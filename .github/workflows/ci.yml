@@ -58,7 +58,7 @@ jobs:
     
     - name: Run dependency check with safety
       run: |
-        safety check --json --output safety-report.json
+        safety check --json --output screen safety-report.json
 
   build:
     runs-on: ubuntu-latest
