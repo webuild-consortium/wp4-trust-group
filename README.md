@@ -113,15 +113,12 @@ wp4-trust-group/
 - **ETSI EN 319 412-6** - Certificate profile requirements for PID, Wallet, EAA, QEAA and PSBEAA providers
 - **ETSI TS 119 411-8** - Access Certificate Policy for EUDI Wallet Relying Parties
 - **ETSI TS 119 475** - Relying party attributes supporting EUDI Wallet user's authorisation decisions (Relying Party Attributes)
+- **ETSI TS 119 602** - Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1.
 - **OpenID Federation 1.0** - Draft 41 (December 2024)
 - **OpenID Federation Wallet Architectures 1.0** - Draft 03 (October 2024)
-- **SD-JWT-based Verifiable Credentials (SD-JWT VC)** - Draft 06 (November 2024)
 
-### Work Items
 
-- **DTS/ESI-0019602** - Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1.
-
-### Reference Specifications
+### Requirements References
 
 - **ARF Requirements About Trust Infrastructure** - https://github.com/webuild-consortium/wp4-trust-group/issues/1
 
