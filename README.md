@@ -114,8 +114,8 @@ wp4-trust-group/
 - **ETSI TS 119 411-8** - Access Certificate Policy for EUDI Wallet Relying Parties
 - **ETSI TS 119 475** - Relying party attributes supporting EUDI Wallet user's authorisation decisions (Relying Party Attributes)
 - **ETSI TS 119 602** - Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1.
-- **OpenID Federation 1.0** - Draft 41 (December 2024)
-- **OpenID Federation Wallet Architectures 1.0** - Draft 03 (October 2024)
+- **OpenID Federation 1.0** - Draft 43
+- **OpenID Federation Wallet Architectures 1.0** - Draft 03
 
 
 ### Requirements References
