@@ -133,13 +133,8 @@ This subtask focuses on defining use cases for trust registry operations in the 
 ## Technical Requirements
 
 ### API Endpoints
-- `GET /api/v1/trust/status` - Get trust status
-- `POST /api/v1/trust/validate` - Validate trust
-- `PUT /api/v1/trust/level` - Update trust level
-- `POST /api/v1/trust/revoke` - Revoke trust
-- `GET /api/v1/trust/policies` - Get trust policies
-- `PUT /api/v1/trust/policies` - Update trust policies
-- `GET /api/v1/trust/reports` - Get trust reports
+
+TBD See OpenID Federation endpoints.
 
 ### Data Models
 - **Trust Status**: Current trust status
