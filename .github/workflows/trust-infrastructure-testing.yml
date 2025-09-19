@@ -156,7 +156,7 @@ jobs:
         locust -f tests/performance/stress_test.py --headless -u 500 -r 50 -t 600s --html=stress_test_report.html
     
     - name: Upload performance reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: performance-reports
         path: |
@@ -196,7 +196,7 @@ jobs:
         safety check --json --output safety-report.json
     
     - name: Upload security reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: security-reports
         path: |
