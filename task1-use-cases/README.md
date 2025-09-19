@@ -245,14 +245,14 @@ Trust evaluation in the Wallet ecosystem serves as a critical security layer tha
 - **Stakeholders**: Wallet Ecosystem, Regulatory Bodies
 
 ### Goal
-- **Business Goal**: Ensure only trusted wallet providers can onboard users
-- **Technical Goal**: Validate wallet provider credentials and compliance before user interaction
+- **Business Goal**: Ensure only trusted Wallet providers can onboard users
+- **Technical Goal**: Validate Wallet Provider credentials and compliance before User interaction
 - **Success Criteria**: Trust decision made within 2 seconds with 99.9% accuracy
 
 ### Preconditions
 - Wallet Provider has valid X.509 certificate
 - Trust Registry is accessible and up-to-date
-- User has initiated wallet provider selection process
+- User has initiated Wallet Provider selection process
 
 ### Main Flow
 1. User selects Wallet Provider for onboarding
@@ -265,7 +265,7 @@ Trust evaluation in the Wallet ecosystem serves as a critical security layer tha
 8. System compares score against trust threshold (0.8)
 9. System generates trust decision
 10. System logs decision and supporting evidence
-11. System returns trust decision to user interface
+11. System returns trust decision to User interface
 
 ### Alternative Flows
 - **A1**: Certificate validation fails
@@ -294,12 +294,12 @@ Trust evaluation in the Wallet ecosystem serves as a critical security layer tha
   - System processes when capacity available
 
 ### Postconditions
-- **Success**: Trust decision logged, user can proceed with trusted provider
-- **Failure**: Trust decision logged, user warned about untrusted provider
+- **Success**: Trust decision logged, User can proceed with trusted provider
+- **Failure**: Trust decision logged, User warned about untrusted provider
 - **Data Changes**: Trust evaluation record created in audit log
 
 ### Business Rules
-- All wallet providers must have valid certificates
+- All Wallet providers must have valid certificates
 - Trust threshold must be configurable per jurisdiction
 - All trust decisions must be auditable
 - Failed evaluations must be reported to compliance team
@@ -319,8 +319,8 @@ Trust evaluation in the Wallet ecosystem serves as a critical security layer tha
 | Security Posture | 10% | > 0.6 | No recent security incidents |
 
 ### Trust Actions
-- **Trust Granted**: Enable user onboarding, log success
-- **Trust Denied**: Block user onboarding, notify compliance
+- **Trust Granted**: Enable User onboarding, log success
+- **Trust Denied**: Block User onboarding, notify compliance
 - **Trust Conditional**: Allow with additional verification steps
 - **Trust Revoked**: Immediately revoke if trust level drops
 ```
@@ -478,7 +478,7 @@ Trust evaluation in the Wallet ecosystem serves as a critical security layer tha
 - **Stakeholder Review**: Business stakeholder validation
 - **Technical Review**: Technical team validation
 - **Compliance Review**: Regulatory compliance validation
-- **User Acceptance**: End-user validation
+- **User Acceptance**: End-User validation
 
 ### Test Case Development
 - **Happy Path Testing**: Normal operation scenarios

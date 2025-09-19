@@ -2,7 +2,7 @@
 
 Public resources shared within the WE BUILD WP4 Trust Infrastructure group
 
-The Trust Registry Infrastructure group is dedicated to establishing the framework for trust evaluation and management within digital wallet ecosystems, in compliance but not limited to the model defined by European regulation (910/2014 as amended by Regulation (EU) 2024/1183).  
+The Trust Registry Infrastructure group is dedicated to establishing the framework for trust evaluation and management within digital Wallet ecosystems, in compliance but not limited to the model defined by European regulation (910/2014 as amended by Regulation (EU) 2024/1183).  
 
 The group develops an implementation of the trust model based on a trusted third party (Trusted Lists) resulting in a Trust Framework and an demo infrastructure of trust. 
 
@@ -71,7 +71,7 @@ wp4-trust-group/
 │   ├── data-model/                 # Data model
 │   └── trust-evaluation-methods/   # Trust evaluation methods
 │
-├── task6-wallet-conformance-interop/ # Wallet Instance Conformance/Interop Checks
+├── task6-Wallet-conformance-interop/ # Wallet Instance Conformance/Interop Checks
 │
 ├── task7-testing-validation/       # Testing and Validation
 │
@@ -112,7 +112,7 @@ wp4-trust-group/
 
 - **ETSI EN 319 412-6** - Certificate profile requirements for PID, Wallet, EAA, QEAA and PSBEAA providers
 - **ETSI TS 119 411-8** - Access Certificate Policy for EUDI Wallet Relying Parties
-- **ETSI TS 119 475** - Relying party attributes supporting EUDI Wallet user's authorisation decisions (Relying Party Attributes)
+- **ETSI TS 119 475** - Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)
 - **ETSI TS 119 602** - Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1.
 - **OpenID Federation 1.0** - Draft 43
 - **OpenID Federation Wallet Architectures 1.0** - Draft 03

@@ -52,8 +52,8 @@ This subtask focuses on defining use cases for participant onboarding processes 
 4. **CA Initial Registration**
    - CA submits registration request
    - System validates CA credentials
-   - System establishes trust anchor
-   - CA receives trust anchor certificate
+   - System establishes Trust Anchor
+   - CA receives Trust Anchor certificate
 
 ### Certificate Management
 1. **Certificate Submission**

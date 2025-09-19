@@ -2,7 +2,9 @@
 
 ## Executive Summary
 
-This document provides detailed implementation guidance for trust mark semantics in credential issuer and relying party scenarios, focusing on additive and subtractive policy approaches to prevent bogus credential issuer collisions and ensure proper authorization based on business purposes and ATECO classifications.
+This document provides detailed implementation guidance for trust mark semantics in Credential Issuer and Relying Party scenarios, focusing on additive and subtractive policy approaches to prevent bogus Credential Issuer collisions.
+
+It also introduces an identification process, during the onboarding phases, based on business purposes and ATECO classifications.
 
 ## Table of Contents
 
@@ -49,7 +51,7 @@ This document provides detailed implementation guidance for trust mark semantics
 ### Additive Approach: Preventing Bogus Credential Issuer Collisions
 
 #### Problem Statement
-Bogus credential issuers may attempt to claim authorization for credential types that are already assigned to legitimate, authorized credential issuers, creating confusion and potential security risks.
+Bogus Credential Issuers may attempt to claim authorization for credential types that are already assigned to legitimate, authorized Credential Issuers, creating confusion and potential security risks.
 
 #### Solution: Unique Credential Type Authorization
 ```json
@@ -608,7 +610,7 @@ class TrustMarkSemanticsEngine:
         self.collision_prevention = CredentialIssuerCollisionPrevention(trust_registry)
     
     def process_credential_issuance_request(self, request):
-        # Validate credential issuer authorization
+        # Validate Credential Issuer authorization
         issuer_validation = self.validate_credential_issuer(request.issuer_id, request.credential_type)
         if not issuer_validation["authorized"]:
             return issuer_validation
@@ -637,7 +639,7 @@ class TrustMarkSemanticsEngine:
         }
     
     def process_attribute_request(self, request):
-        # Validate relying party authorization
+        # Validate Relying Party authorization
         rp_validation = self.validate_relying_party(request.rp_id, request.purpose, request.attribute_types)
         if not rp_validation["authorized"]:
             return rp_validation
@@ -657,11 +659,11 @@ class TrustMarkSemanticsEngine:
         }
     
     def validate_credential_issuer(self, issuer_id, credential_type):
-        # Implementation of credential issuer validation
+        # Implementation of Credential Issuer validation
         pass
     
     def validate_relying_party(self, rp_id, purpose, attribute_types):
-        # Implementation of relying party validation
+        # Implementation of Relying Party validation
         pass
     
     def validate_attribute_authorization(self, credential_type, attributes, purpose):
@@ -751,15 +753,15 @@ class PolicyEnforcementEngine:
 
 ## Conclusion
 
-This implementation guide provides comprehensive trust mark semantics for both credential issuers and relying parties, with robust collision prevention mechanisms and ATECO-based authorization. The key benefits include:
+This implementation guide provides comprehensive trust mark semantics for both Credential Issuers and Relying Parties, with robust collision prevention mechanisms and ATECO-based authorization. The key benefits include:
 
-1. **Collision Prevention**: Prevents bogus credential issuers from claiming authorization for already-assigned credential types
+1. **Collision Prevention**: Prevents bogus Credential Issuers from claiming authorization for already-assigned credential types
 2. **ATECO Integration**: Business purpose validation based on ATECO classifications
 3. **Policy Flexibility**: Support for both additive and subtractive approaches
 4. **Dispute Resolution**: Comprehensive mechanisms for resolving authorization conflicts
 5. **Audit Trail**: Complete logging and monitoring of authorization decisions
 
-The framework ensures that only authorized entities can issue specific credential types while providing flexible authorization for relying parties based on their business purposes and ATECO classifications.
+The framework ensures that only authorized entities can issue specific credential types while providing flexible authorization for Relying Parties based on their business purposes and ATECO classifications.
 
 ## References
 

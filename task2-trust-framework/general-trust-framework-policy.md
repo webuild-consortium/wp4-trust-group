@@ -53,7 +53,7 @@ A general trust framework provides the foundation for establishing, maintaining,
 ### Authentication in Trust Frameworks
 
 #### Definition
-**Authentication** in trust frameworks is the process of verifying the identity of a trust participant (user, system, or entity) to establish their claimed identity within the trust ecosystem.
+**Authentication** in trust frameworks is the process of verifying the identity of a trust participant (User, system, or entity) to establish their claimed identity within the trust ecosystem.
 
 #### Trust-Based Authentication Characteristics
 - **Identity Verification**: Confirms the participant's claimed identity
@@ -353,14 +353,14 @@ class AdditiveTrustAssertionIssuerPolicy:
 
 #### Use Case 3: EUDI Wallet with Trust Discovery
 
-**Scenario**: A wallet solution that supports trust assertion discovery and embedded discovery features.
+**Scenario**: A Wallet solution that supports trust assertion discovery and embedded discovery features.
 
 **Wallet Trust Mark Configuration**:
 ```json
 {
   "trust_mark_id": "eudi_wallet_trust_discovery_v1.0",
-  "issuer": "https://trust-registry.wallet.example.com",
-  "subject": "https://wallet.example.com",
+  "issuer": "https://trust-registry.Wallet.example.com",
+  "subject": "https://Wallet.example.com",
   "trust_mark_type": "wallet_trust_authorization",
   "policy_approach": "additive",
   "trust_semantics": {
@@ -394,7 +394,7 @@ class AdditiveTrustAssertionIssuerPolicy:
 
 #### Use Case 4: Software Development Company (ATECO 62.01.00)
 
-**Scenario**: A software development company requesting user attributes for authentication and service delivery.
+**Scenario**: A software development company requesting User attributes for authentication and service delivery.
 
 **Relying Party Trust Mark Configuration**:
 ```json
@@ -619,7 +619,7 @@ class TrustFrameworkPolicyEngine:
         }
     
     def process_trust_attribute_request(self, request):
-        # Validate trust relying party authorization
+        # Validate trust Relying Party authorization
         rp_validation = self.validate_trust_relying_party(request.rp_id, request.purpose, request.attribute_types)
         if not rp_validation["authorized"]:
             return rp_validation

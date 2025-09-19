@@ -7,11 +7,11 @@ This directory contains reference implementations and profiles relevant to the W
 ### EIDAS-ARF - EUDI Wallet Architecture and Reference Framework
 - **Status**: Reference
 - **Description**: EUDI Wallet - Architecture and Reference Framework
-- **Relevance**: Core architectural reference for wallet ecosystem
+- **Relevance**: Core architectural reference for Wallet ecosystem
 - **Implementation**: Foundation for trust infrastructure design
 
 ### ARF Requirements About Trust Infrastructure
-- **Source**: https://github.com/italia/eid-wallet-it-docs/issues/707
+- **Source**: https://github.com/italia/eid-Wallet-it-docs/issues/707
 - **Status**: To be moved to official public LSP git repository
 - **Description**: Architecture Reference Framework requirements for trust infrastructure
 - **Relevance**: Specific requirements for trust infrastructure implementation
@@ -20,7 +20,7 @@ This directory contains reference implementations and profiles relevant to the W
 
 ### Trust Anchor Format Implementation Profile
 - **Based on**: IETF RFC 5914
-- **Description**: Implementation profile for trust anchor format
+- **Description**: Implementation profile for Trust Anchor format
 - **Requirements**: 
   - Specific format constraints
   - Validation rules

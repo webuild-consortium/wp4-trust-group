@@ -20,14 +20,14 @@ This task focuses on comprehensive testing and validation of the WP4 Trust Infra
 
 #### 3. System Testing
 - **End-to-End Testing**: Test complete system workflows
-- **User Acceptance Testing**: Test user acceptance scenarios
+- **User Acceptance Testing**: Test User acceptance scenarios
 - **Performance Testing**: Test system performance
 - **Security Testing**: Test system security
 
 #### 4. Acceptance Testing
 - **Business Acceptance**: Test business requirements
 - **Technical Acceptance**: Test technical requirements
-- **User Acceptance**: Test user requirements
+- **User Acceptance**: Test User requirements
 - **Stakeholder Acceptance**: Test stakeholder requirements
 
 ## Testing Categories
@@ -79,8 +79,8 @@ This task focuses on comprehensive testing and validation of the WP4 Trust Infra
 - **Disaster Recovery Testing**: Test disaster recovery procedures
 
 #### Usability Testing
-- **User Interface Testing**: Test user interface usability
-- **User Experience Testing**: Test user experience
+- **User Interface Testing**: Test User interface usability
+- **User Experience Testing**: Test User experience
 - **Accessibility Testing**: Test accessibility compliance
 - **Compatibility Testing**: Test cross-platform compatibility
 
@@ -254,7 +254,7 @@ class TrustInfrastructureUser(HttpUser):
 - **Functional Requirements**: Validate functional requirements
 - **Non-Functional Requirements**: Validate non-functional requirements
 - **Business Rules**: Validate business rules
-- **User Stories**: Validate user stories
+- **User Stories**: Validate User stories
 
 #### Technical Requirements Validation
 - **Performance Requirements**: Validate performance requirements
@@ -268,11 +268,11 @@ class TrustInfrastructureUser(HttpUser):
 - **ETSI TS 119 612**: Validate trusted lists compliance
 - **ETSI EN 319 412-6**: Validate certificate profile compliance
 - **ETSI TS 119 411-8**: Validate access certificate policy compliance
-- **ETSI TS 119 475**: Validate relying party attributes compliance
+- **ETSI TS 119 475**: Validate Relying Party attributes compliance
 
 #### IETF Standards Validation
 - **IETF RFC 5280**: Validate X.509 PKI compliance
-- **IETF RFC 5914**: Validate trust anchor format compliance
+- **IETF RFC 5914**: Validate Trust Anchor format compliance
 - **IETF RFC 7517**: Validate JSON Web Key compliance
 - **IETF RFC 7519**: Validate JSON Web Token compliance
 

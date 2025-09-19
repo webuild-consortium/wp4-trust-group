@@ -1,10 +1,10 @@
 # Task 6: Wallet Instance Conformance/Interop Checks
 
-This task focuses on implementing conformance and interoperability checks for wallet instances in the WP4 Trust Infrastructure.
+This task focuses on implementing conformance and interoperability checks for Wallet instances in the WP4 Trust Infrastructure.
 
 ## Overview
 
-Wallet Instance Conformance/Interop Checks ensure that wallet implementations comply with the trust infrastructure requirements and can interoperate with other components in the ecosystem.
+Wallet Instance Conformance/Interop Checks ensure that Wallet implementations comply with the trust infrastructure requirements and can interoperate with other components in the ecosystem.
 
 ## Conformance Areas
 
@@ -53,7 +53,7 @@ Wallet Instance Conformance/Interop Checks ensure that wallet implementations co
 - **Key Management**: Interoperability with key management standards
 
 ### 4. Trust Model Interoperability
-- **Trust Anchors**: Interoperability with trust anchor formats
+- **Trust Anchors**: Interoperability with Trust Anchor formats
 - **Trust Chains**: Interoperability with trust chain validation
 - **Trust Policies**: Interoperability with trust policy formats
 - **Trust Evaluation**: Interoperability with trust evaluation methods
@@ -118,8 +118,8 @@ class WalletConformanceTest:
 ```
 
 #### 2. Manual Testing
-- **User Interface Testing**: Test user interface conformance
-- **User Experience Testing**: Test user experience conformance
+- **User Interface Testing**: Test User interface conformance
+- **User Experience Testing**: Test User experience conformance
 - **Accessibility Testing**: Test accessibility conformance
 - **Usability Testing**: Test usability conformance
 
@@ -140,7 +140,7 @@ class WalletConformanceTest:
 - **Different Networks**: Test interoperability across different networks
 
 #### 2. Cross-Implementation Interoperability
-- **Different Wallet Implementations**: Test interoperability between different wallet implementations
+- **Different Wallet Implementations**: Test interoperability between different Wallet implementations
 - **Different Trust Infrastructure Implementations**: Test interoperability between different trust infrastructure implementations
 - **Different API Implementations**: Test interoperability between different API implementations
 - **Different Protocol Implementations**: Test interoperability between different protocol implementations
@@ -166,10 +166,10 @@ class InteroperabilityTestSuite:
         result = wallet_a.establish_federation(wallet_b)
         assert result.status == "SUCCESS"
     
-    def test_oauth2_interop(self, wallet, auth_server):
+    def test_oauth2_interop(self, Wallet, auth_server):
         """Test OAuth 2.0 interoperability"""
         # Test OAuth 2.0 protocol interoperability
-        result = wallet.authenticate_with_oauth2(auth_server)
+        result = Wallet.authenticate_with_oauth2(auth_server)
         assert result.access_token is not None
     
     def test_jwt_interop(self, wallet_a, wallet_b):
