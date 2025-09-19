@@ -445,7 +445,7 @@ The **Subtractive Policy Approach** implements an explicit deny-list model where
 - **Retention Period**: Service-dependent
 - **Examples**:
   - `address` (postal address)
-  - `preferences` (user preferences)
+  - `preferences` (User preferences)
   - `service_level` (service level agreement)
   - `delivery_method` (delivery method)
   - `language` (preferred language)
@@ -484,7 +484,7 @@ The **Subtractive Policy Approach** implements an explicit deny-list model where
 
 #### OpenID Connect Credentials
 - **Standard**: OpenID Connect for Identity Assurance
-- **Use Cases**: Authentication, authorization, user info
+- **Use Cases**: Authentication, authorization, User info
 - **Policy Requirements**:
   - OIDC compliance
   - Scope restrictions

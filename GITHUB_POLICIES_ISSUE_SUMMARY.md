@@ -6,7 +6,7 @@
 ## Issue Description
 
 ### Problem Statement
-The WP4 Trust Infrastructure framework currently lacks clear definitions and implementation guidelines for different policy approaches. We need to establish two distinct policy methodologies that align with zero-trust principles and provide flexible policy management for both credential issuers and relying parties.
+The WP4 Trust Infrastructure framework currently lacks clear definitions and implementation guidelines for different policy approaches. We need to establish two distinct policy methodologies that align with zero-trust principles and provide flexible policy management for both Credential Issuers and Relying Parties.
 
 ### Proposed Solution
 Define and implement:
@@ -22,7 +22,7 @@ Define and implement:
    - Suitable for open ecosystems and development
 
 ### Key Features
-- **Dual Application**: Both approaches apply to credential issuers and relying parties
+- **Dual Application**: Both approaches apply to Credential Issuers and Relying Parties
 - **OpenID Federation Integration**: Trust mark schemas for policy communication
 - **Comprehensive Classification**: Attribute and credential classification by scope/purpose
 - **Security Alignment**: Additive approach aligns with zero-trust principles

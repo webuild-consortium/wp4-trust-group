@@ -1,6 +1,6 @@
 # Task 2: Trust Framework
 
-This task focuses on defining the comprehensive trust framework for the WP4 Trust Infrastructure, establishing the foundation for trust evaluation and management within digital wallet ecosystems.
+This task focuses on defining the comprehensive trust framework for the WP4 Trust Infrastructure, establishing the foundation for trust evaluation and management within digital Wallet ecosystems.
 
 ## Framework Components
 

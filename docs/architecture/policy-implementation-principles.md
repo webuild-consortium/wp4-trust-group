@@ -12,7 +12,7 @@ assignees: ''
 
 This issue addresses the need to define and propose two distinct policy approaches within the trust framework design methodologies for the WP4 Trust Infrastructure. 
 
-These approaches needs discussions and comments from the participants, along with implementative considerations about a flexible policy management for both credential issuers and relying parties.
+These approaches needs discussions and comments from the participants, along with implementative considerations about a flexible policy management for both Credential Issuers and Relying Parties.
 
 ## Problem Statement
 
@@ -70,7 +70,7 @@ A zero-trust approach requires an additive policy model where nothing is granted
 - **Scope Restrictions**: Define operational scope and limitations
 
 #### For Relying Parties
-- **User Attributes**: Define which user attributes the RP is authorized to request
+- **User Attributes**: Define which User attributes the RP is authorized to request
 - **Purpose Limitations**: Define the purposes for which attributes can be used
 - **Data Retention**: Define data retention and processing limitations
-- **Consent Requirements**: Define user consent requirements
+- **Consent Requirements**: Define User consent requirements

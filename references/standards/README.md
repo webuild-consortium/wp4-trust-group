@@ -36,12 +36,12 @@ This directory contains official standards and specifications relevant to the WP
 - **Status**: Required
 - **Priority**: High
 - **Description**: Access Certificate Policy for EUDI Wallet Relying Parties
-- **Implementation**: Required for relying party policies
+- **Implementation**: Required for Relying Party policies
 
 ### ETSI TS 119 475 - Relying Party Attributes
 - **Status**: Required
 - **Priority**: High
-- **Description**: Relying party attributes supporting EUDI Wallet user's authorisation decisions
+- **Description**: Relying party attributes supporting EUDI Wallet User's authorisation decisions
 - **Implementation**: Required for authorization decisions
 
 ## Digital Signature Standards

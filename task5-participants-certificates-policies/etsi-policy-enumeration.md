@@ -179,7 +179,7 @@ This document provides a comprehensive enumeration of ETSI (European Telecommuni
 #### 5. EN 319 412-6: Certificate Profile for EUDI Wallet Providers
 
 **Policy Application Mechanisms:**
-- **Wallet Attestation Policies**: Define wallet instance attestation
+- **Wallet Attestation Policies**: Define Wallet instance attestation
 - **Security Compliance Policies**: Govern security requirements
 - **Cross-border Policies**: Support international recognition
 - **Privacy Policies**: Ensure privacy protection

@@ -10,7 +10,7 @@ This document defines the distinction between authentication and authorization w
 2. [Policy Principles in Authorization](#policy-principles-in-authorization)
 3. [Use Case Framework](#use-case-framework)
 4. [Credential Issuer Use Cases](#credential-issuer-use-cases)
-5. [Wallet Solution Use Cases](#wallet-solution-use-cases)
+5. [Wallet Solution Use Cases](#Wallet-solution-use-cases)
 6. [Relying Party Use Cases](#relying-party-use-cases)
 7. [Federative Trust Mark Implementation](#federative-trust-mark-implementation)
 8. [Policy Conflict Resolution](#policy-conflict-resolution)
@@ -307,7 +307,7 @@ class AdditiveCredentialIssuerPolicy:
 ```
 
 #### Benefits of Additive Approach
-1. **Collision Prevention**: Prevents bogus credential issuers from claiming authorization for credential types they're not authorized to issue
+1. **Collision Prevention**: Prevents bogus Credential Issuers from claiming authorization for credential types they're not authorized to issue
 2. **Clear Authorization**: Explicit authorization for each credential type and attribute group
 3. **Security**: Conservative approach minimizes unauthorized credential issuance
 4. **Auditability**: Clear audit trail of what is authorized vs. what is requested
@@ -411,14 +411,14 @@ class SubtractiveCredentialIssuerPolicy:
 ### Use Case 3: Wallet with Credential Offer Discovery
 
 #### Scenario: EUDI Wallet with Embedded Discovery
-**Context**: A wallet solution that supports credential offer discovery and embedded discovery features.
+**Context**: A Wallet solution that supports credential offer discovery and embedded discovery features.
 
 **Wallet Trust Mark Configuration**:
 ```json
 {
   "trust_mark_id": "eudi_wallet_discovery_v1.0",
-  "issuer": "https://trust-registry.wallet.example.com",
-  "subject": "https://wallet.example.com",
+  "issuer": "https://trust-registry.Wallet.example.com",
+  "subject": "https://Wallet.example.com",
   "trust_mark_type": "wallet_authorization",
   "policy_approach": "additive",
   "authorization_semantics": {
@@ -506,7 +506,7 @@ class WalletCredentialDiscovery:
 ### Use Case 4: Wallet Holder with Credential Management
 
 #### Scenario: Wallet Holder Managing Multiple Credentials
-**Context**: A wallet holder managing credentials from multiple issuers with different authorization policies.
+**Context**: A Wallet holder managing credentials from multiple issuers with different authorization policies.
 
 **Holder Authorization Framework**:
 ```json
@@ -544,7 +544,7 @@ class WalletCredentialDiscovery:
 ### Use Case 5: Relying Party with ATECO Classification
 
 #### Scenario: Software Development Company (ATECO 62.01.00)
-**Context**: A software development company requesting user attributes for authentication and service delivery.
+**Context**: A software development company requesting User attributes for authentication and service delivery.
 
 **Relying Party Trust Mark Configuration**:
 ```json
@@ -945,7 +945,7 @@ class CredentialTypeCollisionResolver:
 
 ## Conclusion
 
-This framework provides a comprehensive approach to authentication vs authorization, policy principles in authorization, and use cases for credential issuers, wallet solutions, and relying parties using federative trust marks. The key benefits include:
+This framework provides a comprehensive approach to authentication vs authorization, policy principles in authorization, and use cases for Credential Issuers, Wallet solutions, and Relying Parties using federative trust marks. The key benefits include:
 
 1. **Clear Distinction**: Clear separation between authentication and authorization
 2. **Policy Flexibility**: Support for both additive and subtractive authorization approaches
@@ -953,7 +953,7 @@ This framework provides a comprehensive approach to authentication vs authorizat
 4. **Federation Support**: Robust federative trust mark implementation
 5. **Conflict Resolution**: Effective mechanisms for preventing and resolving policy conflicts
 
-The framework ensures that bogus credential issuers cannot claim authorization for credential types they're not authorized to issue, while providing flexible policy management for different deployment scenarios.
+The framework ensures that bogus Credential Issuers cannot claim authorization for credential types they're not authorized to issue, while providing flexible policy management for different deployment scenarios.
 
 ## References
 

@@ -17,7 +17,7 @@ This directory contains draft specifications and working documents relevant to t
 - **Status**: Draft
 - **Authors**: De Marco, G., Hedberg, R., Jones, M.B., Bradley, J., Dzhuvinov, V.
 - **Description**: OpenID Federation Wallet Architectures 1.0
-- **Relevance**: Specific wallet architecture patterns for federation
+- **Relevance**: Specific Wallet architecture patterns for federation
 - **Implementation**: Wallet-specific federation patterns
 
 ## Verifiable Credentials Drafts
@@ -27,7 +27,7 @@ This directory contains draft specifications and working documents relevant to t
 - **Status**: Draft
 - **Authors**: O. Terbu, D.Fett, B. Campbell
 - **Description**: SD-JWT-based Verifiable Credentials (SD-JWT VC)
-- **Relevance**: Verifiable credential format for wallet ecosystem
+- **Relevance**: Verifiable credential format for Wallet ecosystem
 - **Implementation**: Credential issuance and verification
 
 ## Future Milestones

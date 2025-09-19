@@ -38,10 +38,10 @@ This subtask focuses on defining use cases for trust registry operations in the 
    - System enforces trust policies
 
 2. **Trust Anchor Configuration**
-   - Administrator configures trust anchor
-   - System validates trust anchor certificate
-   - System establishes trust anchor relationship
-   - System activates trust anchor
+   - Administrator configures Trust Anchor
+   - System validates Trust Anchor certificate
+   - System establishes Trust Anchor relationship
+   - System activates Trust Anchor
 
 3. **Trust Chain Validation**
    - System retrieves certificate chain

@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This document evaluates ETSI (European Telecommunications Standards Institute) specifications and their application to policy frameworks within trust infrastructures. The evaluation focuses on how ETSI standards support both additive and subtractive policy approaches for credential issuers and relying parties in digital wallet ecosystems.
+This document evaluates ETSI (European Telecommunications Standards Institute) specifications and their application to policy frameworks within trust infrastructures. The evaluation focuses on how ETSI standards support both additive and subtractive policy approaches for Credential Issuers and Relying Parties in digital Wallet ecosystems.
 
 ## Table of Contents
 
@@ -83,7 +83,7 @@ Operational Level (Trust Service Provider policies)
 
 #### EN 319 412-6: Certificate Profile for EUDI Wallet Providers
 - **Policy Application**: Specific to EU Digital Identity Wallet ecosystem
-- **Additive Support**: Defines required attributes for wallet providers
+- **Additive Support**: Defines required attributes for Wallet providers
 - **Subtractive Support**: Excludes non-compliant attributes
 - **Key Features**:
   - Wallet instance attestation
@@ -160,7 +160,7 @@ Operational Level (Trust Service Provider policies)
 - **Cross-border Recognition**: International interoperability requirements
 
 #### EN 319 411-8: Access Certificate Policy for EUDI Wallet Relying Parties
-- **Policy Scope**: Specific to EUDI Wallet ecosystem relying parties
+- **Policy Scope**: Specific to EUDI Wallet ecosystem Relying Parties
 - **Attribute Access**: Policies governing attribute access requests
 - **Consent Management**: User consent requirements and procedures
 - **Data Protection**: GDPR compliance requirements
@@ -168,7 +168,7 @@ Operational Level (Trust Service Provider policies)
 ### ETSI TS 119 475: Relying Party Attributes
 
 #### Policy Application Framework
-- **Attribute Classification**: Systematic classification of user attributes
+- **Attribute Classification**: Systematic classification of User attributes
 - **Access Control**: Policies governing attribute access
 - **Purpose Limitation**: Restrictions on attribute usage
 - **Consent Requirements**: User consent management

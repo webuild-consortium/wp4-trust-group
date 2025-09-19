@@ -4,7 +4,7 @@ This directory contains the implementation of the Trust Infrastructure API for t
 
 ## API Overview
 
-The Trust Infrastructure API provides comprehensive services for trust management, evaluation, validation, and monitoring within the digital wallet ecosystem.
+The Trust Infrastructure API provides comprehensive services for trust management, evaluation, validation, and monitoring within the digital Wallet ecosystem.
 
 ## Core Services
 
