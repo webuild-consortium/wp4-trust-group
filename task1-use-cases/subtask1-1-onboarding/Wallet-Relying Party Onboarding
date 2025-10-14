@@ -70,7 +70,7 @@
 
 *2.2 Access Certificate Request Review*
 * The Access Certificate Authority verifies the identity and any other attributes of the wallet-relying party;
-* The Access Certificate Authority checks the valid registration status and information coherency within a national register in which that Wallet-Relying Party is established.
+* The Access Certificate Authority checks the valid registration status and information coherency within a National Register in which that Wallet-Relying Party is established.
 
 *2.3 Access Certificate Issuance*
 * The Access Certificate Authority issues the Access Certificate and logs the Access Certificate issued;
@@ -82,7 +82,7 @@
 
 *2.5 Registration Certificate Request Review*
 * The Provider of Registration Certificate verifies the identity and any other attributes of the Wallet-Relying Party;
-* The Provider of Registration Certificate checks the valid registration status and information coherency within a national register in which that Wallet-Relying Party is established.
+* The Provider of Registration Certificate checks the valid registration status, the information coherency within a National Register in which that Wallet-Relying Party is established and the validity of Wallet-Relying Party Access Certificate.
 
 *2.6 Registration Certificate Issuance*
 * The Provider of Registration Certificate issues the Registration Certificate and logs the Registration Certificate issued;
@@ -97,44 +97,44 @@
 - [[IA] Annex V | Requirements for wallet-relying party registration certificates referred to in Article 8](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_V:~:text=Requirements%20for%20wallet%2Drelying%20party%20registration%20certificates%20referred%20to%20in%20Article%C2%A08)
 
 *3.1 Registration Update*
-* When needed, the Wallet-Relying Party updates information
-* The Registrar receives the updated information
+* When needed, the Wallet-Relying Party updates information;
+* The Registrar receives the updated information and reissues the certificate.
 
 *3.2 Registration Monitoring*
-* The Registrar monitors continuosly
-* The Access Certificate Authority monitors continuosly and automatically
-* The Provider of Registration Certificate monitors continuosly and automatically
-* Supervisory Body monitors continuosly
-* Data Protection Authority monitors continuosly
+* The Registrar monitors continuosly;
+* The Access Certificate Authority monitors continuosly and automatically;
+* The Provider of Registration Certificate monitors continuosly and automatically;
+* Supervisory Body monitors continuosly;
+* Data Protection Authority monitors continuosly.
 
-*3.3 Registration Suspension / Revocation*
+*3.3 Registration Suspension / Cancellation*
 
 If:
-* If needed, the National Registrar conducts a proportionality assessment
-* The Wallet-Relying Party requests the registration revocation
-* The Supervisory Body requests the registration suspension/ revocation
+* If needed, the National Registrar conducts a proportionality assessment;
+* The Wallet-Relying Party requests the registration cancellation;
+* The Supervisory Body requests the registration suspension/ cancellation.
 
 Then:
-* The Registrar suspends/ revokes the registration
-* The Registrar sends notice about the suspension/ revocation
-* The Wallet-Relying Party receives the registration suspension/ revocation notice
-* The Access Certificate Authority receives the registration suspension/ revocation notice
-* The Provider of Registration Certificate receives the registration suspension/ revocation notice
+* The Registrar suspends/ cancels the registration;
+* The Registrar sends notice about the registration suspension/ cancellation;
+* The Wallet-Relying Party receives the registration suspension/ cancellation notice;
+* The Access Certificate Authority receives the registration suspension/ cancellation notice;
+* The Provider of Registration Certificate receives the registration suspension/ cancellation notice.
 
 *3.4 Access / Registration Certificate Revocation*
 
 If:
-* The Registrar suspends/ revokes the registration
-* The Wallet-Relying Party requests the certificate revocation
-* The Supervisory Body requests the certificate revocation
-* Data Protection Authority requests the certificate revocation
+* The Registrar suspends/ cancels the registration;
+* The Wallet-Relying Party requests the certificate revocation;
+* The Supervisory Body requests the certificate revocation;
+* Data Protection Authority requests the certificate revocation.
 
 Then:
-* The Registrar suspends/ revokes the registration
-* The Access Certificate Authority revokes the Access Certificate (without undue delay)
-* The Provider of Registration Certificate revokes the Registration Certificate (without undue delay) 
-* The Access Certificate Authority publishes the Access Certificate revocation status (within 24 hours)
-* Provider of Registration Certificate publishes the Access Certificate revocation status (within 24 hours)
+* The Registrar suspends/ revokes the registration;
+* The Access Certificate Authority revokes the Access Certificate (without undue delay);
+* The Provider of Registration Certificate revokes the Registration Certificate (without undue delay);
+* The Access Certificate Authority publishes the Access Certificate revocation status (within 24 hours);
+* Provider of Registration Certificate publishes the Access Certificate revocation status (within 24 hours).
 
 ### Alternative Flows
 - **A1**: [Alternative scenario 1]
@@ -388,6 +388,10 @@ The verification of entitlements of wallet-relying parties referred to in paragr
 - 1.   [...]
 2.   Wallet-relying parties shall ensure that the information provided is accurate at the time of registration.
 3.   Wallet-relying parties shall update any information previously registered in the national register of wallet-relying parties without undue delay. [IA / Art. 5 / Information to be provided to the national registers]
+- The wallet-relying party registration certificate policy and certificate practice statement applicable to the provisioning of wallet-relying party registration certificates [...] shall include:
+  - (d) the obligation for the provider of wallet-relying party registration certificates implements measures and processes on:
+    - continuously monitoring in an automated manner any changes in the national register for wallet-relying parties in which wallet-relying parties to whom they have issued wallet-relying party registration certificates are registered;
+    - reissue the wallet-relying party registration certificate;[IA /  Annex V / Requirements for wallet-relying party registration certificates referred to in Article 8]
 
 ### 3.2 Registration Monitoring
 
@@ -408,11 +412,17 @@ The verification of entitlements of wallet-relying parties referred to in paragr
 
 - The certificate policy and certificate practice statement applicable to the provision of wallet-relying party access certificates [...] shall include:
     - [...]
-    - (e) the obligation for the providers of wallet-relying party access
-        - Certificates to implement measures and processes on:
-continuously monitoring any changes in the national register for wallet-relying parties in which wallet-relying parties to whom they have issued wallet-relying party access certificates are registered;
-    - [...]
+    - (e) the obligation for the providers of wallet-relying party access certificates to implement measures and processes on:
+      - continuously monitoring any changes in the national register for wallet-relying parties in which wallet-relying parties to whom they have issued wallet-relying party access certificates are registered;
+      - [...]
     - [...]  [IA /  Annex IV / Requirements for wallet-relying party access certificates referred to in Article 7]
+
+- The certificate policy and certificate practice statement applicable to the provision of wallet-relying party registration certificates [...] shall include:
+    - [...]
+    - (d) the obligation for the provider of wallet-relying party registration certificates implements measures and processes on:
+      - continuously monitoring in an automated manner any changes in the national register for wallet-relying parties in which wallet-relying parties to whom they have issued wallet-relying party registration certificates are registered;
+      - [...]
+    - [...] [IA /  Annex V / Requirements for wallet-relying party registration certificates referred to in Article 8]
 
 ### 3.3 Registration Suspension / Revocation
 
@@ -482,3 +492,19 @@ The revocation set out in point 3(g) shall become effective immediately upon its
     - (i) the obligation for the providers of wallet-relying party access certificates to provide information on the validity or revocation status of wallet-relying party certificates issued by that provider;
     - [...]
 The information set out in point 3(h) shall be made available at least on a per certificate basis at any time and at least beyond the validity period of the certificate in an automated manner that is reliable, free of charge and effectively in accordance with the certificate policy. [IA /  Annex IV / Requirements for wallet-relying party access certificates referred to in Article 7]
+- The wallet-relying party registration certificate policy and certificate practice statement applicable to the provisioning of wallet-relying party registration certificates [...] shall include:
+    - (c) the obligation for the provider of wallet-relying party registration certificates, when issuing a wallet-relying party registration certificate, to verify that:
+      - [...]
+      - the description of the procedures for revocation of wallet-relying party registration certificates is comprehensive.
+    - (d) the obligation for the provider of wallet-relying party registration certificates implements measures and processes on:
+      - [...]
+      - revoking any wallet-relying party registration certificate that they issued to the corresponding wallet-relying party, when such changes so require, in particular when the content of the certificate is no longer accurate and consistent with the information registered, or when the registration of the wallet-relying party is modified, suspended or cancelled.
+    - (e) [...]
+    - (f) the obligation for the provider of wallet-relying party registration certificates to allow relevant stakeholders, including wallet-relying parties as regards their own certificates, competent supervisory bodies and data protection authorities, to request the revocation of wallet-relying party registration certificates;
+The revocation referred to in point 3(g/f?) shall become effective immediately upon its publication. [IA /  Annex V / Requirements for wallet-relying party registration certificates referred to in Article 8]
+- The wallet-relying party registration certificate policy and certificate practice statement applicable to the provisioning of wallet-relying party registration certificates [...] shall include:
+  - [...]
+  - (g) the obligation for the provider of wallet-relying party registration certificates to register all such revocations in its certificate database and to publish the revocation status of the certificate in a timely manner, and in any event within 24 hours after the receipt of the request for revocation;
+  - (h) the obligation for the providers of wallet-relying party registration certificates to provide information on the validity or revocation status of wallet-relying party registration certificates issued by that provider;
+  - [...]
+The information referred to in point 3(h/g?) shall be made available at least on a per certificate basis at any time and at least beyond the validity period of the certificate in an automated manner that is reliable, free of charge and effectively in accordance with the certificate policy. [IA /  Annex V / Requirements for wallet-relying party registration certificates referred to in Article 8]
