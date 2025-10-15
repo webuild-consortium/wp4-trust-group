@@ -12,11 +12,10 @@
 ### Actors
 - **Primary Actor**: Relying Party
 - **Secondary Actors**: Registrar, Access Certificate Authority, Provider of Registration Certificate
-- **Stakeholders**: Supervisory Body, Data Protection Authority, Member State, EU Commission
 
 ### Goal
 - **Business Goal**: To register Relying Parties that intend to rely on European Digital Identity Wallets (‘wallets’) for the provision of digital public or private services (ref. [IA Commission Implementing Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848), Recital 1)
-- **Technical Goal**: To establish a harmonised, secure, and interoperable framework for the registration, certification, and lifecycle management of wallet-relying parties, enabling trusted interaction between wallet solutions and other parties involved.
+- **Technical Goal**: To establish a harmonised, secure, and interoperable framework for the registration, certification, and lifecycle management of wallet-relying parties, enabling trusted interaction between Wallet solutions and other parties involved.
 - **Success Criteria**: [Measurable success indicators]
 
 ### Preconditions
