@@ -10,6 +10,7 @@ This subtask focuses on defining use cases for trust registry operations in the 
 - **Trust Anchor Configuration**: Configuring trust anchors
 - **Trust Chain Validation**: Validating trust chains
 - **Trust Policy Enforcement**: Enforcing trust policies
+- **Schema registration**: Managing data models and semantic standards
 
 ### Trust Evaluation
 - **Certificate Validation**: Validating certificates
@@ -22,12 +23,21 @@ This subtask focuses on defining use cases for trust registry operations in the 
 - **Policy Updates**: Updating policies
 - **Trust Level Adjustments**: Adjusting trust levels
 - **Monitoring and Reporting**: Monitoring and reporting
+- **Access controls**: Managing who can perform which operations
+- **Approval workflow**: Managing multi-step approval processes for sensitive
+- **Delegation Management**: Handling authority delegation and subordinate
 
 ### Trust Revocation
 - **Certificate Revocation**: Revoking certificates
 - **Trust Suspension**: Suspending trust
 - **Emergency Revocation**: Emergency revocation procedures
 - **Revocation List Management**: Managing revocation lists
+
+### Trust Discovery
+- **Finding existing Trust Registries**
+- **Fetching data from Trust Registries**
+- **Finding a trust chain**
+- **Notifications**
 
 ## Use Case Categories
 
