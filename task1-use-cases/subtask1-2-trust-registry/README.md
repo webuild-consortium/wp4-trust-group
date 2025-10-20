@@ -6,6 +6,7 @@ This subtask focuses on defining use cases for trust registry operations in the 
 
 ### Trust Establishment
 - **Initial Trust Setup**: Establishing initial trust relationships
+- **Create a new Trusted List**: Setting up a new trust list
 - **Trust Anchor Configuration**: Configuring trust anchors
 - **Trust Chain Validation**: Validating trust chains
 - **Trust Policy Enforcement**: Enforcing trust policies
