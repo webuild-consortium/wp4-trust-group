@@ -32,17 +32,19 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 ## Tasks
 
-- [ ] **Definition of the Use cases​**
-- [ ] **Definition of the Trust Framework​**
-- [ ] **X.509 PKI with ETSI alignments​**
-- [ ] **Trust Infrastructure API and additional features​**
-  - [ ] Trust Infrastructure API
-  - [ ] Onboarding API
-- [ ] **Participants' Certificates and Policies​**
-  - [ ] Data model
-  - [ ] Trust evaluation methods
-- [ ] **Wallet Instance Conformance/Interop Checks​**
-- [ ] **Testing and Validation​**
+| Task ID | Task Name | Started | Status | Deadline |
+|---------|-----------|---------|--------|----------|
+| Task 1 | Definition of the Use cases​ | No | Not started | TBD |
+| Task 2 | Definition of the Trust Framework​ | No | Not started | TBD |
+| Task 3 | X.509 PKI with ETSI alignments​ | No | Not started | TBD |
+| Task 4 | Trust Infrastructure API and additional features​ | No | Not started | TBD |
+| Task 4.1 | Trust Infrastructure API | No | Not started | TBD |
+| Task 4.2 | Onboarding API | No | Not started | TBD |
+| Task 5 | Participants' Certificates and Policies​ | No | Not started | TBD |
+| Task 5.1 | Data model | No | Not started | TBD |
+| Task 5.2 | Trust evaluation methods | No | Not started | TBD |
+| Task 6 | Wallet Instance Conformance/Interop Checks​ | No | Not started | TBD |
+| Task 7 | Testing and Validation​ | No | Not started | TBD |
 
 ## Directory Structure
 
