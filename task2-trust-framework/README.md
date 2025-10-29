@@ -6,6 +6,7 @@ This task focuses on defining the comprehensive trust framework for the WP4 Trus
 
 ### Trust Model
 - **Trust Hierarchy**: Multi-level trust relationships
+- **Roles and accountability**: Defining roles and their tasks
 - **Trust Anchors**: Root trust authorities
 - **Trust Chains**: Certificate chain validation
 - **Trust Policies**: Policy-based trust management
@@ -21,6 +22,13 @@ This task focuses on defining the comprehensive trust framework for the WP4 Trus
 - **Trust Maintenance**: Ongoing trust management
 - **Trust Revocation**: Trust termination procedures
 - **Trust Monitoring**: Continuous trust assessment
+
+### Auditability
+- **Logging**
+- **Traceability**
+- **audit trails**
+- **Documentation**
+- **Versioning and changes**
 
 ## Framework Architecture
 
