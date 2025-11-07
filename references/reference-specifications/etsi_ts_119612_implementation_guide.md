@@ -17,7 +17,6 @@
 8. [Distribution and Transport](#distribution-and-transport)
 9. [Examples](#examples)
 10. [Testing and Validation](#testing-and-validation)
-11. [Migration Strategy](#migration-strategy)
 
 ## Overview
 
