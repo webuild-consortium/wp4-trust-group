@@ -110,14 +110,15 @@ wp4-trust-group/
   - [Official Document](https://eur-lex.europa.eu/eli/reg/2014/910/oj)
 - **Regulation (EU) 2024/1183** - Amending Regulation (EU) No 910/2014
   - [Official Document](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)
+- **CIR  2025/848** -  Commission Implementing Regulation on the registration of wallet-relying parties
+  - [Official Document](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500848j)
 
 ### Standards
 
-- **ETSI TS 119 612** (v2.3.1) - Electronic Signatures and Trust Infrastructures (ESI); Trusted Lists
-  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.03.01_60/ts_119612v020301p.pdf)
-  - [XSD Schema](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd)
-  - [SIE XSD Schema (ListOfTrustedLists)](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_sie_xsd.xsd)
-  - **Note**: Version 2.4.1 published in 2025 (Nov 2025)
+- **ETSI TS 119 612** (v2.4.1) - Electronic Signatures and Trust Infrastructures (ESI); Trusted Lists
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf)
+  - [XSD Schema](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd)
+  - [SIE XSD Schema (ListOfTrustedLists)](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd)
 - **ETSI EN 319 412-6** (v01.00.00) - Certificate profile requirements for PID, Wallet, EAA, QEAA and PSBEAA providers
   - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf)
 - **ETSI TS 119 411-8** (v01.00.00) - Access Certificate Policy for EUDI Wallet Relying Parties
