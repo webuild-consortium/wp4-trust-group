@@ -12,7 +12,7 @@ This directory contains all the standards, drafts, work items, and reference spe
 ## Standards Categories
 
 ### Trust Infrastructure Core Standards
-- **ETSI TS 119 612** (v2.3.1) - Trusted Lists
+- **ETSI TS 119 612** (v2.4.1) - Trusted Lists
 - **IETF RFC 5914** - Trust Anchor Format
 - **IETF RFC 5280** - X.509 PKI
 

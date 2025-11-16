@@ -4,7 +4,7 @@ This directory contains official standards and specifications relevant to the WP
 
 ## Trust Infrastructure Core Standards
 
-### ETSI TS 119 612 (v2.3.1) - Trusted Lists
+### ETSI TS 119 612 (v2.4.1) - Trusted Lists
 - **Status**: Required
 - **Priority**: High
 - **Description**: Electronic Signatures and Trust Infrastructures (ESI); Trusted Lists

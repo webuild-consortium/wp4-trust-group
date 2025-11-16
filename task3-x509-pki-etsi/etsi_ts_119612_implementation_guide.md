@@ -1,4 +1,4 @@
-# ETSI TS 119 612 v2.3.1 Implementation Guide
+# ETSI TS 119 612 v2.4.1 Implementation Guide
 
 ## Document Information
 - **Standard**: [ETSI TS 119 612 V2.4.1 (2025-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf)
@@ -20,7 +20,7 @@
 
 ## 1. Overview
 
-ETSI TS 119 612 v2.3.1 defines the format and content for eIDAS trusted lists in electronic signature and trust infrastructures. This implementation guide provides specific requirements and examples for implementing this standard in the Wallet ecosystem.
+ETSI TS 119 612 v2.4.1 defines the format and content for eIDAS trusted lists in electronic signature and trust infrastructures. This implementation guide provides specific requirements and examples for implementing this standard in the Wallet ecosystem.
 
 ### Trust List WeBuild Implementation Key Features
 - XML-based trusted list format
@@ -37,7 +37,7 @@ ETSI TS 119 612 v2.3.1 defines the format and content for eIDAS trusted lists in
 ### Phase 1: Core Infrastructure
 
 #### Task 1.1: XML Schema Integration
-- [ ] Integrate official ETSI XSD schema [v2.3.1](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd)
+- [ ] Integrate official ETSI XSD schema [v2.4.1](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd)
 - [ ] Validate TSL (Trusted List) tag structure against official schema
 - [ ] Implement scheme information elements according to schema
 - [ ] Configure TSP (Trust Service Provider) information validation
@@ -70,7 +70,7 @@ ETSI TS 119 612 v2.3.1 defines the format and content for eIDAS trusted lists in
 - [ ] Implement status validation rules
 
 #### Task 1.4: ListOfTrustedLists Implementation
-- [ ] Integrate SIE XSD schema for ListOfTrustedLists [v2.3.1](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_sie_xsd.xsd)
+- [ ] Integrate SIE XSD schema for ListOfTrustedLists [v2.4.1](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd)
 - [ ] Implement ListOfTrustedLists structure
 - [ ] Create TrustedListPointer management
 - [ ] Add cross-border trusted list support
@@ -111,16 +111,16 @@ ETSI TS 119 612 v2.3.1 defines the format and content for eIDAS trusted lists in
 #### 3.1.1 XML Structure
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<TrustServiceStatusList xmlns="http://uri.etsi.org/19612/v2.3.1#"
-                       xmlns:tsl="http://uri.etsi.org/19612/v2.3.1#"
+<TrustServiceStatusList xmlns="http://uri.etsi.org/19612/v2.4.1#"
+                       xmlns:tsl="http://uri.etsi.org/19612/v2.4.1#"
                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xsi:schemaLocation="http://uri.etsi.org/19612/v2.3.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd">
+                       xsi:schemaLocation="http://uri.etsi.org/19612/v2.4.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd">
   <!-- TSL content -->
 </TrustServiceStatusList>
 ```
 
 #### 3.1.2 Required Namespaces
-- `http://uri.etsi.org/19612/v2.3.1#` - Main trusted list namespace
+- `http://uri.etsi.org/19612/v2.4.1#` - Main trusted list namespace
 - `http://www.w3.org/2001/XMLSchema-instance` - XML Schema instance
 - `http://www.w3.org/2000/09/xmldsig#` - XML Digital Signature
 
@@ -216,14 +216,14 @@ Per EUDI Architecture Annex 2, ISSU_33, there may be separate Access Certificate
 
 ### 4.1 Official ETSI Schema Reference
 
-The official ETSI TS 119 612 v2.3.1 XML Schema is available at:
-**https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd**
+The official ETSI TS 119 612 v2.4.1 XML Schema is available at:
+**https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd**
 
 ### 4.2 Schema Integration
 
 #### 4.2.1 Schema Location Declaration
 ```xml
-xsi:schemaLocation="http://uri.etsi.org/19612/v2.3.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd"
+xsi:schemaLocation="http://uri.etsi.org/19612/v2.4.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd"
 ```
 
 #### 4.2.2 Local Schema Caching
@@ -236,7 +236,7 @@ For production environments, it's recommended to:
 #### 4.2.3 Schema Validation
 ```bash
 # Validate TSL against official ETSI schema
-xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd tsl.xml
+xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd tsl.xml
 
 # Or with local cached schema
 xmllint --schema 19612_xsd.xsd tsl.xml
@@ -255,8 +255,8 @@ The official schema includes all necessary elements for:
 ### 4.4 SIE (Service Information Exchange) Schema
 
 #### 4.4.1 SIE Schema Reference
-The ETSI TS 119 612 v2.3.1 also includes a Service Information Exchange (SIE) schema for ListOfTrustedLists:
-**https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_sie_xsd.xsd**
+The ETSI TS 119 612 v2.4.1 also includes a Service Information Exchange (SIE) schema for ListOfTrustedLists:
+**https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd**
 
 #### 4.4.2 SIE Schema Purpose
 The SIE schema is used for:
@@ -268,7 +268,7 @@ The SIE schema is used for:
 ### 4.5 Clause D.5 - ListOfTrustedLists Implementation
 
 #### 4.5.1 Overview
-Clause D.5 of ETSI TS 119 612 v2.3.1 defines the ListOfTrustedLists structure, which is essential for:
+Clause D.5 of ETSI TS 119 612 v2.4.1 defines the ListOfTrustedLists structure, which is essential for:
 - **Multi-jurisdiction trusted list management**
 - **Cross-border trust establishment**
 - **Federation-level service discovery**
@@ -277,9 +277,9 @@ Clause D.5 of ETSI TS 119 612 v2.3.1 defines the ListOfTrustedLists structure, w
 #### 4.5.2 ListOfTrustedLists Structure
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<ListOfTrustedLists xmlns="http://uri.etsi.org/19612/v2.3.1#"
+<ListOfTrustedLists xmlns="http://uri.etsi.org/19612/v2.4.1#"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://uri.etsi.org/19612/v2.3.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_sie_xsd.xsd"
+                   xsi:schemaLocation="http://uri.etsi.org/19612/v2.4.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd"
                    Id="list-of-trusted-lists-1">
   
   <ListInformation>
@@ -475,10 +475,10 @@ Clause D.5 of ETSI TS 119 612 v2.3.1 defines the ListOfTrustedLists structure, w
 ##### 4.5.6.1 SIE Schema Validation
 ```bash
 # Validate ListOfTrustedLists against SIE schema
-xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_sie_xsd.xsd list-of-trusted-lists.xml
+xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd list-of-trusted-lists.xml
 
 # Validate with detailed error reporting
-xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_sie_xsd.xsd --noout list-of-trusted-lists.xml 2>&1 | head -20
+xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd --noout list-of-trusted-lists.xml 2>&1 | head -20
 ```
 
 ##### 4.5.6.2 Cross-Validation
@@ -792,16 +792,16 @@ Cache-Control: max-age=3600
 
 ## 9. Examples
 
-> **Note**: The examples below are designed to be compliant with the official ETSI TS 119 612 v2.3.1 schema. However, some elements may need adjustment based on specific implementation requirements and the exact schema validation rules.
+> **Note**: The examples below are designed to be compliant with the official ETSI TS 119 612 v2.4.1 schema. However, some elements may need adjustment based on specific implementation requirements and the exact schema validation rules.
 
 ### 9.1 Complete TSL Example
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<TrustServiceStatusList xmlns="http://uri.etsi.org/19612/v2.3.1#"
-                       xmlns:tsl="http://uri.etsi.org/19612/v2.3.1#"
+<TrustServiceStatusList xmlns="http://uri.etsi.org/19612/v2.4.1#"
+                       xmlns:tsl="http://uri.etsi.org/19612/v2.4.1#"
                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xsi:schemaLocation="http://uri.etsi.org/19612/v2.3.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd"
+                       xsi:schemaLocation="http://uri.etsi.org/19612/v2.4.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd"
                        Id="tsl-1">
   
   <SchemeInformation>
@@ -971,9 +971,9 @@ Here's a corrected example that should validate against the official ETSI schema
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<TrustServiceStatusList xmlns="http://uri.etsi.org/19612/v2.3.1#"
+<TrustServiceStatusList xmlns="http://uri.etsi.org/19612/v2.4.1#"
                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xsi:schemaLocation="http://uri.etsi.org/19612/v2.3.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd"
+                       xsi:schemaLocation="http://uri.etsi.org/19612/v2.4.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd"
                        Id="tsl-1">
   
   <SchemeInformation>
@@ -1103,10 +1103,10 @@ The examples provided may require adjustments for full schema compliance:
 #### 9.4.2 Validation Commands
 ```bash
 # Validate the complete TSL example
-xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd tsl-example.xml
+xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd tsl-example.xml
 
 # Validate with detailed error reporting
-xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd --noout tsl-example.xml 2>&1 | head -20
+xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd --noout tsl-example.xml 2>&1 | head -20
 ```
 
 #### 9.4.3 Schema Compliance Checklist
@@ -1125,7 +1125,7 @@ xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3
 #### 10.1.1 XSD Validation
 ```bash
 # Validate TSL against official ETSI schema
-xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd tsl.xml
+xmllint --schema https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd tsl.xml
 
 # Or with local cached schema
 xmllint --schema 19612_xsd.xsd tsl.xml
@@ -1241,9 +1241,9 @@ xmlsec1 --verify --pubkey-cert-pem cert.pem tsl.xml
 ## References
 
 ### Standards and Specifications
-- [ETSI TS 119 612 v2.3.1 (2024-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.03.01_60/ts_119612v020301p.pdf)
-- [ETSI TS 119 612 v2.3.1 XSD Schema](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_xsd.xsd)
-- [ETSI TS 119 612 v2.3.1 SIE XSD Schema](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_sie_xsd.xsd)
+- [ETSI TS 119 612 v2.4.1 (2024-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.03.01_60/ts_119612v020301p.pdf)
+- [ETSI TS 119 612 v2.4.1 XSD Schema](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd)
+- [ETSI TS 119 612 v2.4.1 SIE XSD Schema](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd)
 - [eIDAS Regulation (EU) No 910/2014](https://eur-lex.europa.eu/eli/reg/2014/910/oj)
 - [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)
 - [XML Digital Signature Specification](https://www.w3.org/TR/xmldsig-core1/)

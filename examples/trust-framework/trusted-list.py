@@ -8,7 +8,7 @@ Here's a complete Python implementation for signing the ListOfTrustedLists examp
 ```python
 #!/usr/bin/env python3
 """
-ETSI TS 119 612 v2.3.1 ListOfTrustedLists Digital Signing Implementation
+ETSI TS 119 612 v2.4.1 ListOfTrustedLists Digital Signing Implementation
 """
 
 import xml.etree.ElementTree as ET
@@ -70,10 +70,10 @@ class ListOfTrustedListsSigner:
         
         # Create root element
         root = ET.Element("ListOfTrustedLists")
-        root.set("xmlns", "http://uri.etsi.org/19612/v2.3.1#")
+        root.set("xmlns", "http://uri.etsi.org/19612/v2.4.1#")
         root.set("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance")
         root.set("xsi:schemaLocation", 
-                "http://uri.etsi.org/19612/v2.3.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_sie_xsd.xsd")
+                "http://uri.etsi.org/19612/v2.4.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd")
         root.set("Id", list_id)
         
         # ListInformation
@@ -358,7 +358,7 @@ def validate_signed_xml(xml_file):
         result = subprocess.run([
             'xmllint', 
             '--schema', 
-            'https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.3.1/19612_sie_xsd.xsd',
+            'https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd',
             xml_file
         ], capture_output=True, text=True)
         
