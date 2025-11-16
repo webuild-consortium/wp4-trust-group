@@ -1261,5 +1261,5 @@ For questions about this implementation guide:
 - reach the WeBuild WG groups
 ---
 
-**Document Version**: 0.8  
-**Last Updated**: 2025-10-24  
+**Document Version**: 0.9  
+**Last Updated**: 2025-11-16  
