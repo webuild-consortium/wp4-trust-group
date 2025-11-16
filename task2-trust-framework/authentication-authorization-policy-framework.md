@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This document defines the distinction between authentication and authorization within general trust frameworks, explores the application of additive and subtractive policy principles in authorization mechanisms, and develops comprehensive use cases for trust participants (Credential Issuers, Wallet Solutions, and Relying Parties) using federative trust marks in a general trust infrastructure context.
+This document aims to develop a framework for the distinction between authentication and authorization within general trust frameworks, explores the application of additive and subtractive policy principles in authorization mechanisms, and develops comprehensive use cases for trust participants (Credential Issuers, Wallet Solutions, and Relying Parties) using federative trust marks in a general trust infrastructure context.
 
 ## Table of Contents
 
