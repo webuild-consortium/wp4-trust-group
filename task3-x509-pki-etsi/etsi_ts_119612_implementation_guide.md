@@ -178,10 +178,39 @@ ETSI TS 119 612 v2.3.1 defines the format and content for eIDAS trusted lists in
 - Time Stamping: `http://uri.etsi.org/TrstSvc/Svctype/TSA`
 - Electronic Registered Delivery: `http://uri.etsi.org/TrstSvc/Svctype/EDS`
 
-#### 3.4.3 Wallet Specific Service Types
-- Wallet Provider Services: `http://uri.etsi.org/TrstSvc/Svctype/WalletProvider`
-- Credential Issuer Services: `http://uri.etsi.org/TrstSvc/Svctype/CredentialIssuer`
-- Relying Party Services: `http://uri.etsi.org/TrstSvc/Svctype/RelyingParty`
+#### 3.4.3 Wallet-Specific Service Types
+
+The following service types are specific to the Wallet ecosystem and align with EWC Trust List structure and EUDI Architecture requirements:
+
+##### 3.4.3.1 Wallet Provider Services
+- Individual Wallet Provider: `http://uri.etsi.org/TrstSvc/Svctype/IndividualWalletProvider`
+- Legal Person Wallet Provider: `http://uri.etsi.org/TrstSvc/Svctype/LegalPersonWalletProvider`
+- Generic Wallet Provider (for backward compatibility): `http://uri.etsi.org/TrstSvc/Svctype/WalletProvider`
+
+##### 3.4.3.2 Credential Issuer Services
+- Person Identification Data (PID) Issuer: `http://uri.etsi.org/TrstSvc/Svctype/PID_Issuer`
+- Legal Person Identification Data (LPID) Issuer: `http://uri.etsi.org/TrstSvc/Svctype/LPID_Issuer`
+- Qualified Electronic Attestation of Attributes (QEAA) Provider: `http://uri.etsi.org/TrstSvc/Svctype/QEAA_Provider`
+- Public Sector Electronic Attestation of Attributes (PUB EAA) Provider: `http://uri.etsi.org/TrstSvc/Svctype/PUB_EAA_Provider`
+- Non-Qualified Electronic Attestation of Attributes (EAA) Provider: `http://uri.etsi.org/TrstSvc/Svctype/Non_Q_EAA_Provider`
+- Generic Credential Issuer (for backward compatibility): `http://uri.etsi.org/TrstSvc/Svctype/CredentialIssuer`
+
+##### 3.4.3.3 Relying Party Services
+- Relying Party: `http://uri.etsi.org/TrstSvc/Svctype/RelyingParty`
+- Relying Party Intermediary: `http://uri.etsi.org/TrstSvc/Svctype/RelyingPartyIntermediary`
+
+##### 3.4.3.4 Access Certificate Authority Services
+
+Per EUDI Architecture Annex 2, ISSU_33, there may be separate Access Certificate Authority Trusted Lists for different provider types:
+
+- Access Certificate Authority for QEAA Providers: `http://uri.etsi.org/TrstSvc/Svctype/CA/PKC/QEAA`
+- Access Certificate Authority for PUB EAA Providers: `http://uri.etsi.org/TrstSvc/Svctype/CA/PKC/PUB_EAA`
+- Access Certificate Authority for EAA Providers: `http://uri.etsi.org/TrstSvc/Svctype/CA/PKC/EAA`
+- Generic Access Certificate Authority: `http://uri.etsi.org/TrstSvc/Svctype/CA/PKC`
+
+**References**:
+- [EWC Trust List](https://ewc-consortium.github.io/ewc-trust-list/#trust-list)
+- [EUDI Architecture Annex 2, ISSU_33](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2-high-level-requirements.md)
 
 ## 4. XML Schema Implementation
 
@@ -529,7 +558,7 @@ The following credential issuer types are defined based on eIDAS Implementing Ac
 
 ##### 5.1.2.3 Electronic Attestation of Attributes (EAA) Providers
 ```xml
-<ServiceTypeIdentifier>http://uri.etsi.org/TrstSvc/Svctype/EAA_Provider</ServiceTypeIdentifier>
+<ServiceTypeIdentifier>http://uri.etsi.org/TrstSvc/Svctype/Non_Q_EAA_Provider</ServiceTypeIdentifier>
 <ServiceName>
   <Name xml:lang="en">Electronic Attestation of Attributes Provider</Name>
   <Name xml:lang="it">Provider di Attestazioni Elettroniche di Attributi</Name>
