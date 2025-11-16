@@ -3,7 +3,7 @@
 ## Document Information
 - **Standard**: [ETSI TS 119 612 V2.4.1 (2025-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf)
 - **Title**: Electronic Signatures and Trust Infrastructures (ESI); Trusted Lists
-- **Reference**: RTS/ESI-0019612v231
+- **Reference**: RTS/ESI-0019612v241
 - **Keywords**: e-commerce, electronic signature, security, trust services
 
 ## Table of Contents
