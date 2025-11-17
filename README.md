@@ -104,25 +104,59 @@ wp4-trust-group/
 
 ## Informative References
 
+### Community Regulations
+
+- **eIDAS Regulation (EU) No 910/2014** - Regulation on electronic identification and trust services
+  - [Official Document](https://eur-lex.europa.eu/eli/reg/2014/910/oj)
+- **Regulation (EU) 2024/1183** - Amending Regulation (EU) No 910/2014
+  - [Official Document](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)
+- **CIR  2025/848** -  Commission Implementing Regulation on the registration of wallet-relying parties
+  - [Official Document](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500848j)
+
 ### Standards
 
-- **ETSI TS 119 612** (v2.3.1) - Trusted Lists
+- **ETSI TS 119 612** (v2.4.1) - Electronic Signatures and Trust Infrastructures (ESI); Trusted Lists
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf)
+  - [XSD Schema](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd)
+  - [SIE XSD Schema (ListOfTrustedLists)](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd)
+- **ETSI EN 319 412-6** (v01.00.00) - Certificate profile requirements for PID, Wallet, EAA, QEAA and PSBEAA providers
+  - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf)
+- **ETSI TS 119 411-8** (v01.00.00) - Access Certificate Policy for EUDI Wallet Relying Parties
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.00.00_60/ts_11941108v010000c.pdf)
+- **ETSI TS 119 475** (v01.00.00) - Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.00.00_60/ts_119475v010000c.pdf)
+- **ETSI TS 119 602** (v01.00.00) - Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1.
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/119602/01.00.00_60/ts_119602v010000c.pdf)
+  - **Note**: ETSI DTS 119 602 newer version expected (Oct 2025)
+
+### European Commission Technical Specifications
+
+These below may have further updates and require to considered in future milestones.
+
+- **EC TS02 v0.9** (2025-04) - Specification of systems enabling the notification and subsequent publication of Provider information
+- **EC TS05 V1.0** (2025-06) - Common Formats and API for Relying Party Registration Information
+- **EC TS06 v1.0** (2025-06) - Common set of Relying Party information to be registered
+
+### Security Guidelines
+
+- **ENISA EUCC Guidelines Cryptography v.2** (2025-05) - European Union Common Criteria-based Cryptography Guidelines
+  - Reference: CIR (EU) 2024/2981, CIR (EU) 2024/482
+
+#### Dependencies
+
 - **IETF RFC 5914** - Trust Anchor Format
-- **IETF RFC 5280** - X.509 PKI
+- **IETF RFC 5280** - Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile
+- **W3C XML Digital Signature** - XML Signature Syntax and Processing Version 1.1
+  - [Official Specification](https://www.w3.org/TR/xmldsig-core1/)
+- **W3C XML Schema** - XML Schema Definition Language
+  - [Part 1: Structures](https://www.w3.org/TR/xmlschema-1/)
+  - [Part 2: Datatypes](https://www.w3.org/TR/xmlschema-2/)
+
 
 ### Drafts
 
-- **ETSI EN 319 412-6** - Certificate profile requirements for PID, Wallet, EAA, QEAA and PSBEAA providers
-- **ETSI TS 119 411-8** - Access Certificate Policy for EUDI Wallet Relying Parties
-- **ETSI TS 119 475** - Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)
-- **ETSI TS 119 602** - Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1.
 - **OpenID Federation 1.0** - Draft 43
 - **OpenID Federation Wallet Architectures 1.0** - Draft 03
-
-
-### Requirements References
-
-- **ARF Requirements About Trust Infrastructure** - https://github.com/webuild-consortium/wp4-trust-group/issues/1
 
 
 ## Getting Started
