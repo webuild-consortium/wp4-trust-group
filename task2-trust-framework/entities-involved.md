@@ -189,9 +189,9 @@ This document defines, according to EUDIW ARF,  the list of entities involved in
   - Authentic Sources are referenced in PuB-EAA Provider notifications
   - Catalogue of attributes references Authentic Sources
 
-## Trust Evaluation Relationships
+## Trust Infrastructure Leads and Their Relationships
 
-The trust evaluation process involves the following key relationships:
+The following are the main relationships among trust infrastructure entities:
 
 1. **Member States -> Registrars**: Member States establish and oversee Registrars
 2. **Registrars -> Registered Entities**: Registrars register and approve entities
