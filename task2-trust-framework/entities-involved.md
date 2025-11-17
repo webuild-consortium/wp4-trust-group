@@ -1,6 +1,6 @@
 # Entities Involved in Trust Evaluation
 
-This document extracts the list of entities involved in trust evaluation, trust registry, and trust infrastructure in the EUDI Wallet ecosystem.
+This document defines, according to EUDIW ARF,  the list of entities involved in trust evaluation, trust registry, and trust infrastructure in the EUDI Wallet ecosystem.
 
 ## Core Trust Infrastructure Entities
 
