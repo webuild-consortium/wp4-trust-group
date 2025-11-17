@@ -6,6 +6,7 @@ This task focuses on defining the comprehensive trust framework for the WP4 Trus
 
 ### Trust Model
 - **Trust Hierarchy**: Multi-level trust relationships
+- **Roles and accountability**: Defining roles and their tasks
 - **Trust Anchors**: Root trust authorities
 - **Trust Chains**: Certificate chain validation
 - **Trust Policies**: Policy-based trust management
@@ -21,6 +22,13 @@ This task focuses on defining the comprehensive trust framework for the WP4 Trus
 - **Trust Maintenance**: Ongoing trust management
 - **Trust Revocation**: Trust termination procedures
 - **Trust Monitoring**: Continuous trust assessment
+
+### Auditability
+- **Logging**
+- **Traceability**
+- **audit trails**
+- **Documentation**
+- **Versioning and changes**
 
 ## Framework Architecture
 
@@ -275,29 +283,3 @@ This task focuses on defining the comprehensive trust framework for the WP4 Trus
 - **IETF RFC 5914**: Trust Anchor Format
 - **IETF RFC 5280**: X.509 PKI
 - **OpenID Federation**: Federation protocols
-
-## Timeline
-
-### Phase 1: Framework Design (Weeks 1-4)
-- Trust model definition
-- Trust evaluation criteria
-- Trust policy framework
-- Trust data model
-
-### Phase 2: Implementation (Weeks 5-8)
-- Trust engine implementation
-- Trust API development
-- Trust policy engine
-- Trust monitoring system
-
-### Phase 3: Testing (Weeks 9-12)
-- Unit testing
-- Integration testing
-- System testing
-- User acceptance testing
-
-### Phase 4: Deployment (Weeks 13-16)
-- System deployment
-- Configuration management
-- Monitoring setup
-- Documentation completion
