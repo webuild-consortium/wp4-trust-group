@@ -1,6 +1,6 @@
 # Requirements Matrix: Trusted Lists, Participant Registration, and Trust Evaluation
 
-This matrix extracts all requirements related to trusted lists, participant registration, and trust evaluation from Annex 2 (High-Level Requirements) of the EUDI Wallet Architecture and Reference Framework version 2.7.3.
+This matrix extracts all requirements related to trusted lists, participant registration, and trust evaluation from Annex 2 (High-Level Requirements) of the [EUDI Wallet Architecture and Reference Framework version 2.7.3](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/v2.7.3/docs/annexes/annex-2/annex-2.01-high-level-requirements.md).
 
 ---
 
