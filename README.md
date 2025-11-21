@@ -34,17 +34,17 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 | Task ID | Task Name | Started | Status | Deadline |
 |---------|-----------|---------|--------|----------|
-| Task 1 | Definition of the Use cases​ | No | Not started | TBD |
-| Task 2 | Definition of the Trust Framework​ | No | Not started | TBD |
-| Task 3 | X.509 PKI with ETSI alignments​ | No | Not started | TBD |
-| Task 4 | Trust Infrastructure API and additional features​ | No | Not started | TBD |
-| Task 4.1 | Trust Infrastructure API | No | Not started | TBD |
-| Task 4.2 | Onboarding API | No | Not started | TBD |
-| Task 5 | Participants' Certificates and Policies​ | No | Not started | TBD |
-| Task 5.1 | Data model | No | Not started | TBD |
-| Task 5.2 | Trust evaluation methods | No | Not started | TBD |
-| Task 6 | Wallet Instance Conformance/Interop Checks​ | No | Not started | TBD |
-| Task 7 | Testing and Validation​ | No | Not started | TBD |
+| Task 1 | Definition of the Use cases​ | Yes | In progress | 31/12/2025 |
+| Task 2 | Definition of the Trust Framework​ | Yes | In progress | 30/06/2026 |
+| Task 3 | X.509 PKI with ETSI alignments​ | No | Not started | 28/02/2026 |
+| Task 4 | Trust Infrastructure API and additional features​ | Yes | In progress | 31/03/2026 |
+| Task 4.1 | Trust Infrastructure API | Yes | In progress | 31/01/2026 |
+| Task 4.2 | Onboarding API | No | Not started | 31/03/2026 |
+| Task 5 | Participants' Certificates and Policies​ | No | Not started | 30/04/2026 |
+| Task 5.1 | Data model | No | Not started | 31/03/2026 |
+| Task 5.2 | Trust evaluation methods | No | Not started | 30/04/2026 |
+| Task 6 | Wallet Instance Conformance/Interop Checks​ | No | Not started | 30/06/2026 |
+| Task 7 | Testing and Validation​ | No | Not started | 30/09/2026 |
 
 ## Directory Structure
 
