@@ -198,6 +198,66 @@ When a wallet receives a WRPRC, it validates the issuing WRPRC Provider:
 | Validation | Certificate chain to CA in TSL | Signature by WRPRC Provider in TSL |
 | Header | N/A | `typ`: `rc-wrp+jwt` or `rc-wrp+cwt` |
 
+### 2.4 WRPRC Discovery via National Register
+
+When an RP presents only a WRPAC without a WRPRC, the wallet can discover the RP's registration information and WRPRCs through the **National Register of Wallet-Relying Parties** (CIR 2025/848 Article 3(5)).
+
+```mermaid
+sequenceDiagram
+    participant W as Wallet Instance
+    participant RP as Relying Party
+    participant NR as National Register API
+    participant TL as Trusted List
+
+    RP->>W: 1. Presentation Request (WRPAC only, no WRPRC)
+    Note over W: 2. Extract RP identifier from WRPAC<br/>(organizationIdentifier)
+    
+    W->>TL: 3. Fetch Trusted List
+    TL-->>W: 4. Get National Register URI<br/>for RP's country
+    
+    W->>NR: 5. Query National Register API<br/>by RP identifier
+    NR-->>W: 6. Return RP registration info<br/>including WRPRC(s) or registry_uri
+    
+    Note over W: 7. Validate WRPRC(s)<br/>- Verify signature by WRPRC Provider<br/>- Check entitlements vs requested attributes
+    
+    Note over W: 8. Present to user:<br/>- RP identity from WRPAC<br/>- Entitlements from WRPRC/Register<br/>- Requested attributes validation
+```
+
+#### 2.4.1 Discovery Methods
+
+| Method | Description | Reference |
+|--------|-------------|-----------|
+| **WRPRC in Request** | RP includes WRPRC in presentation request | ETSI TS 119 475 clause 4.5 |
+| **National Register Query** | Wallet queries register using RP identifier from WRPAC | CIR 2025/848 Art. 3(5) |
+| **registry_uri in WRPRC** | WRPRC contains URL to national registry API | ETSI TS 119 475 Table 7, Annex B.2.1 |
+
+#### 2.4.2 National Register API
+
+Per CIR 2025/848 Article 3(5), each Member State maintains a publicly accessible National Register with an API endpoint. The wallet can:
+
+1. **Extract RP identifier** from WRPAC (`organizationIdentifier` or `serialNumber`)
+2. **Determine country** from WRPAC (`countryName`) or TSL
+3. **Lookup National Register URI** from Trusted List or well-known location
+4. **Query the register** using the RP identifier
+5. **Retrieve registration data** including:
+   - RP entitlements
+   - Intended use declarations
+   - WRPRC(s) issued to the RP
+   - Privacy policy URL
+   - Supervisory authority
+
+#### 2.4.3 Handling Missing WRPRC
+
+| Scenario | Wallet Behavior | User Notification |
+|----------|-----------------|-------------------|
+| WRPRC provided in request | Use provided WRPRC | Show verified entitlements |
+| WRPRC not provided, register available | Fetch from National Register | Show entitlements from register |
+| WRPRC not provided, register unavailable | Use WRPAC entitlements only (if present) | Warn: "Limited entitlement info" |
+| RP not in register | Reject or warn | "RP registration not verified" |
+| Multiple WRPRCs for RP | Present all applicable entitlements | Show combined entitlements |
+
+> **Note:** The availability and API specification of National Registers may vary by Member State. CIR 2025/848 mandates public availability but implementation details are Member State-specific.
+
 ---
 
 ## 3. Policy Verification Steps
