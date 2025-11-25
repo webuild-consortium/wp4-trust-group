@@ -247,36 +247,112 @@ sequenceDiagram
 
 | Method | Description | Reference |
 |--------|-------------|-----------|
-| **WRPRC in Request** | RP includes WRPRC in presentation request | ETSI TS 119 475 clause 4.5 |
-| **National Register Query** | Wallet queries register using RP identifier from WRPAC | CIR 2025/848 Art. 3(5) |
-| **registry_uri in WRPRC** | WRPRC contains URL to national registry API | ETSI TS 119 475 Table 7, Annex B.2.1 |
+| **WRPRC in Request** | RP includes WRPRC(s) in presentation request | ETSI TS 119 475 clause 4.5 |
+| **National Register Query** | Wallet queries national register using RP identifier from WRPAC | CIR 2025/848 Art. 3(5) |
+| **Sectoral Register Query** | Wallet queries sector-specific register (e.g., financial, healthcare) | Sector-specific regulations |
+| **Cross-Border Register Query** | Wallet queries EU-level or foreign registers | ETSI TS 119 612 LOTL |
+| **registry_uri in WRPRC** | WRPRC contains URL to issuing registry API | ETSI TS 119 475 Table 7, Annex B.2.1 |
 
-#### 2.4.2 National Register API
+#### 2.4.2 Multiple Register Architecture
 
-Per CIR 2025/848 Article 3(5), each Member State maintains a publicly accessible National Register with an API endpoint. The wallet can:
+An RP may be registered in multiple registers at different levels, each issuing WRPRCs for different scopes:
 
-1. **Extract RP identifier** from WRPAC (`organizationIdentifier` or `serialNumber`)
-2. **Determine country** from WRPAC (`countryName`) or TSL
-3. **Lookup National Register URI** from Trusted List or well-known location
-4. **Query the register** using the RP identifier
-5. **Retrieve registration data** including:
-   - RP entitlements
-   - Intended use declarations
-   - WRPRC(s) issued to the RP
-   - Privacy policy URL
-   - Supervisory authority
+```mermaid
+graph TD
+    subgraph EU["EU-Level Registers"]
+        EU_FIN[EU Financial Services Register]
+        EU_HEALTH[EU Healthcare Register]
+    end
+    
+    subgraph MS["Member State Registers"]
+        MS_NAT[National WRP Register<br/>CIR 2025/848 Art. 3]
+        MS_SEC[Sectoral Registers<br/>e.g., Banking, Insurance]
+    end
+    
+    subgraph LOTL_REG["Trusted List Discovery"]
+        LOTL[List of Trusted Lists]
+        TSL_IT[IT Trusted List]
+        TSL_DE[DE Trusted List]
+    end
+    
+    RP[Relying Party] --> MS_NAT
+    RP --> MS_SEC
+    RP --> EU_FIN
+    RP --> EU_HEALTH
+    
+    LOTL --> TSL_IT
+    LOTL --> TSL_DE
+    TSL_IT --> MS_NAT
+    TSL_IT --> MS_SEC
+```
 
-#### 2.4.3 Handling Missing WRPRC
+| Register Level | Scope | Example | WRPRC Entitlements |
+|----------------|-------|---------|-------------------|
+| **National** | General WRP registration | IT National Register | General service provider entitlements |
+| **Sectoral (National)** | Sector-specific within MS | IT Banking Register | PSD2, financial data access |
+| **Sectoral (EU)** | EU-wide sector regulation | EU Financial Services | Cross-border financial services |
+| **Cross-Border** | Foreign MS registers | DE Register for IT-based RP | Services in foreign MS |
 
-| Scenario | Wallet Behavior | User Notification |
-|----------|-----------------|-------------------|
-| WRPRC provided in request | Use provided WRPRC | Show verified entitlements |
-| WRPRC not provided, register available | Fetch from National Register | Show entitlements from register |
-| WRPRC not provided, register unavailable | Use WRPAC entitlements only (if present) | Warn: "Limited entitlement info" |
-| RP not in register | Reject or warn | "RP registration not verified" |
-| Multiple WRPRCs for RP | Present all applicable entitlements | Show combined entitlements |
+#### 2.4.3 Register Discovery via Trusted List
 
-> **Note:** The availability and API specification of National Registers may vary by Member State. CIR 2025/848 mandates public availability but implementation details are Member State-specific.
+The wallet discovers available registers through the Trusted List infrastructure:
+
+1. **LOTL Query** - Fetch List of Trusted Lists to discover all Member State TSLs
+2. **TSL Query** - Each TSL may list:
+   - National WRP Register endpoints
+   - Sectoral register endpoints  
+   - WRPRC Provider services
+3. **Register Query** - Query each relevant register by RP identifier
+
+#### 2.4.4 Multiple WRPRC Aggregation
+
+When an RP has WRPRCs from multiple registers, the wallet aggregates entitlements:
+
+```mermaid
+flowchart TD
+    A[RP presents WRPAC] --> B{WRPRC in request?}
+    B -->|Yes| C[Validate provided WRPRC]
+    B -->|No| D[Query National Register]
+    
+    D --> E{RP found?}
+    E -->|Yes| F[Fetch National WRPRC]
+    E -->|No| G[Check Sectoral Registers]
+    
+    C --> H{Additional registers<br/>applicable?}
+    F --> H
+    G --> H
+    
+    H -->|Yes| I[Query additional registers<br/>based on RP sector/scope]
+    H -->|No| J[Use available WRPRCs]
+    
+    I --> K[Aggregate all WRPRCs]
+    J --> L[Validate entitlements]
+    K --> L
+    
+    L --> M[Present combined entitlements<br/>to user with source indication]
+```
+
+| Scenario | Wallet Behavior | User Display |
+|----------|-----------------|--------------|
+| Single WRPRC | Use single WRPRC entitlements | "Registered in: [Register Name]" |
+| Multiple WRPRCs, same scope | Union of entitlements | "Registered in: [Register 1], [Register 2]" |
+| Multiple WRPRCs, different scopes | Show entitlements per scope | "General: [entitlements], Financial: [entitlements]" |
+| Conflicting entitlements | Most restrictive applies, warn user | "⚠ Entitlement conflict detected" |
+| No WRPRC found | Warn user, limited trust | "⚠ No registration certificate found" |
+
+#### 2.4.5 WRPRC Issuer Identification
+
+Each WRPRC identifies its issuing register/provider:
+
+| WRPRC Field | Purpose | Reference |
+|-------------|---------|-----------|
+| `registry_uri` | URL to the issuing registry API | ETSI TS 119 475 Table 7 |
+| `policy_id` | Policy OID identifying the register's policy | ETSI TS 119 475 clause 6.1.3 |
+| `x5c` / `x5chain` | Certificate chain of WRPRC Provider | ETSI TS 119 475 clause 5.2.2, 5.2.3 |
+
+The wallet validates each WRPRC Provider against the appropriate Trusted List based on the provider's certificate chain.
+
+> **Note:** The availability and API specification of registers may vary. CIR 2025/848 mandates national registers, but sectoral and cross-border registers depend on sector-specific regulations and bilateral/multilateral agreements.
 
 ---
 
