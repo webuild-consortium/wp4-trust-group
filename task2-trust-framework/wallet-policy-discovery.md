@@ -112,7 +112,7 @@ sequenceDiagram
     OCSP-->>W: 7. OCSP/CRL Response
     
     alt WRPRC provided by RP
-        Note over W: 8a. Validate WRPRC signature<br/>- Verify WRPRC Provider in TSL
+        Note over W: 8a. Validate WRPRC signature<br/>- Verify WRPRC Provider in Trusted List
     else WRPRC not provided
         W->>NR: 8b. Query National Register<br/>by RP identifier from WRPAC
         NR-->>W: 9. Return RP WRPRC(s)
@@ -141,7 +141,7 @@ sequenceDiagram
     OCSP-->>W: 7. OCSP/CRL Response
     
     alt WRPRC provided by Provider
-        Note over W: 8a. Validate WRPRC signature<br/>- Verify WRPRC Provider in TSL
+        Note over W: 8a. Validate WRPRC signature<br/>- Verify WRPRC Provider in Trusted List
     else WRPRC not provided
         W->>NR: 8b. Query National Register<br/>by Provider identifier
         NR-->>W: 9. Return Provider WRPRC(s)
@@ -200,7 +200,7 @@ When a wallet receives a WRPRC, it validates the issuing WRPRC Provider:
 
 | Validation Step | Description | Reference |
 |-----------------|-------------|-----------|
-| Provider in TSL | Verify WRPRC Provider is listed in Member State Trusted List | ETSI TS 119 612 clause 5.5.3 |
+| Provider in Trusted List | Verify WRPRC Provider is listed in Member State Trusted List | ETSI TS 119 612 clause 5.5.3 |
 | Service Status | Verify `ServiceCurrentStatus` is `granted` | ETSI TS 119 612 clause 5.5.4 |
 | Signature Validation | Verify WRPRC signature using `x5c` (JWT) or `x5chain` (CWT) | ETSI TS 119 475 clause 5.2.2, 5.2.3 |
 | WRPRC Validity | Check `iat` timestamp, `status` claim | ETSI TS 119 475 Table 7 |
@@ -215,7 +215,7 @@ When a wallet receives a WRPRC, it validates the issuing WRPRC Provider:
 | Policy | ETSI TS 119 411-8 | ETSI TS 119 475 clause 6 |
 | Usage | TLS client authentication | Signed presentation requests |
 | Entitlements | In `qcStatements` extension | In `entitlements` claim |
-| Validation | Certificate chain to CA in TSL | Signature by WRPRC Provider in TSL |
+| Validation | Certificate chain to CA in Trusted List | Signature by WRPRC Provider in Trusted List |
 | Header | N/A | `typ`: `rc-wrp+jwt` or `rc-wrp+cwt` |
 
 ### 2.4 WRPRC Discovery via National Register
@@ -362,7 +362,7 @@ The wallet performs the following lookups:
 
 | Validation Step | Description | Reference |
 |-----------------|-------------|-----------|
-| WRPRC Provider in TSL | Verify WRPRC Provider is listed in Trusted List | ETSI TS 119 612 clause 5.5.3 |
+| WRPRC Provider in Trusted List | Verify WRPRC Provider is listed in Trusted List | ETSI TS 119 612 clause 5.5.3 |
 | Provider Status | Verify `ServiceCurrentStatus` is `granted` | ETSI TS 119 612 clause 5.5.4 |
 | Signature Verification | Verify WRPRC signature using `x5c` (JWT) or `x5chain` (CWT) | ETSI TS 119 475 clause 5.2.2, 5.2.3 |
 | WRPRC Validity | Check `iat` timestamp and `status` claim | ETSI TS 119 475 Table 7 |
