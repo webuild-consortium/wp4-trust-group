@@ -46,6 +46,37 @@ Unless required by applicable law or agreed to in writing, software distributed 
 | Task 6 | Wallet Instance Conformance/Interop Checks​ | No | Not started | 30/06/2026 |
 | Task 7 | Testing and Validation​ | No | Not started | 30/09/2026 |
 
+### Timeline
+
+```mermaid
+timeline
+    title WP4 Trust Group Project Timeline
+    section 2025
+        December 31 : Task 1 Deadline
+                     : Definition of the Use cases (In progress)
+    section 2026
+        January 31 : Task 4.1 Deadline
+                   : Trust Infrastructure API (In progress)
+        February 28 : Task 3 Deadline
+                     : X.509 PKI with ETSI alignments (Not started)
+        March 31 : Task 4 Deadline
+                  : Trust Infrastructure API and additional features (In progress)
+                  : Task 4.2 Deadline
+                  : Onboarding API (Not started)
+                  : Task 5.1 Deadline
+                  : Data model (Not started)
+        April 30 : Task 5 Deadline
+                  : Participants' Certificates and Policies (Not started)
+                  : Task 5.2 Deadline
+                  : Trust evaluation methods (Not started)
+        June 30 : Task 2 Deadline
+                 : Definition of the Trust Framework (In progress)
+                 : Task 6 Deadline
+                 : Wallet Instance Conformance/Interop Checks (Not started)
+        September 30 : Task 7 Deadline
+                      : Testing and Validation (Not started)
+```
+
 ## Directory Structure
 
 ```
