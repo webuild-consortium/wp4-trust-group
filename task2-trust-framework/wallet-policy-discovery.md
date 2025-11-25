@@ -100,7 +100,7 @@ sequenceDiagram
     participant W as Wallet Instance
     participant RP as Relying Party
     participant TL as Trusted List
-    participant OCSP as OCSP Responder
+    participant OCSP as OCSP/CRL Responder
 
     RP->>W: 1. Presentation Request (with WRPAC/WRPRC)
     Note over W: 2. Extract RP Certificate<br/>(WRPAC from TLS or WRPRC from Request)
@@ -108,7 +108,7 @@ sequenceDiagram
     TL-->>W: 4. Trusted List Response
     Note over W: 5. Validate RP against Trusted List<br/>- Check CA in TSP list<br/>- Verify service status: "granted"
     W->>OCSP: 6. Check Certificate Revocation
-    OCSP-->>W: 7. OCSP Response
+    OCSP-->>W: 7. OCSP/CRL Response
     Note over W: 8. Extract and Verify Entitlements<br/>- Parse entitlements from certificate<br/>- Validate requested attributes
 ```
 
@@ -119,16 +119,26 @@ sequenceDiagram
     participant W as Wallet Instance
     participant P as PID/EAA Provider
     participant TL as Trusted List
-    participant OCSP as OCSP Responder
+    participant NR as National Register API
+    participant OCSP as OCSP/CRL Responder
 
     W->>P: 1. Attestation Issuance Request
-    P-->>W: 2. Provider presents WRPAC
+    P-->>W: 2. Provider presents WRPAC (+ WRPRC if available)
     W->>TL: 3. Fetch Trusted List
     TL-->>W: 4. Trusted List Response
-    Note over W: 5. Validate Provider<br/>- Check CA in TSP list<br/>- Verify ServiceTypeIdentifier<br/>- Verify service status: "granted"
-    W->>OCSP: 6. Check Certificate Revocation
-    OCSP-->>W: 7. OCSP Response
-    Note over W: 8. Verify Provider Entitlements<br/>- PID: id-etsi-qcs-SemanticsId-eudipidprovider<br/>- EAA: provided_attestations
+    Note over W: 5. Validate Provider WRPAC<br/>- Check CA in TSP list<br/>- Verify service status: "granted"
+    W->>OCSP: 6. Check WRPAC Revocation
+    OCSP-->>W: 7. OCSP/CRL Response
+    
+    alt WRPRC provided by Provider
+        Note over W: 8a. Validate WRPRC signature<br/>- Verify WRPRC Provider in TSL
+    else WRPRC not provided
+        W->>NR: 8b. Query National Register<br/>by Provider identifier
+        NR-->>W: 9. Return Provider WRPRC(s)
+        Note over W: 10. Validate WRPRC signature
+    end
+    
+    Note over W: 11. Verify Provider Entitlements from WRPRC<br/>- PID: id-etsi-qcs-SemanticsId-eudipidprovider<br/>- EAA: provided_attestations (attestation types)
 ```
 
 ### 2.3 WRPRC Provider and Registration Certificate Issuance
