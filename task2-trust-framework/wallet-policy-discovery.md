@@ -4,6 +4,26 @@
 
 This document describes the policy discovery process performed by an EUDI Wallet Instance (holder) when interacting with Relying Parties (RPs) and Attestation Providers (PID Providers and EAA Providers). The discovery mechanism enables the wallet to verify the trustworthiness and entitlements of counterparties before disclosing user attributes.
 
+## Abbreviations
+
+| Abbreviation | Definition |
+|--------------|------------|
+| CA | Certificate Authority |
+| CIR | Commission Implementing Regulation |
+| CWT | CBOR Web Token |
+| EAA | Electronic Attestation of Attributes |
+| EUDIW | European Digital Identity Wallet |
+| JWT | JSON Web Token |
+| LOTL | List of Trusted Lists |
+| OCSP | Online Certificate Status Protocol |
+| PID | Person Identification Data |
+| RP | Relying Party |
+| TSL | Trusted Service List |
+| TSP | Trust Service Provider |
+| WRP | Wallet-Relying Party |
+| WRPAC | Wallet-Relying Party Access Certificate |
+| WRPRC | Wallet-Relying Party Registration Certificate |
+
 ## Normative References
 
 | Reference | Document |
@@ -39,7 +59,12 @@ graph TD
         EAA[EAA Providers<br/>Qualified / Non-Qualified / Public Sector]
         WP[Wallet Providers]
         RP[Relying Parties]
-        CA[Access Certificate Authorities]
+        WRPAC_CA[WRPAC Providers<br/>Access Certificate Authorities]
+        WRPRC_P[WRPRC Providers<br/>Registration Certificate Providers]
+    end
+    
+    subgraph REG["National Registrars"]
+        REG_WRP[Registrar of WRPs<br/>Manages National Register]
     end
     
     L --> IT
@@ -59,7 +84,10 @@ graph TD
 | EAA Provider | `http://uri.etsi.org/TrstSvc/Svctype/CredentialIssuer` | ETSI TS 119 612 clause 5.5.1 |
 | Wallet Provider | `http://uri.etsi.org/TrstSvc/Svctype/WalletProvider` | ETSI TS 119 612 clause 5.5.1 |
 | Relying Party | `http://uri.etsi.org/TrstSvc/Svctype/RelyingParty` | ETSI TS 119 612 clause 5.5.1 |
-| Access Certificate CA | `http://uri.etsi.org/TrstSvc/Svctype/CA/PKC` | ETSI TS 119 612 clause 5.5.1 |
+| WRPAC Provider (Access Certificate CA) | `http://uri.etsi.org/TrstSvc/Svctype/CA/PKC` | ETSI TS 119 612 clause 5.5.1; ETSI TS 119 411-8 |
+| WRPRC Provider (Registration Certificate Provider) | *TSP - service type TBD* | ETSI TS 119 475 clause 3.1, 6 |
+
+> **Note:** ETSI TS 119 475 clause 3.1 defines the "provider of wallet-relying party registration certificates" as a TSP, but no specific ETSI service type URI has been standardized yet. The Registrar of WRPs (CIR 2025/848 Art. 3) manages the national register but is distinct from certificate providers.
 
 ---
 
@@ -102,6 +130,73 @@ sequenceDiagram
     OCSP-->>W: 7. OCSP Response
     Note over W: 8. Verify Provider Entitlements<br/>- PID: id-etsi-qcs-SemanticsId-eudipidprovider<br/>- EAA: provided_attestations
 ```
+
+### 2.3 WRPRC Provider and Registration Certificate Issuance
+
+Per ETSI TS 119 475 clause 4.6, Member States may authorize **providers of wallet-relying party registration certificates (WRPRC providers)** to issue WRPRCs. These are distinct from:
+- **Registrars of WRPs** - manage the national register (CIR 2025/848 Art. 3)
+- **WRPAC Providers** - issue X.509 access certificates (ETSI TS 119 411-8)
+
+```mermaid
+sequenceDiagram
+    participant RP as Relying Party
+    participant REG as Registrar of WRPs
+    participant WRPRC_P as WRPRC Provider
+    participant TL as Trusted List
+    participant W as Wallet Instance
+
+    Note over RP,REG: Registration Phase (CIR 2025/848 Art. 6)
+    RP->>REG: 1. Registration Request
+    REG->>REG: 2. Identity proofing<br/>(ETSI TS 119 461)
+    REG-->>RP: 3. Registered in National Register
+
+    Note over RP,WRPRC_P: Certificate Issuance (ETSI TS 119 475 clause 6)
+    RP->>WRPRC_P: 4. WRPRC Request
+    WRPRC_P->>REG: 5. Verify RP in register<br/>(REG-6.2.2.2-02)
+    WRPRC_P->>WRPRC_P: 6. Verify RP holds valid WRPAC<br/>(REG-6.2.2.2-03)
+    WRPRC_P-->>RP: 7. Issue WRPRC (JWT/CWT)<br/>signed by WRPRC Provider
+
+    Note over RP,W: Presentation Phase
+    RP->>W: 8. Presentation Request + WRPRC
+    W->>TL: 9. Fetch Trusted List
+    TL-->>W: 10. Trusted List Response
+    Note over W: 11. Validate WRPRC Provider<br/>- Find Provider in TSP list<br/>- Verify status: "granted"
+    Note over W: 12. Validate WRPRC signature<br/>using Provider's public key (x5c)
+    Note over W: 13. Extract entitlements<br/>& validate against request
+```
+
+#### 2.3.1 WRPRC Issuance Models (ETSI TS 119 475 Annex D)
+
+| Model | Description | Reference |
+|-------|-------------|-----------|
+| Integrated | Registrar and WRPRC provider are same entity | ETSI TS 119 475 Annex D.1 |
+| Registrar-initiated | Registrar instructs provider to issue | ETSI TS 119 475 Annex D.2 |
+| RP-initiated | RP contacts provider after registration | ETSI TS 119 475 Annex D.3 |
+| Provider-assisted | Provider acts as proxy to registrar | ETSI TS 119 475 Annex D.4 |
+
+#### 2.3.2 WRPRC Provider Trust Validation
+
+When a wallet receives a WRPRC, it validates the issuing WRPRC Provider:
+
+| Validation Step | Description | Reference |
+|-----------------|-------------|-----------|
+| Provider in TSL | Verify WRPRC Provider is listed in Member State Trusted List | ETSI TS 119 612 clause 5.5.3 |
+| Service Status | Verify `ServiceCurrentStatus` is `granted` | ETSI TS 119 612 clause 5.5.4 |
+| Signature Validation | Verify WRPRC signature using `x5c` (JWT) or `x5chain` (CWT) | ETSI TS 119 475 clause 5.2.2, 5.2.3 |
+| WRPRC Validity | Check `iat` timestamp, `status` claim | ETSI TS 119 475 Table 7 |
+| Policy ID | Verify `policy_id` matches expected policy OIDs | ETSI TS 119 475 clause 6.1.3 |
+
+#### 2.3.3 WRPAC vs WRPRC
+
+| Aspect | WRPAC (Access Certificate) | WRPRC (Registration Certificate) |
+|--------|---------------------------|----------------------------------|
+| Format | X.509 Certificate | JWT or CWT |
+| Issuer | WRPAC Provider (CA) | WRPRC Provider (TSP) |
+| Policy | ETSI TS 119 411-8 | ETSI TS 119 475 clause 6 |
+| Usage | TLS client authentication | Signed presentation requests |
+| Entitlements | In `qcStatements` extension | In `entitlements` claim |
+| Validation | Certificate chain to CA in TSL | Signature by WRPRC Provider in TSL |
+| Header | N/A | `typ`: `rc-wrp+jwt` or `rc-wrp+cwt` |
 
 ---
 
