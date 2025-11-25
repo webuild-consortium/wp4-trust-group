@@ -1,4 +1,4 @@
-# Wallet Ecosystem Policy Discovery
+# Wallet Ecosystem Policy Discovery Mechanisms
 
 According to the Wallet Instance's perspective.
 
