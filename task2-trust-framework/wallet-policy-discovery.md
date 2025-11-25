@@ -1,4 +1,6 @@
-# Wallet Instance Policy Discovery
+# Wallet Ecosystem Policy Discovery
+
+According to the Wallet Instance's perspective.
 
 ## Overview
 
