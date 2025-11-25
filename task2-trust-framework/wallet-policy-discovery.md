@@ -100,16 +100,26 @@ sequenceDiagram
     participant W as Wallet Instance
     participant RP as Relying Party
     participant TL as Trusted List
+    participant NR as National Register API
     participant OCSP as OCSP/CRL Responder
 
-    RP->>W: 1. Presentation Request (with WRPAC/WRPRC)
-    Note over W: 2. Extract RP Certificate<br/>(WRPAC from TLS or WRPRC from Request)
+    RP->>W: 1. Presentation Request (WRPAC + WRPRC if available)
+    Note over W: 2. Extract RP WRPAC<br/>(from TLS or signed request)
     W->>TL: 3. Fetch Trusted List
     TL-->>W: 4. Trusted List Response
-    Note over W: 5. Validate RP against Trusted List<br/>- Check CA in TSP list<br/>- Verify service status: "granted"
-    W->>OCSP: 6. Check Certificate Revocation
+    Note over W: 5. Validate RP WRPAC<br/>- Check CA in TSP list<br/>- Verify service status: "granted"
+    W->>OCSP: 6. Check WRPAC Revocation
     OCSP-->>W: 7. OCSP/CRL Response
-    Note over W: 8. Extract and Verify Entitlements<br/>- Parse entitlements from certificate<br/>- Validate requested attributes
+    
+    alt WRPRC provided by RP
+        Note over W: 8a. Validate WRPRC signature<br/>- Verify WRPRC Provider in TSL
+    else WRPRC not provided
+        W->>NR: 8b. Query National Register<br/>by RP identifier from WRPAC
+        NR-->>W: 9. Return RP WRPRC(s)
+        Note over W: 10. Validate WRPRC signature
+    end
+    
+    Note over W: 11. Extract and Verify Entitlements from WRPRC<br/>- Parse entitlements<br/>- Validate requested attributes against entitlements
 ```
 
 ### 2.2 Discovery Sequence for Attestation Provider Interaction
@@ -272,15 +282,26 @@ Per CIR 2025/848 Article 3(5), each Member State maintains a publicly accessible
 
 ## 3. Policy Verification Steps
 
-### 3.1 Step 1: Obtain Counterparty Certificate
+### 3.1 Step 1: Obtain Counterparty Certificates (WRPAC and WRPRC)
 
-The wallet extracts the counterparty's certificate from:
+The wallet obtains the counterparty's certificates:
 
-| Source | Certificate Type | Reference |
-|--------|------------------|-----------|
-| TLS Handshake | WRPAC (Wallet-Relying Party Access Certificate) | ETSI TS 119 411-8 clause 5 |
-| Signed Request | WRPRC (Wallet-Relying Party Registration Certificate) | ETSI TS 119 475 clause 6 |
-| OpenID4VP Request | JWT/CWT with embedded certificate | ETSI TS 119 475 clause 6.2, 6.3 |
+#### 3.1.1 WRPAC Sources
+
+| Source | Description | Reference |
+|--------|-------------|-----------|
+| TLS Handshake | X.509 client certificate for authentication | ETSI TS 119 411-8 clause 5 |
+| Signed Request | Certificate embedded in signed presentation request | ETSI TS 119 475 clause 4.3 |
+
+#### 3.1.2 WRPRC Sources
+
+| Source | Description | Reference |
+|--------|-------------|-----------|
+| Included in Request | RP/Provider includes WRPRC in presentation request | ETSI TS 119 475 clause 4.5 |
+| National Register API | Wallet queries register using identifier from WRPAC | CIR 2025/848 Art. 3(5) |
+| OpenID4VP Request | JWT/CWT WRPRC embedded in request | ETSI TS 119 475 clause 6.2, 6.3 |
+
+> **Note:** If WRPRC is not provided by the counterparty, the wallet should query the National Register using the identifier extracted from the WRPAC (`organizationIdentifier` for legal persons, `serialNumber` for natural persons).
 
 ### 3.2 Step 2: Trusted List Lookup
 
@@ -318,27 +339,46 @@ The wallet performs the following lookups:
 </TrustServiceStatusList>
 ```
 
-### 3.3 Step 3: Certificate Chain Validation
+### 3.3 Step 3: WRPAC Validation (Certificate Chain)
 
 | Validation Step | Description | Reference |
 |-----------------|-------------|-----------|
-| Issuer Match | Verify certificate issuer matches TSP in Trusted List | ETSI TS 119 612 clause 5.5.3 |
+| Issuer Match | Verify WRPAC issuer (CA) matches TSP in Trusted List | ETSI TS 119 612 clause 5.5.3 |
 | Service Status | Verify `ServiceCurrentStatus` is `granted` | ETSI TS 119 612 clause 5.5.4 |
 | Certificate Path | Build and validate certificate chain to trust anchor | IETF RFC 5280 clause 6 |
 | Validity Period | Check `Not Before` and `Not After` dates | IETF RFC 5280 clause 4.1.2.5 |
-| Revocation Status | Check OCSP or CRL | ETSI TS 119 411-8 GEN-6.6.1-08 |
+| Revocation Status | Check OCSP or CRL for WRPAC | ETSI TS 119 411-8 GEN-6.6.1-08 |
 
-### 3.4 Step 4: Entitlement Verification
+### 3.4 Step 4: WRPRC Validation
 
-#### 3.4.1 For Relying Parties
+#### 3.4.1 Obtaining WRPRC
 
-Extract and verify entitlements from certificate or registration certificate:
+| Scenario | Action | Reference |
+|----------|--------|-----------|
+| WRPRC provided in request | Use provided WRPRC | ETSI TS 119 475 clause 4.5 |
+| WRPRC not provided | Query National Register using identifier from WRPAC | CIR 2025/848 Art. 3(5) |
+
+#### 3.4.2 WRPRC Signature Validation
+
+| Validation Step | Description | Reference |
+|-----------------|-------------|-----------|
+| WRPRC Provider in TSL | Verify WRPRC Provider is listed in Trusted List | ETSI TS 119 612 clause 5.5.3 |
+| Provider Status | Verify `ServiceCurrentStatus` is `granted` | ETSI TS 119 612 clause 5.5.4 |
+| Signature Verification | Verify WRPRC signature using `x5c` (JWT) or `x5chain` (CWT) | ETSI TS 119 475 clause 5.2.2, 5.2.3 |
+| WRPRC Validity | Check `iat` timestamp and `status` claim | ETSI TS 119 475 Table 7 |
+| Identifier Match | Verify WRPRC `sub.id` matches WRPAC `organizationIdentifier` | ETSI TS 119 475 GEN-5.1.1-02 |
+
+### 3.5 Step 5: Entitlement Verification
+
+#### 3.5.1 For Relying Parties
+
+Extract and verify entitlements from WRPRC:
 
 | Entitlement Source | Field | Reference |
 |--------------------|-------|-----------|
-| X.509 Certificate | `qcStatements` extension | ETSI TS 119 475 clause 5.2 |
-| WRPRC (JWT) | `entitlements` claim | ETSI TS 119 475 clause 6.2 |
+| WRPRC (JWT) | `entitlements` claim | ETSI TS 119 475 clause 6.2, Table 7 |
 | WRPRC (CWT) | `entitlements` claim | ETSI TS 119 475 clause 6.3 |
+| WRPRC (JWT/CWT) | `credentials` claim (for service providers) | ETSI TS 119 475 Table 9 |
 
 **Entitlement Structure (ETSI TS 119 475 Annex A):**
 
@@ -353,22 +393,26 @@ Entitlement ::= SEQUENCE {
 
 **Common Entitlement OIDs:**
 
-| Entitlement | OID | Reference |
-|-------------|-----|-----------|
+| Entitlement | OID/URI | Reference |
+|-------------|---------|-----------|
 | PID Provider | `id-etsi-qcs-SemanticsId-eudipidprovider` | ETSI TS 119 475 Annex A.1 |
 | Qualified EAA Provider | `id-etsi-qcs-SemanticsId-eudiqeaaprovider` | ETSI TS 119 475 Annex A.2 |
 | Non-Qualified EAA Provider | `id-etsi-qcs-SemanticsId-eudinqeaaprovider` | ETSI TS 119 475 Annex A.3 |
 | Public Sector EAA Provider | `id-etsi-qcs-SemanticsId-eudipubeaaprovider` | ETSI TS 119 475 Annex A.4 |
-| General Relying Party | `id-etsi-qcs-SemanticsId-eudirp` | ETSI TS 119 475 Annex A.5 |
+| General Relying Party (Service Provider) | `id-etsi-qcs-SemanticsId-eudirp` | ETSI TS 119 475 Annex A.5 |
 
-#### 3.4.2 For Attestation Providers
+#### 3.5.2 For Attestation Providers
 
-| Provider Type | Required Entitlement | Verification |
-|---------------|---------------------|--------------|
-| PID Provider | `id-etsi-qcs-SemanticsId-eudipidprovider` | Must be present in `qcStatements` |
-| Qualified EAA Provider | `id-etsi-qcs-SemanticsId-eudiqeaaprovider` + `provided_attestations` | Must list attestation types |
-| Non-Qualified EAA Provider | `id-etsi-qcs-SemanticsId-eudinqeaaprovider` + `provided_attestations` | Must list attestation types |
-| Public Sector EAA Provider | `id-etsi-qcs-SemanticsId-eudipubeaaprovider` + `provided_attestations` | Must list attestation types |
+Attestation providers (PID/EAA) must have their entitlements verified from the WRPRC:
+
+| Provider Type | Required Entitlement in WRPRC | Additional WRPRC Field | Reference |
+|---------------|------------------------------|------------------------|-----------|
+| PID Provider | `id-etsi-qcs-SemanticsId-eudipidprovider` | - | ETSI TS 119 475 Annex A.1 |
+| Qualified EAA Provider | `id-etsi-qcs-SemanticsId-eudiqeaaprovider` | `provided_attestations` | ETSI TS 119 475 Table 8 |
+| Non-Qualified EAA Provider | `id-etsi-qcs-SemanticsId-eudinqeaaprovider` | `provided_attestations` | ETSI TS 119 475 Table 8 |
+| Public Sector EAA Provider | `id-etsi-qcs-SemanticsId-eudipubeaaprovider` | `provided_attestations` | ETSI TS 119 475 Table 8 |
+
+The `provided_attestations` field in the WRPRC specifies the attestation types the provider is authorized to issue (format, meta, claim). The wallet verifies that the attestation being issued matches the provider's authorized attestation types.
 
 ---
 
@@ -376,26 +420,35 @@ Entitlement ::= SEQUENCE {
 
 ### 4.1 Matching Requested Attributes to Entitlements
 
-When a Relying Party requests attributes, the wallet validates:
+When a Relying Party requests attributes, the wallet validates using the WRPRC:
 
 ```mermaid
 flowchart TD
-    A[1. Parse RP entitlements from WRPAC/WRPRC<br/><i>ETSI TS 119 475 clause 5.2, 6.2</i>] --> B
-    B[2. Parse requested attributes from presentation request<br/><i>OpenID4VP, ISO 18013-5</i>] --> C
-    C[3. For each requested attribute] --> D{Attribute covered<br/>by entitlements?}
-    D -->|Yes| E{Namespace matches<br/>entitlement scope?}
-    D -->|No| F[Alert: Unauthorized attribute request]
-    E -->|Yes| G[Attribute Authorized ✓]
-    E -->|No| F
-    F --> H[4. Allow user to reject<br/>or selectively approve]
-    G --> I[Include in consent screen]
+    A[1. Obtain WRPRC<br/>from request or National Register] --> B
+    B[2. Parse RP entitlements from WRPRC<br/><i>ETSI TS 119 475 Table 7, Table 9</i>] --> C
+    C[3. Parse requested attributes from presentation request<br/><i>OpenID4VP, ISO 18013-5</i>] --> D
+    D[4. For each requested attribute] --> E{Attribute in WRPRC<br/>credentials claim?}
+    E -->|Yes| F{Namespace matches<br/>entitlement scope?}
+    E -->|No| G[Alert: Unauthorized attribute request]
+    F -->|Yes| H[Attribute Authorized ✓]
+    F -->|No| G
+    G --> I[5. Allow user to reject<br/>or selectively approve]
+    H --> J[Include in consent screen]
 ```
 
 ### 4.2 Entitlement-to-Attribute Mapping
 
+The WRPRC `credentials` claim (for service providers) specifies which attestations and attributes the RP is authorized to request:
+
+| WRPRC Field | Description | Reference |
+|-------------|-------------|-----------|
+| `entitlements` | List of entitlement URIs/OIDs | ETSI TS 119 475 Table 7 |
+| `credentials` | Requestable attestations with format, meta, claim | ETSI TS 119 475 Table 9 |
+| `purpose` | Purpose descriptions for data processing | ETSI TS 119 475 Table 9 |
+
 | Entitlement | Authorized Attributes | Reference |
 |-------------|----------------------|-----------|
-| `id-etsi-qcs-SemanticsId-eudirp` | As specified in `entitlements` claim | ETSI TS 119 475 Table 1 |
+| `id-etsi-qcs-SemanticsId-eudirp` | As specified in `credentials` claim of WRPRC | ETSI TS 119 475 Table 9 |
 | Age Verification | `age_over_18`, `age_over_21`, `birth_date` | CIR 2025/848 Annex II |
 | KYC/AML | Full PID attributes | National regulations |
 | Healthcare | Healthcare-specific EAAs | ETSI TS 119 475 Annex B |
