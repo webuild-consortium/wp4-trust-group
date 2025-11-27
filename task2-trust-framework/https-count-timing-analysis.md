@@ -24,52 +24,52 @@ This issue aims to find and get reactions, comments and different perspectives f
 
 Based on [wp4-trust-group Policy Discovery Pull Request](https://github.com/webuild-consortium/wp4-trust-group/pull/33), here's the HTTP request count for a wallet evaluating trust for an RP that is also a QTSP.
 
-### Minimum Request Count (Best Case - All Cached)
+### Minimum Request Count
+
+This analysis assumes that the wallet instance discovers the related Member State (or sector specific) Trusted List starting from the WRPAC.
 
 | Step | Requests | Description |
 |------|----------|-------------|
 | 1. LOTL fetch | 1 | List of Trusted Lists hosted by European Commission|
-| 2. Member State TSL | 1 (+1 if RPI)| RP's country TSL (access certificate domain lookup) |
-| 3. WRPAC OCSP/CRL | 1 (+1 if RPI)| Certificate revocation check |
-| 4. WRPRC validation | 1 | If provided in request, query National Register is always recommended|
+| 2. Member State TSL | 1 | RP's country TSL (access certificate domain lookup) |
+| 3. RP WRPAC OCSP/CRL | 1 | Certificate revocation check |
+| 4. RP WRPRC validation | 1 | If provided in request is 0 but query National Register is always recommended|
+| 5. RPI WRPAC (if any) | +2 | RPI access certificate and revocation status checks (two distinct HTTP requests) |
 | **Subtotal** | **4-6** | For single Member State (MS), single register (4 without RPI, 6 with RPI) |
 
-> **Latency Estimate**:
-> | Scenario | Best (250ms/req) | Worst (4s/req) |
-> |----------|------------------|----------------|
-> | **Serialized** (4 req, no RPI) | **1s** | **16s** |
-> | **Serialized** (6 req, with RPI) | **1.5s** | **24s** |
-> | **Parallelized** (no RPI) | **~0.5s** | **~8s** |
-> | **Parallelized** (with RPI) | **~0.75s** | **~12s** |
+**Latency Estimate**:
+| Scenario | Best (250ms/req) | Worst (4s/req) |
+|----------|------------------|----------------|
+| **Serialized** (4 req, no RPI) | **1s** | **16s** |
+| **Serialized** (6 req, with RPI) | **1.5s** | **24s** |
+| **Parallelized** (no RPI) | **~0.5s** | **~8s** |
+| **Parallelized** (with RPI) | **~0.75s** | **~12s** |
 
 ### Worst Case - Full Discovery (27 MS + Sectoral)
 
-| Component | Requests | Notes |
-|-----------|----------|-------|
-| LOTL | 1 | |
-| 27 MS TSLs | 27 | EU27 Member States |
-| Sectoral registers (PSD2, Healthcare, etc.) | ~5-10 | Per sector per MS |
-| National WRP Registers | 27 | One per MS |
-| OCSP/CRL per CA | 1+ per TSL | Multiple CAs per country |
-| WRPRC Provider validation | 1+ | Per WRPRC |
+This analysis assumes that the wallet instance aims to fetch all the Trusted Lists and Registers for all the Member States and Sectoral Registers, for offline operations and caches.
 
 **Theoretical maximum for full cross-border discovery:**
 
-- **LOTL**: 1
-- **MS TSLs**: 27
-- **National Registers**: 27 (if RP operates cross-border)
-- **Sectoral Registers**: ~50-100 (PSD2 alone has ~4,000 entities across EU)
-- **OCSP/CRL**: ~27-50
-- **Total: ~130-200+ HTTP requests**
+| Component | Requests | Notes | Best (250ms/req) | Worst (4s/req) |
+|-----------|----------|-------|------------------|----------------|
+| LOTL | 1 | | 0.25s | 4s |
+| MS TSLs | 27 | EU27 Member States | 6.75s | 108s (1.8 min) |
+| National WRP Registers | 27 | One per MS, if RP operates cross-border | 6.75s | 108s (1.8 min) |
+| Sectoral Registers | ~50-100 | PSD2, Healthcare, etc. PSD2 alone has ~4,000 entities across EU | 12.5-25s | 200-400s (3.3-6.7 min) |
+| OCSP/CRL per CA | ~27-50 | Multiple CAs per country, 1+ per TSL | 6.75-12.5s | 108-200s (1.8-3.3 min) |
+| WRPRC Provider validation | 1+ | Per WRPRC | - | - |
+| **Total (Serialized)** | **~130-200+** | HTTP requests | **32.5-50s** | **~8.7-13.3 min** |
 
-> **Latency Estimate (Full Discovery)**:
-> | Scenario | Best (250ms/req) | Worst (4s/req) |
-> |----------|------------------|----------------|
-> | **Serialized** (~130 req, min) | **32.5s** | **~8.7 min** |
-> | **Serialized** (~200 req, max) | **50s** | **~13.3 min** |
-> | **Parallelized** (3 sequential phases) | **~0.75s** | **~12s** |
->
-> *Note: Parallelized assumes 3 sequential phases: (1) LOTL, (2) all TSLs + registers in parallel, (3) all OCSP/CRL in parallel.*
+**Latency Estimate (Full Discovery)**:
+| Scenario | Best (250ms/req) | Worst (4s/req) |
+|----------|------------------|----------------|
+| **Serialized** (~130 req, min) | **32.5s** | **~8.7 min** |
+| **Serialized** (~200 req, max) | **50s** | **~13.3 min** |
+| **Parallelized** (3 sequential phases) | **~0.75s** | **~12s** |
+
+> **Note**: Parallelized assumes 3 sequential phases: (1) LOTL, (2) all TSLs + registers in parallel, (3) all OCSP/CRL in parallel.
+
 
 ### Practical Scenario (RP in 1 MS with PSD2 authorization)
 
@@ -112,4 +112,4 @@ When an entity operates simultaneously as a **QTSP**, **Relying Party**, and **C
 | **Serialized** (25 req, worst) | **6.25s** | **100s (~1.7 min)** |
 | **Parallelized** (4 phases) | **~1s** | **~16s** |
 
-> *Parallelized phases: (1) LOTL, (2) TSLs + Issuer metadata in parallel, (3) OCSP/CRL + authorization discovery, (4) cross-role consistency checks.*
+*Parallelized phases: (1) LOTL, (2) TSLs + Issuer metadata in parallel, (3) OCSP/CRL + authorization discovery, (4) cross-role consistency checks.*
