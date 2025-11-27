@@ -30,7 +30,7 @@ This document describes the policy discovery process performed by an EUDI Wallet
 
 | Reference | Document |
 |-----------|----------|
-| ETSI TS 119 612 v2.3.1 | Electronic Signatures and Trust Infrastructures; Trusted Lists |
+| ETSI TS 119 612 v2.4.1 | Electronic Signatures and Trust Infrastructures; Trusted Lists |
 | ETSI TS 119 411-8 | Policy and security requirements for TSPs issuing certificates; Part 8: Access Certificate Policy for EUDI Wallet Relying Parties |
 | ETSI TS 119 475 | Relying party attributes supporting EUDI Wallet user's authorization decisions |
 | ETSI EN 319 412-1 | Certificate Profiles; Part 1: Overview and common data structures |
@@ -82,10 +82,14 @@ graph TD
 
 | Entity Type | Service Type URI | Reference |
 |-------------|------------------|-----------|
-| PID Provider | `http://uri.etsi.org/TrstSvc/Svctype/CredentialIssuer` | ETSI TS 119 612 clause 5.5.1 |
-| EAA Provider | `http://uri.etsi.org/TrstSvc/Svctype/CredentialIssuer` | ETSI TS 119 612 clause 5.5.1 |
-| Wallet Provider | `http://uri.etsi.org/TrstSvc/Svctype/WalletProvider` | ETSI TS 119 612 clause 5.5.1 |
+| PID Provider | `http://uri.etsi.org/TrstSvc/Svctype/PID_Provider` | ETSI TS 119 612 clause 5.5.1 |
+| Qualified EAA Provider | `http://uri.etsi.org/TrstSvc/Svctype/QEAA_Provider` | ETSI TS 119 612 clause 5.5.1 |
+| Non-Qualified EAA Provider | `http://uri.etsi.org/TrstSvc/Svctype/Non_Q_EAA_Provider` | ETSI TS 119 612 clause 5.5.1 |
+| Public Sector EAA Provider | `http://uri.etsi.org/TrstSvc/Svctype/PUB_EAA_Provider` | ETSI TS 119 612 clause 5.5.1 |
+| Individual Wallet Provider | `http://uri.etsi.org/TrstSvc/Svctype/IndividualWalletProvider` | ETSI TS 119 612 clause 5.5.1 |
+| Legal Person Wallet Provider | `http://uri.etsi.org/TrstSvc/Svctype/LegalPersonWalletProvider` | ETSI TS 119 612 clause 5.5.1 |
 | Relying Party | `http://uri.etsi.org/TrstSvc/Svctype/RelyingParty` | ETSI TS 119 612 clause 5.5.1 |
+| Relying Party Intermediary | `http://uri.etsi.org/TrstSvc/Svctype/RelyingPartyIntermediary` | ETSI TS 119 612 clause 5.5.1 |
 | WRPAC Provider (Access Certificate CA) | `http://uri.etsi.org/TrstSvc/Svctype/CA/PKC` | ETSI TS 119 612 clause 5.5.1; ETSI TS 119 411-8 |
 | WRPRC Provider (Registration Certificate Provider) | *TSP - service type TBD* | ETSI TS 119 475 clause 3.1, 6 |
 
@@ -386,7 +390,7 @@ The wallet obtains the counterparty's certificates:
 The wallet performs the following lookups:
 
 ```xml
-<!-- Reference: ETSI TS 119 612 v2.3.1 -->
+<!-- Reference: ETSI TS 119 612 v2.4.1 -->
 
 <!-- Step 2a: Fetch LOTL -->
 <ListOfTrustedLists>
@@ -546,7 +550,7 @@ The WRPRC `credentials` claim (for service providers) specifies which attestatio
 ### 5.2 Trust List Update Monitoring
 
 ```xml
-<!-- Reference: ETSI TS 119 612 v2.3.1 -->
+<!-- Reference: ETSI TS 119 612 v2.4.1 -->
 <SchemeInformation>
   <ListIssueDateTime>2024-01-01T00:00:00Z</ListIssueDateTime>
   <NextUpdate>2024-01-02T00:00:00Z</NextUpdate>
@@ -651,7 +655,7 @@ For cross-border interactions, the wallet:
 
 ## References
 
-- ETSI TS 119 612 v2.3.1 - Trusted Lists
+- ETSI TS 119 612 v2.4.1 - Trusted Lists
 - ETSI TS 119 411-8 - Access Certificate Policy for EUDI Wallet Relying Parties
 - ETSI TS 119 475 - Relying party attributes supporting EUDI Wallet user's authorization decisions
 - ETSI EN 319 412-1 - Certificate Profiles; Part 1: Overview and common data structures
