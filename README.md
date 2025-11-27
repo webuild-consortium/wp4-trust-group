@@ -102,7 +102,7 @@ wp4-trust-group/
 └── LICENSE                        # License file
 ```
 
-## Informative References
+## References
 
 ### Community Regulations
 
