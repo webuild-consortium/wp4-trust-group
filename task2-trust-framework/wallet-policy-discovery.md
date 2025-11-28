@@ -31,9 +31,14 @@ This document describes the policy discovery process performed by an EUDI Wallet
 | Reference | Document |
 |-----------|----------|
 | ETSI TS 119 612 v2.4.1 | Electronic Signatures and Trust Infrastructures; Trusted Lists |
+| ETSI TS 119 602 v1.1.1 | Electronic Signatures and Trust Infrastructures; Lists of Trusted Entities (LoTE) |
 | ETSI TS 119 411-8 | Policy and security requirements for TSPs issuing certificates; Part 8: Access Certificate Policy for EUDI Wallet Relying Parties |
 | ETSI TS 119 475 | Relying party attributes supporting EUDI Wallet user's authorization decisions |
 | ETSI EN 319 412-1 | Certificate Profiles; Part 1: Overview and common data structures |
+| ETSI EN 319 412-6 | Certificate Profile for EUDI Wallet Providers |
+| ETSI EN 319 401 | General Policy Requirements for Trust Service Providers |
+| ETSI EN 319 411-1 | Policy and security requirements for TSPs issuing certificates; Part 1: General requirements |
+| ETSI EN 319 411-2 | Policy and security requirements for TSPs issuing certificates; Part 2: Requirements for Qualified Certificate Issuers |
 | CIR (EU) 2025/848 | Commission Implementing Regulation on the registration of wallet-relying parties |
 
 ---
@@ -91,9 +96,9 @@ graph TD
 | Relying Party | `http://uri.etsi.org/TrstSvc/Svctype/RelyingParty` | ETSI TS 119 612 clause 5.5.1 |
 | Relying Party Intermediary | `http://uri.etsi.org/TrstSvc/Svctype/RelyingPartyIntermediary` | ETSI TS 119 612 clause 5.5.1 |
 | WRPAC Provider (Access Certificate CA) | `http://uri.etsi.org/TrstSvc/Svctype/CA/PKC` | ETSI TS 119 612 clause 5.5.1; ETSI TS 119 411-8 |
-| WRPRC Provider (Registration Certificate Provider) | *TSP - service type TBD* | ETSI TS 119 475 clause 3.1, 6 |
+| WRPRC Provider (Registration Certificate Provider) | `http://uri.etsi.org/19602/SvcType/WRPRC/Issuance`<br/>`http://uri.etsi.org/19602/SvcType/WRPRC/Revocation` | ETSI TS 119 602 clause 3.4.1; ETSI TS 119 475 clause 3.1, 6 |
 
-> **Note:** ETSI TS 119 475 clause 3.1 defines the "provider of wallet-relying party registration certificates" as a TSP, but no specific ETSI service type URI has been standardized yet. The Registrar of WRPs (CIR 2025/848 Art. 3) manages the national register but is distinct from certificate providers.
+> **Note:** ETSI TS 119 602 defines service type URIs for WRPRC Providers in the Lists of Trusted Entities (LoTE) format. The service types `WRPRC/Issuance` and `WRPRC/Revocation` are used to identify WRPRC Provider services in trusted lists. The Registrar of WRPs (CIR 2025/848 Art. 3) manages the national register but is distinct from certificate providers.
 
 ---
 
@@ -496,26 +501,118 @@ Attestation providers (PID/EAA) must have their entitlements verified from the W
 
 The `provided_attestations` field in the WRPRC specifies the attestation types the provider is authorized to issue (format, meta, claim). The wallet verifies that the attestation being issued matches the provider's authorized attestation types.
 
+### 3.5.3 Policy Approach: Additive vs Subtractive
+
+> **Note:** The "additive" and "subtractive" policy approaches are not directly defined in ETSI standards. They represent a conceptual framework for policy interpretation that can be implemented using ETSI standard mechanisms. ETSI standards (e.g., TS 119 475, EN 319 411 series) provide mechanisms that support both approaches, but the policy approach concept itself is implementation-specific to the WP4 Trust Infrastructure framework.
+
+The wallet must understand the policy approach used by the counterparty to correctly interpret entitlements. Two distinct policy approaches are defined:
+
+#### Additive Policy Approach
+
+The **Additive Policy Approach** implements an explicit allow-list model where permissions are granted only when explicitly authorized. This follows the principle: **"Nothing is permitted unless explicitly allowed."**
+
+**Characteristics:**
+- **Default Action**: Deny all requests
+- **Authorization Model**: Explicit allow-list
+- **Security Posture**: Conservative, high-security (zero-trust)
+- **Use Cases**: High-security environments, sensitive data handling, regulatory compliance
+
+**Wallet Validation Logic:**
+```mermaid
+flowchart TD
+    A[Requested Attribute] --> B{Attribute explicitly<br/>in WRPRC entitlements?}
+    B -->|Yes| C[✓ Authorized]
+    B -->|No| D[✗ Denied - Not in allow-list]
+```
+
+**Implementation:**
+- The wallet checks if each requested attribute is explicitly listed in the WRPRC `credentials` claim
+- If not explicitly authorized, the attribute request is denied
+- User is notified of unauthorized requests
+
+#### Subtractive Policy Approach
+
+The **Subtractive Policy Approach** implements an explicit deny-list model where permissions are granted by default except for explicitly restricted items. This follows the principle: **"Everything is permitted unless explicitly denied."**
+
+**Characteristics:**
+- **Default Action**: Allow all requests
+- **Authorization Model**: Explicit deny-list
+- **Security Posture**: Permissive, flexible
+- **Use Cases**: Open ecosystems, development environments, innovation platforms
+
+**Wallet Validation Logic:**
+```mermaid
+flowchart TD
+    A[Requested Attribute] --> B{Attribute explicitly<br/>restricted in WRPRC?}
+    B -->|No| C[✓ Authorized - Default allow]
+    B -->|Yes| D{Exception conditions<br/>met?}
+    D -->|Yes| C
+    D -->|No| E[✗ Denied - In deny-list]
+```
+
+**Implementation:**
+- The wallet checks if the requested attribute is explicitly restricted in the WRPRC
+- If not restricted, the attribute request is allowed by default
+- User is notified of restricted attributes and any applicable exceptions
+
+#### Policy Approach Identification
+
+The policy approach may be indicated in the WRPRC through:
+
+| WRPRC Field | Description | Reference |
+|-------------|-------------|-----------|
+| `policy_approach` | Explicit field indicating "additive" or "subtractive" | Implementation-specific (not ETSI-standardized) |
+| `entitlements` structure | Presence/absence patterns indicate approach | ETSI TS 119 475 Table 7 |
+| `credentials` claim | Explicit allow-list suggests additive | ETSI TS 119 475 Table 9 |
+| `restrictions` claim | Explicit deny-list suggests subtractive | Implementation-specific (not ETSI-standardized) |
+
+**Default Behavior:**
+- If policy approach is not explicitly stated, the wallet should default to **additive** (zero-trust) for security
+- The wallet may query the National Register or Trusted List for policy approach metadata
+
+#### Policy Approach Comparison
+
+| Aspect | Additive Approach | Subtractive Approach |
+|--------|------------------|---------------------|
+| **Security Model** | Zero-trust | Permissive |
+| **Default State** | Deny all | Allow all |
+| **Authorization** | Explicit allow-list | Explicit deny-list |
+| **Risk Level** | Lower (conservative) | Higher (permissive) |
+| **Configuration** | Grant specific permissions | Block specific restrictions |
+| **Wallet Behavior** | Strict validation required | Permissive validation |
+| **User Notification** | Show authorized attributes | Show restricted attributes |
+
 ---
 
 ## 4. Attribute Request Validation
 
 ### 4.1 Matching Requested Attributes to Entitlements
 
-When a Relying Party requests attributes, the wallet validates using the WRPRC:
+When a Relying Party requests attributes, the wallet validates using the WRPRC and applies the appropriate policy approach:
 
 ```mermaid
 flowchart TD
     A[1. Obtain WRPRC<br/>from request or National Register] --> B
     B[2. Parse RP entitlements from WRPRC<br/><i>ETSI TS 119 475 Table 7, Table 9</i>] --> C
-    C[3. Parse requested attributes from presentation request<br/><i>OpenID4VP, ISO 18013-5</i>] --> D
-    D[4. For each requested attribute] --> E{Attribute in WRPRC<br/>credentials claim?}
-    E -->|Yes| F{Namespace matches<br/>entitlement scope?}
-    E -->|No| G[Alert: Unauthorized attribute request]
-    F -->|Yes| H[Attribute Authorized ✓]
-    F -->|No| G
-    G --> I[5. Allow user to reject<br/>or selectively approve]
-    H --> J[Include in consent screen]
+    C[3. Identify Policy Approach<br/>Additive or Subtractive] --> D
+    D[4. Parse requested attributes from presentation request<br/><i>OpenID4VP, ISO 18013-5</i>] --> E{Policy Approach?}
+    
+    E -->|Additive| F{Attribute explicitly<br/>in WRPRC credentials?}
+    F -->|Yes| G{Namespace matches<br/>entitlement scope?}
+    F -->|No| H[Alert: Unauthorized - Not in allow-list]
+    G -->|Yes| I[Attribute Authorized ✓]
+    G -->|No| H
+    
+    E -->|Subtractive| J{Attribute explicitly<br/>restricted in WRPRC?}
+    J -->|No| K[Attribute Authorized ✓<br/>Default allow]
+    J -->|Yes| L{Exception conditions<br/>met?}
+    L -->|Yes| K
+    L -->|No| M[Alert: Restricted - In deny-list]
+    
+    H --> N[5. Allow user to reject<br/>or selectively approve]
+    M --> N
+    I --> O[Include in consent screen]
+    K --> O
 ```
 
 ### 4.2 Entitlement-to-Attribute Mapping
@@ -527,6 +624,8 @@ The WRPRC `credentials` claim (for service providers) specifies which attestatio
 | `entitlements` | List of entitlement URIs/OIDs | ETSI TS 119 475 Table 7 |
 | `credentials` | Requestable attestations with format, meta, claim | ETSI TS 119 475 Table 9 |
 | `purpose` | Purpose descriptions for data processing | ETSI TS 119 475 Table 9 |
+| `policy_approach` | Policy approach: "additive" or "subtractive" | Implementation-specific (not ETSI-standardized) |
+| `restrictions` | Restricted attributes (for subtractive approach) | Implementation-specific |
 
 | Entitlement | Authorized Attributes | Reference |
 |-------------|----------------------|-----------|
@@ -534,6 +633,69 @@ The WRPRC `credentials` claim (for service providers) specifies which attestatio
 | Age Verification | `age_over_18`, `age_over_21`, `birth_date` | CIR 2025/848 Annex II |
 | KYC/AML | Full PID attributes | National regulations |
 | Healthcare | Healthcare-specific EAAs | ETSI TS 119 475 Annex B |
+
+### 4.3 Policy Approach in Attribute Validation
+
+The wallet applies different validation logic based on the policy approach:
+
+#### 4.3.1 Additive Approach Validation
+
+For additive policies, the wallet:
+1. Checks if each requested attribute is explicitly listed in the WRPRC `credentials` claim
+2. Verifies namespace and scope match the entitlement
+3. Denies any attribute not explicitly authorized
+4. Presents only authorized attributes to the user for consent
+
+**Example:**
+```json
+{
+  "policy_approach": "additive",
+  "credentials": [
+    {
+      "format": "dc+sd-jwt",
+      "credential_definition": "https://example.com/credentials/identity",
+      "claims": ["given_name", "family_name", "email"]
+    }
+  ]
+}
+```
+- ✅ `given_name` - Authorized (explicitly listed)
+- ✅ `family_name` - Authorized (explicitly listed)
+- ✅ `email` - Authorized (explicitly listed)
+- ❌ `phone_number` - Denied (not in allow-list)
+- ❌ `address` - Denied (not in allow-list)
+
+#### 4.3.2 Subtractive Approach Validation
+
+For subtractive policies, the wallet:
+1. Checks if the requested attribute is explicitly restricted in the WRPRC
+2. Allows attributes by default unless restricted
+3. Checks for exception conditions if restricted
+4. Presents all allowed attributes to the user for consent
+
+**Example:**
+```json
+{
+  "policy_approach": "subtractive",
+  "restrictions": [
+    {
+      "attribute": "biometric_data",
+      "restriction_reason": "Privacy protection",
+      "exceptions": ["law_enforcement", "national_security"]
+    },
+    {
+      "attribute": "financial_data",
+      "restriction_reason": "Data protection",
+      "exceptions": ["financial_services"]
+    }
+  ]
+}
+```
+- ✅ `given_name` - Authorized (not restricted)
+- ✅ `family_name` - Authorized (not restricted)
+- ✅ `email` - Authorized (not restricted)
+- ❌ `biometric_data` - Denied (restricted, no exception)
+- ✅ `financial_data` (if RP is financial service) - Authorized (exception applies)
 
 ---
 
@@ -574,8 +736,12 @@ The WRPRC `credentials` claim (for service providers) specifies which attestatio
 | Service status `withdrawn` | Reject interaction | "Service provider authorization revoked" |
 | Service status `suspended` | Warn user | "Service provider temporarily suspended" |
 | Certificate revoked | Reject interaction | "Service provider certificate invalid" |
-| Entitlement mismatch | Alert user | "Requested attributes exceed authorization" |
+| Entitlement mismatch (additive) | Alert user | "Requested attributes not authorized in registration certificate" |
+| Attribute restricted (subtractive) | Alert user | "Requested attributes are restricted by policy" |
+| Policy approach unknown | Default to additive, warn user | "Policy approach not specified, applying strict validation" |
 | Certificate expired | Reject interaction | "Service provider certificate expired" |
+| WRPRC signature invalid | Reject interaction | "Registration certificate signature verification failed" |
+| WRPRC Provider not in Trusted List | Reject interaction | "Registration certificate issuer not recognized" |
 
 ### 6.2 User Consent Flow
 
@@ -655,13 +821,32 @@ For cross-border interactions, the wallet:
 
 ## References
 
-- ETSI TS 119 612 v2.4.1 - Trusted Lists
-- ETSI TS 119 411-8 - Access Certificate Policy for EUDI Wallet Relying Parties
+### ETSI Standards
+
+- ETSI TS 119 612 v2.4.1 - Electronic Signatures and Trust Infrastructures; Trusted Lists
+- ETSI TS 119 602 v1.1.1 - Electronic Signatures and Trust Infrastructures; Lists of Trusted Entities (LoTE)
+- ETSI TS 119 411-8 - Policy and security requirements for TSPs issuing certificates; Part 8: Access Certificate Policy for EUDI Wallet Relying Parties
 - ETSI TS 119 475 - Relying party attributes supporting EUDI Wallet user's authorization decisions
 - ETSI EN 319 412-1 - Certificate Profiles; Part 1: Overview and common data structures
-- CIR (EU) 2025/848 - Registration of wallet-relying parties
+- ETSI EN 319 412-6 - Certificate Profile for EUDI Wallet Providers
+- ETSI EN 319 401 - General Policy Requirements for Trust Service Providers
+- ETSI EN 319 411-1 - Policy and security requirements for TSPs issuing certificates; Part 1: General requirements
+- ETSI EN 319 411-2 - Policy and security requirements for TSPs issuing certificates; Part 2: Requirements for Qualified Certificate Issuers
+
+### EU Regulations
+
+- CIR (EU) 2025/848 - Commission Implementing Regulation on the registration of wallet-relying parties
+
+### IETF Standards
+
 - IETF RFC 5280 - Internet X.509 PKI Certificate and CRL Profile
 - IETF RFC 6961 - TLS Multiple Certificate Status Request Extension
+
+### Related Documents
+
+- Policy Approaches Definition: Additive vs Subtractive (task5-participants-certificates-policies/policy-approaches-definition.md)
+- ETSI Policy Application Mechanisms (task5-participants-certificates-policies/etsi-policy-enumeration.md)
+- ETSI Policy Evaluation (task5-participants-certificates-policies/etsi-policy-evaluation.md)
 
 ---
 
