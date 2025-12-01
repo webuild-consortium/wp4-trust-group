@@ -113,14 +113,15 @@ sequenceDiagram
     participant TL as Trusted List
     participant NR as National Register API
     participant OCSP as OCSP/CRL Responder
+    participant RCStatus as WRPRC Status List API
 
     RP->>W: 1. Presentation Request (WRPAC + WRPRC if available)
     Note over W: 2. Extract RP WRPAC<br/>(from TLS or signed request)
     W->>TL: 3. Fetch Trusted List
     TL-->>W: 4. Trusted List Response
     Note over W: 5. Validate RP WRPAC<br/>- Check CA in TSP list<br/>- Verify service status: "granted"
-    W->>OCSP: 6. Check WRPAC Revocation
-    OCSP-->>W: 7. OCSP/CRL Response
+    W->>OCSP: 6. HTTPS GET /ocsp or /crl<br/>for WRPAC status
+    OCSP-->>W: 7. OCSP/CRL HTTP Response
     
     alt WRPRC provided by RP
         Note over W: 8a. Validate WRPRC signature<br/>- Verify WRPRC Provider in Trusted List
@@ -130,7 +131,10 @@ sequenceDiagram
         Note over W: 10. Validate WRPRC signature
     end
     
-    Note over W: 11. Extract and Verify Entitlements from WRPRC<br/>- Parse entitlements<br/>- Validate requested attributes against entitlements
+    W->>RCStatus: 11. HTTPS GET /wrprc/status-list<br/>(WRPRC status check)
+    RCStatus-->>W: 12. Status List HTTP Response
+    
+    Note over W: 13. Extract and Verify Entitlements from WRPRC<br/>- Parse entitlements<br/>- Validate requested attributes against entitlements
 ```
 
 ### 2.2 Discovery Sequence for Attestation Provider Interaction
@@ -142,14 +146,15 @@ sequenceDiagram
     participant TL as Trusted List
     participant NR as National Register API
     participant OCSP as OCSP/CRL Responder
+    participant RCStatus as WRPRC Status List API
 
     W->>P: 1. Attestation Issuance Request
     P-->>W: 2. Provider presents WRPAC (+ WRPRC if available)
     W->>TL: 3. Fetch Trusted List
     TL-->>W: 4. Trusted List Response
     Note over W: 5. Validate Provider WRPAC<br/>- Check CA in TSP list<br/>- Verify service status: "granted"
-    W->>OCSP: 6. Check WRPAC Revocation
-    OCSP-->>W: 7. OCSP/CRL Response
+    W->>OCSP: 6. HTTPS GET /ocsp or /crl<br/>for WRPAC status
+    OCSP-->>W: 7. OCSP/CRL HTTP Response
     
     alt WRPRC provided by Provider
         Note over W: 8a. Validate WRPRC signature<br/>- Verify WRPRC Provider in Trusted List
@@ -159,7 +164,10 @@ sequenceDiagram
         Note over W: 10. Validate WRPRC signature
     end
     
-    Note over W: 11. Verify Provider Entitlements from WRPRC<br/>- PID: id-etsi-qcs-SemanticsId-eudipidprovider<br/>- EAA: provided_attestations (attestation types)
+    W->>RCStatus: 11. HTTPS GET /wrprc/status-list<br/>(WRPRC status check)
+    RCStatus-->>W: 12. Status List HTTP Response
+    
+    Note over W: 13. Verify Provider Entitlements from WRPRC<br/>- PID: id-etsi-qcs-SemanticsId-eudipidprovider<br/>- EAA: provided_attestations (attestation types)
 ```
 
 ### 2.3 WRPRC Provider and Registration Certificate Issuance
