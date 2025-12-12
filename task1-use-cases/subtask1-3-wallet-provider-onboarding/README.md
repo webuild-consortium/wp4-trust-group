@@ -22,7 +22,7 @@ interpreting them for the testing purposes specific to WEBUILD.
 
 ## Terminology
 
-(1) ‘wallet solution’ means a combination of soft wware, hardware, services, settings, and configurations, including
+(1) ‘wallet solution’ means a combination of software, hardware, services, settings, and configurations, including
 wallet instances, one or more wallet secure cryptographic applications and one or more wallet secure cryptographic
 devices;
 (2) ‘wallet instance’ means the application installed and configured on a wallet user’s device or environment, which is
