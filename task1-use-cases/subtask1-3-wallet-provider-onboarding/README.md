@@ -3,7 +3,7 @@
 ## Basic Information
 
 - **Use Case ID**: UC-01
-- **Title**: Relying Party Onboarding
+- **Title**: Wallet Provider Onboarding
 - **Category**: Onboarding
 - **Priority**: [High]
 - **Complexity**: [Medium ]
