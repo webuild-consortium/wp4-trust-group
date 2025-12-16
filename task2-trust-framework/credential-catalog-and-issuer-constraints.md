@@ -1,6 +1,6 @@
 # Comprehensive Evidence and References: Credential Catalogues, EAA, and QEAA
 
-This document compiles all evidence, references, and text about credential catalogues, catalogue of attestations, EAA (Electronic Attestation of Attributes), and QEAA (Qualified Electronic Attestation of Attributes) found in the EUDI Wallet Architecture and Reference Framework.
+This document compiles all evidence, references, and text about credential catalogues, catalogue of attestations, EAA (Electronic Attestation of Attributes), and QEAA (Qualified Electronic Attestation of Attributes) found in the EUDI Wallet Architecture and Reference Framework. It also covers mechanisms used to prevent unallowed credential type issuance by bogus credential issuers, including the use of Trusted Lists and registration certificates to configure which Credential Issuers are authorized to issue specific attestation types.
 
 ---
 
@@ -15,7 +15,9 @@ This document compiles all evidence, references, and text about credential catal
 7. [Legal and Regulatory References](#legal-and-regulatory-references)
 8. [High-Level Requirements](#high-level-requirements)
 9. [Technical Specifications](#technical-specifications)
-10. [Related Topics and Cross-References](#related-topics-and-cross-references)
+10. [Important Notes and Distinctions](#important-notes-and-distinctions)
+    - [Using Trusted Lists to Configure Allowed Credential Issuers](#using-trusted-lists-to-configure-allowed-credential-issuers-for-specific-attestation-types)
+11. [Related Topics and Cross-References](#related-topics-and-cross-references)
 
 ---
 
