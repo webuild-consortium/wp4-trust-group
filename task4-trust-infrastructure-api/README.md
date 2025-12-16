@@ -2,6 +2,16 @@
 
 This task focuses on implementing the Trust Infrastructure API and additional features for the WP4 Trust Infrastructure.
 
+## Folder Contents
+
+This folder contains the following:
+
+- **`README.md`** - This file, providing an overview of the Trust Infrastructure API and Onboarding API
+- **`trust-infrastructure-api/`** - Trust Infrastructure API implementation
+  - Contains `README.md` with detailed API specifications
+- **`onboarding-api/`** - Onboarding API implementation
+  - Contains `README.md` with detailed onboarding API specifications
+
 ## API Architecture
 
 ### Core API Components
