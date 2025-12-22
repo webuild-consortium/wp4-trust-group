@@ -130,7 +130,11 @@ Per ETSI TS 119 612 clause D.5, the Commission maintains a List of Trusted Lists
 
 ## 4. Key Requirements References
 
+Below is a list of the main requirements relating to the entity registration and Trusted List publication processes. 
+
 ### 4.1 Registration Requirements
+
+The matrixes collects all the ARF HLRs about the registration phase.
 
 | Requirement | Description | Source |
 |------------|-------------|--------|
@@ -158,6 +162,19 @@ Per ETSI TS 119 612 clause D.5, the Commission maintains a List of Trusted Lists
 | **TLPub_01** | Commission SHALL establish technical specifications for Trusted List publication | Topic 31 |
 | **TLPub_06** | Commission SHALL publish Trusted List locations in OJEU | Topic 31 |
 | **TLPub_07** | Commission SHALL publish trust anchors in OJEU | Topic 31 |
+
+### 4.3 Trust Evaluation Requirements
+
+| Requirement | Description | Source |
+|------------|-------------|--------|
+| **ISSU_19** | PID Providers SHALL accept trust anchors in Wallet Provider Trusted Lists | Topic 10, Topic 31 |
+| **ISSU_21** | PID Providers SHALL verify Wallet Provider presence in Trusted List | Topic 10, Topic 31 |
+| **ISSU_24** | Wallet Units SHALL authenticate and validate access certificates using Access CA Trusted Lists | Topic 10, Topic 27 |
+| **ISSU_24a** | Wallet Units SHALL verify PID Provider registration before PID issuance | Topic 10, Topic 27, Topic 44 |
+| **ISSU_34a** | Wallet Units SHALL verify Attestation Provider registration before attestation issuance | Topic 10, Topic 27, Topic 44 |
+| **RPA_04** | Wallet Units SHALL accept trust anchors in Relying Party Access CA Trusted Lists | Topic 6 |
+| **RPRC_16** | Wallet Units SHALL offer Users possibility to verify Relying Party registration | Topic 44 |
+| **RPRC_21** | Wallet Units SHALL verify requested attributes are registered | Topic 44 |
 
 ---
 
