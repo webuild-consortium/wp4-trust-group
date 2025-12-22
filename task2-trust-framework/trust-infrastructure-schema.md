@@ -146,12 +146,12 @@ The matrixes collects all the ARF HLRs about the registration phase.
 
 | Requirement | Description | Source |
 |------------|-------------|--------|
-| **ISSU_19** | PID Providers SHALL accept trust anchors in Wallet Provider Trusted Lists | Topic 31 |
-| **ISSU_21** | PID Providers SHALL verify Wallet Provider presence in Trusted List | Topic 31 |
-| **ISSU_24** | Wallet Units SHALL authenticate and validate access certificates using Access CA Trusted Lists | Topic 27 |
-| **ISSU_24a** | Wallet Units SHALL verify PID Provider registration before PID issuance | Topic 27, Topic 44 |
-| **ISSU_34a** | Wallet Units SHALL verify Attestation Provider registration before attestation issuance | Topic 27, Topic 44 |
-| **RPA_04** | Wallet Units SHALL accept trust anchors in Relying Party Access CA Trusted Lists | Topic 31 |
+| **ISSU_19** | PID Providers SHALL accept trust anchors in Wallet Provider Trusted Lists | Topic 10, Topic 31 |
+| **ISSU_21** | PID Providers SHALL verify Wallet Provider presence in Trusted List | Topic 10, Topic 31 |
+| **ISSU_24** | Wallet Units SHALL authenticate and validate access certificates using Access CA Trusted Lists | Topic 10, Topic 27 |
+| **ISSU_24a** | Wallet Units SHALL verify PID Provider registration before PID issuance | Topic 10, Topic 27, Topic 44 |
+| **ISSU_34a** | Wallet Units SHALL verify Attestation Provider registration before attestation issuance | Topic 10, Topic 27, Topic 44 |
+| **RPA_04** | Wallet Units SHALL accept trust anchors in Relying Party Access CA Trusted Lists | Topic 6 |
 | **RPRC_16** | Wallet Units SHALL offer Users possibility to verify Relying Party registration | Topic 44 |
 | **RPRC_21** | Wallet Units SHALL verify requested attributes are registered | Topic 44 |
 
