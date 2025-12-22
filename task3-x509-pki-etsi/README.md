@@ -13,6 +13,7 @@ This folder contains the following documents:
 
 ### Certificate Hierarchy
 - **Root CA**: Root certificate authority
+- **Subordinate CA**: Subordinate certificate authority
 - **Intermediate CAs**: Intermediate certificate authorities
 - **End Entity Certificates**: End entity certificates
 - **Trust Anchors**: Trust anchor certificates
@@ -136,6 +137,7 @@ This folder contains the following documents:
 - **TSP Intermediate Certificate**: TSP intermediate certificate
 - **TSP End Entity Certificate**: TSP end entity certificate
 - **TSP OCSP Certificate**: TSP OCSP responder certificate
+- **European TLS**: TLv5 for eIDAS. TLv6 for eIDAS2 (Mandatory from 29 April 2026)
 
 ### Wallet Provider Certificates
 - **Wallet Provider Certificate**: Wallet provider certificate
@@ -152,7 +154,7 @@ This folder contains the following documents:
 ## Key Management
 
 ### Key Generation
-- **RSA Keys**: RSA key generation
+- **RSA Keys**: RSA key generation, at least 3072 bits length
 - **ECDSA Keys**: Elliptic Curve Digital Signature Algorithm keys
 - **EdDSA Keys**: Edwards Curve Digital Signature Algorithm keys
 - **Key Sizes**: Appropriate key sizes for security levels
@@ -207,7 +209,8 @@ This folder contains the following documents:
 - **EIDAS Compliance**: EIDAS regulation compliance
 - **ETSI Compliance**: ETSI standard compliance
 - **ISO Compliance**: ISO standard compliance
-- **FIPS Compliance**: FIPS standard compliance
+- **FIPS Compliance**: FIPS 140-3 Level 3 standard compliance
+- **CC Compliance**: Common Criteria EAL4+ standard compliance
 
 ## Implementation Guidelines
 
@@ -240,7 +243,10 @@ This folder contains the following documents:
 
 ### Standards Dependencies
 - **IETF RFC 5280**: X.509 PKI standard
+- **IETF RFC 6818**: X.509 PKI standard Updated
 - **IETF RFC 5914**: Trust Anchor Format
+- **IETF RFC 6960**: X.509 OCSP
+- **IETF RFC 6962**: Certificate Transparency (CT)
 - **ETSI EN 319 412-6**: Certificate profile requirements
 - **ETSI TS 119 411-8**: Access certificate policy
 - **ETSI TS 119 475**: Relying party attributes
