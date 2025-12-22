@@ -111,7 +111,11 @@ Per ETSI TS 119 612 clause D.5, the Commission maintains a List of Trusted Lists
 
 ## 4. Key Requirements References
 
+Below is a list of the main requirements relating to the entity registration and Trusted List publication processes. 
+
 ### 4.1 Registration Requirements
+
+The matrixes collects all the ARF HLRs about the registration phase.
 
 | Requirement | Description | Source |
 |------------|-------------|--------|
