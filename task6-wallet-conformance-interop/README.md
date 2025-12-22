@@ -278,6 +278,8 @@ class InteroperabilityTestSuite:
 - **Task 3**: X.509 PKI for certificate conformance
 - **Task 4**: Trust Infrastructure API for API conformance
 - **Task 5**: Participants' Certificates and Policies for data conformance
+- **Task 7**: Testing and Validation for general testing frameworks
+  - Note: This task (Task 6) focuses on conformance and interoperability testing; Task 7 focuses on general testing and validation
 
 ### Standards Dependencies
 - **ETSI Standards**: ETSI conformance requirements
