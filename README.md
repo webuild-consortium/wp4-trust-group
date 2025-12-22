@@ -41,7 +41,7 @@ gantt
     section Task 2
     Definition of the Trust Framework      :active, task2, 2025-10-25, 2026-06-25
     section Task 3
-    X.509 PKI with ETSI alignments        :task3, 2025-11-25, 2026-02-25
+    X.509 PKI with ETSI alignments :task3, 2025-11-25, 2026-04-25
     section Task 4
     Trust Infrastructure API and features  :active, task4, 2025-10-25, 2026-09-25
     Trust list and deploy (4.1)            :active, task4_1, 2025-10-25, 2026-03-25
