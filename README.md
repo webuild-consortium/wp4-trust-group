@@ -32,19 +32,30 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 ## Tasks
 
-| Task ID | Task Name | Started | Status | Deadline |
-|---------|-----------|---------|--------|----------|
-| Task 1 | Definition of the Use cases​ | Yes | In progress | 31/12/2025 |
-| Task 2 | Definition of the Trust Framework​ | Yes | In progress | 30/06/2026 |
-| Task 3 | X.509 PKI with ETSI alignments​ | No | Not started | 28/02/2026 |
-| Task 4 | Trust Infrastructure API and additional features​ | Yes | In progress | 31/03/2026 |
-| Task 4.1 | Trust Infrastructure API | Yes | In progress | 31/01/2026 |
-| Task 4.2 | Onboarding API | No | Not started | 31/03/2026 |
-| Task 5 | Participants' Certificates and Policies​ | No | Not started | 30/04/2026 |
-| Task 5.1 | Data model | No | Not started | 31/03/2026 |
-| Task 5.2 | Trust evaluation methods | No | Not started | 30/04/2026 |
-| Task 6 | Wallet Instance Conformance/Interop Checks​ | No | Not started | 30/06/2026 |
-| Task 7 | Testing and Validation​ | No | Not started | 30/09/2026 |
+```mermaid
+gantt
+    title WP4 Trust Group Project Schedule
+    dateFormat YYYY-MM-DD
+    section Task 1
+    Definition of the Use cases :active, task1, 2025-09-25, 2026-01-31
+    section Task 2
+    Definition of the Trust Framework      :active, task2, 2025-10-25, 2026-06-25
+    section Task 3
+    X.509 PKI with ETSI alignments :task3, 2025-11-25, 2026-04-25
+    section Task 4
+    Trust Infrastructure API and features  :active, task4, 2025-10-25, 2026-09-25
+    Trust list and deploy (4.1)            :active, task4_1, 2025-10-25, 2026-03-25
+    RFC (4.2)                             :task4_2, 2026-01-25, 2026-04-25
+    Onboarding API (4.3)                  :task4_3, 2026-06-25, 2026-09-25
+    section Task 5
+    Participants' Certificates and Policies :task5, 2026-01-01, 2026-07-30
+    Data model (5.1)                      :task5_1, 2026-01-01, 2026-03-31
+    Trust evaluation methods (5.2) :task5_2, 2026-03-01, 2026-07-30
+    section Task 6
+    Wallet Instance Conformance/Interop :task6, 2026-02-01, 2026-10-30
+    section Task 7
+    Testing and Validation :task7, 2026-06-01, 2026-12-31
+```
 
 ## Directory Structure
 
