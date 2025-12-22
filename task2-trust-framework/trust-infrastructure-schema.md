@@ -19,7 +19,7 @@ Both processes are essential for establishing and maintaining trust in the EUDI 
 
 The trust infrastructure involves the following key components:
 
-- **Member State Registrar**: Manages registration of entities (PID Providers, Attestation Providers, Relying Parties)
+- **Member State Registrar**: Manages registration of entities (Wallet Providers, PID Providers, Attestation Providers, Relying Parties)
 - **Access Certificate Authority**: Issues access certificates to registered entities
 - **Provider of Registration Certificates**: Optionally issues registration certificates detailing entitlements
 - **Trusted List Provider (MS)**: Publishes Trusted Lists for entities in the Member State
@@ -53,9 +53,22 @@ Entities must register with their Member State Registrar before participating in
 
 - **Identification data**: Name, country, business registration number
 - **Entitlements**: 
+  - For Wallet Providers: Wallet solution certification status, Wallet Instance Attestation (WUA) capabilities
   - For Attestation Providers: Types of attestations they can issue
   - For Relying Parties: Attributes they can request, intended use
 - **Service supply points**: URLs where services are available
+
+#### Wallet Provider Registration
+
+Wallet Providers register with Member State Registrars according to **Reg_01**. The registration process for Wallet Providers includes:
+
+- **Provider identification**: Company name, country, business registration number
+- **Wallet solution information**: Certification status, compliance verification
+- **Wallet Instance Attestation (WUA)**: Trust Anchors for WUA authentication (required for Trusted List notification per **WPNot_02**)
+- **Security compliance**: Security compliance verification and attestation
+- **Access certificate**: Issued by Access Certificate Authority per **Reg_10** (applies to all registered entities including Wallet Providers)
+
+> **Note**: While Wallet Providers follow the same general registration process as other entities (per **Reg_01** and **Reg_10**), they have additional requirements for Trusted List notification (per **WPNot_01**, **WPNot_02**) that involve providing Trust Anchors for WUA authentication. The registration process enables Wallet Providers to participate in the ecosystem, while the Trusted List publication process (separate from registration) establishes cryptographic Trust Anchors for validation.
 
 ### 2.2 Access Certificate Issuance
 
@@ -68,8 +81,14 @@ After registration, the Access Certificate Authority issues access certificates 
 
 If the Registrar policy requires it, the Provider of Registration Certificates issues registration certificates that:
 - Detail the entity's registration status
-- Specify entitlements (attestation types for Providers, attributes for Relying Parties)
+- Specify entitlements (attestation types for Credential Issuers, attributes for Relying Parties)
 - Enable Wallet Units to verify entity entitlements
+
+Registration certificates are issued per:
+- **RPRC_09**: For Relying Parties (Registrar MAY decide to issue registration certificates to Relying Parties)
+- **RPRC_13**: For Credential Issuers (PID Providers, Attestation Providers) (Registrar MAY decide to issue registration certificates to Providers)
+
+> **Note**: Wallet Providers do not receive registration certificates unless they are also acting as Relying Parties. In that case, they would receive registration certificates per **RPRC_09** for their Relying Party role, not per **RPRC_13**.
 
 ---
 
@@ -122,6 +141,8 @@ Per ETSI TS 119 612 clause D.5, the Commission maintains a List of Trusted Lists
 | **Reg_25** | Member States SHALL identify Relying Parties at appropriate confidence level | Topic 27 |
 | **RPRC_09** | Registrar MAY decide to issue registration certificates to Relying Parties | Topic 27, Topic 44 |
 | **RPRC_13** | Registrar MAY decide to issue registration certificates to Providers | Topic 27, Topic 44 |
+
+**Note**: **Reg_01** applies to all entities including Wallet Providers. **Reg_10** requires Access Certificates to be issued to "all registered entities", which includes Wallet Providers. **RPRC_13** applies to Registration Certificates for Credential Issuers (PID Providers, Attestation Providers), not Wallet Providers. Wallet Providers would only receive registration certificates if they are also acting as Relying Parties, in which case **RPRC_09** would apply.
 
 ### 4.2 Trusted List Requirements
 
@@ -192,7 +213,7 @@ graph TB
     end
 
     %% Registration Flow
-    Entities -->|Register with identification & entitlements<br/>Reg_01, Reg_19, Reg_21, Reg_25| Registrar
+    Entities -->|Register with identification & entitlements<br/>Reg_01 (all entities), Reg_19, Reg_21, Reg_25| Registrar
     Registrar -->|Approve & Register<br/>Reg_19, Reg_21| Registry
     Registrar -->|Request Access Cert<br/>Reg_10| AccessCA
     AccessCA -->|Issue Access Certificate<br/>Reg_10, Reg_12| Entities
@@ -220,7 +241,7 @@ graph TB
 
 ```mermaid
 sequenceDiagram
-    participant Entity as Entity<br/>(PID/Attestation Provider, RP)
+    participant Entity as Entity<br/>(Wallet Provider, PID/Attestation Provider, RP)
     participant Registrar as Member State Registrar<br/>Reg_01, Reg_02
     participant Registry as Registry<br/>Reg_03, Reg_04
     participant AccessCA as Access Certificate Authority<br/>Reg_10, Reg_12
@@ -229,24 +250,36 @@ sequenceDiagram
     Note over Entity,RegCertProv: Registration/Onboarding Process
 
     Entity->>Registrar: 1. Submit Registration Request<br/>(Identification data, Entitlements)
-    Note right of Entity: For Providers: Attestation types<br/>For RP: Attributes, Intended use
+    Note right of Entity: For Wallet Providers: WUA capabilities,<br/>certification status<br/>For Attestation Providers: Attestation types<br/>For RP: Attributes, Intended use
 
-    Registrar->>Registrar: 2. Approve Entity<br/>(Reg_19, Reg_21, Reg_25)
+    alt Wallet Provider
+        Registrar->>Registrar: 2a. Approve Wallet Provider<br/>(Reg_01)
+        Note right of Registrar: Verify certification status,<br/>WUA Trust Anchors
+    else PID/Attestation Provider
+        Registrar->>Registrar: 2b. Approve Provider<br/>(Reg_19, Reg_21)
+    else Relying Party
+        Registrar->>Registrar: 2c. Approve Relying Party<br/>(Reg_25)
+    end
 
     Registrar->>Registry: 3. Register Entity<br/>(Reg_01, Reg_03)
     Note right of Registry: Publish registry entry<br/>Reg_03, Reg_04
 
     Registrar->>AccessCA: 4. Request Access Certificate<br/>(Reg_10)
-    Note right of AccessCA: Issue certificate with<br/>SCT (CT_04), Registry reference
+    Note right of AccessCA: Issue certificate with<br/>SCT (CT_04), Registry reference<br/>Applies to all entities including WP
 
     AccessCA->>Entity: 5. Issue Access Certificate<br/>(Reg_10, Reg_12)
 
     alt Registrar Policy Requires Registration Certificate
-        Registrar->>RegCertProv: 6. Request Registration Certificate<br/>(RPRC_09, RPRC_13)
-        Note right of RegCertProv: Create certificate with<br/>entitlements (RPRC_15)
+        alt Relying Party
+            Registrar->>RegCertProv: 6a. Request Registration Certificate<br/>(RPRC_09)
+            Note right of RegCertProv: For Relying Parties<br/>One per intended use
+        else Credential Issuer (PID/Attestation Provider)
+            Registrar->>RegCertProv: 6b. Request Registration Certificate<br/>(RPRC_13)
+            Note right of RegCertProv: For Credential Issuers<br/>(PID/Attestation Providers)<br/>One certificate per provider
+        end
 
         RegCertProv->>Entity: 7. Issue Registration Certificate<br/>(RPRC_02, RPRC_14)
-        Note right of Entity: For RP: One per intended use<br/>For Providers: One certificate
+        Note right of Entity: Wallet Providers do not receive<br/>registration certificates unless<br/>also acting as Relying Parties
     end
 
     Entity->>Registry: 8. Update Information<br/>(Reg_07, Reg_08)
@@ -407,9 +440,9 @@ graph TB
 ```mermaid
 graph TB
     subgraph Registration["Registration Process<br/>Managed by MS Registrar"]
-        RegStep1[1. Entity Registration<br/>Reg_01, Reg_19, Reg_21, Reg_25]
-        RegStep2[2. Access Certificate Issuance<br/>Reg_10, Reg_12]
-        RegStep3[3. Optional Registration Certificate<br/>RPRC_09, RPRC_13]
+        RegStep1[1. Entity Registration<br/>Reg_01 (all entities), Reg_19, Reg_21, Reg_25]
+        RegStep2[2. Access Certificate Issuance<br/>Reg_10, Reg_12<br/>(all registered entities including WP)]
+        RegStep3[3. Optional Registration Certificate<br/>RPRC_09 (RP), RPRC_13 (Credential Issuers)<br/>(WP only if also acting as RP)]
         RegStep4[4. Registry Publication<br/>Reg_03, Reg_04]
     end
 
@@ -475,7 +508,7 @@ graph TB
 |--------|-------------|---------------------------|
 | **Purpose** | Enable entity participation in ecosystem | Establish trust anchors for validation |
 | **Managed By** | Member State Registrar | Member State → European Commission |
-| **Scope** | All registered entities (PID/Attestation Providers, Relying Parties) | Selected entities (Wallet Providers, PID Providers, Attestation Providers, Access CAs) |
+| **Scope** | All registered entities (Wallet Providers, PID Providers, Attestation Providers, Relying Parties) | Selected entities (Wallet Providers, PID Providers, Attestation Providers, Access CAs) |
 | **Output** | Registry entries, Access Certificates, Registration Certificates | Trusted Lists (signed/sealed), List of Trusted Lists |
 | **Used For** | Entitlement verification, service access | Cryptographic trust validation |
 | **Requirements** | Reg_01, Reg_10, RPRC_09, RPRC_13 | GenNot_01, TLPub_01, TLPub_05 |
