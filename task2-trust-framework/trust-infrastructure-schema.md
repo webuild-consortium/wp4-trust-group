@@ -45,7 +45,7 @@ The registration process is managed by Member State Registrars and involves:
 1. Entity registration with identification data and entitlements
 2. Access certificate issuance by Access Certificate Authority
 3. Optional registration certificate issuance by Provider of Registration Certificates
-4. Registry publication for transparency
+4. Registry publication for transparency and online relying party verification, as required in [ARF version 2.7.3](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#311-relying-parties-and-intermediaries) when registration certs are not issued.
 
 ### 2.1 Registration Flow
 
