@@ -126,8 +126,7 @@ wallet user;
 
 [WEBUILD MVP]
 
-- There will be 1 Trusted List for all wallet providers in WEBUILD to reduce complexity. WP4 Trust Infrastructure group
-  may later decide to set up several Trusted Lists that are included in 1 List of Trusted Lists.
+- As a baseline, there will be a single Trusted List for all wallet providers in WEBUILD to reduce complexity. Later on, provided that time permits and there is readiness of WP4 members to do so, WP4 will set up several Trusted Lists, distribute wallet     providers across them, and include them in a single List of Trusted Lists.
 - Trusted Lists for Wallet Providers comply to ETSI 119 602
 - Wallet Provider Certificate Profile: ETSI 119 412-6, section 5
 - Wallet Unit
