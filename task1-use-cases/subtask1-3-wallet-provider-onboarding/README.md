@@ -34,6 +34,7 @@ wallet user;
 
 ## Actors
 
+
 - **Primary Actor [MVP]**:
     - Beneficiaries and Associated Partners providing a prototype of a EUDI Wallet for natural persons
     - Beneficiaries and Associated Partners providing a prototype of a European Business Wallet
@@ -86,7 +87,7 @@ wallet user;
 - Wallet providers have succesfully passed the Wallet conformity assessment within WEBUILD.
 - Wallet Providers are able to provide the requested data.
 
-| RACI MATRIX - WP4 Trust Infrastructure Group                     | Lead/ Co-Lead | [WEBUILD Body] | IDunion SCE | [Participant] |
+| RACI MATRIX - WP4 Trust Infrastructure Group                     | Lead/ Co-Lead | WP 4 - Testing | IDunion SCE | [Participant] |
 |------------------------------------------------------------------|---------------|----------------|-------------|---------------|
 | Announce onboarding request to Wallet Providers                  |       A,C     |                |      R      |       I       |
 | Set up and manage a form to gather data from Wallet Providers    |       A,C     |                |      R      |       I       |
@@ -340,6 +341,7 @@ _Postconditions:_
     5. details on associated body, if applicable
     6. X509 certificate signing request
     7. unique reference identifier of the wallet solution
+ 5. Wallet Provider provides proof that the wallet solution has passed the WEBUILD Interoperability Test as described here: https://github.com/webuild-consortium/wp4-interop-test-bed/blob/main/docs/user-guide-interoperability-test-bed.md
 
 ### 1.2 WP4 Trust Infrastructure group approves onboarding request
 
