@@ -88,15 +88,15 @@ wallet user;
 
 | RACI MATRIX - WP4 Trust Infrastructure Group                     | Lead/ Co-Lead | [WEBUILD Body] | IDunion SCE | [Participant] |
 |------------------------------------------------------------------|---------------|----------------|-------------|---------------|
-| Announce onboarding request to Wallet Providers                  |               |                |             |               |
-| Set up and manage a form to gather data from Wallet Providers    |               |                |             |               |
-| Review Wallet Provider Data                                      |               |                |             |               |
-| Decide upon listing and de-listing (Ecosystem Authority)         |               |                |             |               |
-| Inform about decision                                            |               |                |             |               |
-| Enable updates on Trusted Lists (Trusted List Provider)          |               |                |             |               |
-| Host the Trusted List for Wallet Providers                       |               |                |             |               |
-| Engage with Wallet Providers during onboarding / troubleshooting |               |                |             |               |
-| Set up wallet conformity assessment                              |               |                |             |               |
+| Announce onboarding request to Wallet Providers                  |       A,C     |                |      R      |       I       |
+| Set up and manage a form to gather data from Wallet Providers    |       A,C     |                |      R      |       I       |
+| Review Wallet Provider Data                                      |       A,C     |                |      R      |       I       |
+| Decide upon listing and de-listing (Ecosystem Authority)         |       A,C     |                |      R      |       I       |
+| Inform about decision                                            |       A,C     |                |      R      |       I       |
+| Enable updates on Trusted Lists (Trusted List Provider)          |       A,C     |                |      R      |       I       |
+| Host the Trusted List for Wallet Providers                       |       A,C     |                |      R      |       I       |
+| Engage with Wallet Providers during onboarding / troubleshooting |       A,C     |                |      R      |       I       |
+| Set up wallet conformity assessment                              |       I       |      A,R       |      C      |       I       |
 
 - Responsible (R): The person or group who do the work and execute the task or deliverable.
 - Accountable (A): The person or group who owns the result, makes the final decision, and is ultimately answerable for
