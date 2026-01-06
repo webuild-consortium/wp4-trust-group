@@ -106,8 +106,7 @@ wallet user;
   before or during the task.
 - Informed (I): People who are kept up to date on progress or outcomes via one‑way communication but are not involved in
   doing or deciding
-- The onboarding Wallet Provider can present a Wallet Unit Attestation according
-  to [EUDI ts3-wallet-unit-attestation](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md)
+
 
 [MVP+]
 
