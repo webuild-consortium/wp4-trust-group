@@ -34,18 +34,10 @@ wallet user;
 
 ## Actors
 
-- **Primary Actor [Extended Scope]**:
-    - EUDI Wallet Provider for natural persons
-    - European Business Wallet Providers for legal persons
-- **Secondary Actors [Extended Scope]**:
-    - Supervisory Body entitled by a Member State of the European Union (alternative names: Registrar or Ecosystem
-      Authority)
-    - Trusted List Provider (alternative name: List of trusted entity scheme operator)
-
-- **Primary Actor [WEBUILD MVP]**:
+- **Primary Actor [MVP]**:
     - Beneficiaries and Associated Partners providing a prototype of a EUDI Wallet for natural persons
     - Beneficiaries and Associated Partners providing a prototype of a European Business Wallet
-- **Secondary Actors [WEBUILD MVP]**:
+- **Secondary Actors [MVP]**:
     - Ecosystem Authority: WEBUILD WP4 Trust Infrastructure group
     - Trusted List Provider: WEBUILD WP4 Trust Infrastructure group
       Please note: The Trust Infrastructure group is not a legal entity. However, the ecosystem authority may be
@@ -53,37 +45,37 @@ wallet user;
       testing purposes, we therefore recommend designating at least one representative of the Trust Infrastructure group
       who is authorized to perform digital signing on behalf of the legal entity they represent.
 
+- **Primary Actor [MVP+]**:
+    - EUDI Wallet Provider for natural persons
+    - European Business Wallet Providers for legal persons
+- **Secondary Actors [MVP+]**:
+    - Supervisory Body entitled by a Member State of the European Union (alternative names: Registrar or Ecosystem
+      Authority)
+    - Trusted List Provider (alternative name: List of trusted entity scheme operator)
+
+
+
 ## Goal
 
-- **Business Goal [Extended Scope]**: Establish Trust Anchors for cryptographic trust validation to identify certified
+
+- **Technical Goal [MVP]**: To establish an onboarding process for wallet providers on a trusted list, enabling trusted
+  interaction between EUDI Wallet Units and other parties involved.
+
+- **Business Goal [MVP+]**: Establish Trust Anchors for cryptographic trust validation to identify certified
   Providers and certified solutions of
     - EUDI Wallets for natural persons [CIR 2025/849](https://data.europa.eu/eli/reg_impl/2025/849/oj)
     - European Business
       Wallets [Proposal for a Regulation (EU) 2025/0358 (COD) ](https://digital-strategy.ec.europa.eu/en/library/proposal-regulation-establishment-european-business-wallets)
-- **Technical Goal**: To establish an onboarding process for wallet providers on a trusted list, enabling trusted
-  interaction between EUDI Wallet Units and other parties involved.
-- **Success Criteria [WEBUILD MVP]**:
-    - The onboarding process for wallet providers is formally defined and documented in a harmonized manner that aligns
-      with EU regulatory and technical frameworks.
-    - Pilot implementations (MVP) successfully demonstrate wallet providers' onboarding
-    - All wallet providers within WEBUILD are included on a publicly accessible trusted list maintained by the WP4 Trust
+- **Success Criteria**:
+    - [MVP] Pilot implementations successfully demonstrate wallet providers' onboarding
+    - [MVP] All wallet providers within WEBUILD are included on a publicly accessible trusted list maintained by the WP4 Trust
       Infrastructure group
+    - [MVP+] The onboarding process for wallet providers is formally defined and documented in a harmonized manner that aligns
+      with EU regulatory and technical frameworks.
 
 ## Preconditions
 
-[Extended Scope]
-
-- Each Member State must have designated at least one Supervisory Body responsible for qualifying EUDI wallet providers
-  to onboard to a Trusted List.
-- Each Member State must have designated at least one Trusted List
-  provider ([Regulation EU 2024/1183 - Article 22(3)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2162-73-1))
-- The onboarding Wallet Provider can present
-    - proof of successfully passing an EUDI Wallet certification process according
-      to [CIR 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj)
-    - a Wallet Unit Attestation according
-      to [EUDI ts3-wallet-unit-attestation](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md)
-
-[WEBUILD MVP]
+[MVP]
 
 - The WEBUILD WP4 Trust Infrastructure group is assigned to act as Ecosystem Authority and Trusted List Provider for all
   WEBUILD participants
@@ -116,15 +108,22 @@ wallet user;
 - The onboarding Wallet Provider can present a Wallet Unit Attestation according
   to [EUDI ts3-wallet-unit-attestation](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md)
 
+[MVP+]
+
+- Each Member State must have designated at least one Supervisory Body responsible for qualifying EUDI wallet providers
+  to onboard to a Trusted List.
+- Each Member State must have designated at least one Trusted List
+  provider ([Regulation EU 2024/1183 - Article 22(3)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2162-73-1))
+- The onboarding Wallet Provider can present
+    - proof of successfully passing an EUDI Wallet certification process according
+      to [CIR 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj)
+    - a Wallet Unit Attestation according
+      to [EUDI ts3-wallet-unit-attestation](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md)
+
+
 ## Data Model
 
-[Extended Scope]
-
-- It is assumed that the European Commission will set up a separate List of Trusted Lists which includes URIs to Trusted
-  List of Wallet Providers for each member state.
-- Trusted Lists for Wallet Providers comply to ETSI 119 602
-
-[WEBUILD MVP]
+[MVP]
 
 - As a baseline, there will be a single Trusted List for all wallet providers in WEBUILD to reduce complexity. Later on, provided that time permits and there is readiness of WP4 members to do so, WP4 will set up several Trusted Lists, distribute wallet     providers across them, and include them in a single List of Trusted Lists.
 - Trusted Lists for Wallet Providers comply to ETSI 119 602
@@ -134,6 +133,13 @@ wallet user;
 - unique reference identifier for the wallet solution according
   to [CIR 2025/849 Annex 2(a)](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849)
 - [token-status-list](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-12)
+
+[MVP+]
+
+- It is assumed that the European Commission will set up a separate List of Trusted Lists which includes URIs to Trusted
+  List of Wallet Providers for each member state.
+- Trusted Lists for Wallet Providers comply to ETSI 119 602
+
 
 ### Trusted List of Entitites Data Model
 
@@ -250,19 +256,20 @@ section 4.2.1
 
 ## Main Flow
 
-**1. Onboarding via Supervisory Body [Extended scope]**
+**1. Onboarding via WP4 Trust Infrastructure group [MVP]**
 
 - 1.1 Wallet Provider requests onboarding
-- 1.2 Supervisory Body reviews onboarding request
-- 1.3 Supervisory Body approves onboarding to Trusted List
-- 1.4 Trusted List of Wallet Providers is updated
-- 1.5 Supervisory Body confirms successful administrative onboarding
+- 1.2 WP4 Trust Infrastructure group approves onboarding to Trusted List
+- 1.3 Trusted List of Wallet Providers is updated
 
-**2. Onboarding via WP4 Trust Infrastructure group [WEBUILD MVP]**
+
+**2. Onboarding via Supervisory Body [MVP+]**
 
 - 2.1 Wallet Provider requests onboarding
-- 2.2 WP4 Trust Infrastructure group approves onboarding to Trusted List
-- 2.3 Trusted List of Wallet Providers is updated
+- 2.2 Supervisory Body reviews onboarding request
+- 2.3 Supervisory Body approves onboarding to Trusted List
+- 2.4 Trusted List of Wallet Providers is updated
+- 2.5 Supervisory Body confirms successful administrative onboarding
 
 **3. Verification of WUA**
 
@@ -279,7 +286,12 @@ List of Wallet Providers.
 
 _Preconditions:_
 
-- **Prerequisites [Extended scope]**:
+- **Prerequisites [MVP]**
+    - The Wallet Provider is a beneficiary or an Associated Member of the WEBUILD Consortium
+- **Triggers**:
+    - The Wallet Provider, that intends to provide a European Digital Identity Wallets (EUDI Wallets) or a European
+      Business Wallet, applies to be listed.
+- **Prerequisites [MVP+]**:
     - Member State has designated at least one Supervisory Body;
     - Member State has designated at least one Trusted List Provider;
         - *Question: Should we define the relationship between Supervisory Body and Trust List Provider acc. to edias 1
@@ -289,48 +301,24 @@ _Preconditions:_
     - The European Comission includes national Trusted List in the List of Trusted Lists (LoTL)
     - The Wallet Provider was able to successfully certify its wallet solution according
       to [CIR 2024/2981](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402981)
-- Prerequisites [WEBUILD MVP]
-    - The Wallet Provider is a beneficiary or an Associated Member of the WEBUILD Consortium
-- **Triggers**:
-    - The Wallet Provider, that intends to provide a European Digital Identity Wallets (EUDI Wallets) or a European
-      Business Wallet, applies to be listed.
 
 _Postconditions:_
 
 - **Success**:
-    - [Extended Scope] The Supervisory Body accepts the Wallet Provider application;
-    - [WEBUILD MVP] WP4 Trust Infrastructure group accepts the Wallet application
+    - [MVP] WP4 Trust Infrastructure group accepts the Wallet application
+    - [MVP+] The Supervisory Body accepts the Wallet Provider application;
     - The Wallet Provider gets a positive response to the application.
 - **Failure**:
-    - [Extended Scope] The Supervisory Body rejects the Wallet Provider application.
-    - [WEBUILD MVP] WP4 Trust Infrastructure group accepts the Wallet application
+    - [MVP] WP4 Trust Infrastructure group accepts the Wallet application
+    - [MVP+] The Supervisory Body rejects the Wallet Provider application.
 - **Outputs**:
     - The Wallet Provider gets included in the Trusted Lists for Wallet Providers;
     - Wallet Provider Certificate is issued to the Wallet Provider
     - The Wallet Provider can provide their wallet solutions to users.
 
+[MVP]
+
 ### 1.1 Wallet Provider requests onboarding
-
-1. Wallet Provider passes for Conformity Assessment at dedicated Conformity Assessment Bodies.
-2. The Conformity Assessment results are provided to the Supervisory Body.
-
-### 1.2 Supervisory Body reviews onboarding request
-
-1. Supervisory Body reviews compliance according
-   to  [CIR 2024/2981](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402981)
-
-### 1.3 Supervisory Body approves onboarding to Trusted List
-
-1. Supervisory body generates a unique reference identifier for the wallet solution according
-   to [CIR 2025/849 Annex 2(a)](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849)
-
-### 1.4 Supervisory Body confirms successful administrative onboarding
-
-1. Wallet provider receives a certification assessment report compliant with Article 5c of Regulation (EU) No 910/2014
-
-### 1.5 Trusted List of Wallet Providers is updated
-
-### 2.1 Wallet Provider requests onboarding
 
 1. Wallet provider requests onboarding via Open Social of the WeBuild Consortium
 2. WP4 Trust Infrastructure group provides a form and requests data from the Wallet Provider
@@ -353,7 +341,7 @@ _Postconditions:_
     6. X509 certificate signing request
     7. unique reference identifier of the wallet solution
 
-### 2.2 WP4 Trust Infrastructure group approves onboarding request
+### 1.2 WP4 Trust Infrastructure group approves onboarding request
 
 Responsible person or group review whether
 
@@ -367,13 +355,38 @@ Responsible person or group review whether
 If successful, responsible Person or group approves Wallet Provider to join the Trusted List for Wallet Providers.
 If not successful, responsible person or group informs about the review result and may request additional data.
 
-### 2.3 Trusted List of Wallet Providers is updated
+### 1.3 Trusted List of Wallet Providers is updated
 
 - Wallet Provider receives a notification about the successful reviewing process.
 - Ecosystem authority confirms that provided data by Wallet Provider shall be used to update the Trusted List.
 - X509 certificates for Wallet Solutions are issued by the Ecosystem Authority
 - Trusted List Provider updates Trusted List of Wallet Providers.
 - Wallet Provider is notified about updated Trusted List.
+
+[MVP+]
+
+### 2.1 Wallet Provider requests onboarding
+
+1. Wallet Provider passes for Conformity Assessment at dedicated Conformity Assessment Bodies.
+2. The Conformity Assessment results are provided to the Supervisory Body.
+
+### 2.2 Supervisory Body reviews onboarding request
+
+1. Supervisory Body reviews compliance according
+   to  [CIR 2024/2981](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402981)
+
+### 2.3 Supervisory Body approves onboarding to Trusted List
+
+1. Supervisory body generates a unique reference identifier for the wallet solution according
+   to [CIR 2025/849 Annex 2(a)](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849)
+
+### 2.4 Supervisory Body confirms successful administrative onboarding
+
+1. Wallet provider receives a certification assessment report compliant with Article 5c of Regulation (EU) No 910/2014
+
+### 2.5 Trusted List of Wallet Providers is updated
+
+
 
 ## Wallet Provider verification
 
