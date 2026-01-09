@@ -80,7 +80,7 @@ wp4-trust-group/
 │   ├── trust-infrastructure-api/   # Trust Infrastructure API
 │   └── onboarding-api/             # Onboarding API
 │
-├── task5-participants-certificates-policies/ # Participants' Certificates and Policies
+├── task5-participants-policies/ # Participants' Certificates and Policies
 │   ├── data-model/                 # Data model
 │   └── trust-evaluation-methods/   # Trust evaluation methods
 │
