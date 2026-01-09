@@ -144,7 +144,7 @@ wp4-trust-group/
 These below may have further updates and require to considered in future milestones.
 
 - **EC TS02 v0.9** (2025-04) - Specification of systems enabling the notification and subsequent publication of Provider information
-- **EC TS05 V1.0** (2025-06) - Common Formats and API for Relying Party Registration Information
+- **EC TS05 V1.0** (2025-06) - Common Formats and API for Relying Party Registration Information (upcoming ETSI TS)
   - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
 - **EC TS06 v1.0** (2025-06) - Common set of Relying Party information to be registered
   - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
