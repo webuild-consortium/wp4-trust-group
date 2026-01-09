@@ -169,6 +169,9 @@ These below may have further updates and require to considered in future milesto
 
 - **ETSI EN 319 412-6** (v01.00.00) - Certificate profile requirements for PID, Wallet, EAA, QEAA and PSBEAA providers
   - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf)
+- **ETSI TS 119 472-3** (v0.0.11 Draft) - Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 3: Profiles for issuance of EAA or PID
+  - [Work Item Page](https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=74935&curItemNr=121&totalNrItems=292&optDisplay=100000&qSORT=TB&qETSI_ALL=&SearchPage=TRUE&qINCLUDE_SUB_TB=&qINCLUDE_MOVED_ON=&qEND_CURRENT_STATUS_CODE=11+WI%3BM58&qSTOP_FLG=N&qKEYWORD_BOOLEAN=&qCLUSTER_BOOLEAN=&qCLUSTER=17&qFREQUENCIES_BOOLEAN=&qSTOPPING_OUTDATED=&butExpertSearch=Search&includeNonActiveTB=FALSE&includeSubProjectCode=&qREPORT_TYPE=TUBE)
+  - [Draft Document](https://docbox.etsi.org/esi/esi/70-Drafts/0019472-3/ESI-0019472-3v0011.docx)
 - **OpenID Federation 1.0** - Draft 43
 - **OpenID Federation Wallet Architectures 1.0** - Draft 03
 
