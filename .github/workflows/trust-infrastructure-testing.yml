@@ -5,13 +5,13 @@ on:
     branches: [ main, develop ]
     paths:
       - 'task4-trust-infrastructure-api/**'
-      - 'task5-participants-certificates-policies/**'
+      - 'task5-participants-policies/**'
       - 'task6-wallet-conformance-interop/**'
   pull_request:
     branches: [ main, develop ]
     paths:
       - 'task4-trust-infrastructure-api/**'
-      - 'task5-participants-certificates-policies/**'
+      - 'task5-participants-policies/**'
       - 'task6-wallet-conformance-interop/**'
 
 jobs:
@@ -61,7 +61,7 @@ jobs:
     
     - name: Run Participants Certificates and Policies tests
       run: |
-        pytest task5-participants-certificates-policies/tests/ -v --cov=task5-participants-certificates-policies/src
+        pytest task5-participants-policies/tests/ -v --cov=task5-participants-policies/src
     
     - name: Run Wallet Conformance tests
       run: |
