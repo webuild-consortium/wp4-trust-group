@@ -26,7 +26,10 @@
     - *Transparency and traceability*
         - All Certificate issuances, renewals, and revocations are logged (optionally under RFC 9162 – Certificate Transparency v2.0) and made publicly accessible for validation (ref. [Regulation (EU) 2025/848, Annex IV 3(j), Annex V 3(i)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
         - Revocation and validity information is provided freely (free of charge), automatically, and reliably (ref. [Regulation (EU) 2025/848, Annex IV 5, Annex V 6](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
+        - All Certificate issuances, renewals, and revocations are logged (optionally under RFC 9162 – Certificate Transparency v2.0) and made publicly accessible for validation (ref. [Regulation (EU) 2025/848, Annex IV 3(j), Annex V 3(i)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
+        - Revocation and validity information is provided freely (free of charge), automatically, and reliably (ref. [Regulation (EU) 2025/848, Annex IV 5, Annex V 6](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Compliance and accountability*
+        - Certificate Policies (CP) and Certification Practice Statements (CPS) follow ETSI EN 319 411-1 version 1.4.1 (2023-10) NCP requirements (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
         - Certificate Policies (CP) and Certification Practice Statements (CPS) follow ETSI EN 319 411-1 version 1.4.1 (2023-10) NCP requirements (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
         - Each Member State designates at least one Registrar and maintains at least one National Register and communicates changes to the Commission and other Member States (ref. [Regulation (EU) 2025/848, Article 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Operational effectiveness*
@@ -67,7 +70,7 @@ Each Relying Party that intends to rely on European Digital Identity Wallets (EU
 
 *Preconditions:*
 - **Prerequisites**: 
-    - its Member State has established at least one National Register of Relying Parties;
+    - Its Member State has established at least one National Register of Relying Parties;
     - Its Member State has designated at least one Registrar;
     - Its Member State has published one or more national Registration Policies;
     - The European Commission has been notified about the Registrar and the National Register.
@@ -86,7 +89,9 @@ Each Relying Party that intends to rely on European Digital Identity Wallets (EU
 
 ### 1.1 Registration Application
 The Relying Party submits the registration application to the Registrar, providing at least the information set out in Annex I.
+The Relying Party submits the registration application to the Registrar, providing at least the information set out in Annex I.
 
+The Registrar receives the registration application for inclusion in the National Register.
 The Registrar receives the registration application for inclusion in the National Register.
 
 *Requirements:*
@@ -130,6 +135,7 @@ See also [Technical Specification n.6. Common Set of Relying Party Information t
     - (1) The single common API shall:
         - (a) be a **REST API**, supporting **JSON** as a format and signed in accordance with the relevant requirements specified in Section 1;
         -    (b) allow any requestor, without prior authentication, to search and request complete lists to the register, for information about registered wallet-relying parties, allowing for partial matches based on defined parameters including, where applicable, the official or business registration number of the wallet-relying parties, the name of the wallet-relying parties or the information referred to in Article 8, paragraph 2, point (g) and Annex I points 12, 13, 14, and 15;
+        -    (b) allow any requestor, without prior authentication, to search and request complete lists to the register, for information about registered wallet-relying parties, allowing for partial matches based on defined parameters including, where applicable, the official or business registration number of the wallet-relying parties, the name of the wallet-relying parties or the information referred to in Article 8, paragraph 2, point (g) and Annex I points 12, 13, 14, and 15;
         -    (c) ensure that replies to requests referred to in point (b) that match at least one wallet-relying party shall include one or more statements on information about registered wallet-relying parties and information according to Annex I, current and historic wallet-relying party access certificates and wallet-relying party registration certificates but exclude the contact information in Annex I point 4;
         - (d) be published as an OpenAPI version 3, together with the appropriate documentation and technical specifications ensuring interoperability across the Union;
         - (e) provide security functions, including security by default and by design, to ensure the availability and integrity of the API and the availability of information through it.
@@ -138,6 +144,7 @@ See also [Technical Specification n.6. Common Set of Relying Party Information t
     - PID Providers, QEAA Providers, PuB-EAA Providers, non-qualified EAA Providers, and **Relying Parties register with a Registrar in their Member State**. The main goal of the registration process is for the Registrar to register relevant information about the registering entity, and make this information available online to interested parties.
 
 ### 1.2 Registration Review
+The Registrar verifies the registration application.
 The Registrar verifies the registration application.
 
 *Requirements:*
@@ -152,11 +159,13 @@ The Registrar verifies the registration application.
 
 ### 1.3 Registration Confirmation
 The Registrar validates or rejects the registration application (the application status becomes "accepted or rejected").
+The Registrar validates or rejects the registration application (the application status becomes "accepted or rejected").
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 6. "Registration processes"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_4:~:text=Article%C2%A04-,Registration%20policies,-1.%C2%A0%C2%A0%C2%A0Member%20States) 
     - 6. Where the registrar **cannot verify the information** in accordance with paragraphs 3 to 5, the registrar shall reject the registration.
 
+The Relying Party receives positive or negative feedback on registration application.
 The Relying Party receives positive or negative feedback on registration application.
 
 *Requirements:*
@@ -172,6 +181,9 @@ See also [ARF, Annex II - High-Level Requirements "A. General requirements for M
     - [...] each Relying Party will register itself with a Registrar in its Member State. If the registration process is successful, **the Registrar includes the Relying Party in its public registry**.
 
 ## 2. Technical Onboarding
+Following successful registration, each Relying Party enters a technical onboarding process, harmonized between Member States, to acquire two mandatory certificates:
+- the Access Certificate(s), which is required for technical connection and authentication with Wallet Units;
+- the Registration Certificate(s), which confirms eligibility to provide services relying on the EUDI Wallets.
 Following successful registration, each Relying Party enters a technical onboarding process, harmonized between Member States, to acquire two mandatory certificates:
 - the Access Certificate(s), which is required for technical connection and authentication with Wallet Units;
 - the Registration Certificate(s), which confirms eligibility to provide services relying on the EUDI Wallets.
@@ -196,7 +208,9 @@ Following successful registration, each Relying Party enters a technical onboard
 
 ### 2.1 Access Certificate Request
 The Registrar informs the Access Certificate Authority about the registered Relying Party.
+The Registrar informs the Access Certificate Authority about the registered Relying Party.
 
+The Access Certificate Authority receives the input and starts the review process for the issuing of the Access Certificate.
 The Access Certificate Authority receives the input and starts the review process for the issuing of the Access Certificate.
 
 *Requirements:*
@@ -210,6 +224,7 @@ The Access Certificate Authority receives the input and starts the review proces
 ### 2.2 Access Certificate Request Review
 The Access Certificate Authority verifies the identity and any other attributes of the Relying Party.
 
+The Access Certificate Authority checks the valid registration status and information coherency within a national register in which that Relying Party is established.
 The Access Certificate Authority checks the valid registration status and information coherency within a national register in which that Relying Party is established.
 
 *Requirements:*
@@ -225,6 +240,7 @@ The Access Certificate Authority checks the valid registration status and inform
 
 ### 2.3 Access Certificate Issuance
 
+The Access Certificate Authority issues the Access Certificate and logs the Access Certificate issued.
 The Access Certificate Authority issues the Access Certificate and logs the Access Certificate issued.
 
 *Requirements:*
@@ -251,6 +267,7 @@ See also [ARF, Annex II - High-Level Requirements "B. General requirements for t
         - plus additional requirements set out in the Annex IV
 
 The Registrar keeps records of the issuance of Relying Party Access Certificate for 10 years and publishes its history within a common REST API (JSON format).
+The Registrar keeps records of the issuance of Relying Party Access Certificate for 10 years and publishes its history within a common REST API (JSON format).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 10 "Record keeping"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_IV:~:text=Requirements%20for%20wallet%2Drelying%20party%20access%20certificates%20referred%20to%20in%20Article%C2%A07)
@@ -266,7 +283,9 @@ The Registrar keeps records of the issuance of Relying Party Access Certificate 
 
 ### 2.4 Registration Certificate Request
 The Registrar informs the Provider of Registration Certificate about the registered Relying Party.
+The Registrar informs the Provider of Registration Certificate about the registered Relying Party.
 
+The Provider of Registration Certificate receives the input and starts the review process for the issuing of the Registration Certificate.
 The Provider of Registration Certificate receives the input and starts the review process for the issuing of the Registration Certificate.
 
 *Requirements:*
@@ -300,12 +319,13 @@ The Provider of Registration Certificate checks the valid registration status an
 
 ### 2.6 Registration Certificate Issuance
 The Provider of Registration Certificate issues the Registration Certificate and logs the Registration Certificate issued.
+The Provider of Registration Certificate issues the Registration Certificate and logs the Registration Certificate issued.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Annex V "Requirements for wallet-relying party registration certificates referred to in Article 8"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_IV:~:text=Requirements%20for%20wallet%2Drelying%20party%20registration%20certificates%20referred%20to%20in%20Article%C2%A08)
     - 3. wallet-relying party registration certificate policy and certificate practice statement applicable to the provisioning of wallet-relying party registration certificates [...] shall include:
         - (i) The provider of wallet-relying party registration certificates **logs all wallet-relying party registration certificates they have issued**;
-        - (j) the obligation for the wallet-relying party registration certificates:
+        - (j) The obligation for the wallet-relying party registration certificates:
             -    to include the location where the validation data of the advanced electronic signature or advanced electronic seal for the certificate used to sign or seal the registration certificate is available, for the entire trust chain to be built up to the **expected trust anchor**;
             - to include a machine-readable **reference to the applicable certificate policy and certificate practice statement**;
             - to include the **information** referred to in Annex I, points 1, 2, 3, 5, 6 and 8, 9, 10, 11, 12, 13, 14 and 15;
@@ -334,12 +354,13 @@ The Registrar keeps records of the issuance of Relying Party Registration Certif
 - [Regulation (EU) 2025/848, Article 10. "Record keeping"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_10:~:text=Article%C2%A010-,Record%20keeping,-Registrars%20shall%20keep)
     - Registrars shall **keep records of the information provided** by wallet-relying parties and registered in accordance with Annex I for the registration of a wallet-relying party and the issuance of the wallet-relying party access certificates and the wallet-relying party registration certificates, and of any subsequent changes to this information, **for 10 years**.
 - [Regulation (EU) 2025/848, Annex II. "2. Requirements on the single common API referred to in Article 3"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_II:~:text=2.%C2%A0%C2%A0%C2%A0REQUIREMENTS%20ON%20THE%20SINGLE%20COMMON%20API%20REFERRED%20TO%20IN%20ARTICLE%C2%A03)
+- [Regulation (EU) 2025/848, Annex II. "2. Requirements on the single common API referred to in Article 3"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_II:~:text=2.%C2%A0%C2%A0%C2%A0REQUIREMENTS%20ON%20THE%20SINGLE%20COMMON%20API%20REFERRED%20TO%20IN%20ARTICLE%C2%A03)
     - (1) The single common API shall:
         - (a) be a **REST API**, supporting **JSON** as a format and signed in accordance with the relevant requirements specified in Section 1;
-        - (b) allow any requestor, without prior authentication, to search and request complete lists to the register, for information about registered wallet-relying parties, allowing for partial matches based on defined parameters including, where applicable, the official or business registration number of the wallet-relying party, the name of the wallet-relying party or the information referred to in Article 8, paragraph 2, point (g) and Annex I points 12, 13, 14 and 15;
+        - (b) allow any requestor, without prior authentication, to search and request complete lists to the register, for information about registered wallet-relying parties, allowing for partial matches based on defined parameters including, where applicable, the official or business registration number of the wallet-relying party, the name of the wallet-relying party or the information referred to in Article 8, paragraph 2, point (g) and Annex I points 12, 13, 14, and 15;
         - (c) ensure that replies to requests referred to in point (b) that match at least one wallet-relying party shall include one or more statements on information about registered wallet-relying parties and information according to Annex I, **current and historic wallet-relying party access certificates and wallet-relying party registration certificates** but exclude the contact information in Annex I point 4;
         - (d) be published as an **OpenAPI version 3**, together with the appropriate documentation and technical specifications ensuring interoperability across the Union;
-        - (e) provide security functions, including security by default and by design, to ensure the availability and integrity of the API and the availability of information through it.
+        - (e) provide security functions, including security by default and by design, to ensure the availability and integrity of the API and the availability of information through it;
     -  (2) The statements referred to in point (c) shall be expressed under the form of **electronically signed or sealed JSON files**, with a format and structure in accordance with the requirements on electronic signatures or seals set out Section 1. 
 
 ## 3. Post-Onboarding
@@ -369,6 +390,7 @@ Once the Access and Registration Certificates are active, the Relying Party may 
 ### 3.1 Registration Monitoring
 
 The Registrar monitors continuously.
+The Registrar monitors continuously.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 9. "Suspension and cancellation of registration"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_9:~:text=Suspension%20and%20cancellation%20of%20registration)
@@ -378,6 +400,7 @@ The Registrar monitors continuously.
         - (c) the wallet-relying party is **requesting more attributes **than they have registered in accordance with Article 5 and Article 6;
         - (d) the wallet-relying party is otherwise **acting in breach of Union or national law** in a manner related to their role as wallet-relying party.
 
+The Provider of Registration Certificate monitors continuously and automatically.
 The Provider of Registration Certificate monitors continuously and automatically.
 
 *Requirements:*
@@ -401,10 +424,17 @@ The Registrar receives the updated information.
      - 3. Wallet-relying party **shall update any information previously registered** in the national register of wallet-relying parties **without undue delay.**
 - [Regulation (EU) 2025/848, Annex V "Requirements for wallet-relying party registration certificates referred to in Article 8"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_IV:~:text=Requirements%20for%20wallet%2Drelying%20party%20registration%20certificates%20referred%20to%20in%20Article%C2%A08)
     - 3. The wallet-relying party registration certificate policy and certificate practice statement applicable to the provisioning of wallet-relying party registration certificates […] shall include:
-         - (d) the obligation for the provider of wallet-relying party registration certificates implements **measures and processes** on:
-            - **reissue the wallet-relying party registration certificate**;
+         - (d) the obligation for the provider of Wallet-Relying Party Registration Certificates to implement measures and processes concerning:
+            - **reissuing the Wallet-Relying Party Registration Certificate**.
 
 ### 3.3 Registration Suspension / Cancellation
+If:
+- The National Registrar conducts a proportionality assessment whose results lead to the Relying Party registration suspension or cancellation.
+- The Relying Party requests the Relying Party registration cancellation.
+- The Supervisory Body requests the Relying Party registration suspension/ cancellation.
+
+Then:
+The Registrar suspends/ revokes the Relying Party registration.
 If:
 - The National Registrar conducts a proportionality assessment whose results lead to the Relying Party registration suspension or cancellation.
 - The Relying Party requests the Relying Party registration cancellation.
@@ -431,12 +461,24 @@ The Relying Party receives notice of its registration suspension / revocation.
 The Access Certificate Authority receives notice of the Relying Party registration suspension/ revocation.
 
 The Provider of Registration Certificate receives notice of the Relying Party registration suspension / revocation.
+The Registrar sends notice about the Relying Party registration suspension / revocation.
+
+The Relying Party receives notice of its registration suspension / revocation.
+
+The Access Certificate Authority receives notice of the Relying Party registration suspension/ revocation.
+
+The Provider of Registration Certificate receives notice of the Relying Party registration suspension / revocation.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 9. "Suspension and cancellation of registration"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_9:~:text=Suspension%20and%20cancellation%20of%20registration)
     - 5.   Where the registration of a wallet-relying party is suspended or cancelled, the **registrar shall inform** **the provider of the relevant wallet-relying party access certificates**, the **provider of the relevant wallet-relying party registration certificates**, and the **affected wallet-relying party** of this action **without undue delay and not later than 24 hours after the suspension or cancellation.** This notification shall include **information** on the reasons for the suspension or cancellation and on the available means of **redress or appeal**.
 
 ### 3.4 Access / Registration Certificate Revocation
+If:
+- The Registrar suspends / cancels the Relying Party registration.
+- The Relying Party requests the Relying Party Access / Registration Certificate revocation.
+- The Supervisory Body requests the Relying Party Access / Registration certificate revocation.
+- Data Protection Authority requests the Relying Party Access / Registration certificate revocation.
 If:
 - The Registrar suspends / cancels the Relying Party registration.
 - The Relying Party requests the Relying Party Access / Registration Certificate revocation.
@@ -451,6 +493,9 @@ If:
     - 3. The wallet-relying party registration certificate policy and certificate practice statement applicable to the provisioning of wallet-relying party registration certificates […] shall include:
         - (f) the obligation for the provider of wallet-relying party registration certificates to **allow** relevant stakeholders, including **wallet-relying parties** as regards their own certificates, competent **supervisory bodies** and **data protection authorities**, **to request the revocation** of wallet-relying party registration certificates;
 
+Then:
+- The Access Certificate Authority revokes the Access Certificate (without undue delay).
+- The Provider of Registration Certificate revokes the Registration Certificate (without undue delay).
 Then:
 - The Access Certificate Authority revokes the Access Certificate (without undue delay).
 - The Provider of Registration Certificate revokes the Registration Certificate (without undue delay).
