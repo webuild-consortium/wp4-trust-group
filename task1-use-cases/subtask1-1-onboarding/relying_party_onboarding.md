@@ -39,7 +39,7 @@
 - Member State must have authorised at least one Certificate Authority to issue Relying Party Access Certificates (ref. [Regulation (EU) 2025/848, Article 7 "Wallet-relying party access certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
 - Member State must have authorised at least one Certificate Authority to issue Relying Party Registration Certificates (ref. [Regulation (EU) 2025/848, Article 8 "Wallet-relying party registration certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
 - Member State must have published one or more national Registration Policies, including or reusing existing sectoral or national registration policies (ref. [Regulation (EU) 2025/848, Article 4 "Registration policies"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-- The European Commission must be notified about the Registrar, the Access Certificate Authority, and the Provider of Registration Certificate (ref. [Regulation (EU) 2024/2980, Article 4 "Notifications by Member States"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ%3AL_202402980&qid=1733300667869)).
+- The European Commission must be notified about the Registrar, the Access Certificate Authority, and the Provider of Registration Certificate. (ref. [Regulation (EU) 2024/2980, Article 4 "Notifications by Member States"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ%3AL_202402980&qid=1733300667869)).
 
 ## Main Flow
 **1. Administrative Onboarding**
@@ -77,7 +77,7 @@ Each Relying Party that intends to rely on European Digital Identity Wallets (EU
 *Postconditions:*
 - **Success**: 
     - The Registrar accepts the Relying Party registration application;
-    - The Relying Party get a positive response to the registration application.
+    - The Relying Party gets a positive response to the registration application.
 - **Failure**: 
     - The Registrar rejects the Relying Party registration application.
 - **Outputs**: 
@@ -111,7 +111,7 @@ See also [Technical Specification n.6. Common Set of Relying Party Information t
         - a list of the attributes that the wallet-relying party intends to request for each intended use
         - a description of intended use of the data
         - indication whether the wallet-relying party is a public sector body
-        - applicable entitlement(s) of the wallet-relying party chosed between:
+        - applicable entitlement(s) of the wallet-relying party chosen between:
             - **Service_Provider**
             - QEAA_Provider
             - Non_Q_EAA_Provider
@@ -122,9 +122,9 @@ See also [Technical Specification n.6. Common Set of Relying Party Information t
             - rQSigCDs_Provider
             - rQSealCDs_Provider
             - ESig_ESeal_Creation_Provider
-        - indication if the wallet-relying party intends to act **as an intermediary or to rely upon an intermediary**
-- [Regulation (EU) 2025/848, Annex II "1.   Requirements for Electronic signature or seals applied to the information made available on registered Wallet-Relying Parties referred to in Article 3"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_II:~:text=1.%C2%A0%C2%A0%C2%A0REQUIREMENTS%20FOR%20ELECTRONIC%20SIGNATURES%20OR%20SEALS%20APPLIED%20TO%20THE%20INFORMATION%20MADE%20AVAILABLE%20ON%20REGISTERED%20WALLET%2DRELYING%20PARTIES%20REFERRED%20TO%20IN%20ARTICLE%C2%A03) 
-    - JavaScript Object Notation (‘JSON’)
+        - indication if the wallet-relying party intends to act **as an intermediary or to rely upon an intermediary**.
+- [Regulation (EU) 2025/848, Annex II "1.   Requirements for Electronic signature or seals applied to the information made available on registered Wallet-Relying Parties referred to in Article 3"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_II:~:text=1.%C2%A0%C2%A0%C2%A0REQUIREMENTS%20FOR%20ELECTRONIC%20SIGNATURES%20OR%20SEALS%20APPLIED%20TO%20THE%20INFORMATION%20MADE%20AVAILABLE%20ON%20REGISTERED%20WALLET%2DRELYING%20PARTIES%20REFERRED%20TO%20IN%20ARTICLE%C2%A03)
+    - JavaScript Object Notation (‘JSON’).
     - IETF 7515 for JSON Web Signatures.
 - [Regulation (EU) 2025/848, Annex II "2.   Requirements on the single common API referred to in Article 3"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_II:~:text=2.%C2%A0%C2%A0%C2%A0REQUIREMENTS%20ON%20THE%20SINGLE%20COMMON%20API%20REFERRED%20TO%20IN%20ARTICLE%C2%A03)
     - (1) The single common API shall:
