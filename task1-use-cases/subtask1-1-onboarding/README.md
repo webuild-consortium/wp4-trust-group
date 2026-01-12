@@ -22,6 +22,14 @@ This subtask focuses on defining use cases for participant onboarding processes 
 - **Certificate Validation**: RP certificate validation
 - **Access Control Setup**: Access control configuration
 
+### PID Providers and Attestation Providers
+- **Provider Registration**: PID / Attestation Provider registration process with National Registrar
+- **Attestation Type Declaration**: Registration of attestation type(s) to be issued to Wallet Units
+- **Access Certificate Issuance**: Access certificate issuance for authentication with Wallet Units
+- **Registration Certificate Issuance**: Optional registration certificate issuance containing provider information
+- **Trust Anchor Publication**: Trust anchor inclusion in Trusted Lists (for PID Providers, QEAA Providers, and PuB-EAA Providers)
+- **Notification to Commission**: Notification to EU Commission and other Member States (for PID Providers and PuB-EAA Providers)
+
 ### Certificate Authorities (CAs)
 - **CA Registration**: Certificate authority registration
 - **Root Certificate Submission**: Root certificate submission and validation
