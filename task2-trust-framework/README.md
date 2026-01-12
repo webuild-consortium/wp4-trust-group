@@ -2,10 +2,20 @@
 
 This task focuses on defining the comprehensive trust framework for the WP4 Trust Infrastructure, establishing the foundation for trust evaluation and management within digital Wallet ecosystems.
 
+## Folder Contents
+
+This folder contains the following documents:
+
+- **`README.md`** - This file, providing an overview of the trust framework
+- **`authentication-authorization-policy-framework.md`** - Framework for distinguishing authentication and authorization, additive and subtractive policy principles, and use cases for trust participants using federative trust marks
+- **`entities-involved.md`** - Definition of entities involved in trust evaluation, trust registry, and trust infrastructure in the EUDI Wallet ecosystem according to EUDIW ARF
+- **`trusted-list-registration-trust-evaluation-matrix.md`** - Requirements matrix extracting all requirements related to trusted lists, participant registration, and trust evaluation from Annex 2 of the EUDI Wallet Architecture and Reference Framework
+
 ## Framework Components
 
 ### Trust Model
 - **Trust Hierarchy**: Multi-level trust relationships
+- **Roles and accountability**: Defining roles and their tasks
 - **Trust Anchors**: Root trust authorities
 - **Trust Chains**: Certificate chain validation
 - **Trust Policies**: Policy-based trust management
@@ -21,6 +31,13 @@ This task focuses on defining the comprehensive trust framework for the WP4 Trus
 - **Trust Maintenance**: Ongoing trust management
 - **Trust Revocation**: Trust termination procedures
 - **Trust Monitoring**: Continuous trust assessment
+
+### Auditability
+- **Logging**
+- **Traceability**
+- **audit trails**
+- **Documentation**
+- **Versioning and changes**
 
 ## Framework Architecture
 
@@ -222,45 +239,7 @@ This task focuses on defining the comprehensive trust framework for the WP4 Trus
    - System notifies stakeholders
    - System maintains audit trail
 
-## Compliance Framework
 
-### Regulatory Compliance
-- **EIDAS Regulation**: Compliance with EU regulation 910/2014
-- **GDPR Compliance**: Privacy and data protection compliance
-- **ISO Standards**: ISO 27001 and related standards
-- **ETSI Standards**: ETSI trust service standards
-
-### Technical Compliance
-- **RFC Compliance**: IETF RFC compliance
-- **ETSI Compliance**: ETSI standard compliance
-- **OpenID Compliance**: OpenID Federation compliance
-- **W3C Compliance**: W3C standard compliance
-
-### Operational Compliance
-- **Security Compliance**: Security standard compliance
-- **Operational Compliance**: Operational standard compliance
-- **Audit Compliance**: Audit standard compliance
-- **Quality Compliance**: Quality standard compliance
-
-## Implementation Guidelines
-
-### Development Standards
-- **Code Standards**: Coding standards and practices
-- **Documentation Standards**: Documentation requirements
-- **Testing Standards**: Testing requirements and practices
-- **Security Standards**: Security implementation requirements
-
-### Deployment Standards
-- **Deployment Standards**: Deployment requirements
-- **Configuration Standards**: Configuration requirements
-- **Monitoring Standards**: Monitoring requirements
-- **Maintenance Standards**: Maintenance requirements
-
-### Operational Standards
-- **Operational Standards**: Operational requirements
-- **Support Standards**: Support requirements
-- **Training Standards**: Training requirements
-- **Compliance Standards**: Compliance requirements
 
 ## Dependencies
 
@@ -269,35 +248,10 @@ This task focuses on defining the comprehensive trust framework for the WP4 Trus
 - **Task 3**: X.509 PKI for certificate management
 - **Task 4**: Trust Infrastructure API for system integration
 - **Task 5**: Participants' Certificates and Policies for data models
+  - Note: Trust evaluation methods are defined at the framework level in this task (Task 2) and implemented in detail in Task 5
+  - Note: Policy framework is defined here (Task 2), with detailed ETSI policy mechanisms in Task 5
 
 ### Standards Dependencies
 - **ETSI TS 119 612**: Trusted Lists
 - **IETF RFC 5914**: Trust Anchor Format
 - **IETF RFC 5280**: X.509 PKI
-- **OpenID Federation**: Federation protocols
-
-## Timeline
-
-### Phase 1: Framework Design (Weeks 1-4)
-- Trust model definition
-- Trust evaluation criteria
-- Trust policy framework
-- Trust data model
-
-### Phase 2: Implementation (Weeks 5-8)
-- Trust engine implementation
-- Trust API development
-- Trust policy engine
-- Trust monitoring system
-
-### Phase 3: Testing (Weeks 9-12)
-- Unit testing
-- Integration testing
-- System testing
-- User acceptance testing
-
-### Phase 4: Deployment (Weeks 13-16)
-- System deployment
-- Configuration management
-- Monitoring setup
-- Documentation completion

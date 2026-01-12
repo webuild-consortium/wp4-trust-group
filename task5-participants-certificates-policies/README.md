@@ -2,6 +2,20 @@
 
 This task focuses on defining data models and trust evaluation methods for participants' certificates and policies in the WP4 Trust Infrastructure.
 
+## Folder Contents
+
+This folder contains the following documents and directories:
+
+- **`README.md`** - This file, providing an overview of data models and trust evaluation methods
+- **`policy-approaches-definition.md`** - Definition of additive vs subtractive policy approaches for the WP4 Trust Infrastructure framework
+- **`etsi-policy-enumeration.md`** - Comprehensive enumeration of ETSI policy application mechanisms within trust frameworks
+- **`etsi-policy-evaluation.md`** - Evaluation of ETSI specifications and their application to policy frameworks, focusing on additive and subtractive policy approaches
+- **`trust-mark-semantics-implementation.md`** - Implementation guide for trust mark semantics in Credential Issuer and Relying Party scenarios
+- **`data-model/`** - Data models for certificates and policies (subtask 5.1)
+  - Currently empty - placeholder for data model specifications
+- **`trust-evaluation-methods/`** - Trust evaluation algorithms and methods (subtask 5.2)
+  - Currently empty - placeholder for trust evaluation method specifications
+
 ## Subtasks
 
 ### Subtask 5.1: Data Model
@@ -302,7 +316,10 @@ def evaluate_trust_risk(participant):
 ### External Dependencies
 - **Task 1**: Use Cases for requirements
 - **Task 2**: Trust Framework for trust policies
+  - Note: Trust evaluation framework is defined in Task 2; this task provides detailed implementation methods
+  - Note: Policy framework concepts are in Task 2; this task provides ETSI-specific policy mechanisms
 - **Task 3**: X.509 PKI for certificate management
+  - Note: Task 3 focuses on PKI infrastructure; this task focuses on participant certificate data models
 - **Task 4**: Trust Infrastructure API for system integration
 
 ### Standards Dependencies
@@ -310,29 +327,3 @@ def evaluate_trust_risk(participant):
 - **ETSI TS 119 411-8**: Access certificate policy
 - **ETSI TS 119 475**: Relying party attributes
 - **IETF RFC 5280**: X.509 PKI standard
-
-## Timeline
-
-### Phase 1: Data Model Design (Weeks 1-4)
-- Certificate data model design
-- Policy data model design
-- Participant data model design
-- Trust relationship data model design
-
-### Phase 2: Trust Evaluation Methods (Weeks 5-8)
-- Trust scoring algorithm development
-- Trust assessment method implementation
-- Trust validation procedure development
-- Trust monitoring technique implementation
-
-### Phase 3: Implementation (Weeks 9-12)
-- Data model implementation
-- Trust evaluation implementation
-- Certificate management implementation
-- Policy management implementation
-
-### Phase 4: Testing and Validation (Weeks 13-16)
-- Unit testing
-- Integration testing
-- System testing
-- User acceptance testing

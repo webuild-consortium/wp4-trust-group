@@ -278,35 +278,11 @@ class InteroperabilityTestSuite:
 - **Task 3**: X.509 PKI for certificate conformance
 - **Task 4**: Trust Infrastructure API for API conformance
 - **Task 5**: Participants' Certificates and Policies for data conformance
+- **Task 7**: Testing and Validation for general testing frameworks
+  - Note: This task (Task 6) focuses on conformance and interoperability testing; Task 7 focuses on general testing and validation
 
 ### Standards Dependencies
 - **ETSI Standards**: ETSI conformance requirements
 - **IETF Standards**: IETF conformance requirements
 - **OpenID Standards**: OpenID conformance requirements
 - **W3C Standards**: W3C conformance requirements
-
-## Timeline
-
-### Phase 1: Framework Design (Weeks 1-4)
-- Conformance framework design
-- Interoperability framework design
-- Testing framework design
-- Certification process design
-
-### Phase 2: Implementation (Weeks 5-12)
-- Conformance testing implementation
-- Interoperability testing implementation
-- Testing tools development
-- Testing infrastructure setup
-
-### Phase 3: Testing (Weeks 13-16)
-- Conformance testing execution
-- Interoperability testing execution
-- Performance testing execution
-- Security testing execution
-
-### Phase 4: Certification (Weeks 17-20)
-- Certification process implementation
-- Certification testing execution
-- Certification documentation
-- Certification maintenance setup
