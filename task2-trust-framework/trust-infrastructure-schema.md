@@ -163,19 +163,6 @@ The matrixes collects all the ARF HLRs about the registration phase.
 | **TLPub_06** | Commission SHALL publish Trusted List locations in OJEU | Topic 31 |
 | **TLPub_07** | Commission SHALL publish trust anchors in OJEU | Topic 31 |
 
-### 4.3 Trust Evaluation Requirements
-
-| Requirement | Description | Source |
-|------------|-------------|--------|
-| **ISSU_19** | PID Providers SHALL accept trust anchors in Wallet Provider Trusted Lists | Topic 10, Topic 31 |
-| **ISSU_21** | PID Providers SHALL verify Wallet Provider presence in Trusted List | Topic 10, Topic 31 |
-| **ISSU_24** | Wallet Units SHALL authenticate and validate access certificates using Access CA Trusted Lists | Topic 10, Topic 27 |
-| **ISSU_24a** | Wallet Units SHALL verify PID Provider registration before PID issuance | Topic 10, Topic 27, Topic 44 |
-| **ISSU_34a** | Wallet Units SHALL verify Attestation Provider registration before attestation issuance | Topic 10, Topic 27, Topic 44 |
-| **RPA_04** | Wallet Units SHALL accept trust anchors in Relying Party Access CA Trusted Lists | Topic 6 |
-| **RPRC_16** | Wallet Units SHALL offer Users possibility to verify Relying Party registration | Topic 44 |
-| **RPRC_21** | Wallet Units SHALL verify requested attributes are registered | Topic 44 |
-
 ---
 
 ## 5. Trust Infrastructure Diagrams
@@ -328,64 +315,6 @@ sequenceDiagram
     Note right of ECCompile: TL locations &<br/>trust anchors
 ```
 
----
-
-```mermaid
-graph LR
-    subgraph WalletUnit["Wallet Unit"]
-        WU[Wallet Unit<br/>ISSU_24, ISSU_34a, RPRC_16]
-    end
-
-    subgraph Providers["Credential Providers"]
-        PIDProv[PID Provider<br/>ISSU_19, ISSU_21]
-        AttProv[Attestation Provider<br/>ISSU_30]
-    end
-
-    subgraph RP["Relying Party"]
-        RPInst[Relying Party Instance<br/>RPA_04, RPRC_19]
-    end
-
-    subgraph TrustSources["Trust Sources"]
-        WPTL[Wallet Provider TL<br/>ISSU_19, ISSU_21]
-        PIDTL[PID Provider TL<br/>OIA_12]
-        APTL[Attestation Provider TL<br/>OIA_13, OIA_14]
-        ACATL[Access CA TL<br/>ISSU_24, ISSU_34]
-        Registry[Registry<br/>ISSU_24a, ISSU_34a, RPRC_16]
-        RegCertTL[Registration Cert Provider TL<br/>ISSU_33a]
-    end
-
-    %% PID Issuance Trust Evaluation
-    WU -->|1. Request PID| PIDProv
-    PIDProv -->|2. Verify WUA in TL<br/>ISSU_21| WPTL
-    WU -->|3. Verify Access Cert in TL<br/>ISSU_24| ACATL
-    WU -->|4. Verify Registration<br/>ISSU_24a| Registry
-    WU -.->|5. Verify Reg Cert in TL<br/>ISSU_33a| RegCertTL
-
-    %% Attestation Issuance Trust Evaluation
-    WU -->|1. Request Attestation| AttProv
-    AttProv -->|2. Verify WUA in TL<br/>ISSU_30| WPTL
-    WU -->|3. Verify Access Cert in TL<br/>ISSU_34| ACATL
-    WU -->|4. Verify Registration & Entitlements<br/>ISSU_34a| Registry
-    WU -.->|5. Verify Reg Cert in TL<br/>ISSU_33a| RegCertTL
-
-    %% Presentation Trust Evaluation
-    RPInst -->|1. Present Request| WU
-    WU -->|2. Verify Access Cert in TL<br/>RPA_04| ACATL
-    WU -->|3. Verify Registration<br/>RPRC_16| Registry
-    WU -->|4. Verify Requested Attributes<br/>RPRC_21| Registry
-    WU -.->|5. Verify Reg Cert in TL<br/>RPRC_17| RegCertTL
-
-    %% RP Validation
-    RPInst -->|Validate PID Signature<br/>OIA_12| PIDTL
-    RPInst -->|Validate QEAA Signature<br/>OIA_13| APTL
-    RPInst -->|Validate PuB-EAA Signature<br/>OIA_14| APTL
-
-    style WalletUnit fill:#e8f5e9
-    style Providers fill:#fff3e0
-    style RP fill:#f3e5f5
-    style TrustSources fill:#e1f5ff
-```
-
 ### 5.4 List of Trusted Lists Structure (ETSI TS 119612 D.5)
 
 ```mermaid
@@ -515,7 +444,28 @@ graph TB
 
 ---
 
+## 8. Summary
+
+The trust infrastructure operates through two distinct but complementary processes:
+
+1. **Registration/Onboarding**: Managed at Member State level, enables entities to participate and defines their entitlements
+2. **Trusted List Publication**: Managed at EU level, establishes cryptographic trust anchors for validation
+
+Both processes are essential for the trust ecosystem:
+- **Registration** provides operational authorization and entitlement management
+- **Trusted Lists** provide cryptographic trust anchors for signature and certificate validation
+
+The separation of these processes aligns with the ARF and allows for:
+- Independent lifecycle management
+- Different trust models (operational vs. cryptographic)
+- Scalable cross-border trust establishment
+- Clear separation of concerns between MS and EU levels
+
+---
+
 ## 7. Trust Evaluation
+
+> **Note**: This section describes trust evaluation processes that use the registration data and Trusted Lists established through the onboarding and Trusted List publication processes described in the main document. As the focus of this document is on **Onboarding (Registration)** and **Trusted List Publication** processes, this section is provided for reference but could be moved to a separate document in the future.
 
 This section describes how trust is evaluated in the ecosystem using the registration data and Trusted Lists established through the onboarding and Trusted List publication processes.
 
@@ -605,23 +555,4 @@ Trust evaluation occurs at multiple points using different trust sources:
 3. **During Signature Validation**:
    - Relying Parties validate PID signatures using PID Provider TL - **OIA_12**
    - Relying Parties validate attestation signatures using Attestation Provider TL - **OIA_13, OIA_14**
-
----
-
-## 8. Summary
-
-The trust infrastructure operates through two distinct but complementary processes:
-
-1. **Registration/Onboarding**: Managed at Member State level, enables entities to participate and defines their entitlements
-2. **Trusted List Publication**: Managed at EU level, establishes cryptographic trust anchors for validation
-
-Both processes are essential for the trust ecosystem:
-- **Registration** provides operational authorization and entitlement management
-- **Trusted Lists** provide cryptographic trust anchors for signature and certificate validation
-
-The separation of these processes aligns with the ARF and allows for:
-- Independent lifecycle management
-- Different trust models (operational vs. cryptographic)
-- Scalable cross-border trust establishment
-- Clear separation of concerns between MS and EU levels
 
