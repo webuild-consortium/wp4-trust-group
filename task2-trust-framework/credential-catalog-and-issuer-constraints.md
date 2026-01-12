@@ -792,10 +792,3 @@ In this case, Wallet Units and Relying Parties can validate credentials using on
 - Reduced dependency on network availability for certificate verification
 
 **Status**: This is a proposal to be further discussed with the European Commission and relevant standardization bodies. The field is not currently defined in ETSI TS 119 602, but the standard's extensible `ServiceInformationExtensions` mechanism (clause 6.6.9) allows for profile-specific extensions to be defined.
-
-## Document History
-
-- **Created**: Based on comprehensive search of the EUDI Wallet Architecture and Reference Framework
-- **Sources**: All files in the `docs/` directory
-- **Last Updated**: Based on current state of the repository
-
