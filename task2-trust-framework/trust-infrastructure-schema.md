@@ -45,7 +45,7 @@ The registration process is managed by Member State Registrars and involves:
 1. Entity registration with identification data and entitlements
 2. Access certificate issuance by Access Certificate Authority
 3. Optional registration certificate issuance by Provider of Registration Certificates
-4. Registry publication for transparency
+4. Registry publication for transparency and online relying party verification, as required in [ARF version 2.7.3](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#311-relying-parties-and-intermediaries) when registration certs are not issued.
 
 ### 2.1 Registration Flow
 
@@ -204,7 +204,8 @@ graph TB
     end
 
     %% Registration Flow
-    Entities -->|Register with identification & entitlements<br/>Reg_01 (all entities), Reg_19, Reg_21, Reg_25| Registrar
+    Entities -->|"Register with identification & entitlements<br/>Reg_01 (all entities), Reg_19, Reg_21, Reg_25"| Registrar   
+
     Registrar -->|Approve & Register<br/>Reg_19, Reg_21| Registry
     Registrar -->|Request Access Cert<br/>Reg_10| AccessCA
     AccessCA -->|Issue Access Certificate<br/>Reg_10, Reg_12| Entities
@@ -212,11 +213,11 @@ graph TB
     RegCertProv -.->|Issue Registration Certificate<br/>RPRC_02| Entities
 
     %% Notification Flow
-    MS -->|Notify entities<br/>GenNot_01| ECNotify
+    MS ---->|Notify entities<br/>GenNot_01| ECNotify
     ECNotify -->|Verify completeness<br/>GenNot_04| ECVerify
-    ECVerify -->|Compile Trusted Lists<br/>TLPub_01| ECCompile
-    ECCompile -->|Publish Trusted Lists<br/>TLPub_05| TL
-    ECCompile -->|Maintain List of Trusted Lists<br/>ETSI TS 119612 D.5| LoTL
+    ECVerify -->|Maintain List of Trusted Lists<br/>ETSI TS 119612 D.5<br/>TLPub_06| LoTL
+    TLProvider -->|Publish Trusted Lists<br/>TLPub_05| TL
+    LoTL --> TL
 
     style MS fill:#e1f5ff
     style EC fill:#fff4e1
@@ -369,9 +370,9 @@ graph TB
 ```mermaid
 graph TB
     subgraph Registration["Registration Process<br/>Managed by MS Registrar"]
-        RegStep1[1. Entity Registration<br/>Reg_01 (all entities), Reg_19, Reg_21, Reg_25]
-        RegStep2[2. Access Certificate Issuance<br/>Reg_10, Reg_12<br/>(all registered entities including WP)]
-        RegStep3[3. Optional Registration Certificate<br/>RPRC_09 (RP), RPRC_13 (Credential Issuers)<br/>(WP only if also acting as RP)]
+        RegStep1["1. Entity Registration<br/>Reg_01 (all entities)", Reg_19, Reg_21, Reg_25]
+        RegStep2["2. Access Certificate Issuance<br/>Reg_10, Reg_12<br/>(all registered entities including WP)"]
+        RegStep3["3. Optional Registration Certificate<br/>RPRC_09 (RP), RPRC_13 (Credential Issuers)<br/>(WP only if also acting as RP)"]
         RegStep4[4. Registry Publication<br/>Reg_03, Reg_04]
     end
 
