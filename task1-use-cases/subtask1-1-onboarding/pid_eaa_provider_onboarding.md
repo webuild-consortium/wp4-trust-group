@@ -1,5 +1,11 @@
 # Use Case: UC-02 PID / Attestation Provider Onboarding
 
+**Note**: This document describes the PID / Attestation Provider onboarding process. For common onboarding framework elements shared with Relying Parties and Wallet Providers, see [Base Onboarding Framework](onboarding-base.md).
+
+**Note on MVP/MVP+ Structure**: This document follows the WEBUILD ecosystem structure, distinguishing between:
+- **[MVP]**: WEBUILD testing/pilot phase requirements, where the WP4 Trust Infrastructure group acts as Ecosystem Authority
+- **[MVP+]**: Production/regulatory phase requirements, aligned with EU regulations and Member State implementations
+
 ## Basic Information
 - **Use Case ID**: UC-02
 - **Title**: PID / Attestation Provider Onboarding
@@ -10,14 +16,38 @@
 - **Last Updated**: 22/10/2025
 
 ## Actors
-- **Primary Actor**: PID / Attestation Provider
-- **Secondary Actors**: Registrar, Access Certificate Authority, Provider of Registration Certificate
+
+- **Primary Actor [MVP]**:
+    - Beneficiaries and Associated Partners providing PID or Attestation services within WEBUILD
+- **Secondary Actors [MVP]**:
+    - Ecosystem Authority: WEBUILD WP4 Trust Infrastructure group
+    - Access Certificate Authority: WEBUILD WP4 Trust Infrastructure group
+    - Provider of Registration Certificate: WEBUILD WP4 Trust Infrastructure group
+    - Trusted List Provider: WEBUILD WP4 Trust Infrastructure group
+    - Please note: The Trust Infrastructure group is not a legal entity. However, the ecosystem authority may be required to provide certain information (e.g., legal name, company address) and to digitally sign data. For testing purposes, we therefore recommend designating at least one representative of the Trust Infrastructure group who is authorized to perform digital signing on behalf of the legal entity they represent.
+
+- **Primary Actor [MVP+]**:
+    - PID Provider (legal or natural person) that intends to issue person identification data interoperable with EUDI Wallets
+    - Attestation Provider (QEAA Provider, PuB-EAA Provider, or non-qualified EAA Provider) that intends to issue electronic attestations of attributes interoperable with EUDI Wallets
+- **Secondary Actors [MVP+]**:
+    - Registrar (designated by Member State)
+    - Access Certificate Authority (authorized by Member State)
+    - Provider of Registration Certificate (authorized by Member State)
+    - Trusted List Provider (designated by Member State)
 
 ## Goal
 
-- **Business Goal**: To register PID / Attestation Providers that intend to issue person identification data or electronic attestations of attributes interoperable with EUDI Wallets (ref. [Regulation (EU) 2025/848, Recital 1](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-- **Technical Goal**: To establish a harmonised, secure, and interoperable framework for the registration, certification, and lifecycle management of PID / Attestation Providers, enabling trusted interaction between EUDI Wallet Solutions and other parties involved.
+- **Technical Goal [MVP]**: To establish an onboarding process for PID / Attestation Providers within WEBUILD, enabling trusted interaction between EUDI Wallet Units and PID / Attestation Providers in the testing environment.
+
+- **Business Goal [MVP+]**: To register PID / Attestation Providers that intend to issue person identification data or electronic attestations of attributes interoperable with EUDI Wallets (ref. [Regulation (EU) 2025/848, Recital 1](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
+- **Technical Goal [MVP+]**: To establish a harmonised, secure, and interoperable framework for the registration, certification, and lifecycle management of PID / Attestation Providers, enabling trusted interaction between EUDI Wallet Solutions and other parties involved.
+
 - **Success Criteria**:
+    - [MVP] Pilot implementations successfully demonstrate PID / Attestation Provider onboarding within WEBUILD
+    - [MVP] All PID / Attestation Providers within WEBUILD are included in a publicly accessible register and Trusted List maintained by the WP4 Trust Infrastructure group
+    - [MVP+] The onboarding process for PID / Attestation Providers is formally defined and documented in a harmonized manner that aligns with EU regulatory and technical frameworks (ref. [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848))
+    - [MVP+] See [Common Success Criteria](onboarding-base.md#common-success-criteria) in the base document for additional criteria
+    - Additional entity-specific success criteria:
     - *Interoperability across Member States*
         - All PID / Attestation Providers Access and Registration Certificates are syntactically and semantically harmonised in line with ETSI EN 319 411-1 version 1.4.1 (2023-10) and related IETF RFCs ([RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519), [RFC 8392](https://datatracker.ietf.org/doc/html/rfc8392), [RFC 9162](https://datatracker.ietf.org/doc/html/rfc9162)) (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
         - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
@@ -35,15 +65,26 @@
         - End-to-end validation of Access and Registration Certificates succeeds automatically through Trusted List integration (see [Task 3 - ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)).
 
 ## Preconditions
-- Member State must have established at least one National Register of PID / Attestation Providers (ref. [Regulation (EU) 2025/848, Article 3 "National registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-- Member State must have designated at least one Registrar (ref. [Regulation (EU) 2025/848, Article 3 "National registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-- Member State must have authorised at least one Certificate Authority to issue PID / Attestation Provider Access Certificates (ref. [Regulation (EU) 2025/848, Article 7 "Wallet-relying party access certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)). See also [ARF "3.18 Access Certificate Authorities"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#318-access-certificate-authorities:~:text=each%20Member%20State.-,3.18%20Access%20Certificate%20Authorities,-Access%20Certificate%20Authorities).
-- Member State must have authorised at least one Certificate Authority to issue PID / Attestation Provider Registration Certificates (ref. [Regulation (EU) 2025/848, Article 8 "Wallet-relying party registration certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)). See also [ARF "3.19 Providers of registration certificates"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#319-providers-of-registration-certificates:~:text=3.19-,Providers%20of%20registration%20certificates,-If%20a%20Registrar) and [ARF "6.4.2 Relying Party registration"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#642-relying-party-registration:~:text=6.4.2%20Relying%20Party-,registration,-Figure%2011%20depicts).
-- Member State must have published one or more national Registration Policies, including or reusing existing sectoral or national registration policies (ref. [Regulation (EU) 2025/848, Article 4 "Registration policies"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-- The European Commission must be notified about the Registrar, the Access Certificate Authority, and the Provider of Registration Certificate. (ref. [Regulation (EU) 2024/2980, Article 4 "Notifications by Member States"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ%3AL_202402980&qid=1733300667869)).
+
+See [Common Preconditions](onboarding-base.md#common-preconditions) in the base document for common preconditions applicable to all participants.
+
+### Preconditions [MVP]
+- The WEBUILD WP4 Trust Infrastructure group has established a register for PID / Attestation Providers within WEBUILD.
+- The WEBUILD WP4 Trust Infrastructure group has established a Trusted List for PID / Attestation Providers within WEBUILD.
+- The WEBUILD WP4 Trust Infrastructure group has designated representatives authorized to act as Ecosystem Authority, Access Certificate Authority, Provider of Registration Certificate, and Trusted List Provider.
+- The WEBUILD WP4 Trust Infrastructure group has published registration policies for the WEBUILD testing environment.
+
+### Preconditions [MVP+]
+- See [Preconditions for Relying Parties and PID/EAA Providers](onboarding-base.md#preconditions-for-relying-parties-and-pideaa-providers) in the base document.
+- Member State must have established a Trusted List for PID / Attestation Providers (for PID Providers, QEAA Providers, PuB-EAA Providers).
 
 ## Main Flow
-**1. Administrative Onboarding** 
+
+See [Common Main Flow Structure](onboarding-base.md#common-main-flow-structure) in the base document for the overall flow structure.
+
+**Note**: The detailed steps below apply to both [MVP] and [MVP+] phases, with specific procedures and requirements differentiated where applicable.
+
+**1. Administrative Onboarding**
 - 1.1 Registration Application
 - 1.2 Registration Review
 - 1.3 Registration Confirmation
@@ -52,11 +93,11 @@
 **2. Technical Onboarding**
 - 2.1 Access Certificate Request
 - 2.2 Access Certificate Request Review
-- 2.3 Access Certificate Issuance 
+- 2.3 Access Certificate Issuance
 - 2.4 Registration Certificate Request
 - 2.5 Registration Certificate Request Review
 - 2.6 Registration Certificate Issuance
-- 2.7 Notification to EU Commission and other Member States 
+- 2.7 Notification to EU Commission and other Member States [MVP+ only]
 - 2.8 Publication in Trusted List
 
 **3. Post Onboarding**
@@ -66,6 +107,8 @@
 - 3.4 Access / Registration Certificate Revocation
 
 ## Industrial-Scale Considerations
+
+See [Industrial-Scale Considerations](onboarding-base.md#industrial-scale-considerations) in the base document for common approaches to entity identification, registry integration, and attribute authorization management.
 
 To support the large-scale onboarding of PID / Attestation Providers across the EUDI Wallet ecosystem, the registration process must address two critical dimensions:
 
@@ -142,10 +185,15 @@ To support the large-scale onboarding of PID / Attestation Providers across the 
 - Detailed specifications for credential catalogues, taxonomies, and sectorial templates are defined in Task 5 (Participants' Certificates and Policies).
 
 ## 1. Administrative Onboarding
-Each PID / Attestation Provider that intends to issue person identification data or electronic attestations of attributes interoperable with EUDI Wallets will register itself with a designated Registrar in its Member State. Registration may occur through direct submission or via import from qualified authoritative registries (see [Industrial-Scale Considerations](#industrial-scale-considerations)). If the registration process is successful, the Registrar includes the PID / Attestation Provider in its public registry.
+
+Each PID / Attestation Provider that intends to issue person identification data or electronic attestations of attributes interoperable with EUDI Wallets will register itself with a designated Registrar in its Member State. Registration may occur through direct submission or via import from qualified authoritative registries (see [Industrial-Scale Considerations](onboarding-base.md#industrial-scale-considerations)). If the registration process is successful, the Registrar includes the PID / Attestation Provider in its public registry.
 
 *Preconditions:*
-- **Prerequisites**:
+- **Prerequisites [MVP]**:
+    - The WEBUILD WP4 Trust Infrastructure group has established a register for PID / Attestation Providers within WEBUILD.
+    - The WEBUILD WP4 Trust Infrastructure group has designated representatives authorized to act as Registrar.
+    - The WEBUILD WP4 Trust Infrastructure group has published registration policies for the WEBUILD testing environment.
+- **Prerequisites [MVP+]**:
     - Its Member State has established at least one National Register of PID / Attestation Providers.
     - Its Member State has designated at least one Registrar of PID / Attestation Providers.
     - Its Member State has published one or more national Registration Policies.
@@ -164,7 +212,16 @@ Each PID / Attestation Provider that intends to issue person identification data
     - The PID / Attestation Provider can proceed to Technical Onboarding to obtain one or more Access Certificate(s) and one or more Registration Certificate(s).
 
 ### 1.1 Registration Application
-The PID / Attestation Provider submits the registration application to the Registrar, providing at least the information set out in Annex I. Alternatively, the Registrar may import entity information from qualified authoritative registries (see [Industrial-Scale Considerations - Entity Identification and Registry Integration](#1-entity-identification-and-registry-integration)).
+
+**For [MVP]**: The PID / Attestation Provider (Beneficiary or Associated Partner) submits the registration application to the WEBUILD WP4 Trust Infrastructure group, providing required information for WEBUILD testing purposes. The application includes:
+- Entity identification and contact information
+- Attestation type(s) that the Provider intends to issue (e.g., QEAA, PuB-EAA, non-qualified EAA, PID)
+- Service description and intended use of EUDI Wallet data
+- For QEAA Providers: Qualification evidence
+- For PuB-EAA Providers: Public sector body evidence
+- For non-qualified EAA Providers: Service provider information
+
+**For [MVP+]**: The PID / Attestation Provider submits the registration application to the Registrar, providing at least the information set out in Annex I. Alternatively, the Registrar may import entity information from qualified authoritative registries (see [Industrial-Scale Considerations - Entity Identification and Registry Integration](onboarding-base.md#1-entity-identification-and-registry-integration)).
 
 The Registrar receives the registration application (or initiates registry import) for inclusion in the National Register.
 
@@ -219,7 +276,10 @@ See also [ARF, Annex II - High-Level Requirements "A. General requirements for M
     - **PID Providers, QEAA Providers, PuB-EAA Providers, non-qualified EAA Providers**, and Relying Parties **register with a Registrar in their Member State**. The main goal of the registration process is for the Registrar to register relevant information about the registering entity, and make this information available online to interested parties.
 
 ### 1.2 Registration Review
-The Registrar verifies the registration application.
+
+**For [MVP]**: The WEBUILD WP4 Trust Infrastructure group reviews the registration application, verifying entity information, attestation type(s), and compliance with WEBUILD testing requirements.
+
+**For [MVP+]**: See [Common Administrative Onboarding Steps - 1.2 Registration Review](onboarding-base.md#12-registration-review) in the base document.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 6. "Registration processes"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_4:~:text=Article%C2%A04-,Registration%20policies,-1.%C2%A0%C2%A0%C2%A0Member%20States) 
@@ -232,7 +292,10 @@ The Registrar verifies the registration application.
     - 5. The verification of entitlements of wallet-relying parties referred to in paragraph 3, point (c) shall be carried out in accordance with Annex III.
 
 ### 1.3 Registration Confirmation
-The Registrar validates or rejects the registration application (the application status becomes "accepted or rejected").
+
+**For [MVP]**: The WEBUILD WP4 Trust Infrastructure group validates or rejects the registration application and notifies the PID / Attestation Provider of the decision.
+
+**For [MVP+]**: See [Common Administrative Onboarding Steps - 1.3 Registration Confirmation](onboarding-base.md#13-registration-confirmation) in the base document.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 6. "Registration processes"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_4:~:text=Article%C2%A04-,Registration%20policies,-1.%C2%A0%C2%A0%C2%A0Member%20States) 
@@ -244,9 +307,11 @@ The PID / Attestation Provider receives positive or negative feedback on registr
 - [Regulation (EU) 2025/848, Article 6. "Registration processes"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_4:~:text=Article%C2%A04-,Registration%20policies,-1.%C2%A0%C2%A0%C2%A0Member%20States).
     - 2. Registrars shall process applications for registration **without undue delay and provide a response** to the application for registration to the applicant within the timeframe defined in the applicable registration policy, using appropriate means and in accordance with the laws and procedures of the Member State where the National Register is established.
   
-###  1.4 Publication in the National Register
+### 1.4 Publication in the National Register
 
-The Registrar registers the PID / Attestation Provider in its registry and publishes it.
+**For [MVP]**: The WEBUILD WP4 Trust Infrastructure group registers the PID / Attestation Provider in the WEBUILD register, including the attestation type(s) the Provider intends to issue, and makes the information publicly accessible for testing purposes.
+
+**For [MVP+]**: See [Common Administrative Onboarding Steps - 1.4 Publication in the National Register](onboarding-base.md#14-publication-in-the-national-register) in the base document. Additionally, the Registrar registers the attestation type(s) that the Provider intends to issue to Wallet Units (see [ARF "3.17 Registrars"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#317-registrars:~:text=an%20accreditation%20certificate.-,3.17%20Registrars,-All%20PID%20Providers)).
 
 *Requirements:*
 
@@ -258,10 +323,15 @@ See also [ARF, Annex II - High-Level Requirements "A. General requirements for M
    -  The data to be registered about a PID Provider, QEAA Provider, PuB-EAA Provider, or EAA Provider **includes the attestation type(s) that the Provider intends to issue to Wallet Units.** This enables Wallet Units and Relying Parties to verify that a given PID Provider or Attestation Provider registered its intent to issue a specific attestation type. 
    
 ## 2. Technical Onboarding
-As a result of successful registration, each registered PID / Attestation Provider undergoes a technical onboarding process, harmonised between Member States, to obtain one or more Access Certificate(s) (which is mandatory and needed to authenticate itself towards a Wallet Unit when issuing a PID or an attestation to it) and one or more Registration Certificate(s) (which confirms the PID / Attestation Provider eligibility to issue person identification data or electronic attestations of attributes interoperable with European Digital Identity Wallets (EUDI Wallets). After certificate issuance, Member State notifies the European Commission and other Member States about the PID / Attestation Provider and the trust anchor of the PID / Attestation Provider gets included in a Trusted List.
+
+As a result of successful registration, each registered PID / Attestation Provider undergoes a technical onboarding process to obtain one or more Access Certificate(s) (which is mandatory and needed to authenticate itself towards a Wallet Unit when issuing a PID or an attestation to it) and one or more Registration Certificate(s) (which confirms the PID / Attestation Provider eligibility to issue person identification data or electronic attestations of attributes interoperable with European Digital Identity Wallets (EUDI Wallets). After certificate issuance, Member State notifies the European Commission and other Member States about the PID / Attestation Provider and the trust anchor of the PID / Attestation Provider gets included in a Trusted List.
 
 *Preconditions:*
-- **Prerequisites**:
+- **Prerequisites [MVP]**:
+    - The WEBUILD WP4 Trust Infrastructure group has designated representatives authorized to act as Access Certificate Authority, Provider of Registration Certificate, and Trusted List Provider.
+    - The PID / Attestation Provider has successfully completed the Administrative Onboarding phase and is listed in the WEBUILD register.
+    - A Trusted List for PID / Attestation Providers has been established within WEBUILD.
+- **Prerequisites [MVP+]**:
     - Its Member State has authorised at least one Certificate Authority to issue PID / Attestation Provider Access Certificates.
     - Its Member State has authorised at least one Certificate Authority to issue PID / Attestation Provider Registration Certificates.
     - The European Commission has been notified about the Access Certificate Authority and the Provider of Registration Certificate.
@@ -281,9 +351,8 @@ As a result of successful registration, each registered PID / Attestation Provid
     - The PID / Attestation Provider is fully onboarded and authorised to interact with EUDI Wallets.
 
 ### 2.1 Access Certificate Request
-The Registrar informs the Access Certificate Authority about the registered PID / Attestation Provider.
 
-The Access Certificate Authority receives the input and starts the review process for the issuing of the Access Certificate.
+See [Common Technical Onboarding Steps - 2.1 Access Certificate Request](onboarding-base.md#21-access-certificate-request) in the base document.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 7. "Wallet-relying party access certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_8:~:text=Article%C2%A08-,Wallet%2Drelying%20party%20registration%20certificates,-1.%C2%A0%C2%A0%C2%A0Member%20States)
@@ -294,9 +363,8 @@ The Access Certificate Authority receives the input and starts the review proces
     - 3. The certificate policy and certificate practice statement applicable to the provision of wallet-relying party access certificates shall be syntactically and semantically harmonised across the Union and shall, as applicable, comply with at least the normalised certificate policy (‘NCP’) requirements as specified in standard ETSI EN 319411-1 version 1.4.1 (2023-10). 
 
 ### 2.2 Access Certificate Request Review
-The Access Certificate Authority verifies the identity and any other attributes of the PID / Attestation Provider.
 
-The Access Certificate Authority checks the valid registration status and information coherency within a National Register in which that PID / Attestation Provider is established.
+See [Common Technical Onboarding Steps - 2.2 Access Certificate Request Review](onboarding-base.md#22-access-certificate-request-review) in the base document.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 7. "Wallet-relying party access certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_5:~:text=Article%C2%A07-,Wallet%2Drelying%20party%20access%20certificates,-1.%C2%A0%C2%A0%C2%A0Member%20States)
@@ -311,7 +379,7 @@ The Access Certificate Authority checks the valid registration status and inform
 
 ### 2.3 Access Certificate Issuance
 
-The Access Certificate Authority issues the Access Certificate and logs the Access Certificate issued.
+See [Common Technical Onboarding Steps - 2.3 Access Certificate Issuance](onboarding-base.md#23-access-certificate-issuance) in the base document.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Annex IV "Requirements for wallet-relying party access certificates referred to in Article 7"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_IV:~:text=Requirements%20for%20wallet%2Drelying%20party%20access%20certificates%20referred%20to%20in%20Article%C2%A07)
@@ -353,9 +421,8 @@ The Registrar keeps records of the issuance of PID / Attestation Provider Access
     - (2) The statements referred to in point (c) shall be expressed under the form of **electronically signed or sealed JSON files**, with a format and structure in accordance with the requirements on electronic signatures or seals set out Section 1.
 
 ### 2.4 Registration Certificate Request
-The Registrar informs the Provider of Registration Certificate about the registered PID / Attestation Provider.
 
-The Provider of Registration Certificate receives the input and starts the review process for the issuing of the Registration Certificate.
+See [Common Technical Onboarding Steps - 2.4 Registration Certificate Request](onboarding-base.md#24-registration-certificate-request) in the base document.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 8. "Wallet-relying party registration certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_8:~:text=Article%C2%A08-,Wallet%2Drelying%20party%20registration%20certificates,-1.%C2%A0%C2%A0%C2%A0Member%20States)
@@ -367,9 +434,8 @@ The Provider of Registration Certificate receives the input and starts the revie
     - 3. The wallet-relying party registration certificate policy and certificate practice statement applicable to the provisioning of wallet-relying party registration certificates shall be **syntactically and semantically harmonised** across the Union and shall comply with at least the applicable NCP requirements as specified in standard **ETSI EN 319 411-1 version 1.4.1 (2023-10)** (ref. [Regulation (EU) 2025/848, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
 
 ### 2.5 Registration Certificate Request Review
-The Provider of Registration Certificate verifies the identity and any other attributes of the PID / Attestation Provider.
 
-The Provider of Registration Certificate checks the valid registration status and information coherency within a National Register in which that PID / Attestation Provider is established.
+See [Common Technical Onboarding Steps - 2.5 Registration Certificate Request Review](onboarding-base.md#25-registration-certificate-request-review) in the base document.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 8. "Wallet-relying party registration certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_8:~:text=Article%C2%A08-,Wallet%2Drelying%20party%20registration%20certificates,-1.%C2%A0%C2%A0%C2%A0Member%20States)
@@ -387,7 +453,8 @@ The Provider of Registration Certificate checks the valid registration status an
             - the description of the procedures for revocation of wallet-relying party registration certificates is comprehensive.
 
 ### 2.6 Registration Certificate Issuance
-The Provider of Registration Certificate issues the Registration Certificate and logs the Registration Certificate issued.
+
+See [Common Technical Onboarding Steps - 2.6 Registration Certificate Issuance](onboarding-base.md#26-registration-certificate-issuance) in the base document.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Annex V "Requirements for wallet-relying party registration certificates referred to in Article 8"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_IV:~:text=Requirements%20for%20wallet%2Drelying%20party%20registration%20certificates%20referred%20to%20in%20Article%C2%A08)
@@ -435,7 +502,9 @@ The Registrar keeps records of the issuance of PID / Attestation Provider Regist
         - (e) provide security functions, including security by default and by design, to ensure the availability and integrity of the API and the availability of information through it.
     -  (2) The statements referred to in point (c) shall be expressed under the form of **electronically signed or sealed JSON files**, with a format and structure in accordance with the requirements on electronic signatures or seals set out Section 1. 
 
-### 2.7 Notification to EU Commission and other Member States
+### 2.7 Notification to EU Commission and other Member States [MVP+ only]
+
+**Note**: This step applies only to [MVP+] phase. For [MVP], notification to EU Commission is not required.
 
 Member State notifies the PID / PuB-EAA Provider to EU Commission and other Member States.
 
@@ -450,7 +519,9 @@ See also ["A. Generic requirements for notification"](https://eu-digital-identit
 
 ### 2.8 Publication in Trusted List
 
-The trust anchor of the PID / Attestation Provider is included in a Trusted List.
+**For [MVP]**: The trust anchor of the PID / Attestation Provider is included in the WEBUILD Trusted List maintained by the WP4 Trust Infrastructure group. The Trusted List is made publicly accessible for testing purposes.
+
+**For [MVP+]**: The trust anchor of the PID / Attestation Provider is included in a Trusted List maintained by the Member State's Trusted List Provider. For PID Providers, QEAA Providers, and PuB-EAA Providers, this is mandatory. Non-qualified EAA Providers are not included in a Trusted List by a Member State (ref. [ARF "6.3.2.4 PID Provider or Attestation Provider trust anchors are included in a Trusted List"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#6323-pid-provider-or-attestation-provider-receives-an-access-certificate-and-a-registration-certificate:~:text=registration%20certificate%20contents.-,6.3.2.4%20PID%20PROVIDER%20OR%20ATTESTATION%20PROVIDER%20TRUST%20ANCHORS%20ARE%20INCLUDED%20IN%20A%20TRUSTED%20LIST,-For%20a%20PID)).
 
 *Requirements:*
 - [ARF "3.5 Trusted List Provider"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#35-trusted-list-provider:~:text=and%20Wallet%20Providers.-,3.5%20Trusted%20List%20Provider,-A%20Trusted%20List)
@@ -500,7 +571,7 @@ Once the Access and Registration Certificates are active, the PID / Attestation 
 
 ### 3.1 Registration Monitoring
 
-The Registrar monitors continuously.
+See [Common Post-Onboarding Steps - 3.1 Registration Monitoring](onboarding-base.md#31-registration-monitoring) in the base document.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 9. "Suspension and cancellation of registration"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_9:~:text=Suspension%20and%20cancellation%20of%20registration)
@@ -521,9 +592,9 @@ The Provider of Registration Certificate monitors continuously and automatically
     - 3. The wallet-relying party registration certificate policy and certificate practice statement applicable to the provisioning of wallet-relying party registration certificates […] shall include:
         - (d) the obligation for the provider of wallet-relying party registration certificates implements measures and processes on:
           - **continuously monitoring** in an automated manner any changes in the National Register for wallet-relying party in which wallet-relying party to whom they have issued wallet-relying party registration certificates are registered.
- ### 3.2 Registration Update
-When needed, the PID / Attestation Provider updates information.
-The Registrar receives the updated information.
+### 3.2 Registration Update
+
+See [Common Post-Onboarding Steps - 3.2 Registration Update](onboarding-base.md#32-registration-update) in the base document.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 5. "Information to be provided to the national registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_5:~:text=Information%20to%20be%20provided%20to%20the%20national%20registers)
@@ -535,13 +606,8 @@ The Registrar receives the updated information.
             - **reissue the wallet-relying party registration certificate**;
 
 ### 3.3 Registration Suspension / Cancellation
-If:
-- The National Registrar conducts a proportionality assessment whose results lead to the PID / Attestation Provider registration suspension or cancellation.
-- The PID / Attestation Provider requests the PID / Attestation Provider registration cancellation.
-- The Supervisory Body requests the PID / Attestation Provider registration suspension/ cancellation.
 
-Then:
-The Registrar suspends/ revokes the PID / Attestation Provider registration.
+See [Common Post-Onboarding Steps - 3.3 Registration Suspension / Cancellation](onboarding-base.md#33-registration-suspension--cancellation) in the base document.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 9. "Suspension and cancellation of registration"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_9:~:text=Suspension%20and%20cancellation%20of%20registration)
@@ -565,11 +631,10 @@ The Provider of Registration Certificate receives notice of the PID / Attestatio
     - 5.   Where the registration of a wallet-relying party is suspended or cancelled, the **registrar shall inform** **the provider of the relevant wallet-relying party access certificates**, the **provider of the relevant wallet-relying party registration certificates**, and the **affected wallet-relying party** of this action **without undue delay and not later than 24 hours after the suspension or cancellation.** This notification shall include **information** on the reasons for the suspension or cancellation and on the available means of **redress or appeal**.
 
 ### 3.4 Access / Registration Certificate Revocation
-If:
-- The Registrar suspends / cancels the PID / Attestation Provider registration.
-- The PID / Attestation Provider requests the PID / Attestation Provider Access / Registration Certificate revocation.
-- The Supervisory Body requests the PID / Attestation Provider Access / Registration certificate revocation.
-- Data Protection Authority requests the PID / Attestation Provider Access / Registration certificate revocation.
+
+See [Common Post-Onboarding Steps - 3.4 Certificate Revocation](onboarding-base.md#34-certificate-revocation) in the base document.
+
+**Note for PID/EAA Providers**: For PID Providers, QEAA Providers, or PuB-EAA Providers, suspension or cancellation also implies that its status in the respective Trusted List will be changed to Invalid (ref. [ARF "6.3.3 Suspension or cancellation of the registration of a PID Provider or Attestation Provider"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#631-pid-provider-or-attestation-provider-lifecycle:~:text=Topic%2031.-,6.3.3%20Suspension%20or%20cancellation%20of%20the%20registration%20of%20a%20PID%20Provider%20or%20Attestation%20Provider,-Under%20specific%20conditions)).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Annex IV "Requirements for wallet-relying party access certificates referred to in Article 7"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_IV:~:text=Requirements%20for%20wallet%2Drelying%20party%20access%20certificates%20referred%20to%20in%20Article%C2%A07)
@@ -623,46 +688,15 @@ Then:
 
 ## Normative References
 
-This document is based on the following normative references:
+See [Common Normative References](onboarding-base.md#common-normative-references) in the base document for common references applicable to all participant onboarding processes.
 
-### Architecture and Reference Framework (ARF)
-- **ARF Version**: 2.7.3
-- **ARF Main Document**: [EUDI Wallet Architecture and Reference Framework 2.7.3](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/)
-- **ARF Annex II - High-Level Requirements**: [Annex II - High-Level Requirements](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/)
+### Additional PID/EAA Provider-Specific References
 
-### Project-Specific References
-- **Task 2 - Trust Framework**: See [Trust Framework documentation](../task2-trust-framework/README.md) for trust evaluation, trust management, and policy framework definitions
-- **Task 3 - X.509 PKI with ETSI Alignments**: See [X.509 PKI documentation](../task3-x509-pki-etsi/README.md) for certificate management, ETSI compliance, and trusted lists implementation
-- **Task 2 - Entities Involved**: See [Entities Involved in Trust Evaluation](../task2-trust-framework/entities-involved.md) for definitions of Trusted List Provider, Access Certificate Authority, Provider of Registration Certificates, PID Providers, QEAA Providers, PuB-EAA Providers, and EAA Providers
-
-### Implementing Acts (IAs)
-- **Regulation (EU) 2025/848**: [Commission Implementing Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)
-- **Regulation (EU) 2024/2980**: [Commission Implementing Regulation (EU) 2024/2980, Article 4 "Notifications by Member States"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ%3AL_202402980&qid=1733300667869)
-- **Regulation (EU) 2024/1183**: [Regulation (EU) 2024/1183, Article 5a(18)](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)
-
-### European Commission Technical Specifications
+#### European Commission Technical Specifications
 - **EC TS02 v0.9** (2025-04): [Specification of systems enabling the notification and subsequent publication of Provider information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md)
-- **EC TS05 V1.0** (2025-06): [Common Formats and API for Relying Party Registration Information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
-- **EC TS06 v1.0** (2025-06): [Common Set of Relying Party Information to be Registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md)
-- **EUDI Wallet Essential Standards and Technical Specifications (STS)**: [Essential Standards and Technical Specifications (STS)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/technical-specifications/#:~:text=Essential%20Standards%20and%20Technical%20Specifications%20(STS))
 
-### ETSI Standards
-- **ETSI TS 119 612** (v2.4.1): [Electronic Signatures and Trust Infrastructures (ESI); Trusted Lists](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf)
-- **ETSI TS 119 602** (v1.1.1): [Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf)
-- **ETSI TS 119 411-8** (v01.01.01): [Access Certificate Policy for EUDI Wallet Relying Parties](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf)
-- **ETSI TS 119 475** (v01.01.01): [Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf)
+#### ETSI Standards
 - **ETSI TS 119 472-2** (v1.1.1): [Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.01.01_60/ts_11947202v010101p.pdf)
-- **ETSI EN 319 411-1**: Version 1.4.1 (2023-10) - Normalised Certificate Policy (NCP) requirements
 - **ETSI EN 319 412-3**: [Certificate Profiles; Part 3: Certificate Profile for Natural Persons](https://www.etsi.org/deliver/etsi_en/319400_319499/31941203/01.04.01_60/en_31941203v010401c.pdf) - Corporate identity-binding practices
 - **ETSI EN 319 412-6** (v01.00.00): [Certificate profile requirements for PID, Wallet, EAA, QEAA and PSBEAA providers](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf)
-
-### IETF Standards
-- **IETF RFC 5280**: Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile
-- **IETF RFC 5914**: Trust Anchor Format
-- **IETF RFC 3647**: Internet X.509 Public Key Infrastructure Certificate Policy and Certification Practices Framework
-- **IETF RFC 5755**: An Internet Attribute Certificate Profile for Authorization
-- **IETF RFC 7515**: JSON Web Signature (JWS)
-- **IETF RFC 7519**: JSON Web Token (JWT)
-- **IETF RFC 8392**: CBOR Web Token (CWT)
-- **IETF RFC 9162**: Certificate Transparency Version 2.0
 

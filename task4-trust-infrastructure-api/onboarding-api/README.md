@@ -2,6 +2,8 @@
 
 This directory contains the implementation of the Onboarding API for the WP4 Trust Infrastructure.
 
+**Note on Schema Harmonization**: The data models defined in this API are harmonized with the [Task 5 data models](../task5-participants-certificates-policies/README.md#data-models) and the [onboarding use case documents](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md) to ensure consistency across the trust infrastructure. Participant types, status values, certificate types, and certificate status values are aligned across all specifications.
+
 ## API Overview
 
 The Onboarding API provides comprehensive services for participant registration, certificate management, policy management, and compliance validation within the trust infrastructure.
@@ -72,14 +74,18 @@ GET    /api/v1/onboarding/audit/{auditId}       # Get audit result
 ```json
 {
   "participantId": "string",
-  "participantType": "TSP|WALLET_PROVIDER|RELYING_PARTY|CA",
+  "participantType": "RELYING_PARTY|PID_PROVIDER|QEAA_PROVIDER|PUB_EAA_PROVIDER|NON_Q_EAA_PROVIDER|WALLET_PROVIDER|ACCESS_CA|REGISTRATION_CA",
   "participantName": "string",
-  "participantStatus": "PENDING|ACTIVE|SUSPENDED|REVOKED",
+  "participantStatus": "PENDING|ACTIVE|INACTIVE|SUSPENDED|REVOKED",
   "contactInfo": {
     "email": "string",
     "phone": "string",
     "address": "string"
   },
+  "website": "string",
+  "officialIdentifiers": ["string"],
+  "memberState": "string",
+  "entitlements": ["string"],
   "registrationDate": "2024-01-01T00:00:00Z",
   "lastUpdated": "2024-01-01T00:00:00Z"
 }
@@ -90,11 +96,13 @@ GET    /api/v1/onboarding/audit/{auditId}       # Get audit result
 {
   "certificateId": "string",
   "participantId": "string",
-  "certificateType": "TSP|WALLET|RP|CA",
+  "certificateType": "ACCESS_CERTIFICATE|REGISTRATION_CERTIFICATE",
   "certificateData": "string",
-  "certificateStatus": "PENDING|VALID|INVALID|REVOKED",
+  "certificateStatus": "PENDING|VALID|INVALID|REVOKED|EXPIRED",
   "validFrom": "2024-01-01T00:00:00Z",
   "validTo": "2024-12-31T23:59:59Z",
+  "revokedAt": "2024-01-01T00:00:00Z",
+  "revocationReason": "string",
   "submittedAt": "2024-01-01T00:00:00Z",
   "validatedAt": "2024-01-01T00:00:00Z"
 }
@@ -146,29 +154,28 @@ GET    /api/v1/onboarding/audit/{auditId}       # Get audit result
 
 ## Registration Workflow
 
-### Step 1: Application Submission
-1. Participant submits registration application
-2. System validates application format
-3. System assigns application ID
-4. System notifies administrators
+The registration workflow follows the detailed onboarding phases defined in the [onboarding use case documents](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md):
 
-### Step 2: Document Review
-1. Administrator reviews application
-2. Administrator validates documents
-3. Administrator requests additional information if needed
-4. Administrator approves or rejects application
+### Phase 1: Administrative Onboarding
+1. **Application Submission**: Participant submits registration application with required information (see [Common Administrative Onboarding Steps - 1.1 Registration Application](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#11-registration-application))
+2. **Review**: Registrar verifies the registration application (see [Common Administrative Onboarding Steps - 1.2 Registration Review](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#12-registration-review))
+3. **Confirmation**: Registrar validates or rejects the registration application (see [Common Administrative Onboarding Steps - 1.3 Registration Confirmation](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#13-registration-confirmation))
+4. **Publication**: Registrar registers the entity in its registry and publishes it (see [Common Administrative Onboarding Steps - 1.4 Publication in the National Register](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#14-publication-in-the-national-register))
 
-### Step 3: Certificate Issuance
-1. System generates participant certificate
-2. System signs certificate with CA
-3. System stores certificate in registry
-4. System notifies participant
+### Phase 2: Technical Onboarding
+1. **Access Certificate Request**: Registrar informs Access Certificate Authority about registered entity (see [Common Technical Onboarding Steps - 2.1 Access Certificate Request](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#21-access-certificate-request))
+2. **Access Certificate Review**: Access Certificate Authority verifies identity and registration status (see [Common Technical Onboarding Steps - 2.2 Access Certificate Request Review](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#22-access-certificate-request-review))
+3. **Access Certificate Issuance**: Access Certificate Authority issues and logs the Access Certificate (see [Common Technical Onboarding Steps - 2.3 Access Certificate Issuance](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#23-access-certificate-issuance))
+4. **Registration Certificate Request**: Registrar informs Provider of Registration Certificate about registered entity (see [Common Technical Onboarding Steps - 2.4 Registration Certificate Request](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#24-registration-certificate-request))
+5. **Registration Certificate Review**: Provider of Registration Certificate verifies identity and registration status (see [Common Technical Onboarding Steps - 2.5 Registration Certificate Request Review](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#25-registration-certificate-request-review))
+6. **Registration Certificate Issuance**: Provider of Registration Certificate issues and logs the Registration Certificate (see [Common Technical Onboarding Steps - 2.6 Registration Certificate Issuance](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#26-registration-certificate-issuance))
+7. **Notification and Trusted List Publication**: (For PID/EAA Providers) Member State notifies EU Commission and publishes trust anchor in Trusted List (see entity-specific onboarding documents)
 
-### Step 4: Trust Establishment
-1. System establishes trust relationship
-2. System configures access permissions
-3. System activates participant account
-4. System notifies participant
+### Phase 3: Post-Onboarding
+1. **Registration Monitoring**: Continuous monitoring of registration status and compliance (see [Common Post-Onboarding Steps - 3.1 Registration Monitoring](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#31-registration-monitoring))
+2. **Registration Update**: Entity updates information as needed (see [Common Post-Onboarding Steps - 3.2 Registration Update](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#32-registration-update))
+3. **Registration Suspension/Cancellation**: Suspension or cancellation procedures when needed (see [Common Post-Onboarding Steps - 3.3 Registration Suspension / Cancellation](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#33-registration-suspension--cancellation))
+4. **Certificate Revocation**: Certificate revocation procedures (see [Common Post-Onboarding Steps - 3.4 Certificate Revocation](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md#34-certificate-revocation))
 
 ## Certificate Validation Process
 

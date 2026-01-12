@@ -2,6 +2,8 @@
 
 This task focuses on defining data models and trust evaluation methods for participants' certificates and policies in the WP4 Trust Infrastructure.
 
+**Note on Schema Harmonization**: The data models defined in this task are harmonized with the [Onboarding API schemas](../task4-trust-infrastructure-api/onboarding-api/README.md#data-models) and the [onboarding use case documents](../task1-use-cases/subtask1-1-onboarding/onboarding-base.md) to ensure consistency across the trust infrastructure. Participant types, status values, certificate types, and certificate status values are aligned across all specifications.
+
 ## Folder Contents
 
 This folder contains the following documents and directories:
@@ -43,7 +45,7 @@ This folder contains the following documents and directories:
 {
   "certificateId": "string",
   "participantId": "string",
-  "certificateType": "TSP|WALLET|RP|CA|OCSP|TIMESTAMP",
+  "certificateType": "ACCESS_CERTIFICATE|REGISTRATION_CERTIFICATE",
   "certificateData": {
     "version": "3",
     "serialNumber": "string",
@@ -54,7 +56,9 @@ This folder contains the following documents and directories:
     "publicKey": "string",
     "extensions": {}
   },
-  "certificateStatus": "VALID|INVALID|REVOKED|EXPIRED",
+  "certificateStatus": "PENDING|VALID|INVALID|REVOKED|EXPIRED",
+  "revokedAt": "2024-01-01T00:00:00Z",
+  "revocationReason": "string",
   "trustLevel": 1-4,
   "createdAt": "2024-01-01T00:00:00Z",
   "updatedAt": "2024-01-01T00:00:00Z"
@@ -85,15 +89,18 @@ This folder contains the following documents and directories:
 ```json
 {
   "participantId": "string",
-  "participantType": "TSP|WALLET_PROVIDER|RELYING_PARTY|CA",
+  "participantType": "RELYING_PARTY|PID_PROVIDER|QEAA_PROVIDER|PUB_EAA_PROVIDER|NON_Q_EAA_PROVIDER|WALLET_PROVIDER|ACCESS_CA|REGISTRATION_CA",
   "participantName": "string",
-  "participantStatus": "ACTIVE|INACTIVE|SUSPENDED|REVOKED",
+  "participantStatus": "PENDING|ACTIVE|INACTIVE|SUSPENDED|REVOKED",
   "contactInfo": {
     "email": "string",
     "phone": "string",
     "address": "string",
     "website": "string"
   },
+  "officialIdentifiers": ["string"],
+  "memberState": "string",
+  "entitlements": ["string"],
   "certificates": [],
   "policies": [],
   "trustLevel": 1-4,
