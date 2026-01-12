@@ -687,6 +687,9 @@ This section describes how trust is evaluated in the ecosystem using the registr
 
 ### 7.2 Trust Evaluation Flow
 
+> ⚠️ **Warning**: The content of this section is temporary and will be removed or replaced as it is updated using reference material under development in [https://github.com/webuild-consortium/wp4-trust-group/pull/33](https://github.com/webuild-consortium/wp4-trust-group/pull/33).
+
+
 ```mermaid
 graph LR
     subgraph WalletUnit["Wallet Unit"]
