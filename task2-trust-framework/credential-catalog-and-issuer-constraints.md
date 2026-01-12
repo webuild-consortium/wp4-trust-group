@@ -2,24 +2,63 @@
 
 This document compiles all evidence, references, and text about credential catalogues, catalogue of attestations, EAA (Electronic Attestation of Attributes), and QEAA (Qualified Electronic Attestation of Attributes) found in the EUDI Wallet Architecture and Reference Framework. It also covers mechanisms used to prevent unallowed credential type issuance by bogus credential issuers, including the use of Trusted Lists and registration certificates to configure which Credential Issuers are authorized to issue specific attestation types.
 
----
-
 ## Table of Contents
 
-1. [Credential Catalogues Overview](#credential-catalogues-overview)
-2. [Catalogue of Attributes](#catalogue-of-attributes)
-3. [Catalogue of Attestation Schemes](#catalogue-of-attestation-schemes)
-4. [EAA (Electronic Attestation of Attributes)](#eaa-electronic-attestation-of-attributes)
-5. [QEAA (Qualified Electronic Attestation of Attributes)](#qeaa-qualified-electronic-attestation-of-attributes)
-6. [PuB-EAA (Public Sector EAA)](#pub-eaa-public-sector-eaa)
-7. [Legal and Regulatory References](#legal-and-regulatory-references)
-8. [High-Level Requirements](#high-level-requirements)
-9. [Technical Specifications](#technical-specifications)
-10. [Important Notes and Distinctions](#important-notes-and-distinctions)
+1. [Glossary and Definitions](#glossary-and-definitions)
+2. [Credential Catalogues Overview](#credential-catalogues-overview)
+3. [Catalogue of Attributes](#catalogue-of-attributes)
+4. [Catalogue of Attestation Schemes](#catalogue-of-attestation-schemes)
+5. [EAA (Electronic Attestation of Attributes)](#eaa-electronic-attestation-of-attributes)
+6. [QEAA (Qualified Electronic Attestation of Attributes)](#qeaa-qualified-electronic-attestation-of-attributes)
+7. [PuB-EAA (Public Sector EAA)](#pub-eaa-public-sector-eaa)
+8. [Legal and Regulatory References](#legal-and-regulatory-references)
+9. [High-Level Requirements](#high-level-requirements)
+10. [Technical Specifications](#technical-specifications)
+11. [Important Notes and Distinctions](#important-notes-and-distinctions)
     - [Using Trusted Lists to Configure Allowed Credential Issuers](#using-trusted-lists-to-configure-allowed-credential-issuers-for-specific-attestation-types)
-11. [Related Topics and Cross-References](#related-topics-and-cross-references)
+12. [Related Topics and Cross-References](#related-topics-and-cross-references)
 
----
+## Glossary and Definitions
+
+This section provides key definitions and terminology used throughout this document.
+
+### Core Concepts
+
+- **EAA (Electronic Attestation of Attributes)**: An electronic attestation of attributes that can be issued in three forms: QEAA, PuB-EAA, or non-qualified EAA.
+
+- **QEAA (Qualified Electronic Attestation of Attributes)**: An electronic attestation of attributes issued by a qualified trust service provider (QTSP) that meets the requirements laid down in Annex V of Regulation (EU) 2024/1183.
+
+- **PuB-EAA (Public Sector EAA)**: An electronic attestation of attributes issued by a public sector body that is responsible for an authentic source or by a public sector body designated by the Member State to issue such attestations on behalf of public sector bodies responsible for authentic sources, in accordance with Article 45f and Annex VII of Regulation (EU) 2024/1183.
+
+- **Non-Qualified EAA**: An EAA which is not a QEAA or a PuB-EAA. Non-qualified EAAs can be provided by any (non-qualified) Trust Service Provider.
+
+- **QTSP (Qualified Trust Service Provider)**: A trust service provider that is qualified in accordance with Regulation (EU) No 910/2014 (eIDAS Regulation).
+
+### Catalogues
+
+- **Catalogue of Attributes**: A catalogue exclusively intended for use by QTSPs issuing QEAAs, enabling them to find the access point of the Authentication Source responsible for a given attribute.
+
+- **Catalogue of Attestation Schemes** (also called "catalogue of schemes for the attestation of attributes"): A catalogue intended for use by Relying Parties, Attestation Providers, and other actors to discover which types of attestations exist within the ecosystem and understand their identifiers, syntax, and semantics.
+
+### Attestation Components
+
+- **Attestation Scheme**: A machine-readable attestation definition that specifies the structure, attributes, and technical format of an attestation type.
+
+- **Attestation Rulebook**: A human-readable specification of an attestation scheme that describes the significance, data quality assurance requirements, and minimum requirements for attestation issuance. While the scheme defines the formal structure, the rulebook focuses on substantial requirements.
+
+### Trust Infrastructure
+
+- **Trusted List**: A list maintained by a Trusted List Owner (also known as Ecosystem Authority or Scheme Owner) that contains trust anchors and metadata for trusted entities (e.g., PID Providers, QEAA Providers, PuB-EAA Providers, EAA Providers).
+
+- **Trusted List Owner** (also **Ecosystem Authority** or **Scheme Owner**): The entity accountable for allowing listed EAA Providers (Trusted Entities) to issue credentials mentioned in the metadata of the Trusted List. A Trusted List Owner can list multiple attribute schemes and can list itself as an EAA Provider.
+
+- **Registration Certificate**: A certificate issued to a PID Provider, QEAA Provider, PuB-EAA Provider, or non-qualified EAA Provider that contains the type(s) of attestation that the entity intends to issue to Wallet Units. Registration certificates are optional and are issued if the Registrar has a policy of issuing such certificates.
+
+- **Registrar**: An entity in a Member State responsible for registering PID Providers, QEAA Providers, PuB-EAA Providers, and non-qualified EAA Providers.
+
+### Scope Note
+
+**Note on Alternative Technologies**: This document and the associated project focus on X.509–based QEAA models as defined in the applicable ETSI and eIDAS2 framework. Alternative approaches such as AnonCreds-based mechanisms for revocation and status management with strong privacy guarantees are considered **out of scope** for the first releases of this project.
 
 ## Credential Catalogues Overview
 
@@ -81,8 +120,6 @@ Through clear definitions of attestation contents:
 - **Commission Implementing Regulation (EU) 2025/1569 of 29 July 2025**
   - **Article 7**: Defines the catalogue of attributes
   - **Article 8**: Defines the catalogue of schemes for the attestation of attributes
-
----
 
 ## Catalogue of Attributes
 
@@ -147,8 +184,6 @@ From **Topic 25**:
 ### Important Notes
 
 - The catalogue of attributes will be used by QTSPs, and each Member State remains free to implement its own verification mechanisms, including the use of OOTS (Once-Only Technical System)
-
----
 
 ## Catalogue of Attestation Schemes
 
@@ -220,6 +255,7 @@ From **Topic 12** (Attestation Rulebooks):
 
 - Commission SHALL make the catalogue publicly available and machine-readable
 - May be hosted by the Commission or parts may be referenced to other catalogues
+- **Delegation to sector-specific authorities**: The Commission may delegate the maintenance of the catalogue to sector-specific authorities, both at the EU level and the national level. This would include the possibility to delegate sector-specific authorities to maintain it on behalf of the Commission.
 - Must include an e-discovery mechanism
 - High availability required (avoiding single point of failure)
 
@@ -230,8 +266,18 @@ An Attestation Scheme Provider may publish a new attestation in the **catalogue 
 ### Important Distinctions
 
 #### Scheme vs. Rulebook
-- **Scheme for the attestation of attributes** = Machine-readable attestation definition
-- **Attestation Rulebook** = Human-readable specification of the scheme
+- **Scheme for the attestation of attributes** = Machine-readable attestation definition that describes the formal structure (data content descriptive structure)
+- **Attestation Rulebook** = Human-readable specification of the scheme that focuses on significance and data quality assurance that should be assured as a minimum requirement by the attestation issuer (substantial requirements)
+
+**Note**: While the scheme defines the formal structure, the rulebook focuses on substantial requirements. For this reason, the sector or industry affiliation should be an access certificate attribute and referred to in the registration certificate.
+
+#### Sectorial Authority Management
+
+Specific sectorial authorities could manage attestation schemes, both at the EU level and the national level. A good example could be the banking sector: a financial and banking data model has been defined at EU level (included in the openbanking API interfaces) and could be extended at national level by the National competence authorities (e.g., national central banks). Data schemes, their inheritance, dependencies, taxonomy, rulebooks, access and registration policies could be delegated to sectorial authorities. Other examples could be the educational sector, commercial sector, and so on.
+
+The rulebook could include a certification process for data quality assurance within the credential issuance process, supervised and ensured by sectorial authorities.
+
+Registering a scheme and its rulebook is assurance of cross-sector interoperability, and it allows issuance restriction policies, enabling WRPRC policy management, so ensuring data quality to the ecosystem.
 
 #### Two Catalogues Serve Different Purposes
 
@@ -242,8 +288,6 @@ An Attestation Scheme Provider may publish a new attestation in the **catalogue 
 | **Scope** | Limited to attributes from authentic public-sector sources | Broader - any scheme owner can register |
 | **Who Can Register** | Specific entities (Member States, certain private entities) | Any scheme owner |
 | **Mandatory Registration** | N/A | Not mandatory for QEAAs/PuB-EAAs |
-
----
 
 ## EAA (Electronic Attestation of Attributes)
 
@@ -271,7 +315,13 @@ Non-qualified EAAs can be provided by any (non-qualified) Trust Service Provider
 - This implies that these non-qualified EAA Providers comply with the Wallet Unit interface specifications
 - The terms and conditions of issuing EAAs and related services are subject to sectoral rules
 - Non-qualified EAA Providers are trust service providers in the sense of the [European Digital Identity Regulation](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183)
-- Trusted Lists and Trusted List Providers may also exist for non-qualified EAA Providers, but this is out of scope of the ARF
+- Trusted Lists and Trusted List Providers may also exist for non-qualified EAA Providers
+
+**Note on Regulation**: Non-qualified EAAs and their providers are regulated under Regulation (EU) 2024/1183. References include Article 19a, Article 45h of Regulation (EU) 2024/1183, Commission Implementing Regulation (EU) 2025/2160, and Commission Implementing Regulation (EU) 2024/2977. While non-qualified EAAs operate under a different level of trust compared to QEAAs and PuB-EAAs, they are still subject to regulatory oversight.
+
+#### Revocation and Status Management
+
+For revocation and status management of non-qualified EAAs, the revocation mechanism to be used should be specified in the applicable Attestation Rulebook, in accordance with the ARF requirements for Attestation Status List or Attestation Revocation List mechanisms (see VCR_11).
 
 #### Validation Requirements
 
@@ -290,8 +340,6 @@ Non-qualified EAAs can be provided by any (non-qualified) Trust Service Provider
 - EAA Providers must be registered by Registrars in Member States
 - Registration certificates may be issued to EAA Providers
 - EAA Providers must have access certificates issued by Access Certificate Authorities
-
----
 
 ## QEAA (Qualified Electronic Attestation of Attributes)
 
@@ -320,15 +368,15 @@ The terms and conditions of these services are for each QEAA Provider to determi
 
 ### Validation Requirements
 
-**OIA_13**: For both proximity and remote presentation flows, a Relying Party SHALL validate the qualified signature of a QEAA in accordance with Art.32 of the [European Digital Identity Regulation]. For the verification, the Relying Party SHALL use a trust anchor provided in a QEAA Provider Trusted List made available in accordance with [Art. 22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2162-73-1) of the European Digital Identity Regulation.
+**OIA_13**: For both proximity and remote presentation flows, a Relying Party SHALL validate the qualified signature of a QEAA in accordance with Art.32 of the [European Digital Identity Regulation](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183). For the verification, the Relying Party SHALL use a trust anchor provided in a QEAA Provider Trusted List made available in accordance with [Art. 22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2162-73-1) of the European Digital Identity Regulation.
 
-**ISSU_08**: After a Wallet Unit receives a QEAA from a QEAA Provider, it SHALL validate the qualified signature of the QEAA in accordance with Art.32 of the [European Digital Identity Regulation]. For the verification, the Wallet Unit SHALL use a trust anchor provided in a QEAA Provider Trusted List made available in accordance with [Art. 22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2162-73-1) of the European Digital Identity Regulation.
+**ISSU_08**: After a Wallet Unit receives a QEAA from a QEAA Provider, it SHALL validate the qualified signature of the QEAA in accordance with Art.32 of the [European Digital Identity Regulation](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183). For the verification, the Wallet Unit SHALL use a trust anchor provided in a QEAA Provider Trusted List made available in accordance with [Art. 22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2162-73-1) of the European Digital Identity Regulation.
 
 ### Attestation Rulebook Requirements
 
 **ARB_11**: The Scheme Provider for an Attestation Rulebook describing a type of attestation that is a QEAA or a PuB-EAA SHALL include in the Rulebook an attribute as meant in [Annex V](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183#d1e40-54-1) point a) and [Annex VII](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183#d1e40-56-1) point a) of the European Digital Identity Regulation. This attribute SHALL reference the technical specification meant in ARB_25.
 
-**ARB_13**: The Scheme Provider for an Attestation Rulebook describing a type of attestation that is a QEAA SHALL include in the Rulebook one or more attributes or metadata representing the set of data meant in [Annex V](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183#d1e40-54-1) point b) of the [European Digital Identity Regulation].
+**ARB_13**: The Scheme Provider for an Attestation Rulebook describing a type of attestation that is a QEAA SHALL include in the Rulebook one or more attributes or metadata representing the set of data meant in [Annex V](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183#d1e40-54-1) point b) of the European Digital Identity Regulation.
 
 **ARB_16**: The Scheme Provider for an Attestation Rulebook describing a type of attestation that is a QEAA or a PuB-EAA SHALL include in the Rulebook one or more attributes representing the set of data meant in [Annex V](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183#d1e40-54-1) point c) or [Annex VII](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183#d1e46-55-1) point c) of the European Digital Identity Regulation.
 
@@ -340,13 +388,15 @@ The terms and conditions of these services are for each QEAA Provider to determi
 - Registration certificates may be issued to QEAA Providers
 - QEAA Providers must have access certificates issued by Access Certificate Authorities
 
+#### Revocation and Status Management
+
+For revocation and status management of QEAAs, the revocation mechanism to be used should be specified in the applicable Attestation Rulebook, in accordance with the ARF requirements for Attestation Status List or Attestation Revocation List mechanisms (see VCR_11).
+
 ### Catalogue Registration
 
 - The Schema Provider for an Attestation Rulebook that is a QEAA or PuB-EAA SHOULD request the registration of all attributes in that QEAA or PuB-EAA in the catalogue of attributes
 - The Schema Provider for an Attestation Rulebook that is a QEAA or PuB-EAA SHOULD register its Rulebook in the catalogue of Attestation Rulebooks
 - Attestation schemes for QEAAs may be registered and published in the catalogue of attestation schemes, but this is not mandatory
-
----
 
 ## PuB-EAA (Public Sector EAA)
 
@@ -370,9 +420,9 @@ As specified in the [European Digital Identity Regulation], an attestation may b
 
 ### Validation Requirements
 
-**OIA_14**: For both proximity and remote presentation flows, a Relying Party SHALL validate the qualified signature of a PuB-EAA in accordance with [Art.32](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2594-73-1) of the European Digital Identity Regulation. For that verification, the Relying Party SHALL use the public key provided in the qualified certificate of the QTSP supporting the qualified signature. The Relying Party SHALL also validate the qualified certificate of the QTSP using a trust anchor provided in a Trusted List made available in accordance with [Art. 22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2162-73-1) of the [European Digital Identity Regulation]. The Relying Party SHALL also verify the certified attributes of the qualified certificate, as specified in [Article 45f](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183#d1e3902-1-1).
+**OIA_14**: For both proximity and remote presentation flows, a Relying Party SHALL validate the qualified signature of a PuB-EAA in accordance with [Art.32](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2594-73-1) of the [European Digital Identity Regulation](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183). For that verification, the Relying Party SHALL use the public key provided in the qualified certificate of the QTSP supporting the qualified signature. The Relying Party SHALL also validate the qualified certificate of the QTSP using a trust anchor provided in a Trusted List made available in accordance with [Art. 22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2162-73-1) of the European Digital Identity Regulation. The Relying Party SHALL also verify the certified attributes of the qualified certificate, as specified in [Article 45f](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183#d1e3902-1-1).
 
-**ISSU_09**: After a Wallet Unit receives a PuB-EAA from a PUB-EAA Provider, it SHALL validate the qualified signature of the PuB-EAA in accordance with Art. 32 of the [European Digital Identity Regulation]. For that verification, the Wallet Unit SHALL use the public key provided in the qualified certificate of the QTSP supporting the qualified signature. The Wallet Unit SHALL also validate the qualified certificate of the QTSP using a trust anchor provided in a Trusted List made available in accordance with [Art. 22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2162-73-1) of the European Digital Identity Regulation. Finally, the Wallet Unit SHALL also verify the certified attributes of the qualified certificate, as specified in [Article 45f](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183#d1e3902-1-1).
+**ISSU_09**: After a Wallet Unit receives a PuB-EAA from a PUB-EAA Provider, it SHALL validate the qualified signature of the PuB-EAA in accordance with Art. 32 of the [European Digital Identity Regulation](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183). For that verification, the Wallet Unit SHALL use the public key provided in the qualified certificate of the QTSP supporting the qualified signature. The Wallet Unit SHALL also validate the qualified certificate of the QTSP using a trust anchor provided in a Trusted List made available in accordance with [Art. 22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2014.257.01.0073.01.ENG#d1e2162-73-1) of the European Digital Identity Regulation. Finally, the Wallet Unit SHALL also verify the certified attributes of the qualified certificate, as specified in [Article 45f](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183#d1e3902-1-1).
 
 ### Attestation Rulebook Requirements
 
@@ -390,13 +440,15 @@ As specified in the [European Digital Identity Regulation], an attestation may b
 - Registration certificates may be issued to PuB-EAA Providers
 - PuB-EAA Providers must have access certificates issued by Access Certificate Authorities
 
+#### Revocation and Status Management
+
+For revocation and status management of PuB-EAAs, the revocation mechanism to be used should be specified in the applicable Attestation Rulebook, in accordance with the ARF requirements for Attestation Status List or Attestation Revocation List mechanisms (see VCR_11).
+
 ### Catalogue Registration
 
 - The Schema Provider for an Attestation Rulebook that is a QEAA or PuB-EAA SHOULD request the registration of all attributes in that QEAA or PuB-EAA in the catalogue of attributes
 - The Schema Provider for an Attestation Rulebook that is a QEAA or PuB-EAA SHOULD register its Rulebook in the catalogue of Attestation Rulebooks
 - Attestation schemes for PuB-EAAs may be registered and published in the catalogue of attestation schemes, but this is not mandatory
-
----
 
 ## Legal and Regulatory References
 
@@ -448,8 +500,6 @@ As specified in the [European Digital Identity Regulation], an attestation may b
 
 **Article 8 paragraph 3**:
 > Owners of a scheme for the attestation of attributes may request adding schemes to the catalogue of schemes for the attestation of attributes.
-
----
 
 ## High-Level Requirements
 
@@ -525,8 +575,6 @@ Relying Parties, PID Providers, QEAA Providers, PuB-EAA Providers, and non-quali
 #### RPACANot_03a
 Relying Parties, PID Providers, QEAA Providers, PuB-EAA Providers, and non-qualified EAA Providers SHALL ensure that their registration certificates, if issued to them, can be authenticated using the trust anchors of a Provider of registration certificates notified to the Commission.
 
----
-
 ## Technical Specifications
 
 ### TS11 - Interfaces and Formats for Catalogue of Attributes and Catalogue of Schemes
@@ -542,8 +590,6 @@ This specification defines:
 - Interfaces for registering attestation schemes in the catalogue of attestation schemes
 - Interfaces for querying the catalogue of attestation schemes
 - Formats for machine-readable attestation schemes
-
----
 
 ## Related Topics and Cross-References
 
@@ -593,8 +639,6 @@ This specification defines:
 ### Section 6.6.3.6 - Relying Party Verifies Authenticity
 - Validation procedures for QEAAs, PuB-EAAs, and EAAs
 
----
-
 ## Important Notes and Distinctions
 
 ### Scheme vs. Rulebook
@@ -609,15 +653,25 @@ This specification defines:
 - PID Providers, QEAA Providers, and PuB-EAA Providers have trust anchors in Commission-compiled Trusted Lists
 - Non-qualified EAA Providers may have trust anchors through mechanisms specified in applicable Rulebook
 - QEAA Providers and PuB-EAA Providers operate within a regulated framework and are regularly audited
-- Non-qualified EAA Providers are unregulated and may not be completely trustworthy
+- Non-qualified EAA Providers are also regulated under Regulation (EU) 2024/1183 (see Article 19a, Article 45h, Commission Implementing Regulation (EU) 2025/2160, and Commission Implementing Regulation (EU) 2024/2977), but operate under a different level of trust compared to QEAAs and PuB-EAAs
 
 ### Using Trusted Lists to configure allowed Credential Issuers for specific attestation types
 
 - **Purpose**: Trusted Lists and registration certificates together can be used to configure which Credential Issuers are allowed to issue specific **attestation types**, even though any entity could technically sign arbitrary data.
+- **Trusted List Owner**:
+  - Each Trusted List has a **Trusted List Owner** (also known as **Ecosystem Authority** or **Scheme Owner**). The Trusted List Owner is accountable for allowing the listed EAA Providers (also known as **Trusted Entities**) to issue credentials that are mentioned in the metadata of the Trusted List.
+  - A Trusted List Owner can list multiple attribute schemes. The listed EAA Providers are allowed to issue all attribute schemes that are listed. It is recommended to set up 1 Trusted List per attribute scheme.
+  - A Trusted List Owner can list itself as an EAA Provider.
+  - The Wallet and Relying Party must trust the Trusted List Owner to accept the credential. Wallet Providers MAY configure the verification component in their Wallet Solutions as follows:
+    - European Commission is trusted per default
+    - PID-Provider, QEAA and PuB-EAA are trusted as referenced in the European Commission's Trusted List
+    - Wallet users will receive an alert if a Trusted List Owner is unknown and MAY be able to configure Trusted List Owner as being trusted
+
 - **Registration certificate as source of truth** (when available):
   - As specified in the ARF (Topic 27 and the registration certificate requirements, e.g. RPRC_15), a **registration certificate** issued to a PID Provider, QEAA Provider, PuB-EAA Provider, or non-qualified EAA Provider **SHALL contain the type(s) of attestation that this entity intends to issue to Wallet Units**.
   - However, registration certificates are **optional** - they are issued "if the Registrar has a policy of issuing such certificates" (ARF Section 6.3.2.2).
   - When a registration certificate is available, it is referenced from the Trusted List entry or from an associated Registrar service.
+  - It is suggested to add a field called `registrationCertificateHash` (for example) in the Trusted List entry, which would provide the certificate hash in cases where the certificate URL is provided.
 - **Trusted List entry for each provider**:
   - For each Provider role (PID, QEAA, PuB-EAA, EAA), the Trusted List includes the **trust anchor** (public key / certificate) and **metadata** that links the Provider to its registration information.
   - This metadata can either:
@@ -655,6 +709,7 @@ The following examples are **illustrative only** and do not prescribe a specific
     - `allowedAttestationType`: `eu.europa.ec.eudi.pid.1`
     - `allowedAttestationType`: `eu.europa.ec.eudi.tax-residency.1`
     - `registrationCertificateRef`: `<URL or hash of the registration certificate>`
+    - `registrationCertificateHash`: `<hash of the registration certificate>` (optional, suggested when URL is provided)
 
 - **Example 2 – PuB-EAA Provider authorised only for a specific public-sector entitlement**
 
@@ -664,6 +719,7 @@ The following examples are **illustrative only** and do not prescribe a specific
   - `serviceInformationExtensions`:
     - `allowedAttestationType`: `eu.europa.ec.eudi.public-benefit.1`
     - `registrationCertificateRef`: `<URL or hash of the registration certificate>`
+    - `registrationCertificateHash`: `<hash of the registration certificate>` (optional, suggested when URL is provided)
 
 - **Example 3 – Non-qualified EAA Provider with sectoral attestation types**
 
@@ -674,6 +730,7 @@ The following examples are **illustrative only** and do not prescribe a specific
     - `allowedAttestationType`: `eu.europa.ec.eudi.university-degree.1`
     - `allowedAttestationType`: `eu.europa.ec.eudi.professional-licence.1`
     - `registrationCertificateRef`: `<URL or hash of the registration certificate>`
+    - `registrationCertificateHash`: `<hash of the registration certificate>` (optional, suggested when URL is provided)
 
 **Note on registration certificates**: The `registrationCertificateRef` field is **optional**. If the `allowedAttestationType` list is embedded directly in the Trusted List entry, the entry is **self-contained** and sufficient for validation without retrieving a separate registration certificate.
 
@@ -700,11 +757,10 @@ In this case, Wallet Units and Relying Parties can validate credentials using on
 - **Notification**: Registered entities are notified to the Commission and published in Trusted Lists
 
 ### Catalogue Registration
-- Registration in catalogues is **not mandatory** for QEAAs and PuB-EAAs
-- Registration does not create any obligation for acceptance of the relevant type of attestation
+- Registration in catalogues is **not mandatory** for QEAAs and PuB-EAAs. *This is stated in the ARF main document at Section 5.5.*
+- **Registration is mandatory for Non-Qualified EAAs** to guarantee interoperability and quality standardization on the attestation issuance and its content
+- Registration does not create any obligation for acceptance of the relevant type of attestation. *This is stated in the ARF main document at Section 5.5.*
 - Registration does not automatically imply cross-border recognition
-
----
 
 ## References
 
@@ -714,23 +770,23 @@ In this case, Wallet Units and Relying Parties can validate credentials using on
 - [Regulation (EU) No 910/2014](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0910) (eIDAS Regulation)
 
 ### Technical Documents
-- [Technical Specification 11](./technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md)
-- [Discussion Paper on Topic O](./discussion-topics/o-catalogues-for-attestations.md)
-- [Credential Catalogue Information](./credential-catalogue-information.md)
+
+**Note**: The following documents are part of the EUDI Wallet Architecture and Reference Framework repository, not this repository. They are referenced here for completeness.
+
+- [Technical Specification 11](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md) - Located in the EUDI Wallet Standards and Technical Specifications repository
+- [Discussion Paper on Topic O](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/discussion-topics/o-catalogues-for-attestations.md) - Located in the EUDI Wallet Architecture and Reference Framework repository
+- Credential Catalogue Information - Referenced in the EUDI Wallet Architecture and Reference Framework
 
 ### Architecture Documents
-- [Architecture and Reference Framework Main Document](../architecture-and-reference-framework-main.md)
-- [Annex 2.02 - High-Level Requirements by Topic](../annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md)
 
----
+**Note**: The following documents are part of the EUDI Wallet Architecture and Reference Framework repository, not this repository.
+
+- [Architecture and Reference Framework Main Document](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/architecture-and-reference-framework-main.md) - Located in the EUDI Wallet Architecture and Reference Framework repository
+- [Annex 2.02 - High-Level Requirements by Topic](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md) - Located in the EUDI Wallet Architecture and Reference Framework repository
 
 ## Document History
 
 - **Created**: Based on comprehensive search of the EUDI Wallet Architecture and Reference Framework
 - **Sources**: All files in the `docs/` directory
 - **Last Updated**: Based on current state of the repository
-
----
-
-*This document compiles all evidence, references, and text about credential catalogues, EAA, and QEAA found in the EUDI Wallet Architecture and Reference Framework. For the most up-to-date information, please refer to the original source documents.*
 
