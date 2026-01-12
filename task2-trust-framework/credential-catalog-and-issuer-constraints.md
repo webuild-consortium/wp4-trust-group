@@ -127,7 +127,7 @@ Through clear definitions of attestation contents:
 
 The catalogue of attributes is **exclusively intended for use by QTSPs** issuing QEAAs. It enables them to find the access point of the Authentication Source responsible for a given attribute, at which the QTSP can verify the value of that attribute for a given User.
 
-*This is stated in the ARF main document at Section 5.5.2 (lines 2557-2560) of `architecture-and-reference-framework-main.md`.*
+*This is stated in the ARF main document at Section 5.5.2*
 
 ### Scope
 
@@ -671,7 +671,6 @@ This specification defines:
   - As specified in the ARF (Topic 27 and the registration certificate requirements, e.g. RPRC_15), a **registration certificate** issued to a PID Provider, QEAA Provider, PuB-EAA Provider, or non-qualified EAA Provider **SHALL contain the type(s) of attestation that this entity intends to issue to Wallet Units**.
   - However, registration certificates are **optional** - they are issued "if the Registrar has a policy of issuing such certificates" (ARF Section 6.3.2.2).
   - When a registration certificate is available, it is referenced from the Trusted List entry or from an associated Registrar service.
-  - It is suggested to add a field called `registrationCertificateHash` (for example) in the Trusted List entry, which would provide the certificate hash in cases where the certificate URL is provided.
 - **Trusted List entry for each provider**:
   - For each Provider role (PID, QEAA, PuB-EAA, EAA), the Trusted List includes the **trust anchor** (public key / certificate) and **metadata** that links the Provider to its registration information.
   - This metadata can either:
@@ -709,7 +708,6 @@ The following examples are **illustrative only** and do not prescribe a specific
     - `allowedAttestationType`: `eu.europa.ec.eudi.pid.1`
     - `allowedAttestationType`: `eu.europa.ec.eudi.tax-residency.1`
     - `registrationCertificateRef`: `<URL or hash of the registration certificate>`
-    - `registrationCertificateHash`: `<hash of the registration certificate>` (optional, suggested when URL is provided)
 
 - **Example 2 – PuB-EAA Provider authorised only for a specific public-sector entitlement**
 
@@ -719,7 +717,6 @@ The following examples are **illustrative only** and do not prescribe a specific
   - `serviceInformationExtensions`:
     - `allowedAttestationType`: `eu.europa.ec.eudi.public-benefit.1`
     - `registrationCertificateRef`: `<URL or hash of the registration certificate>`
-    - `registrationCertificateHash`: `<hash of the registration certificate>` (optional, suggested when URL is provided)
 
 - **Example 3 – Non-qualified EAA Provider with sectoral attestation types**
 
@@ -730,7 +727,6 @@ The following examples are **illustrative only** and do not prescribe a specific
     - `allowedAttestationType`: `eu.europa.ec.eudi.university-degree.1`
     - `allowedAttestationType`: `eu.europa.ec.eudi.professional-licence.1`
     - `registrationCertificateRef`: `<URL or hash of the registration certificate>`
-    - `registrationCertificateHash`: `<hash of the registration certificate>` (optional, suggested when URL is provided)
 
 **Note on registration certificates**: The `registrationCertificateRef` field is **optional**. If the `allowedAttestationType` list is embedded directly in the Trusted List entry, the entry is **self-contained** and sufficient for validation without retrieving a separate registration certificate.
 
@@ -783,6 +779,19 @@ In this case, Wallet Units and Relying Parties can validate credentials using on
 
 - [Architecture and Reference Framework Main Document](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/architecture-and-reference-framework-main.md) - Located in the EUDI Wallet Architecture and Reference Framework repository
 - [Annex 2.02 - High-Level Requirements by Topic](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md) - Located in the EUDI Wallet Architecture and Reference Framework repository
+
+## Proposals for Further Discussion
+
+### Registration Certificate Hash in Trusted Lists
+
+**Proposal**: Consider adding a `registrationCertificateHash` field to the `ServiceInformationExtensions` component in Trusted List entries (as defined in ETSI TS 119 602, clause 6.6.9) to provide the certificate hash when a registration certificate URL is provided via `registrationCertificateRef`.
+
+**Rationale**: Including a hash of the registration certificate alongside the URL reference would enable:
+- Integrity verification of the certificate when retrieved
+- Offline validation capabilities
+- Reduced dependency on network availability for certificate verification
+
+**Status**: This is a proposal to be further discussed with the European Commission and relevant standardization bodies. The field is not currently defined in ETSI TS 119 602, but the standard's extensible `ServiceInformationExtensions` mechanism (clause 6.6.9) allows for profile-specific extensions to be defined.
 
 ## Document History
 
