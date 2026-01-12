@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This document analyzes how specific business and tax identifiers (VAT registration number, tax reference number, LEI, EORI number, and excise number) are handled or considered in the current ETSI profiles, particularly in the context of trusted lists content and certificates.
+This document analyzes how specific business and tax identifiers (VAT registration number, tax reference number, LEI) are handled in the current ETSI profiles, particularly in the context of trusted lists content and certificates.
 
 ## Table of Contents
 
@@ -30,13 +30,15 @@ The ETSI profiles provide specific guidance on how to handle official registrati
 According to **ETSI TS 119 612 v2.4.1, clause 5.4.2** (TSP Trade Name), when a Trust Service Provider (TSP) is a legal person, the registration identifier must be expressed using the following structure:
 
 ```
-[TYPE]-[COUNTRY]-[IDENTIFIER]
+[TYPE][COUNTRY]-[IDENTIFIER]
 ```
 
 Where:
 - **TYPE**: 3-character legal person identity type reference
 - **COUNTRY**: 2-character ISO 3166-1 country code
 - **IDENTIFIER**: The actual identifier value
+
+**Note**: The TYPE and COUNTRY codes are concatenated without a separator, followed by a hyphen before the identifier value.
 
 ### Supported Identifier Types for Legal Persons
 
@@ -45,8 +47,8 @@ Where:
 - **Type Code**: `VAT`
 - **Description**: National value added tax identification number
 - **Priority**: **HIGHEST PRIORITY** - When both a VAT number and other national identification numbers exist, the VAT number **shall** be used
-- **Format**: `VAT-[COUNTRY]-[VAT_NUMBER]`
-- **Example**: `VAT-IT-12345678901`
+- **Format**: `VAT[COUNTRY]-[VAT_NUMBER]`
+- **Example**: `VATIT-12345678901`
 
 #### 2. National Trade Register (NTR) ✅ **EXPLICITLY SUPPORTED**
 
@@ -55,8 +57,8 @@ Where:
 - **Usage**: Used when:
   - No VAT number exists, OR
   - No registered identifier exists (TLSO allocates identifier and uses "NTR")
-- **Format**: `NTR-[COUNTRY]-[REGISTER_NUMBER]`
-- **Example**: `NTR-DE-HRB123456`
+- **Format**: `NTR[COUNTRY]-[REGISTER_NUMBER]`
+- **Example**: `NTRDE-HRB123456`
 
 #### 3. LEI (Legal Entity Identifier) ✅ **EXPLICITLY SUPPORTED**
 
@@ -69,17 +71,6 @@ Where:
 - **Usage**: Can be used in `organizationIdentifier` attribute in X.509 certificates
 - **Note**: LEI uses `XG` instead of a country code because it's a globally unique identifier
 
-#### 4. EORI Number ❓ **NOT EXPLICITLY MENTIONED**
-
-- **Status**: Not explicitly mentioned in ETSI TS 119 612 or EN 319 412-1
-- **Potential Usage**: Could potentially be used as an NTR identifier if registered in a national trade register
-- **Recommendation**: Should be clarified with ETSI or scheme operators
-
-#### 5. Excise Number ❓ **NOT EXPLICITLY MENTIONED**
-
-- **Status**: Not explicitly mentioned in ETSI TS 119 612 or EN 319 412-1
-- **Potential Usage**: Could potentially be used as an NTR identifier if registered in a national trade register
-- **Recommendation**: Should be clarified with ETSI or scheme operators
 
 ### Natural Person Identifiers
 
@@ -90,7 +81,8 @@ For natural persons, the following types are supported:
 3. **PNO**: National personal number (civic registration number)
 4. **TIN**: Tax Identification Number ✅ **EXPLICITLY SUPPORTED**
    - According to European Commission - Tax and Customs Union
-   - Format: `TIN-[COUNTRY]-[TAX_ID]`
+   - Format: `TIN[COUNTRY]-[TAX_ID]`
+   - Example: `TINIT-ABCDEF12G34H567I`
    - Reference: http://ec.europa.eu/taxation_customs/tin/tinByCountry.html
 
 ## ETSI TS 119 602 - Lists of Trusted Entities (JSON/XML)
@@ -175,23 +167,30 @@ For natural persons:
 ### Complete Format Structure
 
 ```
-[TYPE]-[COUNTRY]-[IDENTIFIER]
+[TYPE][COUNTRY]-[IDENTIFIER]
 ```
+
+Where:
+- **TYPE**: 3-character identity type reference (e.g., VAT, NTR, LEI, TIN, PAS, IDC, PNO)
+- **COUNTRY**: 2-character ISO 3166-1 Alpha-2 country code (or `XG` for global identifiers like LEI)
+- **IDENTIFIER**: The actual identifier value specific to the country and identity type
+
+**Note**: The TYPE and COUNTRY codes are concatenated without a separator, followed by a single hyphen before the identifier value, as specified in ETSI TS 119 412-1 section 5.1.3 and ETSI TS 119 612 section 5.4.2.
 
 ### Examples
 
 #### VAT Registration Number
 ```
-VAT-IT-12345678901
-VAT-FR-FR12345678901
-VAT-DE-DE123456789
+VATIT-12345678901
+VATFR-FR12345678901
+VATDE-DE123456789
 ```
 
 #### National Trade Register
 ```
-NTR-DE-HRB123456
-NTR-IT-12345678901
-NTR-FR-123456789
+NTRDE-HRB123456
+NTRIT-12345678901
+NTRFR-123456789
 ```
 
 #### Legal Entity Identifier (LEI)
@@ -203,16 +202,18 @@ LEIXG-7ZW8QJWVPR4P1JRNK46
 
 #### Tax Identification Number (Natural Person)
 ```
-TIN-IT-ABCDEF12G34H567I
-TIN-FR-12345678901
+TINIT-ABCDEF12G34H567I
+TINFR-12345678901
 ```
 
 ### Character Restrictions
 
 - **Type**: Exactly 3 uppercase ASCII characters
-- **Country**: Exactly 2 uppercase ISO 3166-1 Alpha-2 characters
-- **Separator**: Hyphen-minus "-" (0x2D ASCII, U+002D UTF-8)
+- **Country**: Exactly 2 uppercase ISO 3166-1 Alpha-2 characters (or `XG` for global identifiers)
+- **Separator**: Single hyphen-minus "-" (0x2D ASCII, U+002D UTF-8) between COUNTRY and IDENTIFIER
 - **Identifier**: According to country and identity type reference (no explicit format restrictions beyond country-specific rules)
+
+**Important**: There is NO separator between TYPE and COUNTRY - they are concatenated directly.
 
 ## Usage in Certificates
 
@@ -222,22 +223,22 @@ When certificates are issued for entities listed in trusted lists, the registrat
 
 #### For Legal Entities
 - **Attribute**: `organizationIdentifier`
-- **Format**: Must match the format used in trusted lists (`TYPE-COUNTRY-IDENTIFIER`)
+- **Format**: Must match the format used in trusted lists (`TYPE[COUNTRY]-[IDENTIFIER]`)
 - **Example**: 
   ```
   CN=Example Corp
   O=Example Corporation
-  organizationIdentifier=VAT-IT-12345678901
+  organizationIdentifier=VATIT-12345678901
   C=IT
   ```
 
 #### For Natural Persons
 - **Attribute**: `serialNumber`
-- **Format**: Must match the format used in trusted lists
+- **Format**: Must match the format used in trusted lists (`TYPE[COUNTRY]-[IDENTIFIER]`)
 - **Example**:
   ```
   CN=Mario Rossi
-  serialNumber=TIN-IT-ABCDEF12G34H567I
+  serialNumber=TINIT-ABCDEF12G34H567I
   C=IT
   ```
 
@@ -257,7 +258,7 @@ According to ETSI TS 119 602, the certificate's subject DN must:
 **Structure**:
 ```xml
 <TSPTradeName>
-  <Name xml:lang="en">VAT-IT-12345678901</Name>
+  <Name xml:lang="en">VATIT-12345678901</Name>
 </TSPTradeName>
 ```
 
@@ -271,7 +272,7 @@ According to ETSI TS 119 602, the certificate's subject DN must:
   "teTradeName": [
     {
       "lang": "en",
-      "value": "VAT-IT-12345678901"
+      "value": "VATIT-12345678901"
     }
   ]
 }
@@ -280,7 +281,7 @@ According to ETSI TS 119 602, the certificate's subject DN must:
 **XML Structure**:
 ```xml
 <TETradeName>
-  <Name xml:lang="en">VAT-IT-12345678901</Name>
+  <Name xml:lang="en">VATIT-12345678901</Name>
 </TETradeName>
 ```
 
@@ -296,19 +297,17 @@ According to ETSI TS 119 602, the certificate's subject DN must:
   - Used in `organizationIdentifier` attribute
   - Also referenced in ETSI TS 119 475 V1.1.1 with URI `http://data.europa.eu/eudi/id/LEI`
 
-### Not Explicitly Mentioned
+### Out of Scope Identifiers
 
-❓ **EORI Number (Economic Operator Registration and Identification)**:
+❌ **EORI Number (Economic Operator Registration and Identification)**:
+- Not mentioned in ETSI TS 119 612 or EN 319 412-1
+- Business-specific identifier for customs purposes
+- **Status**: Not in scope for trusted lists as per ETSI specifications
 
-❓ **EORI Number (Economic Operator Registration and Identification)**:
-- Not explicitly mentioned in ETSI TS 119 612
-- Could potentially be used under NTR if registered in a national trade register
-- **Recommendation**: Clarify with scheme operators or ETSI
-
-❓ **Excise Number**:
-- Not explicitly mentioned in ETSI TS 119 612
-- Could potentially be used under NTR if registered in a national trade register
-- **Recommendation**: Clarify with scheme operators or ETSI
+❌ **Excise Number**:
+- Not mentioned in ETSI TS 119 612 or EN 319 412-1
+- Business-specific identifier for excise tax purposes
+- **Status**: Not in scope for trusted lists as per ETSI specifications
 
 ### Identifier Support Comparison Matrix
 
@@ -316,12 +315,12 @@ The following table provides a quick reference for ETSI support status of all di
 
 | Identifier | ETSI Support | Primary Specification | Format | Notes |
 |------------|--------------|----------------------|--------|-------|
-| **VAT Registration Number** | ✅ Explicit | TS 119 612, EN 319 412-1 | `VAT-[COUNTRY]-[VAT_NUMBER]` | Highest priority when available |
-| **NTR (National Trade Register)** | ✅ Explicit | TS 119 612, EN 319 412-1 | `NTR-[COUNTRY]-[REGISTER_NUMBER]` | Fallback when VAT not available |
+| **VAT Registration Number** | ✅ Explicit | TS 119 612, EN 319 412-1 | `VAT[COUNTRY]-[VAT_NUMBER]` | Highest priority when available |
+| **NTR (National Trade Register)** | ✅ Explicit | TS 119 612, EN 319 412-1 | `NTR[COUNTRY]-[REGISTER_NUMBER]` | Fallback when VAT not available |
 | **LEI (Legal Entity Identifier)** | ✅ Explicit | EN 319 412-1 V1.6.1 | `LEIXG-[20_CHARACTER_LEI]` | Uses `XG` for global identifier |
-| **TIN (Tax Identification Number)** | ✅ Explicit | TS 119 612 | `TIN-[COUNTRY]-[TAX_ID]` | For natural persons only |
-| **EORI Number** | ❌ Not defined | - | - | Could potentially use NTR format |
-| **Excise Number** | ❌ Not defined | - | - | Could potentially use NTR format |
+| **TIN (Tax Identification Number)** | ✅ Explicit | TS 119 612 | `TIN[COUNTRY]-[TAX_ID]` | For natural persons only |
+| **EORI Number** | ❌ Not in scope | - | - | Business-specific, not for trusted lists |
+| **Excise Number** | ❌ Not in scope | - | - | Business-specific, not for trusted lists |
 
 **Legend:**
 - ✅ **Explicit**: Fully defined and supported in ETSI specifications
@@ -338,20 +337,21 @@ According to ETSI TS 119 612:
 ### Recommendations
 
 1. **For LEI**: ✅ **Already explicitly supported** in ETSI EN 319 412-1 V1.6.1 - Use format `LEIXG-[20_CHARACTER_LEI]`
-2. **For EORI**: Consider adding explicit support or clarification that EORI can be used under NTR type
-3. **For Excise Numbers**: Consider adding explicit support or clarification that excise numbers can be used under NTR type
-4. **Certificate Implementation**: Ensure certificates in the `certs` branch include the registration identifier in the appropriate format
-5. **Validation**: Implement validation to ensure registration identifiers match between trusted lists and certificates
+2. **For EORI and Excise Numbers**: ❌ **Not in scope** - These are business-specific identifiers and should not be included in trusted lists as they are not part of the ETSI specifications
+3. **Certificate Implementation**: Ensure certificates in the `certs` branch include the registration identifier in the appropriate format (`TYPE[COUNTRY]-[IDENTIFIER]`)
+4. **Validation**: Implement validation to ensure registration identifiers match between trusted lists and certificates
+5. **Format Compliance**: Ensure all identifiers follow the correct format with TYPE and COUNTRY concatenated (no hyphen between them)
 
 ## Implementation Checklist
 
 ### For Trusted Lists
 
 - [ ] Include registration identifier in `TSPTradeName` (TS 119 612) or `TETradeName` (TS 119 602)
-- [ ] Use correct format: `[TYPE]-[COUNTRY]-[IDENTIFIER]`
+- [ ] Use correct format: `[TYPE][COUNTRY]-[IDENTIFIER]` (TYPE and COUNTRY concatenated, hyphen before IDENTIFIER)
 - [ ] Prioritize VAT number when available
 - [ ] Use NTR as fallback when VAT is not available
 - [ ] Ensure country code matches ISO 3166-1 Alpha-2
+- [ ] Do not include EORI or excise numbers (not in scope for trusted lists)
 
 ### For Certificates
 
