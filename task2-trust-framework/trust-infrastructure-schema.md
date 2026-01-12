@@ -757,8 +757,6 @@ Trust evaluation occurs at multiple points using different trust sources:
 2. **During Presentation**:
    - Wallet Units verify Relying Party registration (Registry) - **RPRC_16, RPRC_21**
    - Wallet Units verify Access Certificates using Trusted Lists - **ISSU_24, ISSU_34, RPA_04**
-
-3. **During Signature Validation**:
    - Relying Parties validate PID signatures using PID Provider TL - **OIA_12**
    - Relying Parties validate attestation signatures using Attestation Provider TL - **OIA_13, OIA_14**
 
