@@ -2,6 +2,16 @@
 
 This task focuses on implementing the Trust Infrastructure API and additional features for the WP4 Trust Infrastructure.
 
+## Folder Contents
+
+This folder contains the following:
+
+- **`README.md`** - This file, providing an overview of the Trust Infrastructure API and Onboarding API
+- **`trust-infrastructure-api/`** - Trust Infrastructure API implementation
+  - Contains `README.md` with detailed API specifications
+- **`onboarding-api/`** - Onboarding API implementation
+  - Contains `README.md` with detailed onboarding API specifications
+
 ## API Architecture
 
 ### Core API Components
@@ -238,29 +248,3 @@ This task focuses on implementing the Trust Infrastructure API and additional fe
 - **OpenID Connect**: Authentication protocol
 - **JWT**: JSON Web Token standard
 - **TLS 1.3**: Transport Layer Security
-
-## Timeline
-
-### Phase 1: API Design (Weeks 1-4)
-- API architecture design
-- OpenAPI specification
-- Data model definition
-- Security requirements definition
-
-### Phase 2: Implementation (Weeks 5-12)
-- Trust Infrastructure API implementation
-- Onboarding API implementation
-- Authentication and authorization
-- Security features implementation
-
-### Phase 3: Testing (Weeks 13-16)
-- Unit testing
-- Integration testing
-- API testing
-- Security testing
-
-### Phase 4: Deployment (Weeks 17-20)
-- API deployment
-- Documentation completion
-- Monitoring setup
-- Production readiness

@@ -2,6 +2,16 @@
 
 This task focuses on defining comprehensive use cases for the WP4 Trust Infrastructure, covering onboarding scenarios and trust registry operations.
 
+## Folder Contents
+
+This folder contains the following:
+
+- **`README.md`** - This file, providing an overview of use cases, templates, and examples
+- **`subtask1-1-onboarding/`** - Use cases for participant onboarding processes
+  - Contains `README.md` with onboarding use case specifications
+- **`subtask1-2-trust-registry/`** - Use cases for trust registry operations
+  - Contains `README.md` with trust registry use case specifications
+
 ## Use Cases Definitions
 
 All the use cases described for trust evaluation integration among participants in the Wallet ecosystem occur as distinct moments, entirely separate from the protocol exchange flows. Trust evaluation is conducted both prior to any interaction, at the initiation of these interactions and during the interactions. This proactive approach ensures protection for Users and organizations against any malicious behavior.
@@ -458,20 +468,6 @@ Trust evaluation in the Wallet ecosystem serves as a critical security layer tha
 - **Usability**: User experience considerations
 - **Maintainability**: Long-term maintenance
 
-## Documentation Structure
-
-### Use Case Documents
-- `onboarding-use-cases.md` - Complete onboarding use cases
-- `trust-registry-use-cases.md` - Complete trust registry use cases
-- `use-case-templates.md` - Standardized templates
-- `actor-definitions.md` - Actor role definitions
-
-### Supporting Documents
-- `business-processes.md` - Business process flows
-- `technical-requirements.md` - Technical specifications
-- `compliance-requirements.md` - Regulatory requirements
-- `testing-scenarios.md` - Test case definitions
-
 ## Validation and Testing
 
 ### Use Case Validation
@@ -499,25 +495,3 @@ Trust evaluation in the Wallet ecosystem serves as a critical security layer tha
 - **Task 3**: X.509 PKI implementation
 - **Task 4**: Trust Infrastructure API
 - **Task 5**: Participants' Certificates and Policies
-
-## Timeline
-
-### Phase 1: Analysis (Weeks 1-2)
-- Stakeholder interviews
-- Requirements gathering
-- Initial use case identification
-
-### Phase 2: Design (Weeks 3-4)
-- Use case modeling
-- Process flow design
-- Template development
-
-### Phase 3: Documentation (Weeks 5-6)
-- Use case documentation
-- Supporting documentation
-- Review and validation
-
-### Phase 4: Validation (Weeks 7-8)
-- Stakeholder review
-- Technical validation
-- Test case development

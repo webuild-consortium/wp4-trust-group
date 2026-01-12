@@ -2,6 +2,13 @@
 
 This task focuses on implementing X.509 PKI infrastructure aligned with ETSI standards for the WP4 Trust Infrastructure.
 
+## Folder Contents
+
+This folder contains the following documents:
+
+- **`README.md`** - This file, providing an overview of X.509 PKI architecture and ETSI compliance
+- **`etsi_trusted_lists_implementation_profile.md`** - Unified implementation guide for ETSI TS 119 612 (XML) and TS 119 602 (JSON/XML) trusted lists, including implementation tasks, digital signature implementation, distribution, examples, and testing
+
 ## PKI Architecture
 
 ### Certificate Hierarchy
@@ -229,6 +236,7 @@ This task focuses on implementing X.509 PKI infrastructure aligned with ETSI sta
 - **Task 2**: Trust Framework for trust policies
 - **Task 4**: Trust Infrastructure API for system integration
 - **Task 5**: Participants' Certificates and Policies for certificate profiles
+  - Note: This task (Task 3) focuses on PKI infrastructure and ETSI compliance; Task 5 focuses on participant certificate data models
 
 ### Standards Dependencies
 - **IETF RFC 5280**: X.509 PKI standard
@@ -236,29 +244,3 @@ This task focuses on implementing X.509 PKI infrastructure aligned with ETSI sta
 - **ETSI EN 319 412-6**: Certificate profile requirements
 - **ETSI TS 119 411-8**: Access certificate policy
 - **ETSI TS 119 475**: Relying party attributes
-
-## Timeline
-
-### Phase 1: PKI Design (Weeks 1-4)
-- PKI architecture design
-- Certificate profile definition
-- Key management design
-- Security requirements definition
-
-### Phase 2: Implementation (Weeks 5-12)
-- CA implementation
-- Certificate management implementation
-- Revocation services implementation
-- Security services implementation
-
-### Phase 3: Testing (Weeks 13-16)
-- Unit testing
-- Integration testing
-- Security testing
-- Compliance testing
-
-### Phase 4: Deployment (Weeks 17-20)
-- PKI deployment
-- Certificate issuance
-- Service activation
-- Monitoring setup
