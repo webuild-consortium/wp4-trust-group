@@ -18,8 +18,8 @@
 - **Technical Goal**: To establish a harmonised, secure, and interoperable framework for the registration, certification, and lifecycle management of Relying Parties, enabling trusted interaction between EUDI Wallet Solutions and other parties involved.
 - **Success Criteria**:
     - *Interoperability across Member States*
-        - All Relying Party Access and Registration Certificates are syntactically and semantically harmonised in line with version 1.4.1 (2023-10) and related IETF RFCs (7519, 8392, 9162).
-        - Certificates and registration data can be validated cross-border in an automated manner.
+        - All Relying Party Access and Registration Certificates are syntactically and semantically harmonised in line with ETSI EN 319 411-1 version 1.4.1 (2023-10) and related IETF RFCs ([RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519), [RFC 8392](https://datatracker.ietf.org/doc/html/rfc8392), [RFC 9162](https://datatracker.ietf.org/doc/html/rfc9162)) (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
+        - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
     - *Secure trust establishment*
         - Each Relying Party’s identity and attributes are verifiable via National Registers and anchored in the EU trust framework (ref. [Regulation (EU) 2024/1183, Article 5a(18)](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)).
         - Continuous monitoring and automatic Access and Registration Certificate revocation mechanisms are implemented and effective within 24 hours of a change request (ref. [Regulation (EU) 2025/848, Article 9(5)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
@@ -31,13 +31,13 @@
         - Each Member State designates at least one Registrar and maintains at least one National Register and communicates changes to the Commission and other Member States (ref. [Regulation (EU) 2025/848, Article 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Operational effectiveness*
         - Onboarding of new Relying Parties is completed through a dual-phase process (administrative + technical) with measurable outcomes and turnaround times.
-        - End-to-end validation of Access and Registration Certificates succeeds automatically through Trusted List integration, except for Relying Parties that are not themselves listed on a Union Trusted List.
+        - End-to-end validation of Access and Registration Certificates succeeds automatically through Trusted List integration (see [Task 3 - ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)), except for Relying Parties that are not themselves listed on a Union Trusted List.
 
 ## Preconditions
 - Member State must have established at least one National Register of Relying Parties (ref. [Regulation (EU) 2025/848, Article 3 "National registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
 - Member State must have designated at least one Registrar (ref. [Regulation (EU) 2025/848, Article 3 "National registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
 - Member State must have authorised at least one Certificate Authority to issue Relying Party Access Certificates (ref. [Regulation (EU) 2025/848, Article 7 "Wallet-relying party access certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-- Member State must have authorised at least one Certificate Authority to issue Relying Party Registration Certificates (ref. [Regulation (EU) 2025/848, Article 8 "Wallet-relying party registration certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
+- Member State must have authorised at least one Certificate Authority to issue Relying Party Registration Certificates (ref. [Regulation (EU) 2025/848, Article 8 "Wallet-relying party registration certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)). See also [ARF "3.19 Providers of registration certificates"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#319-providers-of-registration-certificates:~:text=3.19-,Providers%20of%20registration%20certificates,-If%20a%20Registrar) and [ARF "6.4.2 Relying Party registration"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#642-relying-party-registration:~:text=6.4.2%20Relying%20Party-,registration,-Figure%2011%20depicts).
 - Member State must have published one or more national Registration Policies, including or reusing existing sectoral or national registration policies (ref. [Regulation (EU) 2025/848, Article 4 "Registration policies"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
 - The European Commission must be notified about the Registrar, the Access Certificate Authority, and the Provider of Registration Certificate. (ref. [Regulation (EU) 2024/2980, Article 4 "Notifications by Member States"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ%3AL_202402980&qid=1733300667869)).
 
@@ -100,7 +100,7 @@ The Registrar receives the registration application for inclusion in the Nationa
 - [Regulation (EU) 2025/848, Article 6. "Registration processes"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_4:~:text=Article%C2%A04-,Registration%20policies,-1.%C2%A0%C2%A0%C2%A0Member%20States) 
     - 1. Registrars shall establish **easy to use electronic, and where possible, automated registration processes** for wallet-relying parties.
 - [Regulation (EU) 2025/848, Annex I "Information regarding wallet-relying parties"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)
-See also [Technical Specification n.6. Common Set of Relying Party Information to be Registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md) and ["2.2 Role-dependent Mandatory Data to be Provided in Registration"](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md#22-role-dependent-mandatory-data-to-be-provided-in-registration:~:text=2.2%20Role%2Ddependent%20Mandatory%20Data%20to%20be%20Provided%20in%20Registration)
+See also [EC TS06 v1.0 - Common Set of Relying Party Information to be Registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md) and [EC TS05 V1.0 - Common Formats and API for Relying Party Registration Information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
     - Summary of the information to be provided:
         - official name of the wallet-relying party
         - one or more official identifiers of the wallet-relying party (EORI, LEI, VAT number...)
@@ -172,9 +172,6 @@ See also [ARF, Annex II - High-Level Requirements "A. General requirements for M
     - [...] each Relying Party will register itself with a Registrar in its Member State. If the registration process is successful, **the Registrar includes the Relying Party in its public registry**.
 
 ## 2. Technical Onboarding
-Following successful registration, each Relying Party enters a technical onboarding process, harmonized between Member States, to acquire two mandatory certificates:
-- the Access Certificate(s), which is required for technical connection and authentication with Wallet Units;
-- the Registration Certificate(s), which confirms eligibility to provide services relying on the EUDI Wallets.
 Following successful registration, each Relying Party enters a technical onboarding process, harmonized between Member States, to acquire two mandatory certificates:
 - the Access Certificate(s), which is required for technical connection and authentication with Wallet Units;
 - the Registration Certificate(s), which confirms eligibility to provide services relying on the EUDI Wallets.
@@ -415,13 +412,6 @@ If:
 
 Then:
 The Registrar suspends/ revokes the Relying Party registration.
-If:
-- The National Registrar conducts a proportionality assessment whose results lead to the Relying Party registration suspension or cancellation.
-- The Relying Party requests the Relying Party registration cancellation.
-- The Supervisory Body requests the Relying Party registration suspension/ cancellation.
-
-Then:
-The Registrar suspends/ revokes the Relying Party registration.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 9. "Suspension and cancellation of registration"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_9:~:text=Suspension%20and%20cancellation%20of%20registration)
@@ -441,24 +431,12 @@ The Relying Party receives notice of its registration suspension / revocation.
 The Access Certificate Authority receives notice of the Relying Party registration suspension/ revocation.
 
 The Provider of Registration Certificate receives notice of the Relying Party registration suspension / revocation.
-The Registrar sends notice about the Relying Party registration suspension / revocation.
-
-The Relying Party receives notice of its registration suspension / revocation.
-
-The Access Certificate Authority receives notice of the Relying Party registration suspension/ revocation.
-
-The Provider of Registration Certificate receives notice of the Relying Party registration suspension / revocation.
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 9. "Suspension and cancellation of registration"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_9:~:text=Suspension%20and%20cancellation%20of%20registration)
     - 5.   Where the registration of a wallet-relying party is suspended or cancelled, the **registrar shall inform** **the provider of the relevant wallet-relying party access certificates**, the **provider of the relevant wallet-relying party registration certificates**, and the **affected wallet-relying party** of this action **without undue delay and not later than 24 hours after the suspension or cancellation.** This notification shall include **information** on the reasons for the suspension or cancellation and on the available means of **redress or appeal**.
 
 ### 3.4 Access / Registration Certificate Revocation
-If:
-- The Registrar suspends / cancels the Relying Party registration.
-- The Relying Party requests the Relying Party Access / Registration Certificate revocation.
-- The Supervisory Body requests the Relying Party Access / Registration certificate revocation.
-- Data Protection Authority requests the Relying Party Access / Registration certificate revocation.
 If:
 - The Registrar suspends / cancels the Relying Party registration.
 - The Relying Party requests the Relying Party Access / Registration Certificate revocation.
@@ -473,9 +451,6 @@ If:
     - 3. The wallet-relying party registration certificate policy and certificate practice statement applicable to the provisioning of wallet-relying party registration certificates […] shall include:
         - (f) the obligation for the provider of wallet-relying party registration certificates to **allow** relevant stakeholders, including **wallet-relying parties** as regards their own certificates, competent **supervisory bodies** and **data protection authorities**, **to request the revocation** of wallet-relying party registration certificates;
 
-Then:
-- The Access Certificate Authority revokes the Access Certificate (without undue delay).
-- The Provider of Registration Certificate revokes the Registration Certificate (without undue delay).
 Then:
 - The Access Certificate Authority revokes the Access Certificate (without undue delay).
 - The Provider of Registration Certificate revokes the Registration Certificate (without undue delay).
@@ -523,42 +498,36 @@ This document is based on the following normative references:
 - **ARF Main Document**: [EUDI Wallet Architecture and Reference Framework 2.7.3](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/)
 - **ARF Annex II - High-Level Requirements**: [Annex II - High-Level Requirements](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/)
 
+### Project-Specific References
+- **Task 2 - Trust Framework**: See [Trust Framework documentation](../task2-trust-framework/README.md) for trust evaluation, trust management, and policy framework definitions
+- **Task 3 - X.509 PKI with ETSI Alignments**: See [X.509 PKI documentation](../task3-x509-pki-etsi/README.md) for certificate management, ETSI compliance, and trusted lists implementation
+- **Task 2 - Entities Involved**: See [Entities Involved in Trust Evaluation](../task2-trust-framework/entities-involved.md) for definitions of Trusted List Provider, Access Certificate Authority, Provider of Registration Certificates, and other trust infrastructure entities
+
 ### Implementing Acts (IAs)
 - **Regulation (EU) 2025/848**: [Commission Implementing Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)
 - **Regulation (EU) 2024/2980**: [Commission Implementing Regulation (EU) 2024/2980, Article 4 "Notifications by Member States"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ%3AL_202402980&qid=1733300667869)
 - **Regulation (EU) 2024/1183**: [Regulation (EU) 2024/1183, Article 5a(18)](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)
 
-### Technical Specifications
-- **Technical Specification n.6**: [Common Set of Relying Party Information to be Registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md)
+### European Commission Technical Specifications
+- **EC TS05 V1.0** (2025-06): [Common Formats and API for Relying Party Registration Information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
+- **EC TS06 v1.0** (2025-06): [Common Set of Relying Party Information to be Registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md)
 - **EUDI Wallet Essential Standards and Technical Specifications (STS)**: [Essential Standards and Technical Specifications (STS)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/technical-specifications/#:~:text=Essential%20Standards%20and%20Technical%20Specifications%20(STS))
 
-### Standards
+### ETSI Standards
+- **ETSI TS 119 612** (v2.4.1): [Electronic Signatures and Trust Infrastructures (ESI); Trusted Lists](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf)
+- **ETSI TS 119 602** (v1.1.1): [Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf)
+- **ETSI TS 119 411-8** (v01.01.01): [Access Certificate Policy for EUDI Wallet Relying Parties](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf)
+- **ETSI TS 119 475** (v01.01.01): [Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf)
+- **ETSI TS 119 472-2** (v1.1.1): [Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.01.01_60/ts_11947202v010101p.pdf)
 - **ETSI EN 319 411-1**: Version 1.4.1 (2023-10) - Normalised Certificate Policy (NCP) requirements
-- **IETF RFC 7519**: JSON Web Token (JWT)
-- **IETF RFC 7515**: JSON Web Signature (JWS)
-- **IETF RFC 8392**: CBOR Web Token (CWT)
+- **ETSI EN 319 412-6** (v01.00.00): [Certificate profile requirements for PID, Wallet, EAA, QEAA and PSBEAA providers](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf)
+
+### IETF Standards
+- **IETF RFC 5280**: Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile
+- **IETF RFC 5914**: Trust Anchor Format
 - **IETF RFC 3647**: Internet X.509 Public Key Infrastructure Certificate Policy and Certification Practices Framework
 - **IETF RFC 5755**: An Internet Attribute Certificate Profile for Authorization
+- **IETF RFC 7515**: JSON Web Signature (JWS)
+- **IETF RFC 7519**: JSON Web Token (JWT)
+- **IETF RFC 8392**: CBOR Web Token (CWT)
 - **IETF RFC 9162**: Certificate Transparency Version 2.0
-
----
-
-## Business Rules
-- [Rule 1: Specific business constraint]
-- [Rule 2: Policy requirement]
-- [Rule 3: Compliance requirement]
-
-## Non-Functional Requirements
-- **Performance**: [Response time requirements]
-- **Security**: [Security requirements]
-- **Reliability**: [Availability requirements]
-- **Scalability**: [Load handling requirements]
-
-## Assumptions
-- [Assumption 1: What we assume to be true]
-- [Assumption 2: Environmental assumptions]
-
-## Notes
-- [Additional context or considerations]
-- [Implementation notes]
-- [Testing considerations]
