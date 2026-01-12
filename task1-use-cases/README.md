@@ -2,6 +2,16 @@
 
 This task focuses on defining comprehensive use cases for the WP4 Trust Infrastructure, covering onboarding scenarios and trust registry operations.
 
+## Folder Contents
+
+This folder contains the following:
+
+- **`README.md`** - This file, providing an overview of use cases, templates, and examples
+- **`subtask1-1-onboarding/`** - Use cases for participant onboarding processes
+  - Contains `README.md` with onboarding use case specifications
+- **`subtask1-2-trust-registry/`** - Use cases for trust registry operations
+  - Contains `README.md` with trust registry use case specifications
+
 ## Use Cases Definitions
 
 All the use cases described for trust evaluation integration among participants in the Wallet ecosystem occur as distinct moments, entirely separate from the protocol exchange flows. Trust evaluation is conducted both prior to any interaction, at the initiation of these interactions and during the interactions. This proactive approach ensures protection for Users and organizations against any malicious behavior.
@@ -457,20 +467,6 @@ Trust evaluation in the Wallet ecosystem serves as a critical security layer tha
 - **Auditability**: Audit trail requirements
 - **Usability**: User experience considerations
 - **Maintainability**: Long-term maintenance
-
-## Documentation Structure
-
-### Use Case Documents
-- `onboarding-use-cases.md` - Complete onboarding use cases
-- `trust-registry-use-cases.md` - Complete trust registry use cases
-- `use-case-templates.md` - Standardized templates
-- `actor-definitions.md` - Actor role definitions
-
-### Supporting Documents
-- `business-processes.md` - Business process flows
-- `technical-requirements.md` - Technical specifications
-- `compliance-requirements.md` - Regulatory requirements
-- `testing-scenarios.md` - Test case definitions
 
 ## Validation and Testing
 
