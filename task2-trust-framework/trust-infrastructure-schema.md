@@ -1,49 +1,48 @@
 # Trust Infrastructure Schema: Onboarding and Trusted Lists
 
-This document provides a comprehensive schema and graphical representation of the EUDI Wallet trust infrastructure, focusing on two main processes: **Onboarding** (Registration) and **Trusted List Publication**. These processes are separated to align with the Architecture and Reference Framework (ARF).
+This document outlines the schema and graphical representation of the EUDI Wallet trust infrastructure. It focuses on two primary processes: **Onboarding** (Registration) and **Trusted List Publication**, which are separated to align with the Architecture and Reference Framework (ARF).
 
 ## Overview
 
-The trust infrastructure consists of two distinct but related processes:
+The trust infrastructure relies on two distinct but complementary processes:
 
-1. **Registration/Onboarding**: Entities register with Registrars, providing identification data and entitlements. According to the ARF (Section 3.17), entities (PID Providers, Attestation Providers, Relying Parties) are registered by a Registrar in the Member State where they reside. The ARF states that "Member States establish and oversee Registrars" and that "the process and terms and conditions for registering will be determined by each Member State." While the ARF consistently refers to "Member State Registrars" and does not explicitly mention sector-specific or European Commission-level Registrars, it does not explicitly rule them out either.
-2. **Trusted List Publication**: Trusted Lists are compiled and published to establish cryptographic trust anchors. The European Commission compiles EU-wide Trusted Lists for Wallet Providers, PID Providers, Access CAs, and Registration Cert Providers. Member State TLPs compile Trusted Lists per Member State for Attestation Providers. The Commission maintains the List of Trusted Lists (LoTL) containing pointers to all published Trusted Lists.
+1.  **Registration/Onboarding**: Entities (PID Providers, Attestation Providers, Relying Parties) register with Member State Registrars to define operational authorization and entitlements (ARF Section 3.17).
+2.  **Trusted List Publication**: Publication of cryptographic trust anchors for validation purposes.
 
-Both processes are required to establish the trust infrastructure in the EUDI Wallet ecosystem.
+### Responsibilities Matrix
 
-### Key Reference: Entity Registration and Trusted List Compilation
+The following table summarizes the registration requirement and the authority responsible for compiling the Trusted List (TL) for each entity type:
 
-**Entity Registration:**
-- **Register with Registrar**: PID Providers, Attestation Providers, Relying Parties (per ARF Section 3.17). These entities register with Registrars for Registry inclusion and operational authorization.
-- **Notified by Member States to Commission** (per **GenNot_01**): After registration with Registrar, PID Providers are also notified by Member States to the Commission for Trusted List inclusion (per **PPNot_01**, **PPNot_02**, **PPNot_05**). Wallet Providers, Access CAs, and Providers of Registration Certificates are notified by Member States to the Commission (per **WPNot_01**, **WPNot_02**, **RPACANot_01**, **RPACANot_02**); they do not register with Registrars.
+| Entity Type | Registration Process | Trusted List Compilation |
+| :--- | :--- | :--- |
+| **PID Provider** | **Register with MS Registrar** | **European Commission** (EU-wide TL) |
+| **Attestation Provider** | **Register with MS Registrar** | **Member State TLP** (National TL) |
+| **Relying Party (RP)** | **Register with MS Registrar** | N/A (Uses Access Certificates/Registry) |
+| **Wallet Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-wide TL) |
+| **Access CA** | *Notification only* (by MS to EC) | **European Commission** (EU-wide TL) |
+| **Reg. Cert. Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-wide TL) |
 
-**Trusted List Compilation:**
-- **Compiled by European Commission** (EU-wide): Wallet Provider TL (**WPNot_04**, **WPNot_05**), PID Provider TL (**PPNot_05**), Access CA TL (**PPNot_06**, **RPACANot_04**), Registration Cert Provider TL (**RPACANot_04**)
-- **Compiled by Member State TLP** (per Member State): Attestation Provider TL (PuB-EAA Providers)
-
-**Submission and Update Process**: For Attestation Providers, successful registration with the Registrar triggers the Member State TLP to compile, sign, and publish Trusted Lists, then submit the TL URL to the European Commission. For Wallet Providers, PID Providers, Access CAs, and Registration Cert Providers, Member States notify these entities to the Commission, and the Commission compiles and publishes their Trusted Lists directly. See [Section 5.3.1](#531-submission-and-update-models-registration-to-trusted-list) for detailed submission and update models.
+> **Key Distinction**: **Wallet Providers**, **Access CAs**, and **Providers of Registration Certificates** do **not** register with Registrars. They are notified directly by Member States to the European Commission.
 
 ## 1. Trust Infrastructure Architecture
 
 ### 1.1 Trust Infrastructure Authorities
 
-The trust infrastructure is operated by the following authorities and entities:
-
-- **Registrar**: Manages registration of entities (PID Providers, Attestation Providers, Relying Parties). According to the ARF (Section 3.17), entities are registered by a Registrar in the Member State where they reside. The ARF states that "Member States establish and oversee Registrars" and that "the process and terms and conditions for registering will be determined by each Member State." While the ARF consistently refers to Member State-level Registrars, it does not explicitly specify whether Registrars can be sector-specific or established at European Commission level.
-- **Access Certificate Authority**: Issues access certificates to registered entities (PID Providers, Attestation Providers, Relying Parties). Access Certificate Authorities do not register with Registrars; they are notified by Member States to the European Commission (per **RPACANot_01**, **RPACANot_02**).
-- **Provider of Registration Certificates**: Optionally issues registration certificates detailing entitlements. Providers of Registration Certificates do not register with Registrars; they are notified by Member States to the European Commission (per **RPACANot_01**, **RPACANot_02**).
-- **Trusted List Provider (TLP)**: Both Member State TLPs and the European Commission act as TLPs. Member State TLPs (MS TLPs) compile, sign, and publish Trusted Lists for Attestation Providers (PuB-EAA Providers) per Member State, and submit Trusted List URLs to the European Commission. The European Commission acts as TLP for Wallet Providers, PID Providers, Access CAs, and Registration Cert Providers, compiling EU-wide Trusted Lists. The ARF does not explicitly specify whether MS TLPs must be Member State entities, sector-specific bodies, or the European Commission itself. However, the notification process (GenNot_01) requires Member States to notify entities to the Commission, suggesting MS TLPs operate at Member State level. See [Overview](#overview) for Trusted List compilation responsibilities.
-- **European Commission**: Compiles, signs/seals, and publishes EU-wide Trusted Lists for Wallet Providers, PID Providers, Access CAs, and Registration Cert Providers. Receives Trusted List URL notifications from Member State TLPs (for Attestation Providers only), verifies Trusted Lists, and compiles, signs, and publishes the List of Trusted Lists (LoTL). See [Overview](#overview) for Trusted List compilation responsibilities.
+*   **Registrar**: Established by Member States to manage the registration and operational authorization of **PID Providers**, **Attestation Providers**, and **Relying Parties**.
+*   **European Commission**:
+    *   Acts as **Trusted List Provider (TLP)** for EU-wide lists (see Responsibilities Matrix).
+    *   Maintains and publishes the **List of Trusted Lists (LoTL)**.
+*   **Member State TLP**: Compiles, signs, and publishes the National Trusted List specifically for **Attestation Providers** (PuB-EAA) and submits the URL to the Commission.
+*   **Access Certificate Authority (CA)**: Issues access certificates to registered entities. Notified by MS to the Commission; does not interact with Registrars.
+*   **Provider of Registration Certificates**: Optionally issues certificates detailing entitlements. Notified by MS to the Commission.
 
 ### 1.2 Registered Entities
 
-The following entities register with Registrars and participate in the trust infrastructure:
+The following entities must undergo the registration process with a Registrar (ARF Topic 27):
 
-- **PID Providers**: Issue Person Identification Data. PID Providers must be approved by Member States according to a well-defined policy before registration (per **Reg_19**, [Topic 27](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties)). Member States define specific vetting processes and rules of acceptance for inclusion in the PID Provider Registry. This is a policy-based approval process, not a technical certification like Wallet Solutions. After registration with Registrar, PID Providers are also notified by Member States to the Commission for Trusted List inclusion (per **GenNot_01**, **PPNot_01**, **PPNot_02**).
-- **Attestation Providers**: QEAA Providers, PuB-EAA Providers, EAA Providers.
-- **Relying Parties (RP)**: Request attributes from Wallet Units.
-
-**Note**: Wallet Providers are notified by Member States to the European Commission (per **GenNot_01**, **WPNot_01**, **WPNot_02**), not registered with Registrars. The Commission compiles, signs/seals, and publishes the EU-wide Wallet Provider Trusted List (per **WPNot_04**, **WPNot_05**). Wallet Solutions must be certified by Conformity Assessment Bodies (CABs), not by the European Commission directly, according to [Commission Implementing Regulation (EU) 2024/2981](https://eur-lex.europa.eu/eli/reg_impl/2024/2981/oj) (per [ARF Chapter 7](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#7-certification-and-risk-management)) at assurance level High. See [Section 2.1.1](#211-wallet-provider-notification) for details.
+*   **PID Providers**: Issue Person Identification Data. Approved via MS-defined policy.
+*   **Attestation Providers**: Issue attestations (QEAA, PuB-EAA, EAA).
+*   **Relying Parties (RP)**: Request attributes from Wallet Units.
 
 ## 2. Registration/Onboarding Process
 
@@ -74,9 +73,7 @@ The registration data includes:
 
 #### 2.1.1 Wallet Provider Notification
 
-> **Note**: This section describes the notification process for Wallet Providers. PID Providers follow a different process: they register with Registrars (see [Section 2.1](#21-registration-data-and-requirements)) and are then also notified by Member States to the Commission for Trusted List inclusion.
-
-Wallet Providers are notified by Member States to the European Commission (per **GenNot_01**, **WPNot_01**, **WPNot_02**), not registered with Registrars. The process involves:
+Wallet Providers are notified by Member States to the European Commission (per **GenNot_01**, **WPNot_01**, **WPNot_02**). The process involves:
 
 1. **Member State Notification**: Member States notify Wallet Providers to the European Commission, providing the information specified in **WPNot_01** and **WPNot_02** (Topic 31):
    - **Identification data**: Member State/Country of establishment, name as registered in an official record, business registration number (where applicable).
@@ -84,40 +81,38 @@ Wallet Providers are notified by Member States to the European Commission (per *
 
 2. **Commission Compilation**: The European Commission compiles, signs/seals, and publishes the EU-wide Wallet Provider Trusted List (per **WPNot_04**, **WPNot_05**).
 
-**Note**: Wallet Providers do not receive access certificates or registration certificates, as they are not registered with Registrars. The Wallet Solution provided by the Wallet Provider must be certified by Conformity Assessment Bodies (CABs) as described in [ARF Chapter 7](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#7-certification-and-risk-management).
+**Note**: The Wallet Solution provided by the Wallet Provider must be certified by Conformity Assessment Bodies (CABs) as described in [ARF Chapter 7](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#7-certification-and-risk-management).
 
 ### 2.2 Access Certificate Issuance
 
-After registration, the Access Certificate Authority issues access certificates to registered entities (PID Providers, Attestation Providers, Relying Parties). These certificates:
-- Enable authentication during service interactions.
+After registration of entities (PID Providers, Attestation Providers, Relying Parties) the Access CA issues certificates that:
+- Authenticate entities during service interactions.
 - Reference the registry for entitlement verification.
 - Include Signed Certificate Timestamps (SCT) for Certificate Transparency.
 
 ### 2.3 Registration Certificate Issuance (Optional)
 
-If the Registrar policy requires it, the Provider of Registration Certificates issues registration certificates that:
+If the Registrar policy requires it, the provider of Registration Certificates issues registration certificates that:
 - Detail the entity's registration status.
-- Specify entitlements (attestation types for Credential Issuers, attributes for Relying Parties).
+- Specify entitlements for the specific entity, including available attestation types from Credential Issuers and attributes requested by Relying Parties.
 - Enable Wallet Units to verify entity entitlements.
 
 Registration certificates are issued per:
 - **RPRC_09**: For Relying Parties (Registrar MAY decide to issue registration certificates to Relying Parties).
 - **RPRC_13**: For Credential Issuers (PID Providers, Attestation Providers) (Registrar MAY decide to issue registration certificates to Providers).
 
-> **Note**: Wallet Providers do not receive registration certificates unless they are also acting as Relying Parties. In that case, they would receive registration certificates per **RPRC_09** for their Relying Party role, not per **RPRC_13**.
-
 ## 3. Trusted List Publication Process
 
 The Trusted List publication process is separate from registration. See [Overview](#overview) for Trusted List compilation responsibilities. The process involves:
 
-1. Member States notify entities to the European Commission (for Wallet Providers, PID Providers, Access CAs, Registration Cert Providers) or Member State TLPs compile Trusted Lists (for Attestation Providers).
+1. Competent authorities (European Commission or Member State TLPs) compile Trusted Lists based on the entity type.
 2. European Commission compiles EU-wide Trusted Lists or receives TL URLs from Member State TLPs.
 3. Commission verifies and maintains the List of Trusted Lists (LoTL) containing pointers to all published Trusted Lists.
 4. Commission signs and publishes the LoTL.
 
 ### 3.1 Trusted List Publication by Trusted List Provider
 
-> **Note on Trusted List Provider Organizational Level**: The ARF ([Section 3.5](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#35-trusted-list-provider)) defines a Trusted List Provider (TLP) as "a body responsible for maintaining, managing, and publishing a Trusted List." Both Member State TLPs and the European Commission act as TLPs, but with different scopes: Member State TLPs compile, sign, and publish Trusted Lists for Attestation Providers (per Member State), while the European Commission acts as TLP for Wallet Providers, PID Providers, Access CAs, and Registration Cert Providers (EU-wide). The ARF does not explicitly specify whether Member State TLPs must be Member State entities, sector-specific bodies, or the European Commission itself. However, the notification requirements (GenNot_01) state that "Member States SHALL notify" entities to the Commission, and [Section 3.5](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#35-trusted-list-provider) states that "relevant entities must be notified to the Commission by a Member State." This suggests that Member State TLPs operate at Member State level, though the ARF does not explicitly rule out other organizational models. There is also an inconsistency in the ARF itself ([Section 6.3.2](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#632-pid-provider-or-attestation-provider-registration-and-notification)) where line 2838 states that "A PID Provider or an Attestation Provider is registered by a Trusted List Provider" while line 2851 states that entities "register itself with a Registrar," regarding whether entities are registered by a TLP or by a Registrar.
+> **Note on Trusted List Provider Organizational Level**: The ARF ([Section 3.5](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#35-trusted-list-provider)) defines a Trusted List Provider (TLP) as "a body responsible for maintaining, managing, and publishing a Trusted List." Both Member State TLPs and the European Commission act as TLPs with distinct scopes (see [Responsibilities Matrix](#overview)). The ARF does not explicitly specify whether Member State TLPs must be Member State entities, sector-specific bodies, or the European Commission itself. However, the notification requirements (GenNot_01) state that "Member States SHALL notify" entities to the Commission, and [Section 3.5](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#35-trusted-list-provider) states that "relevant entities must be notified to the Commission by a Member State." This suggests that Member State TLPs operate at Member State level, though the ARF does not explicitly rule out other organizational models. There is also an inconsistency in the ARF itself ([Section 6.3.2](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#632-pid-provider-or-attestation-provider-registration-and-notification)) where line 2838 states that "A PID Provider or an Attestation Provider is registered by a Trusted List Provider" while line 2851 states that entities "register itself with a Registrar," regarding whether entities are registered by a TLP or by a Registrar.
 
 The Member State Trusted List Provider (MS TLP) is responsible for (for Attestation Providers only):
 
@@ -154,10 +149,9 @@ The European Commission:
 
 Per ETSI TS 119 612 clause D.5, the European Commission maintains a List of Trusted Lists (LoTL) that:
 - Contains pointers (TrustedListPointers) to all published Trusted Lists:
-  - **EU-wide Trusted Lists** compiled and published by the European Commission (Wallet Provider TL, PID Provider TL, Access CA TL, Registration Cert Provider TL) - single lists covering all Member States.
-  - **Member State Trusted Lists** published by Member State TLPs (Attestation Provider TLs) - one separate list per Member State.
+  - **EU-wide Trusted Lists** compiled and published by the European Commission (single lists covering all Member States).
+  - **Member State Trusted Lists** published by Member State TLPs (one separate list per Member State).
 
-**Note**: Member States do not have autonomous Trusted Lists for Wallet Providers, PID Providers, Access CAs, or Registration Cert Providers. These are compiled as single EU-wide lists by the European Commission. Only Attestation Providers have separate Trusted Lists per Member State.
 - Each pointer includes the Trusted List location (TSLLocation), scheme territory, and scheme operator name.
 - Facilitates cross-border trust establishment.
 - Centralizes trusted list distribution.
@@ -165,7 +159,7 @@ Per ETSI TS 119 612 clause D.5, the European Commission maintains a List of Trus
 
 The European Commission:
 - Compiles the LoTL from:
-  - The directly compiled and published Trusted Lists (Wallet Provider TL, PID Provider TL, Access CA TL, Registration Cert Provider TL).
+  - The directly compiled and published EU-wide Trusted Lists.
   - Trusted List URL notifications received from Member State TLPs (for Attestation Providers only).
 - Signs/seals the LoTL using the Commission's signing key.
 - Publishes the LoTL in machine-readable and human-readable formats.
@@ -182,7 +176,7 @@ The matrix collects all the ARF HLRs about the registration phase.
 | Requirement | Description | Source |
 |------------|-------------|--------|
 | **Reg_01** | Member States SHALL provide processes for entity registration | Topic 27 |
-| **Reg_10** | Access Certificate Authority SHALL issue access certificates to all registered entities (PID Providers, Attestation Providers, Relying Parties). Note: Wallet Providers do not receive access certificates. | Topic 27, Topic 31 |
+| **Reg_10** | Access Certificate Authority SHALL issue access certificates to all registered entities (PID Providers, Attestation Providers, Relying Parties). | Topic 27, Topic 31 |
 | **Reg_19** | Member States SHALL approve PID Providers according to well-defined policy | Topic 27 |
 | **Reg_21** | Member States SHALL approve Attestation Providers according to well-defined policy | Topic 27 |
 | **Reg_25** | Member States SHALL identify Relying Parties at appropriate confidence level | Topic 27 |
@@ -220,7 +214,7 @@ graph TB
         RegCertProv[Provider of Registration Certificates<br/>RPRC_01, RPRC_02]
         TLProvider[Trusted List Provider<br/>MS Component]
         Registry[Registry<br/>Reg_03, Reg_04]
-        WP[Wallet Provider<br/>Notified by MS to Commission<br/>Not registered with Registrar]
+        WP[Wallet Provider<br/>Notified by MS to Commission]
     end
 
     subgraph EC["European Commission"]
@@ -290,7 +284,7 @@ sequenceDiagram
     participant AccessCA as Access Certificate Authority<br/>Reg_10, Reg_12
     participant RegCertProv as Provider of Registration Certificates<br/>RPRC_01, RPRC_02
 
-    Note over Entity,RegCertProv: Registration/Onboarding Process<br/>(Note: Wallet Providers are notified by Member States to Commission, not registered with Registrars)
+    Note over Entity,RegCertProv: Registration/Onboarding Process
 
     Entity->>Registrar: 1. Submit Registration Request<br/>(Identification data, Entitlements)
     Note right of Entity: For Attestation Providers: Attestation types<br/>For RP: Attributes, Intended use
@@ -391,7 +385,7 @@ sequenceDiagram
 
 ### 5.3.1 Submission and Update Models: Registration to Trusted List
 
-The relationship between Registrar and Trusted List Provider (TLP) can be implemented in two ways, as referenced in [ARF section 6.3.2](https://eudi.dev/2.5.0/architecture-and-reference-framework-main/#632-pid-provider-or-attestation-provider-registration-and-notification):
+The relationship between Registrar and Trusted List Provider (TLP) can be implemented in two ways (illustrated in Diagram 5.3), as referenced in [ARF section 6.3.2](https://eudi.dev/2.5.0/architecture-and-reference-framework-main/#632-pid-provider-or-attestation-provider-registration-and-notification):
 
 #### Model A: Automatic Trigger (Recommended)
 
@@ -646,19 +640,19 @@ graph TB
 | Aspect | Registration | Trusted List Publication |
 |--------|-------------|---------------------------|
 | **Purpose** | Enable entity participation in ecosystem | Establish trust anchors for validation |
-| **Managed By** | Member State Registrar | EC compiles & publishes EU-wide TLs: Wallet Provider, PID Provider, Access CA, Registration Cert Provider; MS TLP compiles & publishes Attestation Provider TL per MS; EC maintains LoTL |
-| **Scope** | PID Providers, Attestation Providers, Relying Parties (register with Registrar). PID Providers are also notified by Member States to Commission for Trusted List inclusion. Wallet Providers, Access CAs, Registration Cert Providers are notified by Member States to Commission (per GenNot_01), not registered with Registrars. | Selected entities: Wallet Providers (EU-wide TL compiled by EC), PID Providers (EU-wide TL compiled by EC), Attestation Providers (per MS TL compiled by MS TLP), Access CAs (EU-wide TL compiled by EC), Registration Cert Providers (EU-wide TL compiled by EC) |
-| **Output** | Registry entries, Access Certificates, Registration Certificates | Trusted Lists: Wallet Provider TL (EU-wide, compiled by EC), PID Provider TL (EU-wide, compiled by EC), Attestation Provider TL (per MS, compiled by MS TLP), Access CA TL (EU-wide, compiled by EC), Registration Cert Provider TL (EU-wide, compiled by EC); List of Trusted Lists (compiled by EC) |
+| **Managed By** | Member State Registrar | EC (EU-wide TLs) and MS TLP (National TLs); EC maintains LoTL |
+| **Scope** | PID Providers, Attestation Providers, Relying Parties. (PID Providers are subsequently notified to Commisson). | Wallet Providers, PID Providers, Attestation Providers, Access CAs, Registration Cert Providers. |
+| **Output** | Registry entries, Access Certificates, Registration Certificates | Trusted Lists tailored to entity type (see Responsibilities Matrix); List of Trusted Lists (compiled by EC) |
 | **Used For** | Entitlement verification, service access | Cryptographic trust validation |
 | **Requirements** | Reg_01, Reg_10, RPRC_09, RPRC_13 | GenNot_01, TLPub_01, TLPub_05, TLPub_06 |
-| **Submission and Update** | Managed by Registrar | For Attestation Providers: Triggered by Registrar registration completion; MS TLP compiles, signs & publishes TL per MS, then submits TL URL to EC. For Wallet Providers, PID Providers, Access CAs, Reg Cert Providers: MS notifies entities to EC, EC compiles & publishes EU-wide TLs directly. See [Overview](#overview) for details. |
+| **Submission and Update** | Managed by Registrar | Varies by entity type (see [Overview](#overview) and [Section 5.3](#53-complete-registration-to-trusted-list-publication-flow)). |
 
 ## 9. Summary
 
 The trust infrastructure operates through two distinct but complementary processes:
 
-1. **Registration/Onboarding**: Managed at Member State level, entities (PID Providers, Attestation Providers, Relying Parties) register with Registrars and entitlements are defined. PID Providers are also notified by Member States to the Commission for Trusted List inclusion. Wallet Providers, Access CAs, and Registration Cert Providers are notified by Member States to the Commission (per **GenNot_01**), not registered with Registrars. See [Overview](#overview) for entity registration responsibilities.
-2. **Trusted List Publication**: The European Commission compiles EU-wide Trusted Lists for Wallet Providers, PID Providers, Access CAs, and Registration Cert Providers. Member State TLPs compile Trusted Lists per Member State for Attestation Providers. See [Overview](#overview) for Trusted List compilation responsibilities.
+1. **Registration/Onboarding**: Managed at Member State level, entities (PID Providers, Attestation Providers, Relying Parties) register with Registrars and entitlements are defined. PID Providers are also notified by Member States to the Commission for Trusted List inclusion. See [Overview](#overview) for entity registration responsibilities.
+2. **Trusted List Publication**: The European Commission compiles EU-wide Trusted Lists, while Member State TLPs compile National Trusted Lists (see [Overview](#overview) for specific responsibilities).
 
 Both processes are required for the trust ecosystem:
 - **Registration**: Defines operational authorization and entitlement management.
@@ -676,7 +670,7 @@ The separation of these processes aligns with the ARF and enables:
 
 ### 7.1 Member State Autonomous Trusted Lists
 
-Member States may publish additional Trusted Lists within their own perimeter for internal or national purposes, beyond the eIDAS Trusted Lists published by the European Commission. These Member State-specific Trusted Lists are not normative or usable by other Member States, as only the eIDAS Trusted Lists published by the European Commission (for Wallet Providers, PID Providers, Access CAs, and Registration Cert Providers) and the Attestation Provider Trusted Lists published by Member State TLPs (which are included in the Commission's List of Trusted Lists) are recognized for cross-border trust establishment in the EUDI Wallet ecosystem.
+Member States may publish additional Trusted Lists within their own perimeter for internal or national purposes, beyond the eIDAS Trusted Lists published by the European Commission. These Member State-specific Trusted Lists are not normative or usable by other Member States, as only the official **EU-wide Trusted Lists** and **Member State Attestation Provider Trusted Lists** (referenced in the LoTL) are recognized for cross-border trust establishment in the EUDI Wallet ecosystem.
 
 ## 8. Trust Evaluation
 
