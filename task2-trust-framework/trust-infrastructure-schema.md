@@ -205,14 +205,19 @@ The following Mermaid diagrams illustrate the trust infrastructure architecture 
 ### 5.1 Overall Trust Infrastructure Architecture
 
 ```mermaid
+%%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
 graph TB
+    %% --- CLASSES ---
+    classDef titleBox fill:none,stroke:none,font-weight:bold,font-size:16px,color:black;    
+
     subgraph MS["Member State"]
         Registrar[Registrar<br/>Reg_01, Reg_02]
         AccessCA[Access Certificate Authority<br/>Reg_10, Reg_11]
         RegCertProv[Provider of Registration Certificates<br/>RPRC_01, RPRC_02]
         TLProvider[Trusted List Provider<br/>MS Component]
         Registry[Registry<br/>Reg_03, Reg_04]
-        WP[Wallet Provider<br/>Notified by MS to Commission]
+        WP[Wallet Provider<br/>Notified by MS to Commission<br/>Not registered with Registrar]
+        Registry ~~~ WP
     end
 
     subgraph EC["European Commission"]
@@ -222,10 +227,18 @@ graph TB
         LoTL[List of Trusted Lists<br/>Signed/Sealed by EC]
     end
 
-    subgraph Entities["Registered Entities<br/>(Register with Registrar)"]
+    subgraph EntitiesScope[ ]
+        %% inserted title to fix visibility
+        EntitiesTitle["Registered Entities<br/>(Register with Registrar)"]:::titleBox
+        
         PID[PID Provider<br/>Registers with Registrar<br/>Also notified to Commission<br/>PPNot_02]
         AP[Attestation Provider<br/>PuBPNot_02]
         RP[Relying Party<br/>Reg_25]
+        
+        %% Force vertical layout
+        EntitiesTitle ~~~ PID
+        EntitiesTitle ~~~ AP
+        EntitiesTitle ~~~ RP
     end
 
     subgraph TL["Published Trusted Lists"]
@@ -240,19 +253,22 @@ graph TB
     PID -->|Register with identification & entitlements<br/>Reg_01, Reg_19| Registrar
     AP -->|Register with identification & entitlements<br/>Reg_01, Reg_21| Registrar
     RP -->|Register with identification & entitlements<br/>Reg_01, Reg_25| Registrar
+    
+    %% Notification Flow (entities notified to Commission)
     WP -.->|MS notifies WP to Commission<br/>GenNot_01, WPNot_01, WPNot_02| ECNotify
-    PID -.->|After registration, MS notifies PID Provider to Commission<br/>GenNot_01, PPNot_01, PPNot_02| ECNotify   
-
+    PID -.->|After registration, MS notifies PID Provider to Commission<br/>GenNot_01, PPNot_01, PPNot_02| ECNotify
+    AccessCA -.->|MS notifies Access CA to Commission<br/>GenNot_01, RPACANot_01, RPACANot_02| ECNotify
+    RegCertProv -.->|MS notifies Registration Cert Provider to Commission<br/>GenNot_01, RPACANot_01, RPACANot_02| ECNotify
+    
     Registrar -->|Approve & Register<br/>Reg_19, Reg_21| Registry
     Registrar -->|Request Access Cert<br/>Reg_10| AccessCA
-    AccessCA -->|Issue Access Certificate<br/>Reg_10, Reg_12| Entities
+    AccessCA -->|Issue Access Certificate<br/>Reg_10, Reg_12| EntitiesScope
     Registrar -.->|Optional: Request Reg Cert<br/>RPRC_09, RPRC_13| RegCertProv
-    RegCertProv -.->|Issue Registration Certificate<br/>RPRC_02| Entities
-
+    RegCertProv -.->|Issue Registration Certificate<br/>RPRC_02| EntitiesScope
+    
     %% Submission and Update: Registration triggers Trusted List publication (Attestation Providers only)
     Registrar -->|Registration Complete<br/>Triggers TLP for Attestation Providers| TLProvider
     Registry -.->|TLP accesses Registry data<br/>Extracts Trust Anchors for Attestation Providers| TLProvider
-    %% Note: After registration, PID Providers are notified to Commission for TL inclusion. Access CAs and Registration Cert Providers are notified to Commission (not registered)
     
     %% Trusted List Publication Flow
     TLProvider -->|Compile, Sign & Publish<br/>Attestation Provider TL only<br/>PuBPNot_03| APTL
@@ -268,7 +284,7 @@ graph TB
 
     style MS fill:#e1f5ff
     style EC fill:#fff4e1
-    style Entities fill:#e8f5e9
+    style EntitiesScope fill:#e8f5e9
     style TL fill:#f3e5f5
 ```
 
