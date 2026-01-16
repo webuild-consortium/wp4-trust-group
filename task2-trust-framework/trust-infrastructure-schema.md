@@ -110,9 +110,7 @@ The Member State Trusted List Provider (MS TLP) is responsible for (for Attestat
 
 2. **Signing Trusted Lists**: The MS TLP signs/seals the Trusted Lists using its signing key (for Attestation Providers only).
 
-3. **Publishing Trusted Lists**: The MS TLP publishes the signed Trusted Lists in machine-readable and human-readable formats at a publicly accessible URL (for Attestation Providers only). Per [ETSI TS 119 602 V1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) (Data model for Lists of Trusted Entities), the format requirements are:
-   - **Commission-compiled Trusted Lists** (Wallet Provider TL - Annex E, PID Provider TL - Annex D, Access CA TL - Annex F, Registration Cert Provider TL - Annex G): Must be published in **JSON format with compact JAdES Baseline B signature** (per ETSI TS 119 182-1).
-   - **Attestation Provider Trusted Lists** (Annex H, published by MS TLP): May be published in either **JSON format with compact JAdES Baseline B signature** OR **XML format with XAdES Baseline B signature** (per ETSI EN 319 132-1). When XML is used, it must be an enveloped digital signature.
+3. **Publishing Trusted Lists**: The MS TLP publishes the signed Trusted Lists in machine-readable and human-readable formats at a publicly accessible URL (for Attestation Providers only). Per [ETSI TS 119 602 V1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) (Data model for Lists of Trusted Entities), **Attestation Provider Trusted Lists** (ETSI TS 119 602 Annex H, published by MS TLP) may be published in either **JSON format with compact JAdES Baseline B signature** OR **XML format with XAdES Baseline B signature** (per ETSI EN 319 132-1). When XML is used, it must be an enveloped digital signature.
 
 All Trusted Lists must comply with ETSI TS 119 602 data model and the specific profiles defined in the annexes, or with ETSI TS 119 612 v2.1.1 or a suitable profile derived from ETSI TS 102 231 (per **WPNot_05**, **PPNot_07**, **PuBPNot_03**, **RPACANot_05**).
 
