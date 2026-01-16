@@ -580,24 +580,29 @@ graph TB
         RegStep3["3. Optional Registration Certificate<br/>RPRC_09 (RP), RPRC_13 (Credential Issuers)"]
         RegStep4[4. Registry Publication<br/>Reg_03, Reg_04]
     end
-    
-    subgraph WPNotification["Wallet Provider Notification<br/>MS → EC"]
-        WPNotifStep1[1. MS notifies WP to Commission<br/>GenNot_01, WPNot_01, WPNot_02]
-        WPNotifStep2[2. EC compiles & publishes EU-wide Wallet Provider TL<br/>WPNot_04, WPNot_05]
-    end
 
-    subgraph SubmissionUpdate["Submission and Update: Registration → Trusted List<br/>Registrar → Trusted List Provider<br/>(Attestation Providers only)"]
-        TLPTrigger[Trusted List Provider<br/>Triggered by Registration Completion]
+    subgraph SubmissionUpdate["Attestation Provider TL Publication<br/>MS TLP (Attestation Providers only)"]
+        TLPTrigger[MS TLP Triggered by Registration Completion]
         TLPCompile[Compile Attestation Provider TL<br/>Extract Trust Anchors from Registry]
         TLPPublish[Sign & Publish Attestation Provider TL<br/>TLPub_05]
     end
 
-    subgraph Notification["Notification & LoTL Process<br/>MS TLP → EC (Attestation Providers)<br/>MS → EC (Wallet/PID/Access CA/Reg Cert Providers)"]
-        NotifStep1[1. MS TLP Submits Attestation Provider TL URL<br/>GenNot_01]
-        NotifStep2[2. EC Compiles Commission TLs<br/>WPNot_04, PPNot_05, PPNot_06, RPACANot_04]
-        NotifStep3[3. EC Verifies Attestation Provider TL<br/>GenNot_04]
-        NotifStep4[4. EC Compiles LoTL<br/>ETSI TS 119612 D.5]
-        NotifStep5[5. EC Signs & Publishes LoTL<br/>TLPub_06]
+    subgraph Notification["MS Notification to EC<br/>GenNot_01"]
+        NotifWP[MS notifies Wallet Provider<br/>WPNot_01, WPNot_02]
+        NotifPID[MS notifies PID Provider<br/>PPNot_01, PPNot_02]
+        NotifACA[MS notifies Access CA<br/>RPACANot_01, RPACANot_02]
+        NotifRegCert[MS notifies Registration Cert Provider<br/>RPACANot_01, RPACANot_02]
+        NotifAPTL[MS TLP submits Attestation Provider TL URL<br/>GenNot_01]
+    end
+
+    subgraph ECCompilation["EC Compilation & Publication"]
+        ECCompileWP[EC compiles Wallet Provider TL<br/>WPNot_04, WPNot_05]
+        ECCompilePID[EC compiles PID Provider TL<br/>PPNot_05]
+        ECCompileACA[EC compiles Access CA TL<br/>PPNot_06, RPACANot_04]
+        ECCompileRegCert[EC compiles Registration Cert Provider TL<br/>RPACANot_04]
+        ECVerify[EC verifies Attestation Provider TL<br/>GenNot_04]
+        ECCompileLoTL[EC compiles LoTL<br/>ETSI TS 119612 D.5]
+        ECPublishLoTL[EC signs & publishes LoTL<br/>TLPub_06]
     end
 
     subgraph Entities["Entities"]
@@ -610,11 +615,11 @@ graph TB
     end
 
     subgraph TrustedLists["Published Trusted Lists"]
-        WPTL[Wallet Provider TL<br/>EU-wide, compiled by EC<br/>WPNot_04, WPNot_05]
-        PIDTL[PID Provider TL<br/>EU-wide, compiled by EC<br/>PPNot_05]
-        APTL[Attestation Provider TL<br/>Per MS, compiled by MS TLP<br/>PuBPNot_03]
-        ACATL[Access CA TL<br/>EU-wide, compiled by EC<br/>PPNot_06, RPACANot_04]
-        RegCertTL[Registration Cert Provider TL<br/>EU-wide, compiled by EC<br/>RPACANot_04]
+        WPTL[Wallet Provider TL<br/>EU-wide, compiled by EC]
+        PIDTL[PID Provider TL<br/>EU-wide, compiled by EC]
+        APTL[Attestation Provider TL<br/>Per MS, compiled by MS TLP]
+        ACATL[Access CA TL<br/>EU-wide, compiled by EC]
+        RegCertTL[Registration Cert Provider TL<br/>EU-wide, compiled by EC]
     end
 
     %% Registration Flow (PID/Attestation Providers, RP)
@@ -625,32 +630,47 @@ graph TB
     RegStep2 --> RegStep3
     RegStep3 --> RegStep4
 
-    %% Wallet Provider Notification Flow
-    WP -->|MS notifies to Commission<br/>GenNot_01, WPNot_01, WPNot_02| WPNotifStep1
-    WPNotifStep1 -->|EC compiles & publishes<br/>EU-wide TL| WPNotifStep2
-    WPNotifStep2 -->|EU-wide TL published by EC| WPTL
-
-    %% Submission and Update Flow (Attestation Providers only)
-    RegStep4 -->|Registration Complete<br/>Triggers TLP for Attestation Providers| TLPTrigger
+    %% Attestation Provider TL Publication Flow
+    RegStep4 -->|Registration Complete<br/>Triggers MS TLP| TLPTrigger
     TLPTrigger -->|Access Registry Data<br/>Extract Trust Anchors| TLPCompile
     TLPCompile -->|Compile Attestation Provider TL| TLPPublish
-    TLPPublish -->|Sign & Publish at URL| NotifStep1
+    TLPPublish -->|Sign & Publish at URL| NotifAPTL
+    TLPPublish --> APTL
 
-    %% Notification Flow
-    NotifStep1 -->|MS TLP submits Attestation Provider TL URL| NotifStep3
-    WPNotifStep1 -->|MS notifies Wallet/PID/Access CA/Reg Cert Providers to Commission| NotifStep2
-    NotifStep2 -->|EC compiles Commission TLs| NotifStep4
-    NotifStep3 -->|EC verifies Attestation Provider TL| NotifStep4
-    NotifStep4 -->|EC compiles LoTL| NotifStep5
-    NotifStep5 --> TrustedLists
+    %% Notification Flows (all entities notified to EC)
+    WP -->|MS notifies| NotifWP
+    PID -->|After registration, MS notifies| NotifPID
+    ACA -->|MS notifies| NotifACA
+    RegCertProv -->|MS notifies| NotifRegCert
+
+    %% EC Compilation Flows
+    NotifWP --> ECCompileWP
+    NotifPID --> ECCompilePID
+    NotifACA --> ECCompileACA
+    NotifRegCert --> ECCompileRegCert
+    NotifAPTL --> ECVerify
+
+    ECCompileWP --> WPTL
+    ECCompilePID --> PIDTL
+    ECCompileACA --> ACATL
+    ECCompileRegCert --> RegCertTL
+    ECVerify --> ECCompileLoTL
+
+    %% LoTL Compilation
+    ECCompileWP --> ECCompileLoTL
+    ECCompilePID --> ECCompileLoTL
+    ECCompileACA --> ECCompileLoTL
+    ECCompileRegCert --> ECCompileLoTL
+    ECCompileLoTL --> ECPublishLoTL
+    ECPublishLoTL --> TrustedLists
 
     %% Note: Registration data feeds into Trusted Lists
     RegStep4 -.->|Registry data used for<br/>trust evaluation| TrustedLists
 
     style Registration fill:#e8f5e9
-    style WPNotification fill:#ffe0b2
     style SubmissionUpdate fill:#fff9c4
-    style Notification fill:#fff4e1
+    style Notification fill:#ffe0b2
+    style ECCompilation fill:#fff4e1
     style Entities fill:#f3e5f5
     style TrustedLists fill:#e1f5ff
 ```
