@@ -1,6 +1,6 @@
 # Trust Infrastructure Schema: Onboarding and Trusted Lists
 
-This document provides a comprehensive schema and graphical representation of the EUDI Wallet trust infrastructure, focusing on two main processes: **Onboarding** (Registration) and **Trusted List Publication**. These processes are separated to align with the Architecture and Reference Framework (ARF).
+This document outlines the schema and graphical representation of the EUDI Wallet trust infrastructure. It focuses on two primary processes: **Onboarding** (Registration) and **Trusted List Publication**, which are separated to align with the Architecture and Reference Framework (ARF).
 
 ## Overview
 
@@ -85,16 +85,16 @@ Wallet Providers are notified by Member States to the European Commission (per *
 
 ### 2.2 Access Certificate Issuance
 
-After registration, the Access Certificate Authority issues access certificates to registered entities (PID Providers, Attestation Providers, Relying Parties). These certificates:
-- Enable authentication during service interactions.
+After registration of entities (PID Providers, Attestation Providers, Relying Parties) the Access CA issues certificates that:
+- Authenticate entities during service interactions.
 - Reference the registry for entitlement verification.
 - Include Signed Certificate Timestamps (SCT) for Certificate Transparency.
 
 ### 2.3 Registration Certificate Issuance (Optional)
 
-If the Registrar policy requires it, the Provider of Registration Certificates issues registration certificates that:
+If the Registrar policy requires it, the provider of Registration Certificates issues registration certificates that:
 - Detail the entity's registration status.
-- Specify entitlements (attestation types for Credential Issuers, attributes for Relying Parties).
+- Specify entitlements for the specific entity, including available attestation types from Credential Issuers and attributes requested by Relying Parties.
 - Enable Wallet Units to verify entity entitlements.
 
 Registration certificates are issued per:
