@@ -71,17 +71,7 @@ The registration data includes:
   - **For Relying Parties**: Attributes that the Relying Party intends to request from Wallet Units, and for what purpose (intended use). The Registrar also registers if the Relying Party intends to use the services of an intermediary, and if so, which one.
 - **Service supply points**: URLs where services are available (e.g., PID issuance endpoint, attestation issuance endpoint, presentation request endpoint).
 
-#### 2.1.1 Wallet Provider Notification
-
-Wallet Providers are notified by Member States to the European Commission (per **GenNot_01**, **WPNot_01**, **WPNot_02**). The process involves:
-
-1. **Member State Notification**: Member States notify Wallet Providers to the European Commission, providing the information specified in **WPNot_01** and **WPNot_02** (Topic 31):
-   - **Identification data**: Member State/Country of establishment, name as registered in an official record, business registration number (where applicable).
-   - **Wallet Provider trust anchors**: Public keys and name supporting the authentication of Wallet Unit Attestations (WUA) issued by the Wallet Provider (per **WPNot_02**).
-
-2. **Commission Compilation**: The European Commission compiles, signs/seals, and publishes the EU-wide Wallet Provider Trusted List (per **WPNot_04**, **WPNot_05**).
-
-**Note**: The Wallet Solution provided by the Wallet Provider must be certified by Conformity Assessment Bodies (CABs) as described in [ARF Chapter 7](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#7-certification-and-risk-management).
+> **Note**: Wallet Providers do not register with Registrars. They are notified by Member States to the European Commission for Trusted List inclusion (see [Section 3.1.1](#311-wallet-provider-notification)). Wallet Providers do not receive access certificates or registration certificates, as they are not registered with Registrars. The Wallet Solution provided by the Wallet Provider must be certified by Conformity Assessment Bodies (CABs) as described in [ARF Chapter 7](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#7-certification-and-risk-management).
 
 ### 2.2 Access Certificate Issuance
 
@@ -136,6 +126,16 @@ The process is triggered by successful registration with the Member State Regist
 - Submits the Trusted List URL to the European Commission.
 
 > **Note**: For Attestation Providers, the TLP extracts trust anchors that were provided during registration and includes them in the Trusted Lists. See [Overview](#overview) for Trusted List compilation responsibilities and [Section 5.3.1](#531-submission-and-update-models-registration-to-trusted-list) for details on submission and update models.
+
+### 3.1.1 Wallet Provider Notification
+
+Wallet Providers are notified by Member States to the European Commission (per **GenNot_01**, **WPNot_01**, **WPNot_02**), not registered with Registrars. The process involves:
+
+1. **Member State Notification**: Member States notify Wallet Providers to the European Commission, providing the information specified in **WPNot_01** and **WPNot_02** (Topic 31):
+   - **Identification data**: Member State/Country of establishment, name as registered in an official record, business registration number (where applicable).
+   - **Wallet Provider trust anchors**: Public keys and name supporting the authentication of Wallet Unit Attestations (WUA) issued by the Wallet Provider (per **WPNot_02**).
+
+2. **Commission Compilation**: The European Commission compiles, signs/seals, and publishes the EU-wide Wallet Provider Trusted List (per **WPNot_04**, **WPNot_05**).
 
 ### 3.2 European Commission Verification and LoTL Maintenance
 
