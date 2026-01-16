@@ -125,15 +125,16 @@ The process is triggered by successful registration with the Member State Regist
 
 > **Note**: For Attestation Providers, the TLP extracts trust anchors that were provided during registration and includes them in the Trusted Lists. See [Overview](#overview) for Trusted List compilation responsibilities and [Section 5.3.1](#531-submission-and-update-models-registration-to-trusted-list) for details on submission and update models.
 
-### 3.1.1 Wallet Provider Notification
+### 3.1.1 Member State Notification to European Commission
 
-Wallet Providers are notified by Member States to the European Commission (per **GenNot_01**, **WPNot_01**, **WPNot_02**), not registered with Registrars. The process involves:
+Member States SHALL notify all PID Providers, PuB-EAA Providers, Wallet Providers, Access Certificate Authorities, and Providers of Registration Certificates to the European Commission (per **GenNot_01**). The information notified varies by entity type:
 
-1. **Member State Notification**: Member States notify Wallet Providers to the European Commission, providing the information specified in **WPNot_01** and **WPNot_02** (Topic 31):
-   - **Identification data**: Member State/Country of establishment, name as registered in an official record, business registration number (where applicable).
-   - **Wallet Provider trust anchors**: Public keys and name supporting the authentication of Wallet Unit Attestations (WUA) issued by the Wallet Provider (per **WPNot_02**).
+- **PID Providers** (per **PPNot_02**): Identification data, PID Provider trust anchors, Access Certificate Authority trust anchors for PID Providers, Service Supply Point (URL).
+- **Wallet Providers** (per **WPNot_02**): Identification data, Wallet Provider trust anchors.
+- **PuB-EAA Providers** (per **PuBPNot_02**): Identification data (including conformity assessment report), Service Supply Point (URL).
+- **Access Certificate Authorities and Providers of Registration Certificates** (per **RPACANot_02**): Identification data, Trust anchors.
 
-2. **Commission Compilation**: The European Commission compiles, signs/seals, and publishes the EU-wide Wallet Provider Trusted List (per **WPNot_04**, **WPNot_05**).
+> **Note**: Wallet Providers are notified by Member States to the European Commission (per **GenNot_01**, **WPNot_01**, **WPNot_02**), and are not registered with Registrars. The European Commission compiles, signs/seals, and publishes EU-wide Trusted Lists for Wallet Providers (per **WPNot_04**, **WPNot_05**), PID Providers (per **PPNot_05**), Access CAs (per **PPNot_06**, **RPACANot_04**), and Registration Cert Providers (per **RPACANot_04**).
 
 ### 3.2 European Commission Verification and LoTL Maintenance
 
@@ -468,49 +469,56 @@ This diagram focuses solely on the notification process, as referenced in the or
 
 ```mermaid
 sequenceDiagram
-    participant MS as Member State<br/>Trusted List Provider
-    participant ECNotify as European Commission<br/>Notification System<br/>GenNot_01
-    participant ECVerify as European Commission<br/>Verification System<br/>GenNot_04
-    participant ECCompile as European Commission<br/>Compilation System<br/>TLPub_01
-    participant LoTL as List of Trusted Lists<br/>ETSI TS 119612 D.5
-    participant TL as Published Trusted Lists<br/>TLPub_05
-
-    Note over MS,LoTL: Trusted List Publication Process
-
-    rect rgb(230, 245, 255)
-        Note over MS,TL: Phase 1: MS TLP Compiles, Signs & Publishes Attestation Provider TL
-        MS->>MS: 1. Compile Attestation Provider TL<br/>(PuBPNot_01, PuBPNot_02)
-        Note right of MS: Conformity assessment<br/>report (PuBPNot_02)
-        
-        MS->>TL: 2. Sign/Seal & Publish Attestation Provider TL<br/>(TLPub_05)
-        Note right of TL: Published at MS TLP URL<br/>Machine-readable & human-readable<br/>ETSI TS 119612 format
-    end
-
-    rect rgb(255, 244, 225)
-        Note over MS,ECNotify: Phase 2: MS TLP Submits Attestation Provider TL URL to EC
-        MS->>ECNotify: 3. Submit Attestation Provider TL URL to EC<br/>(GenNot_01)
-        Note right of MS: Submit URL of published<br/>Attestation Provider Trusted List
-    end
-
-    rect rgb(255, 230, 230)
-        Note over ECVerify,LoTL: Phase 3: EC Compiles Commission TLs, Verifies MS TLs, and Maintains LoTL
-        ECCompile->>ECCompile: 4. Commission compiles Wallet Provider TL<br/>(WPNot_04, WPNot_05)
-        ECCompile->>ECCompile: 5. Commission compiles PID Provider TL<br/>(PPNot_05)
-        ECCompile->>ECCompile: 6. Commission compiles Access CA TL<br/>(PPNot_06, RPACANot_04)
-        ECCompile->>ECCompile: 7. Commission compiles Registration Cert Provider TL<br/>(RPACANot_04)
-        
-        ECNotify->>ECVerify: 8. Verify Attestation Provider TL Completeness & Compliance<br/>(GenNot_04)
-        Note right of ECVerify: Technical validation<br/>Schema compliance<br/>Verify TL signatures
-        
-        ECVerify->>ECCompile: 9. Compile List of Trusted Lists<br/>(ETSI TS 119612 D.5)
-        Note right of ECCompile: Create TrustedListPointers<br/>for EC-compiled TLs: WP, PID, Access CA, Reg Cert<br/>Plus MS TLP-compiled TLs: Attestation Provider per MS
-        
-        ECCompile->>LoTL: 10. Sign/Seal & Publish LoTL<br/>(TLPub_06)
-        Note right of LoTL: Published by EC<br/>Contains pointers to EC-compiled TLs<br/>and MS TLP-compiled Attestation Provider TLs
-        
-        ECCompile->>ECCompile: 11. Publish in OJEU<br/>(TLPub_06, TLPub_07)
-        Note right of ECCompile: LoTL location &<br/>trust anchors
-    end
+	participant MS as Member State<br/>Trusted List Provider
+	participant ECNotify as European Commission<br/>Notification System<br/>GenNot_01
+	participant ECVerify as European Commission<br/>Verification System<br/>GenNot_04
+	participant ECCompile as European Commission<br/>Compilation System<br/>TLPub_01
+	participant LoTL as List of Trusted Lists<br/>ETSI TS 119612 D.5
+	participant TL as Published Trusted Lists<br/>TLPub_05
+	Note over MS,LoTL: MS SHALL notify all PID Providers, PuB-EAA Providers,<br/>Wallet Providers, Access CAs, and Providers of Registration Certificates<br/>to the European Commission (GenNot_01)
+	
+	rect rgb(230, 245, 255)
+		Note over MS,TL: Phase 1: MS TLP Compiles, Signs & Publishes Attestation Provider TL
+		MS->>MS: 1. Compile Attestation Provider TL<br/>(PuBPNot_01, PuBPNot_02)
+		Note right of MS: Conformity assessment report<br/>(PuBPNot_02)
+		MS->>TL: 2. Sign/Seal & Publish Attestation Provider TL<br/>(TLPub_05)
+		Note right of TL: Published at MS TLP URL<br/>ETSI TS 119612 format
+	end
+	
+	rect rgb(255, 244, 225)
+		Note over MS,ECNotify: Phase 2: MS Notification to EC
+		MS->>ECNotify: 3a. Submit Attestation Provider TL URL<br/>(GenNot_01)
+		Note right of MS: For PuB-EAA Providers only
+		
+		MS->>ECNotify: 3b. Notify PID Provider<br/>(GenNot_01, PPNot_02)
+		Note right of MS: Identification data, Trust anchors,<br/>Access CA trust anchors, Service Supply Point
+		
+		MS->>ECNotify: 3c. Notify Wallet Provider<br/>(GenNot_01, WPNot_02)
+		Note right of MS: Identification data,<br/>Wallet Provider trust anchors
+		
+		MS->>ECNotify: 3d. Notify Access CA<br/>(GenNot_01, RPACANot_02)
+		Note right of MS: Identification data, Trust anchors
+		
+		MS->>ECNotify: 3e. Notify Registration Cert Provider<br/>(GenNot_01, RPACANot_02)
+		Note right of MS: Identification data, Trust anchors
+	end
+	
+	rect rgb(255, 230, 230)
+		Note over ECVerify,LoTL: Phase 3: EC Compiles TLs, Verifies MS TLs, and Maintains LoTL
+		ECNotify->>ECVerify: 4. Verify completeness & compliance<br/>(GenNot_04)
+		Note right of ECVerify: Technical validation,<br/>Schema compliance, Verify TL signatures
+		
+		ECCompile->>ECCompile: 5. Compile Wallet Provider TL<br/>(WPNot_04, WPNot_05)
+		ECCompile->>ECCompile: 6. Compile PID Provider TL<br/>(PPNot_05)
+		ECCompile->>ECCompile: 7. Compile Access CA TL<br/>(PPNot_06, RPACANot_04)
+		ECCompile->>ECCompile: 8. Compile Registration Cert Provider TL<br/>(RPACANot_04)
+		
+		ECVerify->>ECCompile: 9. Compile List of Trusted Lists<br/>(ETSI TS 119612 D.5)
+		Note right of ECCompile: Create TrustedListPointers<br/>for EC-compiled TLs and MS TLP-compiled TLs
+		
+		ECCompile->>LoTL: 10. Sign/Seal & Publish LoTL<br/>(TLPub_06)
+		ECCompile->>ECCompile: 11. Publish in OJEU<br/>(TLPub_06, TLPub_07)
+	end
 ```
 
 ### 5.4 List of Trusted Lists Structure (ETSI TS 119612 D.5)
