@@ -57,7 +57,7 @@ The registration process is managed by Member State Registrars and involves (for
    - Attestation Provider registration and attestation types (per **ISSU_34a**).
    - Relying Party registration and requested attributes (per **RPRC_18**).
 
-### 2.1 Registration Flow
+### 2.1 Registration Data and Requirements
 
 Entities register with their Member State Registrar before participating in the ecosystem. The common set of data to be registered is specified in [ARF Section 6.3.2.2](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#6322-data-about-the-pid-provider-or-attestation-provider-is-included-in-the-registry) and [Section 6.4.2](https://eudi.dev/2.7.3/architecture-and-reference-framework-main/#642-relying-party-registration), and detailed in [Technical Specification 6](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md) per requirement **Reg_01a** (Topic 27).
 
@@ -74,7 +74,7 @@ The registration data includes:
 
 #### 2.1.1 Wallet Provider Notification
 
-> **Note**: This section describes the notification process for Wallet Providers. PID Providers follow a different process: they register with Registrars (see [Section 2.1](#21-registration-flow)) and are then also notified by Member States to the Commission for Trusted List inclusion.
+> **Note**: This section describes the notification process for Wallet Providers. PID Providers follow a different process: they register with Registrars (see [Section 2.1](#21-registration-data-and-requirements)) and are then also notified by Member States to the Commission for Trusted List inclusion.
 
 Wallet Providers are notified by Member States to the European Commission (per **GenNot_01**, **WPNot_01**, **WPNot_02**), not registered with Registrars. The process involves:
 
