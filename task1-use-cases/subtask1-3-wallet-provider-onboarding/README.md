@@ -81,10 +81,7 @@ wallet user;
 - The WEBUILD WP4 Trust Infrastructure group is assigned to act as Ecosystem Authority and Trusted List Provider for all
   WEBUILD participants
 - A Trusted List for Wallet Providers is available for onboarding
-- The onboarding Wallet Provider can present a Wallet Unit Attestation according
-  to [EUDI ts3-wallet-unit-attestation](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md)
 - WP4 Trust Infrastructure group has assigned responsibilities for the onboarding process
-- Wallet providers have succesfully passed the Wallet conformity assessment within WEBUILD.
 - Wallet Providers are able to provide the requested data.
 
 | RACI MATRIX - WP4 Trust Infrastructure Group                     | Lead/ Co-Lead | WP 4 - Testing | IDunion SCE | [Participant] |
@@ -117,27 +114,19 @@ wallet user;
 - The onboarding Wallet Provider can present
     - proof of successfully passing an EUDI Wallet certification process according
       to [CIR 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj)
-    - a Wallet Unit Attestation according
-      to [EUDI ts3-wallet-unit-attestation](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md)
 
 
 ## Data Model
 
 [MVP]
 
-- As a baseline, there will be a single Trusted List for all wallet providers in WEBUILD to reduce complexity. Later on, provided that time permits and there is readiness of WP4 members to do so, WP4 will set up several Trusted Lists, distribute wallet providers across them, and include them in a single List of Trusted Lists.
+- As a baseline, there will be a single Trusted List for all wallet providers in WEBUILD to reduce complexity.
 - Trusted Lists for Wallet Providers comply to ETSI 119 602
 - Wallet Provider Certificate Profile: ETSI 119 412-6, section 5
 - Wallet Unit Attestion: [https://github.com/EWC-consortium/eudi-wallet-rfcs/blob/main/ewc-rfc004-individual-wallet-attestation.md](https://github.com/EWC-consortium/eudi-wallet-rfcs/blob/main/ewc-rfc004-individual-wallet-attestation.md), [OIDC4VCI 1.0, Appendix E](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-E)
 - unique reference identifier for the wallet solution according
   to [CIR 2025/849 Annex 2(a)](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849)
 - [token-status-list](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-12)
-
-[MVP+]
-
-- It is assumed that the European Commission will set up a separate List of Trusted Lists which includes URIs to Trusted
-  List of Wallet Providers for each member state.
-- Trusted Lists for Wallet Providers comply to ETSI 119 602
 
 
 ### Trusted List of Entitites Data Model
@@ -196,7 +185,7 @@ No 2024/1183                                                                    
 | TE service definition URI<br>(clause 6.6.8)             | URI                            | https://www.spherity.com/eida                                                                         |                                                                                                                                    |
 | Service unique identifier extension (clause 6.6.9.1)    | URI                            | wallet_solution_reference_number                                                                      |                                                                                                                                    |
 
-### Revocation Service Entry of a Wallet Solution
+### Revocation Service Entry of a Wallet Solution (Optional)
 
 | LoTE component                                          | Format                         | Sample value for WEBUILD MVP                                                                          | notes                                                                                                                              |
 |---------------------------------------------------------|--------------------------------|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
@@ -232,28 +221,6 @@ section 4.2.1
 | `organizationName`     | string                  | Spherity GmbH, tp be discussed / must be the formal legal name |                                                 |
 | `commonName`           | string                  | Spherity                                                       | Name commonly used to identify the organization |
 
-### Wallet Unit Attestation JWT
-
-**Header:**
-
-| JWT Field name | Format                      | Sample value for EUDIW MVP     | Notes                                                                                                                             |
-|----------------|-----------------------------|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| `typ`          | string                      | `oauth-client-attestation+jwt` | Must be `oauth-client-attestation+jwt`                                                                                            |
-| `alg`          | string                      | `ES256`                        | Signing algorithm of the JWT signature                                                                                            |
-| `x5c`          | base64 encoded string array | [x509 certificate chain]       | Certificate chain containing the Wallet Provider's certificate as its leaf and the Onboarding authority's certificate as its root |
-
-**Payload:**
-
-| JWT Field name     | Format         | Sample value for EUDIW MVP                        | Notes                                                                                                                                                                                                                            |
-|--------------------|----------------|---------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `iss`              | URI            | https://attester.spherity.com                     | URL of the wallet provider's attestation service                                                                                                                                                                                 |
-| `sub`              | string         | Spherity GmbH                                     | OAuth 2.0 Client ID of the wallet, open for discussion                                                                                                                                                                           |
-| `exp`              | UNIX timestamp | [timestamp]                                       | Expiration time of the Attestation JWT                                                                                                                                                                                           |
-| `cnf`              | JSON           | [JWT key binding]                                 | Key binding to the Wallet Unit                                                                                                                                                                                                   |
-| `wallet_name`      | string         | Spherity Wallet                                   | Human readable name of the Wallet Solution                                                                                                                                                                                       |
-| `wallet_link`      | URL            | [wallet inforamtion URL]                          | URL Containing information about the wallet                                                                                                                                                                                      |
-| `status`           | JSON           | [Status List Entry data]                          | According to [token-status-list](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-12)                                                                                                                          |
-| `eudi_wallet_info` | JSON           | [EUDI Specific information about the Wallet Unit] | According to [EUDI ts3-wallet-unit-attestation](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md#23-content) |
 
 ## Main Flow
 
@@ -272,17 +239,12 @@ section 4.2.1
 - 2.4 Trusted List of Wallet Providers is updated
 - 2.5 Supervisory Body confirms successful administrative onboarding
 
-**3. Verification of WUA**
-
-- 3.1 PID Provider receives a Wallet Unit Attestation JWT
-- 3.2 PID Provider validates the JWT
-- 3.3 PID Provider verifies if the X509 certificate used to sign the WUA is in the Wallet Providers Trust Entity List
 
 ## Onboarding
 
 Each Wallet Provider that intends to provide a European Digital Identity Wallet for natural persons or a European
-Business Wallet for legal persons will register itself and its wallet solution at a Supervisory Body of a Member State.
-If the application process is successful, the Supervisory Body advises a Trusted List Provider to update the Trusted
+Business Wallet for legal persons will register itself and its wallet solution at WP 4 Trust Registry Infrastructure Working Group in WEBUILD.
+If the application process is successful, WP4 Trust Registry Infrastructure Working Group will update the Trusted
 List of Wallet Providers.
 
 _Preconditions:_
@@ -295,8 +257,6 @@ _Preconditions:_
 - **Prerequisites [MVP+]**:
     - Member State has designated at least one Supervisory Body;
     - Member State has designated at least one Trusted List Provider;
-        - *Question: Should we define the relationship between Supervisory Body and Trust List Provider acc. to edias 1
-          here?*
     - Supervisory Body has delegated the Trusted List Provider to create a national Trusted List for Wallet Providers
     - The Europen Commission has been notified about the creation of the national Trusted List.
     - The European Comission includes national Trusted List in the List of Trusted Lists (LoTL)
@@ -310,7 +270,7 @@ _Postconditions:_
     - [MVP+] The Supervisory Body accepts the Wallet Provider application;
     - The Wallet Provider gets a positive response to the application.
 - **Failure**:
-    - [MVP] WP4 Trust Infrastructure group accepts the Wallet application
+    - [MVP] WP4 Trust Infrastructure group reject the Wallet application
     - [MVP+] The Supervisory Body rejects the Wallet Provider application.
 - **Outputs**:
     - The Wallet Provider gets included in the Trusted Lists for Wallet Providers;
@@ -329,30 +289,26 @@ _Postconditions:_
     3. legal address
     4. Country name of Member state in which wallet Provider is registered
     5. URI to terms and conditions
-    6. URI to status list of Wallet Provider's Wallet Solutions
-    7. statement whether Wallet Provider is a QTSP
-    8. statement whether Wallet Provider is a single-person company
+    6. statement whether Wallet Provider is a QTSP
+    7. statement whether Wallet Provider is a single-person company
 4. Wallet Provider provides the following data about its Wallet Solutions:
     1. statement whether wallet solution is an EUDI Wallet for natural persons or a European Business Wallet for legal
        entities
     2. Name of the Wallet Solution
     3. URI to Wallet Solution
-    4. URI of Wallet Solution's status list entry in the Wallet Provider's status list
+    4. URI of Wallet Solution's status list entry in the Wallet Provider's status list (optional)
     5. details on associated body, if applicable
     6. X509 certificate signing request
-    7. unique reference identifier of the wallet solution
- 5. Wallet Provider provides proof that the wallet solution has passed the WEBUILD Interoperability Test as described here: https://github.com/webuild-consortium/wp4-interop-test-bed/blob/main/docs/user-guide-interoperability-test-bed.md
+    7. unique reference identifier of the wallet solution (optional)
 
 ### 1.2 WP4 Trust Infrastructure group approves onboarding request
 
-Responsible person or group review whether
+Responsible person or group reviews whether
 
-- wallet provider is beneficiary of associated partner of WEBUILD Consortium
-- wallet solution successfully passed the wallet conformity test in WEBUILD
-- provided data is complete
-- data is provided in the expected format
-- WP4 Trust Infrastructure group generates a unique reference identifier for the wallet solution according
-  to [CIR 2025/849 Annex 2(a)](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849)
+- wallet provider is beneficiary or associated partner of WEBUILD Consortium
+- Certificate Signing Request is provided in the expected format
+
+Note: WP4 Trust Infrastructure group will not check whether data is correct or complete.
 
 If successful, responsible Person or group approves Wallet Provider to join the Trusted List for Wallet Providers.
 If not successful, responsible person or group informs about the review result and may request additional data.
@@ -360,10 +316,10 @@ If not successful, responsible person or group informs about the review result a
 ### 1.3 Trusted List of Wallet Providers is updated
 
 - Wallet Provider receives a notification about the successful reviewing process.
-- Ecosystem authority confirms that provided data by Wallet Provider shall be used to update the Trusted List.
 - X509 certificates for Wallet Solutions are issued by the Ecosystem Authority
 - Trusted List Provider updates Trusted List of Wallet Providers.
 - Wallet Provider is notified about updated Trusted List.
+- Wallet Provider receives a x509 certificate for each of its wallet solutions
 
 [MVP+]
 
@@ -387,19 +343,4 @@ If not successful, responsible person or group informs about the review result a
 1. Wallet provider receives a certification assessment report compliant with Article 5c of Regulation (EU) No 910/2014
 
 ### 2.5 Trusted List of Wallet Providers is updated
-
-
-
-## Wallet Provider verification
-
-### 3.1 PID Provider receives a Wallet Unit Attestation JWT from Wallet Unit
-
-### 3.2 PID Provider validates the JWT
-
-### 3.3 PID Provider verifies if the X509 certificate used to sign the WUA is in the Wallet Providers Trust Entity List
-
-1. PID Provider verifies the certificate chain
-2. PID Provider fetches the newest version of the Wallet Provider Trust List
-3. PID Provider looks for the Wallet Provider's certificate in the Trust List
-4. PID Provider verifies the Wallet Provider's Trust List entry
 
