@@ -95,7 +95,7 @@ Registration certificates are issued per:
 
 The Trusted List publication process is separate from registration. See [Overview](#overview) for Trusted List compilation responsibilities. The process involves:
 
-1. Member State TLPs compile, sign, and publish Trusted Lists for all entities (Wallet Providers, PID Providers, Attestation Providers, Access CAs, Registration Cert Providers) based on notifications from Member States.
+1. Member State TLPs compile, sign, and publish Trusted Lists for all entities (Wallet Providers, PID Providers, Attestation Providers, Access CAs, Registration Cert Providers).
 2. Member State TLPs submit Trusted List URLs to the European Commission.
 3. Commission verifies Trusted Lists and maintains the List of Trusted Lists (LoTL) containing pointers to all published Trusted Lists.
 4. Commission signs and publishes the LoTL.
