@@ -10,6 +10,28 @@ The trust infrastructure relies on three distinct but complementary processes:
 2.  **Notification**: Member States notify the European Commission of **Wallet Providers**, **Access Certificate Authorities (Access CAs)**, and **Providers of Registration Certificates** for inclusion in the relevant Trusted Lists.
 3.  **Trusted List Publication**: Publication of cryptographic trust anchors for validation purposes, based on registration data and Member State notifications.
 
+### Acronyms
+
+| Acronym | Meaning |
+|--------|---------|
+| **ARF** | Architecture and Reference Framework (EUDI Wallet) |
+| **CA** | Certificate Authority |
+| **EC** | European Commission |
+| **EAA Provider** | non-qualified Electronic Attestation of Attributes Provider |
+| **EUDI** | European Digital Identity |
+| **LoTL** | List of Trusted Lists |
+| **MS** | Member State |
+| **MS TLP** | Member State Trusted List Provider |
+| **PID** | Person Identification Data |
+| **PID Provider** | Provider issuing PIDs |
+| **PuB-EAA Provider** | Public Sector Body Electronic Attestation of Attributes Provider |
+| **QEAA Provider** | Qualified Electronic Attestation of Attributes Provider (a QTSP) |
+| **QTSP** | Qualified Trust Service Provider (under eIDAS) |
+| **RP** | Relying Party |
+| **TL** | Trusted List |
+| **TLP** | Trusted List Provider |
+| **WP** | Wallet Provider |
+
 ### Responsibilities Matrix
 
 The following table summarizes the registration requirement and the authority responsible for compiling the Trusted List (TL) for each entity type:
