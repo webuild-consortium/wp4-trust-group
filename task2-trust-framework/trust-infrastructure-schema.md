@@ -1,13 +1,14 @@
 # Trust Infrastructure Schema: Onboarding and Trusted Lists
 
-This document outlines the schema and graphical representation of the EUDI Wallet trust infrastructure. It focuses on two primary processes: **Onboarding** (Registration) and **Trusted List Publication**, which are separated to align with the Architecture and Reference Framework (ARF).
+This document outlines the schema and graphical representation of the EUDI Wallet trust infrastructure. It focuses on three closely related processes: **Registration/Onboarding**, **Notification**, and **Trusted List Publication**, which are separated to align with the Architecture and Reference Framework (ARF).
 
 ## Overview
 
-The trust infrastructure relies on two distinct but complementary processes:
+The trust infrastructure relies on three distinct but complementary processes:
 
 1.  **Registration/Onboarding**: Entities (PID Providers, Attestation Providers, Relying Parties) register with Member State Registrars to define operational authorization and entitlements (ARF Section 3.17).
-2.  **Trusted List Publication**: Publication of cryptographic trust anchors for validation purposes.
+2.  **Notification**: Member States notify the European Commission of **Wallet Providers**, **Access Certificate Authorities (Access CAs)**, and **Providers of Registration Certificates** for inclusion in the relevant Trusted Lists.
+3.  **Trusted List Publication**: Publication of cryptographic trust anchors for validation purposes, based on registration data and Member State notifications.
 
 ### Responsibilities Matrix
 
