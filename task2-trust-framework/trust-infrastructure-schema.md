@@ -17,7 +17,7 @@ The following table summarizes the registration requirement and the authority re
 | Entity Type | Registration Process | Trusted List Compilation (EC / MS TLP) | Member State TLP Role |
 | :--- | :--- | :--- | :--- |
 | **PID Provider** | **Register with MS Registrar** | **European Commission** (EU-level TL for PID Providers) | None (no national TL for PID Providers) |
-| **Attestation Provider** | **Register with MS Registrar** | **Member State TLP** (per MS, national TL for Attestation Providers) | Compiles, signs, and publishes national TL; submits TL URL to EC (LoTL) |
+| **Attestation Provider** | **Register with MS Registrar** | **Member State TLP** (per MS, national TL for EAA Providers) | Compiles, signs, and publishes national TL; submits TL URL to EC (LoTL) |
 | **Relying Party (RP)** | **Register with MS Registrar** | N/A (Uses Access Certificates/Registry) | None (not listed in TLs) |
 | **Wallet Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for Wallet Providers) | Not applicable in pilot (notification from MS to EC only) |
 | **Access CA** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for Access CAs) | Not applicable in pilot (notification from MS to EC only) |
@@ -33,7 +33,7 @@ The following table summarizes the registration requirement and the authority re
 *   **European Commission**:
     *   Compiles, signs/seals, and publishes Trusted Lists for Wallet Providers, PID Providers, Access CAs, and Registration Cert Providers (per **WPNot_04**, **WPNot_05**, **PPNot_05**, **PPNot_06**, **RPACANot_04**).
     *   Maintains and publishes the **List of Trusted Lists (LoTL)** containing pointers to all published Trusted Lists.
-*   **Member State TLP**: Compiles, signs, and publishes National Trusted Lists specifically for **Attestation Providers** (PuB-EAA, EAA) and submits the TL URL to the Commission.
+*   **Member State TLP**: Compiles, signs, and publishes National Trusted Lists specifically for EAA Providers and submits the TL URL to the Commission.
 *   **Access Certificate Authority (CA)**: Issues access certificates to registered entities. Notified by MS to the Commission; does not interact with Registrars.
 *   **Provider of Registration Certificates**: Optionally issues certificates detailing entitlements. Notified by MS to the Commission.
 
@@ -96,7 +96,7 @@ Registration certificates are issued per:
 
 The Trusted List publication process is separate from registration. See [Overview](#overview) for Trusted List compilation responsibilities. The process involves:
 
-1. Member State TLPs compile, sign, and publish Trusted Lists for all entities (Wallet Providers, PID Providers, Attestation Providers, Access CAs, Registration Cert Providers).
+1. Member State TLPs compile, sign, and publish Trusted Lists for all entities EAA Providers.
 2. Member State TLPs submit Trusted List URLs to the European Commission.
 3. Commission verifies Trusted Lists and maintains the List of Trusted Lists (LoTL) containing pointers to all published Trusted Lists.
 4. Commission signs and publishes the LoTL.
@@ -107,17 +107,17 @@ The Trusted List publication process is separate from registration. See [Overvie
 
 The Member State Trusted List Provider (MS TLP) is responsible for (for Attestation Providers only):
 
-1. **Compiling Trusted Lists**: The MS TLP compiles Trusted Lists for Attestation Providers (PuB-EAA Providers with conformity assessment reports).
+1. **Compiling Trusted Lists**: The MS TLP compiles Trusted Lists for EAA Providers.
 
 2. **Signing Trusted Lists**: The MS TLP signs/seals the Trusted Lists using its signing key (for Attestation Providers only).
 
-3. **Publishing Trusted Lists**: The MS TLP publishes the signed Trusted Lists in machine-readable and human-readable formats at a publicly accessible URL (for Attestation Providers only). Per [ETSI TS 119 602 V1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) (Data model for Lists of Trusted Entities), **Attestation Provider Trusted Lists** (ETSI TS 119 602 Annex H, published by MS TLP) may be published in either **JSON format with compact JAdES Baseline B signature** OR **XML format with XAdES Baseline B signature** (per ETSI EN 319 132-1). When XML is used, it must be an enveloped digital signature.
+3. **Publishing Trusted Lists**: The MS TLP publishes the signed EAA Providers Trusted Lists in machine-readable and human-readable formats at a publicly accessible URL. Per [ETSI TS 119 602 V1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) (Data model for Lists of Trusted Entities), **Attestation Provider Trusted Lists** (ETSI TS 119 602 Annex H, published by MS TLP) may be published in either **JSON format with compact JAdES Baseline B signature** OR **XML format with XAdES Baseline B signature** (per ETSI EN 319 132-1). When XML is used, it must be an enveloped digital signature.
 
 All Trusted Lists must comply with ETSI TS 119 602 data model and the specific profiles defined in the annexes, or with ETSI TS 119 612 v2.1.1 or a suitable profile derived from ETSI TS 102 231 (per **WPNot_05**, **PPNot_07**, **PuBPNot_03**, **RPACANot_05**).
 
-4. **Submitting to European Commission**: The MS TLP submits the published Trusted List URL to the European Commission (for Attestation Providers only).
+4. **Submitting to European Commission**: The MS TLP submits the published EAA Provider Trusted List URL to the European Commission.
 
-The process is triggered by successful registration with the Member State Registrar (for Attestation Providers only). The MS TLP:
+The process is triggered by successful registration with the Member State Registrar. The MS TLP:
 - Receives notification of successful registration from the Registrar (or accesses Registry data).
 - Extracts trust anchors and relevant data from the Registry.
 - Compiles Trusted Lists according to ETSI TS 119 612 specifications.
@@ -141,7 +141,7 @@ Member States SHALL notify all PID Providers, PuB-EAA Providers, Wallet Provider
 
 The European Commission:
 - Compiles, signs/seals, and publishes Trusted Lists (see [Overview](#overview) for details).
-- Receives Trusted List URL notifications from Member State TLPs (for Attestation Providers only), verifies completeness and technical compliance of published Trusted Lists.
+- Receives Trusted List URL notifications from Member State TLPs (for EAA Providers only), verifies completeness and technical compliance of published Trusted Lists.
 - Maintains the List of Trusted Lists (LoTL) containing pointers to all published Trusted Lists.
 - Signs/seals and publishes the LoTL in machine-readable and human-readable formats.
 
@@ -159,7 +159,7 @@ Per ETSI TS 119 612 clause D.5, the European Commission maintains a List of Trus
 The European Commission:
 - Compiles the LoTL from:
   - The directly compiled and published Trusted Lists (Wallet Provider TL, PID Provider TL, Access CA TL, Registration Cert Provider TL).
-  - Trusted List URL notifications received from Member State TLPs (for Attestation Providers only).
+  - Trusted List URL notifications received from Member State TLPs (for EAA Providers only).
 - Signs/seals the LoTL using the Commission's signing key.
 - Publishes the LoTL in machine-readable and human-readable formats.
 - Publishes LoTL location and trust anchors in the Official Journal of the European Union (OJEU).
@@ -245,7 +245,7 @@ graph TB
     subgraph TL["Published Trusted Lists"]
         WPTL[Wallet Provider TL<br/>Compiled by EC<br/>WPNot_04, WPNot_05]
         PIDTL[PID Provider TL<br/>Compiled by EC<br/>PPNot_05]
-        APTL[Attestation Provider TL<br/>Per MS, compiled by MS TLP<br/>PuBPNot_03]
+        APTL[EAA Provider TL<br/>Per MS, compiled by MS TLP<br/>PuBPNot_03]
         ACATL[Access CA TL<br/>Compiled by EC<br/>PPNot_06, RPACANot_04]
         RegCertTL[Registration Cert Provider TL<br/>Compiled by EC<br/>RPACANot_04]
     end
@@ -337,11 +337,11 @@ sequenceDiagram
 
 ### 5.3 Complete Registration to Trusted List Publication Flow
 
-This diagram shows the complete end-to-end process from entity registration through to Trusted List publication for **Attestation Providers only**. For PID Providers, after registration with Registrar, Member States notify them to the Commission for Trusted List inclusion. For Wallet Providers, Access CAs, and Registration Cert Providers, see [Section 2.1.1](#211-wallet-provider-notification) and [Overview](#overview).
+This diagram shows the complete end-to-end process from entity registration through to Trusted List For PID Providers, after registration with Registrar, Member States notify them to the Commission for Trusted List inclusion. For Wallet Providers, Access CAs, and Registration Cert Providers, see [Section 2.1.1](#211-wallet-provider-notification) and [Overview](#overview).
 
 ```mermaid
 sequenceDiagram
-    participant Entity as Attestation Provider<br/>(PuB-EAA Provider)
+    participant Entity as Pub-EAA Provider<br/>
     participant Registrar as Member State Registrar<br/>Reg_01, Reg_19, Reg_21
     participant Registry as Registry<br/>Reg_03, Reg_04
     participant AccessCA as Access Certificate Authority<br/>Reg_10
@@ -357,7 +357,7 @@ sequenceDiagram
     rect rgb(230, 245, 255)
         Note over Entity,Registry: Phase 1: Registration/Onboarding
         Entity->>Registrar: 1. Submit Registration Request<br/>(Identification, Entitlements, Trust Anchors)
-        Note right of Entity: For Attestation Providers: Conformity assessment<br/>report (PuBPNot_02)
+        Note right of Entity: For Pub-EAA Providers: Conformity assessment<br/>report (PuBPNot_02)
         
         Registrar->>Registrar: 2. Approve Entity<br/>(Reg_01, Reg_19, Reg_21)
         Registrar->>Registry: 3. Register Entity<br/>(Reg_01, Reg_03)
@@ -455,9 +455,9 @@ In this model, entities must separately register with both the Registrar and the
 - Process managed by the Registrar, with TLP acting as the Trusted List publisher for Attestation Providers.
 
 The TLP's role in this model is to:
-- Receive registration completion notifications from Registrar (for Attestation Providers only).
+- Receive registration completion notifications from Registrar for EAA Providers.
 - Extract trust anchors and relevant data from Registry.
-- Compile Attestation Provider Trusted Lists according to ETSI TS 119 612 specifications.
+- Compile EAA Provider Trusted Lists according to ETSI TS 119 612 specifications.
 - Sign/seal and publish Trusted Lists at publicly accessible URLs (per Member State).
 - Submit Trusted List URLs to European Commission.
 
@@ -487,7 +487,7 @@ sequenceDiagram
 	
 	rect rgb(255, 244, 225)
 		Note over MS,ECNotify: Phase 2: MS Notification to EC
-		MS->>ECNotify: 3a. Submit Attestation Provider TL URL<br/>(GenNot_01)
+		MS->>ECNotify: 3a. Submit EAA Provider TL URL<br/>(GenNot_01)
 		Note right of MS: For PuB-EAA Providers only
 		
 		MS->>ECNotify: 3b. Notify PID Provider<br/>(GenNot_01, PPNot_02)
@@ -581,9 +581,9 @@ graph TB
         RegStep4[4. Registry Publication<br/>Reg_03, Reg_04]
     end
 
-    subgraph SubmissionUpdate["Attestation Provider TL Publication<br/>MS TLP (Attestation Providers only)"]
+    subgraph SubmissionUpdate["EAA Provider TL Publication<br/>MS TLP"]
         TLPTrigger[MS TLP Triggered by Registration Completion]
-        TLPCompile[Compile Attestation Provider TL<br/>Extract Trust Anchors from Registry]
+        TLPCompile[Compile EAA Provider TL<br/>Extract Trust Anchors from Registry]
         TLPPublish[Sign & Publish Attestation Provider TL<br/>TLPub_05]
     end
 
@@ -592,7 +592,7 @@ graph TB
         NotifPID[MS notifies PID Provider<br/>PPNot_01, PPNot_02]
         NotifACA[MS notifies Access CA<br/>RPACANot_01, RPACANot_02]
         NotifRegCert[MS notifies Registration Cert Provider<br/>RPACANot_01, RPACANot_02]
-        NotifAPTL[MS TLP submits Attestation Provider TL URL<br/>GenNot_01]
+        NotifAPTL[MS TLP submits EAA Provider TL URL<br/>GenNot_01]
     end
 
     subgraph ECCompilation["EC Verification & LoTL Maintenance"]
@@ -626,10 +626,10 @@ graph TB
     RegStep2 --> RegStep3
     RegStep3 --> RegStep4
 
-    %% Attestation Provider TL Publication Flow
+    %% EAA Provider TL Publication Flow
     RegStep4 -->|Registration Complete<br/>Triggers MS TLP| TLPTrigger
     TLPTrigger -->|Access Registry Data<br/>Extract Trust Anchors| TLPCompile
-    TLPCompile -->|Compile Attestation Provider TL| TLPPublish
+    TLPCompile -->|Compile EAA Provider TL| TLPPublish
     TLPPublish -->|Sign & Publish at URL| NotifAPTL
     TLPPublish --> APTL
 
