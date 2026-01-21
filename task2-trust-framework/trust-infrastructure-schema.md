@@ -254,7 +254,7 @@ graph TB
     subgraph TL["Published Trusted Lists"]
         WPTL[Wallet Provider TL<br/>Compiled by EC<br/>WPNot_04, WPNot_05]
         PIDTL[PID Provider TL<br/>Compiled by EC<br/>PPNot_05]
-        APTL[Attestation Provider TLs<br/>(QEAA QTSP TL, EAA TL)<br/>Compiled by MS TLP]
+        APTL[Attestation Provider TLs<br/>Compiled by MS TLP]
         ACATL[Access CA TL<br/>Compiled by EC<br/>PPNot_06, RPACANot_04]
         RegCertTL[Registration Cert Provider TL<br/>Compiled by EC<br/>RPACANot_04]
     end
