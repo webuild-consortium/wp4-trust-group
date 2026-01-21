@@ -1,29 +1,14 @@
 # Subtask 1.1: Onboarding Use Cases
 
-This subtask focuses on defining use cases for participant onboarding processes in the WP4 Trust Infrastructure.
+This subtask defines the onboarding use cases for participants in the WP4 Trust Infrastructure.
 
-## Onboarding Participants
+## Folder contents
 
-### Trust Service Providers (TSPs)
-- **Registration Process**: Initial TSP registration
-- **Certificate Submission**: TSP certificate submission and validation
-- **Policy Compliance**: TSP policy compliance verification
-- **Trust Mark Issuance**: Trust mark issuance and management
+- **`README.md`** – Summary of onboarding use case areas in this subtask
 
-### Wallet Providers
-- **Provider Registration**: Wallet provider registration process
-- **Wallet Instance Attestation**: Wallet instance attestation and validation
-- **Security Compliance**: Security compliance verification
-- **Trust Establishment**: Trust establishment with infrastructure
+## Covered onboarding scenarios
 
-### Relying Parties (RPs)
-- **RP Registration**: Relying party registration process
-- **Policy Acceptance**: RP policy acceptance and agreement
-- **Certificate Validation**: RP certificate validation
-- **Access Control Setup**: Access control configuration
-
-### Certificate Authorities (CAs)
-- **CA Registration**: Certificate authority registration
-- **Root Certificate Submission**: Root certificate submission and validation
-- **Policy Compliance**: CA policy compliance verification
-- **Trust Anchor Establishment**: Trust anchor establishment
+- **Trust Service Providers (TSPs)** – Registration, certificate submission and validation, policy compliance checks, and trust mark issuance.
+- **Wallet Providers** – Provider registration, wallet instance attestation, security compliance verification, and trust establishment.
+- **Relying Parties (RPs)** – RP registration, policy acceptance, certificate validation and access‑control configuration.
+- **Certificate Authorities (CAs)** – CA registration, root certificate submission and validation, policy compliance checks and trust anchor establishment.
