@@ -33,7 +33,7 @@ The following table summarizes the registration requirement and the authority re
 *   **European Commission**:
     *   Compiles, signs/seals, and publishes Trusted Lists for Wallet Providers, PID Providers, Access CAs, and Registration Cert Providers (per **WPNot_04**, **WPNot_05**, **PPNot_05**, **PPNot_06**, **RPACANot_04**).
     *   Maintains and publishes the **List of Trusted Lists (LoTL)** containing pointers to all published Trusted Lists.
-*   **Member State TLP**: Compiles, signs, and publishes National Trusted Lists specifically for **Attestation Providers** (PuB-EAA) and submits the TL URL to the Commission.
+*   **Member State TLP**: Compiles, signs, and publishes National Trusted Lists specifically for **Attestation Providers** (PuB-EAA, EAA) and submits the TL URL to the Commission.
 *   **Access Certificate Authority (CA)**: Issues access certificates to registered entities. Notified by MS to the Commission; does not interact with Registrars.
 *   **Provider of Registration Certificates**: Optionally issues certificates detailing entitlements. Notified by MS to the Commission.
 
