@@ -14,14 +14,14 @@ The trust infrastructure relies on three distinct but complementary processes:
 
 The following table summarizes the registration requirement and the authority responsible for compiling the Trusted List (TL) for each entity type:
 
-| Entity Type | Registration Process | Trusted List Compilation |
-| :--- | :--- | :--- |
-| **PID Provider** | **Register with MS Registrar** | **European Commission** |
-| **Attestation Provider** | **Register with MS Registrar** | **Member State TLP** (per MS) |
-| **Relying Party (RP)** | **Register with MS Registrar** | N/A (Uses Access Certificates/Registry) |
-| **Wallet Provider** | *Notification only* (by MS to EC) | **European Commission** |
-| **Access CA** | *Notification only* (by MS to EC) | **European Commission** |
-| **Reg. Cert. Provider** | *Notification only* (by MS to EC) | **European Commission** |
+| Entity Type | Registration Process | Trusted List Compilation (EC / MS TLP) | Member State TLP Role |
+| :--- | :--- | :--- | :--- |
+| **PID Provider** | **Register with MS Registrar** | **European Commission** (EU-level TL for PID Providers) | None (no national TL for PID Providers) |
+| **Attestation Provider** | **Register with MS Registrar** | **Member State TLP** (per MS, national TL for Attestation Providers) | Compiles, signs, and publishes national TL; submits TL URL to EC (LoTL) |
+| **Relying Party (RP)** | **Register with MS Registrar** | N/A (Uses Access Certificates/Registry) | None (not listed in TLs) |
+| **Wallet Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for Wallet Providers) | Not applicable in pilot (notification from MS to EC only) |
+| **Access CA** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for Access CAs) | Not applicable in pilot (notification from MS to EC only) |
+| **Reg. Cert. Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for Reg. Cert. Providers) | Not applicable in pilot (notification from MS to EC only) |
 
 > **Key Distinction**: **Wallet Providers**, **Access CAs**, and **Providers of Registration Certificates** do **not** register with Registrars. They are notified directly by Member States to the European Commission.
 
