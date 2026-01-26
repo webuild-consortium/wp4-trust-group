@@ -1,8 +1,101 @@
 # Base Onboarding Framework for EUDI Wallet Ecosystem Participants
 
-**Note**: This document provides the common base framework for onboarding processes applicable to Relying Parties, PID Providers, Attestation Providers (QEAA Providers, PuB-EAA Providers, and non-qualified EAA Providers), and Wallet Providers in the EUDI Wallet ecosystem. This base document should be referenced by entity-specific onboarding documents to avoid duplication and ensure consistency.
+This document provides the common base framework for onboarding processes applicable to Relying Parties, PID Providers, Attestation Providers (QEAA Providers, PuB-EAA Providers, and non-qualified EAA Providers), and Wallet Providers in the EUDI Wallet ecosystem. This base document should be referenced by entity-specific onboarding documents to avoid duplication and ensure consistency.
 
-**Note on API Schema Alignment**: The data models and workflows described in this document align with the [Onboarding API data schemas](../../task4-trust-infrastructure-api/onboarding-api/README.md#data-models). Participant types, status values, certificate types, and workflow steps are harmonized across both specifications.
+## Terminology and Acronyms
+
+This section consolidates terminology and acronyms used across onboarding use cases, aligned with the [EUDI Wallet Architecture and Reference Framework (ARF)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/).
+
+### Acronyms
+
+| Acronym | Meaning | Source |
+|---------|---------|--------|
+| **ARF** | Architecture and Reference Framework (EUDI Wallet) | ARF |
+| **CA** | Certificate Authority | ARF |
+| **EC** | European Commission | ARF |
+| **EAA Provider** | non-qualified Electronic Attestation of Attributes Provider | ARF |
+| **EUDI** | European Digital Identity | ARF |
+| **EUDIW** | European Digital Identity Wallet | Regulation (EU) 2024/1183 |
+| **LoTL** | List of Trusted Lists | ARF, ETSI TS 119 612 |
+| **MS** | Member State | ARF |
+| **MS TLP** | Member State Trusted List Provider | ARF |
+| **PID** | Person Identification Data | ARF |
+| **PID Provider** | Provider issuing PIDs | ARF |
+| **PuB-EAA Provider** | Public Sector Body Electronic Attestation of Attributes Provider | ARF |
+| **QEAA Provider** | Qualified Electronic Attestation of Attributes Provider (a QTSP) | ARF |
+| **QTSP** | Qualified Trust Service Provider (under eIDAS) | eIDAS Regulation |
+| **RP** | Relying Party | ARF |
+| **TL** | Trusted List | ARF |
+| **TLP** | Trusted List Provider | ARF |
+| **WP** | Wallet Provider | ARF |
+
+### Key Terminology
+
+#### Wallet-Related Terms (per Regulation (EU) 2024/1183)
+
+- **wallet solution**: A combination of software, hardware, services, settings, and configurations, including wallet instances, one or more wallet secure cryptographic applications and one or more wallet secure cryptographic devices
+- **wallet instance**: The application installed and configured on a wallet user's device or environment, which is part of a wallet unit, and that the wallet user uses to interact with the wallet unit
+- **wallet unit**: A unique configuration of a wallet solution that includes wallet instances, wallet secure cryptographic applications and wallet secure cryptographic devices provided by a wallet provider to an individual wallet user
+- **wallet provider**: A natural or legal person who provides wallet solutions
+
+#### Trust Infrastructure Entities (per ARF)
+
+- **Registrar**: Established by Member States to manage the registration and operational authorization of PID Providers, Attestation Providers, and Relying Parties (ARF Section 3.17)
+- **Access Certificate Authority**: Issues access certificates to registered entities (PID Providers, Attestation Providers, Relying Parties) for authentication during service interactions (ARF Section 3.18)
+- **Provider of Registration Certificates**: Optionally issues certificates detailing entitlements for registered entities (ARF Section 3.19)
+- **Trusted List Provider (TLP)**: A body responsible for maintaining, managing, and publishing a Trusted List (ARF Section 3.5)
+- **Member State Trusted List Provider (MS TLP)**: Compiles, signs, and publishes national Trusted Lists for non-qualified EAA Providers and Member State QTSP Trusted Lists for QEAA Providers
+
+#### Entity Types
+
+- **PID Provider**: Provider issuing Person Identification Data to Wallet Units
+- **Attestation Provider**: Provider issuing electronic attestations of attributes (includes QEAA Providers, PuB-EAA Providers, and non-qualified EAA Providers)
+- **QEAA Provider**: Qualified Electronic Attestation of Attributes Provider (a Qualified Trust Service Provider under eIDAS)
+- **PuB-EAA Provider**: Public Sector Body Electronic Attestation of Attributes Provider
+- **EAA Provider**: non-qualified Electronic Attestation of Attributes Provider
+- **Relying Party (RP)**: Service that requests attributes from Wallet Units to provide services to users
+- **Wallet Provider**: Natural or legal person who provides wallet solutions
+
+#### Trust Infrastructure Terms
+
+- **Trusted List (TL)**: A list containing trust anchors for validation purposes, published by Trusted List Providers
+- **List of Trusted Lists (LoTL)**: Maintained by the European Commission, contains pointers to all published Trusted Lists (ETSI TS 119 612 D.5)
+- **Registry**: Publicly accessible register maintained by Registrars containing registration information about entities
+- **Access Certificate**: Certificate issued by Access Certificate Authority to registered entities for authentication
+- **Registration Certificate**: Optional certificate issued by Provider of Registration Certificates detailing entity entitlements
+
+For additional entity definitions, see [Task 2 - Entities Involved](../task2-trust-framework/entities-involved.md).
+
+### WEBUILD-Specific Entities
+
+#### Trust Infrastructure Responsible Group
+
+The **Trust Infrastructure Responsible Group** is a designated group within the WEBUILD WP4 Trust Infrastructure group that performs the Responsible (R) role in RACI matrices for onboarding processes during the WEBUILD MVP phase. This group is responsible for executing tasks and deliverables related to trust infrastructure operations, including but not limited to:
+
+- Managing onboarding requests and data collection
+- Reviewing entity data and making recommendations
+- Maintaining and updating Trusted Lists
+- Hosting Trusted Lists
+- Engaging with entities during onboarding and troubleshooting
+
+The following table lists the entities that are part of the Trust Infrastructure Responsible Group:
+
+| Entity | Legal Name | Website | Administrative Contact | Technical Contact |
+|--------|------------|---------|----------------------|-------------------|
+| IDunion SCE | GER-IDunion SCE | [https://www.idunion.eu](https://www.idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) |
+
+**Note**: Additional entities may be added to this group as designated by the WP4 Trust Infrastructure group. Consortium participants can propose theirselves applying a Pull Request to add themselves to the list and be actively involved in the registration operations and review processes.
+
+#### RACI Matrix
+
+**RACI** (Responsible, Accountable, Consulted, Informed) is a responsibility assignment matrix used to clarify roles and responsibilities in project management and organizational processes.
+
+**RACI Role Definitions:**
+
+- **Responsible (R)**: The person or group who do the work and execute the task or deliverable. In WEBUILD MVP, this role is performed by the [Trust Infrastructure Responsible Group](#trust-infrastructure-responsible-group), which includes IDunion SCE and other designated entities within the WP4 Trust Infrastructure group.
+- **Accountable (A)**: The person or group who owns the result, makes the final decision, and is ultimately answerable for success or failure.
+- **Consulted (C)**: Person or group who are asked for input or expertise and are involved through two‑way communication before or during the task.
+- **Informed (I)**: People who are kept up to date on progress or outcomes via one‑way communication but are not involved in doing or deciding.
 
 ## Common Success Criteria
 
@@ -10,7 +103,7 @@ The following success criteria apply to all participant onboarding processes in 
 
 - *Interoperability across Member States*
     - All certificates and attestations are syntactically and semantically harmonised in line with applicable ETSI standards (e.g., ETSI EN 319 411-1 version 1.4.1 (2023-10)) and related IETF RFCs ([RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519), [RFC 8392](https://datatracker.ietf.org/doc/html/rfc8392), [RFC 9162](https://datatracker.ietf.org/doc/html/rfc9162)) (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-    - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
+    - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation guidance.
 - *Secure trust establishment*
     - Each entity's identity and attributes are verifiable via National Registers (for Relying Parties, PID/EAA Providers) or Trusted Lists (for Wallet Providers) and anchored in the EU trust framework (ref. [Regulation (EU) 2024/1183, Article 5a(18)](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)).
     - Continuous monitoring and automatic certificate/attestation revocation mechanisms are implemented and effective within 24 hours of a change request (ref. [Regulation (EU) 2025/848, Article 9(5)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
@@ -18,7 +111,7 @@ The following success criteria apply to all participant onboarding processes in 
     - All certificate issuances, renewals, and revocations are logged (optionally under RFC 9162 – Certificate Transparency v2.0) and made publicly accessible for validation (ref. [Regulation (EU) 2025/848, Annex IV 3(j), Annex V 3(i)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - Revocation and validity information is provided freely (free of charge), automatically, and reliably (ref. [Regulation (EU) 2025/848, Annex IV 5, Annex V 6](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
 - *Compliance and accountability*
-    - Certificate Policies (CP) and Certification Practice Statements (CPS) follow ETSI EN 319 411-1 version 1.4.1 (2023-10) NCP requirements where applicable (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
+    - Certificate Policies (CP) and Certification Practice Statements (CPS) follow ETSI EN 319 411-1 version 1.4.1 (2023-10) NCP requirements where applicable (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)). See [ETSI Policy Enumeration](../task5-participants-certificates-policies/etsi-policy-enumeration.md) and [ETSI Policy Evaluation](../task5-participants-certificates-policies/etsi-policy-evaluation.md) for policy specifications and evaluation methods.
     - Each Member State designates appropriate authorities (Registrars for Relying Parties/PID/EAA Providers, Supervisory Bodies for Wallet Providers) and maintains National Registers or Trusted Lists, and communicates changes to the Commission and other Member States (ref. [Regulation (EU) 2025/848, Article 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
 - *Operational effectiveness*
     - Onboarding is completed through defined processes (administrative + technical for Relying Parties/PID/EAA Providers; certification + listing for Wallet Providers) with measurable outcomes and turnaround times.
@@ -48,6 +141,8 @@ The following preconditions apply to participant onboarding processes, with enti
 
 All participant onboarding processes follow a structured approach, with entity-specific variations:
 
+> **Registration vs. Notification** (MVP+): The trust infrastructure distinguishes between entities that **register** with Registrars (PID Providers, Attestation Providers, Relying Parties) and entities that are **notified** by Member States to the European Commission without registration (Wallet Providers, Access CAs, Registration Cert Providers). See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix). For MVP (WEBUILD), all entities register with WEBUILD WP4 Trust Infrastructure group.
+
 ### Main Flow for Relying Parties and PID/EAA Providers
 **1. Administrative Onboarding**
 - 1.1 Registration Application
@@ -62,7 +157,7 @@ All participant onboarding processes follow a structured approach, with entity-s
 - 2.4 Registration Certificate Request
 - 2.5 Registration Certificate Request Review
 - 2.6 Registration Certificate Issuance
-- *Note: Additional steps (e.g., 2.7 Notification, 2.8 Trusted List Publication) may apply to specific entity types.*
+- *Note: Additional steps (e.g., 2.7 Notification, 2.8 Trusted List Publication) may apply to specific entity types. See [Trust Infrastructure Schema - Registration/Onboarding Process](../task2-trust-framework/trust-infrastructure-schema.md#2-registrationonboarding-process) and [Trust Infrastructure Schema - Trusted List Publication Process](../task2-trust-framework/trust-infrastructure-schema.md#3-trusted-list-publication-process) for entity-specific requirements.*
 
 **3. Post Onboarding**
 - 3.1 Registration Monitoring
@@ -510,7 +605,7 @@ Then:
 
 ## Common Normative References
 
-This section provides the common normative references applicable to all participant onboarding processes. Entity-specific documents should reference this section and add any additional entity-specific references.
+This section provides the common normative references applicable to all participant onboarding processes, including entity-specific references. Entity-specific onboarding documents should reference this section.
 
 ### Architecture and Reference Framework (ARF)
 - **ARF Version**: 2.7.3
@@ -518,9 +613,12 @@ This section provides the common normative references applicable to all particip
 - **ARF Annex II - High-Level Requirements**: [Annex II - High-Level Requirements](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/)
 
 ### Project-Specific References
+- **Task 2 - Trust Infrastructure Schema**: See [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md) for the overall architecture, registration vs. notification processes, trusted list compilation responsibilities, and the relationship between registration and trusted list publication
 - **Task 2 - Trust Framework**: See [Trust Framework documentation](../task2-trust-framework/README.md) for trust evaluation, trust management, and policy framework definitions
-- **Task 3 - X.509 PKI with ETSI Alignments**: See [X.509 PKI documentation](../task3-x509-pki-etsi/README.md) for certificate management, ETSI compliance, and trusted lists implementation
 - **Task 2 - Entities Involved**: See [Entities Involved in Trust Evaluation](../task2-trust-framework/entities-involved.md) for definitions of Trusted List Provider, Access Certificate Authority, Provider of Registration Certificates, and other trust infrastructure entities
+- **Task 3 - X.509 PKI with ETSI Alignments**: See [X.509 PKI documentation](../task3-x509-pki-etsi/README.md) for certificate management, ETSI compliance, and trusted lists implementation. See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for detailed trusted list implementation guidance
+- **Task 4 - Trust Infrastructure APIs**: See [Onboarding API](../task4-trust-infrastructure-api/onboarding-api/README.md) for participant registration and certificate management API specifications
+- **Task 5 - Participants' Certificates and Policies**: See [Participants' Certificates and Policies](../task5-participants-certificates-policies/README.md) for certificate and policy data models, trust evaluation methods, and ETSI policy application mechanisms. See [ETSI Policy Enumeration](../task5-participants-certificates-policies/etsi-policy-enumeration.md) and [ETSI Policy Evaluation](../task5-participants-certificates-policies/etsi-policy-evaluation.md) for policy specifications and evaluation methods
 
 ### Implementing Acts (IAs)
 - **Regulation (EU) 2025/848**: [Commission Implementing Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)
@@ -537,8 +635,8 @@ This section provides the common normative references applicable to all particip
 - **EUDI Wallet Essential Standards and Technical Specifications (STS)**: [Essential Standards and Technical Specifications (STS)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/technical-specifications/#:~:text=Essential%20Standards%20and%20Technical%20Specifications%20(STS))
 
 ### ETSI Standards
-- **ETSI TS 119 612** (v2.4.1): [Electronic Signatures and Trust Infrastructures (ESI); Trusted Lists](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf)
-- **ETSI TS 119 602** (v1.1.1): [Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf)
+- **ETSI TS 119 612** (v2.4.1): [Electronic Signatures and Trust Infrastructures (ESI); Trusted Lists](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) - See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation guidance
+- **ETSI TS 119 602** (v1.1.1): [Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) - See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation guidance
 - **ETSI TS 119 411-8** (v01.01.01): [Access Certificate Policy for EUDI Wallet Relying Parties](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf)
 - **ETSI TS 119 475** (v01.01.01): [Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf)
 - **ETSI TS 119 472-2** (v1.1.1): [Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.01.01_60/ts_11947202v010101p.pdf)

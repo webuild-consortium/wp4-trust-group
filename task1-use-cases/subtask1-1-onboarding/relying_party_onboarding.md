@@ -1,19 +1,22 @@
-## Use Case: UC-01 Relying Party Onboarding
+# Use Case: UC-01 Relying Party Onboarding
 
-**Note**: This document describes the Relying Party onboarding process. For common onboarding framework elements shared with PID/EAA Providers and Wallet Providers, see [Base Onboarding Framework](onboarding-base.md).
+## Scope
 
-**Note on MVP/MVP+ Structure**: This document follows the WEBUILD ecosystem structure, distinguishing between:
+This document describes the Relying Party onboarding process. Relying Parties are entities that intend to rely on EUDI Wallets for the provision of digital public or private services. The onboarding process enables Relying Parties to register with Member State Registrars and obtain Access Certificates for authentication during service interactions.
+
+This use case aligns with the [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md), which defines the overall architecture and registration process. Relying Parties register with Member State Registrars but are not included in Trusted Lists (they use Access Certificates/Registry for verification). See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) for details.
+
+This document follows the WEBUILD ecosystem structure, distinguishing between:
 - **[MVP]**: WEBUILD testing/pilot phase requirements, where the WP4 Trust Infrastructure group acts as Ecosystem Authority
 - **[MVP+]**: Production/regulatory phase requirements, aligned with EU regulations and Member State implementations
 
-## Basic Information
-- **Use Case ID**: UC-01
-- **Title**: Relying Party Onboarding
-- **Category**: Onboarding
-- **Priority**: [High | Medium | Low]
-- **Complexity**: [Simple | Medium | Complex]
-- **Version**: 1.1
-- **Last Updated**: 22/10/2025
+Wherever feasible, this specification aligns with processes defined in [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) and the [Architecture and Reference Framework](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/), interpreting them for the testing purposes specific to WEBUILD.
+
+For common onboarding framework elements shared with PID/EAA Providers and Wallet Providers, see [Base Onboarding Framework](onboarding-base.md).
+
+## Terminology and Acronyms
+
+See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in the base document.
 
 ## Actors
 
@@ -45,11 +48,11 @@
     - [MVP] Pilot implementations successfully demonstrate Relying Party onboarding within WEBUILD
     - [MVP] All Relying Parties within WEBUILD are included in a publicly accessible register maintained by the WP4 Trust Infrastructure group
     - [MVP+] The onboarding process for Relying Parties is formally defined and documented in a harmonized manner that aligns with EU regulatory and technical frameworks (ref. [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848))
-    - [MVP+] See [Common Success Criteria](onboarding-base.md#common-success-criteria) in the base document for additional criteria
+    - [MVP+] See [Common Success Criteria](onboarding-base.md#common-success-criteria)
     - Additional entity-specific success criteria:
     - *Interoperability across Member States*
         - All Relying Party Access and Registration Certificates are syntactically and semantically harmonised in line with ETSI EN 319 411-1 version 1.4.1 (2023-10) and related IETF RFCs ([RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519), [RFC 8392](https://datatracker.ietf.org/doc/html/rfc8392), [RFC 9162](https://datatracker.ietf.org/doc/html/rfc9162)) (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-        - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
+        - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation guidance.
     - *Secure trust establishment*
         - Each Relying Party’s identity and attributes are verifiable via National Registers and anchored in the EU trust framework (ref. [Regulation (EU) 2024/1183, Article 5a(18)](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)).
         - Continuous monitoring and automatic Access and Registration Certificate revocation mechanisms are implemented and effective within 24 hours of a change request (ref. [Regulation (EU) 2025/848, Article 9(5)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
@@ -57,7 +60,7 @@
         - All Certificate issuances, renewals, and revocations are logged (optionally under RFC 9162 – Certificate Transparency v2.0) and made publicly accessible for validation (ref. [Regulation (EU) 2025/848, Annex IV 3(j), Annex V 3(i)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
         - Revocation and validity information is provided freely (free of charge), automatically, and reliably (ref. [Regulation (EU) 2025/848, Annex IV 5, Annex V 6](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Compliance and accountability*
-        - Certificate Policies (CP) and Certification Practice Statements (CPS) follow ETSI EN 319 411-1 version 1.4.1 (2023-10) NCP requirements (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
+        - Certificate Policies (CP) and Certification Practice Statements (CPS) follow ETSI EN 319 411-1 version 1.4.1 (2023-10) NCP requirements (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)). See [ETSI Policy Enumeration](../task5-participants-certificates-policies/etsi-policy-enumeration.md) and [ETSI Policy Evaluation](../task5-participants-certificates-policies/etsi-policy-evaluation.md) for policy specifications and evaluation methods.
         - Each Member State designates at least one Registrar and maintains at least one National Register and communicates changes to the Commission and other Member States (ref. [Regulation (EU) 2025/848, Article 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Operational effectiveness*
         - Onboarding of new Relying Parties is completed through a dual-phase process (administrative + technical) with measurable outcomes and turnaround times.
@@ -65,7 +68,7 @@
 
 ## Preconditions
 
-See [Common Preconditions](onboarding-base.md#common-preconditions) in the base document for common preconditions applicable to all participants.
+See [Common Preconditions](onboarding-base.md#common-preconditions).
 
 ### Preconditions [MVP]
 - The WEBUILD WP4 Trust Infrastructure group has established a register for Relying Parties within WEBUILD.
@@ -73,11 +76,69 @@ See [Common Preconditions](onboarding-base.md#common-preconditions) in the base 
 - The WEBUILD WP4 Trust Infrastructure group has published registration policies for the WEBUILD testing environment.
 
 ### Preconditions [MVP+]
-- See [Preconditions for Relying Parties and PID/EAA Providers](onboarding-base.md#preconditions-for-relying-parties-and-pideaa-providers) in the base document.
+- See [Preconditions for Relying Parties and PID/EAA Providers](onboarding-base.md#preconditions-for-relying-parties-and-pideaa-providers).
+
+See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI acronym definition and role definitions.
+
+| RACI MATRIX - WP4 Trust Infrastructure Group                     | Lead/ Co-Lead | WP 4 - Testing |[Responsible](onboarding-base.md#trust-infrastructure-responsible-group)| [Participant] |
+|------------------------------------------------------------------|---------------|----------------|--------------|---------------|
+| Announce registration request to Relying Parties                  |       A,C     |                |      R       |       I       |
+| Set up and manage a form to gather data from Relying Parties     |       A,C     |                |      R       |       I       |
+| Review Relying Party registration data                           |       A,C     |                |      R       |       I       |
+| Decide upon registration acceptance/rejection (Ecosystem Authority) |       A,C     |                |      R       |       I       |
+| Inform about registration decision                              |       A,C     |                |      R       |       I       |
+| Publish Relying Party in the register                            |       A,C     |                |      R       |       I       |
+| Issue Access Certificates (Access Certificate Authority)        |       A,C     |                |      R       |       I       |
+| Issue Registration Certificates (Provider of Registration Certificates) |       A,C     |                |      R       |       I       |
+| Engage with Relying Parties during onboarding / troubleshooting  |       A,C     |                |      R       |       I       |
+
+## Data Model
+
+[MVP]
+
+- As a baseline, there will be a single register for all Relying Parties in WEBUILD to reduce complexity.
+- Registry for Relying Parties complies with [Regulation (EU) 2025/848, Article 3 "National registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) and [EC TS05 V1.0](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
+- Access Certificate Profile: [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) - Access Certificate Policy for EUDI Wallet Relying Parties. X.509 certificate structure per ETSI EN 319 412-3 for legal persons.
+- Registration Certificate Profile: [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf) version 1.4.1 (2023-10) NCP requirements and [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf) - JWT format (rc-wrp+jwt) with relying party attributes
+- Relying Party Attributes: [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf)
+
+### Registry Data Model
+
+The registry for Relying Parties contains the information set out in [Regulation (EU) 2025/848, Annex I](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) and [EC TS06 v1.0](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md):
+
+- Official name of the wallet-relying party
+- One or more official identifiers (EORI, LEI, VAT number, etc.)
+- Physical address and Member State
+- URL belonging to the wallet-relying party where applicable
+- Detailed contact information (phone number, website or email)
+- Description of the type of services provided
+- List of attributes that the wallet-relying party intends to request for each intended use
+- Description of intended use of the data
+- Indication whether the wallet-relying party is a public sector body
+- Applicable entitlement(s) of the wallet-relying party
+- Indication if the wallet-relying party intends to act as an intermediary or to rely upon an intermediary
+
+The registry information is made available through a REST API supporting JSON format, electronically signed or sealed, in accordance with [Regulation (EU) 2025/848, Annex II](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848). See [Task 4 - Onboarding API](../task4-trust-infrastructure-api/onboarding-api/README.md) for API specifications.
+
+### Access Certificate Profile
+
+Access Certificates for Relying Parties follow [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) - Access Certificate Policy for EUDI Wallet Relying Parties. The certificate profile specifies X.509 certificate structure with subject distinguished name fields (countryName, organizationName, organizationIdentifier, commonName), subject alternative name extensions (URI, email, telephoneNumber), certificate policies, and key usage extensions per ETSI EN 319 412-3 for legal persons.
+
+### Registration Certificate Profile
+
+Registration Certificates for Relying Parties follow [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf) version 1.4.1 (2023-10) NCP requirements and [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf) for relying party attributes. Registration Certificates are issued in JWT format (typ: "rc-wrp+jwt") with payload containing identity fields (name, sub.legal_name, sub.id, country, registry_uri), service descriptions, entitlements, purpose, credentials, privacy policy, and status information per ETSI TS 119 475 clause 5.2.4.
+
+[MVP+]
+
+- See [Common Preconditions - Preconditions for Relying Parties and PID/EAA Providers](onboarding-base.md#preconditions-for-relying-parties-and-pideaa-providers) for MVP+ data model requirements.
 
 ## Main Flow
 
-See [Common Main Flow Structure](onboarding-base.md#common-main-flow-structure) in the base document for the overall flow structure.
+See [Common Main Flow Structure](onboarding-base.md#common-main-flow-structure).
+
+> **Relying Party Registration**:
+> - **[MVP]**: Relying Parties register with WEBUILD WP4 Trust Infrastructure group → Registry maintained by WEBUILD
+> - **[MVP+]**: Relying Parties register with Member State Registrars but are **not** included in Trusted Lists. They use Access Certificates and Registry entries for verification. See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix).
 
 **Note**: The detailed steps below apply to both [MVP] and [MVP+] phases, with specific procedures and requirements differentiated where applicable.
 
@@ -103,67 +164,7 @@ See [Common Main Flow Structure](onboarding-base.md#common-main-flow-structure) 
 
 ## Industrial-Scale Considerations
 
-See [Industrial-Scale Considerations](onboarding-base.md#industrial-scale-considerations) in the base document for common approaches to entity identification, registry integration, and attribute authorization management.
-
-To support the large-scale onboarding of Relying Parties across the EUDI Wallet ecosystem, the registration process must address two critical dimensions:
-
-### 1. Entity Identification and Registry Integration
-
-**Objective**: Efficiently identify and onboard entities, leveraging existing authoritative registries where possible.
-
-**Approaches**:
-- **Direct Registration**: Entities register directly with the National Registrar, providing all required information manually or through automated submission.
-- **Registry Import**: Import entity information from existing authoritative registries (e.g., business registries, VAT registries, professional qualification registries) to reduce duplication and streamline onboarding.
-
-**Level of Assurance for Existing Registries**:
-- Member States must establish criteria for qualifying existing registries as authoritative sources for entity identification.
-- Qualification criteria should consider:
-  - **Registry Authority**: Legal basis and governance of the source registry.
-  - **Data Quality**: Accuracy, completeness, and currency of registry data.
-  - **Access Mechanisms**: Availability of machine-readable APIs or data exports.
-  - **Identity Verification**: Level of identity proofing and verification performed by the source registry.
-  - **Update Frequency**: How frequently registry data is updated and synchronized.
-- Qualified registries should be documented in Registration Policies and made available through the National Register API (ref. [Regulation (EU) 2025/848, Article 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-
-**Registry Integration Requirements**:
-- Automated data import mechanisms from qualified registries.
-- Data mapping and transformation to align with Annex I requirements.
-- Validation and verification of imported data against source registries.
-- Reconciliation processes for entities already registered in multiple authoritative sources.
-
-### 2. Attribute Authorization Management
-
-**Objective**: Enable efficient and consistent management of credential and attribute authorization requests across Member States and sectors.
-
-**High-Level Approach for Cross-Member State and Cross-Sector Authorization**:
-
-**Credential Catalogues and Taxonomies**:
-- **Common Credential Catalogue**: A harmonized catalogue of credential types and attributes available in the EUDI Wallet ecosystem, enabling Relying Parties to reference standardized credential and attribute definitions.
-- **Attribute Taxonomies**: Hierarchical classification systems for attributes (e.g., identity attributes, professional attributes, qualification attributes) to support consistent authorization policies across sectors.
-- **Sectorial Templates**: Pre-configured sets of credentials and attributes aligned with specific sectors (e.g., healthcare, finance, education, public administration) to simplify registration for Relying Parties operating in those sectors.
-
-**Authorization Policy Framework**:
-- Authorization policies follow the framework defined in [Task 2 - Authentication and Authorization Policy Framework](../task2-trust-framework/authentication-authorization-policy-framework.md), supporting both:
-  - **Additive Authorization**: Explicit allow-list model (default deny, explicit allow) for high-security environments.
-  - **Subtractive Authorization**: Explicit deny-list model (default allow, explicit deny) for flexible, open ecosystems.
-- Policies are expressed through trust marks and registration certificates, enabling automated authorization decisions.
-
-**Cross-Border and Cross-Sector Harmonization**:
-- **Harmonized Attribute Definitions**: Common semantic definitions for attributes across Member States to enable cross-border authorization decisions.
-- **Mutual Recognition**: Mechanisms for recognizing authorization policies and trust marks across Member States and sectors.
-- **Policy Mapping**: Translation mechanisms between sector-specific and national authorization policies to enable interoperability.
-
-**Tools and Mechanisms**:
-- **Credential Catalogue APIs**: Machine-readable access to credential and attribute definitions, taxonomies, and sectorial templates.
-- **Authorization Policy Templates**: Reusable policy templates for common use cases and sectors.
-- **Validation Services**: Automated validation of attribute requests against authorization policies and sectorial requirements.
-
-**Implementation Considerations**:
-- These industrial-scale mechanisms are defined at the framework level (see [Task 2 - Trust Framework](../task2-trust-framework/README.md)) and implemented through:
-  - Registration Policies (ref. [Regulation (EU) 2025/848, Article 4](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-  - Registration Certificates containing authorization information (ref. [Regulation (EU) 2025/848, Article 8](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-  - Trust marks expressing authorization semantics (see [Task 2 - Authentication and Authorization Policy Framework](../task2-trust-framework/authentication-authorization-policy-framework.md)).
-- Detailed specifications for credential catalogues, taxonomies, and sectorial templates are defined in Task 5 (Participants' Certificates and Policies).
+See [Industrial-Scale Considerations](onboarding-base.md#industrial-scale-considerations).
 
 ## 1. Administrative Onboarding
 
@@ -194,7 +195,7 @@ Each Relying Party that intends to rely on EUDI Wallets for the provision of dig
 
 ### 1.1 Registration Application
 
-**For [MVP]**: The Relying Party (Beneficiary or Associated Partner) submits the registration application to the WEBUILD WP4 Trust Infrastructure group, providing required information for WEBUILD testing purposes. The application includes entity identification, contact information, service description, and intended use of EUDI Wallet data.
+**For [MVP]**: The Relying Party (Beneficiary or Associated Partner) submits the registration application to the [Trust Infrastructure Responsible Group](onboarding-base.md#trust-infrastructure-responsible-group), providing required information for WEBUILD testing purposes. The application includes entity identification, contact information, service description, and intended use of EUDI Wallet data.
 
 **For [MVP+]**: The Relying Party submits the registration application to the Registrar, providing at least the information set out in Annex I. Alternatively, the Registrar may import entity information from qualified authoritative registries (see [Industrial-Scale Considerations - Entity Identification and Registry Integration](onboarding-base.md#1-entity-identification-and-registry-integration)).
 
@@ -250,9 +251,9 @@ See also [EC TS06 v1.0 - Common Set of Relying Party Information to be Registere
 
 ### 1.2 Registration Review
 
-**For [MVP]**: The WEBUILD WP4 Trust Infrastructure group reviews the registration application, verifying entity information and compliance with WEBUILD testing requirements.
+**For [MVP]**: The [Trust Infrastructure Responsible Group](onboarding-base.md#trust-infrastructure-responsible-group) reviews the registration application, verifying entity information and compliance with WEBUILD testing requirements.
 
-**For [MVP+]**: See [Common Administrative Onboarding Steps - 1.2 Registration Review](onboarding-base.md#12-registration-review) in the base document.
+**For [MVP+]**: See [Common Administrative Onboarding Steps - 1.2 Registration Review](onboarding-base.md#12-registration-review).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 6. "Registration processes"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_4:~:text=Article%C2%A04-,Registration%20policies,-1.%C2%A0%C2%A0%C2%A0Member%20States)
@@ -266,9 +267,9 @@ See also [EC TS06 v1.0 - Common Set of Relying Party Information to be Registere
 
 ### 1.3 Registration Confirmation
 
-**For [MVP]**: The WEBUILD WP4 Trust Infrastructure group validates or rejects the registration application and notifies the Relying Party of the decision.
+**For [MVP]**: The [Trust Infrastructure Responsible Group](onboarding-base.md#trust-infrastructure-responsible-group) validates or rejects the registration application and notifies the Relying Party of the decision.
 
-**For [MVP+]**: See [Common Administrative Onboarding Steps - 1.3 Registration Confirmation](onboarding-base.md#13-registration-confirmation) in the base document.
+**For [MVP+]**: See [Common Administrative Onboarding Steps - 1.3 Registration Confirmation](onboarding-base.md#13-registration-confirmation).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 6. "Registration processes"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_4:~:text=Article%C2%A04-,Registration%20policies,-1.%C2%A0%C2%A0%C2%A0Member%20States)
@@ -284,7 +285,7 @@ The Relying Party receives positive or negative feedback on registration applica
 
 **For [MVP]**: The WEBUILD WP4 Trust Infrastructure group registers the Relying Party in the WEBUILD register and makes the information publicly accessible for testing purposes.
 
-**For [MVP+]**: See [Common Administrative Onboarding Steps - 1.4 Publication in the National Register](onboarding-base.md#14-publication-in-the-national-register) in the base document.
+**For [MVP+]**: See [Common Administrative Onboarding Steps - 1.4 Publication in the National Register](onboarding-base.md#14-publication-in-the-national-register).
 
 *Requirements:*
 - [ARF "6.4.2 Relying Party registration"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#642-relying-party-registration)
@@ -320,7 +321,7 @@ Following successful registration, each Relying Party enters a technical onboard
 
 ### 2.1 Access Certificate Request
 
-See [Common Technical Onboarding Steps - 2.1 Access Certificate Request](onboarding-base.md#21-access-certificate-request) in the base document.
+See [Common Technical Onboarding Steps - 2.1 Access Certificate Request](onboarding-base.md#21-access-certificate-request).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 7. "Wallet-relying party access certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_8:~:text=Article%C2%A08-,Wallet%2Drelying%20party%20registration%20certificates,-1.%C2%A0%C2%A0%C2%A0Member%20States)
@@ -332,7 +333,7 @@ See [Common Technical Onboarding Steps - 2.1 Access Certificate Request](onboard
 
 ### 2.2 Access Certificate Request Review
 
-See [Common Technical Onboarding Steps - 2.2 Access Certificate Request Review](onboarding-base.md#22-access-certificate-request-review) in the base document.
+See [Common Technical Onboarding Steps - 2.2 Access Certificate Request Review](onboarding-base.md#22-access-certificate-request-review).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 7. "Wallet-relying party access certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_5:~:text=Article%C2%A07-,Wallet%2Drelying%20party%20access%20certificates,-1.%C2%A0%C2%A0%C2%A0Member%20States)
@@ -347,7 +348,7 @@ See [Common Technical Onboarding Steps - 2.2 Access Certificate Request Review](
 
 ### 2.3 Access Certificate Issuance
 
-See [Common Technical Onboarding Steps - 2.3 Access Certificate Issuance](onboarding-base.md#23-access-certificate-issuance) in the base document.
+See [Common Technical Onboarding Steps - 2.3 Access Certificate Issuance](onboarding-base.md#23-access-certificate-issuance).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Annex IV "Requirements for wallet-relying party access certificates referred to in Article 7"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_IV:~:text=Requirements%20for%20wallet%2Drelying%20party%20access%20certificates%20referred%20to%20in%20Article%C2%A07)
@@ -388,7 +389,7 @@ The Registrar keeps records of the issuance of Relying Party Access Certificate 
 
 ### 2.4 Registration Certificate Request
 
-See [Common Technical Onboarding Steps - 2.4 Registration Certificate Request](onboarding-base.md#24-registration-certificate-request) in the base document.
+See [Common Technical Onboarding Steps - 2.4 Registration Certificate Request](onboarding-base.md#24-registration-certificate-request).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 8. "Wallet-relying party registration certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_8:~:text=Article%C2%A08-,Wallet%2Drelying%20party%20registration%20certificates,-1.%C2%A0%C2%A0%C2%A0Member%20States)
@@ -401,7 +402,7 @@ See [Common Technical Onboarding Steps - 2.4 Registration Certificate Request](o
 
 ### 2.5 Registration Certificate Request Review
 
-See [Common Technical Onboarding Steps - 2.5 Registration Certificate Request Review](onboarding-base.md#25-registration-certificate-request-review) in the base document.
+See [Common Technical Onboarding Steps - 2.5 Registration Certificate Request Review](onboarding-base.md#25-registration-certificate-request-review).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 8. "Wallet-relying party registration certificates"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_8:~:text=Article%C2%A08-,Wallet%2Drelying%20party%20registration%20certificates,-1.%C2%A0%C2%A0%C2%A0Member%20States)
@@ -420,7 +421,7 @@ See [Common Technical Onboarding Steps - 2.5 Registration Certificate Request Re
 
 ### 2.6 Registration Certificate Issuance
 
-See [Common Technical Onboarding Steps - 2.6 Registration Certificate Issuance](onboarding-base.md#26-registration-certificate-issuance) in the base document.
+See [Common Technical Onboarding Steps - 2.6 Registration Certificate Issuance](onboarding-base.md#26-registration-certificate-issuance).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Annex V "Requirements for wallet-relying party registration certificates referred to in Article 8"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_IV:~:text=Requirements%20for%20wallet%2Drelying%20party%20registration%20certificates%20referred%20to%20in%20Article%C2%A08)
@@ -489,7 +490,7 @@ Once the Access and Registration Certificates are active, the Relying Party may 
 
 ### 3.1 Registration Monitoring
 
-See [Common Post-Onboarding Steps - 3.1 Registration Monitoring](onboarding-base.md#31-registration-monitoring) in the base document.
+See [Common Post-Onboarding Steps - 3.1 Registration Monitoring](onboarding-base.md#31-registration-monitoring).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 9. "Suspension and cancellation of registration"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_9:~:text=Suspension%20and%20cancellation%20of%20registration)
@@ -513,7 +514,7 @@ The Provider of Registration Certificate monitors continuously and automatically
  
 ### 3.2 Registration Update
 
-See [Common Post-Onboarding Steps - 3.2 Registration Update](onboarding-base.md#32-registration-update) in the base document.
+See [Common Post-Onboarding Steps - 3.2 Registration Update](onboarding-base.md#32-registration-update).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 5. "Information to be provided to the national registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_5:~:text=Information%20to%20be%20provided%20to%20the%20national%20registers)
@@ -526,7 +527,7 @@ See [Common Post-Onboarding Steps - 3.2 Registration Update](onboarding-base.md#
 
 ### 3.3 Registration Suspension / Cancellation
 
-See [Common Post-Onboarding Steps - 3.3 Registration Suspension / Cancellation](onboarding-base.md#33-registration-suspension--cancellation) in the base document.
+See [Common Post-Onboarding Steps - 3.3 Registration Suspension / Cancellation](onboarding-base.md#33-registration-suspension--cancellation).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Article 9. "Suspension and cancellation of registration"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#art_9:~:text=Suspension%20and%20cancellation%20of%20registration)
@@ -553,7 +554,7 @@ The Provider of Registration Certificate receives notice of the Relying Party re
 
 ### 3.4 Access / Registration Certificate Revocation
 
-See [Common Post-Onboarding Steps - 3.4 Certificate Revocation](onboarding-base.md#34-certificate-revocation) in the base document.
+See [Common Post-Onboarding Steps - 3.4 Certificate Revocation](onboarding-base.md#34-certificate-revocation).
 
 *Requirements:*
 - [Regulation (EU) 2025/848, Annex IV "Requirements for wallet-relying party access certificates referred to in Article 7"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_IV:~:text=Requirements%20for%20wallet%2Drelying%20party%20access%20certificates%20referred%20to%20in%20Article%C2%A07)
@@ -603,14 +604,4 @@ Then:
 
 ## Normative References
 
-See [Common Normative References](onboarding-base.md#common-normative-references) in the base document for common references applicable to all participant onboarding processes.
-
-### Additional Relying Party-Specific References
-
-#### European Commission Technical Specifications
-- **EC TS05 V1.0** (2025-06): [Common Formats and API for Relying Party Registration Information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
-- **EC TS06 v1.0** (2025-06): [Common Set of Relying Party Information to be Registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md)
-
-#### ETSI Standards
-- **ETSI TS 119 411-8** (v01.01.01): [Access Certificate Policy for EUDI Wallet Relying Parties](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf)
-- **ETSI TS 119 475** (v01.01.01): [Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf)
+See [Common Normative References](onboarding-base.md#common-normative-references) for all references applicable to Relying Party onboarding processes, including Relying Party-specific references.
