@@ -396,7 +396,6 @@ ETSI_LOTE_TYPE_URIS = {
 - [ ] Entity validation tool validates JSON/YAML files against entity-specific schemas using extensible field-level validation
 - [ ] Templates include X.509 CSR for access certificate, validated by base registration validator
 - [ ] Access certificate complies with Task 3 specifications
-- [ ] Entity identifiers are unique; duplicate identifiers are rejected
 - [ ] PRs with existing entity identifiers are treated as updates to published Trusted Lists
 - [ ] All tools include unit and integration tests using pytest (minimum 95% code coverage)
 - [ ] GitHub workflow triggers on PRs modifying `onboarding/` files, validates schema, executes test platforms, posts results
