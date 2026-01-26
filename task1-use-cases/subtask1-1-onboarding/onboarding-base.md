@@ -83,6 +83,7 @@ The following table lists the entities that are part of the Trust Infrastructure
 | Entity | Legal Name | Website | Administrative Contact | Technical Contact |
 |--------|------------|---------|----------------------|-------------------|
 | IDunion SCE | GER-IDunion SCE | [https://www.idunion.eu](https://www.idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) |
+| Forkbomb | Forkbomb BV | [https://forkbomb.eu](https://forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) |
 
 **Note**: Additional entities may be added to this group as designated by the WP4 Trust Infrastructure group. Consortium participants can propose theirselves applying a Pull Request to add themselves to the list and be actively involved in the registration operations and review processes.
 
