@@ -2,6 +2,8 @@
 
 This directory contains the implementation and detailed specification of the Onboarding API for the WP4 Trust Infrastructure.
 
+**Note on Schema Harmonization**: The data models defined in this API are harmonized with the [Task 5 data models](../task5-participants-certificates-policies/README.md#data-models) and the [onboarding use case documents](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md) to ensure consistency across the trust infrastructure. Participant types, status values, certificate types, and certificate status values are aligned across all specifications.
+
 ## Folder contents
 
 - **`README.md`** – Summary of the Onboarding API responsibilities and main resources
