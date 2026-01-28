@@ -46,7 +46,7 @@ Per ETSI TS 119 475 clause 5.2.2 (Table 5):
   "name": "Online Shop AG",
   "sub": {
     "legal_name": "Online Shop AG",
-    "id": "LEIXG-529900T8BM49AURSDO55"
+    "id": "LEIDE-529900T8BM49AURSDO55"
   },
   "country": "DE",
   "registry_uri": "https://wrp-register.de/api/v1/relying-parties/DE-WRP-00789",
@@ -136,9 +136,13 @@ Per ETSI TS 119 475 Table 9 and GEN-5.2.4-06:
 ```json
 {
   "name": "Dutch Bank Customer Onboarding",
-  "sub": { "legal_name": "Dutch Bank N.V.", "id": "LEIXG-724500VKKSH9QOLTFR81" },
+  "sub": { "legal_name": "Dutch Bank N.V.", "id": "LEINL-724500VKKSH9QOLTFR81" },
   "country": "NL",
   "registry_uri": "https://wrp-register.nl/api/v1/relying-parties/NL-WRP-00234",
+  "service": [
+    { "lang": "en-US", "value": "Online banking account opening service" },
+    { "lang": "nl-NL", "value": "Online bankrekening openen" }
+  ],
   "entitlements": [
     "https://uri.etsi.org/19475/Entitlement/Service_Provider",
     "https://uri.etsi.org/19475/SubEntitlement/psp/psp-as"
@@ -194,7 +198,7 @@ Per ETSI TS 119 475 Table 10 and GEN-5.2.4-09:
   ],
   "act": {
     "sub": {
-      "id": "LEIXG-529900INTERMEDIARY01",
+      "id": "LEIDE-529900INTERMEDIARY01",
       "name": "Verification Services AG"
     }
   },
@@ -314,9 +318,9 @@ OID: 0.4.0.19475.3.1
 
 Relying Party Registration Certificates are used to:
 
-1. **Declare intended use** - Purpose for requesting attributes (CIR 2025/848 Article 8.2(b))
-2. **Define requested credentials** - Attestations and claims needed (Annex I.9)
-3. **Support data minimization** - Enforce attribute access policies
-4. **Enable transparency** - Allow users to understand data requests
-5. **Facilitate over-asking detection** - Detect requests beyond declared scope
-6. **Support intermediary chains** - Identify intermediated requests (Annex I.14)
+1. **Declare intended use** - Purpose for requesting attributes (CIR 2025/848 Article 8.2(b));
+2. **Define requested credentials** - Attestations and claims needed (Annex I.9);
+3. **Support data minimization** - Enforce attribute access policies;
+4. **Enable transparency** - Allow users to understand data requests;
+5. **Facilitate over-asking detection** - Detect requests beyond declared scope;
+6. **Support intermediary chains** - Identify intermediated requests (Annex I.14).
