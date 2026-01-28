@@ -229,7 +229,7 @@ Per ETSI EN 319 412-1 clause 5.1.4 and ETSI TS 119 475 clause 5.1.3:
 | `http://data.europa.eu/eudi/id/LEI` | `LEI` | clause 5.1.4 | CIR 2022/1860, ISO 17442-1 |
 | `http://data.europa.eu/eudi/id/VATIN` | `VAT` | clause 5.1.4 | Directive 2006/112/EC |
 | `http://data.europa.eu/eudi/id/EORI-No` | `EOR` | clause 5.1.4 (future) | CIR 1352/2013 |
-| `http://data.europa.eu/eudi/id/TIN` | `VAT` | clause 5.1.4 | - |
+| `http://data.europa.eu/eudi/id/TIN` | `TIN` | clause 5.1.4 | - |
 | `http://data.europa.eu/eudi/id/Excise` | `EXC` | clause 5.1.4 (future) | Regulation 389/2012 |
 
 ### Natural Person Identifiers (Table 4)
@@ -303,6 +303,7 @@ Per ETSI TS 119 475 clause 5.1.2 and ETSI TS 119 411-8 GEN-6.6.1-10:
 
 ### Generate Key Pair
 ```bash
+# In this example a P-384 ECDSA key will be used
 openssl ecparam -name secp384r1 -genkey -noout -out relying_party.key
 ```
 
@@ -337,6 +338,7 @@ certificatePolicies = @policy_section
 authorityInfoAccess = OCSP;URI:http://ocsp.tsp.example
 crlDistributionPoints = URI:http://crl.tsp.example/wallet-ca.crl
 
+# Per ETSI TS 119 411-8 GEN-6.6.1-07
 [alt_names]
 URI.1 = https://service.example.com/support
 email.1 = support@service.example.com
@@ -353,7 +355,7 @@ CPS.1 = https://pki.service.example.com/cps
 
 Relying Party Access Certificates are used to:
 
-1. **Authenticate** to EUDIW when requesting attributes (per CIR 2025/848 Article 7)
-2. **Sign** attribute requests to prove authenticity
-3. **Establish trust** with wallet users via national trusted lists (per eIDAS Article 22)
-4. **Enable verification** of the relying party's identity by the wallet
+1. **Authenticate** to EUDIW when requesting attributes (per CIR 2025/848 Article 7);
+2. **Sign** attribute requests to prove authenticity;
+3. **Establish trust** with wallet users via national trusted lists (per eIDAS Article 22);
+4. **Enable verification** of the relying party's identity by the wallet.

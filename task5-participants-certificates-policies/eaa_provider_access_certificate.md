@@ -79,7 +79,7 @@ Certificate:
 |-------|-------|----------------|-------------|
 | `countryName (C)` | `ES` | ETSI EN 319 412-3 clause 4.2.1 | ISO 3166-1 alpha-2 country code |
 | `organizationName (O)` | `Ministerio del Interior` | ETSI EN 319 412-3 clause 4.2.1; ETSI TS 119 475 Table 1 `legalName` | Legal name from official record |
-| `organizationIdentifier` | `VATES-S2800001J` | ETSI EN 319 412-1 clause 5.1.4; ETSI TS 119 411-8 GEN-6.6.1-05; ETSI TS 119 475 Table 2 | VAT + Country + VAT Number |
+| `organizationIdentifier` | `VATES-S2800001J` | ETSI EN 319 412-1 clause 5.1.4; ETSI TS 119 411-8 GEN-6.6.1-05; ETSI TS 119 475 Table 2 | "VAT" + ISO 3166-1 alpha-2 country code + VAT Number |
 | `commonName (CN)` | `Spanish Driving License Attestation Service` | ETSI EN 319 412-3 clause 4.2.1; ETSI TS 119 411-8 GEN-6.1.1-04; ETSI TS 119 475 Table 1 `tradeName` | User-friendly service name |
 
 #### Subject Alternative Name (SAN)
@@ -95,7 +95,7 @@ Certificate:
 | Field | Value | ETSI Reference | Description |
 |-------|-------|----------------|-------------|
 | `policyIdentifier` | `0.4.0.194118.1.4` | ETSI TS 119 411-8 clause 5.3 (QCP-l-eudiwrp) | Qualified Certificate Policy for legal persons |
-| `cpsURI` | `https://pki.dgt.es/cps` | ETSI TS 119 411-8 GEN-6.6.1-06 | CPS URL |
+| `cpsURI` | `https://pki.dgt.es/cps` | ETSI TS 119 411-8 GEN-6.6.1-06 | Certification Practice Statement URL |
 | `QcCompliance` | Present | ETSI EN 319 411-2 clause 6.6.1; ETSI EN 319 412-5 | Indicates EU qualified certificate |
 | `QcType` | `id-etsi-qct-eseal` | ETSI EN 319 411-2 clause 6.6.1; ETSI EN 319 412-5 | Qualified electronic seal |
 
@@ -160,7 +160,7 @@ Certificate:
 
 | Field | Value | ETSI Reference | Description |
 |-------|-------|----------------|-------------|
-| `organizationIdentifier` | `NTRNLD-KVK34567890` | ETSI EN 319 412-1 clause 5.1.4; ETSI TS 119 475 Table 2 | NTR (EUID) + Country + Chamber of Commerce ID |
+| `organizationIdentifier` | `NTRNL-KVK34567890` | ETSI EN 319 412-1 clause 5.1.4; ETSI TS 119 475 Table 2 | "NTR" (EUID) + ISO 3166-1 alpha-2 country code + National trade register ID |
 | `policyIdentifier` | `0.4.0.194118.1.2` | ETSI TS 119 411-8 clause 5.3 (NCP-l-eudiwrp) | Normalized Certificate Policy for legal persons |
 
 #### Entitlement
@@ -290,6 +290,7 @@ Per ETSI TS 119 475 clause 5.1.2 (Table 1) and ETSI TS 119 411-8 GEN-6.6.1-10:
 
 ### Generate Key Pair
 ```bash
+# In this example a P-384 ECDSA key will be used
 openssl ecparam -name secp384r1 -genkey -noout -out eaa_provider.key
 ```
 
@@ -314,6 +315,7 @@ subjectAltName = @alt_names
 # Per ETSI TS 119 411-8 clause 5.3 and GEN-6.6.1-06
 certificatePolicies = @policy_section
 
+# Per ETSI TS 119 411-8 GEN-6.6.1-07
 [alt_names]
 URI.1 = https://dgt.es/attestations
 email.1 = attestations@dgt.es

@@ -148,6 +148,7 @@ Per ETSI TS 119 475 clause 4.2 and Annex A.2.5:
 
 ### Generate Key Pair
 ```bash
+# In this example a P-384 ECDSA key will be used
 openssl ecparam -name secp384r1 -genkey -noout -out pid_provider.key
 ```
 
