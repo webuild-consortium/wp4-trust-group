@@ -1,6 +1,6 @@
 # Base Onboarding Framework for EUDI Wallet Ecosystem Participants
 
-This document provides the common base framework for onboarding processes applicable to Relying Parties, PID Providers, Attestation Providers (QEAA Providers, PuB-EAA Providers, and non-qualified EAA Providers), and Wallet Providers in the EUDI Wallet ecosystem. This base document should be referenced by entity-specific onboarding documents to avoid duplication and ensure consistency.
+This document provides the common base framework for onboarding processes applicable to Relying Parties, PID Providers, Attestation Providers (QEAA Providers, PuB-EAA Providers, and non-qualified EAA Providers), and Wallet Providers in the EUDI Wallet ecosystem. This base document should be referenced by entity-specific onboarding documents to avoid duplication.
 
 ## Terminology and Acronyms
 
