@@ -121,8 +121,11 @@ wp4-trust-group/
   - [Official Document](https://eur-lex.europa.eu/eli/reg/2014/910/oj)
 - **Regulation (EU) 2024/1183** - Amending Regulation (EU) No 910/2014
   - [Official Document](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)
-- **CIR  2025/848** -  Commission Implementing Regulation on the registration of wallet-relying parties
+- **CIR 2025/848** - Commission Implementing Regulation on the registration of wallet-relying parties
   - [Official Document](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500848j)
+- **CIR 2025/2164** - Commission Implementing Regulation (trusted lists context; referenced by ARF v2.8.0 for ETSI TS 119 612)
+  - [Official Document](https://eur-lex.europa.eu/eli/reg_impl/2025/2164/oj)
+- **Further Implementing Acts** (ARF v2.8.0): CIR 2025/2527 (qualified certificates for website authentication), 2025/2530 (qualified trust service providers), 2025/2531 (qualified electronic ledgers), 2025/2532 (qualified electronic archiving services).
 
 ### Standards
 
@@ -130,14 +133,20 @@ wp4-trust-group/
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf)
   - [XSD Schema](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd)
   - [SIE XSD Schema (ListOfTrustedLists)](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd)
-- **ETSI TS 119 602** (v01.01.01) - Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1.
+- **ETSI TS 119 602** (v01.01.01) - Electronic Signatures and Trust Infrastructures (ESI); **Lists of trusted entities; Data model**. Trusted lists in other formats (JSON, XML, CBOR, ASN.1).
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf)
-- **ETSI TS 119 411-8** (v01.01.01) - Access Certificate Policy for EUDI Wallet Relying Parties
+- **ETSI TS 119 615** (v01.03.01) - Procedures for using and interpreting EUMS national trusted lists (consumption/validation of LoTL and national trusted lists; implements CID 2015/1505).
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119615/01.03.01_60/ts_119615v010301p.pdf)
+- **ETSI TS 119 411-8** (v01.01.01) - Access Certificate Policy for EUDI Wallet Relying Parties (access certificate issuance per ARF Reg_11).
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf)
+- **ETSI EN 319 411-1** - Certificate policy requirements (NCP); Access Certificate Authorities SHALL comply with at least this for ARF Reg_11.
+  - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.01.01_60/en_31941101v010101p.pdf)
 - **ETSI TS 119 475** (v01.01.01) - Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf)
 - **ETSI TS 119 472-2** (v1.1.1) - Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.01.01_60/ts_11947202v010101p.pdf)
+
+Project alignment with **EUDI Architecture and Reference Framework (ARF) v2.8.0** (terminology LoTE, Reg_10/10a/11/31, RPA_02/RPA_04, access certificate and trusted list standards).
 
 ### European Commission Technical Specifications
 

@@ -4,7 +4,8 @@
 ## Document Information
 - **Standards**: 
   - [ETSI TS 119 612 V2.4.1 (2025-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) - Trusted Lists (XML)
-  - [ETSI TS 119 602 V1.1.1 (2025-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) - Lists of Trusted Entities (JSON/XML)
+  - [ETSI TS 119 602 V1.1.1 (2025-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) - Lists of trusted entities; Data model (JSON/XML)
+  - [ETSI TS 119 615 V1.3.1 (2026-01)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119615/01.03.01_60/ts_119615v010301p.pdf) - Procedures for using and interpreting EUMS national trusted lists
 - **Keywords**: e-commerce, electronic signature, eudi wallet, security, trust services
 
 ## Table of Contents
@@ -17,9 +18,10 @@
 7. [Profile-Specific Requirements](#7-profile-specific-requirements)
 8. [Digital Signature Implementation](#8-digital-signature-implementation)
 9. [Distribution and Transport](#9-distribution-and-transport)
-10. [Examples](#10-examples)
-11. [Testing and Validation](#11-testing-and-validation)
-12. [Python Libraries for Signatures](#12-python-libraries-for-signatures)
+10. [Procedures for Authenticating and Using Trusted Lists (TS 119 615)](#10-procedures-for-authenticating-and-using-trusted-lists-ts-119-615)
+11. [Examples](#11-examples)
+12. [Testing and Validation](#12-testing-and-validation)
+13. [Python Libraries for Signatures](#13-python-libraries-for-signatures)
 
 ## 1. Overview
 
@@ -33,11 +35,18 @@ This implementation profile provides unified guidance for implementing both ETSI
 - Service type definitions and status management
 - XAdES digital signatures
 
-**ETSI TS 119 602 v1.1.1** defines:
+**ETSI TS 119 602 v1.1.1 (2025-11)** (per ARF v2.8.0 STS list) (“Lists of trusted entities; Data model”) defines:
 - Abstract data model for Lists of Trusted Entities (LoTE)
 - JSON and XML bindings
 - Profile-based approach for different entity types
 - JAdES (JSON) and XAdES (XML) digital signatures
+
+**ETSI TS 119 615 v1.3.1** defines:
+- Procedures for **using and interpreting** EUMS national trusted lists when **validating** EU qualified trust service outputs (e.g. qualified certificates, time stamps, validation reports)
+- Interoperable algorithms for authenticating the EC-compiled List of Trusted Lists (LoTL) and EUMS national trusted lists
+- Implements the rules of Commission Implementing Decision (EU) 2015/1505; builds on ETSI TS 119 612
+
+**Distinction**: TS 119 612 and TS 119 602 define **structure and format** of trusted lists (production side). TS 119 615 defines **procedures for authentication and interpretation** (consumption/validation side).
 
 ### 1.2 When to Use Which Standard
 
@@ -724,7 +733,9 @@ python -m jsonschema lote.json lote-schema.json
 - Next update maximum: 6 months
 - Signature: Compact JAdES Baseline B
 
-### 7.3 Pub-EAA Providers List (TS 119 602, Annex H)
+### 7.3 Pub-EAA Providers List and national non-qualified EAA Provider lists (TS 119 602, Annex H)
+
+**Scope**: Annex H defines the LoTE profile for **Pub-EAA Providers** (EC-compiled list) and is also used for **national non-qualified EAA Provider Trusted Lists** compiled and published by Member State TLPs (per ARF v2.8.0 and the trust infrastructure schema).
 
 #### Required URIs
 - **LoTE Type**: `http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList`
@@ -1046,9 +1057,11 @@ This guide includes:
 - [Regulation (EU) No 910/2014](https://eur-lex.europa.eu/eli/reg/2014/910/oj) - eIDAS
 - [Commission Implementing Regulation (EU) 2024/2980](https://eur-lex.europa.eu/eli/reg_impl/2024/2980/oj)
 - [Commission Implementing Regulation (EU) 2025/1569](https://eur-lex.europa.eu/eli/reg_impl/2025/1569/oj)
+- [Commission Implementing Regulation (EU) 2025/2164](https://eur-lex.europa.eu/eli/reg_impl/2025/2164/oj) – trusted lists / TS 119 612 (marked Done in ARF v2.8.0 STS list)
 
 ---
 
-**Document Version**: 1.0  
-**Last Updated**: 2025-01-28
+**Document Version**: 1.1  
+**Last Updated**: 2025-02-02  
+**ARF alignment**: v2.8.0 (ETSI TS 119 602 title "Lists of trusted entities; Data model" V1.1.1 (2025-11); Annex H for Pub-EAA and national non-qualified EAA Provider lists; TS 119 612 / CIR 2025/2164)
 
