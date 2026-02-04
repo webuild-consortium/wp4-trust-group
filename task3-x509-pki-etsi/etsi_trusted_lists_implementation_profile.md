@@ -207,7 +207,7 @@ http://uri.etsi.org/19602/WalletProvidersList/StatusDetn/EU
 http://uri.etsi.org/19602/WRPACProvidersList/StatusDetn/EU
 
 # WRPRC Providers
-http://uri.etsi.org/19602/WRPRCrovidersList/StatusDetn/EU
+http://uri.etsi.org/19602/WRPRCProvidersList/StatusDetn/EU
 
 # Pub-EAA Providers
 http://uri.etsi.org/19602/PubEAAProvidersList/StatusDetn/EU
