@@ -34,7 +34,8 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
     - Registrar (designated by Member State)
     - Access Certificate Authority (authorized by Member State)
     - Provider of Registration Certificate (authorized by Member State)
-    - Trusted List Provider (designated by Member State)
+    - Trusted List Provider (designated by Member State): national Trusted Lists. See [Trust Infrastructure Schema - Overview](../task2-trust-framework/trust-infrastructure-schema.md#overview).
+    - European Commission: EU-level LoTEs of PID Providers and PuB-EAA Providers (compiled and published in production); LoTL. See [Trust Infrastructure Schema - Overview](../task2-trust-framework/trust-infrastructure-schema.md#overview).
 
 ## Goal
 
