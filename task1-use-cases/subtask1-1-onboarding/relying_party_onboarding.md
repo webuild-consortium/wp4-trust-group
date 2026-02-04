@@ -49,13 +49,13 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
     - [MVP+] See [Success Criteria](onboarding-base.md#success-criteria)
     - Additional entity-specific success criteria:
     - *Interoperability across Member States*
-        - All Relying Party Access and Registration Certificates are syntactically and semantically harmonised in line with ETSI EN 319 411-1 version 1.4.1 (2023-10) and related IETF RFCs ([RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519), [RFC 8392](https://datatracker.ietf.org/doc/html/rfc8392), [RFC 9162](https://datatracker.ietf.org/doc/html/rfc9162)) (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
+        - All Relying Party Access and Registration Certificates are syntactically and semantically harmonised in line with ETSI EN 319 411-1 version 1.4.1 (2023-10) (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
         - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation guidance.
     - *Secure trust establishment*
         - Each Relying Party’s identity and attributes are verifiable via National Registers and anchored in the EU trust framework (ref. [Regulation (EU) 2024/1183, Article 5a(18)](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)).
         - Continuous monitoring and automatic Access and Registration Certificate revocation mechanisms are implemented and effective within 24 hours of a change request (ref. [Regulation (EU) 2025/848, Article 9(5)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Transparency and traceability*
-        - All Certificate issuances, renewals, and revocations are logged (optionally under RFC 9162 – Certificate Transparency v2.0) and made publicly accessible for validation (ref. [Regulation (EU) 2025/848, Annex IV 3(j), Annex V 3(i)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
+        - All Certificate issuances, renewals, and revocations are logged (optionally under Certificate Transparency v2.0) and made publicly accessible for validation (ref. [Regulation (EU) 2025/848, Annex IV 3(j), Annex V 3(i)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
         - Revocation and validity information is provided freely (free of charge), automatically, and reliably (ref. [Regulation (EU) 2025/848, Annex IV 5, Annex V 6](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Compliance and accountability*
         - Certificate Policies (CP) and Certification Practice Statements (CPS) follow ETSI EN 319 411-1 version 1.4.1 (2023-10) NCP requirements (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)). See [ETSI Policy Enumeration](../task5-participants-certificates-policies/etsi-policy-enumeration.md) and [ETSI Policy Evaluation](../task5-participants-certificates-policies/etsi-policy-evaluation.md) for policy specifications and evaluation methods.
@@ -252,7 +252,7 @@ See also [EC TS06 v1.0 - Common Set of Relying Party Information to be Registere
         - indication if the wallet-relying party intends to act **as an intermediary or to rely upon an intermediary**.
 - [Regulation (EU) 2025/848, Annex II "1.   Requirements for Electronic signature or seals applied to the information made available on registered Wallet-Relying Parties referred to in Article 3"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_II:~:text=1.%C2%A0%C2%A0%C2%A0REQUIREMENTS%20FOR%20ELECTRONIC%20SIGNATURES%20OR%20SEALS%20APPLIED%20TO%20THE%20INFORMATION%20MADE%20AVAILABLE%20ON%20REGISTERED%20WALLET%2DRELYING%20PARTIES%20REFERRED%20TO%20IN%20ARTICLE%C2%A03)
     - JavaScript Object Notation (‘JSON’).
-    - IETF RFC 7515 for JSON Web Signatures.
+    - JSON Web Signatures (per ETSI/ARF).
 - [Regulation (EU) 2025/848, Annex II "2.   Requirements on the single common API referred to in Article 3"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_II:~:text=2.%C2%A0%C2%A0%C2%A0REQUIREMENTS%20ON%20THE%20SINGLE%20COMMON%20API%20REFERRED%20TO%20IN%20ARTICLE%C2%A03)
     - (1) The single common API shall:
         - (a) be a **REST API**, supporting **JSON** as a format and signed in accordance with the relevant requirements specified in Section 1;
@@ -368,7 +368,7 @@ The Access Certificate Authority issues and logs the Access Certificate; the Reg
 *Requirements:*
 - [Regulation (EU) 2025/848, Annex IV "Requirements for wallet-relying party access certificates referred to in Article 7"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_IV:~:text=Requirements%20for%20wallet%2Drelying%20party%20access%20certificates%20referred%20to%20in%20Article%C2%A07)
     - 3. The certificate policy and certificate practice statement applicable to the provision of wallet-relying party access certificates […] shall include:
-        - (j) a description, where relevant, on how a provider of wallet-relying party access certificates **logs all wallet-relying party access certificates they have issued**, in compliance with internet engineering task force (‘**IETF**’) request for comments (‘**RFC**’) **9162 Certificate Transparency version 2.0**;
+        - (j) a description, where relevant, on how a provider of wallet-relying party access certificates **logs all wallet-relying party access certificates they have issued**, in compliance with **Certificate Transparency version 2.0**;
         - (k) the obligation for the wallet-relying party access certificates to include:
             - the location where the certificate supporting the advanced electronic signature or advanced electronic seal on that certificate is available, for the entire certification path to be built up to the expected trust anchor in the public key infrastructure hierarchy used by the provider;
             - a machine processable reference to the applicable certificate policy and certificate practice statement;
@@ -385,8 +385,7 @@ See also [ARF, Annex II - High-Level Requirements "B. General requirements for t
     - The registrant receives **one or more Relying Party Access Certificates**.
     - Requirements for Relying party access certificates:
         - **X.509 certificate** with certificate policy and certificate practice statement
-        - shall comply with **IETF RFC 3647**
-        - plus additional requirements set out in the Annex IV
+        - shall comply with the certificate policy and practice statement requirements set out in Annex IV
 
 The Registrar keeps records of the issuance of Relying Party Access Certificate for 10 years and publishes its history within a common REST API (JSON format).
 
@@ -448,7 +447,7 @@ The Provider of Registration Certificate issues and logs the Registration Certif
             - to include the **information** referred to in Annex I, points 1, 2, 3, 5, 6 and 8, 9, 10, 11, 12, 13, 14 and 15;
             - to include the **URL to the privacy policy** referred to in Article 8(2)g;
             - 	to include a **general access policy** as referred to in Article 8(3);
-    - 4. The data exchange format for the relying party registration certificate shall be signed **JSON Web Tokens (IETF RFC 7519)** and **CBOR Web Tokens (IETF RFC 8392).**
+    - 4. The data exchange format for the relying party registration certificate shall be signed **JSON Web Tokens** and **CBOR Web Tokens** (per ETSI TS 119 475 and ARF).
 - [ARF "3.19 Providers of registration certificates"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#319-providers-of-registration-certificates:~:text=3.19-,Providers%20of%20registration%20certificates,-If%20a%20Registrar)
     - If a Registrar has a policy of issuing registration certificates, it has one or more associated Provider(s) of registration certificates. Such a Provider **issues one or more registration certificates to each registered Relying Party**, PID Provider, QEAA Provider, PuB-EAA Provider, and non-qualified EAA Provider. Each registration certificate **contains (a subset of) the data registered for that entity**, as described in Section 3.17.
 - [ARF "6.4.2 Relying Party registration"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#642-relying-party-registration:~:text=6.4.2%20Relying%20Party-,registration,-Figure%2011%20depicts)
@@ -462,9 +461,9 @@ See also ["A. Generic requirements on the specification and contents of registra
 - [Topic X "Relying Party Registration" / "2.2 Draft CIR on Relying Party registration"](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/discussion-topics/x-relying-party-registration.md)
     - The registrant receives **one or more Relying Party Registration Certificates**.
     - Requirements for Relying party registration certificates:
-        - certificate policy and certificate practice statement shall comply with **IETF RFC 3647** and **IETF RFC 5755**
+        - certificate policy and certificate practice statement shall comply with the requirements set out in the Regulation (Annex IV, Annex V)
         - includes the information referred to in **Annex I, points 1, 2 and 8**
-        - expresses attributes in way compliant with **IETF RFC 5755**
+        - expresses attributes in a format compliant with the applicable specifications (per ETSI/ARF)
         - plus additional requirements set out in the **Annex V**
 
 The Registrar keeps records of the issuance of Relying Party Registration Certificate for 10 years and publishes its history within a common REST API (JSON format).

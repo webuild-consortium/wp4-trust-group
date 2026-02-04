@@ -50,13 +50,13 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
     - [MVP+] See [Success Criteria](onboarding-base.md#success-criteria). Entity-specific: dual-phase (administrative + technical) onboarding; trust anchors published in Trusted Lists per entity type (see [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix)).
     - *(Removed duplicated criteria; see base.)*
     - *Interoperability across Member States*
-        - All PID / Attestation Providers Access and Registration Certificates are syntactically and semantically harmonised in line with ETSI EN 319 411-1 version 1.4.1 (2023-10) and related IETF RFCs ([RFC 7519](https://datatracker.ietf.org/doc/html/rfc7519), [RFC 8392](https://datatracker.ietf.org/doc/html/rfc8392), [RFC 9162](https://datatracker.ietf.org/doc/html/rfc9162)) (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
+        - All PID / Attestation Providers Access and Registration Certificates are syntactically and semantically harmonised in line with ETSI EN 319 411-1 version 1.4.1 (2023-10), [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) (Access Certificate), [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf) (Registration Certificate), (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
         - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation guidance.
     - *Secure trust establishment*
         - Each PID / Attestation Providers’s identity and attributes are verifiable via National Registers and anchored in the EU trust framework (ref. [Regulation (EU) 2024/1183, Article 5a(18)](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)).
         - Continuous monitoring and automatic Access and Registration Certificate revocation mechanisms are implemented and effective within 24 hours of a change request (ref. [Regulation (EU) 2025/848, Article 9(5)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Transparency and traceability*
-        - All Certificate issuances, renewals, and revocations are logged (optionally under RFC 9162 – Certificate Transparency v2.0) and made publicly accessible for validation (ref. [Regulation (EU) 2025/848, Annex IV 3(j), Annex V 3(i)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
+        - All Certificate issuances, renewals, and revocations are logged (optionally under Certificate Transparency v2.0) and made publicly accessible for validation (ref. [Regulation (EU) 2025/848, Annex IV 3(j), Annex V 3(i)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
         - Revocation and validity information is provided freely (free of charge), automatically, and reliably (ref. [Regulation (EU) 2025/848, Annex IV 5, Annex V 6](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Compliance and accountability*
         - Certificate Policies (CP) and Certification Practice Statements (CPS) follow ETSI EN 319 411-1 version 1.4.1 (2023-10) NCP requirements (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
@@ -288,7 +288,7 @@ See also [EC TS06 v1.0 - Common Set of Relying Party Information to be Registere
         - the attestation type(s) that the Provider intends to issue to Wallet Units (see [ARF "3.17 Registrars"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#317-registrars:~:text=an%20accreditation%20certificate.-,3.17%20Registrars,-All%20PID%20Providers)).
 - [Regulation (EU) 2025/848, Annex II "1.   Requirements for Electronic signature or seals applied to the information made available on registered Wallet-Relying Parties referred to in Article 3"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_II:~:text=1.%C2%A0%C2%A0%C2%A0REQUIREMENTS%20FOR%20ELECTRONIC%20SIGNATURES%20OR%20SEALS%20APPLIED%20TO%20THE%20INFORMATION%20MADE%20AVAILABLE%20ON%20REGISTERED%20WALLET%2DRELYING%20PARTIES%20REFERRED%20TO%20IN%20ARTICLE%C2%A03) 
     - JavaScript Object Notation (‘JSON’)
-    - IETF 7515 for JSON Web Signatures
+    - JSON Web Signatures (per ETSI/ARF)
 - [Regulation (EU) 2025/848, Annex II "2.   Requirements on the single common API referred to in Article 3"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_II:~:text=2.%C2%A0%C2%A0%C2%A0REQUIREMENTS%20ON%20THE%20SINGLE%20COMMON%20API%20REFERRED%20TO%20IN%20ARTICLE%C2%A03)
 See also [ARF, Annex II - High-Level Requirements "A. General requirements for Member State registration processes"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#:~:text=A.%20General%20requirements%20for%20Member%20State%20registration%20processes) and ["C. Requirements for the registration of PID Providers"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#:~:text=C.%20Requirements%20for%20the%20registration%20of%20PID%20Providers) and ["D. Requirements for the registration of Attestation Providers"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#:~:text=D.%20Requirements%20for%20the%20registration%20of%20Attestation%20Providers).
     - (1) The single common API shall:
@@ -381,7 +381,7 @@ The Access Certificate Authority issues and logs the Access Certificate; the Reg
 *Requirements:*
 - [Regulation (EU) 2025/848, Annex IV "Requirements for wallet-relying party access certificates referred to in Article 7"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_IV:~:text=Requirements%20for%20wallet%2Drelying%20party%20access%20certificates%20referred%20to%20in%20Article%C2%A07)
     - 3. The certificate policy and certificate practice statement applicable to the provision of wallet-relying party access certificates […] shall include:
-        - (j) a description, where relevant, on how a provider of wallet-relying party access certificates **logs all wallet-relying party access certificates they have issued**, in compliance with internet engineering task force (‘**IETF**’) request for comments (‘**RFC**’) **9162 Certificate Transparency version 2.0**;
+        - (j) a description, where relevant, on how a provider of wallet-relying party access certificates **logs all wallet-relying party access certificates they have issued**, in compliance with **Certificate Transparency version 2.0**;
         - (k) the obligation for the wallet-relying party access certificates to include:
             - the location where the certificate supporting the advanced electronic signature or advanced electronic seal on that certificate is available, for the entire certification path to be built up to the expected trust anchor in the public key infrastructure hierarchy used by the provider.
             - a machine processable reference to the applicable certificate policy and certificate practice statement.
@@ -400,8 +400,7 @@ See also [ARF, Annex II - High-Level Requirements "B. General requirements for t
     - The registrant receives **one or more Relying Party Access Certificates**. 
     - Requirements for Relying Party access certificates:
         - **X.509 certificate** with certificate policy and certificate practice statement
-        - shall comply with **IETF RFC 3647**
-        - plus additional requirements set out in the Annex IV
+        - shall comply with the certificate policy and practice statement requirements set out in Annex IV
 
 The Registrar keeps records of the issuance of PID / Attestation Provider Access Certificate for 10 years and publishes its history within a common REST API (JSON format).
 
@@ -463,7 +462,7 @@ The Provider of Registration Certificate issues and logs the Registration Certif
             - to include the **information** referred to in Annex I, points 1, 2, 3, 5, 6 and 8, 9, 10, 11, 12, 13, 14 and 15.
             - to include the **URL to the privacy policy** referred to in Article 8(2)g.
             - 	to include a **general access policy** as referred to in Article 8(3);
-    - 4. The data exchange format for the relying party registration certificate shall be signed **JSON Web Tokens (IETF RFC 7519)** and **CBOR Web Tokens (IETF RFC 8392).**
+    - 4. The data exchange format for the wallet-relying party registration certificate (here: for PID Providers and Attestation Providers) shall be signed **JSON Web Tokens** and **CBOR Web Tokens** (per ETSI TS 119 475 and ARF).
 - [ARF "6.3 Trust throughout a PID Provider or an Attestation Provider lifecycle"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#632-pid-provider-or-attestation-provider-registration-and-notification:~:text=or%20suspended%20separately.-,6.3%20Trust%20throughout%20a%20PID%20Provider%20or%20an%20Attestation%20Provider%20lifecycle,-6.3.1%20PID%20Provider)
     -    When a PID Provider or Attestation Provider is registered by a Member State, a Access Certificate Authority (see Section 3.18 **issues one or more access certificates to the PID Provider or to the Attestation Provider.** A PID Provider or an Attestation Provider needs such a certificate to authenticate itself towards a Wallet Unit when issuing a PID or an attestation to it, as described in Section 6.6.2.2.
     -    Furthermore, the access certificate of a PID Provider or Attestation Provider does not contain the Provider's **registration to issue attestations of a specific type**, for instance an mDL or diploma. Such information is **included in the registration certificates (if issued)**, and in any case available in the Registrar's online service.
@@ -479,12 +478,12 @@ See also ["A. Generic requirements on the specification and contents of registra
     - A registration certificate for a PID Provider, a QEAA Provider, a PuB-EAA Provider, a non-qualified EAA Provider contains **information on the attestation type(s) it intends to issue.**
     - The above types of registration certificate can be **combined in a single certificate**, for instance in case an Attestation Providers intends to request data from the User's PID during issuance of an attestation. Such an Attestation Provider would then register both as a Relying Party (which is called a Service Provider in Technical Specification 5) and as a PID Provider, QEAA Provider, PuB-EAA Provider, or non-qualified EAA Provider.
     - A registration certificate is **signed by the Provider of registration certificates** that issued it. 
-- [Topic X "Relying Party Registration" / "2.2 Draft CIR on Relying Party registration"](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/discussion-topics/x-relying-party-registration.md).
+- [Topic X "Relying Party Registration" / "2.2 Draft CIR on Relying Party registration"](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/discussion-topics/x-relying-party-registration.md) (for **Relying Parties** only; same Provider of Registration Certificates may issue to both Relying Parties and PID/Attestation Providers):
     - The registrant receives **one or more Relying Party Registration Certificates**. 
     - Requirements for Relying Party registration certificates:
-        - certificate policy and certificate practice statement shall comply with **IETF RFC 3647** and **IETF RFC 5755**
+        - certificate policy and certificate practice statement shall comply with the requirements set out in the Regulation (Annex IV, Annex V)
         - includes the information referred to in **Annex I, points 1, 2 and 8**
-        - expresses attributes in way compliant with **IETF RFC 5755**
+        - expresses attributes in a format compliant with the applicable specifications (per ETSI/ARF)
         - plus additional requirements set out in the **Annex V**
 
 The Registrar keeps records of the issuance of PID / Attestation Provider Registration Certificate for 10 years and publishes its history within a common REST API (JSON format).
