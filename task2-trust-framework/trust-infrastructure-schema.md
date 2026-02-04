@@ -1,6 +1,6 @@
 # Trust Infrastructure Schema: Onboarding and Trusted Lists
 
-This document outlines the schema and graphical representation of the EUDI Wallet trust infrastructure. It focuses on three closely related processes: **Registration/Onboarding**, **Notification**, and **Trusted List Publication**, which are separated to align with the Architecture and Reference Framework (ARF). The document is aligned with **ARF v2.8.0** (terminology: LoTE for validation trust anchors per OIA_12, RPA_04; access certificate policy in ETSI TS 119 411-8 / EN 319 411-1; one access certificate per Relying Party Instance per Reg_10a).
+This document describes the schema and graphical representation of the EUDI Wallet trust infrastructure. It focuses on three closely related processes: **Registration/Onboarding**, **Notification**, and **Trusted List Publication**, which are separated to align with the Architecture and Reference Framework (ARF). The document is aligned with **ARF v2.8.0**.
 
 ## Overview
 
