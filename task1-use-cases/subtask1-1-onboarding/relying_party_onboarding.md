@@ -4,7 +4,7 @@
 
 This document describes the Relying Party onboarding process. Relying Parties are entities that intend to rely on EUDI Wallets for the provision of digital public or private services. The onboarding process enables Relying Parties to register with Member State Registrars and obtain Access Certificates for authentication during service interactions.
 
-This use case aligns with the [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md), which defines the overall architecture and registration process. Relying Parties register with Member State Registrars but are not included in Trusted Lists (they use Access Certificates/Registry for verification). See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) for details.
+Under [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) (implementing Regulation (EU) No 910/2014 – eIDAS), **Member States** establish and maintain national registers of wallet-relying parties established in their territory; registration is exclusively with a Member State Registrar. **The European Commission does not register Relying Parties.** The Commission is notified by Member States about the Registrar and the National Register (Article 3); it does not maintain a register of Relying Parties. Relying Parties are not included in Union Trusted Lists (they use Access Certificates and the National Register for verification). See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) for details.
 
 This document follows the WEBUILD ecosystem structure; see [MVP and MVP+ Definitions](onboarding-base.md#mvp-and-mvp-definitions) in the base document.
 
@@ -62,7 +62,7 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
         - Each Member State designates at least one Registrar and maintains at least one National Register and communicates changes to the Commission and other Member States (ref. [Regulation (EU) 2025/848, Article 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Operational effectiveness*
         - Onboarding of new Relying Parties is completed through a dual-phase process (administrative + technical) with measurable outcomes and turnaround times.
-        - End-to-end validation of Access and Registration Certificates succeeds automatically through Trusted List integration (see [Task 3 - ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)), except for Relying Parties that are not themselves listed on a Union Trusted List.
+        - End-to-end validation of Access and Registration Certificates succeeds automatically: trust anchors (e.g. Access CA) via Trusted List integration; Relying Party registration status via the National Register/common API (see [Trust Infrastructure Schema - Overview](../task2-trust-framework/trust-infrastructure-schema.md#overview) and [Task 3 - ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)).
 
 ## Preconditions
 
@@ -321,7 +321,7 @@ Following successful registration, each Relying Party enters a technical onboard
     - Its Member State has authorised at least one Certificate Authority to issue Relying Party Access Certificates.
     - Its Member State has authorised at least one Certificate Authority to issue Relying Party Registration Certificates.
     - The European Commission has been notified about the Access Certificate Authority and the Provider of Registration Certificate.
-    - The Relying Party has successfully completed the Administrative Onboarding phase and is listed in a National Register, notified by the Member State to the EU Commission.
+    - The Relying Party has successfully completed the Administrative Onboarding phase and is listed in a National Register maintained by its Member State (Member States communicate information on the Registrar and the National Register to the Commission and other Member States per [Regulation (EU) 2025/848, Article 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848); the Commission does not register Relying Parties).
     - The Registrar has included the Relying Party in its public registry.
 - **Triggers**:
     - The positive completion of the Relying Party registration process.
