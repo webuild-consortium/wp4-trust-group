@@ -139,7 +139,7 @@ The Wallet Provider must provide the following when requesting onboarding. [MVP]
 
 - 1.1 Wallet Provider requests onboarding
 - 1.2 Onboarding Request Review
-- 1.3 Trusted List of Wallet Providers is updated
+- 1.3 Trusted List of Wallet Providers is updated (MVP: by WP4 Trust Infrastructure group; single TL for WEBUILD)
 
 
 **2. Onboarding via Supervisory Body [MVP+]**
@@ -148,7 +148,7 @@ The Wallet Provider must provide the following when requesting onboarding. [MVP]
 - 2.2 Supervisory Body reviews onboarding request
 - 2.3 Supervisory Body approves onboarding to Trusted List
 - 2.4 Supervisory Body confirms successful administrative onboarding
-- 2.5 Trusted List of Wallet Providers is updated
+- 2.5 European Commission updates the EU-level Trusted List of Wallet Providers (after Member State notification; see [Trust Infrastructure Schema - Overview](../task2-trust-framework/trust-infrastructure-schema.md#overview))
 
 **2. Technical Onboarding**
 
@@ -240,9 +240,11 @@ If not successful, the Trust Infrastructure Responsible Group informs about the 
 
 ### 1.3 Trusted List of Wallet Providers is updated
 
+[MVP]: The **WP4 Trust Infrastructure group** (acting as Trusted List Provider) maintains and updates the single Trusted List of Wallet Providers for WEBUILD; there is no EU-level or Member State–level Wallet Provider Trusted List in MVP.
+
 - Wallet Provider receives a notification about the successful reviewing process.
 - X509 certificates for Wallet Solutions are issued by the Ecosystem Authority
-- Trusted List Provider updates Trusted List of Wallet Providers.
+- Trusted List Provider (WP4) updates Trusted List of Wallet Providers.
 - Wallet Provider is notified about updated Trusted List.
 - Wallet Provider receives a x509 certificate for each of its wallet solutions
 
@@ -268,6 +270,8 @@ If not successful, the Trust Infrastructure Responsible Group informs about the 
 1. Wallet provider receives a certification assessment report compliant with Article 5c of Regulation (EU) No 910/2014
 
 ### 2.5 Trusted List of Wallet Providers is updated
+
+[MVP+]: The **European Commission** compiles, maintains, and publishes the **EU-level** Trusted List of Wallet Providers. After the Supervisory Body approves the Wallet Provider, the Member State notifies the Commission (per [Trust Infrastructure Schema - Member State Notification to European Commission](../task2-trust-framework/trust-infrastructure-schema.md#311-member-state-notification-to-european-commission)); the Commission then updates the Trusted List accordingly. The Trusted List of Wallet Providers is not maintained at Member State level. See [Trust Infrastructure Schema - Overview](../task2-trust-framework/trust-infrastructure-schema.md#overview).
 
 ## 2. Technical Onboarding
 
