@@ -425,7 +425,8 @@ http://uri.etsi.org/19602/LoTETag
                        Id="tsl-1">
   
   <SchemeInformation>
-    <TSLVersionIdentifier>2</TSLVersionIdentifier>
+    <!-- TS 119 612 clause 5.3.1: value shall be "6" -->
+    <TSLVersionIdentifier>6</TSLVersionIdentifier>
     <TSLSequenceNumber>1</TSLSequenceNumber>
     <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
     <SchemeOperatorName>
