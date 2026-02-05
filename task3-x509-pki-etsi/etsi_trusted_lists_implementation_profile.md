@@ -18,10 +18,9 @@
 7. [Profile-Specific Requirements](#7-profile-specific-requirements)
 8. [Digital Signature Implementation](#8-digital-signature-implementation)
 9. [Distribution and Transport](#9-distribution-and-transport)
-10. [Procedures for Authenticating and Using Trusted Lists (TS 119 615)](#10-procedures-for-authenticating-and-using-trusted-lists-ts-119-615)
-11. [Examples](#11-examples)
-12. [Testing and Validation](#12-testing-and-validation)
-13. [Python Libraries for Signatures](#13-python-libraries-for-signatures)
+10. [Examples](#10-examples)
+11. [Testing and Validation](#11-testing-and-validation)
+12. [Python Libraries for Signatures](../tools/python_signature_libraries.md) (in `tools/`)
 
 ## 1. Overview
 
@@ -195,6 +194,10 @@ http://uri.etsi.org/TrstSvc/Svctype/Non_Q_EAA_Provider
 ```
 
 ### 3.5 Status Determination Approach URIs
+
+**TS 119 612 (EU Member State trusted lists):** the value shall be `http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate` (clause 5.3.8, annex D.5.2).
+
+**TS 119 602 (LoTE profiles):**
 
 ```
 # PID Providers
@@ -450,7 +453,7 @@ http://uri.etsi.org/19602/LoTETag
       <Name xml:lang="en">Wallet Trusted List</Name>
     </SchemeName>
     <SchemeInformationURI>https://trust-list.example.org/scheme-info</SchemeInformationURI>
-    <StatusDeterminationApproach>http://uri.etsi.org/TrstSvc/TrustedList/StatusDeterminationApproach/BySupervision</StatusDeterminationApproach>
+    <StatusDeterminationApproach>http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate</StatusDeterminationApproach>
     <SchemeTypeCommunityRules>http://uri.etsi.org/TrstSvc/TrustedList/SchemeTypeCommunityRules/EU</SchemeTypeCommunityRules>
     <SchemeTerritory>IT</SchemeTerritory>
     <ListIssueDateTime>2025-01-01T00:00:00Z</ListIssueDateTime>
@@ -895,6 +898,8 @@ Cache-Control: max-age=3600
 
 ## 10. Examples
 
+For **procedures for authenticating and using trusted lists** (LoTL and EUMS national trusted lists when validating trust service outputs), see **ETSI TS 119 615** clause 4 (e.g. PRO-4.1 authenticating the EC compiled list of trusted lists, PRO-4.2 authenticating an EUMS trusted list, PRO-4.3 obtaining listed services matching a certificate, and subsequent determination procedures). This profile does not duplicate those normative procedures.
+
 ### 10.1 Complete XML TSL Example (TS 119 612)
 
 See section 5.2 for complete XML example.
@@ -993,19 +998,6 @@ Use appropriate JAdES validation library (see section 12).
 - [ ] StatusStartingTime is present
 - [ ] HistoricalInformationPeriod is `65535`
 - [ ] Service history uses X509SKI (not X509Certificate)
-
-## 12. Python Libraries for Signatures
-
-For detailed information on Python libraries for implementing XAdES and JAdES signatures, see the separate document:
-
-**[Python Signature Libraries Guide](../tools/python_signature_libraries.md)**
-
-This guide includes:
-- XAdES signature libraries (`python-xades`, `signxml`)
-- JAdES signature libraries (`jwcrypto`, `python-jose`)
-- Certificate handling with `cryptography`
-- Complete working examples for both XAdES and JAdES
-- Library comparison and recommendations
 
 ## Implementation Checklist
 
