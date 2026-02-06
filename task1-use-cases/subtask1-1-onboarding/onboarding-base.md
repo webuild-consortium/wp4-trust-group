@@ -21,16 +21,12 @@ This section consolidates terminology and acronyms used across onboarding use ca
 | **ARF** | Architecture and Reference Framework (EUDI Wallet) | ARF |
 | **CA** | Certificate Authority | ARF |
 | **EC** | European Commission | ARF |
-| **EAA Provider** | non-qualified Electronic Attestation of Attributes Provider | ARF |
 | **EUDI** | European Digital Identity | ARF |
 | **EUDIW** | European Digital Identity Wallet | Regulation (EU) 2024/1183 |
 | **LoTL** | List of Trusted Lists | ARF, ETSI TS 119 612 |
 | **MS** | Member State | ARF |
 | **MS TLP** | Member State Trusted List Provider | ARF |
 | **PID** | Person Identification Data | ARF |
-| **PID Provider** | Provider issuing PIDs | ARF |
-| **PuB-EAA Provider** | Public Sector Body Electronic Attestation of Attributes Provider | ARF |
-| **QEAA Provider** | Qualified Electronic Attestation of Attributes Provider (a QTSP) | ARF |
 | **QTSP** | Qualified Trust Service Provider (under eIDAS) | eIDAS Regulation |
 | **RP** | Relying Party | ARF |
 | **TL** | Trusted List | ARF |
