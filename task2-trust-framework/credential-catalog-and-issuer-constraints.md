@@ -754,7 +754,7 @@ In this case, Wallet Units and Relying Parties can validate credentials using on
 
 ### Catalogue Registration
 - Registration in catalogues is **not mandatory** for QEAAs and PuB-EAAs. *This is stated in the ARF main document at Section 5.5.*
-- **Registration is mandatory for Non-Qualified EAAs** to guarantee interoperability and quality standardization on the attestation issuance and its content
+- **Catalogue registration** (in the catalogue of attestation schemes) for non-qualified EAAs is **not mandatory**; "Registration and publication of non-qualified EAAs is not mandatory" (see [Catalogue of Attestation Schemes](#catalogue-of-attestation-schemes)). **Provider registration** (registration of non-qualified EAA Providers with the Member State Registrar and inclusion in national EAA Provider Trusted Lists) **is** required for participation in the ecosystem and for interoperability.
 - Registration does not create any obligation for acceptance of the relevant type of attestation. *This is stated in the ARF main document at Section 5.5.*
 - Registration does not automatically imply cross-border recognition
 

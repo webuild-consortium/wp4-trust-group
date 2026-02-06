@@ -143,7 +143,7 @@ The Member State Trusted List Provider (MS TLP) is responsible **for national no
 
 2. **Signing Trusted Lists**: The MS TLP signs/seals the non-qualified EAA Provider Trusted Lists and the Member State QTSP Trusted Lists for QEAA Providers using its signing key.
 
-3. **Publishing Trusted Lists**: The MS TLP publishes the signed **non-qualified EAA Provider Trusted Lists** and the Member State QTSP Trusted Lists for QEAA Providers in machine-readable and human-readable formats at a publicly accessible URL. Per [ETSI TS 119 602 V1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) (Data model for Lists of Trusted Entities), **Attestation Provider Trusted Lists** (ETSI TS 119 602 Annex H, published by an MS TLP) may be used as the profile for these national non-qualified EAA Provider TLs and may be published in either **JSON format with compact JAdES Baseline B signature** OR **XML format with XAdES Baseline B signature** (per ETSI EN 319 132-1). When XML is used, it must be an enveloped digital signature.
+3. **Publishing Trusted Lists**: The MS TLP publishes the signed **non-qualified EAA Provider Trusted Lists** and the Member State QTSP Trusted Lists for QEAA Providers in machine-readable and human-readable formats at a publicly accessible URL. **Note on ETSI profiles**: ETSI TS 119 602 **Annex H** defines the profile for the **Pub-EAA providers list** only (Commission-published list of public sector bodies issuing electronic attestations of attributes); it is **not** the profile for national non-qualified EAA Provider TLs. National non-qualified EAA Provider Trusted Lists SHALL use the [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) data model (generic LoTE or a national/extension profile with appropriate LoTE type and service type identifiers). Member State QTSP Trusted Lists for QEAA Providers follow **Article 22 of the eIDAS Regulation** and typically use **ETSI TS 119 612** (XML TSL). Trusted Lists compiled by an MS TLP may be published in **JSON format with compact JAdES Baseline B signature** OR **XML format with XAdES Baseline B signature** (per ETSI EN 319 132-1). When XML is used, it must be an enveloped digital signature.
 
 All Trusted Lists must comply with ETSI TS 119 602 data model and the specific profiles defined in the annexes, or with ETSI TS 119 612 v2.1.1 or a suitable profile derived from ETSI TS 102 231 (per **WPNot_05**, **PPNot_07**, **RPACANot_05**).
 
@@ -152,7 +152,7 @@ All Trusted Lists must comply with ETSI TS 119 602 data model and the specific p
 The national non-qualified EAA Provider TL and Member State QTSP Trusted List for QEAA Providers processes are triggered by successful registration with the Member State Registrar. The MS TLP:
 - Receives notification of successful registration from the Registrar (or accesses Registry data).
 - Extracts trust anchors and relevant data from the Registry.
-- Compiles Trusted Lists according to ETSI TS 119 612 specifications.
+- Compiles Trusted Lists (national non-qualified EAA Provider TL per TS 119 602 LoTE model; Member State QTSP TL for QEAA Providers per TS 119 612).
 - Signs and publishes Trusted Lists.
 - Submits the Trusted List URL to the European Commission.
 
@@ -414,7 +414,7 @@ sequenceDiagram
 
     rect rgb(255, 230, 230)
         Note over TLP,TL: Phase 3: National non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers Publication and Notification
-        TLP->>TLP: 8. Compile non-qualified EAA Provider Trusted List<br/>(using ETSI TS 119 602 Annex H profile)
+        TLP->>TLP: 8. Compile non-qualified EAA Provider Trusted List<br/>(TS 119 602 LoTE model or national profile)
         Note right of TLP: Include trust anchors:<br/>non-qualified EAA Provider keys
         
         TLP->>TL: 9. Sign/Seal & Publish national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers<br/>(national extension)
@@ -507,7 +507,7 @@ sequenceDiagram
 	
 	rect rgb(230, 245, 255)
         Note over MS,TL: Phase 1: MS TLP Compiles, Signs & Publishes **national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers**
-        MS->>MS: 1. Compile national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers<br/>(national extension, using ETSI TS 119 602 Annex H profile)
+        MS->>MS: 1. Compile national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers<br/>(non-qualified EAA: TS 119 602 LoTE; QEAA: TS 119 612 QTSP TL)
         Note right of MS: non-qualified EAA Provider and QEAA Provider trust anchors and registry data
         MS->>TL: 2. Sign/Seal & Publish national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers
         Note right of TL: Published at MS TLP URL<br/>ETSI TS 119 612/119 602-compliant format

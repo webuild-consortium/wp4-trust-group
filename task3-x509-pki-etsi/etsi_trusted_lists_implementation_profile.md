@@ -745,6 +745,17 @@ python -m jsonschema lote.json lote-schema.json
 - Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
 - Service history uses X509SKI (not X509Certificate)
 
+### 7.4 Issuer constraint extensions (ServiceInformationExtensions)
+
+To support **issuer constraints** (which Credential Issuers are allowed to issue which attestation types), Trusted List entries may carry profile-specific data in the **ServiceInformationExtensions** component (ETSI TS 119 602, clause 6.6.9). The standard defines an extensible mechanism; profile-specific extensions are not defined in the ETSI annexes.
+
+For the EUDI Wallet ecosystem, the following extensions are used when configuring allowed attestation types per issuer:
+
+- **allowedAttestationType** (repeatable): List of attestation type identifiers (e.g. `eu.europa.ec.eudi.pid.1`, `eu.europa.ec.eudi.tax-residency.1`) that the listed provider is authorised to issue. When present in the Trusted List entry, the entry can be **self-contained** for validation (Wallet Units and Relying Parties need not retrieve a separate registration certificate).
+- **registrationCertificateRef** (optional): URL or reference to the provider's registration certificate or Registrar API where the list of allowed attestation types is maintained. When absent, the Trusted List entry alone is sufficient if `allowedAttestationType` is embedded.
+
+**Reference**: Full requirements, validation behaviour, and non-normative examples are in the task2 trust framework document [Credential catalog and issuer constraints](../task2-trust-framework/credential-catalog-and-issuer-constraints.md) (section "Using Trusted Lists to configure allowed Credential Issuers for specific attestation types"). A proposal for an optional `registrationCertificateHash` in ServiceInformationExtensions is also described there.
+
 ## 8. Digital Signature Implementation
 
 ### 8.1 JAdES Signature (JSON - TS 119 602)
