@@ -28,7 +28,7 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
     - Please note: The Trust Infrastructure group is not a legal entity. However, the ecosystem authority may be required to provide certain information (e.g., legal name, company address) and to digitally sign data. For testing purposes, we therefore recommend designating at least one representative of the Trust Infrastructure group who is authorized to perform digital signing on behalf of the legal entity they represent.
 
 - **Primary Actor [MVP+]**:
-    - PID Provider (legal or natural person) that intends to issue person identification data interoperable with EUDI Wallets
+    - PID Provider that intends to issue person identification data interoperable with EUDI Wallets
     - Attestation Provider (QEAA Provider, PuB-EAA Provider, or non-qualified EAA Provider) that intends to issue electronic attestations of attributes interoperable with EUDI Wallets
 - **Secondary Actors [MVP+]**:
     - Registrar (designated by Member State)
