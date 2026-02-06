@@ -58,7 +58,7 @@ This section consolidates terminology and acronyms used across onboarding use ca
 - **PuB-EAA Provider**: Public Sector Body Electronic Attestation of Attributes Provider
 - **EAA Provider**: non-qualified Electronic Attestation of Attributes Provider
 - **Relying Party (RP)**: Service that requests attributes from Wallet Units to provide services to users
-- **Wallet Provider**: Natural or legal person who provides wallet solutions
+- **Wallet Provider (WP)**: Natural or legal person who provides wallet solutions
 
 #### Trust Infrastructure Terms
 
