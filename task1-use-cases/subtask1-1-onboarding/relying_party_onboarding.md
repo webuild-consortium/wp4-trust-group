@@ -103,7 +103,7 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 
 [MVP]
 
-- As a baseline, there will be a single register for all Relying Parties in WEBUILD to reduce complexity.
+- As a baseline, there will be a single register for all Relying Parties in WEBUILD to reduce complexity. Access Certificate validation uses the same WEBUILD trust infrastructure (LoTL as trust anchor, TL referencing the Access CA); see [MVP trust infrastructure: LoTL and Trusted Lists](onboarding-base.md#mvp-trust-infrastructure-lotl-and-trusted-lists) in the base document.
 - Registry for Relying Parties complies with [Regulation (EU) 2025/848, Article 3 "National registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) and [EC TS05 V1.0](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
 - Access Certificate Profile: [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) - Access Certificate Policy for EUDI Wallet Relying Parties. X.509 certificate structure per ETSI EN 319 412-3 for legal persons.
 - Registration Certificate Profile: [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf) version 1.4.1 (2023-10) NCP requirements and [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf) - JWT format (rc-wrp+jwt) with relying party attributes

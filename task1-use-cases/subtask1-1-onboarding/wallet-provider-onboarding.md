@@ -60,7 +60,7 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
 ### Preconditions [MVP]
 
 - The WEBUILD WP4 Trust Infrastructure group is assigned to act as Ecosystem Authority and Trusted List Provider for all WEBUILD participants.
-- A Trusted List for Wallet Providers is available for onboarding.
+- A LoTL with one Trusted List for Wallet Providers is available for onboarding; see [MVP trust infrastructure: LoTL and Trusted Lists](onboarding-base.md#mvp-trust-infrastructure-lotl-and-trusted-lists) in the base document.
 - WP4 Trust Infrastructure group has assigned responsibilities for the onboarding process.
 - Wallet Providers are able to provide the requested data.
 
@@ -101,7 +101,7 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 
 [MVP]
 
-- As a baseline, there will be a single Trusted List for all wallet providers in WEBUILD to reduce complexity.
+- As a baseline, there will be a LoTL with one Trusted List (TL) for all wallet providers in WEBUILD to reduce complexity. For the common LoTL/TL and trust-anchor model, see [MVP trust infrastructure: LoTL and Trusted Lists](onboarding-base.md#mvp-trust-infrastructure-lotl-and-trusted-lists) in the base document.
 
 ### Trusted List and certificate profile
 
@@ -139,7 +139,7 @@ The Wallet Provider must provide the following when requesting onboarding. [MVP]
 
 - 1.1 Wallet Provider requests onboarding
 - 1.2 Onboarding Request Review
-- 1.3 Trusted List of Wallet Providers is updated (MVP: by WP4 Trust Infrastructure group; single TL for WEBUILD)
+- 1.3 Trusted List of Wallet Providers is updated (MVP: by WP4 Trust Infrastructure group; LoTL with one TL for WEBUILD)
 
 
 **2. Onboarding via Supervisory Body [MVP+]**
@@ -240,7 +240,7 @@ If not successful, the Trust Infrastructure Responsible Group informs about the 
 
 ### 1.3 Trusted List of Wallet Providers is updated
 
-[MVP]: The **WP4 Trust Infrastructure group** (acting as Trusted List Provider) maintains and updates the single Trusted List of Wallet Providers for WEBUILD; there is no EU-level or Member State–level Wallet Provider Trusted List in MVP.
+[MVP]: The **WP4 Trust Infrastructure group** (acting as Trusted List Provider) maintains and updates the LoTL and the single Trusted List of Wallet Providers for WEBUILD; there is no EU-level or Member State–level Wallet Provider Trusted List in MVP.
 
 - Wallet Provider receives a notification about the successful reviewing process.
 - X509 certificates for Wallet Solutions are issued by the Ecosystem Authority

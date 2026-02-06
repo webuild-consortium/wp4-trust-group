@@ -115,6 +115,10 @@ Onboarding use cases distinguish between two phases. Entity-specific onboarding 
 - All participating entities (Relying Parties, PID/EAA Providers, Wallet Providers) **register** with the WEBUILD WP4 Trust Infrastructure group for the purposes of the pilot.
 - Registers and Trusted Lists are maintained by the WP4 Trust Infrastructure group for WEBUILD testing.
 
+#### MVP trust infrastructure: LoTL and Trusted Lists
+
+As a baseline for MVP, the WEBUILD pilot uses a **List of Trusted Lists (LoTL)** that references one or more **Trusted Lists (TL)** (e.g. one TL for PID/EAA Providers, one for Wallet Providers, as needed per entity type). This keeps **one trust anchor** in the implementation: in the ETSI TS 119 612 model the **LoTL is the trust anchor**. The WEBUILD LoTL references the relevant TL(s); each TL in turn references the trust anchor used to issue Access and Registration Certificates (and, where applicable, other trust anchors for entity listing). The MVP thus provides a LoTL with at least one internal trust anchor for consistency with the production framework. Entity-specific onboarding documents (Relying Party, PID/EAA Provider, Wallet Provider) reference this section for the common LoTL/TL model and add only entity-specific registers or TL scope.
+
 ### MVP+
 
 **MVP+** refers to the production/regulatory phase aligned with EU regulations and Member State implementations:

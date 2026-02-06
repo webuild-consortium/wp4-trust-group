@@ -45,7 +45,7 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
 - **Technical Goal [MVP+]**: To establish a harmonised, secure, and interoperable framework for the registration, certification, and lifecycle management of PID / Attestation Providers, enabling trusted interaction between EUDI Wallet Solutions and other parties involved.
 
 - **Success Criteria**:
-    - [MVP] Pilot implementations successfully demonstrate PID / Attestation Provider onboarding within WEBUILD; all PID/EAA Providers within WEBUILD are included in a publicly accessible register and Trusted List maintained by the WP4 Trust Infrastructure group.
+    - [MVP] Pilot implementations successfully demonstrate PID / Attestation Provider onboarding within WEBUILD; all PID/EAA Providers within WEBUILD are included in a publicly accessible register and in the LoTL (with one TL) maintained by the WP4 Trust Infrastructure group.
     - [MVP+] The onboarding process is formally defined and documented in a harmonized manner that aligns with EU regulatory and technical frameworks (ref. [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - [MVP+] See [Success Criteria](onboarding-base.md#success-criteria). Entity-specific: dual-phase (administrative + technical) onboarding; trust anchors published in Trusted Lists per entity type (see [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix)).
     - *(Removed duplicated criteria; see base.)*
@@ -71,7 +71,7 @@ See [Preconditions](onboarding-base.md#preconditions).
 
 ### Preconditions [MVP]
 - The WEBUILD WP4 Trust Infrastructure group has established a register for PID / Attestation Providers within WEBUILD.
-- The WEBUILD WP4 Trust Infrastructure group has established a Trusted List for PID / Attestation Providers within WEBUILD.
+- The WEBUILD WP4 Trust Infrastructure group has established a LoTL with one Trusted List for PID / Attestation Providers within WEBUILD.
 - The WEBUILD WP4 Trust Infrastructure group has designated representatives authorized to act as Ecosystem Authority, Access Certificate Authority, Provider of Registration Certificate, and Trusted List Provider.
 - The WEBUILD WP4 Trust Infrastructure group has published registration policies for the WEBUILD testing environment.
 
@@ -110,7 +110,7 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 
 [MVP]
 
-- As a baseline, there will be a single register and a **List of Trusted Lists (LoTL)** with **one Trusted List (TL)** for all PID/EAA Providers in WEBUILD to reduce complexity. This keeps one trust anchor in the implementation: in the ETSI TS 119 612 model the LoTL is the trust anchor; the WEBUILD LoTL references that single TL, which in turn references the trust anchor used to issue Access and Registration Certificates. The MVP thus provides a LoTL with at least one internal trust anchor for consistency with the production framework.
+- As a baseline, there will be a single register and a LoTL with one Trusted List (TL) for all PID/EAA Providers in WEBUILD to reduce complexity. For the common LoTL/TL and trust-anchor model, see [MVP trust infrastructure: LoTL and Trusted Lists](onboarding-base.md#mvp-trust-infrastructure-lotl-and-trusted-lists) in the base document.
 - Registry for PID/EAA Providers complies with [Regulation (EU) 2025/848, Article 3 "National registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)
 - Trusted Lists for PID/EAA Providers comply with [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation details.
 - Access Certificate Profile: [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) - Access Certificate Policy for EUDI Wallet Relying Parties. X.509 certificate structure per ETSI EN 319 412-3 for legal persons. For Qualified EAA Providers, includes QCStatements per ETSI EN 319 411-2 and ETSI EN 319 412-5.
@@ -327,13 +327,13 @@ As a result of successful registration, each registered PID / Attestation Provid
 - **Prerequisites [MVP]**:
     - The WEBUILD WP4 Trust Infrastructure group has designated representatives authorized to act as Access Certificate Authority, Provider of Registration Certificate, and Trusted List Provider.
     - The PID / Attestation Provider has successfully completed the Administrative Onboarding phase and is listed in the WEBUILD register.
-    - A Trusted List for PID / Attestation Providers has been established within WEBUILD.
+    - A LoTL with one Trusted List for PID / Attestation Providers has been established within WEBUILD.
 - **Prerequisites [MVP+]**:
     - Its Member State has authorised at least one Certificate Authority to issue PID / Attestation Provider Access Certificates.
     - Its Member State has authorised at least one Certificate Authority to issue PID / Attestation Provider Registration Certificates.
     - The European Commission has been notified about the Access Certificate Authority and the Provider of Registration Certificate.
     - The PID / Attestation Provider has successfully completed the Administrative Onboarding phase and is listed in a National Register, notified by the Member State to the EU Commission.
-    - A Trusted List for PID / Attestation Providers has been established and published.
+    - A LoTL with one Trusted List for PID / Attestation Providers has been established and published.
 - **Triggers**:
     - The positive completion of the PID / Attestation Provider registration process.
 
