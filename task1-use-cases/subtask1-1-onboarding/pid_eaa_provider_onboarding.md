@@ -110,7 +110,7 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 
 [MVP]
 
-- As a baseline, there will be a single register and Trusted List for all PID/EAA Providers in WEBUILD to reduce complexity.
+- As a baseline, there will be a single register and a **List of Trusted Lists (LoTL)** with **one Trusted List (TL)** for all PID/EAA Providers in WEBUILD to reduce complexity. This keeps one trust anchor in the implementation: in the ETSI TS 119 612 model the LoTL is the trust anchor; the WEBUILD LoTL references that single TL, which in turn references the trust anchor used to issue Access and Registration Certificates. The MVP thus provides a LoTL with at least one internal trust anchor for consistency with the production framework.
 - Registry for PID/EAA Providers complies with [Regulation (EU) 2025/848, Article 3 "National registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)
 - Trusted Lists for PID/EAA Providers comply with [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation details.
 - Access Certificate Profile: [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) - Access Certificate Policy for EUDI Wallet Relying Parties. X.509 certificate structure per ETSI EN 319 412-3 for legal persons. For Qualified EAA Providers, includes QCStatements per ETSI EN 319 411-2 and ETSI EN 319 412-5.
