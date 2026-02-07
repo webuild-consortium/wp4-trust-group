@@ -69,6 +69,7 @@ wp4-trust-group/
 │   └── overview.md                 # Overview of all references
 │
 ├── task1-use-cases/               # Use cases​
+│   ├── terms-and-entities.md      # Consolidated terms, acronyms, and entity definitions (single source)
 │   ├── subtask1-1-onboarding/     # Use cases​ onboarding
 │   └── subtask1-2-trust-registry/ # Use cases​ trust registry
 │
@@ -112,6 +113,10 @@ wp4-trust-group/
 ├── README.md                      # This file
 └── LICENSE                        # License file
 ```
+
+## Terms and definitions
+
+A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and-entities.md)** document collects all acronyms, key terminology, entity definitions, WEBUILD-specific entities (Trust Infrastructure Responsible Group), MVP/MVP+ definitions, and policy terms used across WP4 Trust Group deliverables. RACI definitions and matrices are kept in the onboarding documents ([Base Onboarding Framework](task1-use-cases/subtask1-1-onboarding/onboarding-base.md#raci-matrix) and each use case doc). Other documents reference the consolidated doc to avoid duplicating definitions.
 
 ## References
 
