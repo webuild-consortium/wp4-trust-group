@@ -130,7 +130,7 @@ Certificate:
         Subject:
             C = NL
             O = University of Amsterdam
-            organizationIdentifier = NTRNLD-KVK34567890
+            organizationIdentifier = NTRNL-KVK34567890
             CN = UvA Student Credential Service
         Subject Public Key Info:
             Public Key Algorithm: id-ecPublicKey
