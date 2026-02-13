@@ -350,8 +350,8 @@ Per ETSI TS 119 475 Annex B:
 
 EAA Provider Registration Certificates are used to:
 
-1. **Declare attestation types** - Specify which attestations the provider can issue (per CIR 2025/848 Annex I.13)
-2. **Define claim schemas** - List the attributes included in each attestation type
-3. **Support transparency** - Allow wallet users to understand what credentials are available
-4. **Enable discovery** - Help wallets identify appropriate attestation providers
-5. **Facilitate trust decisions** - Provide information for embedded disclosure policies (per CIR 2024/2979 Article 10)
+1. **Declare attestation types** - Specify which attestations the provider can issue (per CIR 2025/848 Annex I.13);
+2. **Define claim schemas** - List the attributes included in each attestation type;
+3. **Support transparency** - Allow wallet users to understand what credentials are available;
+4. **Enable discovery** - Help wallets identify appropriate attestation providers;
+5. **Facilitate trust decisions** - Provide information for embedded disclosure policies (per CIR 2024/2979 Article 10).
