@@ -52,6 +52,8 @@ Certificate:
                 Digital Signature
             X509v3 Extended Key Usage:
                 id-kp-clientAuth
+            X509v3 Authority Key Identifier: 
+                keyid:DE:AD:BE:EF:01:23:45:67:89:AB:CD:EF:01:23:45:67:89:AB:CD:EF
             X509v3 Subject Alternative Name:
                 URI: https://shop.example.de/support
                 email: identity@shop.example.de
