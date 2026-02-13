@@ -89,6 +89,7 @@ Per ETSI TS 119 475 clause 5.2.2 (Table 5):
 
 ### Identity Fields
           Per ETSI TS 119 475 Table 7 and GEN-5.2.4-02:
+          
 | Field | ETSI Reference | CIR 2025/848 | Description |
 |-------|----------------|--------------|-------------|
 | `name` | Table 7; B.2.1 `tradeName` | Annex I.2 | Trade/service name |
