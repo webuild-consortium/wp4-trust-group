@@ -127,7 +127,7 @@ Per ETSI TS 119 475 Table 9 and GEN-5.2.4-06:
 |-------|----------------|-------------|
 | `policy_id` | Table 7, clause 6.1.3 | WRPRC policy OID: `0.4.0.19475.3.1` |
 | `iat` | Table 7 | Issuance timestamp |
-| `exp` | Table 10, GEN-5.2.4-08 | Expiration (max 12 months) |
+| `exp` | Table 10, GEN-5.2.4-08 | Expiration (max 12 months). Note that this field is optional as per GEN-5.2.4-07. |
 | `status` | Table 7, GEN-6.2.6.1-04 | Status list reference |
 
 ---
