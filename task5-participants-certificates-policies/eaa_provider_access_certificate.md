@@ -332,7 +332,7 @@ CPS.1 = https://pki.dgt.es/cps
 
 EAA Providers use these certificates to:
 
-1. **Authenticate** to EUDIW when issuing attestations (per CIR 2025/848 Article 7)
-2. **Sign** attestation issuance requests to prove authenticity
-3. **Establish trust** with the wallet ecosystem via national trusted lists (per eIDAS Article 22)
-4. **Prove authorization** to issue specific types of attestations (per entitlements in CIR 2025/848 Annex I.12)
+1. **Authenticate** to EUDIW when issuing attestations (per CIR 2025/848 Article 7);
+2. **Sign** attestation issuance requests to prove authenticity;
+3. **Establish trust** with the wallet ecosystem via national trusted lists (per eIDAS Article 22);
+4. **Prove authorization** to issue specific types of attestations (per entitlements in CIR 2025/848 Annex I.12).
