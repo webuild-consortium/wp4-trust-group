@@ -130,6 +130,8 @@ Certificate:
                 Digital Signature
             X509v3 Extended Key Usage:
                 id-kp-clientAuth
+            X509v3 Authority Key Identifier: 
+                keyid:44:55:66:77:88:99:AA:BB:CC:DD:EE:FF:00:11:22:33:44:55:66:77
             X509v3 Subject Alternative Name:
                 URI: https://onboarding.dutchbank.nl
                 email: kyc@dutchbank.nl
