@@ -28,7 +28,7 @@ Per ETSI TS 119 475 clause 5.2.2 (Table 5):
   "typ": "rc-wrp+jwt",
   "alg": "ES384",
   "b64": true,
-  "cty": ["b64"],
+  "cty": "b64",
   "x5c": ["<base64-encoded-certificate-chain>"]
 }
 ```
