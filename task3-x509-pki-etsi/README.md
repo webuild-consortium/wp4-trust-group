@@ -146,7 +146,7 @@ This task focuses on implementing X.509 PKI infrastructure aligned with ETSI sta
 ## Key Management
 
 ### Key Generation
-- **RSA Keys**: RSA key generation, at least 3072 bits length
+- **RSA Keys**: RSA key generation, at least 3072 bits long
 - **ECDSA Keys**: Elliptic Curve Digital Signature Algorithm keys
 - **EdDSA Keys**: Edwards Curve Digital Signature Algorithm keys
 - **Key Sizes**: Appropriate key sizes for security levels
