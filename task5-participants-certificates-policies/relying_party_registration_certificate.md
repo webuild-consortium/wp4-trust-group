@@ -88,7 +88,7 @@ Per ETSI TS 119 475 clause 5.2.2 (Table 5):
 ## Payload Fields with ETSI References
 
 ### Identity Fields
-          Per ETSI TS 119 475 Table 7 and GEN-5.2.4-02:
+Per ETSI TS 119 475 Table 7 and GEN-5.2.4-02:
           
 | Field | ETSI Reference | CIR 2025/848 | Description |
 |-------|----------------|--------------|-------------|
