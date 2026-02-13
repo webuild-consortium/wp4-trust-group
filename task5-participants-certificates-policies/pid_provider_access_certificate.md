@@ -202,6 +202,6 @@ Per ETSI TS 119 475 clause 5.1.2 and ETSI TS 119 411-8 GEN-6.6.1-10, certificate
 
 The PID Provider uses this certificate to:
 
-1. **Authenticate** to EUDIW when issuing Person Identification Data (per CIR 2025/848 Article 7)
-2. **Sign** PID issuance requests to prove authenticity
-3. **Establish trust** with the wallet ecosystem via the national trusted list
+1. **Authenticate** to EUDIW when issuing Person Identification Data (per CIR 2025/848 Article 7);
+2. **Sign** PID issuance requests to prove authenticity;
+3. **Establish trust** with the wallet ecosystem via the national trusted list.
