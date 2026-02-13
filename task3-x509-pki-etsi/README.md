@@ -6,7 +6,6 @@ This task focuses on implementing X.509 PKI infrastructure aligned with ETSI sta
 
 ### Certificate Hierarchy
 - **Root CA**: Root certificate authority
-- **Subordinate CA**: Subordinate certificate authority
 - **Intermediate CAs**: Intermediate certificate authorities
 - **End Entity Certificates**: End entity certificates
 - **Trust Anchors**: Trust anchor certificates
