@@ -194,6 +194,9 @@ Certificate:
                 Digital Signature
             X509v3 Extended Key Usage:
                 id-kp-clientAuth
+            X509v3 Authority Key Identifier:
+                keyid:99:88:77:66:55:44:33:22:11:00:FF:EE:DD:CC:BB:AA:00:11:22:33
+                
             X509v3 Subject Alternative Name:
                 URI: https://notaio-rossi.it
                 email: marco.rossi@notaio.it
