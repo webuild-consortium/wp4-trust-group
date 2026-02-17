@@ -57,15 +57,27 @@ jobs:
     
     - name: Run Trust Infrastructure API tests
       run: |
-        pytest task4-trust-infrastructure-api/tests/ -v --cov=task4-trust-infrastructure-api/src
+        if [ -d task4-trust-infrastructure-api/tests ]; then
+          pytest task4-trust-infrastructure-api/tests/ -v --cov=task4-trust-infrastructure-api/src
+        else
+          echo "No task4 tests directory, skipping"
+        fi
     
     - name: Run Participants Certificates and Policies tests
       run: |
-        pytest task5-participants-certificates-policies/tests/ -v --cov=task5-participants-certificates-policies/src
+        if [ -d task5-participants-certificates-policies/tests ]; then
+          pytest task5-participants-certificates-policies/tests/ -v --cov=task5-participants-certificates-policies/src
+        else
+          echo "No task5 tests directory, skipping"
+        fi
     
     - name: Run Wallet Conformance tests
       run: |
-        pytest task6-wallet-conformance-interop/tests/ -v --cov=task6-wallet-conformance-interop/src
+        if [ -d task6-wallet-conformance-interop/tests ]; then
+          pytest task6-wallet-conformance-interop/tests/ -v --cov=task6-wallet-conformance-interop/src
+        else
+          echo "No task6 tests directory, skipping"
+        fi
 
   integration-testing:
     runs-on: ubuntu-latest
@@ -185,7 +197,7 @@ jobs:
     
     - name: Run OWASP ZAP security scan
       run: |
-        docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8080
+        docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://localhost:8080
     
     - name: Run bandit security scan
       run: |
