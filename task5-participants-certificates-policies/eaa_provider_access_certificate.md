@@ -51,6 +51,8 @@ Certificate:
                 Digital Signature
             X509v3 Extended Key Usage:
                 id-kp-clientAuth
+            X509v3 Authority Key Identifier:
+                keyid:11:22:33:44:55:66:77:88:99:AA:BB:CC:DD:EE:FF:00:11:22:33:44
             X509v3 Subject Alternative Name:
                 URI: https://dgt.es/attestations
                 email: attestations@dgt.es
@@ -141,6 +143,8 @@ Certificate:
                 Digital Signature
             X509v3 Extended Key Usage:
                 id-kp-clientAuth
+            X509v3 Authority Key Identifier:
+                keyid:AA:BB:CC:DD:EE:FF:00:11:22:33:44:55:66:77:88:99:AA:BB:CC:DD
             X509v3 Subject Alternative Name:
                 URI: https://credentials.uva.nl
                 email: credentials@uva.nl
@@ -205,6 +209,8 @@ Certificate:
                 Digital Signature
             X509v3 Extended Key Usage:
                 id-kp-clientAuth
+            X509v3 Authority Key Identifier:
+                keyid:99:88:77:66:55:44:33:22:11:00:FF:EE:DD:CC:BB:AA:99:88:77:66
             X509v3 Subject Alternative Name:
                 URI: https://impots.gouv.fr/attestations
                 email: attestations@dgfip.finances.gouv.fr
