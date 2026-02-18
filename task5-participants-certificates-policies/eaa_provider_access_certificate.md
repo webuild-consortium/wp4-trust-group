@@ -54,7 +54,7 @@ Certificate:
             X509v3 Authority Key Identifier:
                 keyid:11:22:33:44:55:66:77:88:99:AA:BB:CC:DD:EE:FF:00:11:22:33:44
             X509v3 Subject Alternative Name:
-                URI: https://dgt.es/attestations
+                URI: https://dgt.es/helpdesk
                 email: helpdesk@dgt.es
                 otherName: id-at-telephoneNumber: +34 91 301 5000
             X509v3 Certificate Policies:
