@@ -37,7 +37,7 @@ Certificate:
         Subject:
             C = DE
             O = Bundesdruckerei GmbH
-            organizationIdentifier = NTRDEU-HRB12345
+            organizationIdentifier = NTRDE-HRB12345
             CN = German PID Issuer Service
         Subject Public Key Info:
             Public Key Algorithm: id-ecPublicKey
