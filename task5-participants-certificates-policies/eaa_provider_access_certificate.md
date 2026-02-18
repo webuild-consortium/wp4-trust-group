@@ -88,7 +88,7 @@ Certificate:
 
 | Field | Value | ETSI Reference | Description |
 |-------|-------|----------------|-------------|
-| `uniformResourceIdentifier` | `https://dgt.es/attestations` | ETSI TS 119 411-8 GEN-6.6.1-07; IETF RFC 5280 clause 4.2.1.6; CIR 2025/848 Annex I.7(a) | Support URL |
+| `uniformResourceIdentifier` | `https://dgt.es/helpdesk` | ETSI TS 119 411-8 GEN-6.6.1-07; IETF RFC 5280 clause 4.2.1.6; CIR 2025/848 Annex I.7(a) | Support URL |
 | `rfc822Name` | `attestations@dgt.es` | ETSI TS 119 411-8 GEN-6.6.1-07; IETF RFC 5280 clause 4.2.1.6; CIR 2025/848 Annex I.7(c) | Contact email |
 | `otherName (telephoneNumber)` | `+34 91 301 5000` | ETSI TS 119 411-8 GEN-6.6.1-07; ITU-T X.520 clause 6.7.1 (OID 2.5.4.20); CIR 2025/848 Annex I.7(b) | Contact phone |
 
