@@ -229,7 +229,7 @@ Certificate:
 
 #### Entitlement
 
-| Attribute | Value | ETSI Reference |
+| Attribute | Value | Reference |
 |-----------|-------|----------------|
 | Entitlement | `PUB_EAA_Provider` | ETSI TS 119 475 clause 4.2, Annex A.2.4 |
 | Description | Public sector body or its agent issuing electronic attestations of attributes from authentic sources | CIR 2025/848 Annex I.12 |
