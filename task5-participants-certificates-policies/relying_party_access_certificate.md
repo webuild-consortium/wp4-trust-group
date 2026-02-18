@@ -235,7 +235,7 @@ Per ETSI EN 319 412-1 clause 5.1.4 and ETSI TS 119 475 clause 5.1.3:
 | `http://data.europa.eu/eudi/id/LEI` | `LEI` | clause 5.1.4 | CIR 2022/1860, ISO 17442-1 |
 | `http://data.europa.eu/eudi/id/VATIN` | `VAT` | clause 5.1.4 | Directive 2006/112/EC |
 | `http://data.europa.eu/eudi/id/EORI-No` | `EOR` | clause 5.1.4 (future) | CIR 1352/2013 |
-| `http://data.europa.eu/eudi/id/TIN` | `TIN` | clause 5.1.4 | - |
+| `http://data.europa.eu/eudi/id/TIN` | `VAT` | clause 5.1.4 | - |
 | `http://data.europa.eu/eudi/id/Excise` | `EXC` | clause 5.1.4 (future) | Regulation 389/2012 |
 
 ### Natural Person Identifiers (Table 4)
