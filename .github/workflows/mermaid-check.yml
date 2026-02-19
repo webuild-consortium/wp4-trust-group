@@ -99,7 +99,7 @@ jobs:
             [ -z "$file" ] && continue
             echo "Validating: $file"
             out=$(mktemp -u /tmp/mermaid-XXXXX.svg)
-            if ! npx mmdc -i "$file" -o "$out" -b transparent; then
+            if ! npx mmdc -p .github/puppeteer-config.json -i "$file" -o "$out" -b transparent; then
               echo "::error::Mermaid render failed in $file"
               failed=1
             fi
