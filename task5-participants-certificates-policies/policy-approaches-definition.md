@@ -774,10 +774,10 @@ The implementation guidelines and examples demonstrate practical applications of
 - [HL7 FHIR](https://www.hl7.org/fhir/) (Health data)
 
 ### Related Documents
-- [Trust Framework Definition](task2-trust-framework/README.md)
-- [Policy Data Models](data-model/README.md)
-- [Trust Evaluation Methods](trust-evaluation-methods/README.md)
-- [Use Cases](task1-use-cases/README.md)
+- [Trust Framework Definition](../task2-trust-framework/README.md)
+- [Policy Data Models](README.md#data-models)
+- [Trust Evaluation Methods](../task2-trust-framework/trust-infrastructure-schema.md)
+- [Use Cases](../task1-use-cases/README.md)
 
 ### External Resources
 - [Zero Trust Architecture](https://www.nist.gov/publications/zero-trust-architecture)

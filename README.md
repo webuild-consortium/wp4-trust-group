@@ -32,19 +32,30 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 ## Tasks
 
-| Task ID | Task Name | Started | Status | Deadline |
-|---------|-----------|---------|--------|----------|
-| Task 1 | Definition of the Use cases​ | Yes | In progress | 31/12/2025 |
-| Task 2 | Definition of the Trust Framework​ | Yes | In progress | 30/06/2026 |
-| Task 3 | X.509 PKI with ETSI alignments​ | No | Not started | 28/02/2026 |
-| Task 4 | Trust Infrastructure API and additional features​ | Yes | In progress | 31/03/2026 |
-| Task 4.1 | Trust Infrastructure API | Yes | In progress | 31/01/2026 |
-| Task 4.2 | Onboarding API | No | Not started | 31/03/2026 |
-| Task 5 | Participants' Certificates and Policies​ | No | Not started | 30/04/2026 |
-| Task 5.1 | Data model | No | Not started | 31/03/2026 |
-| Task 5.2 | Trust evaluation methods | No | Not started | 30/04/2026 |
-| Task 6 | Wallet Instance Conformance/Interop Checks​ | No | Not started | 30/06/2026 |
-| Task 7 | Testing and Validation​ | No | Not started | 30/09/2026 |
+```mermaid
+gantt
+    title WP4 Trust Group Project Schedule
+    dateFormat YYYY-MM-DD
+    section Task 1
+    Definition of the Use cases :active, task1, 2025-09-25, 2026-01-31
+    section Task 2
+    Definition of the Trust Framework      :active, task2, 2025-10-25, 2026-06-25
+    section Task 3
+    X.509 PKI with ETSI alignments :task3, 2025-11-25, 2026-04-25
+    section Task 4
+    Trust Infrastructure API and features  :active, task4, 2025-10-25, 2026-09-25
+    Trust list and deploy (4.1)            :active, task4_1, 2025-10-25, 2026-03-25
+    RFC (4.2)                             :task4_2, 2026-01-25, 2026-04-25
+    Onboarding API (4.3)                  :task4_3, 2026-06-25, 2026-09-25
+    section Task 5
+    Participants' Certificates and Policies :task5, 2026-01-01, 2026-07-30
+    Data model (5.1)                      :task5_1, 2026-01-01, 2026-03-31
+    Trust evaluation methods (5.2) :task5_2, 2026-03-01, 2026-07-30
+    section Task 6
+    Wallet Instance Conformance/Interop :task6, 2026-02-01, 2026-10-30
+    section Task 7
+    Testing and Validation :task7, 2026-06-01, 2026-12-31
+```
 
 ## Directory Structure
 
@@ -58,6 +69,7 @@ wp4-trust-group/
 │   └── overview.md                 # Overview of all references
 │
 ├── task1-use-cases/               # Use cases​
+│   ├── terms-and-entities.md      # Consolidated terms, acronyms, and entity definitions (single source)
 │   ├── subtask1-1-onboarding/     # Use cases​ onboarding
 │   └── subtask1-2-trust-registry/ # Use cases​ trust registry
 │
@@ -102,7 +114,11 @@ wp4-trust-group/
 └── LICENSE                        # License file
 ```
 
-## Informative References
+## Terms and definitions
+
+A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and-entities.md)** document collects all acronyms, key terminology, entity definitions, WEBUILD-specific entities (Trust Infrastructure Responsible Group), MVP/MVP+ definitions, and policy terms used across WP4 Trust Group deliverables. RACI definitions and matrices are kept in the onboarding documents ([Base Onboarding Framework](task1-use-cases/subtask1-1-onboarding/onboarding-base.md#raci-matrix) and each use case doc). Other documents reference the consolidated doc to avoid duplicating definitions.
+
+## References
 
 ### Community Regulations
 
@@ -110,8 +126,11 @@ wp4-trust-group/
   - [Official Document](https://eur-lex.europa.eu/eli/reg/2014/910/oj)
 - **Regulation (EU) 2024/1183** - Amending Regulation (EU) No 910/2014
   - [Official Document](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)
-- **CIR  2025/848** -  Commission Implementing Regulation on the registration of wallet-relying parties
+- **CIR 2025/848** - Commission Implementing Regulation on the registration of wallet-relying parties
   - [Official Document](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500848j)
+- **CIR 2025/2164** - Commission Implementing Regulation (trusted lists context; referenced by ARF v2.8.0 for ETSI TS 119 612)
+  - [Official Document](https://eur-lex.europa.eu/eli/dec_impl/2025/2164/oj)
+- **Further Implementing Acts** (ARF v2.8.0): CIR 2025/2527 (qualified certificates for website authentication), 2025/2530 (qualified trust service providers), 2025/2531 (qualified electronic ledgers), 2025/2532 (qualified electronic archiving services).
 
 ### Standards
 
@@ -119,20 +138,32 @@ wp4-trust-group/
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf)
   - [XSD Schema](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd)
   - [SIE XSD Schema (ListOfTrustedLists)](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd)
-- **ETSI TS 119 411-8** (v01.01.01) - Access Certificate Policy for EUDI Wallet Relying Parties
+- **ETSI TS 119 602** (v01.01.01) - Electronic Signatures and Trust Infrastructures (ESI); **Lists of trusted entities; Data model**. Trusted lists in other formats (JSON, XML, CBOR, ASN.1).
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf)
+- **ETSI TS 119 615** (v01.03.01) - Procedures for using and interpreting EUMS national trusted lists (consumption/validation of LoTL and national trusted lists; implements CID 2015/1505).
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119615/01.03.01_60/ts_119615v010301p.pdf)
+- **ETSI TS 119 411-8** (v01.01.01) - Access Certificate Policy for EUDI Wallet Relying Parties (access certificate issuance per ARF Reg_11).
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf)
+- **ETSI EN 319 411-1** - Certificate policy requirements (NCP); Access Certificate Authorities SHALL comply with at least this for ARF Reg_11.
+  - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.01.01_60/en_31941101v010101p.pdf)
 - **ETSI TS 119 475** (v01.01.01) - Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf)
-- **ETSI TS 119 602** (v01.01.01) - Electronic Signatures and Trust Infrastructures (ESI); Trusted lists; Data model. Trusted lists in other formats, such as JSON, CBOR or ASN.1.
-  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf)
+- **ETSI TS 119 412-6** (v1.1.1) - Electronic Signatures and Trust Infrastructures (ESI); Certificate Profiles; Part 6: Certificate profile requirements for PID, Wallet, EAA, QEAA, and PSBEAA providers
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941206/01.01.01_60/ts_11941206v010101p.pdf)
+- **ETSI TS 119 472-2** (v1.1.1) - Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.01.01_60/ts_11947202v010101p.pdf)
+
+Project alignment with **EUDI Architecture and Reference Framework (ARF) v2.8.0** (terminology LoTE, Reg_10/10a/11/31, RPA_02/RPA_04, access certificate and trusted list standards).
 
 ### European Commission Technical Specifications
 
 These below may have further updates and require to considered in future milestones.
 
 - **EC TS02 v0.9** (2025-04) - Specification of systems enabling the notification and subsequent publication of Provider information
-- **EC TS05 V1.0** (2025-06) - Common Formats and API for Relying Party Registration Information
+- **EC TS05 V1.0** (2025-06) - Common Formats and API for Relying Party Registration Information (upcoming ETSI TS)
+  - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
 - **EC TS06 v1.0** (2025-06) - Common set of Relying Party information to be registered
+  - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
 
 ### Security Guidelines
 
@@ -152,8 +183,9 @@ These below may have further updates and require to considered in future milesto
 
 ### Drafts
 
-- **ETSI EN 319 412-6** (v01.00.00) - Certificate profile requirements for PID, Wallet, EAA, QEAA and PSBEAA providers
-  - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf)
+- **ETSI TS 119 472-3** (v0.0.11 Draft) - Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 3: Profiles for issuance of EAA or PID
+  - [Work Item Page](https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=74935&curItemNr=121&totalNrItems=292&optDisplay=100000&qSORT=TB&qETSI_ALL=&SearchPage=TRUE&qINCLUDE_SUB_TB=&qINCLUDE_MOVED_ON=&qEND_CURRENT_STATUS_CODE=11+WI%3BM58&qSTOP_FLG=N&qKEYWORD_BOOLEAN=&qCLUSTER_BOOLEAN=&qCLUSTER=17&qFREQUENCIES_BOOLEAN=&qSTOPPING_OUTDATED=&butExpertSearch=Search&includeNonActiveTB=FALSE&includeSubProjectCode=&qREPORT_TYPE=TUBE)
+  - [Draft Document](https://docbox.etsi.org/esi/esi/70-Drafts/0019472-3/ESI-0019472-3v0011.docx)
 - **OpenID Federation 1.0** - Draft 43
 - **OpenID Federation Wallet Architectures 1.0** - Draft 03
 
