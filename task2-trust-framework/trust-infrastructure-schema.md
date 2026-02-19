@@ -19,6 +19,7 @@ The trust infrastructure relies on three distinct but complementary processes:
 | **EC** | European Commission |
 | **EAA Provider** | non-qualified Electronic Attestation of Attributes Provider |
 | **EUDI** | European Digital Identity |
+| **EUMS** | EU Member States |
 | **LoTE** | List of Trusted Entities (ARF term for trust anchors used in validation; see OIA_12, RPA_04) |
 | **LoTL** | List of Trusted Lists |
 | **MS** | Member State |
@@ -95,7 +96,7 @@ The registration data includes:
   - **For Relying Parties**: Attributes that the Relying Party intends to request from Wallet Units, and for what purpose (intended use). The Registrar also registers if the Relying Party intends to use the services of an intermediary, and if so, which one.
 - **Service supply points**: URLs where services are available (e.g., PID issuance endpoint, attestation issuance endpoint, presentation request endpoint).
 
-> **Note**: Wallet Providers do not register with Registrars. They are notified by Member States to the European Commission for Trusted List inclusion (see [Section 3.1.1](#311-wallet-provider-notification)). Wallet Providers do not receive access certificates or registration certificates, as they are not registered with Registrars. The Wallet Solution provided by the Wallet Provider must be certified by Conformity Assessment Bodies (CABs) as described in [ARF Chapter 7](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#7-certification-and-risk-management).
+> **Note**: Wallet Providers do not register with Registrars. They are notified by Member States to the European Commission for Trusted List inclusion (see [Section 3.1.1](#311-wallet-provider-notification)). Wallet Providers do not receive access certificates or registration certificates, as they are not registered with Registrars. The Wallet Solution provided by the Wallet Provider must be certified by Conformity Assessment Bodies (CABs) as described in [ARF Chapter 7](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#7-wallet-solution-certification-and-risk-management).
 
 > **Disambiguation – QEAA Providers and Registration**  
 > In this document, **QEAA Providers are treated as a specific type of Attestation Provider**. As such, they **MUST register with a Member State Registrar** together with other Attestation Providers, in line with **ARF Section 3.17 (Registrars)** and **Topic 27 (Reg_01, Reg_21)**. The registration data for QEAA Providers – including identification data, attestation types they intend to issue, and service supply points – is part of the **common registration dataset** described in [ARF Section 6.3.2.2](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#6322-data-about-the-pid-provider-or-attestation-provider-is-included-in-the-registry) and referenced in this section.  
@@ -137,7 +138,7 @@ The Trusted List publication process is separate from registration. See [Overvie
 
 ### 3.1 Trusted List Publication by Trusted List Provider
 
-> **Note on Trusted List Provider Organizational Level**: The ARF ([Section 3.5](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#35-trusted-list-provider)) defines a Trusted List Provider (TLP) as "a body responsible for maintaining, managing, and publishing a Trusted List." Both Member State TLPs and the European Commission act as TLPs with distinct scopes (see [Responsibilities Matrix](#overview)). Member State TLPs operate at Member State level per notification requirements (GenNot_01).
+> **Note on Trusted List Provider Organizational Level**: The ARF ([Section 3.5](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#35-trusted-list-or-lote-provider)) defines a Trusted List Provider (TLP) as "a body responsible for maintaining, managing, and publishing a Trusted List." Both Member State TLPs and the European Commission act as TLPs with distinct scopes (see [Responsibilities Matrix](#overview)). Member State TLPs operate at Member State level per notification requirements (GenNot_01).
 
 The Member State Trusted List Provider (MS TLP) is responsible **for national non-qualified EAA Provider Trusted Lists** and **for the Member State QTSP Trusted Lists for QEAA Providers**, in line with Article 22 of eIDAS Regulation (EU) No 910/2014:
 
@@ -232,7 +233,7 @@ The matrix collects all the ARF HLRs about the registration phase.
 | **PuBPNot_01** | Commission SHALL establish technical specifications for PuB-EAA Provider information | Topic 31 |
 | **RPACANot_01** | Commission SHALL establish technical specifications for Access CA information | Topic 31 |
 | **TLPub_01** | Commission SHALL establish technical specifications for Trusted List publication | Topic 31 |
-| **TLPub_06** | Commission SHALL publish Trusted List locations in OJEU | Topic 31 |
+| **TLPub_06** | Commission SHALL publish LoTEs and Trusted List locations in OJEU | Topic 31 |
 | **TLPub_07** | Commission SHALL publish trust anchors in OJEU | Topic 31 |
 
 Implementers validating trust service outputs against trusted lists SHALL follow **ETSI TS 119 615** (procedures for using and interpreting EUMS national trusted lists); CID (EU) 2015/1505.
@@ -301,7 +302,7 @@ graph TB
     
     Registrar -->|Approve & Register<br/>Reg_19, Reg_21| Registry
     Registrar -->|Request Access Cert<br/>Reg_10| AccessCA
-    AccessCA -->|Issue Access Certificate<br/>Reg_10, Reg_10a, Reg_11 (ETSI TS 119 411-8)| EntitiesScope
+    AccessCA -->|"Issue Access Certificate<br/>Reg_10, Reg_10a, Reg_11 (ETSI TS 119 411-8)"| EntitiesScope
     Registrar -.->|Optional: Request Reg Cert<br/>RPRC_09, RPRC_13| RegCertProv
     RegCertProv -.->|Issue Registration Certificate<br/>RPRC_02| EntitiesScope
     
