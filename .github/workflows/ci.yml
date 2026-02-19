@@ -1,5 +1,9 @@
 name: CI/CD Pipeline
 
+# Skip when commit message contains [skip ci], [ci skip], [no ci], [skip actions], or [actions skip]
+# (GitHub natively skips workflows for push/pull_request when these are in the commit message)
+# Skip duplicate runs: on push to a branch with an open PR, skip (pull_request will run)
+
 on:
   push:
     branches: [ main, develop ]
@@ -7,7 +11,25 @@ on:
     branches: [ main, develop ]
 
 jobs:
+  should-run:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - id: check
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "run=true" >> $GITHUB_OUTPUT
+          else
+            count=$(gh pr list --head "${{ github.ref_name }}" --state open --json number --jq 'length' 2>/dev/null || echo "0")
+            [ "$count" -gt 0 ] && echo "run=false" >> $GITHUB_OUTPUT || echo "run=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   test:
+    needs: should-run
+    if: needs.should-run.outputs.run == 'true'
     runs-on: ubuntu-latest
     
     strategy:
@@ -37,6 +59,8 @@ jobs:
     #     pytest tests/ --cov=src --cov-report=xml --cov-report=html
     
   security:
+    needs: should-run
+    if: needs.should-run.outputs.run == 'true'
     runs-on: ubuntu-latest
     
     steps:
