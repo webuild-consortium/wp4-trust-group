@@ -124,7 +124,7 @@ wp4-trust-group/
 - **CIR 2025/848** - Commission Implementing Regulation on the registration of wallet-relying parties
   - [Official Document](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500848j)
 - **CIR 2025/2164** - Commission Implementing Regulation (trusted lists context; referenced by ARF v2.8.0 for ETSI TS 119 612)
-  - [Official Document](https://eur-lex.europa.eu/eli/reg_impl/2025/2164/oj)
+  - [Official Document](https://eur-lex.europa.eu/eli/dec_impl/2025/2164/oj)
 - **Further Implementing Acts** (ARF v2.8.0): CIR 2025/2527 (qualified certificates for website authentication), 2025/2530 (qualified trust service providers), 2025/2531 (qualified electronic ledgers), 2025/2532 (qualified electronic archiving services).
 
 ### Standards
