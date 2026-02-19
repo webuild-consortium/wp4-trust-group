@@ -4,7 +4,8 @@
 ## Document Information
 - **Standards**: 
   - [ETSI TS 119 612 V2.4.1 (2025-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) - Trusted Lists (XML)
-  - [ETSI TS 119 602 V1.1.1 (2025-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) - Lists of Trusted Entities (JSON/XML)
+  - [ETSI TS 119 602 V1.1.1 (2025-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) - Lists of trusted entities; Data model (JSON/XML)
+  - [ETSI TS 119 615 V1.3.1 (2026-01)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119615/01.03.01_60/ts_119615v010301p.pdf) - Procedures for using and interpreting EUMS national trusted lists
 - **Keywords**: e-commerce, electronic signature, eudi wallet, security, trust services
 
 ## Table of Contents
@@ -19,7 +20,7 @@
 9. [Distribution and Transport](#9-distribution-and-transport)
 10. [Examples](#10-examples)
 11. [Testing and Validation](#11-testing-and-validation)
-12. [Python Libraries for Signatures](#12-python-libraries-for-signatures)
+12. [Python Libraries for Signatures](../tools/python_signature_libraries.md) (in `tools/`)
 
 ## 1. Overview
 
@@ -33,11 +34,18 @@ This implementation profile provides unified guidance for implementing both ETSI
 - Service type definitions and status management
 - XAdES digital signatures
 
-**ETSI TS 119 602 v1.1.1** defines:
+**ETSI TS 119 602 v1.1.1 (2025-11)** (per ARF v2.8.0 STS list) (“Lists of trusted entities; Data model”) defines:
 - Abstract data model for Lists of Trusted Entities (LoTE)
 - JSON and XML bindings
 - Profile-based approach for different entity types
 - JAdES (JSON) and XAdES (XML) digital signatures
+
+**ETSI TS 119 615 v1.3.1** defines:
+- Procedures for **using and interpreting** EUMS national trusted lists when **validating** EU qualified trust service outputs (e.g. qualified certificates, time stamps, validation reports)
+- Interoperable algorithms for authenticating the EC-compiled List of Trusted Lists (LoTL) and EUMS national trusted lists
+- Implements the rules of Commission Implementing Decision (EU) 2015/1505; builds on ETSI TS 119 612
+
+**Distinction**: TS 119 612 and TS 119 602 define **structure and format** of trusted lists (production side). TS 119 615 defines **procedures for authentication and interpretation** (consumption/validation side).
 
 ### 1.2 When to Use Which Standard
 
@@ -187,6 +195,10 @@ http://uri.etsi.org/TrstSvc/Svctype/Non_Q_EAA_Provider
 
 ### 3.5 Status Determination Approach URIs
 
+**TS 119 612 (EU Member State trusted lists):** the value shall be `http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate` (clause 5.3.8, annex D.5.2).
+
+**TS 119 602 (LoTE profiles):**
+
 ```
 # PID Providers
 http://uri.etsi.org/19602/PIDProvidersList/StatusDetn/EU
@@ -198,7 +210,7 @@ http://uri.etsi.org/19602/WalletProvidersList/StatusDetn/EU
 http://uri.etsi.org/19602/WRPACProvidersList/StatusDetn/EU
 
 # WRPRC Providers
-http://uri.etsi.org/19602/WRPRCrovidersList/StatusDetn/EU
+http://uri.etsi.org/19602/WRPRCProvidersList/StatusDetn/EU
 
 # Pub-EAA Providers
 http://uri.etsi.org/19602/PubEAAProvidersList/StatusDetn/EU
@@ -416,7 +428,8 @@ http://uri.etsi.org/19602/LoTETag
                        Id="tsl-1">
   
   <SchemeInformation>
-    <TSLVersionIdentifier>2</TSLVersionIdentifier>
+    <!-- TS 119 612 clause 5.3.1: value shall be "6" -->
+    <TSLVersionIdentifier>6</TSLVersionIdentifier>
     <TSLSequenceNumber>1</TSLSequenceNumber>
     <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
     <SchemeOperatorName>
@@ -440,7 +453,7 @@ http://uri.etsi.org/19602/LoTETag
       <Name xml:lang="en">Wallet Trusted List</Name>
     </SchemeName>
     <SchemeInformationURI>https://trust-list.example.org/scheme-info</SchemeInformationURI>
-    <StatusDeterminationApproach>http://uri.etsi.org/TrstSvc/TrustedList/StatusDeterminationApproach/BySupervision</StatusDeterminationApproach>
+    <StatusDeterminationApproach>http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate</StatusDeterminationApproach>
     <SchemeTypeCommunityRules>http://uri.etsi.org/TrstSvc/TrustedList/SchemeTypeCommunityRules/EU</SchemeTypeCommunityRules>
     <SchemeTerritory>IT</SchemeTerritory>
     <ListIssueDateTime>2025-01-01T00:00:00Z</ListIssueDateTime>
@@ -724,7 +737,9 @@ python -m jsonschema lote.json lote-schema.json
 - Next update maximum: 6 months
 - Signature: Compact JAdES Baseline B
 
-### 7.3 Pub-EAA Providers List (TS 119 602, Annex H)
+### 7.3 Pub-EAA Providers List and national non-qualified EAA Provider lists (TS 119 602, Annex H)
+
+**Scope**: Annex H defines the LoTE profile for **Pub-EAA Providers** (EC-compiled list) and is also used for **national non-qualified EAA Provider Trusted Lists** compiled and published by Member State TLPs (per ARF v2.8.0 and the trust infrastructure schema).
 
 #### Required URIs
 - **LoTE Type**: `http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList`
@@ -883,6 +898,8 @@ Cache-Control: max-age=3600
 
 ## 10. Examples
 
+For **procedures for authenticating and using trusted lists** (LoTL and EUMS national trusted lists when validating trust service outputs), see **ETSI TS 119 615** clause 4 (e.g. PRO-4.1 authenticating the EC compiled list of trusted lists, PRO-4.2 authenticating an EUMS trusted list, PRO-4.3 obtaining listed services matching a certificate, and subsequent determination procedures). This profile does not duplicate those normative procedures.
+
 ### 10.1 Complete XML TSL Example (TS 119 612)
 
 See section 5.2 for complete XML example.
@@ -982,19 +999,6 @@ Use appropriate JAdES validation library (see section 12).
 - [ ] HistoricalInformationPeriod is `65535`
 - [ ] Service history uses X509SKI (not X509Certificate)
 
-## 12. Python Libraries for Signatures
-
-For detailed information on Python libraries for implementing XAdES and JAdES signatures, see the separate document:
-
-**[Python Signature Libraries Guide](../tools/python_signature_libraries.md)**
-
-This guide includes:
-- XAdES signature libraries (`python-xades`, `signxml`)
-- JAdES signature libraries (`jwcrypto`, `python-jose`)
-- Certificate handling with `cryptography`
-- Complete working examples for both XAdES and JAdES
-- Library comparison and recommendations
-
 ## Implementation Checklist
 
 ### Core Implementation
@@ -1046,9 +1050,11 @@ This guide includes:
 - [Regulation (EU) No 910/2014](https://eur-lex.europa.eu/eli/reg/2014/910/oj) - eIDAS
 - [Commission Implementing Regulation (EU) 2024/2980](https://eur-lex.europa.eu/eli/reg_impl/2024/2980/oj)
 - [Commission Implementing Regulation (EU) 2025/1569](https://eur-lex.europa.eu/eli/reg_impl/2025/1569/oj)
+- [Commission Implementing Regulation (EU) 2025/2164](https://eur-lex.europa.eu/eli/reg_impl/2025/2164/oj) – trusted lists / TS 119 612 (marked Done in ARF v2.8.0 STS list)
 
 ---
 
-**Document Version**: 1.0  
-**Last Updated**: 2025-01-28
+**Document Version**: 1.1  
+**Last Updated**: 2025-02-02  
+**ARF alignment**: v2.8.0 (ETSI TS 119 602 title "Lists of trusted entities; Data model" V1.1.1 (2025-11); Annex H for Pub-EAA and national non-qualified EAA Provider lists; TS 119 612 / CIR 2025/2164)
 
