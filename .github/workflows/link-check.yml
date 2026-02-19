@@ -34,10 +34,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Check links in documents
-        uses: tcort/github-action-markdown-link-check@v1
+        uses: lycheeverse/lychee-action@v2
         with:
-          use-quiet-mode: 'yes'
-          use-verbose-mode: 'yes'
-          config-file: '.github/mlc_config.json'
-          folder-path: '.'
-          file-extension: '.md'
+          args: >
+            --verbose
+            --no-progress
+            .
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fail: true
+          failIfEmpty: true

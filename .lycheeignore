@@ -1,0 +1,5 @@
+# Exclude mailto links (valid but not HTTP-checkable)
+^mailto:
+
+# Exclude same-page anchor links
+^#
