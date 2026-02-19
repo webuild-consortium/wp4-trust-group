@@ -335,7 +335,7 @@ sequenceDiagram
     Registrar->>AccessCA: 4. Request Access Certificate<br/>(Reg_10)
     Note right of AccessCA: Issue certificate with<br/>SCT, Registry reference
 
-    AccessCA->>Entity: 5. Issue Access Certificate<br/>(Reg_10, Reg_10a, Reg_11; ETSI TS 119 411-8)
+    AccessCA->>Entity: 5. Issue Access Certificate<br/>(Reg_10, Reg_10a, Reg_11, ETSI TS 119 411-8)
 
     alt Registrar Policy Requires Registration Certificate
         alt Relying Party
@@ -381,7 +381,7 @@ sequenceDiagram
         Registrar->>Registrar: 2. Approve Entity<br/>(Reg_01, Reg_19, Reg_21)
         Registrar->>Registry: 3. Register Entity<br/>(Reg_01, Reg_03)
         Registrar->>AccessCA: 4. Request Access Certificate<br/>(Reg_10)
-        AccessCA->>Entity: 5. Issue Access Certificate<br/>(Reg_10, Reg_10a, Reg_11; ETSI TS 119 411-8)
+        AccessCA->>Entity: 5. Issue Access Certificate<br/>(Reg_10, Reg_10a, Reg_11, ETSI TS 119 411-8)
     end
 
     rect rgb(255, 244, 225)
