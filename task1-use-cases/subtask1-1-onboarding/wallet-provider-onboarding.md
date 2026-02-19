@@ -4,7 +4,7 @@
 
 This document describes the Wallet Provider onboarding process. The Trusted List of Wallet Providers is intended to convey trust in a set of legal entities and their solutions within [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/eli/reg/2024/1183/oj/eng). Wallet Providers are notified by Member States to the European Commission for inclusion in Trusted Lists.
 
-This use case aligns with the [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md), which defines the overall architecture and notification process. See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) for details.
+This use case aligns with the [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md), which defines the overall architecture and notification process. See [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) for details.
 
 This document follows the WEBUILD ecosystem structure; see [MVP and MVP+ Definitions](onboarding-base.md#mvp-and-mvp-definitions) in the base document.
 
@@ -53,7 +53,7 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
       Wallets [Proposal for a Regulation (EU) 2025/0358 (COD) ](https://digital-strategy.ec.europa.eu/en/library/proposal-regulation-establishment-european-business-wallets)
 - **Success Criteria**:
     - [MVP] Pilot implementations successfully demonstrate wallet providers' onboarding; all wallet providers within WEBUILD are included on a publicly accessible trusted list maintained by the WP4 Trust Infrastructure group.
-    - [MVP+] See [Success Criteria](onboarding-base.md#success-criteria). Wallet Provider–specific: onboarding via notification (not registration with Registrar); trust anchors published in Trusted Lists (see [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix)).
+    - [MVP+] See [Success Criteria](onboarding-base.md#success-criteria). Wallet Provider–specific: onboarding via notification (not registration with Registrar); trust anchors published in Trusted Lists (see [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix)).
 
 ## Preconditions
 
@@ -105,15 +105,15 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 
 ### Trusted List and certificate profile
 
-- Trusted Lists for Wallet Providers comply with [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for detailed implementation guidance, including Wallet Provider Trusted List data model, service entries, and profile-specific requirements.
-- Wallet Provider Certificate Profile: See [Task 3 - X.509 PKI with ETSI Alignments](../task3-x509-pki-etsi/README.md) for certificate profile specifications. Certificates follow [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) (v01.00.00), section 5.
+- Trusted Lists for Wallet Providers comply with [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for detailed implementation guidance, including Wallet Provider Trusted List data model, service entries, and profile-specific requirements.
+- Wallet Provider Certificate Profile: See [Task 3 - X.509 PKI with ETSI Alignments](../../task3-x509-pki-etsi/README.md) for certificate profile specifications. Certificates follow [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) (v01.00.00), section 5.
 - Wallet Unit Attestation: [EWC RFC 004 - Individual Wallet Attestation](https://github.com/EWC-consortium/eudi-wallet-rfcs/blob/main/ewc-rfc004-individual-wallet-attestation.md), [OIDC4VCI 1.0, Appendix E](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html#appendix-E)
 - Unique reference identifier for the wallet solution according to [CIR 2025/849 Annex 2(a)](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849)
 - [Token Status List](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-status-list-12) (OAuth 2.0 Token Status List)
 
 ### Data to be provided
 
-The Wallet Provider must provide the following when requesting onboarding. [MVP]: submitted via the form provided by the Trust Infrastructure Responsible Group; [MVP+]: as required by the Supervisory Body and the regulations below. Normative: [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/eli/reg/2024/1183/oj/eng) (wallet providers, Trusted Lists, Article 22(3)); [CIR 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj) (conformity assessment, certification of EUDI Wallets); [CIR 2025/849](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849) (unique reference identifier per Annex 2(a), wallet solution data). Technical: [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) (Trusted List structure, wallet solution service entries); [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) (Wallet Provider Trusted List data model).
+The Wallet Provider must provide the following when requesting onboarding. [MVP]: submitted via the form provided by the Trust Infrastructure Responsible Group; [MVP+]: as required by the Supervisory Body and the regulations below. Normative: [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/eli/reg/2024/1183/oj/eng) (wallet providers, Trusted Lists, Article 22(3)); [CIR 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj) (conformity assessment, certification of EUDI Wallets); [CIR 2025/849](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849) (unique reference identifier per Annex 2(a), wallet solution data). Technical: [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) (Trusted List structure, wallet solution service entries); [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) (Wallet Provider Trusted List data model).
 
 *About the Wallet Provider (legal entity):*
 - Legal name of the wallet provider
@@ -130,7 +130,7 @@ The Wallet Provider must provide the following when requesting onboarding. [MVP]
 - URI to the Wallet Solution
 - URI of the Wallet Solution's status list entry (optional)
 - Details on associated body, if applicable
-- X.509 certificate signing request (required for issuance of the wallet solution certificate; certificate profile and issuance process: [Task 3 - X.509 PKI with ETSI Alignments](../task3-x509-pki-etsi/README.md), [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) section 5; Trusted List entry includes the issued certificate per [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf))
+- X.509 certificate signing request (required for issuance of the wallet solution certificate; certificate profile and issuance process: [Task 3 - X.509 PKI with ETSI Alignments](../../task3-x509-pki-etsi/README.md), [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) section 5; Trusted List entry includes the issued certificate per [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf))
 - Unique reference identifier of the wallet solution (optional; [MVP+] per CIR 2025/849 Annex 2(a))
 
 ## Main Flow
@@ -148,11 +148,11 @@ The Wallet Provider must provide the following when requesting onboarding. [MVP]
 - 2.2 Supervisory Body reviews onboarding request
 - 2.3 Supervisory Body approves onboarding to Trusted List
 - 2.4 Supervisory Body confirms successful administrative onboarding
-- 2.5 European Commission updates the EU-level Trusted List of Wallet Providers (after Member State notification; see [Trust Infrastructure Schema - Overview](../task2-trust-framework/trust-infrastructure-schema.md#overview))
+- 2.5 European Commission updates the EU-level Trusted List of Wallet Providers (after Member State notification; see [Trust Infrastructure Schema - Overview](../../task2-trust-framework/trust-infrastructure-schema.md#overview))
 
 **2. Technical Onboarding**
 
-- Certificate issuance for wallet solutions is part of Administrative Onboarding (see 1.3, 2.5). See [Task 3](../task3-x509-pki-etsi/README.md), [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf), [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
+- Certificate issuance for wallet solutions is part of Administrative Onboarding (see 1.3, 2.5). See [Task 3](../../task3-x509-pki-etsi/README.md), [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf), [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
 
 **3. Post-Onboarding**
 
@@ -163,11 +163,11 @@ The Wallet Provider must provide the following when requesting onboarding. [MVP]
 
 ## Industrial-Scale Considerations
 
-The following apply to Wallet Provider onboarding (notification and Trusted List listing) at scale. Framework context: [Task 2 - Trust Framework](../task2-trust-framework/README.md).
+The following apply to Wallet Provider onboarding (notification and Trusted List listing) at scale. Framework context: [Task 2 - Trust Framework](../../task2-trust-framework/README.md).
 
 ### 1. Entity Identification and Trusted List Integration
 
-Wallet Providers are **notified** by Member States to the European Commission and do not register with a Registrar. They are listed on the **Trusted List of Wallet Providers**, which is compiled and published by the **European Commission** (MVP+); see [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix). For MVP, the Trusted List is maintained by the WP4 Trust Infrastructure group. Identification and listing use the data required by the Supervisory Body and [CIR 2024/2981](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402981) / [CIR 2025/849](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849). Trusted Lists are published and linked via the [List of Trusted Lists (LoTL)](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework) (ETSI TS 119 612).
+Wallet Providers are **notified** by Member States to the European Commission and do not register with a Registrar. They are listed on the **Trusted List of Wallet Providers**, which is compiled and published by the **European Commission** (MVP+); see [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix). For MVP, the Trusted List is maintained by the WP4 Trust Infrastructure group. Identification and listing use the data required by the Supervisory Body and [CIR 2024/2981](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402981) / [CIR 2025/849](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849). Trusted Lists are published and linked via the [List of Trusted Lists (LoTL)](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework) (ETSI TS 119 612).
 
 ### 2. Attribute and Wallet Solution Scope
 
@@ -185,7 +185,7 @@ _Preconditions:_
     - The Wallet Provider, that intends to provide a European Digital Identity Wallets (EUDI Wallets) or a European Business Wallet, applies to be listed.
 - **Prerequisites [MVP+]**:
     - Member State has designated at least one Supervisory Body responsible for qualifying Wallet Providers.
-    - Member States notify Wallet Providers to the European Commission (per [Trust Infrastructure Schema - Member State Notification to European Commission](../task2-trust-framework/trust-infrastructure-schema.md#311-member-state-notification-to-european-commission)); the European Commission compiles and publishes the EU-level Trusted List of Wallet Providers (per [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix)).
+    - Member States notify Wallet Providers to the European Commission (per [Trust Infrastructure Schema - Member State Notification to European Commission](../../task2-trust-framework/trust-infrastructure-schema.md#311-member-state-notification-to-european-commission)); the European Commission compiles and publishes the EU-level Trusted List of Wallet Providers (per [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix)).
     - The Wallet Provider has successfully certified its wallet solution according to [CIR 2024/2981](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402981).
 
 _Postconditions:_
@@ -271,11 +271,11 @@ If not successful, the Trust Infrastructure Responsible Group informs about the 
 
 ### 2.5 Trusted List of Wallet Providers is updated
 
-[MVP+]: The **European Commission** compiles, maintains, and publishes the **EU-level** Trusted List of Wallet Providers. After the Supervisory Body approves the Wallet Provider, the Member State notifies the Commission (per [Trust Infrastructure Schema - Member State Notification to European Commission](../task2-trust-framework/trust-infrastructure-schema.md#311-member-state-notification-to-european-commission)); the Commission then updates the Trusted List accordingly. The Trusted List of Wallet Providers is not maintained at Member State level. See [Trust Infrastructure Schema - Overview](../task2-trust-framework/trust-infrastructure-schema.md#overview).
+[MVP+]: The **European Commission** compiles, maintains, and publishes the **EU-level** Trusted List of Wallet Providers. After the Supervisory Body approves the Wallet Provider, the Member State notifies the Commission (per [Trust Infrastructure Schema - Member State Notification to European Commission](../../task2-trust-framework/trust-infrastructure-schema.md#311-member-state-notification-to-european-commission)); the Commission then updates the Trusted List accordingly. The Trusted List of Wallet Providers is not maintained at Member State level. See [Trust Infrastructure Schema - Overview](../../task2-trust-framework/trust-infrastructure-schema.md#overview).
 
 ## 2. Technical Onboarding
 
-Wallet Providers do not have a separate technical onboarding phase. X.509 certificates for wallet solutions are issued as part of Administrative Onboarding (see sections 1.3 and 2.5). Certificate profile and issuance are described in [Task 3 - X.509 PKI with ETSI Alignments](../task3-x509-pki-etsi/README.md) and [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) section 5. Trusted List entries and service digital identities follow [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
+Wallet Providers do not have a separate technical onboarding phase. X.509 certificates for wallet solutions are issued as part of Administrative Onboarding (see sections 1.3 and 2.5). Certificate profile and issuance are described in [Task 3 - X.509 PKI with ETSI Alignments](../../task3-x509-pki-etsi/README.md) and [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) section 5. Trusted List entries and service digital identities follow [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
 
 ## 3. Post-Onboarding
 
@@ -302,7 +302,7 @@ Once a Wallet Provider and its wallet solution(s) are listed on the Trusted List
 
 ### 3.1 Trusted List / Wallet Provider Monitoring
 
-The Supervisory Body and Trusted List Provider monitor listed Wallet Providers and their wallet solutions for continued compliance with [CIR 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj) and [CIR 2025/849](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849). Monitoring may include conformity surveillance, changes in legal or certification status, and notifications from competent authorities. Trusted Lists are maintained and published per [ETSI TS 119 612](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md) and [ARF – Trusted Lists](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/).
+The Supervisory Body and Trusted List Provider monitor listed Wallet Providers and their wallet solutions for continued compliance with [CIR 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj) and [CIR 2025/849](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849). Monitoring may include conformity surveillance, changes in legal or certification status, and notifications from competent authorities. Trusted Lists are maintained and published per [ETSI TS 119 612](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) and [ARF – Trusted Lists](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/).
 
 ### 3.2 Trusted List Update
 
@@ -314,7 +314,7 @@ The Ecosystem Authority (under [MVP]) or the Supervisory Body (under [MVP+]) may
 
 ### 3.4 Wallet Solution Certificate / Status Revocation
 
-When a Wallet Provider or wallet solution is de-listed or its status is set to invalid/suspended, any X.509 certificates issued for the wallet solution (and, where used, status list entries) are revoked or updated without undue delay. Revocation status is published in line with the Trusted List and certificate policy (e.g. status list, CRL, or OCSP). Under [MVP], the Ecosystem Authority (as issuer of wallet solution certificates) revokes certificates when the Trusted List entry is removed or invalidated. Under [MVP+], the body responsible for issuing wallet solution certificates follows the same principle in line with national and Union requirements. See [Task 3 - X.509 PKI with ETSI Alignments](../task3-x509-pki-etsi/README.md) and ETSI EN 319 412 series for certificate lifecycle.
+When a Wallet Provider or wallet solution is de-listed or its status is set to invalid/suspended, any X.509 certificates issued for the wallet solution (and, where used, status list entries) are revoked or updated without undue delay. Revocation status is published in line with the Trusted List and certificate policy (e.g. status list, CRL, or OCSP). Under [MVP], the Ecosystem Authority (as issuer of wallet solution certificates) revokes certificates when the Trusted List entry is removed or invalidated. Under [MVP+], the body responsible for issuing wallet solution certificates follows the same principle in line with national and Union requirements. See [Task 3 - X.509 PKI with ETSI Alignments](../../task3-x509-pki-etsi/README.md) and ETSI EN 319 412 series for certificate lifecycle.
 
 ---
 

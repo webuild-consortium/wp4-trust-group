@@ -23,7 +23,7 @@ That document includes: acronyms; wallet-related and trust infrastructure termin
 Onboarding use cases distinguish between two phases. Full definitions are in the [Consolidated Terms and Entity Definitions](../terms-and-entities.md#5-mvp-and-mvp-definitions). Summary:
 
 - **MVP**: WEBUILD testing/pilot phase; WP4 Trust Infrastructure group acts as Ecosystem Authority (and as Registrar, Access CA, Provider of Registration Certificates, TLP); entities register with WP4; registers and Trusted Lists maintained by WP4. LoTL is the trust anchor; see consolidated doc for LoTL/TL model.
-- **MVP+**: Production/regulatory phase; registration with Member State Registrars (PID/Attestation Providers, Relying Parties); notification to European Commission (Wallet Providers, Access CAs, Providers of Registration Certificates); trust anchors via Trusted Lists and National Registers per [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix).
+- **MVP+**: Production/regulatory phase; registration with Member State Registrars (PID/Attestation Providers, Relying Parties); notification to European Commission (Wallet Providers, Access CAs, Providers of Registration Certificates); trust anchors via Trusted Lists and National Registers per [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix).
 
 ## RACI Matrix
 
@@ -44,7 +44,7 @@ The entities that perform the Responsible (R) role in the RACI matrices are list
 
 ### Member State requirements under MVP+
 
-Under MVP+, Member States have the following obligations (ref. [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) and [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md)):
+Under MVP+, Member States have the following obligations (ref. [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) and [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md)):
 
 | Requirement | Description | Reference |
 |-------------|-------------|-----------|
@@ -67,11 +67,11 @@ See [Relying Party Onboarding](relying_party_onboarding.md), [PID/EAA Provider O
 
 ## Main Flows and Steps
 
-Preconditions, main flows, administrative/technical/post-onboarding steps, and industrial-scale considerations are defined in [Relying Party Onboarding](relying_party_onboarding.md), [PID/EAA Provider Onboarding](pid_eaa_provider_onboarding.md), and [Wallet Provider Onboarding](wallet-provider-onboarding.md). Registration vs. notification (MVP+): [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix).
+Preconditions, main flows, administrative/technical/post-onboarding steps, and industrial-scale considerations are defined in [Relying Party Onboarding](relying_party_onboarding.md), [PID/EAA Provider Onboarding](pid_eaa_provider_onboarding.md), and [Wallet Provider Onboarding](wallet-provider-onboarding.md). Registration vs. notification (MVP+): [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix).
 
 ## Industrial-Scale Considerations
 
-See [Relying Party Onboarding](relying_party_onboarding.md), [PID/EAA Provider Onboarding](pid_eaa_provider_onboarding.md), and [Wallet Provider Onboarding](wallet-provider-onboarding.md). Framework-level context: [Task 2 - Trust Framework](../task2-trust-framework/README.md).
+See [Relying Party Onboarding](relying_party_onboarding.md), [PID/EAA Provider Onboarding](pid_eaa_provider_onboarding.md), and [Wallet Provider Onboarding](wallet-provider-onboarding.md). Framework-level context: [Task 2 - Trust Framework](../../task2-trust-framework/README.md).
 
 ## Administrative, Technical, and Post-Onboarding Steps
 
@@ -82,7 +82,7 @@ Defined only in the use case documents. Shared steps for Relying Parties and PID
 The following references apply across onboarding use cases. Entity-specific documents may add further references.
 
 - **ARF**: [EUDI Wallet Architecture and Reference Framework 2.7.3](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/), [Annex II - High-Level Requirements](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/)
-- **Project**: [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md), [Trust Framework](../task2-trust-framework/README.md), [Entities Involved](../task2-trust-framework/entities-involved.md), [X.509 PKI / ETSI](../task3-x509-pki-etsi/README.md), [Onboarding API](../task4-trust-infrastructure-api/onboarding-api/README.md), [Participants' Certificates and Policies](../task5-participants-certificates-policies/README.md)
+- **Project**: [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md), [Trust Framework](../../task2-trust-framework/README.md), [Entities Involved](../../task2-trust-framework/entities-involved.md), [X.509 PKI / ETSI](../../task3-x509-pki-etsi/README.md), [Onboarding API](../../task4-trust-infrastructure-api/onboarding-api/README.md), [Participants' Certificates and Policies](../../task5-participants-certificates-policies/README.md)
 - **Regulations**: [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848), [Regulation (EU) 2024/2980 Art. 4](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ%3AL_202402980), [Regulation (EU) 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj), [Regulation (EU) 2024/1183 Art. 5a(18)](https://eur-lex.europa.eu/eli/reg/2024/1183/oj), [Regulation (EU) 2025/849](https://data.europa.eu/eli/reg_impl/2025/849/oj)
 - **EC specs**: [EC TS02](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md), [EC TS03](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md), [EC TS05](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md), [EC TS06](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md)
 - **ETSI**: TS 119 612, TS 119 602, TS 119 411-8, TS 119 475, TS 119 472-2, EN 319 411-1, EN 319 412-2/3/6 (IETF standards are referenced where applicable in ETSI and ARF)
