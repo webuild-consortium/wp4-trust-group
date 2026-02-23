@@ -495,7 +495,7 @@ sequenceDiagram
 	
 	rect rgb(230, 245, 255)
         Note over MS,TL: Phase 1: MS TLP Compiles, Signs & Publishes **national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers**
-        MS->>MS: 1. Compile national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers<br/>(non-qualified EAA: TS 119 602 LoTE; QEAA: TS 119 612 QTSP TL)
+        MS->>MS: 1. Compile national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers
         Note right of MS: non-qualified EAA Provider and QEAA Provider trust anchors and registry data
         MS->>TL: 2. Sign/Seal & Publish national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers
         Note right of TL: Published at MS TLP URL<br/>ETSI TS 119 612/119 602-compliant format
