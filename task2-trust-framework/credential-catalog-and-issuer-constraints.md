@@ -2,63 +2,11 @@
 
 This document compiles all evidence, references, and text about credential catalogues, catalogue of attestations, EAA (Electronic Attestation of Attributes), and QEAA (Qualified Electronic Attestation of Attributes) found in the EUDI Wallet Architecture and Reference Framework. It also covers mechanisms used to prevent unallowed credential type issuance by bogus credential issuers, including the use of Trusted Lists and registration certificates to configure which Credential Issuers are authorized to issue specific attestation types.
 
-## Table of Contents
-
-1. [Glossary and Definitions](#glossary-and-definitions)
-2. [Credential Catalogues Overview](#credential-catalogues-overview)
-3. [Catalogue of Attributes](#catalogue-of-attributes)
-4. [Catalogue of Attestation Schemes](#catalogue-of-attestation-schemes)
-5. [EAA (Electronic Attestation of Attributes)](#eaa-electronic-attestation-of-attributes)
-6. [QEAA (Qualified Electronic Attestation of Attributes)](#qeaa-qualified-electronic-attestation-of-attributes)
-7. [PuB-EAA (Public Sector EAA)](#pub-eaa-public-sector-eaa)
-8. [Legal and Regulatory References](#legal-and-regulatory-references)
-9. [High-Level Requirements](#high-level-requirements)
-10. [Technical Specifications](#technical-specifications)
-11. [Important Notes and Distinctions](#important-notes-and-distinctions)
-    - [Using Trusted Lists to Configure Allowed Credential Issuers](#using-trusted-lists-to-configure-allowed-credential-issuers-for-specific-attestation-types)
-12. [Related Topics and Cross-References](#related-topics-and-cross-references)
-
 ## Glossary and Definitions
 
-This section provides key definitions and terminology used throughout this document.
+**Entity and trust terminology**: See [terms-and-entities.md](../task1-use-cases/terms-and-entities.md).
 
-### Core Concepts
-
-- **EAA (Electronic Attestation of Attributes)**: An electronic attestation of attributes that can be issued in three forms: QEAA, PuB-EAA, or non-qualified EAA.
-
-- **QEAA (Qualified Electronic Attestation of Attributes)**: An electronic attestation of attributes issued by a qualified trust service provider (QTSP) that meets the requirements laid down in Annex V of Regulation (EU) 2024/1183.
-
-- **PuB-EAA (Public Sector EAA)**: An electronic attestation of attributes issued by a public sector body that is responsible for an authentic source or by a public sector body designated by the Member State to issue such attestations on behalf of public sector bodies responsible for authentic sources, in accordance with Article 45f and Annex VII of Regulation (EU) 2024/1183.
-
-- **Non-Qualified EAA**: An EAA which is not a QEAA or a PuB-EAA. Non-qualified EAAs can be provided by any (non-qualified) Trust Service Provider.
-
-- **QTSP (Qualified Trust Service Provider)**: A trust service provider that is qualified in accordance with Regulation (EU) No 910/2014 (eIDAS Regulation).
-
-### Catalogues
-
-- **Catalogue of Attributes**: A catalogue exclusively intended for use by QTSPs issuing QEAAs, enabling them to find the access point of the Authentication Source responsible for a given attribute.
-
-- **Catalogue of Attestation Schemes** (also called "catalogue of schemes for the attestation of attributes"): A catalogue intended for use by Relying Parties, Attestation Providers, and other actors to discover which types of attestations exist within the ecosystem and understand their identifiers, syntax, and semantics.
-
-### Attestation Components
-
-- **Attestation Scheme**: A machine-readable attestation definition that specifies the structure, attributes, and technical format of an attestation type.
-
-- **Attestation Rulebook**: A human-readable specification of an attestation scheme that describes the significance, data quality assurance requirements, and minimum requirements for attestation issuance. While the scheme defines the formal structure, the rulebook focuses on substantial requirements.
-
-### Trust Infrastructure
-
-- **Trusted List**: A list maintained by a Trusted List Owner (also known as Ecosystem Authority or Scheme Owner) that contains trust anchors and metadata for trusted entities (e.g., PID Providers, QEAA Providers, PuB-EAA Providers, EAA Providers).
-
-- **Trusted List Owner** (also **Ecosystem Authority** or **Scheme Owner**): The entity accountable for allowing listed EAA Providers (Trusted Entities) to issue credentials mentioned in the metadata of the Trusted List. A Trusted List Owner can list multiple attribute schemes and can list itself as an EAA Provider.
-
-- **Registration Certificate**: A certificate issued to a PID Provider, QEAA Provider, PuB-EAA Provider, or non-qualified EAA Provider that contains the type(s) of attestation that the entity intends to issue to Wallet Units. Registration certificates are optional and are issued if the Registrar has a policy of issuing such certificates.
-
-- **Registrar**: An entity in a Member State responsible for registering PID Providers, QEAA Providers, PuB-EAA Providers, and non-qualified EAA Providers.
-
-### Scope Note
-
-**Note on Alternative Technologies**: This document and the associated project focus on X.509–based QEAA models as defined in the applicable ETSI and eIDAS2 framework. Alternative approaches such as AnonCreds-based mechanisms for revocation and status management with strong privacy guarantees are considered **out of scope** for the first releases of this project.
+**Catalogue and attestation concepts**: See [ARF v2.8.0 Section 5.5](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes) and [Technical Specification 11](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md).
 
 ## Credential Catalogues Overview
 
@@ -71,24 +19,19 @@ The EUDI Wallet ecosystem defines **two distinct catalogues** to support discove
 
 ### Key Documents
 
-#### Main Architecture Document
-- **File**: `architecture-and-reference-framework-main.md`
-- **Section**: 5.5 - "Catalogue of attributes and catalogue of attestation schemes"
-- **Lines**: 2519-2608
+#### Main Architecture Document (ARF v2.8.0)
+- [Section 5.5 - Catalogue of attributes and catalogue of attestation schemes](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes)
 
 #### Discussion Paper
-- **File**: `discussion-topics/o-catalogues-for-attestations.md`
-- **Title**: Topic O - Catalogues for Attestations
-- **Version**: 1.0, updated 29 Sep 2025
-- **GitHub Discussion**: [Link](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/discussions/557)
+- [Topic O - Catalogues for Attestations](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/discussion-topics/o-catalogues-for-attestations/) (Version 1.0, updated 29 Sep 2025)
+- [GitHub Discussion](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/discussions/557)
 
 #### Technical Specification
-- **File**: `technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md`
-- **Note**: Detailed specification is in the standards and technical specifications repository
+- [Technical Specification 11 - Interfaces and formats for catalogue of attributes and catalogue of schemes](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md)
 
-#### Requirements Documents
-- **Topic 25**: Unified definition and controlled vocabularies for attributes (`annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md`)
-- **Topic 26**: References to catalogue of Attestation Rulebooks
+#### Requirements Documents (ARF v2.8.0 Annex 2.02)
+- [Topic 25 - Unified definition and controlled vocabularies for attributes](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2315-topic-25---unified-definition-and-controlled-vocabularies-for-attributes)
+- Topic 26 (References to catalogue of Attestation Rulebooks) has been removed in ARF v2.8.0; see [Discussion Paper Topic O](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/discussion-topics/o-catalogues-for-attestations/) Section 3.2 for updates.
 
 ### Objectives
 
@@ -325,9 +268,9 @@ For revocation and status management of non-qualified EAAs, the revocation mecha
 
 #### Validation Requirements
 
-**OIA_15**: For both proximity and remote presentation flows, a Relying Party SHALL validate the signature of a non-qualified EAA using a trust anchor provided according to the mechanism(s) specified in the applicable Rulebook, see [Topic 12](./annex-2.02-high-level-requirements-by-topic.md#a239-topic-12---attestation-rulebooks).
+**OIA_15**: For both proximity and remote presentation flows, a Relying Party SHALL validate the signature of a non-qualified EAA using a trust anchor provided according to the mechanism(s) specified in the applicable Rulebook, see [Topic 12](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a239-topic-12---attestation-rulebooks).
 
-**ISSU_10**: After a Wallet Unit receives a non-qualified EAA from an EAA Provider, it SHALL validate the signature of the EAA using a trust anchor provided according to the mechanism(s) specified in the applicable Rulebook, see [Topic 12](./annex-2.02-high-level-requirements-by-topic.md#a239-topic-12---attestation-rulebooks).
+**ISSU_10**: After a Wallet Unit receives a non-qualified EAA from an EAA Provider, it SHALL validate the signature of the EAA using a trust anchor provided according to the mechanism(s) specified in the applicable Rulebook, see [Topic 12](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a239-topic-12---attestation-rulebooks).
 
 #### Attestation Rulebook Requirements
 
@@ -356,7 +299,7 @@ A **QEAA** is an electronic attestation of attributes which is issued by a quali
 #### Key Responsibilities
 
 - QEAA Providers maintain an interface to Wallet Units to provide QEAAs upon request
-- Potentially, they also maintain an interface towards Authentic Sources to verify the value of User attributes, as specified in [Topic 42](./annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a2324-topic-42---requirements-for-qtsps-to-access-authentic-sources)
+- Potentially, they also maintain an interface towards Authentic Sources to verify the value of User attributes, as specified in [Topic 42](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2324-topic-42---requirements-for-qtsps-to-access-authentic-sources)
 
 #### User Authentication
 
@@ -594,17 +537,20 @@ This specification defines:
 ## Related Topics and Cross-References
 
 ### Topic 12 - Attestation Rulebooks
+- [Topic 12 (ARF v2.8.0)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a239-topic-12---attestation-rulebooks)
 - Defines requirements for Attestation Rulebooks for QEAAs, PuB-EAAs, and EAAs
 - Specifies requirements for referencing catalogues
 
 ### Topic 25 - Unified Definition and Controlled Vocabularies for Attributes
+- [Topic 25 (ARF v2.8.0)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2315-topic-25---unified-definition-and-controlled-vocabularies-for-attributes)
 - Defines requirements for the catalogue of attributes
 - Specifies requirements for attribute registration
 
 ### Topic 26 - References to Catalogue of Attestation Rulebooks
-- Being updated to reflect the distinction between catalogue of schemes and catalogue of rulebooks
+- Removed in ARF v2.8.0; see [Discussion Paper Topic O](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/discussion-topics/o-catalogues-for-attestations/) Section 3.2.
 
 ### Topic 27 - Registration of PID Providers, Providers of QEAAs, PuB-EAAs, and non-qualified EAAs, and Relying Parties
+- [Topic 27 (ARF v2.8.0)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties)
 - Defines registration requirements for QEAA Providers, PuB-EAA Providers, and EAA Providers
 
 ### Topic 31 - Notification and Publication
@@ -650,10 +596,9 @@ This specification defines:
 - The ARF includes high-level requirements (HLR) for these catalogues, which are considered outdated and will be updated (see Discussion Paper Topic O, Section 3)
 
 ### Trust Model
-- PID Providers, QEAA Providers, and PuB-EAA Providers have trust anchors in Commission-compiled Trusted Lists
-- Non-qualified EAA Providers may have trust anchors through mechanisms specified in applicable Rulebook
-- QEAA Providers and PuB-EAA Providers operate within a regulated framework and are regularly audited
-- Non-qualified EAA Providers are also regulated under Regulation (EU) 2024/1183 (see Article 19a, Article 45h, Commission Implementing Regulation (EU) 2025/2160, and Commission Implementing Regulation (EU) 2024/2977), but operate under a different level of trust compared to QEAAs and PuB-EAAs
+- Trust anchor placement and Trusted List responsibilities per provider type: see [Trust Infrastructure Schema](trust-infrastructure-schema.md) (Overview, Section 3) and ARF Topic 27, Topic 31.
+- Entity and terminology definitions: see [terms-and-entities.md](../task1-use-cases/terms-and-entities.md).
+- A different level of trust applies when evaluating non-qualified EAA Providers compared to QEAA Providers and PuB-EAA Providers.
 
 ### Using Trusted Lists to configure allowed Credential Issuers for specific attestation types
 
@@ -767,18 +712,17 @@ In this case, Wallet Units and Relying Parties can validate credentials using on
 
 ### Technical Documents
 
-**Note**: The following documents are part of the EUDI Wallet Architecture and Reference Framework repository, not this repository. They are referenced here for completeness.
+**Note**: The following documents are part of the EUDI Wallet repositories, not this repository.
 
-- [Technical Specification 11](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md) - Located in the EUDI Wallet Standards and Technical Specifications repository
-- [Discussion Paper on Topic O](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/discussion-topics/o-catalogues-for-attestations.md) - Located in the EUDI Wallet Architecture and Reference Framework repository
-- Credential Catalogue Information - Referenced in the EUDI Wallet Architecture and Reference Framework
+- [Technical Specification 11](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md) - EUDI Wallet Standards and Technical Specifications repository
+- [Discussion Paper on Topic O](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/discussion-topics/o-catalogues-for-attestations/) - Catalogues for Attestations (ARF v2.8.0)
 
-### Architecture Documents
+### Architecture Documents (ARF v2.8.0)
 
-**Note**: The following documents are part of the EUDI Wallet Architecture and Reference Framework repository, not this repository.
+**Note**: The following documents are part of the EUDI Wallet Architecture and Reference Framework repository.
 
-- [Architecture and Reference Framework Main Document](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/architecture-and-reference-framework-main.md) - Located in the EUDI Wallet Architecture and Reference Framework repository
-- [Annex 2.02 - High-Level Requirements by Topic](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md) - Located in the EUDI Wallet Architecture and Reference Framework repository
+- [Architecture and Reference Framework Main Document](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/) - Section 5.5: [Catalogue of attributes and catalogue of attestation schemes](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes)
+- [Annex 2.02 - High-Level Requirements by Topic](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/)
 
 ## Proposals for Further Discussion
 
