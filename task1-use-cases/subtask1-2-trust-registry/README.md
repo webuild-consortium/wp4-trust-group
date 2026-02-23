@@ -1,6 +1,6 @@
 # Subtask 1.2: Trust Registry and Trust Evaluation Use Cases
 
-This folder contains use cases for **trust registry operations** and **trust evaluation**: how ecosystem participants use Trusted Lists, registries, and certificates to establish and verify trust during credential issuance and presentation.
+This subtask contains use cases for **trust registry operations** and **trust evaluation**: how ecosystem participants use Trusted Lists, registries, and certificates to establish and verify trust during credential issuance and presentation.
 
 ## Scope
 

@@ -25,7 +25,7 @@ Before issuing a **PID** or an **attestation (EAA)**, the **PID Provider** or **
 2. **Trust anchors**: Credential Issuer accepts trust anchors from the **Wallet Provider Trusted List** (ISSU_19 for PID Provider, ISSU_28 for Attestation Provider).
 3. **Wallet Provider in TL**: Credential Issuer verifies that the Wallet Provider referenced in the WUA is **present in the Wallet Provider Trusted List** and has **valid entity status** (not Invalid; GenNot_05) (ISSU_21, ISSU_30).
 4. **WUA validation**: Credential Issuer authenticates and validates the WUA using the trust anchor(s) registered for that Wallet Provider in the TL; verifies the WUA is **not revoked** (ISSU_21, ISSU_30; Topic 38).
-5. If any check fails: reject the issuance request. If all checks pass, proceed with issuance.
+5. If any check fails: reject the issuance request, (the Wallet Unit informs the User of the reason). If all checks pass, proceed with issuance.
 
 ## Success Criteria
 

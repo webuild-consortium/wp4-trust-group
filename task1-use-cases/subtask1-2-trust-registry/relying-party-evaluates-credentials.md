@@ -16,6 +16,7 @@ After receiving **PID** and/or **attestations (EAA)** from a Wallet Unit (proxim
 
 ## Preconditions
 
+- User, after reviewing the identity of the RP (RPA_05), the intended use and any privacy policies, if available, as shown by the Wallet Unit, approved the presentation (RPA_10).
 - Relying Party has (or can obtain) the Trusted Lists needed for the credential types it accepts: PID Provider TL; QEAA Provider TL (e.g. Member State QTSP TL); PuB-EAA Provider TL; for non-qualified EAA, mechanism per applicable Rulebook (Topic 12).
 - Presented credentials (PID, QEAA, PuB-EAA, or non-qualified EAA) are available for signature verification.
 
@@ -26,7 +27,7 @@ After receiving **PID** and/or **attestations (EAA)** from a Wallet Unit (proxim
 3. **QEAA**: Relying Party validates the **qualified signature of the QEAA** per Art. 32 using a trust anchor from a **QEAA Provider Trusted List** (Member State QTSP TL); considers **issuer status in TL** (GenNot_05). Where specs require it, verifies the **attestation is not revoked** (OIA_13).
 4. **PuB-EAA**: Relying Party validates the **qualified signature of the PuB-EAA** per Art. 32; validates the QTSP certificate via TL; verifies certified attributes per Article 45f; considers **issuer status in TL**. Where specs require it, verifies **attestation not revoked** (OIA_14).
 5. **Non-qualified EAA**: Relying Party validates the **signature of the EAA** using trust anchors per the **applicable Rulebook** (Topic 12); considers issuer status where applicable; **revocation** per rulebook/specs (OIA_15).
-6. If any signature, certificate, status, or revocation check fails: reject the presentation. If all pass, the RP may use the attributes for the service.
+6. If any signature, certificate, status, or revocation check fails: reject the presentation (the Wallet Unit informs the User of the reason). If all pass, the RP may use the attributes for the service.
 
 ## Success Criteria
 

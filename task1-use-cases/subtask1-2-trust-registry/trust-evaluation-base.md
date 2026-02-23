@@ -33,6 +33,12 @@ Full requirement set: [Trusted list registration trust evaluation matrix](../../
 
 ## Trust Evaluation Points (Summary)
 
+**Before Wallet Unit activation (User)**
+User evaluates: general information on the certification of Wallet Solutions and discovers links to the certification status information (DASH_09).
+
+**After Wallet Unit activation (User)**
+User evaluates: and is informed about the validity status of their Wallet Unit (WURevocation_14 and WURevocation_16)
+
 1. **Before credential issuance (Wallet Unit → PID/Attestation Provider)**  
    Wallet Unit evaluates: Access Certificate (via Access CA TL), **certificate not revoked** (Reg_14), **Provider entity status in TL not Invalid** (GenNot_05), Provider registration and entitlements (Registry / registration certificate); **registration certificate not revoked** where used (RPRC_02).  
    Provider evaluates: Wallet Unit Attestation (via Wallet Provider TL), **WUA not revoked** (Topic 38), **Wallet Provider entity status in TL not Invalid** (GenNot_05).
