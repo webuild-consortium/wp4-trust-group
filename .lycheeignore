@@ -1,0 +1,27 @@
+# Exclude mailto links (valid but not HTTP-checkable)
+^mailto:
+
+# Exclude same-page anchor links
+^#
+
+# ETSI deliverables - URLs change frequently
+https://www\.etsi\.org/deliver/
+
+# ETSI URI namespace - not HTTP endpoints
+^http://uri\.etsi\.org/
+
+# TLS test/demo site - may be unavailable
+^http://www\.tlsox\.xyz/
+
+# EUDI annex 2.7.3 annex-2-high-level-requirements - 404 (doc structure changed)
+eu-digital-identity-wallet\.github\.io.*annex-2-high-level-requirements
+
+# Truncated/broken URLs in specs
+^http://www\.w3\.org/2001/10/xml-
+^https://ec\.europa\.eu/tools/lotl/pivot-lotl-
+
+# ISO standards - may require auth (403)
+https://www\.iso\.org/standard/
+
+# EUDI development-issues path - moved/renamed
+COMPREHENSIVE-CATALOGUE-EAA-QEAA-REFERENCES

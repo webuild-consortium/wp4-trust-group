@@ -4,7 +4,7 @@
 
 This document describes the PID / Attestation Provider onboarding process. PID Providers and Attestation Providers (QEAA Providers, PuB-EAA Providers, and non-qualified EAA Providers) register with Member State Registrars, obtain Access Certificates, and are included in Trusted Lists for validation purposes.
 
-This use case aligns with the [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md), which defines the overall architecture, registration vs. notification processes, and trusted list compilation responsibilities. Where applicable, this document references the schema to avoid duplication.
+This use case aligns with the [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md), which defines the overall architecture, registration vs. notification processes, and trusted list compilation responsibilities. Where applicable, this document references the schema to avoid duplication.
 
 This document follows the WEBUILD ecosystem structure; see [MVP and MVP+ Definitions](onboarding-base.md#mvp-and-mvp-definitions) in the base document.
 
@@ -34,8 +34,8 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
     - Registrar (designated by Member State)
     - Access Certificate Authority (authorized by Member State)
     - Provider of Registration Certificate (authorized by Member State)
-    - Trusted List Provider (designated by Member State): national Trusted Lists. See [Trust Infrastructure Schema - Overview](../task2-trust-framework/trust-infrastructure-schema.md#overview).
-    - European Commission: EU-level LoTEs of PID Providers and PuB-EAA Providers (compiled and published in production); LoTL. See [Trust Infrastructure Schema - Overview](../task2-trust-framework/trust-infrastructure-schema.md#overview).
+    - Trusted List Provider (designated by Member State): national Trusted Lists. See [Trust Infrastructure Schema - Overview](../../task2-trust-framework/trust-infrastructure-schema.md#overview).
+    - European Commission: EU-level LoTEs of PID Providers and PuB-EAA Providers (compiled and published in production); LoTL. See [Trust Infrastructure Schema - Overview](../../task2-trust-framework/trust-infrastructure-schema.md#overview).
 
 ## Goal
 
@@ -47,11 +47,11 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
 - **Success Criteria**:
     - [MVP] Pilot implementations successfully demonstrate PID / Attestation Provider onboarding within WEBUILD; all PID/EAA Providers within WEBUILD are included in a publicly accessible register and in the LoTL (with one TL) maintained by the WP4 Trust Infrastructure group.
     - [MVP+] The onboarding process is formally defined and documented in a harmonized manner that aligns with EU regulatory and technical frameworks (ref. [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-    - [MVP+] See [Success Criteria](onboarding-base.md#success-criteria). Entity-specific: dual-phase (administrative + technical) onboarding; trust anchors published in Trusted Lists per entity type (see [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix)).
+    - [MVP+] See [Success Criteria](onboarding-base.md#success-criteria). Entity-specific: dual-phase (administrative + technical) onboarding; trust anchors published in Trusted Lists per entity type (see [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix)).
     - *(Removed duplicated criteria; see base.)*
     - *Interoperability across Member States*
         - All PID / Attestation Providers Access and Registration Certificates are syntactically and semantically harmonised in line with ETSI EN 319 411-1 version 1.4.1 (2023-10), [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) (Access Certificate), [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf) (Registration Certificate), (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-        - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation guidance.
+        - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation guidance.
     - *Secure trust establishment*
         - Each PID / Attestation Providers’s identity and attributes are verifiable via National Registers and anchored in the EU trust framework (ref. [Regulation (EU) 2024/1183, Article 5a(18)](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)).
         - Continuous monitoring and automatic Access and Registration Certificate revocation mechanisms are implemented and effective within 24 hours of a change request (ref. [Regulation (EU) 2025/848, Article 9(5)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
@@ -63,7 +63,7 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
         - Each Member State designates at least one Registrar and maintains at least one National Register and communicates changes to the Commission and other Member States (ref. [Regulation (EU) 2025/848, Article 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Operational effectiveness*
         - Onboarding of new PID / Attestation Providers is completed through a dual-phase process (administrative + technical) with measurable outcomes and turnaround times.
-        - End-to-end validation of Access and Registration Certificates succeeds automatically through Trusted List integration (see [Task 3 - ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)).
+        - End-to-end validation of Access and Registration Certificates succeeds automatically through Trusted List integration (see [Task 3 - ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)).
 
 ## Preconditions
 
@@ -76,9 +76,9 @@ See [Preconditions](onboarding-base.md#preconditions).
 - The WEBUILD WP4 Trust Infrastructure group has published registration policies for the WEBUILD testing environment.
 
 ### Preconditions [MVP+]
-- See Preconditions [MVP+] in this document and [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix).
+- See Preconditions [MVP+] in this document and [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix).
   
-See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) for details.
+See [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) for details.
 
 See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI acronym definition and role definitions.
 
@@ -112,7 +112,7 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 
 - As a baseline, there will be a single register and a LoTL with one Trusted List (TL) for all PID/EAA Providers in WEBUILD to reduce complexity. For the common LoTL/TL and trust-anchor model, see [MVP trust infrastructure: LoTL and Trusted Lists](onboarding-base.md#mvp-trust-infrastructure-lotl-and-trusted-lists) in the base document.
 - Registry for PID/EAA Providers complies with [Regulation (EU) 2025/848, Article 3 "National registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)
-- Trusted Lists for PID/EAA Providers comply with [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation details.
+- Trusted Lists for PID/EAA Providers comply with [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation details.
 - Access Certificate Profile: [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) - Access Certificate Policy for EUDI Wallet Relying Parties. X.509 certificate structure per ETSI EN 319 412-3 for legal persons. For Qualified EAA Providers, includes QCStatements per ETSI EN 319 411-2 and ETSI EN 319 412-5.
 - Registration Certificate Profile: [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf) version 1.4.1 (2023-10) NCP requirements and [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf) - JWT format (rc-wrp+jwt) with relying party attributes and provided_attestations
 - PID/EAA Provider Certificate Profile: [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) (v01.00.00)
@@ -135,11 +135,11 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 - Applicable entitlement(s) of the Provider
 - Description of intended use of the data
 
-The registry information is made available through a REST API supporting JSON format, electronically signed or sealed, in accordance with [Regulation (EU) 2025/848, Annex II](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848). See [Task 4 - Onboarding API](../task4-trust-infrastructure-api/onboarding-api/README.md) for API specifications.
+The registry information is made available through a REST API supporting JSON format, electronically signed or sealed, in accordance with [Regulation (EU) 2025/848, Annex II](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848). See [Task 4 - Onboarding API](../../task4-trust-infrastructure-api/onboarding-api/README.md) for API specifications.
 
 ### Trusted List Data Model
 
-Trusted Lists for PID/EAA Providers follow the structure defined in [ETSI TS 119 612](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) (XML format) and [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) (JSON/XML format), containing trust anchors for validation purposes. See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for detailed implementation guidance.
+Trusted Lists for PID/EAA Providers follow the structure defined in [ETSI TS 119 612](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) (XML format) and [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) (JSON/XML format), containing trust anchors for validation purposes. See [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for detailed implementation guidance.
 
 - **QEAA Providers**: Included in Member State QTSP Trusted Lists (compiled by MS TLP)
 - **PuB-EAA Providers**: Included in EU-level PuB-EAA Provider Trusted List (compiled by EC)
@@ -168,7 +168,7 @@ See [Main Flows and Steps](onboarding-base.md#main-flows-and-steps).
 
 > **Registration and Trusted List flows**:
 > - **[MVP]**: All providers register with WEBUILD WP4 Trust Infrastructure group → Trusted Lists maintained by WEBUILD WP4 Trust Infrastructure group
-> - **[MVP+]**: See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix):
+> - **[MVP+]**: See [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix):
 >   - **PID Providers**: Register with MS Registrar → MS notifies to EC → EC compiles and publishes PID Provider TL
 >   - **QEAA Providers**: Register with MS Registrar → MS TLP compiles Member State QTSP TL → MS notifies to EC (Article 22(3))
 >   - **PuB-EAA Providers**: Register with MS Registrar → MS notifies to EC → EC compiles and publishes PuB-EAA Provider TL
@@ -200,7 +200,7 @@ See [Main Flows and Steps](onboarding-base.md#main-flows-and-steps).
 
 ## Industrial-Scale Considerations
 
-The following apply to PID / Attestation Provider registration at scale. Framework context: [Task 2 - Trust Framework](../task2-trust-framework/README.md).
+The following apply to PID / Attestation Provider registration at scale. Framework context: [Task 2 - Trust Framework](../../task2-trust-framework/README.md).
 
 ### 1. Entity Identification and Registry Integration
 
@@ -212,7 +212,7 @@ The list of attributes (or attestation types) that a PID/Attestation Provider in
 
 ## 1. Administrative Onboarding
 
-See [Trust Infrastructure Schema - Registration/Onboarding Process](../task2-trust-framework/trust-infrastructure-schema.md#2-registrationonboarding-process). Administrative steps 1.1–1.4 are defined in this document below.
+See [Trust Infrastructure Schema - Registration/Onboarding Process](../../task2-trust-framework/trust-infrastructure-schema.md#2-registrationonboarding-process). Administrative steps 1.1–1.4 are defined in this document below.
 
 *Preconditions:*
 - **Prerequisites [MVP]**:
@@ -501,13 +501,13 @@ The Registrar keeps records of the issuance of PID / Attestation Provider Regist
 ### 2.7 Notification to EU Commission and other Member States [MVP+ only]
 
 - **[MVP]**: Not applicable
-- **[MVP+]**: See [Trust Infrastructure Schema - Member State Notification to European Commission](../task2-trust-framework/trust-infrastructure-schema.md#311-member-state-notification-to-european-commission). Notification varies by entity type:
+- **[MVP+]**: See [Trust Infrastructure Schema - Member State Notification to European Commission](../../task2-trust-framework/trust-infrastructure-schema.md#311-member-state-notification-to-european-commission). Notification varies by entity type:
 - **PID Providers**: After registration, Member State notifies to European Commission (per **GenNot_01**, **PPNot_02**). The European Commission compiles and publishes the PID Provider Trusted List.
 - **PuB-EAA Providers**: After registration, Member State notifies to European Commission (per **GenNot_01**, **PuBPNot_02**). The European Commission compiles and publishes the PuB-EAA Provider Trusted List.
 - **QEAA Providers**: After registration, Member State TLP compiles Member State QTSP Trusted List (per Article 22 of eIDAS Regulation), then Member State notifies to European Commission (per Article 22(3)) for inclusion in LoTL.
 - **Non-qualified EAA Providers**: After registration, Member State TLP compiles national non-qualified EAA Provider Trusted List, then Member State TLP submits TL URL to European Commission for inclusion in LoTL.
 
-See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) for a complete overview of registration and trusted list compilation responsibilities.
+See [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) for a complete overview of registration and trusted list compilation responsibilities.
 
 *Requirements:*
 - [Topic 31 "Notification and publication of PID Provider, Wallet Provider, Attestation Provider, Access Certificate Authority, and Provider of registration certificates"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#a2331-topic-31---pid-provider-wallet-provider-attestation-provider-and-access-certificate-authority-notification-and-publication:~:text=A.2.3.31%20Topic%2031%20%2D%20Notification%20and%20publication%20of%20PID%20Provider%2C%20Wallet%20Provider%2C%20Attestation%20Provider%2C%20Access%20Certificate%20Authority%2C%20and%20Provider%20of%20registration%20certificates)
@@ -521,13 +521,13 @@ See also ["A. Generic requirements for notification"](https://eu-digital-identit
 ### 2.8 Publication in Trusted List
 
 - **[MVP]**: Trust anchors are included in WEBUILD Trusted List maintained by WP4 Trust Infrastructure group
-- **[MVP+]**: See [Trust Infrastructure Schema - Trusted List Publication Process](../task2-trust-framework/trust-infrastructure-schema.md#3-trusted-list-publication-process). Trusted List compilation varies by entity type:
+- **[MVP+]**: See [Trust Infrastructure Schema - Trusted List Publication Process](../../task2-trust-framework/trust-infrastructure-schema.md#3-trusted-list-publication-process). Trusted List compilation varies by entity type:
 - **PID Providers**: European Commission compiles and publishes EU-level PID Provider Trusted List (per **PPNot_05**).
 - **PuB-EAA Providers**: European Commission compiles and publishes EU-level PuB-EAA Provider Trusted List (per **PuBPNot_02**, Topic 31).
 - **QEAA Providers**: Member State TLP compiles and publishes Member State QTSP Trusted List (per Article 22 of eIDAS Regulation), then notifies to European Commission (per Article 22(3)) for inclusion in LoTL.
 - **Non-qualified EAA Providers**: Member State TLP compiles and publishes national non-qualified EAA Provider Trusted List (national extension), then submits TL URL to European Commission for inclusion in LoTL.
 
-See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) and [Trust Infrastructure Schema - Complete Registration to National non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers Publication Flow](../task2-trust-framework/trust-infrastructure-schema.md#53-complete-registration-to-national-non-qualified-eaa-provider-trusted-list-and-member-state-qtsp-trusted-list-for-qeaa-providers-publication-flow) for detailed process flows.
+See [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) and [Trust Infrastructure Schema - Complete Registration to National non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers Publication Flow](../../task2-trust-framework/trust-infrastructure-schema.md#53-complete-registration-to-national-non-qualified-eaa-provider-trusted-list-and-member-state-qtsp-trusted-list-for-qeaa-providers-publication-flow) for detailed process flows.
 
 *Requirements:*
 - [ARF "3.5 Trusted List Provider"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#35-trusted-list-provider:~:text=and%20Wallet%20Providers.-,3.5%20Trusted%20List%20Provider,-A%20Trusted%20List)
@@ -547,7 +547,7 @@ See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-frame
         -    **The trust anchors of the PID Provider or Attestation Provider are included in a Trusted List.**
 - [ARF "6.3.2.4 PID Provider or Attestation Provider trust anchors are included in a Trusted List"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#6323-pid-provider-or-attestation-provider-receives-an-access-certificate-and-a-registration-certificate:~:text=registration%20certificate%20contents.-,6.3.2.4%20PID%20PROVIDER%20OR%20ATTESTATION%20PROVIDER%20TRUST%20ANCHORS%20ARE%20INCLUDED%20IN%20A%20TRUSTED%20LIST,-For%20a%20PID)
     - For a PID Provider, a QEAA Provider, or a PuB-EAA Provider, successful registration and notification also means **that the Provider is notified to the European Commission and that its trust anchors are included in a Trusted List.** Relying Parties can use these trust anchors to verify the authenticity of PIDs, QEAAs, and PuB-EAAs they obtain from Wallet Units.
-    - **Note**: ARF Section 6.3.2.4 states that "Non-qualified EAA Providers are not included in a Trusted List by a Member State" (meaning ARF does not require it). However, ARF Section 3.5 acknowledges that "Trusted Lists and Trusted List Providers may also exist for non-qualified EAA Providers" but notes this is "out of scope of the ARF." The [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md) implements this as a **national extension beyond Topic 31** (see Section 3, point 3), where Member State TLPs compile and publish national Trusted Lists for non-qualified EAA Providers. This is an implementation decision that extends beyond ARF's mandatory scope but is recommended for operational consistency.
+    - **Note**: ARF Section 6.3.2.4 states that "Non-qualified EAA Providers are not included in a Trusted List by a Member State" (meaning ARF does not require it). However, ARF Section 3.5 acknowledges that "Trusted Lists and Trusted List Providers may also exist for non-qualified EAA Providers" but notes this is "out of scope of the ARF." The [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) implements this as a **national extension beyond Topic 31** (see Section 3, point 3), where Member State TLPs compile and publish national Trusted Lists for non-qualified EAA Providers. This is an implementation decision that extends beyond ARF's mandatory scope but is recommended for operational consistency.
 - [Topic 31 "Notification and publication of PID Provider, Wallet Provider, Attestation Provider, Access Certificate Authority, and Provider of registration certificates"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#a2331-topic-31---pid-provider-wallet-provider-attestation-provider-and-access-certificate-authority-notification-and-publication:~:text=A.2.3.31%20Topic%2031%20%2D%20Notification%20and%20publication%20of%20PID%20Provider%2C%20Wallet%20Provider%2C%20Attestation%20Provider%2C%20Access%20Certificate%20Authority%2C%20and%20Provider%20of%20registration%20certificates). 
     -  PID Providers, PuB-EAA Providers, Wallet Providers, Access Certificate Authorities, and Providers of registration certificates **must be notified by a Member State to the Commission. **As part of the notification process, the trust anchors of these parties must be included in a Trusted List**.
   

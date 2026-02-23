@@ -4,7 +4,7 @@
 
 This document describes the Relying Party onboarding process. Relying Parties are entities that intend to rely on EUDI Wallets for the provision of digital public or private services. The onboarding process enables Relying Parties to register with Member State Registrars and obtain Access Certificates for authentication during service interactions.
 
-Under [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) (implementing Regulation (EU) No 910/2014 – eIDAS), **Member States** establish and maintain national registers of wallet-relying parties established in their territory; registration is exclusively with a Member State Registrar. **The European Commission does not register Relying Parties.** The Commission is notified by Member States about the Registrar and the National Register (Article 3); it does not maintain a register of Relying Parties. Relying Parties are not included in Union Trusted Lists (they use Access Certificates and the National Register for verification). See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) for details.
+Under [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) (implementing Regulation (EU) No 910/2014 – eIDAS), **Member States** establish and maintain national registers of wallet-relying parties established in their territory; registration is exclusively with a Member State Registrar. **The European Commission does not register Relying Parties.** The Commission is notified by Member States about the Registrar and the National Register (Article 3); it does not maintain a register of Relying Parties. Relying Parties are not included in Union Trusted Lists (they use Access Certificates and the National Register for verification). See [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) for details.
 
 This document follows the WEBUILD ecosystem structure; see [MVP and MVP+ Definitions](onboarding-base.md#mvp-and-mvp-definitions) in the base document.
 
@@ -50,7 +50,7 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
     - Additional entity-specific success criteria:
     - *Interoperability across Member States*
         - All Relying Party Access and Registration Certificates are syntactically and semantically harmonised in line with ETSI EN 319 411-1 version 1.4.1 (2023-10) (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
-        - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation guidance.
+        - Certificates and registration data can be validated cross-border in an automated manner using Trusted Lists as defined in [ETSI TS 119 612 v2.4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for implementation guidance.
     - *Secure trust establishment*
         - Each Relying Party’s identity and attributes are verifiable via National Registers and anchored in the EU trust framework (ref. [Regulation (EU) 2024/1183, Article 5a(18)](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)).
         - Continuous monitoring and automatic Access and Registration Certificate revocation mechanisms are implemented and effective within 24 hours of a change request (ref. [Regulation (EU) 2025/848, Article 9(5)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
@@ -58,11 +58,11 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
         - All Certificate issuances, renewals, and revocations are logged (optionally under Certificate Transparency v2.0) and made publicly accessible for validation (ref. [Regulation (EU) 2025/848, Annex IV 3(j), Annex V 3(i)](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
         - Revocation and validity information is provided freely (free of charge), automatically, and reliably (ref. [Regulation (EU) 2025/848, Annex IV 5, Annex V 6](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Compliance and accountability*
-        - Certificate Policies (CP) and Certification Practice Statements (CPS) follow ETSI EN 319 411-1 version 1.4.1 (2023-10) NCP requirements (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)). See [ETSI Policy Enumeration](../task5-participants-certificates-policies/etsi-policy-enumeration.md) and [ETSI Policy Evaluation](../task5-participants-certificates-policies/etsi-policy-evaluation.md) for policy specifications and evaluation methods.
+        - Certificate Policies (CP) and Certification Practice Statements (CPS) follow ETSI EN 319 411-1 version 1.4.1 (2023-10) NCP requirements (ref. [Regulation (EU) 2025/848, Annex IV 3, Annex V 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)). See [ETSI Policy Enumeration](../../task5-participants-certificates-policies/etsi-policy-enumeration.md) and [ETSI Policy Evaluation](../../task5-participants-certificates-policies/etsi-policy-evaluation.md) for policy specifications and evaluation methods.
         - Each Member State designates at least one Registrar and maintains at least one National Register and communicates changes to the Commission and other Member States (ref. [Regulation (EU) 2025/848, Article 3](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)).
     - *Operational effectiveness*
         - Onboarding of new Relying Parties is completed through a dual-phase process (administrative + technical) with measurable outcomes and turnaround times.
-        - End-to-end validation of Access and Registration Certificates succeeds automatically: trust anchors (e.g. Access CA) via Trusted List integration; Relying Party registration status via the National Register/common API (see [Trust Infrastructure Schema - Overview](../task2-trust-framework/trust-infrastructure-schema.md#overview) and [Task 3 - ETSI Trusted Lists Implementation Profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)).
+        - End-to-end validation of Access and Registration Certificates succeeds automatically: trust anchors (e.g. Access CA) via Trusted List integration; Relying Party registration status via the National Register/common API (see [Trust Infrastructure Schema - Overview](../../task2-trust-framework/trust-infrastructure-schema.md#overview) and [Task 3 - ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)).
 
 ## Preconditions
 
@@ -74,7 +74,7 @@ See [Preconditions](onboarding-base.md#preconditions).
 - The WEBUILD WP4 Trust Infrastructure group has published registration policies for the WEBUILD testing environment.
 
 ### Preconditions [MVP+]
-- Preconditions for Relying Parties (MVP+): see [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) and prerequisites below.
+- Preconditions for Relying Parties (MVP+): see [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix) and prerequisites below.
 
 See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI acronym definition and role definitions.
 
@@ -125,7 +125,7 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 - Applicable entitlement(s) of the wallet-relying party
 - Indication if the wallet-relying party intends to act as an intermediary or to rely upon an intermediary
 
-The registry information is made available through a REST API supporting JSON format, electronically signed or sealed, in accordance with [Regulation (EU) 2025/848, Annex II](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848). See [Task 4 - Onboarding API](../task4-trust-infrastructure-api/onboarding-api/README.md) for API specifications.
+The registry information is made available through a REST API supporting JSON format, electronically signed or sealed, in accordance with [Regulation (EU) 2025/848, Annex II](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848). See [Task 4 - Onboarding API](../../task4-trust-infrastructure-api/onboarding-api/README.md) for API specifications.
 
 ### Access Certificate Profile
 
@@ -137,7 +137,7 @@ Registration Certificates for Relying Parties follow [ETSI EN 319 411-1](https:/
 
 [MVP+]
 
-- MVP+ data model: see [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md) and Regulation (EU) 2025/848.
+- MVP+ data model: see [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) and Regulation (EU) 2025/848.
 
 ## Main Flow
 
@@ -145,7 +145,7 @@ See [Main Flows and Steps](onboarding-base.md#main-flows-and-steps).
 
 > **Relying Party Registration**:
 > - **[MVP]**: Relying Parties register with WEBUILD WP4 Trust Infrastructure group → Registry maintained by WEBUILD
-> - **[MVP+]**: Relying Parties register with Member State Registrars but are **not** included in Trusted Lists. They use Access Certificates and Registry entries for verification. See [Trust Infrastructure Schema - Responsibilities Matrix](../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix).
+> - **[MVP+]**: Relying Parties register with Member State Registrars but are **not** included in Trusted Lists. They use Access Certificates and Registry entries for verification. See [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix).
 
 **Note**: The detailed steps below apply to both [MVP] and [MVP+] phases, with specific procedures and requirements differentiated where applicable.
 
@@ -171,7 +171,7 @@ See [Main Flows and Steps](onboarding-base.md#main-flows-and-steps).
 
 ## Industrial-Scale Considerations
 
-The following apply to Relying Party registration at scale. Framework context: [Task 2 - Trust Framework](../task2-trust-framework/README.md).
+The following apply to Relying Party registration at scale. Framework context: [Task 2 - Trust Framework](../../task2-trust-framework/README.md).
 
 ### 1. Entity Identification and Registry Integration
 
