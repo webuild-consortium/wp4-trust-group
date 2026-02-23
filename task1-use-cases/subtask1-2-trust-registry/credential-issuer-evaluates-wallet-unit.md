@@ -7,7 +7,7 @@ Before issuing a **PID** or an **attestation (EAA)**, the **PID Provider** or **
 ## Actors
 
 - **Primary**: Credential Issuer (PID Provider or Attestation Provider)
-- **Secondary**: Wallet Unit (presents WUA), Wallet Provider Trusted List (and LoTL for discovery)
+- **Secondary**: Holder (User using the Wallet Unit), Wallet Unit (presents WUA), Wallet Provider Trusted List (and LoTL for discovery)
 
 ## Goal
 
@@ -44,4 +44,5 @@ Before issuing a **PID** or an **attestation (EAA)**, the **PID Provider** or **
 
 ## References
 
+- **Terminology**: [Consolidated Terms and Entity Definitions](../terms-and-entities.md)
 - [Trust evaluation base](trust-evaluation-base.md), [Trust Infrastructure Schema §8](../../task2-trust-framework/trust-infrastructure-schema.md#8-trust-evaluation), [Trusted list / trust evaluation matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md)

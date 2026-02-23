@@ -7,7 +7,7 @@ After receiving **PID** and/or **attestations (EAA)** from a Wallet Unit (proxim
 ## Actors
 
 - **Primary**: Relying Party (or Relying Party Instance)
-- **Secondary**: Wallet Unit (source of presented credentials), PID Provider Trusted List, QEAA/PuB-EAA/EAA Provider Trusted Lists (or rulebook-defined mechanism for non-qualified EAA)
+- **Secondary**: Holder (User using the Wallet Unit), Wallet Unit (source of presented credentials), PID Provider Trusted List, QEAA/PuB-EAA/EAA Provider Trusted Lists (or rulebook-defined mechanism for non-qualified EAA)
 
 ## Goal
 
@@ -47,4 +47,5 @@ After receiving **PID** and/or **attestations (EAA)** from a Wallet Unit (proxim
 
 ## References
 
+- **Terminology**: [Consolidated Terms and Entity Definitions](../terms-and-entities.md)
 - [Trust evaluation base](trust-evaluation-base.md), [Trust Infrastructure Schema §8](../../task2-trust-framework/trust-infrastructure-schema.md#8-trust-evaluation), [Trusted list / trust evaluation matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md), [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)

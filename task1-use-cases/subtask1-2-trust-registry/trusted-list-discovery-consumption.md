@@ -7,7 +7,7 @@ Participants (Wallet Units, Relying Parties, PID Providers, Attestation Provider
 ## Actors
 
 - **Primary**: Any participant that performs trust evaluation (Wallet Unit, RP, PID Provider, Attestation Provider)
-- **Secondary**: European Commission (publishes LoTL and EU-level TLs), Member State TLP (publishes national TLs), LoTL and TL distribution endpoints
+- **Secondary**: Holder (User using the Wallet Unit), European Commission (publishes LoTL and EU-level TLs), Member State TLP (publishes national TLs), LoTL and TL distribution endpoints
 
 ## Goal
 
@@ -57,4 +57,5 @@ Participants (Wallet Units, Relying Parties, PID Providers, Attestation Provider
 
 ## References
 
+- **Terminology**: [Consolidated Terms and Entity Definitions](../terms-and-entities.md)
 - [Trust evaluation base](trust-evaluation-base.md), [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) (Section 3: Trusted List Publication), [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md), [Trusted list / trust evaluation matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md)

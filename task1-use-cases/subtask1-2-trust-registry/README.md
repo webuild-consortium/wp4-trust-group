@@ -4,7 +4,9 @@ This subtask contains use cases for **trust registry operations** and **trust ev
 
 ## Scope
 
-- **Trust evaluation**: How Wallet Units, Relying Parties, PID Providers, and Attestation Providers evaluate the trustworthiness of other participants using Trusted Lists (TL), List of Trusted Lists (LoTL), and Registrar registries.
+- **Trust evaluation**: How Wallet Units, Relying Parties, PID Providers, Attestation Providers, and Holders (Users using the Wallet Unit) evaluate the trustworthiness of other participants using Trusted Lists (TL), List of Trusted Lists (LoTL), and Registrar registries.
+
+For terminology and entity definitions, see [Consolidated Terms and Entity Definitions](../terms-and-entities.md).
 - **Trust sources**: Access CA Trusted Lists, PID Provider TL, Attestation Provider TL (QEAA/PuB-EAA/EAA), Wallet Provider TL, Registration Certificate Provider TL, and National Registers (per [Trust Infrastructure Schema - Trust Evaluation](../../task2-trust-framework/trust-infrastructure-schema.md#8-trust-evaluation)).
 
 These use cases are aligned with the [EUDI Wallet Architecture and Reference Framework (ARF)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/) and the [Trusted List / Registration / Trust Evaluation requirements matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md).

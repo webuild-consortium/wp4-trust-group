@@ -1,20 +1,10 @@
 # Base: Trust Evaluation in the EUDI Wallet Ecosystem
 
-This document provides the **common framework** for trust evaluation use cases: terminology, trust sources, and mapping to ARF high-level requirements. Use-case-specific flows and actors are in the individual use case documents.
+This document provides the **common framework** for trust evaluation use cases: trust sources and mapping to ARF high-level requirements. Terminology is in [Consolidated Terms and Entity Definitions](../terms-and-entities.md). Use-case-specific flows and actors are in the individual use case documents.
 
 ## Terminology and Acronyms
 
-See [onboarding-base.md](../subtask1-1-onboarding/onboarding-base.md#terminology-and-acronyms) for ecosystem terms. Terms specific to trust evaluation:
-
-| Term | Meaning |
-|------|---------|
-| **Trust evaluation** | The process by which a participant verifies another participant's eligibility and authenticity using Trusted Lists, registries, and certificates (ARF Topics 27, 31, 44; [Trust Infrastructure Schema §8](../../task2-trust-framework/trust-infrastructure-schema.md#8-trust-evaluation)). |
-| **Trust anchor** | Public key (or certificate) in a Trusted List used to validate signatures or certificate chains. |
-| **LoTL** | List of Trusted Lists; maintained by the European Commission; single trust anchor for TL discovery (ETSI TS 119 612). |
-| **Registry** | Member State register of PID Providers, Attestation Providers, and Relying Parties; used for entitlement and registration verification (Reg_03, Reg_06). |
-| **Entity status (in TL)** | Trusted List entries may carry a status (e.g. Valid / Invalid). Suspended or cancelled entities have status **Invalid** in the TL (GenNot_05). Evaluators should use only entries with valid status. |
-| **Certificate revocation** | Access certificates and registration certificates can be revoked (Reg_14, Reg_15, RPRC_01, RPRC_02). Validators obtain revocation information (e.g. CRL, OCSP) as specified by the applicable Certificate Policy and check that certificates are not revoked at validation time. |
-| **Credential / attestation revocation** | PID, attestations (EAA), and Wallet Unit Attestations (WUA) may be revocable. Where technical specifications or Topic 38 (WUA) require it, evaluators verify that the credential or attestation is not revoked. |
+See [Consolidated Terms and Entity Definitions](../terms-and-entities.md) for all terms, acronyms, and entity definitions, including trust evaluation terms (Trust evaluation, Trust anchor, Entity status, Certificate revocation, Credential/attestation revocation, Holder) in [Section 2.3 and 2.4](../terms-and-entities.md#23-trust-evaluation-terms).
 
 ## Trust Sources Used in Evaluation
 

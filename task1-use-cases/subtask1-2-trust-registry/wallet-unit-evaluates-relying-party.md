@@ -6,8 +6,8 @@ Before the User approves **presentation** of attributes to a Relying Party, the 
 
 ## Actors
 
-- **Primary**: Wallet Unit (on behalf of the User)
-- **Secondary**: Relying Party Instance, Access CA Trusted List, Registrar registry (or Provider of Registration Certificates), optionally User (chooses to verify RP)
+- **Primary**: Wallet Unit (on behalf of the Holder)
+- **Secondary**: Holder (User using the Wallet Unit), Relying Party Instance, Access CA Trusted List, Registrar registry (or Provider of Registration Certificates)
 
 ## Goal
 
@@ -49,4 +49,5 @@ Before the User approves **presentation** of attributes to a Relying Party, the 
 
 ## References
 
+- **Terminology**: [Consolidated Terms and Entity Definitions](../terms-and-entities.md)
 - [Trust evaluation base](trust-evaluation-base.md), [Trust Infrastructure Schema §8](../../task2-trust-framework/trust-infrastructure-schema.md#8-trust-evaluation), [Trusted list / trust evaluation matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md)

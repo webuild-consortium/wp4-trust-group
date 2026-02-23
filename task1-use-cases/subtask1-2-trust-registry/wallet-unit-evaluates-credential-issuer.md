@@ -6,8 +6,8 @@ Before requesting a **PID** or an **attestation (EAA)**, the Wallet Unit evaluat
 
 ## Actors
 
-- **Primary**: Wallet Unit (on behalf of the User)
-- **Secondary**: Credential Issuer (PID Provider or Attestation Provider), Trusted List / LoTL, Registrar registry (or Provider of Registration Certificates)
+- **Primary**: Wallet Unit (on behalf of the Holder)
+- **Secondary**: Holder (User using the Wallet Unit), Credential Issuer (PID Provider or Attestation Provider), Trusted List / LoTL, Registrar registry (or Provider of Registration Certificates)
 
 ## Goal
 
@@ -52,4 +52,5 @@ Before requesting a **PID** or an **attestation (EAA)**, the Wallet Unit evaluat
 
 ## References
 
+- **Terminology**: [Consolidated Terms and Entity Definitions](../terms-and-entities.md)
 - [Trust evaluation base](trust-evaluation-base.md), [Trust Infrastructure Schema §8](../../task2-trust-framework/trust-infrastructure-schema.md#8-trust-evaluation), [Trusted list / trust evaluation matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md)
