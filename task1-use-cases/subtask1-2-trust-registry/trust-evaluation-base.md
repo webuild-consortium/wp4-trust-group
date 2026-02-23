@@ -4,7 +4,7 @@ This document provides the **common framework** for trust evaluation use cases: 
 
 ## Terminology and Acronyms
 
-See [Consolidated Terms and Entity Definitions](../terms-and-entities.md) for all terms, acronyms, and entity definitions, including trust evaluation terms (Trust evaluation, Trust anchor, Entity status, Certificate revocation, Credential/attestation revocation, Holder) in [Section 2.3 and 2.4](../terms-and-entities.md#23-trust-evaluation-terms).
+See [Consolidated Terms and Entity Definitions](../terms-and-entities.md) for all terms, acronyms, and entity definitions, including trust evaluation terms (Trust evaluation, Trust anchor, Entity status, Certificate revocation, Credential/attestation revocation, Trust Mark, Holder) in [Section 2.3 and 2.4](../terms-and-entities.md#23-trust-evaluation-terms).
 
 ## Trust Sources Used in Evaluation
 
@@ -18,16 +18,20 @@ See [Consolidated Terms and Entity Definitions](../terms-and-entities.md) for al
 | **National Register / Registrar API** | Registered attributes, intended use, attestation types; suspension/cancellation (Reg_09) | Wallet Unit, (optional) User | ISSU_24a, ISSU_34a, RPRC_16–21, Reg_06 |
 | **Revocation information (certificates)** | CRL, OCSP or other means per Certificate Policy (Reg_14, RPRC_02) | Wallet Unit, Relying Party, Providers | Reg_14, Reg_15, RPRC_01, RPRC_02 |
 | **Revocation information (credentials/WUA)** | Per Topic 38 (WUA); per applicable specs for PID/attestation where defined | Credential Issuer, Relying Party | ISSU_21, ISSU_30, Topic 38 |
+| **Trust Mark (EUDI Wallet)** | Verifiable, simple, recognisable indication of wallet authenticity and validity; displayed by Wallet Instance for Holder assessment | Holder | Regulation (EU) 2024/1183 Art. 3(50), 5a(5), 5a(8), 5d |
 
 Full requirement set: [Trusted list registration trust evaluation matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md).
 
 ## Trust Evaluation Points (Summary)
 
-**Before Wallet Unit activation (User)**
-User evaluates: general information on the certification of Wallet Solutions and discovers links to the certification status information (DASH_09).
+**0. Holder evaluates own Wallet Instance (via Trust Marks)**  
+The Holder (User using the Wallet Unit) can assess the trustworthiness of their own Wallet Instance. Regulation (EU) 2024/1183 Articles 3(50), 5a(5), 5a(8), and 5d introduce Trust Marks as a "verifiable, simple and recognisable indication" capable of ensuring that the authenticity and validity of European Digital Identity Wallets can be verified. Wallet solutions display the EU Digital Identity Wallet Trust Mark for user interaction, enabling Holders to verify they are using a certified, authentic wallet instance before and during use.
 
-**After Wallet Unit activation (User)**
-User evaluates: and is informed about the validity status of their Wallet Unit (WURevocation_14 and WURevocation_16)
+**Before Wallet Unit activation (Holder)**  
+Holder evaluates: general information on the certification of Wallet Solutions and discovers links to the certification status information (DASH_09); presence and validity of the EU Digital Identity Wallet Trust Mark indicating a certified wallet.
+
+**After Wallet Unit activation (Holder)**  
+Holder evaluates: and is informed about the validity status of their Wallet Unit (WURevocation_14 and WURevocation_16); ongoing display of the Trust Mark as an indication of continued authenticity and validity.
 
 1. **Before credential issuance (Wallet Unit → PID/Attestation Provider)**  
    Wallet Unit evaluates: Access Certificate (via Access CA TL), **certificate not revoked** (Reg_14), **Provider entity status in TL not Invalid** (GenNot_05), Provider registration and entitlements (Registry / registration certificate); **registration certificate not revoked** where used (RPRC_02).  
@@ -42,4 +46,5 @@ User evaluates: and is informed about the validity status of their Wallet Unit (
 ## Normative References
 
 - **ARF**: [EUDI Wallet Architecture and Reference Framework 2.7.3](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/), Annex II High-Level Requirements
+- **Regulation**: [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183) (European Digital Identity Regulation), Articles 3(50), 5a(5), 5a(8), 5d (Trust Marks for EUDI Wallets)
 - **Project**: [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md), [Entities Involved](../../task2-trust-framework/entities-involved.md), [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)

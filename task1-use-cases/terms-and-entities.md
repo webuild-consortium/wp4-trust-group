@@ -62,6 +62,7 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 - **Entity status (in TL)**: Trusted List entries may carry a status (e.g. Valid / Invalid). Suspended or cancelled entities have status **Invalid** in the TL (GenNot_05). Evaluators should use only entries with valid status.
 - **Certificate revocation**: Access certificates and registration certificates can be revoked (Reg_14, Reg_15, RPRC_01, RPRC_02). Validators obtain revocation information (e.g. CRL, OCSP) as specified by the applicable Certificate Policy and check that certificates are not revoked at validation time.
 - **Credential / attestation revocation**: PID, attestations (EAA), and Wallet Unit Attestations (WUA) may be revocable. Where technical specifications or Topic 38 (WUA) require it, evaluators verify that the credential or attestation is not revoked.
+- **Trust Mark (EUDI Wallet)**: A verifiable, simple, and recognisable indication capable of ensuring that the authenticity and validity of European Digital Identity Wallets can be verified. Holders use Trust Marks to assess the trustworthiness of their Wallet Instance. *Regulation (EU) 2024/1183, Articles 3(50), 5a(5), 5a(8), 5d.*
 
 *For the trust-evaluation context of LoTL and Registry, see also the Trust Sources table in [trust-evaluation-base.md](subtask1-2-trust-registry/trust-evaluation-base.md#trust-sources-used-in-evaluation).*
 

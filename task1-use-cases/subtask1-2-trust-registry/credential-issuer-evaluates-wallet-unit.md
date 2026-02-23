@@ -21,7 +21,7 @@ Before issuing a **PID** or an **attestation (EAA)**, the **PID Provider** or **
 
 ## Main Flow (Short)
 
-1. Wallet Unit initiates issuance and presents its **Wallet Unit Attestation (WUA)** to the Credential Issuer.
+1. Holder initiates issuance and presents its **Wallet Unit Attestation (WUA)** to the Credential Issuer.
 2. **Trust anchors**: Credential Issuer accepts trust anchors from the **Wallet Provider Trusted List** (ISSU_19 for PID Provider, ISSU_28 for Attestation Provider).
 3. **Wallet Provider in TL**: Credential Issuer verifies that the Wallet Provider referenced in the WUA is **present in the Wallet Provider Trusted List** and has **valid entity status** (not Invalid; GenNot_05) (ISSU_21, ISSU_30).
 4. **WUA validation**: Credential Issuer authenticates and validates the WUA using the trust anchor(s) registered for that Wallet Provider in the TL; verifies the WUA is **not revoked** (ISSU_21, ISSU_30; Topic 38).
