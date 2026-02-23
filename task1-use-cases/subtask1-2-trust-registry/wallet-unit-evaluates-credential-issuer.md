@@ -11,7 +11,7 @@ Before requesting a **PID** or an **attestation (EAA)**, the Wallet Unit evaluat
 
 ## Goal
 
-- **Business**: Ensure the User requests credentials only from providers that are registered and entitled to issue the requested credential type.
+- **Business**: Ensure the Holder requests credentials only from providers that are registered and entitled to issue the requested credential type.
 - **Technical**: Validate the Credential Issuer's access certificate (and optional registration certificate), confirm they are not revoked, confirm Provider entity status in TL is valid, and verify registration/entitlements before starting the issuance flow.
 
 ## Preconditions

@@ -11,8 +11,8 @@ Before the User approves **presentation** of attributes to a Relying Party, the 
 
 ## Goal
 
-- **Business**: Ensure the User presents attributes only to Relying Parties that are registered and, if the User opts in, that the requested attributes match what is registered.
-- **Technical**: Validate RP access certificate (and registration certificate if present), verify they are not revoked, and when the User requests it, RP registration and requested-attributes consistency (and that RP is not suspended/cancelled).
+- **Business**: Ensure the Holder presents attributes only to Relying Parties that are registered and, if the Holder opts in, that the requested attributes match what is registered.
+- **Technical**: Validate RP access certificate (and registration certificate if present), verify they are not revoked, and when the Holder requests it, RP registration and requested-attributes consistency (and that RP is not suspended/cancelled).
 
 ## Preconditions
 
