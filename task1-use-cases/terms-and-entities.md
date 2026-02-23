@@ -55,7 +55,18 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 - **Access Certificate**: Certificate issued by Access Certificate Authority to registered entities for authentication.
 - **Registration Certificate**: Optional certificate issued by Provider of Registration Certificates detailing entity entitlements.
 
-### 2.3 Entity Types (Short Definitions)
+### 2.3 Trust Evaluation Terms
+
+- **Trust evaluation**: The process by which a participant verifies another participant's eligibility and authenticity using Trusted Lists, registries, and certificates (ARF Topics 27, 31, 44; [Trust Infrastructure Schema §8](../task2-trust-framework/trust-infrastructure-schema.md#8-trust-evaluation)).
+- **Trust anchor**: Public key (or certificate) in a Trusted List used to validate signatures or certificate chains.
+- **Entity status (in TL)**: Trusted List entries may carry a status (e.g. Valid / Invalid). Suspended or cancelled entities have status **Invalid** in the TL (GenNot_05). Evaluators should use only entries with valid status.
+- **Certificate revocation**: Access certificates and registration certificates can be revoked (Reg_14, Reg_15, RPRC_01, RPRC_02). Validators obtain revocation information (e.g. CRL, OCSP) as specified by the applicable Certificate Policy and check that certificates are not revoked at validation time.
+- **Credential / attestation revocation**: PID, attestations (EAA), and Wallet Unit Attestations (WUA) may be revocable. Where technical specifications or Topic 38 (WUA) require it, evaluators verify that the credential or attestation is not revoked.
+- **Trust Mark (EUDI Wallet)**: A verifiable, simple, and recognisable indication capable of ensuring that the authenticity and validity of European Digital Identity Wallets can be verified. Holders use Trust Marks to assess the trustworthiness of their Wallet Instance. *Regulation (EU) 2024/1183, Articles 3(50), 5a(5), 5a(8), 5d.*
+
+*For the trust-evaluation context of LoTL and Registry, see also the Trust Sources table in [trust-evaluation-base.md](subtask1-2-trust-registry/trust-evaluation-base.md#trust-sources-used-in-evaluation).*
+
+### 2.4 Entity Types (Short Definitions)
 
 - **PID Provider**: Provider issuing Person Identification Data to Wallet Units.
 - **Attestation Provider**: Provider issuing electronic attestations of attributes (includes QEAA Providers, PuB-EAA Providers, and non-qualified EAA Providers).
@@ -64,6 +75,7 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 - **EAA Provider**: non-qualified Electronic Attestation of Attributes Provider.
 - **Relying Party (RP)**: Service that requests attributes from Wallet Units to provide services to users.
 - **Wallet Provider (WP)**: Natural or legal person who provides wallet solutions.
+- **Holder**: User using the Wallet Unit.
 - **Intermediary**: Special class of Relying Party that acts on behalf of other Relying Parties.
 
 ---
