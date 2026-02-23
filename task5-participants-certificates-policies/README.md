@@ -2,6 +2,8 @@
 
 This task defines the data models and trust evaluation methods for participants' certificates and policies in the WP4 Trust Infrastructure.
 
+**Note on Schema Harmonization**: The data models defined in this task are harmonized with the [Onboarding API schemas](../task4-trust-infrastructure-api/onboarding-api/README.md#data-models) and the [onboarding use case documents](../task1-use-cases/subtask1-1-onboarding/onboarding-base.md) to ensure consistency across the trust infrastructure. Participant types, status values, certificate types, and certificate status values are aligned across all specifications.
+
 ## Folder contents
 
 - **`README.md`** – Overview of Task 5 and its subcomponents

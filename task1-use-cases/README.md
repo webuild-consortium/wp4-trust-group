@@ -6,7 +6,7 @@ This task collects the high‑level use cases that drive the design of the WP4 T
 
 - **`README.md`** – Overview of Task 1 and pointers to the detailed use cases
 - **`subtask1-1-onboarding/`** – Onboarding use cases for Trust Service Providers, Wallet Providers, Relying Parties, and Certificate Authorities (see its `README.md`)
-- **`subtask1-2-trust-registry/`** – Use cases for trust registry operations, including establishment, evaluation, maintenance, revocation and discovery (see its `README.md`)
+- **`subtask1-2-trust-registry/`** – Use cases for trust registry operations and **trust evaluation**: Wallet Unit vs Credential Issuer/Relying Party, Credential Issuer vs Wallet Unit, Relying Party credential validation, and Trusted List discovery/consumption (see its `README.md`)
 
 ## Scope of Task 1
 
