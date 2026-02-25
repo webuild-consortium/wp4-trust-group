@@ -87,7 +87,7 @@ graph TD
 
 | Entity Type | Service Type URI | Reference |
 |-------------|------------------|-----------|
-| PID Provider | `http://uri.etsi.org/TrstSvc/Svctype/PID_Provider` | ETSI TS 119 612 clause 5.5.1 |
+| PID Provider | `http://uri.etsi.org/19602/SvcType/PID/Issuance` | ETSI TS 119 602 Table D.3 |
 | Qualified EAA Provider | `http://uri.etsi.org/TrstSvc/Svctype/QEAA_Provider` | ETSI TS 119 612 clause 5.5.1 |
 | Non-Qualified EAA Provider | `http://uri.etsi.org/TrstSvc/Svctype/Non_Q_EAA_Provider` | ETSI TS 119 612 clause 5.5.1 |
 | Public Sector EAA Provider | `http://uri.etsi.org/TrstSvc/Svctype/PUB_EAA_Provider` | ETSI TS 119 612 clause 5.5.1 |
