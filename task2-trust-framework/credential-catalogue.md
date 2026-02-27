@@ -2,11 +2,11 @@
 
 This document compiles evidence, references, and specifications for the EUDI Wallet **catalogue of attributes** and **catalogue of attestation schemes**, as defined in the Architecture and Reference Framework (ARF) v2.8.0 and Commission Implementing Regulation (EU) 2025/1569.
 
-For Trusted List extensions used to configure which Credential Issuers are authorised to issue specific attestation types, see [trusted-list-extensions-credential-issuers.md](../task3-x509-pki-etsi/trusted-list-extensions-credential-issuers.md).
+For Trusted List extensions used to configure which Credential Issuers are authorised to issue specific attestation types, see [trusted-list-extensions-credential-issuers.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task3-x509-pki-etsi/trusted-list-extensions-credential-issuers.md).
 
 ## Glossary and Definitions
 
-**Entity and trust terminology**: See [terms-and-entities.md](../task1-use-cases/terms-and-entities.md).
+**Entity and trust terminology**: See [terms-and-entities.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task1-use-cases/terms-and-entities.md).
 
 **Catalogue and attestation concepts**: See [ARF v2.8.0 Section 5.5](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes) and [Technical Specification 11](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md).
 
@@ -223,7 +223,7 @@ An **Electronic Attestation of Attributes (EAA)** can be issued in three forms:
 2. **PuB-EAA** (Public Sector EAA)
 3. **Non-Qualified EAA** (EAA which is not a QEAA or a PuB-EAA)
 
-See [terms-and-entities.md](../task1-use-cases/terms-and-entities.md) for entity definitions.
+See [terms-and-entities.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task1-use-cases/terms-and-entities.md) for entity definitions.
 
 ### Catalogue Registration by EAA Type
 

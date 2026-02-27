@@ -965,6 +965,6 @@ The framework ensures that bogus Credential Issuers cannot claim authorization f
 - [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf)
 
 ### Related Documents
-- [Policy Approaches Definition](../task5-participants-certificates-policies/policy-approaches-definition.md)
-- [ETSI Policy Evaluation](../task5-participants-certificates-policies/etsi-policy-evaluation.md)
-- [ETSI Policy Enumeration](../task5-participants-certificates-policies/etsi-policy-enumeration.md)
+- [Policy Approaches Definition](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task5-participants-certificates-policies/policy-approaches-definition.md)
+- [ETSI Policy Evaluation](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task5-participants-certificates-policies/etsi-policy-evaluation.md)
+- [ETSI Policy Enumeration](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task5-participants-certificates-policies/etsi-policy-enumeration.md)

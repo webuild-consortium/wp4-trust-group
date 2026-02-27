@@ -1,11 +1,11 @@
 # Trusted List Extensions for Credential Issuers and Credential Type
 
-This document describes how Trusted Lists and registration certificates configure which Credential Issuers (PID Providers, QEAA Providers, PuB-EAA Providers, EAA Providers) are authorised to issue specific **attestation types** (ARF RPRC_15, Topic 27). For **what** credential types exist, see [credential-catalogue.md](../task2-trust-framework/credential-catalogue.md).
+This document describes how Trusted Lists and registration certificates configure which Credential Issuers (PID Providers, QEAA Providers, PuB-EAA Providers, EAA Providers) are authorised to issue specific **attestation types** (ARF RPRC_15, Topic 27). For **what** credential types exist, see [credential-catalogue.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task2-trust-framework/credential-catalogue.md).
 
 ## Trust Model
 
-- Trust anchor placement and TL responsibilities: [trust-infrastructure-schema.md](../task2-trust-framework/trust-infrastructure-schema.md) (Section 3), ARF Topic 27, Topic 31.
-- Entity definitions: [terms-and-entities.md](../task1-use-cases/terms-and-entities.md). Different trust levels apply for non-qualified EAA Providers vs QEAA/PuB-EAA Providers.
+- Trust anchor placement and TL responsibilities: [trust-infrastructure-schema.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task2-trust-framework/trust-infrastructure-schema.md) (Section 3), ARF Topic 27, Topic 31.
+- Entity definitions: [terms-and-entities.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task1-use-cases/terms-and-entities.md). Different trust levels apply for non-qualified EAA Providers vs QEAA/PuB-EAA Providers.
 
 ## Using Trusted Lists to Configure Allowed Credential Issuers for Specific Attestation Types
 
@@ -15,7 +15,7 @@ Trusted Lists and registration certificates configure which Credential Issuers a
 
 ### Trusted List Owner
 
-Per [trust-infrastructure-schema.md](../task2-trust-framework/trust-infrastructure-schema.md), Trusted Lists are published by Trusted List Providers (European Commission or Member State TLPs). For sector-specific or scheme-specific Trusted Lists, the entity accountable for the list is sometimes referred to as **Trusted List Owner**, **Ecosystem Authority**, or **Scheme Owner** (see [terms-and-entities.md](../task1-use-cases/terms-and-entities.md)).
+Per [trust-infrastructure-schema.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task2-trust-framework/trust-infrastructure-schema.md), Trusted Lists are published by Trusted List Providers (European Commission or Member State TLPs). For sector-specific or scheme-specific Trusted Lists, the entity accountable for the list is sometimes referred to as **Trusted List Owner**, **Ecosystem Authority**, or **Scheme Owner** (see [terms-and-entities.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task1-use-cases/terms-and-entities.md)).
 
 ### Registration Certificate as Source of Truth (when available)
 
@@ -74,13 +74,13 @@ The following provisions from existing specifications inform conflict resolution
 When a Wallet Unit or Relying Party receives a credential, it:
 
 1. Reads the **attestation type identifier / namespace** from the credential.
-2. Identifies the **issuer** from the credential's signing certificate and locates the corresponding **Trusted List entry** (by matching the signing certificate against trust anchors in the TL; the certificate does *not* contain a pointer to the TL — see [Trusted List discovery and consumption](../task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md) and ETSI TS 119 615 clause 4.3).
+2. Identifies the **issuer** from the credential's signing certificate and locates the corresponding **Trusted List entry** (by matching the signing certificate against trust anchors in the TL; the certificate does *not* contain a pointer to the TL — see [Trusted List discovery and consumption](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md) and ETSI TS 119 615 clause 4.3).
 3. From the Trusted List entry (or the referenced registration certificate / Registrar API), obtains the list of **attestation types the issuer is authorised to issue**.
 4. **Accepts** the credential as being of that attestation type **only if**:
    - The issuer is present in the applicable Trusted List, and
    - The attestation type in the credential is listed in the issuer's authorised types.
 
-Catalogue defines **what** credential types exist; Trusted Lists and registration certificates define **who** may issue them (RPRC_15, Topic 27). See [credential-catalogue.md](../task2-trust-framework/credential-catalogue.md).
+Catalogue defines **what** credential types exist; Trusted Lists and registration certificates define **who** may issue them (RPRC_15, Topic 27). See [credential-catalogue.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task2-trust-framework/credential-catalogue.md).
 
 ## Non-normative Examples
 
@@ -138,7 +138,7 @@ Illustrative only; no ETSI encoding prescribed.
 
 ## References
 
-- [credential-catalogue.md](../task2-trust-framework/credential-catalogue.md) | [trust-infrastructure-schema.md](../task2-trust-framework/trust-infrastructure-schema.md) | [terms-and-entities.md](../task1-use-cases/terms-and-entities.md)
+- [credential-catalogue.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task2-trust-framework/credential-catalogue.md) | [trust-infrastructure-schema.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task2-trust-framework/trust-infrastructure-schema.md) | [terms-and-entities.md](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task1-use-cases/terms-and-entities.md)
 - ARF: [Topic 27](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties) | [Topic 31](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2320-topic-31---notification-and-publication-of-pid-provider-wallet-provider-attestation-provider-access-certificate-authority-and-provider-of-registration-certificates)
 - ETSI TS 119 602 v1.1.1 (6.3.15) | ETSI TS 119 615 v1.3.1 (4.4)
 - [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183) | [eIDAS 910/2014 Art.22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0910)
