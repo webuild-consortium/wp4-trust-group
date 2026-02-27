@@ -8,7 +8,7 @@ The trust infrastructure relies on three distinct but complementary processes:
 
 1.  **Registration/Onboarding**: Entities (PID Providers, Attestation Providers, Relying Parties) register with Member State Registrars to define operational authorization and entitlements (ARF Section 3.17).
 2.  **Notification**: Member States notify the European Commission of **Wallet Providers**, **Access Certificate Authorities (Access CAs)**, and **Providers of Registration Certificates** for inclusion in the relevant Trusted Lists.
-3.  **Trusted List Publication**: Publication of cryptographic trust anchors for validation purposes, based on registration data and Member State notifications.
+3.  **Trusted List Publication**: Publication of cryptographic trust anchors for validation purposes, based on registration data and Member State notifications. Publication rules for trusted lists are specified in **ETSI TS 119 602** and **ETSI TS 119 612**.
 
 ### Acronyms and entity definitions
 
@@ -21,13 +21,13 @@ The following table summarizes the registration requirement and the authority re
 | Entity Type | Registration Process | Trusted List Compilation (EC / MS TLP) | Member State TLP Role |
 | :--- | :--- | :--- | :--- |
 | **PID Provider** | **Register with MS Registrar** | **European Commission** (EU-level TL for PID Providers) | None (no national TL for PID Providers) |
-| **Attestation Provider** | **Register with MS Registrar** | **Member State / MS TLP** (national QTSP TL for QEAA Providers; national TL for non-qualified EAA Providers) | Compiles, signs, and publishes national Trusted Lists (QTSP TL for QEAA Providers per Article 22; EAA Provider TL for non-qualified EAA Providers per Section 3). |
+| **Attestation Provider** | **Register with MS Registrar** | **Member State / MS TLP** (national QTSP TL for QEAA Providers; national TL for non-qualified EAA Providers; PuB-EAA Providers notified to EC per Topic 31) | Compiles, signs, and publishes national Trusted Lists (QTSP TL for QEAA Providers per Article 22; EAA Provider TL for non-qualified EAA Providers per Section 3). *Note*: EAA/QEAA Providers are also trust services according to **ETSI TS 119 612**. The type "PuB-EAA Provider" is compiled into EC-level TLs (not MS TLP) per Topic 31. |
 | **Relying Party (RP)** | **Register with MS Registrar** | N/A (Uses Access Certificates/Registry) | None (not listed in TLs) |
 | **Wallet Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for Wallet Providers) | Not applicable in pilot (notification from MS to EC only) |
-| **Access CA** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for Access CAs) | Not applicable in pilot (notification from MS to EC only) |
-| **Reg. Cert. Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for Reg. Cert. Providers) | Not applicable in pilot (notification from MS to EC only) |
+| **WRPAC Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for WRPAC Providers) | Not applicable in pilot (notification from MS to EC only) |
+| **WRPRC Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for WRPRC Providers) | Not applicable in pilot (notification from MS to EC only) |
 
-> **Key Distinction**: **Wallet Providers**, **Access CAs**, and **Providers of Registration Certificates** do **not** register with Registrars. They are notified directly by Member States to the European Commission.
+> **Key Distinction**: **Wallet Providers**, **WRPAC Providers** (Access Certificate Authorities), and **WRPRC Providers** (Providers of Registration Certificates) do **not** register with Registrars. They are notified directly by Member States to the European Commission.
 
 ## 1. Trust Infrastructure Architecture
 
@@ -35,11 +35,11 @@ The following table summarizes the registration requirement and the authority re
 
 *   **Registrar**: Established by Member States to manage the registration and operational authorization of **PID Providers**, **Attestation Providers**, and **Relying Parties**.
 *   **European Commission**:
-    *   Compiles, signs/seals, and publishes Trusted Lists for Wallet Providers, PID Providers, Access CAs, and Registration Cert Providers (per **WPNot_04**, **WPNot_05**, **PPNot_05**, **PPNot_06**, **RPACANot_04**).
+    *   Compiles, signs/seals, and publishes Trusted Lists for Wallet Providers, PID Providers, WRPAC Providers (Access Certificate Authorities), and WRPRC Providers (Providers of Registration Certificates) (per **WPNot_04**, **WPNot_05**, **PPNot_05**, **PPNot_06**, **RPACANot_04**).
     *   Maintains and publishes the **List of Trusted Lists (LoTL)** containing pointers to all published Trusted Lists.
-*   **Member State TLP**: Compiles, signs, and publishes **national Trusted Lists for non-qualified EAA Providers** and submits the non-qualified EAA Provider TL URL to the Commission for inclusion in the LoTL. **QEAA Providers are included in Member State QTSP Trusted Lists** published by Member States per **Article 22 of eIDAS Regulation (EU) No 910/2014** and **notified to the European Commission** per Article 22(3). **PuB-EAA Providers** are notified to and published by the European Commission according to **Topic 31**.
-*   **Access Certificate Authority (CA)**: Issues access certificates to registered entities. Notified by MS to the Commission; does not interact with Registrars.
-*   **Provider of Registration Certificates**: Optionally issues certificates detailing entitlements. Notified by MS to the Commission.
+*   **Member State TLP**: Compiles, signs, and publishes **national Trusted Lists for non-qualified EAA Providers** and submits the non-qualified EAA Provider TL URL to the Commission for inclusion in the LoTL. **QEAA Providers are included in Member State QTSP Trusted Lists** published by Member States per **Article 22 of eIDAS Regulation (EU) No 910/2014** and **notified to the European Commission** per Article 22(3). **PuB-EAA Providers** are notified to and published by the European Commission according to **Topic 31**. *Note*: EAA/QEAA Providers are also trust services according to **ETSI TS 119 612**.
+*   **WRPAC Provider** (Access Certificate Authority): Issues access certificates to registered entities. Notified by MS to the Commission; does not interact with Registrars.
+*   **WRPRC Provider** (Provider of Registration Certificates): Optionally issues certificates detailing entitlements. Notified by MS to the Commission.
 
 ### 1.2 Registered Entities
 
@@ -81,6 +81,8 @@ The registration data includes:
 > **Disambiguation – QEAA Providers and Registration**  
 > In this document, **QEAA Providers are treated as a specific type of Attestation Provider**. As such, they **MUST register with a Member State Registrar** together with other Attestation Providers, in line with **ARF Section 3.17 (Registrars)** and **Topic 27 (Reg_01, Reg_21)**. The registration data for QEAA Providers – including identification data, attestation types they intend to issue, and service supply points – is part of the **common registration dataset** described in [ARF Section 6.3.2.2](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#6322-data-about-the-pid-provider-or-attestation-provider-is-included-in-the-registry) and referenced in this section.  
 > **QEAA Providers are Qualified Trust Service Providers (QTSPs)**. After successful registration and approval at Member State level, QEAA Providers are included in **Member State Trusted Lists for QTSPs**, which are published by **Member States** in accordance with **Article 22 of the eIDAS Regulation (EU) No 910/2014)** and **notified to the European Commission** per Article 22(3) so that pointers and signing keys can be exposed via the **List of Trusted Lists (LoTL)**. Trust anchors for QEAA Providers are published in these Member State QTSP Trusted Lists, as referenced in ARF requirements **OIA_13** and **ISSU_08** (see [COMPREHENSIVE-CATALOGUE-EAA-QEAA-REFERENCES.md](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/development-issues/COMPREHENSIVE-CATALOGUE-EAA-QEAA-REFERENCES.md#registration-and-trusted-lists)). The European Commission maintains the **List of Trusted Lists (LoTL)** that references all Member State Trusted Lists, including QTSP Trusted Lists.
+>
+> **Note on ETSI alignment**: ARF Section 3.17 states that "All PID Providers, QEAA Providers, PuB-EAA Providers, non-qualified EAA Providers and Relying Parties in the EUDI Wallet ecosystem are registered by a Registrar in the Member State where they reside." However, **ETSI TS 119 602** does not specify how to register EAA/QEAA Providers as attestation providers. ETSI TS 119 602 specifies how to register PuB-EAA Providers. **ETSI TS 119 612** specifies how to register EAA/QEAA Providers as trust services. There is thus a mismatch between ETSI TS 119 602 and the ARF (Section 3.17, Topic 27) regarding the registration of EAA/QEAA Providers.
 
 > **Article 22 – Trusted Lists (eIDAS Regulation (EU) No 910/2014)**  
 > 1. Each Member State shall establish, maintain and publish trusted lists, including information related to the qualified trust service providers for which it is responsible, together with information related to the qualified trust services provided by them.  
