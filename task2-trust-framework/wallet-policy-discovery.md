@@ -8,34 +8,20 @@ This document describes the policy discovery process performed by an EUDI Wallet
 
 ## Abbreviations
 
-| Abbreviation | Definition |
-|--------------|------------|
-| CA | Certificate Authority |
-| CIR | Commission Implementing Regulation |
-| CWT | CBOR Web Token |
-| EAA | Electronic Attestation of Attributes |
-| EUDIW | European Digital Identity Wallet |
-| JWT | JSON Web Token |
-| LOTL | List of Trusted Lists |
-| OCSP | Online Certificate Status Protocol |
-| PID | Person Identification Data |
-| RP | Relying Party |
-| TSL | Trusted Service List |
-| TSP | Trust Service Provider |
-| WRP | Wallet-Relying Party |
-| WRPAC | Wallet-Relying Party Access Certificate |
-| WRPRC | Wallet-Relying Party Registration Certificate |
+See [Terms and Entities](../task1-use-cases/terms-and-entities.md#1-acronyms).
 
 ## Normative References
+
+For official document links and extended references (including TS 119 615, TS 119 472-2), see [README References](../README.md#references).
 
 | Reference | Document |
 |-----------|----------|
 | ETSI TS 119 612 v2.4.1 | Electronic Signatures and Trust Infrastructures; Trusted Lists |
 | ETSI TS 119 602 v1.1.1 | Electronic Signatures and Trust Infrastructures; Lists of Trusted Entities (LoTE) |
-| ETSI TS 119 411-8 | Policy and security requirements for TSPs issuing certificates; Part 8: Access Certificate Policy for EUDI Wallet Relying Parties |
-| ETSI TS 119 475 | Relying party attributes supporting EUDI Wallet user's authorization decisions |
+| ETSI TS 119 411-8 v1.1.1 | Policy and security requirements for TSPs issuing certificates; Part 8: Access Certificate Policy for EUDI Wallet Relying Parties |
+| ETSI TS 119 475 v1.1.1 | Relying party attributes supporting EUDI Wallet user's authorization decisions |
 | ETSI EN 319 412-1 | Certificate Profiles; Part 1: Overview and common data structures |
-| ETSI EN 319 412-6 | Certificate Profile for EUDI Wallet Providers |
+| ETSI TS 119 412-6 v1.1.1 | Certificate profile requirements for PID, Wallet, EAA, QEAA, and PSBEAA providers |
 | ETSI EN 319 401 | General Policy Requirements for Trust Service Providers |
 | ETSI EN 319 411-1 | Policy and security requirements for TSPs issuing certificates; Part 1: General requirements |
 | ETSI EN 319 411-2 | Policy and security requirements for TSPs issuing certificates; Part 2: Requirements for Qualified Certificate Issuers |
@@ -52,7 +38,7 @@ The EUDI Wallet ecosystem uses a hierarchical trust infrastructure based on ETSI
 ```mermaid
 graph TD
     subgraph LOTL["List of Trusted Lists (LOTL)"]
-        L[Federation-level Registry<br/>e.g., WeBuild LSP Registry<br/><i>ETSI TS 119 612 v2.3.1 Clause D.5</i>]
+        L[Federation-level Registry<br/>e.g., WeBuild LSP Registry<br/><i>ETSI TS 119 612 v2.4.1 Clause D.5</i>]
     end
     
     subgraph MS["Member State Trusted Lists"]
@@ -829,21 +815,7 @@ For cross-border interactions, the wallet:
 
 ## References
 
-### ETSI Standards
-
-- ETSI TS 119 612 v2.4.1 - Electronic Signatures and Trust Infrastructures; Trusted Lists
-- ETSI TS 119 602 v1.1.1 - Electronic Signatures and Trust Infrastructures; Lists of Trusted Entities (LoTE)
-- ETSI TS 119 411-8 - Policy and security requirements for TSPs issuing certificates; Part 8: Access Certificate Policy for EUDI Wallet Relying Parties
-- ETSI TS 119 475 - Relying party attributes supporting EUDI Wallet user's authorization decisions
-- ETSI EN 319 412-1 - Certificate Profiles; Part 1: Overview and common data structures
-- ETSI EN 319 412-6 - Certificate Profile for EUDI Wallet Providers
-- ETSI EN 319 401 - General Policy Requirements for Trust Service Providers
-- ETSI EN 319 411-1 - Policy and security requirements for TSPs issuing certificates; Part 1: General requirements
-- ETSI EN 319 411-2 - Policy and security requirements for TSPs issuing certificates; Part 2: Requirements for Qualified Certificate Issuers
-
-### EU Regulations
-
-- CIR (EU) 2025/848 - Commission Implementing Regulation on the registration of wallet-relying parties
+ETSI standards, EU regulations, and document links: see [Normative References](#normative-references) above and [README References](../README.md#references).
 
 ### IETF Standards
 
@@ -855,9 +827,4 @@ For cross-border interactions, the wallet:
 - Policy Approaches Definition: Additive vs Subtractive (task5-participants-certificates-policies/policy-approaches-definition.md)
 - ETSI Policy Application Mechanisms (task5-participants-certificates-policies/etsi-policy-enumeration.md)
 - ETSI Policy Evaluation (task5-participants-certificates-policies/etsi-policy-evaluation.md)
-
----
-
-**Document Version**: 1.0  
-**Last Updated**: 2025-11-25
 
