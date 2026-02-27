@@ -124,7 +124,7 @@ sequenceDiagram
     Note over W: 15. Extract and Verify Entitlements from WRPRC<br/>- Parse entitlements<br/>- Validate requested attributes against entitlements
 ```
 
-> **Uncovered attributes:** When WRPRC(s) do not cover all requested attributes, authorization for uncovered ones shifts to user-autonomous. See [§4.3.3](#433-uncovered-attributes-and-user-autonomous-authorization).
+> **Uncovered attributes:** When WRPRC(s) do not cover all requested attributes, authorization for uncovered ones shifts to user-autonomous. See [§4.3.1](#431-uncovered-attributes-and-user-autonomous-authorization).
 
 ### 2.2 Discovery Sequence for Attestation Provider Interaction
 
@@ -235,7 +235,9 @@ The **catalogue of attributes** and **catalogue of attestation schemes** are est
 
 ### 2.4 WRPRC Discovery via Registry
 
-When an RP presents only a WRPAC without a WRPRC, the wallet discovers WRPRCs via **Registry** and **Credential Catalogue** (Reg_03, Reg_04; CIR 2025/848 Art. 3(5)). **Query order:** credential type first (WRPRC policy, applicable registers), then entity id (WRPRC(s) for the specific RP/Provider). See [§2.3.4](#234-credential-catalogue-wrprc-policy-and-sector-authorities).
+When an RP presents only a WRPAC without a WRPRC, the wallet discovers the RP's registration information and WRPRCs through the **Registry** and **Credential Catalogue** (per Reg_03, Reg_04; CIR 2025/848 Art. 3(5)). The Registry is published by the Member State Registrar; the Credential Catalogue (managed by registers) indicates per credential type whether WRPRC is mandatory and which sectoral registers apply. See [§2.3.4 Credential Catalogue, WRPRC Policy, and Sector Authorities](#234-credential-catalogue-wrprc-policy-and-sector-authorities).
+
+**Query order:** The wallet SHALL query by **credential type first** (to obtain WRPRC policy and applicable registers), then by **entity id** (to obtain WRPRC(s) for the specific RP or Provider).
 
 ```mermaid
 sequenceDiagram
@@ -266,10 +268,12 @@ sequenceDiagram
 
 | Method | Description | Reference |
 |--------|-------------|-----------|
-| WRPRC in Request | RP includes WRPRC(s) in presentation request | ETSI TS 119 475 clause 4.5 |
-| Credential Catalogue + Registry | Query by credential type first, then entity id (see [§2.4](#24-wrprc-discovery-via-registry)) | Reg_03, Reg_04; CIR 2025/848 |
-| Sectoral/Cross-Border Register | Sector-specific or EU/foreign registers | Sector regulations; ETSI TS 119 612 |
-| registry_uri in WRPRC | URL to issuing registry API | ETSI TS 119 475 Table 7 |
+| **WRPRC in Request** | RP includes WRPRC(s) in presentation request | ETSI TS 119 475 clause 4.5 |
+| **Credential Catalogue Query** | Wallet queries Credential Catalogue by **credential type** first: WRPRC mandatory?, applicable registers? | [§2.3.4](#234-credential-catalogue-wrprc-policy-and-sector-authorities); [credential-catalogue.md](credential-catalogue.md) |
+| **Registry Query** | Wallet queries Registry by **entity id** (RP/Provider identifier from WRPAC) after credential type | Reg_06; CIR 2025/848 Art. 3(5) |
+| **Sectoral Register Query** | Wallet queries sector-specific register (e.g., financial, healthcare) | Sector-specific regulations |
+| **Cross-Border Register Query** | Wallet queries EU-level or foreign registers | ETSI TS 119 612 LOTL |
+| **registry_uri in WRPRC** | WRPRC contains URL to issuing registry API | ETSI TS 119 475 Table 7, Annex B.2.1 |
 
 #### 2.4.2 Multiple Register Architecture
 
@@ -313,10 +317,15 @@ graph TD
 
 #### 2.4.3 Register Discovery via Trusted List
 
-1. **LOTL** → pointers to EC-compiled and MS TSLs ([Trust Infrastructure Schema](trust-infrastructure-schema.md#33-list-of-trusted-lists-lotl))
-2. **TSL** → national/sectoral register endpoints, WRPRC Provider services
-3. **Credential Catalogue** (by credential type) → WRPRC policy, applicable registers
-4. **Registry** (by entity id) → WRPRC(s) for the counterparty
+The wallet discovers available registers through the Trusted List infrastructure. The query order is **credential type first**, then **entity id**:
+
+1. **LOTL Query** - Fetch List of Trusted Lists (EC-maintained) to discover pointers to EC-compiled TLs and MS TLP-compiled TLs (per [Trust Infrastructure Schema](trust-infrastructure-schema.md#33-list-of-trusted-lists-lotl))
+2. **TSL Query** - Each Trusted List may list:
+   - National WRP Register endpoints
+   - Sectoral register endpoints  
+   - WRPRC Provider services
+3. **Credential Catalogue Query** - Query by **credential type** to obtain WRPRC policy (mandatory/optional) and applicable registers for that credential type
+4. **Register Query** - Query each relevant register by **entity id** (RP or Provider identifier)
 
 #### 2.4.4 Multiple WRPRC Aggregation
 
@@ -392,7 +401,7 @@ The wallet obtains the counterparty's certificates:
 | Registry API | Wallet queries Registry using identifier from WRPAC | Reg_06, Reg_03, Reg_04; CIR 2025/848 Art. 3(5) |
 | OpenID4VP Request | JWT/CWT WRPRC embedded in request | ETSI TS 119 475 clause 6.2, 6.3 |
 
-> **Note:** WRPRC not provided → query Credential Catalogue (credential type), then Registry (entity id from WRPAC). See [§2.4](#24-wrprc-discovery-via-registry).
+> **Note:** If WRPRC is not provided by the counterparty, the wallet SHALL first query the **Credential Catalogue** by **credential type** (to obtain WRPRC policy and applicable registers), then query the **Registry** by **entity id** from the WRPAC (`organizationIdentifier` for legal persons, `serialNumber` for natural persons), per **RPRC_18** and [Trust Infrastructure Schema](trust-infrastructure-schema.md) Reg_03, Reg_04. See [§2.4 WRPRC Discovery via Registry](#24-wrprc-discovery-via-registry).
 
 ### 3.2 Step 2: Trusted List Lookup
 
@@ -446,8 +455,8 @@ The wallet performs the following lookups:
 
 | Scenario | Action | Reference |
 |----------|--------|-----------|
-| WRPRC provided | Use provided WRPRC | ETSI TS 119 475 clause 4.5 |
-| WRPRC not provided | Credential Catalogue (credential type) → Registry (entity id) | [§2.4](#24-wrprc-discovery-via-registry) |
+| WRPRC provided in request | Use provided WRPRC | ETSI TS 119 475 clause 4.5 |
+| WRPRC not provided | 1) Query Credential Catalogue by credential type; 2) Query Registry by entity id from WRPAC | Reg_03, Reg_04; CIR 2025/848 Art. 3(5); [§2.4](#24-wrprc-discovery-via-registry) |
 
 #### 3.4.2 WRPRC Signature Validation
 
@@ -505,97 +514,43 @@ Attestation providers (PID/EAA) must have their entitlements verified from the W
 
 The `provided_attestations` field in the WRPRC specifies the attestation types the provider is authorized to issue (format, meta, claim). The wallet verifies that the attestation being issued matches the provider's authorized attestation types.
 
-### 3.5.3 Policy Approach: Additive vs Subtractive
-
-> **Note:** The "additive" and "subtractive" policy approaches are not directly defined in ETSI standards. They represent a conceptual framework for policy interpretation that can be implemented using ETSI standard mechanisms. ETSI standards (e.g., TS 119 475, EN 319 411 series) provide mechanisms that support both approaches, but the policy approach concept itself is implementation-specific to the WP4 Trust Infrastructure framework.
-
-The wallet must understand the policy approach used by the counterparty to correctly interpret entitlements. Two distinct policy approaches are defined:
-
-#### Additive Policy Approach
-
-The **Additive Policy Approach** implements an explicit allow-list model where permissions are granted only when explicitly authorized. This follows the principle: **"Nothing is permitted unless explicitly allowed."**
-
-**Characteristics:**
-- **Default Action**: Deny all requests
-- **Authorization Model**: Explicit allow-list
-- **Security Posture**: Conservative, high-security (zero-trust)
-- **Use Cases**: High-security environments, sensitive data handling, regulatory compliance
-
-**Wallet Validation Logic:**
-```mermaid
-flowchart TD
-    A[Requested Attribute] --> B{Attribute explicitly<br/>in WRPRC entitlements?}
-    B -->|Yes| C[✓ Authorized]
-    B -->|No| D[✗ Denied - Not in allow-list]
-```
-
-#### Subtractive Policy Approach
-
-The **Subtractive Policy Approach** implements an explicit deny-list model where permissions are granted by default except for explicitly restricted items. This follows the principle: **"Everything is permitted unless explicitly denied."**
-
-**Characteristics:**
-- **Default Action**: Allow all requests
-- **Authorization Model**: Explicit deny-list
-- **Security Posture**: Permissive, flexible
-- **Use Cases**: Open ecosystems, development environments, innovation platforms
-
-**Wallet Validation Logic:**
-```mermaid
-flowchart TD
-    A[Requested Attribute] --> B{Attribute explicitly<br/>restricted in WRPRC?}
-    B -->|No| C[✓ Authorized - Default allow]
-    B -->|Yes| D{Exception conditions<br/>met?}
-    D -->|Yes| C
-    D -->|No| E[✗ Denied - In deny-list]
-```
-
-#### Policy Approach Identification
-
-The policy approach may be indicated in the WRPRC through:
-
-| WRPRC Field | Description | Reference |
-|-------------|-------------|-----------|
-| `policy_approach` | Explicit field indicating "additive" or "subtractive" | Implementation-specific (not ETSI-standardized) |
-| `entitlements` structure | Presence/absence patterns indicate approach | ETSI TS 119 475 Table 7 |
-| `credentials` claim | Explicit allow-list suggests additive | ETSI TS 119 475 Table 9 |
-| `restrictions` claim | Explicit deny-list suggests subtractive | Implementation-specific (not ETSI-standardized) |
-
-**Default Behavior:**
-- If policy approach is not explicitly stated, the wallet should default to **additive** (zero-trust) for security
-- The wallet may query the Registry or Trusted List for policy approach metadata
-- When the wallet does *not* query a policy repository, it has only the attribute request; responsibility falls on the user and the wallet applies the user default policy. See [§4.3.4 No WRPRC Scenario and User Default Policy](#434-no-wrprc-scenario-and-user-default-policy).
-
 ---
 
 ## 4. Attribute Request Validation
 
+### 4.0 Default Policy Approach in EUDIW
+
+The ARF and ETSI standards do **not** use the terms "additive" or "subtractive." The default policy approach in EUDIW is implied by the validation mechanism, not explicitly named.
+
+**Evidence:** ARF **RPRC_21** (Topic 44 – Registration certificates for Relying Parties) states:
+
+> *"If the User indicated that they want to verify the information registered about a Relying Party and the Wallet Unit retrieved this information … it SHALL verify that **all attributes requested in the presentation request are included in the list of attributes registered by the Registrar**. If the outcome of the verification is negative, the Wallet Unit SHALL … **notify the User about the requested attributes that the Relying Party did not register**."*
+
+This defines an **allow-list** model: requested attributes must be **in** the RP's registered entitlements. Attributes **not** in the list → verification fails, user is notified. There is no provision for a deny-list or "restrictions with exceptions."
+
+| Aspect | EUDIW (per ARF) |
+|--------|-----------------|
+| Validation rule | Requested attributes must be **included in** registered list |
+| Attributes not in list | Verification negative; notify user |
+| Equivalent (conceptual) | Allow-list; deny-by-default for unregistered attributes |
+
+*Source: [ARF Annex 2.02 – RPRC_21](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/), Topic 44.*
+
 ### 4.1 Matching Requested Attributes to Entitlements
 
-When a Relying Party requests attributes, the wallet validates using the WRPRC and applies the appropriate policy approach:
+Per RPRC_21, the wallet verifies that requested attributes are included in the RP's registered entitlements (WRPRC `credentials` claim). Attributes not in WRPRC are uncovered; see [§4.3.1](#431-uncovered-attributes-and-user-autonomous-authorization).
 
 ```mermaid
 flowchart TD
     A[1. Obtain WRPRC<br/>from request or Registry] --> B
-    B[2. Parse RP entitlements from WRPRC<br/><i>ETSI TS 119 475 Table 7, Table 9</i>] --> C
-    C[3. Identify Policy Approach<br/>Additive or Subtractive] --> D
-    D[4. Parse requested attributes from presentation request<br/><i>OpenID4VP, ISO 18013-5</i>] --> E{Policy Approach?}
-    
-    E -->|Additive| F{Attribute explicitly<br/>in WRPRC credentials?}
-    F -->|Yes| G{Namespace matches<br/>entitlement scope?}
-    F -->|No| H[Alert: Unauthorized - Not in allow-list]
-    G -->|Yes| I[Attribute Authorized ✓]
-    G -->|No| H
-    
-    E -->|Subtractive| J{Attribute explicitly<br/>restricted in WRPRC?}
-    J -->|No| K[Attribute Authorized ✓<br/>Default allow]
-    J -->|Yes| L{Exception conditions<br/>met?}
-    L -->|Yes| K
-    L -->|No| M[Alert: Restricted - In deny-list]
-    
-    H --> N[5. Allow user to reject all<br/>or approve all (RPA_10a)]
-    M --> N
-    I --> O[Include in consent screen]
-    K --> O
+    B[2. Parse entitlements from WRPRC<br/><i>ETSI TS 119 475 Table 7, Table 9</i>] --> C
+    C[3. Parse requested attributes<br/><i>OpenID4VP, ISO 18013-5</i>] --> D
+    D[4. For each attribute: in WRPRC credentials?] --> E{In WRPRC?}
+    E -->|Yes| F[Authorized ✓]
+    E -->|No| G[Uncovered - alert user]
+    F --> H[Include in consent screen]
+    G --> H
+    H --> I[5. User: reject all or approve all RPA_10a]
 ```
 
 ### 4.2 Entitlement-to-Attribute Mapping
@@ -607,8 +562,6 @@ The WRPRC `credentials` claim (for service providers) specifies which attestatio
 | `entitlements` | List of entitlement URIs/OIDs | ETSI TS 119 475 Table 7 |
 | `credentials` | Requestable attestations with format, meta, claim | ETSI TS 119 475 Table 9 |
 | `purpose` | Purpose descriptions for data processing | ETSI TS 119 475 Table 9 |
-| `policy_approach` | Policy approach: "additive" or "subtractive" | Implementation-specific (not ETSI-standardized) |
-| `restrictions` | Restricted attributes (for subtractive approach) | Implementation-specific |
 
 | Entitlement | Authorized Attributes | Reference |
 |-------------|----------------------|-----------|
@@ -617,67 +570,18 @@ The WRPRC `credentials` claim (for service providers) specifies which attestatio
 | KYC/AML | Full PID attributes | National regulations |
 | Healthcare | Healthcare-specific EAAs | ETSI TS 119 475 Annex B |
 
-### 4.3 Policy Approach in Attribute Validation
+### 4.3 Attribute Validation Scenarios
 
-Logic: see §4.1 flowchart. Additive = allow-list; subtractive = deny-list with exceptions.
-
-#### 4.3.1 Additive Approach Validation
-
-**Example:**
-```json
-{
-  "policy_approach": "additive",
-  "credentials": [
-    {
-      "format": "dc+sd-jwt",
-      "credential_definition": "https://example.com/credentials/identity",
-      "claims": ["given_name", "family_name", "email"]
-    }
-  ]
-}
-```
-- ✅ `given_name` - Authorized (explicitly listed)
-- ✅ `family_name` - Authorized (explicitly listed)
-- ✅ `email` - Authorized (explicitly listed)
-- ❌ `phone_number` - Denied (not in allow-list)
-- ❌ `address` - Denied (not in allow-list)
-
-#### 4.3.2 Subtractive Approach Validation
-
-**Example:**
-```json
-{
-  "policy_approach": "subtractive",
-  "restrictions": [
-    {
-      "attribute": "biometric_data",
-      "restriction_reason": "Privacy protection",
-      "exceptions": ["law_enforcement", "national_security"]
-    },
-    {
-      "attribute": "financial_data",
-      "restriction_reason": "Data protection",
-      "exceptions": ["financial_services"]
-    }
-  ]
-}
-```
-- ✅ `given_name` - Authorized (not restricted)
-- ✅ `family_name` - Authorized (not restricted)
-- ✅ `email` - Authorized (not restricted)
-- ❌ `biometric_data` - Denied (restricted, no exception)
-- ✅ `financial_data` (if RP is financial service) - Authorized (exception applies)
-
-
-> **Exception strings:** Values like `law_enforcement`, `financial_services` are illustrative. No controlled vocabulary in ARF/ETSI/CIR. Possible sources: credential catalogue, sector registers, ETSI SubEntitlements, ATECO codes.
-
-#### 4.3.3 Uncovered Attributes and User-Autonomous Authorization
+#### 4.3.1 Uncovered Attributes and User-Autonomous Authorization
 
 When an RP requests attributes and the WRPRC(s) from the RP or Registry do not cover all requested attributes, some attributes are **uncovered** (no corresponding entitlement in any WRPRC). In this situation:
 
 1. **Authorization source:** For covered attributes, authorization comes from the WRPRC/Registry (registration-based). For uncovered attributes, authorization can be provided **autonomously by the user** via explicit wallet interaction.
 
-2. **Wallet behaviour:** Distinguish WRPRC-authorized vs uncovered on consent screen. Uncovered: SHALL NOT disclose without explicit user approval. All-or-nothing choice (RPA_10a): reject all or approve all—no partial approval.
+2. **Wallet behaviour:**
+   - Clearly distinguish on the consent screen: attributes **authorized by WRPRC** vs attributes **not in any registered entitlement** (uncovered).
+   - For uncovered attributes, SHALL NOT disclose unless the user explicitly approves after being informed.
+   - Present the user with an all-or-nothing choice: reject all requested attributes, or approve all requested attributes (including any uncovered ones the user chooses to disclose). Per RPA_10a, the wallet SHOULD NOT allow partial approval (e.g., approving only covered attributes while rejecting uncovered), since partial disclosure would violate the user's privacy.
 
 3. **User responsibility:** When the user explicitly approves disclosure of uncovered attributes, the user assumes responsibility for sharing data outside the RP's registered scope. The wallet SHALL record that such disclosure was user-initiated.
 
@@ -686,18 +590,37 @@ When an RP requests attributes and the WRPRC(s) from the RP or Registry do not c
 | Attribute in WRPRC `credentials` | WRPRC/Registry | Include in consent screen; user may approve or reject |
 | Attribute not in any WRPRC (uncovered) | User-autonomous | Alert user; require explicit approval to disclose; do not disclose by default |
 
-#### 4.3.4 No WRPRC Scenario and User Default Policy
+#### 4.3.2 No WRPRC Scenario and User Default Policy
 
 When the wallet does **not** query a policy repository (Registry/Registrar)—e.g., offline, user has chosen not to verify (RPRC_16), or WRPRC is unavailable—the wallet has only the attribute request. In that case:
 
 1. **Responsibility:** There is no WRPRC to validate against; the responsibility for deciding what to disclose falls entirely on the user.
 2. **Wallet behaviour:** The wallet SHALL present all requested attributes for user consent, applying the user's **default policy** configured in the wallet instance.
 
-**Attribute marking:** WRPRC-authorized → one mark. Not in WRPRC (or unavailable) → user default policy mark. **User default policy** (wallet config): Deny by default | Allow by default | Ask every time.
+**UX protection through attribute marking:** To support informed consent, the wallet SHALL visually distinguish on the consent screen:
 
-#### 4.3.5 Same-Entity Issuer-Consumer
+| Mark | Meaning |
+|------|---------|
+| Explicitly in WRPRC | Attribute is in the RP's registered entitlements; authorization is registration-based |
+| Not in WRPRC (or WRPRC unavailable) | Attribute follows the **user default policy** defined in the wallet instance |
 
-When issuer = RP (e.g. travel, access, membership), the wallet MAY offer a separate default. RPA_07 (user approval) still applies.
+The **user default policy** is a wallet configuration that determines how to present and pre-dispose attributes that are not in WRPRC (or when WRPRC is unavailable). Examples:
+
+- **Deny by default** — treat as uncovered; require explicit user approval before disclosure
+- **Allow by default** — pre-select for presentation; user may deselect
+- **Ask every time** — no pre-selection; user must explicitly approve or reject each
+
+When WRPRC is available, attributes in WRPRC are marked as authorized-by-registration; uncovered attributes are marked according to the user default policy. When WRPRC is unavailable, all requested attributes are marked according to the user default policy.
+
+#### 4.3.3 Same-Entity Issuer-Consumer
+
+In many use cases—travel (boarding pass), access (building key), membership (club card)—the credential **issuer** and the **Relying Party** (consumer) are the **same entity**. The user receives a credential from Entity X and later presents it to Entity X for verification.
+
+This pattern may warrant a distinct default policy consideration:
+
+- **Rationale:** The user has already entrusted the entity with the credential; the entity is requesting back what it issued.
+- **Wallet behaviour:** The wallet MAY offer a configurable default for same-entity scenarios (e.g., reduced scrutiny, different UX treatment, or a separate user preference).
+- **Compliance:** Any such default SHALL still respect RPA_07 (user approval required) and applicable data protection requirements. The default affects presentation and UX, not the requirement to obtain user consent.
 
 ---
 
@@ -738,10 +661,8 @@ When issuer = RP (e.g. travel, access, membership), the wallet MAY offer a separ
 | Service status `withdrawn` | Reject interaction | "Service provider authorization revoked" |
 | Service status `suspended` | Warn user | "Service provider temporarily suspended" |
 | Certificate revoked | Reject interaction | "Service provider certificate invalid" |
-| Entitlement mismatch (additive; uncovered attributes) | Alert user; offer explicit approval for user-autonomous disclosure | "Requested attributes not in RP's registered entitlements. Approve anyway?" |
+| Entitlement mismatch (uncovered attributes) | Alert user; offer explicit approval for user-autonomous disclosure | "Requested attributes not in RP's registered entitlements. Approve anyway?" |
 | WRPRC unavailable / no Registry query | Apply user default policy; user bears full responsibility | "RP registration not verified. Proceed based on your default settings?" |
-| Attribute restricted (subtractive) | Alert user | "Requested attributes are restricted by policy" |
-| Policy approach unknown | Default to additive, warn user | "Policy approach not specified, applying strict validation" |
 | Certificate expired | Reject interaction | "Service provider certificate expired" |
 | WRPRC signature invalid | Reject interaction | "Registration certificate signature verification failed" |
 | WRPRC Provider not in Registration Cert Provider TL | Reject interaction | "Registration certificate issuer not recognized" |
@@ -779,7 +700,7 @@ flowchart TD
     Attributes --> Actions
 ```
 
-> **Note:** Marking per [§4.3.4](#434-no-wrprc-scenario-and-user-default-policy). Same-entity cases per [§4.3.5](#435-same-entity-issuer-consumer).
+> **Note:** Marking per [§4.3.2](#432-no-wrprc-scenario-and-user-default-policy). Same-entity cases per [§4.3.3](#433-same-entity-issuer-consumer).
 
 ---
 
@@ -836,7 +757,6 @@ ETSI standards, EU regulations, and document links: see [Normative References](#
 ### Related Documents
 
 - Trust Infrastructure Schema: Onboarding and Trusted Lists ([trust-infrastructure-schema.md](trust-infrastructure-schema.md))
-- Policy Approaches Definition: Additive vs Subtractive (task5-participants-certificates-policies/policy-approaches-definition.md)
 - ETSI Policy Application Mechanisms (task5-participants-certificates-policies/etsi-policy-enumeration.md)
 - ETSI Policy Evaluation (task5-participants-certificates-policies/etsi-policy-evaluation.md)
 
