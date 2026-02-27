@@ -405,7 +405,7 @@ Schema URI:      https://schema.eudi.eu/pid/1.0/pid-type-metadata.json
 
 ## Examples
 
-### Relying Party / Service Provider - Minimalistic Registration
+### Example A - Relying Party / Service Provider - Minimalistic Registration
 <pre>
 Legal name: XYZ Example Company GmbH
 Trade name: xyzexamplecompany.de
