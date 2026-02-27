@@ -95,7 +95,7 @@ graph TD
 | Legal Person Wallet Provider | `http://uri.etsi.org/TrstSvc/Svctype/LegalPersonWalletProvider` | ETSI TS 119 612 clause 5.5.1 |
 | Relying Party | `http://uri.etsi.org/TrstSvc/Svctype/RelyingParty` | ETSI TS 119 612 clause 5.5.1 |
 | Relying Party Intermediary | `http://uri.etsi.org/TrstSvc/Svctype/RelyingPartyIntermediary` | ETSI TS 119 612 clause 5.5.1 |
-| WRPAC Provider (Access Certificate CA) | `http://uri.etsi.org/TrstSvc/Svctype/CA/PKC` | ETSI TS 119 612 clause 5.5.1; ETSI TS 119 411-8 |
+| WRPAC Provider (Access Certificate CA) | `http://uri.etsi.org/19602/SvcType/WRPAC/Issuance` <br/> `http://uri.etsi.org/19602/SvcType/WRPAC/Revocation` | ETSI TS 119 602 Table F.3  |
 | WRPRC Provider (Registration Certificate Provider) | `http://uri.etsi.org/19602/SvcType/WRPRC/Issuance`<br/>`http://uri.etsi.org/19602/SvcType/WRPRC/Revocation` | ETSI TS 119 602 clause 3.4.1; ETSI TS 119 475 clause 3.1, 6 |
 
 > **Note:** ETSI TS 119 602 defines service type URIs for WRPRC Providers in the Lists of Trusted Entities (LoTE) format. The service types `WRPRC/Issuance` and `WRPRC/Revocation` are used to identify WRPRC Provider services in trusted lists. The Registrar of WRPs (CIR 2025/848 Art. 3) manages the national register but is distinct from certificate providers.
@@ -187,7 +187,7 @@ sequenceDiagram
     Note over RP,REG: Registration Phase (CIR 2025/848 Art. 6)
     RP->>REG: 1. Registration Request
     REG->>REG: 2. Identity proofing<br/>(ETSI TS 119 461)
-    REG-->>RP: 3. Registered in National Register
+    REG-->>RP: 3. Registered in National Register <br> + <br> WRPRC Provider informations
 
     Note over RP,WRPRC_P: Certificate Issuance (ETSI TS 119 475 clause 6)
     RP->>WRPRC_P: 4. WRPRC Request
@@ -450,7 +450,7 @@ The wallet performs the following lookups:
 
 | Scenario | Action | Reference |
 |----------|--------|-----------|
-| WRPRC provided in request | Use provided WRPRC | ETSI TS 119 475 clause 4.5 |
+| WRPRC provided in request | Use provided WRPRC (using verifier_info parameter from [OpenID4VP]( https://openid.github.io/OpenID4VP/openid-4-verifiable-presentations-1_1-wg-draft.html#name-verifier-info))   | ETSI TS 119 475 clause 4.5 |
 | WRPRC not provided | Query National Register using identifier from WRPAC | CIR 2025/848 Art. 3(5) |
 
 #### 3.4.2 WRPRC Signature Validation
