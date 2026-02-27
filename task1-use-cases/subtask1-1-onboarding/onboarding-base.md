@@ -16,7 +16,7 @@ All terms, acronyms, entity definitions, WEBUILD-specific entities (Trust Infras
 
 **→ [Consolidated Terms and Entity Definitions](../terms-and-entities.md)**
 
-That document includes: acronyms; wallet-related and trust infrastructure terminology; entity types; detailed core trust infrastructure entities (TLP, European Commission, Member States, Registrars, Access CA, Provider of Registration Certificates, CAB, NAB, Supervisory Body, PID Provider, QEAA/PuB-EAA/EAA Providers, Wallet Provider, Relying Party, Intermediary, Attestation Scheme Provider, Authentic Source); WEBUILD Trust Infrastructure Responsible Group; MVP and MVP+ definitions; and policy terms (Authentication, Authorization, Additive/Subtractive policy). RACI definitions and matrices are kept in this document and in the use case documents below.
+That document includes: acronyms; wallet-related and trust infrastructure terminology; trust evaluation terms (Trust evaluation, Trust anchor, Entity status, Certificate/credential revocation); entity types; detailed core trust infrastructure entities (TLP, European Commission, Member States, Registrars, Access CA, Provider of Registration Certificates, CAB, NAB, Supervisory Body, PID Provider, QEAA/PuB-EAA/EAA Providers, Wallet Provider, Relying Party, Intermediary, Attestation Scheme Provider, Authentic Source); WEBUILD Trust Infrastructure Responsible Group; MVP and MVP+ definitions; and policy terms (Authentication, Authorization, Additive/Subtractive policy). RACI definitions and matrices are kept in this document and in the use case documents below.
 
 ## MVP and MVP+ Definitions (Onboarding Context)
 

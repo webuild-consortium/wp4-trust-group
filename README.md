@@ -8,16 +8,6 @@ The group develops an implementation of the trust model based on a trusted third
 
 The group aims to create a comprehensive infrastructure of trust that supports seamless interactions among diverse entities. 
 
-## Contributing
-
-We welcome contributions from all collaborators.
-
-- Open issues for bugs, improvements, or questions
-- Submit pull requests following the repository structure
-- Use discussions (if enabled) for ideas and proposals
-
-By contributing, you agree to follow the project's coding and documentation guidelines.
-
 ## Funding
 
 Co-funded by the European Union
@@ -196,6 +186,16 @@ These below may have further updates and require to considered in future milesto
 2. Review the task directories for specific implementation details
 3. Check the references directory for relevant standards and specifications
 4. Follow the contributing guidelines for any modifications
+
+## Contributing
+
+We welcome contributions from all collaborators.
+
+- Open issues for bugs, improvements, or questions
+- Submit pull requests following the repository structure
+- Use discussions (if enabled) for ideas and proposals
+
+By contributing, you agree to follow the project's coding and documentation guidelines.
 
 ## Contact
 
