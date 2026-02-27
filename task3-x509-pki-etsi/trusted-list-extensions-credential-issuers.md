@@ -1,14 +1,11 @@
 # Trusted List Extensions for Credential Issuers and Credential Type
 
-This document describes how Trusted Lists and registration certificates are used to configure which Credential Issuers (PID Providers, QEAA Providers, PuB-EAA Providers, EAA Providers) are authorised to issue specific **attestation types** (ARF RPRC_15, Topic 27).
-
-For the catalogue of attributes and catalogue of attestation schemes (which define **what** credential types exist), see [credential-catalogue.md](../task2-trust-framework/credential-catalogue.md).
+This document describes how Trusted Lists and registration certificates configure which Credential Issuers (PID Providers, QEAA Providers, PuB-EAA Providers, EAA Providers) are authorised to issue specific **attestation types** (ARF RPRC_15, Topic 27). For **what** credential types exist, see [credential-catalogue.md](../task2-trust-framework/credential-catalogue.md).
 
 ## Trust Model
 
-- Trust anchor placement and Trusted List responsibilities per provider type: see [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md) (Overview, Section 3) and ARF Topic 27, Topic 31.
-- Entity and terminology definitions: see [terms-and-entities.md](../task1-use-cases/terms-and-entities.md).
-- A different level of trust applies when evaluating non-qualified EAA Providers compared to QEAA Providers and PuB-EAA Providers (see [trust-infrastructure-schema.md](../task2-trust-framework/trust-infrastructure-schema.md) Overview for Trusted List responsibilities per provider type).
+- Trust anchor placement and TL responsibilities: [trust-infrastructure-schema.md](../task2-trust-framework/trust-infrastructure-schema.md) (Section 3), ARF Topic 27, Topic 31.
+- Entity definitions: [terms-and-entities.md](../task1-use-cases/terms-and-entities.md). Different trust levels apply for non-qualified EAA Providers vs QEAA/PuB-EAA Providers.
 
 ## Using Trusted Lists to Configure Allowed Credential Issuers for Specific Attestation Types
 
@@ -39,10 +36,10 @@ When a Trusted List entry is **self-contained** (embedded `allowedAttestationTyp
 
 | Risk | Description |
 |------|-------------|
-| **Conflict resolution** | No rule exists for what happens when TL metadata and Registry or registration certificate disagree on allowed attestation types. |
-| **Precedence** | No explicit hierarchy (e.g., whether Registry overrides TL when they differ, or vice versa) is defined. |
-| **Cross-checking** | There is no requirement for Wallet Units or Relying Parties to compare TL data with Registry or registration certificate during validation. |
-| **Self-contained TL staleness** | No rule defines how often TL entries must be updated when Registry or registration status changes. |
+| **Disagreement** | No rule when TL metadata and Registry/registration certificate disagree on allowed attestation types. |
+| **Precedence** | No hierarchy (Registry vs TL) defined. |
+| **Cross-checking** | No requirement to compare TL with Registry during validation. |
+| **Staleness** | No rule for TL update frequency when Registry or registration changes. |
 
 **Mitigation approaches** (for further discussion):
 - Define precedence rules (e.g., TL as canonical for RP validation vs. Registry as source of truth for registration state).
@@ -69,8 +66,8 @@ The following provisions from existing specifications inform conflict resolution
 
 ### Self-contained Trusted List Entries
 
-If the `allowedAttestationType` list is embedded directly in the Trusted List entry's `serviceInformationExtensions`, Wallet Units and Relying Parties can perform validation using only the Trusted List, without needing to retrieve a registration certificate.
-- When registration certificates are not available, Wallet Units should use the Registrar's online service URL (ARF ISSU_34a).
+- **Credential validation (presentation)**: When verifying issuer entitlement to an attestation type, embedded `allowedAttestationType` in the TL entry suffices; no registration certificate needed.
+- **Registration verification (issuance)**: Before requesting a PID or attestation, the Wallet Unit SHALL verify the provider is registered (ISSU_24a for PID, ISSU_34a for attestation): (a) registration certificate in Credential Issuer metadata, or (b) Registrar URI in Credential Issuer metadata.
 
 ### Wallet and Relying Party Behaviour
 
@@ -83,18 +80,13 @@ When a Wallet Unit or Relying Party receives a credential, it:
    - The issuer is present in the applicable Trusted List, and
    - The attestation type in the credential is listed in the issuer's authorised types.
 
-### Relation to Catalogue Entries
+Catalogue defines **what** credential types exist; Trusted Lists and registration certificates define **who** may issue them (RPRC_15, Topic 27). See [credential-catalogue.md](../task2-trust-framework/credential-catalogue.md).
 
-- The **catalogue of attributes** and **catalogue of attestation schemes** define **what** credential types and attributes exist and how they are structured (see [credential-catalogue.md](../task2-trust-framework/credential-catalogue.md)).
-- Trusted Lists and registration certificates define **who** is allowed to issue which of those types (ARF RPRC_15, Topic 27).
+## Non-normative Examples
 
-## Non-normative Examples of Trusted List Entries
+Illustrative only; no ETSI encoding prescribed.
 
-The following examples are **illustrative only** and do not prescribe a specific ETSI TL encoding, but show how information could be structured conceptually.
-
-### Example 1 – QEAA Provider authorised for PID and tax-residency attestations
-
-For each TL service entry:
+### Example 1 – QEAA Provider (PID, tax-residency)
 
 - `serviceTypeIdentifier` = `QEAAProvider`
 - `serviceInformationExtensions`:
@@ -102,18 +94,14 @@ For each TL service entry:
   - `allowedAttestationType`: `eu.europa.ec.eudi.tax-residency.1`
   - `registrationCertificateRef`: `<URL or hash of the registration certificate>`
 
-### Example 2 – PuB-EAA Provider authorised only for a specific public-sector entitlement
-
-For each TL service entry:
+### Example 2 – PuB-EAA Provider (public-benefit)
 
 - `serviceTypeIdentifier` = `PuBEAAProvider`
 - `serviceInformationExtensions`:
   - `allowedAttestationType`: `eu.europa.ec.eudi.public-benefit.1`
   - `registrationCertificateRef`: `<URL or hash of the registration certificate>`
 
-### Example 3 – Non-qualified EAA Provider with sectoral attestation types
-
-For each TL service entry:
+### Example 3 – EAA Provider (sectoral attestations)
 
 - `serviceTypeIdentifier` = `EAAProvider`
 - `serviceInformationExtensions`:
@@ -121,17 +109,14 @@ For each TL service entry:
   - `allowedAttestationType`: `eu.europa.ec.eudi.professional-licence.1`
   - `registrationCertificateRef`: `<URL or hash of the registration certificate>`
 
-**Note on registration certificates**: The `registrationCertificateRef` field is **optional**. If the `allowedAttestationType` list is embedded directly in the Trusted List entry, the entry is **self-contained** and sufficient for validation without retrieving a separate registration certificate.
+`registrationCertificateRef` is optional. With embedded `allowedAttestationType`, the entry is self-contained and sufficient for validation.
 
-### Example 4 – Self-contained Trusted List entry (without registration certificate reference)
-
-For a TL service entry that is self-contained:
+### Example 4 – Self-contained entry (no registrationCertificateRef)
 
 - `serviceTypeIdentifier` = `QEAAProvider`
 - `serviceInformationExtensions`:
   - `allowedAttestationType`: `eu.europa.ec.eudi.pid.1`
   - `allowedAttestationType`: `eu.europa.ec.eudi.tax-residency.1`
-  - *(No `registrationCertificateRef` field - the TL entry is self-contained)*
 
 ## Registration vs. Notification
 
@@ -153,19 +138,7 @@ For a TL service entry that is self-contained:
 
 ## References
 
-### Related Documents
-- [credential-catalogue.md](../task2-trust-framework/credential-catalogue.md) - Catalogue of attributes and catalogue of attestation schemes
-- [trust-infrastructure-schema.md](../task2-trust-framework/trust-infrastructure-schema.md) - Trust anchor placement and Trusted List publication
-- [terms-and-entities.md](../task1-use-cases/terms-and-entities.md) - Entity and terminology definitions
-
-### ARF Requirements (ARF v2.8.0)
-- [Topic 27 - Registration](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties) - RPRC_15: registration certificate SHALL contain attestation type(s)
-- [Topic 31 - Notification and Publication](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2320-topic-31---notification-and-publication-of-pid-provider-wallet-provider-attestation-provider-access-certificate-authority-and-provider-of-registration-certificates)
-
-### ETSI Specifications
-- ETSI TS 119 602 v1.1.1 – Lists of trusted entities; Data model (clause 6.3.15 NextUpdate)
-- ETSI TS 119 615 v1.3.1 – Procedures for using and interpreting EUMS national trusted lists (clause 4.4)
-
-### Legal Documents
-- [European Digital Identity Regulation (EU) 2024/1183](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183)
-- [Regulation (EU) No 910/2014](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0910) (eIDAS Regulation) - Article 22 on Trusted Lists
+- [credential-catalogue.md](../task2-trust-framework/credential-catalogue.md) | [trust-infrastructure-schema.md](../task2-trust-framework/trust-infrastructure-schema.md) | [terms-and-entities.md](../task1-use-cases/terms-and-entities.md)
+- ARF: [Topic 27](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties) | [Topic 31](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2320-topic-31---notification-and-publication-of-pid-provider-wallet-provider-attestation-provider-access-certificate-authority-and-provider-of-registration-certificates)
+- ETSI TS 119 602 v1.1.1 (6.3.15) | ETSI TS 119 615 v1.3.1 (4.4)
+- [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183) | [eIDAS 910/2014 Art.22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0910)
