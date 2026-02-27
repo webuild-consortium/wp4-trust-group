@@ -8,7 +8,6 @@ This task defines the conceptual trust framework for the WP4 Trust Infrastructur
 - **`authentication-authorization-policy-framework.md`** – Distinction between authentication and authorization, additive/subtractive policy principles, and federated trust mark use cases
 - **`credential-catalog-and-issuer-constraints.md`** – Overview and index for credential catalogues and Trusted List extensions for issuer constraints
 - **`credential-catalogue.md`** – Catalogue of attributes and catalogue of attestation schemes (ARF Section 5.5, CIR 2025/1569)
-- **`trusted-list-extensions-credential-issuers.md`** – Trusted List extensions for configuring which Credential Issuers are authorised to issue specific attestation types
 - **`entities-involved.md`** – Description of the entities participating in trust evaluation, the trust registry and trust infrastructure (aligned with the EUDIW ARF)
 - **`trusted-list-registration-trust-evaluation-matrix.md`** – Requirements matrix for trusted lists, participant registration and trust evaluation derived from EUDI Wallet ARF Annex 2
 - **`trust-infrastructure-schema.md`** – Structural schema of the trust infrastructure, including registries, entities and relationships

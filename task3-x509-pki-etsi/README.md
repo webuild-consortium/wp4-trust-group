@@ -6,6 +6,7 @@ This task specifies the X.509 PKI infrastructure for the WP4 Trust Infrastructur
 
 - **`README.md`** – Overview of the PKI role and its interaction with other tasks
 - **`etsi_trusted_lists_implementation_profile.md`** – Implementation profile for ETSI TS 119 612 and TS 119 602 trusted lists, including signing, distribution, examples and testing guidance
+- **`trusted-list-extensions-credential-issuers.md`** – Trusted List extensions for configuring which Credential Issuers are authorised to issue specific attestation types
 
 ## Scope of Task 3
 

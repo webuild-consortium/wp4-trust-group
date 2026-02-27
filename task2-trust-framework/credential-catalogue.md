@@ -2,7 +2,7 @@
 
 This document compiles evidence, references, and specifications for the EUDI Wallet **catalogue of attributes** and **catalogue of attestation schemes**, as defined in the Architecture and Reference Framework (ARF) v2.8.0 and Commission Implementing Regulation (EU) 2025/1569.
 
-For Trusted List extensions used to configure which Credential Issuers are authorised to issue specific attestation types, see [trusted-list-extensions-credential-issuers.md](trusted-list-extensions-credential-issuers.md).
+For Trusted List extensions used to configure which Credential Issuers are authorised to issue specific attestation types, see [trusted-list-extensions-credential-issuers.md](../task3-x509-pki-etsi/trusted-list-extensions-credential-issuers.md).
 
 ## Glossary and Definitions
 

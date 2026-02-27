@@ -769,7 +769,7 @@ For the EUDI Wallet ecosystem, the following extensions are used when configurin
 - **allowedAttestationType** (repeatable): List of attestation type identifiers (e.g. `eu.europa.ec.eudi.pid.1`, `eu.europa.ec.eudi.tax-residency.1`) that the listed provider is authorised to issue. When present in the Trusted List entry, the entry can be **self-contained** for validation (Wallet Units and Relying Parties need not retrieve a separate registration certificate).
 - **registrationCertificateRef** (optional): URL or reference to the provider's registration certificate or Registrar API where the list of allowed attestation types is maintained. When absent, the Trusted List entry alone is sufficient if `allowedAttestationType` is embedded.
 
-**Reference**: Full requirements, validation behaviour, and non-normative examples are in [Trusted List extensions for Credential Issuers](../task2-trust-framework/trusted-list-extensions-credential-issuers.md). A proposal for an optional `registrationCertificateHash` in ServiceInformationExtensions is also described there.
+**Reference**: Full requirements, validation behaviour, and non-normative examples are in [Trusted List extensions for Credential Issuers](trusted-list-extensions-credential-issuers.md). A proposal for an optional `registrationCertificateHash` in ServiceInformationExtensions is also described there.
 
 ## 8. Digital Signature Implementation
 
