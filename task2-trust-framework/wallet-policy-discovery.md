@@ -71,7 +71,7 @@ graph TD
 
 | Entity Type | Service Type URI | Reference |
 |-------------|------------------|-----------|
-| PID Provider | `http://uri.etsi.org/TrstSvc/Svctype/PID_Provider` | ETSI TS 119 612 clause 5.5.1 |
+| PID Provider | `http://uri.etsi.org/19602/SvcType/PID/Issuance` | ETSI TS 119 602 Table D.3 |
 | Qualified EAA Provider | `http://uri.etsi.org/TrstSvc/Svctype/QEAA_Provider` | ETSI TS 119 612 clause 5.5.1 |
 | Non-Qualified EAA Provider | `http://uri.etsi.org/TrstSvc/Svctype/Non_Q_EAA_Provider` | ETSI TS 119 612 clause 5.5.1 |
 | Public Sector EAA Provider | `http://uri.etsi.org/TrstSvc/Svctype/PUB_EAA_Provider` | ETSI TS 119 612 clause 5.5.1 |
@@ -79,7 +79,7 @@ graph TD
 | Legal Person Wallet Provider | `http://uri.etsi.org/TrstSvc/Svctype/LegalPersonWalletProvider` | ETSI TS 119 612 clause 5.5.1 |
 | Relying Party | `http://uri.etsi.org/TrstSvc/Svctype/RelyingParty` | ETSI TS 119 612 clause 5.5.1 |
 | Relying Party Intermediary | `http://uri.etsi.org/TrstSvc/Svctype/RelyingPartyIntermediary` | ETSI TS 119 612 clause 5.5.1 |
-| WRPAC Provider (Access Certificate CA) | `http://uri.etsi.org/TrstSvc/Svctype/CA/PKC` | ETSI TS 119 612 clause 5.5.1; ETSI TS 119 411-8 |
+| WRPAC Provider (Access Certificate CA) | `http://uri.etsi.org/19602/SvcType/WRPAC/Issuance` <br/> `http://uri.etsi.org/19602/SvcType/WRPAC/Revocation` | ETSI TS 119 602 Table F.3  |
 | WRPRC Provider (Registration Certificate Provider) | `http://uri.etsi.org/19602/SvcType/WRPRC/Issuance`<br/>`http://uri.etsi.org/19602/SvcType/WRPRC/Revocation` | ETSI TS 119 602 clause 3.4.1; ETSI TS 119 475 clause 3.1, 6 |
 
 > **Note:** WRPRC Provider URIs per ETSI TS 119 602. WRPAC/WRPRC Providers are notified by MS to EC (not registered). Registrar manages PID/Attestation/RP registration. See [Trust Infrastructure Schema](trust-infrastructure-schema.md#overview).
