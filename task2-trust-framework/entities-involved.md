@@ -2,11 +2,11 @@
 
 This document describes, according to EUDIW ARF, the list of entities involved in trust evaluation, trust registry, and trust infrastructure in the EUDI Wallet ecosystem.
 
-**Term and entity definitions** (acronyms, short definitions, role summaries) are maintained in a single document: **[Consolidated Terms and Entity Definitions](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task1-use-cases/terms-and-entities.md)**. The sections below repeat the entity list with the same structure and detail for continuity; for a single source of definitions, use the consolidated document.
+**Term and entity definitions** (acronyms, short definitions, role summaries) are maintained in a single document: **[Consolidated Terms and Entity Definitions](../task1-use-cases/terms-and-entities.md)**. The sections below repeat the entity list with the same structure and detail for continuity; for a single source of definitions, use the consolidated document.
 
 ## Entity index
 
-All **definitions** (roles, responsibilities, trust evaluation involvement) for the entities below are in **[Consolidated Terms and Entity Definitions](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task1-use-cases/terms-and-entities.md#3-core-trust-infrastructure-entities-detailed)**.
+All **definitions** (roles, responsibilities, trust evaluation involvement) for the entities below are in **[Consolidated Terms and Entity Definitions](../task1-use-cases/terms-and-entities.md#3-core-trust-infrastructure-entities-detailed)**.
 
 | # | Entity |
 |---|--------|
@@ -31,5 +31,5 @@ All **definitions** (roles, responsibilities, trust evaluation involvement) for 
 
 ## Trust Infrastructure Relationships and Trust Evaluation Criteria
 
-For **Trust Infrastructure Leads and Their Relationships** and **Trust Evaluation Criteria**, see [Consolidated Terms and Entity Definitions – Section 7 and Section 8](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task1-use-cases/terms-and-entities.md#7-trust-infrastructure-relationships-summary).
+For **Trust Infrastructure Leads and Their Relationships** and **Trust Evaluation Criteria**, see [Consolidated Terms and Entity Definitions – Section 7 and Section 8](../task1-use-cases/terms-and-entities.md#7-trust-infrastructure-relationships-summary).
 

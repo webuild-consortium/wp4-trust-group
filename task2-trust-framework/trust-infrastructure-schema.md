@@ -12,7 +12,7 @@ The trust infrastructure relies on three distinct but complementary processes:
 
 ### Acronyms and entity definitions
 
-See [Consolidated Terms and Entity Definitions](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task1-use-cases/terms-and-entities.md) for acronyms and entity type definitions (PID Provider, Attestation Provider, QEAA/PuB-EAA/EAA Provider, RP, Wallet Provider, etc.).
+See [Consolidated Terms and Entity Definitions](../task1-use-cases/terms-and-entities.md) for acronyms and entity type definitions (PID Provider, Attestation Provider, QEAA/PuB-EAA/EAA Provider, RP, Wallet Provider, etc.).
 
 ### Responsibilities Matrix
 

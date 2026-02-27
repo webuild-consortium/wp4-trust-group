@@ -52,3 +52,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fail: true
           failIfEmpty: true
+
+  markdownlint:
+    needs: should-run
+    if: needs.should-run.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run markdownlint
+        run: npx --yes markdownlint-cli2 "**/*.md" "#.github" "#docs/sectorial-authorities-banking-brief.md"
