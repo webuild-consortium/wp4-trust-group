@@ -562,7 +562,7 @@ Attestation providers (PID/EAA) must have their entitlements verified from the W
 | Provider Type              | Required Entitlement in WRPRC                | Additional WRPRC Field  | Reference                 |
 | -------------------------- | -------------------------------------------- | ----------------------- | ------------------------- |
 | PID Provider               | `https://uri.etsi.org/19475/Entitlement/PID_Provider`    | -                       | ETSI TS 119 475 Annex A.2.5 |
-| Qualified EAA Provider     | https://uri.etsi.org/19475/Entitlement/QEAA_Provider`   | `provided_attestations` | ETSI TS 119 475 Table 8   |
+| Qualified EAA Provider     | `https://uri.etsi.org/19475/Entitlement/QEAA_Provider`   | `provided_attestations` | ETSI TS 119 475 Table 8   |
 | Non-Qualified EAA Provider | `https://uri.etsi.org/19475/Entitlement/Non_Q_EAA_Provider`  | `provided_attestations` | ETSI TS 119 475 Table 8   |
 | Public Sector EAA Provider | `https://uri.etsi.org/19475/Entitlement/PUB_EAA_Provider` | `provided_attestations` | ETSI TS 119 475 Table 8   |
 
