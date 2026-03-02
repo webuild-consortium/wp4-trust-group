@@ -684,8 +684,8 @@ This pattern may warrant a distinct default policy consideration:
 
 | Parameter       | Value                          | Reference                    |
 | --------------- | ------------------------------ | ---------------------------- |
-| Cache Duration  | Until `NextUpdate` field       | ETSI TS 119 612 clause 5.3.9 |
-| Refresh Trigger | `NextUpdate` reached or manual | ETSI TS 119 612 clause 5.3.9 |
+| Cache Duration  | Until `NextUpdate` field       | ETSI TS 119 612 clause 5.3.15 |
+| Refresh Trigger | `NextUpdate` reached or manual | ETSI TS 119 612 clause 5.3.15 |
 | Fallback        | Use cached list if fetch fails | Implementation-specific      |
 
 
@@ -768,12 +768,12 @@ flowchart TD
 ### 7.1 Performance Optimization
 
 
-| Optimization    | Description                              | Reference                  |
-| --------------- | ---------------------------------------- | -------------------------- |
-| LOTL Caching    | Cache List of Trusted Lists locally      | ETSI TS 119 612 clause D.5 |
-| TSL Prefetching | Prefetch commonly used Member State TSLs | Implementation-specific    |
-| OCSP Stapling   | Accept stapled OCSP responses            | IETF RFC 6961              |
-| Delta Updates   | Support incremental TSL updates          | ETSI TS 119 612 clause 5.3 |
+| Optimization    | Description                                                         | Reference                       |
+| --------------- | ------------------------------------------------------------------- | ------------------------------- |
+| LOTL Caching    | Cache List of Trusted Lists locally (LoTL structure per D.5)        | Implementation-specific         |
+| TSL Prefetching | Prefetch commonly used Member State TSLs                            | Implementation-specific         |
+| OCSP Stapling   | Accept stapled OCSP responses                                        | IETF RFC 6961                   |
+| TSL Updates     | Fetch updated TSL from distribution points when NextUpdate reached   | ETSI TS 119 612 clause 5.3.15, 5.3.16 |
 
 
 ### 7.2 Offline Scenarios
