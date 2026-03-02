@@ -46,6 +46,8 @@ graph TD
     end
     
     subgraph EC_TL["EC-compiled Trusted Lists<br/>EU-level"]
+        spacer1[" "]
+        style spacer1 fill:none,stroke:none,color:none
         WPTL[Wallet Provider TL]
         PIDTL[PID Provider TL]
         ACATL[Access CA TL]
@@ -54,11 +56,15 @@ graph TD
     end
     
     subgraph MS_TL["MS TLP-compiled Trusted Lists<br/>National"]
+        spacer2[" "]
+        style spacer2 fill:none,stroke:none,color:none
         QTSPTL[Member State QTSP TL<br/>QEAA Providers]
         EAATL[National EAA Provider TL<br/>Non-qualified EAA]
     end
     
     subgraph REG["Registration & Registry<br/>Member State Registrar"]
+        spacer3[" "]
+        style spacer3 fill:none,stroke:none,color:none
         REG_ENT[Registrar<br/>Reg_01: PID/Attestation/RP]
         REGISTRY[Registry<br/>Reg_03, Reg_04<br/>ISSU_24a, ISSU_34a, RPRC_18]
     end
@@ -236,7 +242,7 @@ When a wallet receives a WRPRC, it validates the issuing WRPRC Provider:
 
 #### 2.3.4 Credential Catalogue, WRPRC Policy, and Sector Authorities
 
-The **catalogue of attributes** and **catalogue of attestation schemes** are established by the Commission (CIR 2025/1569 Art. 7–8, ARF 5.5). Per ARF RPRC_09 and RPRC_13, registration certificates (WRPRC) are **optional**—the Registrar MAY decide to issue them. When a WRPRC exists, future Relying Parties rely on **issuer authorization** to trust credential content; this is not solely a user decision. The catalogue of schemes (CIR 2025/1569 Art. 8) can specify "requirements concerning providers"; sector- or scheme-specific rules may impose when WRPRC or equivalent issuer authorization is required. For definitions, data model, scope, and maintenance, see [Credential Catalogue](credential-catalogue.md) and ETSI TS 119 475.
+The **catalogue of attributes** and **catalogue of attestation schemes** are established by the Commission (CIR 2025/1569 Art. 7–8, ARF 5.5). Per ARF RPRC_09 and RPRC_13, registration certificates (WRPRC) are **optional**—the Registrar MAY decide to issue them. When a WRPRC exists, future Relying Parties rely on **issuer authorization** to trust credential content; this is not solely a user decision. The catalogue of schemes (CIR 2025/1569 Art. 8) can specify "requirements concerning providers"; sector- or scheme-specific rules may impose when WRPRC or equivalent issuer authorization is required. For definitions, data model, scope, and maintenance, see [Credential Catalogue](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task2-trust-framework/credential-catalogue.md) and ETSI TS 119 475.
 
 #### 2.3.5 WRPAC vs WRPRC
 
@@ -555,10 +561,10 @@ Attestation providers (PID/EAA) must have their entitlements verified from the W
 
 | Provider Type              | Required Entitlement in WRPRC                | Additional WRPRC Field  | Reference                 |
 | -------------------------- | -------------------------------------------- | ----------------------- | ------------------------- |
-| PID Provider               | `id-etsi-qcs-SemanticsId-eudipidprovider`    | -                       | ETSI TS 119 475 Annex A.1 |
-| Qualified EAA Provider     | `id-etsi-qcs-SemanticsId-eudiqeaaprovider`   | `provided_attestations` | ETSI TS 119 475 Table 8   |
-| Non-Qualified EAA Provider | `id-etsi-qcs-SemanticsId-eudinqeaaprovider`  | `provided_attestations` | ETSI TS 119 475 Table 8   |
-| Public Sector EAA Provider | `id-etsi-qcs-SemanticsId-eudipubeaaprovider` | `provided_attestations` | ETSI TS 119 475 Table 8   |
+| PID Provider               | `https://uri.etsi.org/19475/Entitlement/PID_Provider`    | -                       | ETSI TS 119 475 Annex A.2.5 |
+| Qualified EAA Provider     | https://uri.etsi.org/19475/Entitlement/QEAA_Provider`   | `provided_attestations` | ETSI TS 119 475 Table 8   |
+| Non-Qualified EAA Provider | `https://uri.etsi.org/19475/Entitlement/Non_Q_EAA_Provider`  | `provided_attestations` | ETSI TS 119 475 Table 8   |
+| Public Sector EAA Provider | `https://uri.etsi.org/19475/Entitlement/PUB_EAA_Provider` | `provided_attestations` | ETSI TS 119 475 Table 8   |
 
 
 The `provided_attestations` field in the WRPRC specifies the attestation types the provider is authorized to issue (format, meta, claim). The wallet verifies that the attestation being issued matches the provider's authorized attestation types.
@@ -649,7 +655,7 @@ When an RP requests attributes and the WRPRC(s) from the RP or Registry do not c
 
 #### 4.3.2 No WRPRC Scenario and User Default Policy
 
-When the wallet does **not** query a policy repository (Registry/Registrar)—e.g., offline, user has chosen not to verify (RPRC_16), or WRPRC is unavailable—the wallet has only the attribute request. In that case:
+When the wallet does **not** query a policy repository (Registry/Registrar)—e.g., offline, user has chosen not to verify (RPRC_16, RPRC_18), or WRPRC is unavailable—the wallet has only the attribute request. In that case:
 
 1. **Responsibility:** There is no WRPRC to validate against; the responsibility for deciding what to disclose falls entirely on the user.
 2. **Wallet behaviour:** The wallet SHALL present all requested attributes for user consent, applying the user's **default policy** configured in the wallet instance.
@@ -810,7 +816,7 @@ For cross-border interactions, the wallet:
 | ------------------------ | ----------------------------------- | ---------------------------- |
 | TSL Tampering            | Verify TSL digital signature        | ETSI TS 119 612 clause 5.7   |
 | Man-in-the-Middle        | Use HTTPS for all TSL fetches       | ETSI TS 119 612 clause 6.1   |
-| Replay Attacks           | Check `ListIssueDateTime` freshness | ETSI TS 119 612 clause 5.3.8 |
+| Replay Attacks           | Check `ListIssueDateTime` freshness | ETSI TS 119 612 clause 5.3.14  |
 | Certificate Substitution | Bind certificate to TLS session     | Implementation-specific      |
 
 
