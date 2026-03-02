@@ -176,10 +176,10 @@ sequenceDiagram
     participant TL as Trusted List
     participant W as Wallet Instance
 
-    Note over RP,REG: Registration Phase (Reg_01, Reg_25; CIR 2025/848 Art. 6)
+    Note over RP,REG: Registration Phase (Reg_01, Reg_25, CIR 2025/848 Art. 6)
     RP->>REG: 1. Registration Request
     REG->>REG: 2. Identity proofing<br/>(ETSI TS 119 461)
-    REG-->>RP: 3. Registered; published in Registry
+    REG-->>RP: 3. Registered, published in Registry
 
     Note over RP,WRPRC_P: Certificate Issuance (ETSI TS 119 475 clause 6)
     RP->>WRPRC_P: 4. WRPRC Request
