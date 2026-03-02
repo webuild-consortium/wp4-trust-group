@@ -11,6 +11,7 @@ This task defines the conceptual trust framework for the WP4 Trust Infrastructur
 - **`entities-involved.md`** – Description of the entities participating in trust evaluation, the trust registry and trust infrastructure (aligned with the EUDIW ARF)
 - **`trusted-list-registration-trust-evaluation-matrix.md`** – Requirements matrix for trusted lists, participant registration and trust evaluation derived from EUDI Wallet ARF Annex 2
 - **`trust-infrastructure-schema.md`** – Structural schema of the trust infrastructure, including registries, entities and relationships
+- **`eudi-wallet-trust-and-entitlement-discovery.md`** – Policy discovery and trust verification from wallet (holder) perspective: WRPRC/WRPAC discovery, Trusted List validation, Registry lookup, entitlement and attribute validation (ARF RPRC_21, RPA_*)
 - **`issue-mdl-pub-eaa-discovery.md`** – Issue note on mDL, EAA publication and discovery in relation to the trust framework
 - **`etsi-identifier-handling.md`** – Handling of ETSI identifiers and their mapping into the trust infrastructure
 

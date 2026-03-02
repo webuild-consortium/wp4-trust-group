@@ -106,7 +106,7 @@ wp4-trust-group/
 
 ## Terms and definitions
 
-A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and-entities.md)** document collects all acronyms, key terminology, entity definitions, WEBUILD-specific entities (Trust Infrastructure Responsible Group), MVP/MVP+ definitions, and policy terms used across WP4 Trust Group deliverables. RACI definitions and matrices are kept in the onboarding documents ([Base Onboarding Framework](task1-use-cases/subtask1-1-onboarding/onboarding-base.md#raci-matrix) and each use case doc). Other documents reference the consolidated doc to avoid duplicating definitions.
+A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and-entities.md)** document collects all acronyms, key terminology, entity definitions, WEBUILD-specific entities (Trust Infrastructure Responsible Group), MVP/MVP+ definitions, and policy terms used across WP4 Trust Group deliverables. RACI definitions and matrices are kept in the onboarding documents ([Base Onboarding Framework](task1-use-cases/subtask1-1-onboarding/onboarding-base.md#raci-matrix) and each use case doc). Other documents reference the consolidated doc to avoid duplicating definitions. For policy discovery and trust verification from the wallet perspective (WRPRC/WRPAC, Trusted Lists, Registry, entitlement validation), see **[EUDI Wallet Trust and Entitlement Discovery](task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md)**.
 
 ## References
 
