@@ -333,27 +333,27 @@ When an RP has WRPRCs from multiple registers, the wallet aggregates entitlement
 
 ```mermaid
 flowchart TD
-    A[RP presents WRPAC] --> B{WRPRC in request?}
+    A[RP presents WRPAC] --> B{WRPRC in request}
     B -->|Yes| C[Validate provided WRPRC]
     B -->|No| D[Parse requested credential types]
-    D --> E[Query Credential Catalogue<br/>by credential type]
+    D --> E[Query Credential Catalogue by credential type]
     E --> F[Get WRPRC policy, applicable registers]
     F --> G[Query Registry by entity id]
     
-    G --> H{Entity found?}
-    H -->|Yes| I[Fetch WRPRC(s)]
-    H -->|No| J[Check Sectoral Registers<br/>from catalogue by entity id]
+    G --> H{Entity found}
+    H -->|Yes| I[Fetch WRPRCs]
+    H -->|No| J[Check Sectoral Registers from catalogue by entity id]
     
-    C --> K{Additional registers<br/>applicable?}
+    C --> K{Additional registers applicable}
     I --> K
     J --> K
     
-    K -->|Yes| L[Query additional registers<br/>by credential type, then entity id]
+    K -->|Yes| L[Query additional registers by credential type, then entity id]
     K -->|No| M[Use available WRPRCs]
     M --> N[Validate entitlements]
     L --> N
     
-    N --> O[Present combined entitlements<br/>to user with source indication]
+    N --> O[Present combined entitlements to user with source indication]
 ```
 
 | Scenario | Wallet Behavior | User Display |
@@ -542,15 +542,15 @@ Per RPRC_21, the wallet verifies that requested attributes are included in the R
 
 ```mermaid
 flowchart TD
-    A[1. Obtain WRPRC<br/>from request or Registry] --> B
-    B[2. Parse entitlements from WRPRC<br/><i>ETSI TS 119 475 Table 7, Table 9</i>] --> C
-    C[3. Parse requested attributes<br/><i>OpenID4VP, ISO 18013-5</i>] --> D
-    D[4. For each attribute: in WRPRC credentials?] --> E{In WRPRC?}
-    E -->|Yes| F[Authorized ✓]
-    E -->|No| G[Uncovered - alert user]
+    A[1. Obtain WRPRC from request or Registry] --> B
+    B[2. Parse entitlements from WRPRC] --> C
+    C[3. Parse requested attributes] --> D
+    D[4. For each attribute: in WRPRC credentials] --> E{In WRPRC}
+    E -->|Yes| F[Authorized]
+    E -->|No| G[Uncovered, alert user]
     F --> H[Include in consent screen]
     G --> H
-    H --> I[5. User: reject all or approve all RPA_10a]
+    H --> I[5. User reject all or approve all RPA_10a]
 ```
 
 ### 4.2 Entitlement-to-Attribute Mapping
@@ -683,10 +683,10 @@ flowchart TD
         end
         
         subgraph Attributes["Requested Attributes"]
-            A1["☑ Family Name - ✓ In WRPRC"]
-            A2["☑ Given Name - ✓ In WRPRC"]
-            A3["☑ Age Over 18 - ✓ In WRPRC"]
-            A4["☐ Full Address - ⚠ User default policy (not in entitlements)"]
+            A1["Family Name - In WRPRC"]
+            A2["Given Name - In WRPRC"]
+            A3["Age Over 18 - In WRPRC"]
+            A4["Full Address - User default policy, not in entitlements"]
         end
         
         subgraph Actions["User Actions"]
