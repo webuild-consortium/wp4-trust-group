@@ -123,17 +123,15 @@ sequenceDiagram
     alt WRPRC provided by RP
         Note over W: 9a. Validate WRPRC signature<br/>- Verify WRPRC Provider in Registration Cert Provider TL
     else WRPRC not provided
-        W->>NR: 9b. Query Registry/Credential Catalogue<br/>by credential type
-        NR-->>W: 10a. Return WRPRC policy per credential type
-        W->>NR: 10b. Query Registry<br/>by entity id (from WRPAC)
-        NR-->>W: 11. Return RP WRPRC(s)
-        Note over W: 12. Validate WRPRC signature
+        W->>NR: 9b. Query Registry<br/>by entity id (from WRPAC)
+        NR-->>W: 10. Return RP WRPRC(s)
+        Note over W: 11. Validate WRPRC signature
     end
     
-    W->>RCStatus: 13. HTTPS GET /wrprc/status-list<br/>(WRPRC status check)
-    RCStatus-->>W: 14. Status List HTTP Response
+    W->>RCStatus: 12. HTTPS GET /wrprc/status-list<br/>(WRPRC status check)
+    RCStatus-->>W: 13. Status List HTTP Response
     
-    Note over W: 15. Extract and Verify Entitlements from WRPRC<br/>- Parse entitlements<br/>- Validate requested attributes against entitlements
+    Note over W: 14. Extract and Verify Entitlements from WRPRC<br/>- Parse entitlements<br/>- Validate requested attributes against entitlements
 ```
 
 
@@ -163,17 +161,15 @@ sequenceDiagram
     alt WRPRC provided by Provider
         Note over W: 9a. Validate WRPRC signature<br/>- Verify WRPRC Provider in Registration Cert Provider TL
     else WRPRC not provided
-        W->>NR: 9b. Query Registry/Credential Catalogue<br/>by credential type (WRPRC policy, registers)
-        NR-->>W: 10a. Return WRPRC policy per credential type
-        W->>NR: 10b. Query Registry<br/>by Provider identifier (entity id)
-        NR-->>W: 11. Return Provider WRPRC(s)
-        Note over W: 12. Validate WRPRC signature
+        W->>NR: 9b. Query Registry<br/>by Provider identifier (entity id)
+        NR-->>W: 10. Return Provider WRPRC(s)
+        Note over W: 11. Validate WRPRC signature
     end
     
-    W->>RCStatus: 13. HTTPS GET /wrprc/status-list<br/>(WRPRC status check)
-    RCStatus-->>W: 14. Status List HTTP Response
+    W->>RCStatus: 12. HTTPS GET /wrprc/status-list<br/>(WRPRC status check)
+    RCStatus-->>W: 13. Status List HTTP Response
     
-    Note over W: 15. Verify Provider Entitlements from WRPRC<br/>- PID: id-etsi-qcs-SemanticsId-eudipidprovider<br/>- EAA: provided_attestations (attestation types)
+    Note over W: 14. Verify Provider Entitlements from WRPRC<br/>- PID: id-etsi-qcs-SemanticsId-eudipidprovider<br/>- EAA: provided_attestations (attestation types)
 ```
 
 
@@ -260,15 +256,15 @@ The **catalogue of attributes** and **catalogue of attestation schemes** are est
 
 ### 2.4 WRPRC Discovery via Registry
 
-When an RP presents only a WRPAC without a WRPRC, the wallet discovers the RP's registration information and WRPRCs through the **Registry** and **Credential Catalogue** (per Reg_03, Reg_04; CIR 2025/848 Art. 3(5)). The Registry is published by the Member State Registrar; the Credential Catalogue (managed by registers) indicates per credential type whether WRPRC is mandatory and which sectoral registers apply. See [§2.3.4 Credential Catalogue, WRPRC Policy, and Sector Authorities](#234-credential-catalogue-wrprc-policy-and-sector-authorities).
+When an RP presents only a WRPAC without a WRPRC, the wallet discovers the RP's registration information and WRPRCs through the **Registry** (per Reg_03, Reg_04; CIR 2025/848 Art. 3(5)). The Registry is published by the Member State Registrar. See [§2.3.4 Credential Catalogue, WRPRC Policy, and Sector Authorities](#234-credential-catalogue-wrprc-policy-and-sector-authorities).
 
-**Query order:** The wallet SHALL query by **credential type first** (to obtain WRPRC policy and applicable registers), then by **entity id** (to obtain WRPRC(s) for the specific RP or Provider).
+**Query order:** The wallet SHALL query by **entity id** (from WRPAC) to obtain WRPRC(s) or registry information for the specific RP or Provider.
 
 ```mermaid
 sequenceDiagram
     participant W as Wallet Instance
     participant RP as Relying Party
-    participant NR as Registry + Credential Catalogue
+    participant NR as Registry
     participant TL as Trusted List
 
     RP->>W: 1. Presentation Request (WRPAC only, no WRPRC)
@@ -278,11 +274,8 @@ sequenceDiagram
     W->>TL: 4. Fetch Trusted List
     TL-->>W: 5. Get Registry URI<br/>for RP's Member State
     
-    W->>NR: 6. Query Credential Catalogue<br/>by credential type(s)
-    NR-->>W: 7. Return WRPRC policy (mandatory?),<br/>applicable registers per credential type
-    
-    W->>NR: 8. Query Registry<br/>by entity id (RP identifier)
-    NR-->>W: 9. Return RP registration info<br/>including WRPRC(s) or registry_uri
+    W->>NR: 6. Query Registry<br/>by entity id (RP identifier)
+    NR-->>W: 7. Return RP registration info<br/>including WRPRC(s) or registry_uri
     
     Note over W: 10. Validate WRPRC(s)<br/>- Verify signature by WRPRC Provider<br/>- Check entitlements vs requested attributes
     
@@ -297,8 +290,7 @@ sequenceDiagram
 | Method                          | Description                                                                                               | Reference                                                                                                                   |
 | ------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | **WRPRC in Request**            | RP includes WRPRC(s) in presentation request                                                              | ETSI TS 119 475 clause 4.5                                                                                                  |
-| **Credential Catalogue Query**  | Wallet queries Credential Catalogue by **credential type** first: WRPRC mandatory?, applicable registers? | [§2.3.4](#234-credential-catalogue-wrprc-policy-and-sector-authorities); [credential-catalogue.md](credential-catalogue.md) |
-| **Registry Query**              | Wallet queries Registry by **entity id** (RP/Provider identifier from WRPAC) after credential type        | Reg_06; CIR 2025/848 Art. 3(5)                                                                                              |
+| **Registry Query**              | Wallet queries Registry by **entity id** (RP/Provider identifier from WRPAC)                              | Reg_06; CIR 2025/848 Art. 3(5)                                                                                              |
 | **Sectoral Register Query**     | Wallet queries sector-specific register (e.g., financial, healthcare)                                     | Sector-specific regulations                                                                                                 |
 | **Cross-Border Register Query** | Wallet queries EU-level or foreign registers                                                              | ETSI TS 119 612 LOTL                                                                                                        |
 | **registry_uri in WRPRC**       | WRPRC contains URL to issuing registry API                                                                | ETSI TS 119 475 Table 7, Annex B.2.1                                                                                        |
@@ -350,15 +342,14 @@ graph TD
 
 #### 2.4.3 Register Discovery via Trusted List
 
-The wallet discovers available registers through the Trusted List infrastructure. The query order is **credential type first**, then **entity id**:
+The wallet discovers available registers through the Trusted List infrastructure:
 
 1. **LOTL Query** - Fetch List of Trusted Lists (EC-maintained) to discover pointers to EC-compiled TLs and MS TLP-compiled TLs (per [Trust Infrastructure Schema](trust-infrastructure-schema.md#33-list-of-trusted-lists-lotl))
 2. **TSL Query** - Each Trusted List may list:
   - National WRP Register endpoints
   - Sectoral register endpoints  
   - WRPRC Provider services
-3. **Credential Catalogue Query** - Query by **credential type** to obtain WRPRC policy (mandatory/optional) and applicable registers for that credential type
-4. **Register Query** - Query each relevant register by **entity id** (RP or Provider identifier)
+3. **Register Query** - Query each relevant register by **entity id** (RP or Provider identifier)
 
 #### 2.4.4 Multiple WRPRC Aggregation
 
@@ -369,19 +360,16 @@ flowchart TD
     A[RP presents WRPAC] --> B{WRPRC in request}
     B -->|Yes| C[Validate provided WRPRC]
     B -->|No| D[Parse requested credential types]
-    D --> E[Query Credential Catalogue by credential type]
-    E --> F[Get WRPRC policy, applicable registers]
-    F --> G[Query Registry by entity id]
-    
-    G --> H{Entity found}
+    D --> E[Query Registry by entity id]
+    E --> H{Entity found}
     H -->|Yes| I[Fetch WRPRCs]
-    H -->|No| J[Check Sectoral Registers from catalogue by entity id]
+    H -->|No| J[Check Sectoral Registers by entity id]
     
     C --> K{Additional registers applicable}
     I --> K
     J --> K
     
-    K -->|Yes| L[Query additional registers by credential type, then entity id]
+    K -->|Yes| L[Query additional registers by entity id]
     K -->|No| M[Use available WRPRCs]
     M --> N[Validate entitlements]
     L --> N
@@ -444,7 +432,7 @@ The wallet obtains the counterparty's certificates:
 | OpenID4VP Request   | JWT/CWT WRPRC embedded in request                   | ETSI TS 119 475 clause 6.2, 6.3                |
 
 
-> **Note:** If WRPRC is not provided by the counterparty, the wallet SHALL first query the **Credential Catalogue** by **credential type** (to obtain WRPRC policy and applicable registers), then query the **Registry** by **entity id** from the WRPAC (`organizationIdentifier` for legal persons, `serialNumber` for natural persons), per **RPRC_18** and [Trust Infrastructure Schema](trust-infrastructure-schema.md) Reg_03, Reg_04. See [§2.4 WRPRC Discovery via Registry](#24-wrprc-discovery-via-registry).
+> **Note:** If WRPRC is not provided by the counterparty, the wallet SHALL query the **Registry** by **entity id** from the WRPAC (`organizationIdentifier` for legal persons, `serialNumber` for natural persons), per **RPRC_18** and [Trust Infrastructure Schema](trust-infrastructure-schema.md) Reg_03, Reg_04. See [§2.4 WRPRC Discovery via Registry](#24-wrprc-discovery-via-registry).
 
 ### 3.2 Step 2: Trusted List Lookup
 
@@ -502,7 +490,7 @@ The wallet performs the following lookups:
 | Scenario                  | Action                                                                                      | Reference                                                                        |
 | ------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | WRPRC provided in request | Use provided WRPRC                                                                          | ETSI TS 119 475 clause 4.5                                                       |
-| WRPRC not provided        | 1) Query Credential Catalogue by credential type; 2) Query Registry by entity id from WRPAC | Reg_03, Reg_04; CIR 2025/848 Art. 3(5); [§2.4](#24-wrprc-discovery-via-registry) |
+| WRPRC not provided        | Query Registry by entity id from WRPAC                                                        | Reg_03, Reg_04; CIR 2025/848 Art. 3(5); [§2.4](#24-wrprc-discovery-via-registry) |
 
 
 #### 3.4.2 WRPRC Signature Validation
