@@ -276,6 +276,7 @@ tools/trusted_lists/
 - Standalone Python program with CLI
 - Generate trusted lists according to ETSI TS 119 612 2.1.1 (XML) and TS 119 602 (JSON/XML) in both formats
 - Support entity-specific trusted lists for all entity types (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider, wallet-provider)
+- **Wallet Provider TL** (EUWalletProvidersList, TS 119 602 Annex E): produced by this pipeline
 - Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../task3-x509-pki-etsi/)
 - **Signature libraries**: `signxml` (XAdES) or `python-xades`; `jwcrypto` (JAdES) or `python-jose`; `cryptography` for certificates
 
@@ -301,8 +302,9 @@ trusted-list-producer --entity-type <type> --output-dir <path> [--sign]
 - Standalone Python program with CLI
 - **MUST produce all trusted lists AND the List of Trusted Lists in a single execution**:
   1. Generate all entity-specific trusted lists (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider, wallet-provider) in both XML and JSON formats
-  2. Generate List of Trusted Lists (LoTL) referencing all generated trusted lists (incl. Wallet Provider TL per TS 119 602 Annex E) and TLs from WP4 members
+  2. Generate List of Trusted Lists (LoTL) referencing all generated trusted lists (incl. Wallet Provider TL per TS 119 602 Annex E), TLs from WP4 members, and external TLPs/static Access and Registration CA lists
   3. All trusted lists must be signed before being referenced in the LoTL
+- **Baseline CA**: Must be on Access and Registration CA TLs
 - Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../task3-x509-pki-etsi/)
 - **Signature libraries**: `signxml` (XAdES) or `python-xades`; `jwcrypto` (JAdES) or `python-jose`; `cryptography` for certificates
 
