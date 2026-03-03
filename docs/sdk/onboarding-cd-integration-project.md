@@ -432,6 +432,12 @@ ETSI_LOTE_TYPE_URIS = {
 
 ## Additional Context
 
+### WE BUILD Practical
+
+- **Validation**: Human-attended PR; participants filtered by consortium relationship
+- **Certs**: Provisioned via PR thread (public)
+- **Flows**: Biweekly meetings, Slack, ad-hoc sessions
+
 ### Entity Types
 
 - `rp` (Relying Parties), `pub-eaa-provider` (Public EAA Providers), `pid-provider` (PID Providers), `qeaa-provider` (Qualified EAA Providers), `eaa-provider` (EAA Providers)
