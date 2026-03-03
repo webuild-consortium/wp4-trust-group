@@ -87,7 +87,7 @@ tools/entity_registration_validator/
   - The access certificate MUST comply with specifications defined in [Task 3](../task3-x509-pki-etsi/)
   - Base validator validates CSR format, structure, and compliance with Task 3 requirements
   - **Allowed key types per eIDAS 2.0 (ETSI TS 119 312, ENISA EUCC v.2)**:
-    - **RSA**: Minimum 3000 bits (RSA 2048 is legacy, sunset date 31 Dec 2025)
+    - **RSA**: 3072 bits (ETSI TS 119 312; RSA 2048 legacy, sunset 31 Dec 2025)
     - **ECDSA**: Supported (curves per ETSI TS 119 312 tables 4, 6, 7)
     - **EdDSA**: Supported (per ETSI TS 119 312)
 - **Entity identifier uniqueness requirement**:
