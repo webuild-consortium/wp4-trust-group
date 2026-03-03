@@ -428,6 +428,7 @@ ETSI_LOTE_TYPE_URIS = {
 
 - **Task 2**: [`task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md`](../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md) - Entity registration requirements
 - **Task 3**: [`task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md`](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) - Trusted list generation and signing
+- **TL validation**: [eIDAS validation tests](https://eidas.ec.europa.eu/efda/validation-tests)
 - **ARF Requirements**: See EUDI Wallet Architecture and Reference Framework Annex 2
 - **Implementing Acts**: CIR 2025/848 and related regulations
 
