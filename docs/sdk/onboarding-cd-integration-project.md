@@ -4,7 +4,7 @@ TL and LoTL generation, signing, publication per [Task 3](../task3-x509-pki-etsi
 
 ## Solution Overview
 
-1. Generate and sign TLs per ETSI TS 119 612 and TS 119 602
+1. Generate and sign TLs per ETSI TS 119 612 2.1.1 (TLv5) and TS 119 602. TLv6 (29 Apr 2026): TS 119 612 2.4.1, XAdES-BASELINE-B ([upgrade](https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/887386519/TLv6+is+coming+Upgrade+now+to+avoid+signature+validation+failures))
 2. Generate and sign LoTL
 3. Publish to GitHub Pages
 
@@ -272,7 +272,7 @@ tools/trusted_lists/
 
 **Requirements**:
 - Standalone Python program with CLI
-- Generate trusted lists according to ETSI TS 119 612 (XML) and TS 119 602 (JSON/XML) in both formats
+- Generate trusted lists according to ETSI TS 119 612 2.1.1 (XML) and TS 119 602 (JSON/XML) in both formats
 - Support entity-specific trusted lists for all entity types (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider)
 - Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../task3-x509-pki-etsi/)
 - **Signature libraries**: `signxml` (XAdES) or `python-xades`; `jwcrypto` (JAdES) or `python-jose`; `cryptography` for certificates
