@@ -81,7 +81,7 @@ tools/entity_registration_validator/
   - Base field validators (`schema_validators/field_validators.py`) with common field-level validation logic
   - Each entity-specific validator inherits from base validator and extends with entity-specific requirements
 - Process JSON or YAML files describing entities
-- Support entity types: `rp`, `pub-eaa-provider`, `pid-provider`, `qeaa-provider`, `eaa-provider`
+- Support entity types: `rp`, `pub-eaa-provider`, `pid-provider`, `qeaa-provider`, `eaa-provider`, `wallet-provider`, `ebwoid-provider`
 - **X.509 Certificate Signing Request (CSR) requirement** (validated by `schema_validators/base.py`):
   - Templates MUST include X.509 CSR for the access certificate only
   - The access certificate MUST comply with specifications defined in [Task 3](../task3-x509-pki-etsi/)
@@ -124,6 +124,8 @@ entity-registration-validator --file <path> --entity-type <type> [--schema <sche
   - `onboarding/pid-provider/` - PID Provider registrations
   - `onboarding/qeaa-provider/` - Qualified EAA Provider registrations
   - `onboarding/eaa-provider/` - EAA Provider registrations
+  - `onboarding/wallet-provider/` - Wallet Provider registrations
+  - `onboarding/ebwoid-provider/` - EBWOID Provider registrations
 
 **File Naming Convention**:
 - Entity files: `<entity_acronym>_<unique_identifier>.json` or `.yaml`
@@ -273,7 +275,7 @@ tools/trusted_lists/
 **Requirements**:
 - Standalone Python program with CLI
 - Generate trusted lists according to ETSI TS 119 612 2.1.1 (XML) and TS 119 602 (JSON/XML) in both formats
-- Support entity-specific trusted lists for all entity types (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider)
+- Support entity-specific trusted lists for all entity types (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider, wallet-provider)
 - Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../task3-x509-pki-etsi/)
 - **Signature libraries**: `signxml` (XAdES) or `python-xades`; `jwcrypto` (JAdES) or `python-jose`; `cryptography` for certificates
 
@@ -298,8 +300,8 @@ trusted-list-producer --entity-type <type> --output-dir <path> [--sign]
 **Requirements**:
 - Standalone Python program with CLI
 - **MUST produce all trusted lists AND the List of Trusted Lists in a single execution**:
-  1. Generate all entity-specific trusted lists (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider) in both XML and JSON formats
-  2. Generate List of Trusted Lists (LoTL) referencing all generated trusted lists
+  1. Generate all entity-specific trusted lists (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider, wallet-provider) in both XML and JSON formats
+  2. Generate List of Trusted Lists (LoTL) referencing all generated trusted lists (incl. Wallet Provider TL per TS 119 602 Annex E) and TLs from WP4 members
   3. All trusted lists must be signed before being referenced in the LoTL
 - Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../task3-x509-pki-etsi/)
 - **Signature libraries**: `signxml` (XAdES) or `python-xades`; `jwcrypto` (JAdES) or `python-jose`; `cryptography` for certificates
