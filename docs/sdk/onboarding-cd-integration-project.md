@@ -1,15 +1,16 @@
-# [FEATURE] Implement Automated Compliance Registry with CD Pipeline
+# [FEATURE] Trusted List CD Pipeline
 
-The WP4 Trust Infrastructure requires an automated system to evaluate and register the compliance of entities (Wallet Providers, Relying Parties, and PID/Attestation Providers), and to compile and publish List of Trusted Lists (LoTL) and Trusted Lists (TLs) in both XML and JSON formats. Currently, we need an automated mechanism to validate entity information, test against configured platforms, compile trusted lists, and publish them following the ETSI standards and the ARF, as defined in [Task 3](../task3-x509-pki-etsi/).
+TL and LoTL generation, signing, publication per [Task 3](../task3-x509-pki-etsi/). Registry/validation → separate PR.
 
 ## Solution Overview
 
-Implement a comprehensive Continuous Deployment (CD) system that:
-1. Validates entity registration files against templates and schemas
-2. Executes compliance tests against configured test platforms provided by weBuild participants
-3. Automatically generates and signs trusted lists according to ETSI TS 119 612 and TS 119 602
-4. Publishes entities to appropriate trusted lists upon successful validation
-5. Automatically publishes trusted lists to GitHub Pages for public access
+1. Generate and sign TLs per ETSI TS 119 612 and TS 119 602
+2. Generate and sign LoTL
+3. Publish to GitHub Pages
+
+**Registry rule**: WRP in registry recognised by WP4 → trust anchor on TL. Query: `GET {registry}/wrp?identifier={id}`.
+
+**`onboarding/`**: Data only (entity id + cert). Registries submit entities for TL inclusion.
 
 ## Functional Requirements
 
