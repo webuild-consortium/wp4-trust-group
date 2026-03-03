@@ -139,109 +139,9 @@ entity-registration-validator --file <path> --entity-type <type> [--schema <sche
 - Entity files: `<entity_acronym>_<unique_identifier>.json` or `.yaml`
 - Example: `rp_example-corp-12345.json`
 
-### 3. GitHub Workflow for PR Validation
+### 3. PR Validation / Test Compliance
 
-**Location**: `.github/workflows/entity-onboarding-validation.yml`
-
-**Trigger Conditions**:
-- Activates on PRs that modify files in `onboarding/` directories
-- Detects file additions/modifications in `onboarding/*/` paths
-
-**Workflow Steps**:
-
-1. **File Detection and Entity Identifier Check**:
-   - Identify changed files in `onboarding/` directories
-   - Extract entity type from directory path
-   - Extract entity identifier from filename
-   - **Check entity identifier uniqueness**:
-     - Query existing published Trusted Lists to check if entity identifier already exists
-     - If identifier exists: treat PR as an **update** to existing entity in the Trusted List
-     - If identifier is new: treat PR as a **new registration**
-     - Reject PR if duplicate identifier found for different entity (same identifier cannot exist for multiple entities)
-
-2. **Template Validation**:
-   - Load appropriate JSON Schema template for entity type
-   - Validate entity file against schema using JSON Schema validator
-   - Report validation errors in PR comments
-
-3. **Field-Level Validation**:
-   - For each field in the validated template:
-     - Call extensible validation method (inheritable base class)
-     - Support custom validators per entity type
-     - Collect all validation results
-
-4. **Test Platform Integration**:
-   - Read test platform configuration from `.ini` file (e.g., `test_platforms.ini`)
-   - **MUST support multiple test platforms** - the `.ini` file can contain multiple platform configurations
-   - For each test platform with `enabled = true`:
-     - Extract platform endpoint and test parameters from `.ini` file
-     - **Registration tokens/API keys MUST be retrieved from environment variables** using the `!ENV:` prefix in the `.ini` file
-     - The workflow MUST read `token = !ENV:VARIABLE_NAME` from the `.ini` file and retrieve the value from the corresponding environment variable (populated from GitHub Secrets)
-     - Execute compliance tests against the platform
-     - Collect test results
-   - **All active platforms** (those with `enabled = true`) **MUST be executed** in parallel or sequentially
-   - Support multiple non-competing test platforms
-
-5. **Test Report Generation**:
-   - Generate comprehensive test report
-   - Include validation results, schema validation status, and test platform results
-   - Post report as PR comment automatically
-
-6. **Certificate Provisioning** (when registration succeeds):
-   - If all validations pass AND all test platforms return success:
-     - Generate access certificate and registration certificate for the registered entity (for rp and pid/attestation providers only, excluding wallet providers)
-     - Access certificate MUST comply with specifications defined in [Task 3](../task3-x509-pki-etsi/)
-     - **MUST publish certificates in clear text within the PR thread** (certificates contain public keys only):
-       - Post access certificate and registration certificate as PR comment, since certificates are public information
-     - **Private keys for signature operations**:
-       - MUST be provided via environment variables
-       - MUST be stored in GitHub Secrets
-       - Used for signing trusted lists and certificates
-     - Mark workflow as successful
-     - Add label `ready-for-review` to PR
-   - If any validation or test fails:
-     - Mark workflow as failed
-     - Add label `validation-failed` to PR
-     - Block merge until resolved
-
-**Configuration File Format** (`test_platforms.ini`):
-```ini
-[credimi.io]
-enabled = true
-endpoint = https://api.credimi.io/test
-timeout = 30
-token = !ENV:CREDIMI_API_KEY
-
-[platform2]
-enabled = true
-endpoint = https://platform2.example.com/test
-timeout = 30
-token = !ENV:PLATFORM2_API_KEY
-
-[platform3]
-enabled = false
-endpoint = https://platform3.example.com/test
-timeout = 30
-token = !ENV:PLATFORM3_API_KEY
-```
-
-**Security Requirements**:
-- **Registration tokens/API keys MUST use `!ENV:` prefix in the `.ini` file** to indicate they must be retrieved from environment variables
-- The `token = !ENV:VARIABLE_NAME` format signals that the value MUST be taken from the environment variable `VARIABLE_NAME`
-- All authentication tokens/API keys **MUST be stored as GitHub Secrets** and provided to the workflow as environment variables
-- GitHub Secret naming convention: `<PLATFORM_ID>_API_KEY` (e.g., `CREDIMI_API_KEY`, `PLATFORM2_API_KEY`)
-- The workflow MUST retrieve secrets from GitHub Secrets and provide them as environment variables
-- The `.ini` file MUST support multiple platforms, and all platforms with `enabled = true` MUST be executed
-- **Private keys for signature operations**:
-  - MUST be stored in GitHub Secrets
-  - MUST be provided via environment variables to the workflow
-  - Used for signing trusted lists, certificates, and other cryptographic operations
-  - GitHub Secret naming convention: `TL_SIGNING_PRIVATE_KEY`, `CERT_SIGNING_PRIVATE_KEY`, etc.
-
-**Pilot Integration**:
-- Andrea D'Intino and team will integrate with `credimi.io` as the first test platform
-- Configuration should support additional non-competing platforms
-- Platform integration should be pluggable/extensible
+Schema validation, test platform integration, cert provisioning → separate PR. See [test-compliance-cd.md](test-compliance-cd.md).
 
 ### 4. Trusted List Generation Tools
 
@@ -411,7 +311,7 @@ ETSI_LOTE_TYPE_URIS = {
 - [ ] Access certificate complies with Task 3 specifications
 - [ ] PRs with existing entity identifiers are treated as updates to published Trusted Lists
 - [ ] All tools include unit and integration tests using pytest (minimum 95% code coverage)
-- [ ] GitHub workflow triggers on PRs modifying `onboarding/` files, validates schema, executes test platforms, posts results
+- [ ] PR validation workflow (schema, test platforms) → see [test-compliance-cd.md](test-compliance-cd.md)
 - [ ] When registration succeeds: certificates generated (for rp and providers only, excluding wallet providers) and published in clear text in PR thread
 - [ ] Private keys for signature operations stored in GitHub Secrets and provided via environment variables
 - [ ] PR can only be merged when all validations and tests pass
@@ -421,14 +321,14 @@ ETSI_LOTE_TYPE_URIS = {
 - [ ] All Python code uses `settings.py` for configuration (no hardcoded constants)
 - [ ] Directory structure `trusted_lists/` and `onboarding/` created with proper naming conventions
 - [ ] Test platform configuration supports multiple platforms via `.ini` file; all active platforms executed; tokens in GitHub Secrets
-- [ ] Integration with credimi.io functional (pilot)
+- [ ] Test platform integration (credimi.io pilot) → separate PR
 
 ## Component Affected
 
 - [x] [Task 2: Trust Framework](../task2-trust-framework/) (entity templates and requirements)
 - [x] [Task 3: X.509 PKI with ETSI alignments](../task3-x509-pki-etsi/) (trusted list generation and signing)
 - [x] [Task 4: Trust Infrastructure API](../task4-trust-infrastructure-api/) (onboarding process)
-- [x] [Task 7: Testing and Validation](../task7-testing-validation/) (test platform integration)
+- [ ] [Task 7: Testing and Validation](../task7-testing-validation/) (test platform → separate PR)
 
 ## Additional Context
 
@@ -460,7 +360,7 @@ ETSI_LOTE_TYPE_URIS = {
 ### Workflow Example
 
 1. Participant creates PR with entity file: `onboarding/rp/example-corp-12345.json` (including X.509 CSR for access certificate)
-2. Workflow validates schema, executes field-level validations, calls test platforms
+2. Workflow validates (when integrated); test platform → separate PR
 3. If all pass: access certificate and registration certificate generated (for rp and providers only, excluding wallet providers), posted in clear text as PR comment
 4. On merge: trusted lists generated and published to GitHub Pages
 
