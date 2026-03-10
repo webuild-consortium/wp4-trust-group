@@ -202,7 +202,7 @@ We welcome contributions from all collaborators.
 - Submit pull requests following the repository structure.
 - Use discussions (if enabled) for ideas and proposals.
 
-By contributing, you agree to follow the project's coding and documentation guidelines.
+By contributing, you agree to follow the project's coding and documentation guidelines above.
 
 ## Contact
 
