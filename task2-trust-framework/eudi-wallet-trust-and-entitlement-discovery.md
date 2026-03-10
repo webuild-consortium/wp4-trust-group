@@ -479,7 +479,7 @@ The wallet performs the following lookups:
 | Service Status    | Verify `ServiceCurrentStatus` is `granted` in Access CA TL                        | ETSI TS 119 612 clause 5.5.4                                                                         |
 | Certificate Path  | Build and validate certificate chain to trust anchor                              | IETF RFC 5280 clause 6                                                                               |
 | Validity Period   | Check `Not Before` and `Not After` dates                                          | IETF RFC 5280 clause 4.1.2.5                                                                         |
-| Revocation Status | Check OCSP or CRL for WRPAC                                                       | ETSI TS 119 411-8 GEN-6.6.1-08                                                                       |
+| Revocation Status | Check OCSP or CRL for WRPAC                                                       | ETSI TS 119 411-8 CSS-6.6.2-01 and CSS-6.6.3-01                                                                       |
 
 
 ### 3.4 Step 4: WRPRC Validation
