@@ -149,7 +149,7 @@ In addition to the above, this project is developed in constant alignment with *
 
 ### European Commission Technical Specifications
 
-These below may have further updates and require to considered in future milestones.
+The following specifications are subject to ongoing updates, which will be integrated and addressed in future project milestones.
 
 - **EC TS02 v0.9** (2025-04) - Specification of systems enabling the notification and subsequent publication of Provider information
 - **EC TS05 V1.0** (2025-06) - Common Formats and API for Relying Party Registration Information (upcoming ETSI TS)
