@@ -202,7 +202,7 @@ Per ETSI TS 119 475 v1.2.1 Table 10 and GEN-5.2.4-09: use `intermediary` with `s
   ],
   "intermediary": {
     "sub": "LEIDE-529900INTERMEDIARY01",
-    "name": "Verification Services AG"
+    "sname": "Verification Services AG"
   },
   "policy_id": ["0.4.0.19475.3.1"],
   "iat": 1704067200,
@@ -214,7 +214,7 @@ Per ETSI TS 119 475 v1.2.1 Table 10 and GEN-5.2.4-09: use `intermediary` with `s
 |-------|----------------|--------------|-------------|
 | `intermediary` | Table 10; B.2.1 `usesIntermediary` | Annex I.14 | Intermediary indication |
 | `intermediary.sub` | Table 10 | Annex I.14 | Intermediary identifier from WRPAC |
-| `intermediary.name` | Table 10 (sname) | Annex I.14 | Intermediary name from WRPAC |
+| `intermediary.sname` | Table 10 (sname) | Annex I.14 | Intermediary name from WRPAC |
 
 ---
 
