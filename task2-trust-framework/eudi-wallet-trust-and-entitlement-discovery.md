@@ -533,16 +533,21 @@ Entitlement ::= SEQUENCE {
 **Common Entitlement OIDs:**
 
 
-| Entitlement                              | OID/URI                                      | Reference                 |
-| ---------------------------------------- | -------------------------------------------- | ------------------------- |
-| PID Provider                             | `id-etsi-qcs-SemanticsId-eudipidprovider`    | ETSI TS 119 475 Annex A.1 |
-| Qualified EAA Provider                   | `id-etsi-qcs-SemanticsId-eudiqeaaprovider`   | ETSI TS 119 475 Annex A.2 |
-| Non-Qualified EAA Provider               | `id-etsi-qcs-SemanticsId-eudinqeaaprovider`  | ETSI TS 119 475 Annex A.3 |
-| Public Sector EAA Provider               | `id-etsi-qcs-SemanticsId-eudipubeaaprovider` | ETSI TS 119 475 Annex A.4 |
-| General Relying Party (Service Provider) | `id-etsi-qcs-SemanticsId-eudirp`             | ETSI TS 119 475 Annex A.5 |
+| Entitlement                              | OID                                      | URI                                                       | Reference                 |
+| ---------------------------------------- | ---------------------------------------- | --------------------------------------------------------- | ------------------------- |
+| General Relying Party (Service Provider) | `id-etsi-qcs-SemanticsId-eudirp`          | `https://uri.etsi.org/19475/Entitlement/Service_Provider`  | ETSI TS 119 475 Annex A.2.1 |
 
 
 #### 3.5.2 For Attestation Providers
+
+Attestation providers (PID/EAA) Entitlement OIDs:
+
+| Provider Type                               | OID                                      | URI                                                       | Reference                 |
+| ---------------------------------------- | ---------------------------------------- | --------------------------------------------------------- | ------------------------- |
+| PID Provider                             | `id-etsi-qcs-SemanticsId-eudipidprovider` | `https://uri.etsi.org/19475/Entitlement/PID_Provider`      | ETSI TS 119 475 Annex A.2.5 |
+| Qualified EAA Provider                   | `id-etsi-qcs-SemanticsId-eudiqeaaprovider` | `https://uri.etsi.org/19475/Entitlement/QEAA_Provider`    | ETSI TS 119 475 Annex A.2.2 |
+| Non-Qualified EAA Provider               | `id-etsi-qcs-SemanticsId-eudinqeaaprovider` | `https://uri.etsi.org/19475/Entitlement/Non_Q_EAA_Provider` | ETSI TS 119 475 Annex A.2.3 |
+| Public Sector EAA Provider               | `id-etsi-qcs-SemanticsId-eudipubeaaprovider` | `https://uri.etsi.org/19475/Entitlement/PUB_EAA_Provider` | ETSI TS 119 475 Annex A.2.4 |
 
 Attestation providers (PID/EAA) must have their entitlements verified from the WRPRC:
 
