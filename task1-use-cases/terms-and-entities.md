@@ -13,14 +13,19 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 | **ARF** | Architecture and Reference Framework (EUDI Wallet) | ARF |
 | **CAB** | Conformity Assessment Body | ARF |
 | **CA** | Certificate Authority | ARF |
+| **CIR** | Commission Implementing Regulation | EU |
+| **CWT** | CBOR Web Token | RFC 8392 |
+| **EAA** | Electronic Attestation of Attributes | ARF |
 | **EC** | European Commission | ARF |
 | **EAA Provider** | non-qualified Electronic Attestation of Attributes Provider | ARF |
 | **EUDI** | European Digital Identity | ARF |
 | **EUDIW** | European Digital Identity Wallet | Regulation (EU) 2024/1183 |
+| **JWT** | JSON Web Token | RFC 7519 |
 | **LoTL** | List of Trusted Lists | ARF, ETSI TS 119 612 |
 | **MS** | Member State | ARF |
 | **MS TLP** | Member State Trusted List Provider | ARF |
 | **NAB** | National Accreditation Body | ARF |
+| **OCSP** | Online Certificate Status Protocol | RFC 6960 |
 | **PID** | Person Identification Data | ARF |
 | **PuB-EAA Provider** | Public Sector Body Electronic Attestation of Attributes Provider | ARF |
 | **QEAA Provider** | Qualified Electronic Attestation of Attributes Provider (a QTSP under eIDAS) | ARF |
@@ -28,7 +33,12 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 | **RP** | Relying Party | ARF |
 | **TL** | Trusted List | ARF |
 | **TLP** | Trusted List Provider | ARF |
+| **TSL** | Trusted Service List | ETSI TS 119 612 |
+| **TSP** | Trust Service Provider | eIDAS, ETSI |
 | **WP** | Wallet Provider | ARF |
+| **WRP** | Wallet-Relying Party | CIR (EU) 2025/848, ETSI TS 119 411-8 |
+| **WRPAC** | Wallet-Relying Party Access Certificate | ETSI TS 119 411-8 |
+| **WRPRC** | Wallet-Relying Party Registration Certificate | ETSI TS 119 411-8 |
 | **WUA** | Wallet Unit Attestation | ARF |
 
 ---
