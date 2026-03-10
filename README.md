@@ -136,8 +136,8 @@ A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf)
 - **ETSI EN 319 411-1** - Certificate policy requirements (NCP); Access Certificate Authorities SHALL comply with at least this for ARF Reg_11.
   - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.01.01_60/en_31941101v010101p.pdf)
-- **ETSI TS 119 475** (v01.01.01) - Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)
-  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf)
+- **ETSI TS 119 475** (v1.2.1) - Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)
+  - [Official Document (ETSI TS 119 475 v1.2.1)](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf)
 - **ETSI TS 119 412-6** (v1.1.1) - Electronic Signatures and Trust Infrastructures (ESI); Certificate Profiles; Part 6: Certificate profile requirements for PID, Wallet, EAA, QEAA, and PSBEAA providers
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941206/01.01.01_60/ts_11941206v010101p.pdf)
 - **ETSI TS 119 472-2** (v1.1.1) - Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party
