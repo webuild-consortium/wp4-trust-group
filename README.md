@@ -187,7 +187,10 @@ The following specifications are subject to ongoing updates, which will be integ
 1. Clone the repository
 2. Review the task directories for specific implementation details
 3. Check the references directory for relevant standards and specifications
-4. Follow the contributing guidelines for any modifications
+1. Clone the repository.
+2. Review the task directories for specific implementation details.
+3. Check the references directory for relevant standards and specifications.
+4. Follow the contributing guidelines for any modifications.
 
 ## Contributing
 
