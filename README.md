@@ -134,7 +134,9 @@ A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119615/01.03.01_60/ts_119615v010301p.pdf)
 - **ETSI TS 119 411-8** (v01.01.01) - Access Certificate Policy for EUDI Wallet Relying Parties (access certificate issuance per ARF Reg_11).
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf)
-- **ETSI EN 319 411-1** - Certificate policy requirements (NCP); Access Certificate Authorities SHALL comply with at least this for ARF Reg_11.
+- **ETSI TS 119 411-8** (v01.01.01) - Access Certificate Policy for EUDI Wallet Relying Parties (access certificate issuance per ARF Reg_11)
+- [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf)
+- **ETSI EN 319 411-1** - Certificate policy requirements (NCP); Access Certificate Authorities SHALL comply with at least this for ARF Reg_11
   - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.01.01_60/en_31941101v010101p.pdf)
 - **ETSI TS 119 475** (v01.01.01) - Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf)
