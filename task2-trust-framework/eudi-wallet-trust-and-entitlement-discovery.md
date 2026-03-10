@@ -1,4 +1,4 @@
-# EUDI Wallet Policy Discovery and Trust Verification
+# EUDI Wallet Policy Discovery and Trust Evaluation
 
 This document describes the policy discovery process performed by an EUDI Wallet Instance (holder) when interacting with **Relying Parties (RPs)** and **Attestation Providers** (PID Providers, QEAA Providers, PuB-EAA Providers, non-qualified EAA Providers). The discovery mechanism enables the wallet to verify the trustworthiness and entitlements of counterparties before disclosing user attributes.
 
@@ -427,9 +427,9 @@ The wallet obtains the counterparty's certificates:
 
 | Source              | Description                                         | Reference                                      |
 | ------------------- | --------------------------------------------------- | ---------------------------------------------- |
-| Included in Request | RP/Provider includes WRPRC in presentation request  | ETSI TS 119 475 clause 4.5                     |
+| Included in Request (proximity) | RP includes WRPRC in ISO/IEC 18013-5 DeviceRequest (requestInfo / euWrprc) | ETSI TS 119 472-2 V1.1.1 ISO/IEC 18013-5-REQ-11 |
 | Registry API        | Wallet queries Registry using identifier from WRPAC | Reg_06, Reg_03, Reg_04; CIR 2025/848 Art. 3(5) |
-| OpenID4VP Request   | JWT/CWT WRPRC embedded in request                   | ETSI TS 119 475 clause 6.2, 6.3                |
+| OpenID4VP Request   | WRPRC in Request Object (RO) JWT body via verifier_info (e.g. registration_cert) | ETSI TS 119 472-2 V1.1.1 clause 6.3.1.4 (OIDFVP-HAIP_COMMON_RO_REQ-05, -06) |
 
 
 > **Note:** If WRPRC is not provided by the counterparty, the wallet SHALL query the **Registry** by **entity id** from the WRPAC (`organizationIdentifier` for legal persons, `serialNumber` for natural persons), per **RPRC_18** and [Trust Infrastructure Schema](trust-infrastructure-schema.md) Reg_03, Reg_04. See [§2.4 WRPRC Discovery via Registry](#24-wrprc-discovery-via-registry).
