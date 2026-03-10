@@ -17,6 +17,7 @@ For official document links and extended references (including TS 119 615, TS 11
 | ETSI TS 119 602 v1.1.1   | Electronic Signatures and Trust Infrastructures; Lists of Trusted Entities (LoTE)                                                 |
 | ETSI TS 119 411-8 v1.1.1 | Policy and security requirements for TSPs issuing certificates; Part 8: Access Certificate Policy for EUDI Wallet Relying Parties |
 | ETSI TS 119 475 v1.1.1   | Relying party attributes supporting EUDI Wallet user's authorization decisions                                                    |
+| ETSI TS 119 472-2 v1.1.1 | Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party                   |
 | ETSI EN 319 412-1        | Certificate Profiles; Part 1: Overview and common data structures                                                                 |
 | ETSI TS 119 412-6 v1.1.1 | Certificate profile requirements for PID, Wallet, EAA, QEAA, and PSBEAA providers                                                 |
 | ETSI EN 319 401          | General Policy Requirements for Trust Service Providers                                                                           |
@@ -247,7 +248,7 @@ The **catalogue of attributes** and **catalogue of attestation schemes** are est
 | ------------ | ------------------------------------------------------------ | -------------------------------------------------------------------------- |
 | Format       | X.509 Certificate                                            | JWT or CWT                                                                 |
 | Issuer       | WRPAC Provider (CA)                                          | WRPRC Provider (TSP)                                                       |
-| Policy       | ETSI TS 119 411-8                                            | ETSI TS 119 475 clause 6                                                   |
+| Policy       | ETSI TS 119 411-8                                     | ETSI TS 119 475 clause 6                                                   |
 | Usage        | TLS client authentication                                    | Signed presentation requests                                               |
 | Entitlements | In `qcStatements` extension                                  | In `entitlements` claim                                                    |
 | Validation   | Certificate chain to Access CA in Access CA TL (EC-compiled) | Signature by WRPRC Provider in Registration Cert Provider TL (EC-compiled) |
@@ -427,9 +428,9 @@ The wallet obtains the counterparty's certificates:
 
 | Source              | Description                                         | Reference                                      |
 | ------------------- | --------------------------------------------------- | ---------------------------------------------- |
-| Included in Request (proximity) | RP includes WRPRC in ISO/IEC 18013-5 DeviceRequest (requestInfo / euWrprc) | ETSI TS 119 472-2 V1.1.1 ISO/IEC 18013-5-REQ-11 |
+| Included in Request (proximity) | RP includes WRPRC in ISO/IEC 18013-5 DeviceRequest (requestInfo / euWrprc) | ETSI TS 119 472-2 ISO/IEC 18013-5-REQ-11 |
 | Registry API        | Wallet queries Registry using identifier from WRPAC | Reg_06, Reg_03, Reg_04; CIR 2025/848 Art. 3(5) |
-| OpenID4VP Request   | WRPRC in Request Object (RO) JWT body via verifier_info (e.g. registration_cert) | ETSI TS 119 472-2 V1.1.1 clause 6.3.1.4 (OIDFVP-HAIP_COMMON_RO_REQ-05, -06) |
+| OpenID4VP Request   | WRPRC in Request Object (RO) JWT body via verifier_info (e.g. registration_cert) | ETSI TS 119 472-2 clause 6.3.1.4 (OIDFVP-HAIP_COMMON_RO_REQ-05, -06) |
 
 
 > **Note:** If WRPRC is not provided by the counterparty, the wallet SHALL query the **Registry** by **entity id** from the WRPAC (`organizationIdentifier` for legal persons, `serialNumber` for natural persons), per **RPRC_18** and [Trust Infrastructure Schema](trust-infrastructure-schema.md) Reg_03, Reg_04. See [§2.4 WRPRC Discovery via Registry](#24-wrprc-discovery-via-registry).
@@ -439,7 +440,7 @@ The wallet obtains the counterparty's certificates:
 The wallet performs the following lookups:
 
 ```xml
-<!-- Reference: ETSI TS 119 612 v2.4.1 -->
+<!-- Reference: ETSI TS 119 612 -->
 
 <!-- Step 2a: Fetch LOTL -->
 <ListOfTrustedLists>
@@ -507,19 +508,13 @@ The wallet performs the following lookups:
 
 ### 3.5 Step 5: Entitlement Verification
 
-#### 3.5.1 For Relying Parties
+The wallet extracts and verifies entitlements from the counterparty's WRPRC. The following subsections apply to **Relying Parties** and **PID/EAA Providers** in a unified way: common entitlements are listed once; verification steps are specified per counterparty type.
 
-Extract and verify entitlements from WRPRC:
+#### 3.5.1 Common Entitlements (OID and URI)
 
+Entitlements are carried in the WRPRC `entitlements` claim (and, for RPs, in the `credentials` claim). The following table lists all counterparty types and their standard entitlement identifiers (ETSI TS 119 475 Annex A).
 
-| Entitlement Source | Field                                       | Reference                           |
-| ------------------ | ------------------------------------------- | ----------------------------------- |
-| WRPRC (JWT)        | `entitlements` claim                        | ETSI TS 119 475 clause 6.2, Table 7 |
-| WRPRC (CWT)        | `entitlements` claim                        | ETSI TS 119 475 clause 6.3          |
-| WRPRC (JWT/CWT)    | `credentials` claim (for service providers) | ETSI TS 119 475 Table 9             |
-
-
-**Entitlement Structure (ETSI TS 119 475 Annex A):**
+**Entitlement structure (ETSI TS 119 475 Annex A):**
 
 ```
 entitlements ::= SEQUENCE OF Entitlement
@@ -530,37 +525,38 @@ Entitlement ::= SEQUENCE {
 }
 ```
 
-**Common Entitlement OIDs:**
+| Counterparty type                      | Entitlement (label)                       | OID                                      | URI                                                       | Reference                   |
+| -------------------------------------- | ----------------------------------------- | ---------------------------------------- | --------------------------------------------------------- | --------------------------- |
+| Relying Party                          | General Relying Party (Service Provider)   | `id-etsi-qcs-SemanticsId-eudirp`         | `https://uri.etsi.org/19475/Entitlement/Service_Provider`  | ETSI TS 119 475 Annex A.2.1 |
+| PID Provider                            | PID Provider                              | `id-etsi-qcs-SemanticsId-eudipidprovider` | `https://uri.etsi.org/19475/Entitlement/PID_Provider`      | ETSI TS 119 475 Annex A.2.5 |
+| Qualified EAA Provider                  | Qualified EAA Provider                    | `id-etsi-qcs-SemanticsId-eudiqeaaprovider` | `https://uri.etsi.org/19475/Entitlement/QEAA_Provider`    | ETSI TS 119 475 Annex A.2.2 |
+| Non-Qualified EAA Provider              | Non-Qualified EAA Provider                | `id-etsi-qcs-SemanticsId-eudinqeaaprovider` | `https://uri.etsi.org/19475/Entitlement/Non_Q_EAA_Provider` | ETSI TS 119 475 Annex A.2.3 |
+| Public Sector EAA Provider              | Public Sector EAA Provider                | `id-etsi-qcs-SemanticsId-eudipubeaaprovider` | `https://uri.etsi.org/19475/Entitlement/PUB_EAA_Provider` | ETSI TS 119 475 Annex A.2.4 |
 
+#### 3.5.2 Verification for Relying Parties
 
-| Entitlement                              | OID                                      | URI                                                       | Reference                 |
-| ---------------------------------------- | ---------------------------------------- | --------------------------------------------------------- | ------------------------- |
-| General Relying Party (Service Provider) | `id-etsi-qcs-SemanticsId-eudirp`          | `https://uri.etsi.org/19475/Entitlement/Service_Provider`  | ETSI TS 119 475 Annex A.2.1 |
+For an **RP** (Relying Party), the wallet obtains entitlements from the WRPRC and verifies that requested attributes are covered by the RP's registered entitlements (see [§4](#4-attribute-request-validation)).
 
+| Entitlement source | WRPRC field                               | Reference                                  |
+| ------------------ | ----------------------------------------- | ------------------------------------------ |
+| WRPRC (JWT)        | `entitlements` claim                      | ETSI TS 119 475 clause 6.2, Table 7 |
+| WRPRC (CWT)        | `entitlements` claim                      | ETSI TS 119 475 clause 6.3          |
+| WRPRC (JWT/CWT)    | `credentials` claim (requestable attestations) | ETSI TS 119 475 Table 9         |
 
-#### 3.5.2 For Attestation Providers
+The RP's WRPRC shall include the **General Relying Party (Service Provider)** entitlement; the `credentials` claim specifies which attestations and attributes the RP is authorized to request.
 
-Attestation providers (PID/EAA) Entitlement OIDs:
+#### 3.5.3 Verification for PID/EAA Providers
 
-| Provider Type                               | OID                                      | URI                                                       | Reference                 |
-| ---------------------------------------- | ---------------------------------------- | --------------------------------------------------------- | ------------------------- |
-| PID Provider                             | `id-etsi-qcs-SemanticsId-eudipidprovider` | `https://uri.etsi.org/19475/Entitlement/PID_Provider`      | ETSI TS 119 475 Annex A.2.5 |
-| Qualified EAA Provider                   | `id-etsi-qcs-SemanticsId-eudiqeaaprovider` | `https://uri.etsi.org/19475/Entitlement/QEAA_Provider`    | ETSI TS 119 475 Annex A.2.2 |
-| Non-Qualified EAA Provider               | `id-etsi-qcs-SemanticsId-eudinqeaaprovider` | `https://uri.etsi.org/19475/Entitlement/Non_Q_EAA_Provider` | ETSI TS 119 475 Annex A.2.3 |
-| Public Sector EAA Provider               | `id-etsi-qcs-SemanticsId-eudipubeaaprovider` | `https://uri.etsi.org/19475/Entitlement/PUB_EAA_Provider` | ETSI TS 119 475 Annex A.2.4 |
+For a **PID Provider** or **EAA Provider** (Qualified, Non-Qualified, or Public Sector), the wallet verifies that the provider's WRPRC contains the corresponding entitlement from the table in [§3.5.1](#351-common-entitlements-oid-and-uri) and, for EAA providers, the `provided_attestations` field.
 
-Attestation providers (PID/EAA) must have their entitlements verified from the WRPRC:
+| Counterparty type              | Required entitlement (URI) in WRPRC       | Additional WRPRC field     | Reference                   |
+| ------------------------------ | ----------------------------------------- | -------------------------- | --------------------------- |
+| PID Provider                   | `https://uri.etsi.org/19475/Entitlement/PID_Provider`      | —                          | ETSI TS 119 475 Annex A.2.5 |
+| Qualified EAA Provider         | `https://uri.etsi.org/19475/Entitlement/QEAA_Provider`     | `provided_attestations`    | ETSI TS 119 475 Table 8   |
+| Non-Qualified EAA Provider     | `https://uri.etsi.org/19475/Entitlement/Non_Q_EAA_Provider` | `provided_attestations`    | ETSI TS 119 475 Table 8   |
+| Public Sector EAA Provider     | `https://uri.etsi.org/19475/Entitlement/PUB_EAA_Provider`  | `provided_attestations`    | ETSI TS 119 475 Table 8   |
 
-
-| Provider Type              | Required Entitlement in WRPRC                | Additional WRPRC Field  | Reference                 |
-| -------------------------- | -------------------------------------------- | ----------------------- | ------------------------- |
-| PID Provider               | `https://uri.etsi.org/19475/Entitlement/PID_Provider`    | -                       | ETSI TS 119 475 Annex A.2.5 |
-| Qualified EAA Provider     | `https://uri.etsi.org/19475/Entitlement/QEAA_Provider`   | `provided_attestations` | ETSI TS 119 475 Table 8   |
-| Non-Qualified EAA Provider | `https://uri.etsi.org/19475/Entitlement/Non_Q_EAA_Provider`  | `provided_attestations` | ETSI TS 119 475 Table 8   |
-| Public Sector EAA Provider | `https://uri.etsi.org/19475/Entitlement/PUB_EAA_Provider` | `provided_attestations` | ETSI TS 119 475 Table 8   |
-
-
-The `provided_attestations` field in the WRPRC specifies the attestation types the provider is authorized to issue (format, meta, claim). The wallet verifies that the attestation being issued matches the provider's authorized attestation types.
+The `provided_attestations` field specifies the attestation types the provider is authorized to issue (format, meta, claim). The wallet verifies that the attestation being issued matches the provider's authorized attestation types.
 
 ---
 
@@ -697,7 +693,7 @@ This pattern may warrant a distinct default policy consideration:
 ### 5.2 Trust List Update Monitoring
 
 ```xml
-<!-- Reference: ETSI TS 119 612 v2.4.1 -->
+<!-- Reference: ETSI TS 119 612 -->
 <SchemeInformation>
   <ListIssueDateTime>2024-01-01T00:00:00Z</ListIssueDateTime>
   <NextUpdate>2024-01-02T00:00:00Z</NextUpdate>
