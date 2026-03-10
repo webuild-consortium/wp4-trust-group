@@ -145,7 +145,7 @@ A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and
 - **ETSI TS 119 472-2** (v1.1.1) - Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.01.01_60/ts_11947202v010101p.pdf)
 
-Project alignment with **EUDI Architecture and Reference Framework (ARF) v2.8.0** (terminology LoTE, Reg_10/10a/11/31, RPA_02/RPA_04, access certificate and trusted list standards).
+In addition to the above, this project is developed in constant alignment with **EUDI Architecture and Reference Framework (ARF) v2.8.0** specifications, adopting LoTE terminology and including core regulatory frameworks (Reg_10/11/31, RPA_02/RPA_04),  and access certificate and trusted list standards. 
 
 ### European Commission Technical Specifications
 
