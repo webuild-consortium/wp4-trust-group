@@ -130,7 +130,7 @@ A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and
   - [SIE XSD Schema (ListOfTrustedLists)](https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_sie_xsd.xsd)
 - **ETSI TS 119 602** (v01.01.01) - Electronic Signatures and Trust Infrastructures (ESI); **Lists of trusted entities; Data model**. Trusted lists in other formats (JSON, XML, CBOR, ASN.1)
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf)
-- **ETSI TS 119 615** (v01.03.01) - Procedures for using and interpreting EUMS national trusted lists (consumption/validation of LoTL and national trusted lists; implements CID 2015/1505).
+- **ETSI TS 119 615** (v01.03.01) - Procedures for using and interpreting EUMS national trusted lists (consumption/validation of LoTL and national trusted lists; implements CID 2015/1505)
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119615/01.03.01_60/ts_119615v010301p.pdf)
 - **ETSI TS 119 411-8** (v01.01.01) - Access Certificate Policy for EUDI Wallet Relying Parties (access certificate issuance per ARF Reg_11).
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf)
