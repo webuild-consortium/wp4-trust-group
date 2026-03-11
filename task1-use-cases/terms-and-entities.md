@@ -206,14 +206,16 @@ The **Trust Infrastructure Responsible Group** is a designated group within the 
 - Maintaining and updating Trusted Lists
 - Hosting Trusted Lists
 - Engaging with entities during onboarding and troubleshooting
+- Operates one or more registers, either jointly under shared registration instructions or independently as a sub-group with register specific instructions
 
 The following table lists the entities that are part of the Trust Infrastructure Responsible Group:
 
-| Entity | Legal Name | Website | Administrative Contact | Technical Contact |
-|--------|------------|---------|------------------------|------------------|
-| IDunion SCE | GER-IDunion SCE | [https://www.idunion.eu](https://www.idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) |
-| Forkbomb | Forkbomb BV | [https://forkbomb.eu](https://forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) |
-| Department for digital transformation | Department for digital transformation | [https://innovazione.gov.it](https://innovazione.gov.it) | [g.messori@innovazione.gov.it](mailto:g.messori@innovazione.gov.it) | [gi.demarco@innovazione.gov.it](mailto:gi.demarco@innovazione.gov.it) |
+| Entity | Legal Name | Website | Administrative Contact | Technical Contact | Designation |
+|--------|------------|---------|------------------------|------------------|---------------|
+| IDunion SCE | GER-IDunion SCE | [https://www.idunion.eu](https://www.idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) | TBD |
+| Forkbomb | Forkbomb BV | [https://forkbomb.eu](https://forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) | TBD | 
+| Department for digital transformation | Department for digital transformation | [https://innovazione.gov.it](https://innovazione.gov.it) | [g.messori@innovazione.gov.it](mailto:g.messori@innovazione.gov.it) | [gi.demarco@innovazione.gov.it](mailto:gi.demarco@innovazione.gov.it) | TBD |
+| Raidiam | Raidiam Services Limited | [https://raidiam.com](https://raidiam.com) | TBD | TBD | TBD |
 
 **Note**: Additional entities may be added to this group as designated by the WP4 Trust Infrastructure group. Consortium participants can propose themselves by applying a Pull Request to add themselves to the list and be actively involved in the registration operations and review processes.
 
