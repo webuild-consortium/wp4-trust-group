@@ -21,21 +21,19 @@ This example demonstrates Wallet-Relying Party Registration Certificates (WRPRC)
 
 ### JWT Header
 
-Per ETSI TS 119 475 clause 5.2.2 (Table 5):
+Per ETSI TS 119 475 v1.2.1 clause 5.2.2 (Table 5):
 
 ```json
 {
   "typ": "rc-wrp+jwt",
   "alg": "ES384",
-  "b64": true,
-  "cty": "b64",
   "x5c": ["<base64-encoded-certificate-chain>"]
 }
 ```
 
 | Field | ETSI Reference | Description |
 |-------|----------------|-------------|
-| `typ` | ETSI TS 119 475 Table 5 | `rc-wrp+jwt` for JWT format |
+| `typ` | ETSI TS 119 475 v1.2.1 Table 5 | `rc-wrp+jwt` for JWT format |
 | `alg` | ETSI TS 119 182-1 clause 5.1.2 | Signing algorithm |
 | `x5c` | ETSI TS 119 182-1 clause 5.1.8 | Certificate chain |
 
@@ -99,7 +97,7 @@ Per ETSI TS 119 475 v1.2.1 Table 7 and GEN-5.2.4-02: subject uses flat `sub` (id
 
 ### Service and Purpose (Service Provider Specific)
 
-Per ETSI TS 119 475 Table 9 and GEN-5.2.4-06:
+Per ETSI TS 119 475 v1.2.1 Table 9 and GEN-5.2.4-06:
 
 | Field | ETSI Reference | CIR 2025/848 | Description |
 |-------|----------------|--------------|-------------|
@@ -263,7 +261,7 @@ Per ETSI TS 119 475 v1.2.1 Table 7: natural person uses `sub_gn`, `sub_fn`, and 
 
 ## Entitlements and Sub-Entitlements
 
-Per ETSI TS 119 475 Annex A:
+Per ETSI TS 119 475 v1.2.1 Annex A:
 
 | Entitlement | URI | OID | Reference |
 |-------------|-----|-----|-----------|
@@ -305,7 +303,7 @@ Per ETSI TS 119 475 Annex A:
 
 ## WRPRC Policy OID
 
-Per ETSI TS 119 475 clause 6.1.3:
+Per ETSI TS 119 475 v1.2.1 clause 6.1.3:
 
 ```
 wrprc OBJECT IDENTIFIER ::=
