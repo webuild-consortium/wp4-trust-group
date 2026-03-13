@@ -547,7 +547,7 @@ The RP's WRPRC shall include the **General Relying Party (Service Provider)** en
 
 #### 3.5.3 Verification for PID/EAA Providers
 
-For a **PID Provider** or **EAA Provider** (Qualified, Non-Qualified, or Public Sector), the wallet verifies that the provider's WRPRC contains the corresponding entitlement from the table in [§3.5.1](#351-common-entitlements-oid-and-uri) and, for EAA providers, the `provided_attestations` field.
+For a **PID Provider** or **EAA Provider** (Qualified, Non-Qualified, or Public Sector), the wallet verifies that the provider's WRPRC contains the corresponding entitlement from the table in [§3.5.1](#351-common-entitlements-oid-and-uri) and, for EAA providers, the `provides_attestations` field.
 
 | Counterparty type              | Required entitlement (URI) in WRPRC       | Additional WRPRC field     | Reference                   |
 | ------------------------------ | ----------------------------------------- | -------------------------- | --------------------------- |

@@ -173,6 +173,7 @@ Per ETSI TS 119 475 v1.2.1 Table 9 and GEN-5.2.4-06:
   },
   "public_body": false,
   "policy_id": ["0.4.0.19475.3.1"],
+  "certificate_policy": "https://wrp-register.nl/policies/service-provider",
   "iat": 1704067200,
   "status": { "status_list": { "idx": 89, "uri": "https://status.wrp-register.nl/statuslist/1" } }
 }
