@@ -8,7 +8,7 @@ This example demonstrates Wallet-Relying Party Registration Certificates (WRPRC)
 
 | Reference | Document |
 |-----------|----------|
-| ETSI TS 119 475 | Relying party attributes supporting EUDI Wallet user's authorization decisions |
+| ETSI TS 119 475 v1.2.1 | Relying party attributes supporting EUDI Wallet user's authorization decisions |
 | ETSI TS 119 182-1 | JAdES digital signatures; Part 1: Building blocks and JAdES baseline signatures |
 | ETSI EN 319 411-1 | Policy and security requirements for Trust Service Providers; Part 1: General requirements |
 | CIR (EU) 2025/848 | Commission Implementing Regulation on the registration of wallet-relying parties |
@@ -21,38 +21,35 @@ This example demonstrates Wallet-Relying Party Registration Certificates (WRPRC)
 
 ### JWT Header
 
-Per ETSI TS 119 475 clause 5.2.2 (Table 5):
+Per ETSI TS 119 475 v1.2.1 clause 5.2.2 (Table 5):
 
 ```json
 {
   "typ": "rc-wrp+jwt",
   "alg": "ES384",
-  "b64": true,
-  "cty": "b64",
   "x5c": ["<base64-encoded-certificate-chain>"]
 }
 ```
 
 | Field | ETSI Reference | Description |
 |-------|----------------|-------------|
-| `typ` | ETSI TS 119 475 Table 5 | `rc-wrp+jwt` for JWT format |
+| `typ` | ETSI TS 119 475 v1.2.1 Table 5 | `rc-wrp+jwt` for JWT format |
 | `alg` | ETSI TS 119 182-1 clause 5.1.2 | Signing algorithm |
 | `x5c` | ETSI TS 119 182-1 clause 5.1.8 | Certificate chain |
 
 ### JWT Payload
 
+Per ETSI TS 119 475 v1.2.1 Table 7: subject is conveyed by `sub` (identifier string), `sub_ln` (legal name for legal persons), and `srv_description` / `supervisory_authority` (replacing legacy `service` / `dpa`). The `claim` (singular) array is used in `credentials`.
+
 ```json
 {
   "name": "Online Shop AG",
-  "sub": {
-    "legal_name": "Online Shop AG",
-    "id": "LEIDE-529900T8BM49AURSDO55"
-  },
+  "sub_ln": "Online Shop AG",
+  "sub": "LEIDE-529900T8BM49AURSDO55",
   "country": "DE",
   "registry_uri": "https://wrp-register.de/api/v1/relying-parties/DE-WRP-00789",
-  "service": [
-    { "lang": "de-DE", "value": "Online-Einkaufsplattform mit Altersverifikation" },
-    { "lang": "en-US", "value": "Online shopping platform with age verification" }
+  "srv_description": [
+    [{ "lang": "de-DE", "value": "Online-Einkaufsplattform mit Altersverifikation" }, { "lang": "en-US", "value": "Online shopping platform with age verification" }]
   ],
   "entitlements": ["https://uri.etsi.org/19475/Entitlement/Service_Provider"],
   "purpose": [
@@ -63,13 +60,13 @@ Per ETSI TS 119 475 clause 5.2.2 (Table 5):
     {
       "format": "dc+sd-jwt",
       "meta": { "vct_values": ["https://credentials.example.eu/pid"] },
-      "claims": [{ "path": ["age_over_18"] }]
+      "claim": [{ "path": ["age_over_18"] }]
     }
   ],
   "privacy_policy": "https://shop.example.de/privacy",
   "info_uri": "https://shop.example.de",
   "support_uri": "https://shop.example.de/support",
-  "dpa": {
+  "supervisory_authority": {
     "uri": "https://www.bfdi.bund.de",
     "email": "poststelle@bfdi.bund.de",
     "phone": "+49 228 997799 0"
@@ -88,28 +85,28 @@ Per ETSI TS 119 475 clause 5.2.2 (Table 5):
 ## Payload Fields with ETSI References
 
 ### Identity Fields
-Per ETSI TS 119 475 Table 7 and GEN-5.2.4-02:
+Per ETSI TS 119 475 v1.2.1 Table 7 and GEN-5.2.4-02: subject uses flat `sub` (identifier), `sub_ln` (legal person) or `sub_gn`/`sub_fn` (natural person).
           
 | Field | ETSI Reference | CIR 2025/848 | Description |
 |-------|----------------|--------------|-------------|
 | `name` | Table 7; B.2.1 `tradeName` | Annex I.2 | Trade/service name |
-| `sub.legal_name` | Table 7; B.2.3 `legalName` | Annex I.1 | Official legal name |
-| `sub.id` | Table 7, GEN-5.2.4-02; B.2.5 | Annex I.3 | Identifier per clause 5.1.3 |
+| `sub_ln` | Table 7; B.2.3 `legalName` | Annex I.1 | Official legal name (legal person) |
+| `sub` | Table 7, GEN-5.2.4-02; B.2.5 | Annex I.3 | Identifier per clause 5.1.3 |
 | `country` | Table 7; B.2.2 `country` | Annex I.6 | ISO 3166-1 alpha-2 |
 | `registry_uri` | Table 7; B.2.1 `registryURI` | Article 3(5) | National registry API |
 
 ### Service and Purpose (Service Provider Specific)
 
-Per ETSI TS 119 475 Table 9 and GEN-5.2.4-06:
+Per ETSI TS 119 475 v1.2.1 Table 9 and GEN-5.2.4-06:
 
 | Field | ETSI Reference | CIR 2025/848 | Description |
 |-------|----------------|--------------|-------------|
-| `service` | Table 7; B.2.1 `srvDescription` | Annex I.8 | Service descriptions |
+| `srv_description` | Table 7; B.2.1 `srvDescription` | Annex I.8 | Service descriptions (array of lang/value) |
 | `purpose` | Table 9; B.2.7 `purpose` | Article 8.2(b) | Purpose of data processing |
 | `credentials` | Table 9; B.2.7 `credential` | Annex I.9 | Requested credential types |
 | `credentials[].format` | Table 9; B.2.9 `format` | Annex I.9 | Credential format |
 | `credentials[].meta` | Table 9; B.2.9 `meta` | Annex I.9 | Credential type metadata |
-| `credentials[].claims` | Table 9; B.2.9 `claim` | Annex I.9 | Requested attributes |
+| `credentials[].claim` | Table 9; B.2.9 `claim` | Annex I.9 | Requested attributes |
 
 ### Privacy and Policy
 
@@ -119,7 +116,7 @@ Per ETSI TS 119 475 Table 9 and GEN-5.2.4-06:
 | `info_uri` | Table 7; B.2.2 `infoURI` | Annex I.5 | Information URL |
 | `support_uri` | Table 10; B.2.1 `supportURI` | Annex I.7(a) | Support URL |
 | `public_body` | Table 10; B.2.1 `isPSB` | Annex I.11 | Public sector body |
-| `dpa` | Table 7; B.2.1 `supervisoryAuthority` | Annex IV.3(g) | DPA info |
+| `supervisory_authority` | Table 7; B.2.1 `supervisoryAuthority` | Annex IV.3(g), V.3(f) | DPA (email, phone, uri) |
 
 ### Technical Fields
 
@@ -137,12 +134,12 @@ Per ETSI TS 119 475 Table 9 and GEN-5.2.4-06:
 ```json
 {
   "name": "Dutch Bank Customer Onboarding",
-  "sub": { "legal_name": "Dutch Bank N.V.", "id": "LEINL-724500VKKSH9QOLTFR81" },
+  "sub_ln": "Dutch Bank N.V.",
+  "sub": "LEINL-724500VKKSH9QOLTFR81",
   "country": "NL",
   "registry_uri": "https://wrp-register.nl/api/v1/relying-parties/NL-WRP-00234",
-  "service": [
-    { "lang": "en-US", "value": "Online banking account opening service" },
-    { "lang": "nl-NL", "value": "Online bankrekening openen" }
+  "srv_description": [
+    [{ "lang": "en-US", "value": "Online banking account opening service" }, { "lang": "nl-NL", "value": "Online bankrekening openen" }]
   ],
   "entitlements": [
     "https://uri.etsi.org/19475/Entitlement/Service_Provider",
@@ -155,7 +152,7 @@ Per ETSI TS 119 475 Table 9 and GEN-5.2.4-06:
     {
       "format": "dc+sd-jwt",
       "meta": { "vct_values": ["https://credentials.example.eu/pid"] },
-      "claims": [
+      "claim": [
         { "path": ["family_name"] }, { "path": ["given_name"] },
         { "path": ["birth_date"] }, { "path": ["nationality"] },
         { "path": ["resident_address"] }, { "path": ["personal_identifier"] }
@@ -164,15 +161,19 @@ Per ETSI TS 119 475 Table 9 and GEN-5.2.4-06:
     {
       "format": "dc+sd-jwt",
       "meta": { "vct_values": ["https://credentials.example.eu/address-attestation"] },
-      "claims": [
+      "claim": [
         { "path": ["resident_address"] }, { "path": ["resident_country"] }
       ]
     }
   ],
   "privacy_policy": "https://dutchbank.nl/privacy",
-  "dpa": { "uri": "https://autoriteitpersoonsgegevens.nl", "email": "info@autoriteitpersoonsgegevens.nl" },
+  "supervisory_authority": { 
+    "uri": "https://autoriteitpersoonsgegevens.nl", 
+    "email": "info@autoriteitpersoonsgegevens.nl" 
+  },
   "public_body": false,
   "policy_id": ["0.4.0.19475.3.1"],
+  "certificate_policy": "https://wrp-register.nl/policies/service-provider",
   "iat": 1704067200,
   "status": { "status_list": { "idx": 89, "uri": "https://status.wrp-register.nl/statuslist/1" } }
 }
@@ -182,26 +183,25 @@ Per ETSI TS 119 475 Table 9 and GEN-5.2.4-06:
 
 ## Example 3: With Intermediary
 
-Per ETSI TS 119 475 Table 10 and GEN-5.2.4-09:
+Per ETSI TS 119 475 v1.2.1 Table 10 and GEN-5.2.4-09: use `intermediary` with `sub` (identifier) and `name` (sname in Table 10).
 
 ```json
 {
   "name": "Small Business Verification",
-  "sub": { "legal_name": "Small Business GmbH", "id": "VATDE-DE123456789" },
+  "sub_ln": "Small Business GmbH",
+  "sub": "VATDE-DE123456789",
   "country": "DE",
   "entitlements": ["https://uri.etsi.org/19475/Entitlement/Service_Provider"],
   "credentials": [
     {
       "format": "dc+sd-jwt",
       "meta": { "vct_values": ["https://credentials.example.eu/pid"] },
-      "claims": [{ "path": ["age_over_18"] }]
+      "claim": [{ "path": ["age_over_18"] }]
     }
   ],
-  "act": {
-    "sub": {
-      "id": "LEIDE-529900INTERMEDIARY01",
-      "name": "Verification Services AG"
-    }
+  "intermediary": {
+    "sub": "LEIDE-529900INTERMEDIARY01",
+    "sname": "Verification Services AG"
   },
   "policy_id": ["0.4.0.19475.3.1"],
   "iat": 1704067200,
@@ -211,22 +211,22 @@ Per ETSI TS 119 475 Table 10 and GEN-5.2.4-09:
 
 | Field | ETSI Reference | CIR 2025/848 | Description |
 |-------|----------------|--------------|-------------|
-| `act` | Table 10; B.2.1 `usesIntermediary` | Annex I.14 | Intermediary indication |
-| `act.sub.id` | Table 10 | Annex I.14 | Intermediary identifier from WRPAC |
-| `act.sub.name` | Table 10 | Annex I.14 | Intermediary name from WRPAC |
+| `intermediary` | Table 10; B.2.1 `usesIntermediary` | Annex I.14 | Intermediary indication |
+| `intermediary.sub` | Table 10 | Annex I.14 | Intermediary identifier from WRPAC |
+| `intermediary.sname` | Table 10 (sname) | Annex I.14 | Intermediary name from WRPAC |
 
 ---
 
 ## Example 4: Natural Person (Notary)
 
+Per ETSI TS 119 475 v1.2.1 Table 7: natural person uses `sub_gn`, `sub_fn`, and `sub` (identifier).
+
 ```json
 {
   "name": "Notaio Marco Rossi",
-  "sub": {
-    "given_name": "Marco",
-    "family_name": "Rossi",
-    "id": "TINIT-RSSMRC80A01H501U"
-  },
+  "sub_gn": "Marco",
+  "sub_fn": "Rossi",
+  "sub": "TINIT-RSSMRC80A01H501U",
   "country": "IT",
   "registry_uri": "https://wrp-register.gov.it/api/v1/relying-parties/IT-WRP-00890",
   "entitlements": ["https://uri.etsi.org/19475/Entitlement/Service_Provider"],
@@ -237,14 +237,14 @@ Per ETSI TS 119 475 Table 10 and GEN-5.2.4-09:
     {
       "format": "dc+sd-jwt",
       "meta": { "vct_values": ["https://credentials.example.eu/pid"] },
-      "claims": [
+      "claim": [
         { "path": ["family_name"] }, { "path": ["given_name"] },
         { "path": ["birth_date"] }, { "path": ["personal_identifier"] }
       ]
     }
   ],
   "privacy_policy": "https://notaio-rossi.it/privacy",
-  "dpa": { "uri": "https://www.garanteprivacy.it", "email": "protocollo@gpdp.it" },
+  "supervisory_authority": { "uri": "https://www.garanteprivacy.it", "email": "protocollo@gpdp.it" },
   "public_body": false,
   "policy_id": ["0.4.0.19475.3.1"],
   "iat": 1704067200,
@@ -254,15 +254,15 @@ Per ETSI TS 119 475 Table 10 and GEN-5.2.4-09:
 
 | Field | ETSI Reference | Description |
 |-------|----------------|-------------|
-| `sub.given_name` | Table 7; B.2.4 `givenName` | First name (natural person) |
-| `sub.family_name` | Table 7; B.2.4 `familyName` | Family name (natural person) |
-| `sub.id` | GEN-5.1.5-01, Table 4 | Natural person identifier |
+| `sub_gn` | Table 7; B.2.4 `givenName` | First name (natural person) |
+| `sub_fn` | Table 7; B.2.4 `familyName` | Family name (natural person) |
+| `sub` | GEN-5.1.5-01, Table 4 | Natural person identifier |
 
 ---
 
 ## Entitlements and Sub-Entitlements
 
-Per ETSI TS 119 475 Annex A:
+Per ETSI TS 119 475 v1.2.1 Annex A:
 
 | Entitlement | URI | OID | Reference |
 |-------------|-----|-----|-----------|
@@ -288,13 +288,13 @@ Per ETSI TS 119 475 Annex A:
 | B.2.1 WalletRelyingParty | `entitlement` | `entitlements` | Annex I.12 |
 | B.2.1 WalletRelyingParty | `supportURI` | `support_uri` | Annex I.7(a) |
 | B.2.1 WalletRelyingParty | `isPSB` | `public_body` | Annex I.11 |
-| B.2.1 WalletRelyingParty | `usesIntermediary` | `act` | Annex I.14 |
+| B.2.1 WalletRelyingParty | `usesIntermediary` | `intermediary` | Annex I.14 |
 | B.2.2 LegalEntity | `country` | `country` | Annex I.6 |
 | B.2.2 LegalEntity | `infoURI` | `info_uri` | Annex I.5 |
-| B.2.3 LegalPerson | `legalName` | `sub.legal_name` | Annex I.1 |
-| B.2.4 NaturalPerson | `givenName` | `sub.given_name` | Annex I.1 |
-| B.2.4 NaturalPerson | `familyName` | `sub.family_name` | Annex I.1 |
-| B.2.5 Identifier | `identifier` | `sub.id` | Annex I.3 |
+| B.2.3 LegalPerson | `legalName` | `sub_ln` | Annex I.1 |
+| B.2.4 NaturalPerson | `givenName` | `sub_gn` | Annex I.1 |
+| B.2.4 NaturalPerson | `familyName` | `sub_fn` | Annex I.1 |
+| B.2.5 Identifier | `identifier` | `sub` | Annex I.3 |
 | B.2.7 IntendedUse | `purpose` | `purpose` | Article 8.2(b) |
 | B.2.7 IntendedUse | `credential` | `credentials` | Annex I.9 |
 | B.2.7 IntendedUse | `privacyPolicy` | `privacy_policy` | Article 8.2(g) |
@@ -304,7 +304,7 @@ Per ETSI TS 119 475 Annex A:
 
 ## WRPRC Policy OID
 
-Per ETSI TS 119 475 clause 6.1.3:
+Per ETSI TS 119 475 v1.2.1 clause 6.1.3:
 
 ```
 wrprc OBJECT IDENTIFIER ::=
