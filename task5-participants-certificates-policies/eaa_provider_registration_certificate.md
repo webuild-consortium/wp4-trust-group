@@ -8,7 +8,7 @@ This example demonstrates Wallet-Relying Party Registration Certificates (WRPRC)
 
 | Reference | Document |
 |-----------|----------|
-| ETSI TS 119 475 | Relying party attributes supporting EUDI Wallet user's authorization decisions |
+| ETSI TS 119 475 v1.2.1 | Relying party attributes supporting EUDI Wallet user's authorization decisions |
 | ETSI TS 119 182-1 | JAdES digital signatures; Part 1: Building blocks and JAdES baseline signatures |
 | ETSI EN 319 411-1 | Policy and security requirements for Trust Service Providers issuing certificates; Part 1: General requirements |
 | CIR (EU) 2025/848 | Commission Implementing Regulation on the registration of wallet-relying parties |
@@ -23,40 +23,34 @@ This example demonstrates Wallet-Relying Party Registration Certificates (WRPRC)
 
 ### Header
 
-Per ETSI TS 119 475 clause 5.2.2 (Table 5) and ETSI TS 119 182-1:
+Per ETSI TS 119 475 v1.2.1 clause 5.2.2 (Table 5) and ETSI TS 119 182-1:
 
 ```json
 {
   "typ": "rc-wrp+jwt",
   "alg": "ES384",
-  "b64": true,
-  "cty": ["b64"],
   "x5c": ["<base64-encoded-certificate-chain>"]
 }
 ```
 
 | Field | Value | ETSI Reference | Description |
 |-------|-------|----------------|-------------|
-| `typ` | `rc-wrp+jwt` | ETSI TS 119 475 Table 5 | Registration Certificate for WRP in JWT format |
-| `alg` | `ES384` | ETSI TS 119 182-1 clause 5.1.2; ETSI TS 119 475 GEN-5.2.1-04 | Signing algorithm |
-| `b64` | `true` | ETSI TS 119 182-1 clause 5.1.2; ETSI TS 119 475 Table 5 | Base64 encoding indicator |
-| `cty` | `["b64"]` | ETSI TS 119 182-1 clause 5.1.3; ETSI TS 119 475 Table 5 | Content type |
-| `x5c` | Certificate chain | ETSI TS 119 182-1 clause 5.1.8; ETSI TS 119 475 Table 5 | Certificate chain for verification |
+| `typ` | `rc-wrp+jwt` | ETSI TS 119 475 v1.2.1 Table 5 | Registration Certificate for WRP in JWT format |
+| `alg` | `ES384` | ETSI TS 119 182-1 clause 5.1.2; ETSI TS 119 475 v1.2.1 GEN-5.2.1-04 | Signing algorithm |
+| `x5c` | Certificate chain | ETSI TS 119 182-1 clause 5.1.8; ETSI TS 119 475 v1.2.1 Table 5 | Certificate chain for verification |
 
 ### Payload
 
-Per ETSI TS 119 475 clause 5.2.4 (Tables 7, 8):
+Per ETSI TS 119 475 v1.2.1 clause 5.2.4 (Tables 7, 8):
 
 ```json
 {
   "name": "Spanish Driving License Attestation Service",
-  "sub": {
-    "legal_name": "Ministerio del Interior - Dirección General de Tráfico",
-    "id": "VATES-S2800001J"
-  },
+  "sub": "VATES-S2800001J",
+  "sub_ln": "Ministerio del Interior - Dirección General de Tráfico",
   "country": "ES",
   "registry_uri": "https://registro.mineco.gob.es/wrp/api/v1/relying-parties/ES-WRP-00123",
-  "service": [
+  "srv_description": [
     {
       "lang": "es-ES",
       "value": "Servicio de emisión de permisos de conducir digitales y attestaciones relacionadas con la conducción"
@@ -70,7 +64,7 @@ Per ETSI TS 119 475 clause 5.2.4 (Tables 7, 8):
     "https://uri.etsi.org/19475/Entitlement/QEAA_Provider",
     "https://uri.etsi.org/19475/Entitlement/PUB_EAA_Provider"
   ],
-  "provided_attestations": [
+  "provides_attestations": [
     {
       "format": "dc+sd-jwt",
       "meta": {
@@ -78,7 +72,7 @@ Per ETSI TS 119 475 clause 5.2.4 (Tables 7, 8):
           "https://credentials.dgt.es/mobile-driving-license"
         ]
       },
-      "claims": [
+      "claim": [
         { "path": ["family_name"] },
         { "path": ["given_name"] },
         { "path": ["birth_date"] },
@@ -96,7 +90,7 @@ Per ETSI TS 119 475 clause 5.2.4 (Tables 7, 8):
       "meta": {
         "doctype_value": "org.iso.18013.5.1.mDL"
       },
-      "claims": [
+      "claim": [
         { "path": ["org.iso.18013.5.1", "family_name"] },
         { "path": ["org.iso.18013.5.1", "given_name"] },
         { "path": ["org.iso.18013.5.1", "birth_date"] },
@@ -107,7 +101,7 @@ Per ETSI TS 119 475 clause 5.2.4 (Tables 7, 8):
   ],
   "privacy_policy": "https://dgt.es/privacy-policy",
   "info_uri": "https://dgt.es",
-  "dpa": {
+  "supervisory_authority": {
     "uri": "https://www.aepd.es",
     "email": "ciudadano@aepd.es",
     "phone": "+34 91 266 35 17"
@@ -136,65 +130,65 @@ Per ETSI TS 119 475 clause 5.2.4 (Tables 7, 8):
 
 | Field | Value | ETSI Reference | CIR 2025/848 | Description |
 |-------|-------|----------------|--------------|-------------|
-| `name` | `Spanish Driving License...` | ETSI TS 119 475 Table 7; B.2.1 `tradeName` | Annex I.2 | Trade/service name |
-| `sub.legal_name` | `Ministerio del Interior...` | ETSI TS 119 475 Table 7; B.2.3 `legalName` | Annex I.1 | Official legal name |
-| `sub.id` | `VATES-S2800001J` | ETSI TS 119 475 Table 7, GEN-5.2.4-02; B.2.5 `identifier` | Annex I.3 | Organizational identifier per clause 5.1.3 |
-| `country` | `ES` | ETSI TS 119 475 Table 7; B.2.2 `country` | Annex I.6 | ISO 3166-1 alpha-2 code |
-| `registry_uri` | URL | ETSI TS 119 475 Table 7; B.2.1 `registryURI` | Article 3(5) | National registry API endpoint |
+| `name` | `Spanish Driving License...` | ETSI TS 119 475 v1.2.1 Table 7; B.2.1 `tradeName` | Annex I.2 | Trade/service name |
+| `sub.ln` | `Ministerio del Interior...` | ETSI TS 119 475 v1.2.1 Table 7; B.2.3 `legalName` | Annex I.1 | Official legal name |
+| `sub` | `VATES-S2800001J` | ETSI TS 119 475 v1.2.1 Table 7, GEN-5.2.4-02; B.2.5 `identifier` | Annex I.3 | Organizational identifier per clause 5.1.3 |
+| `country` | `ES` | ETSI TS 119 475 v1.2.1 Table 7; B.2.2 `country` | Annex I.6 | ISO 3166-1 alpha-2 code |
+| `registry_uri` | URL | ETSI TS 119 475 v1.2.1 Table 7; B.2.1 `registryURI` | Article 3(5) | National registry API endpoint |
 
 ### Service Description
 
 | Field | Value | ETSI Reference | CIR 2025/848 | Description |
 |-------|-------|----------------|--------------|-------------|
-| `service` | Array | ETSI TS 119 475 Table 7; B.2.1 `srvDescription` | Annex I.8 | Multilingual service descriptions |
-| `service[].lang` | `es-ES`, `en-US` | ETSI TS 119 475 Table 7; B.2.6 `lang`; IETF RFC 5646 | - | BCP 47 language tag |
-| `service[].value` | Description text | ETSI TS 119 475 Table 7; B.2.6 `content` | - | Service description in language |
+| `srv_description` | Array | ETSI TS 119 475 v1.2.1 Table 7; B.2.1 `srvDescription` | Annex I.8 | Multilingual service descriptions |
+| `srv_description[].lang` | `es-ES`, `en-US` | ETSI TS 119 475 v1.2.1 Table 7; B.2.6 `lang`; IETF RFC 5646 | - | BCP 47 language tag |
+| `srv_description[].value` | Description text | ETSI TS 119 475 v1.2.1 Table 7; B.2.6 `content` | - | Service description in language |
 
 ### Entitlements
 
 | Field | Value | ETSI Reference | CIR 2025/848 | Description |
 |-------|-------|----------------|--------------|-------------|
-| `entitlements` | Array of URIs | ETSI TS 119 475 Table 7, GEN-5.2.4-03; B.2.1 `entitlement` | Annex I.12 | WRP entitlements per Annex A.2 |
+| `entitlements` | Array of URIs | ETSI TS 119 475 v1.2.1 Table 7, GEN-5.2.4-03; B.2.1 `entitlement` | Annex I.12 | WRP entitlements per Annex A.2 |
 
 ### Provided Attestations (EAA Provider Specific)
 
-Per ETSI TS 119 475 Table 8 and GEN-5.2.4-05:
+Per ETSI TS 119 475 v1.2.1 Table 8 and GEN-5.2.4-05:
 
 | Field | Value | ETSI Reference | CIR 2025/848 | Description |
 |-------|-------|----------------|--------------|-------------|
-| `provided_attestations` | Array | ETSI TS 119 475 Table 8; B.2.1 `providesAttestations` | Annex I.13 | Attestations issued by provider |
-| `provided_attestations[].format` | `dc+sd-jwt`, `mso_mdoc` | ETSI TS 119 475 Table 8; B.2.9 `format` | Annex I.13 | Credential format |
-| `provided_attestations[].meta` | Object | ETSI TS 119 475 Table 8; B.2.9 `meta` | Annex I.13 | Credential type metadata |
-| `provided_attestations[].claims` | Array | ETSI TS 119 475 Table 8; B.2.9 `claim` | Annex I.13 | Attributes in attestation |
+| `provides_attestations` | Array | ETSI TS 119 475 v1.2.1 Table 8; B.2.1 `providesAttestations` | Annex I.13 | Attestations issued by provider |
+| `provides_attestations[].format` | `dc+sd-jwt`, `mso_mdoc` | ETSI TS 119 475 v1.2.1 Table 8; B.2.9 `format` | Annex I.13 | Credential format |
+| `provides_attestations[].meta` | Object | ETSI TS 119 475 v1.2.1 Table 8; B.2.9 `meta` | Annex I.13 | Credential type metadata |
+| `provides_attestations[].claim` | Array | ETSI TS 119 475 v1.2.1 Table 8; B.2.9 `claim` | Annex I.13 | Attributes in attestation |
 
 ### Privacy and Policy
 
 | Field | Value | ETSI Reference | CIR 2025/848 | Description |
 |-------|-------|----------------|--------------|-------------|
-| `privacy_policy` | URL | ETSI TS 119 475 Table 7; B.2.7 `privacyPolicy` | Article 8.2(g) | Privacy policy URL |
-| `info_uri` | URL | ETSI TS 119 475 Table 7; B.2.2 `infoURI` | Annex I.5 | General information URL |
-| `public_body` | `true`/`false` | ETSI TS 119 475 Table 10; B.2.1 `isPSB` | Annex I.11 | Public sector body indicator |
+| `privacy_policy` | URL | ETSI TS 119 475 v1.2.1 Table 7; B.2.7 `privacyPolicy` | Article 8.2(g) | Privacy policy URL |
+| `info_uri` | URL | ETSI TS 119 475 v1.2.1 Table 7; B.2.2 `infoURI` | Annex I.5 | General information URL |
+| `public_body` | `true`/`false` | ETSI TS 119 475 v1.2.1 Table 10; B.2.1 `isPSB` | Annex I.11 | Public sector body indicator |
 
 ### Data Protection Authority
 
 | Field | Value | ETSI Reference | CIR 2025/848 | Description |
 |-------|-------|----------------|--------------|-------------|
-| `dpa` | Object | ETSI TS 119 475 Table 7; B.2.1 `supervisoryAuthority` | Annex IV.3(g), Annex V.3(f) | DPA information |
-| `dpa.uri` | URL | ETSI TS 119 475 Table 7; B.2.2 `infoURI` | - | DPA website |
-| `dpa.email` | Email | ETSI TS 119 475 Table 7; B.2.2 `email` | - | DPA contact email |
-| `dpa.phone` | Phone | ETSI TS 119 475 Table 7; B.2.2 `phone` | - | DPA contact phone |
+| `supervisory_authority` | Object | ETSI TS 119 475 v1.2.1 Table 7; B.2.1 `supervisoryAuthority` | Annex IV.3(g), Annex V.3(f) | DPA information |
+| `supervisory_authority.uri` | URL | ETSI TS 119 475 v1.2.1 Table 7; B.2.2 `infoURI` | - | DPA website |
+| `supervisory_authority.email` | Email | ETSI TS 119 475 v1.2.1 Table 7; B.2.2 `email` | - | DPA contact email |
+| `supervisory_authority.phone` | Phone | ETSI TS 119 475 v1.2.1 Table 7; B.2.2 `phone` | - | DPA contact phone |
 
 ### Technical Fields
 
 | Field | Value | ETSI Reference | Description |
 |-------|-------|----------------|-------------|
-| `policy_id` | `["0.4.0.19475.3.1"]` | ETSI TS 119 475 Table 7, clause 6.1.3 | WRPRC policy OID |
-| `certificate_policy` | URL | ETSI TS 119 475 Table 7 | CPS/CP URL |
-| `iat` | Unix timestamp | ETSI TS 119 475 Table 7 | Issuance time |
-| `exp` | Unix timestamp | ETSI TS 119 475 Table 10, GEN-5.2.4-08 | Expiration (max 12 months after iat) |
-| `status` | Object | ETSI TS 119 475 Table 7, GEN-6.2.6.1-04 | Status list reference |
-| `status.status_list.idx` | Number | ETSI TS 119 475 GEN-6.2.6.1-04, GEN-6.2.6.1-05 | Position in status bitstring |
-| `status.status_list.uri` | URL | ETSI TS 119 475 GEN-6.2.6.1-04 | Status list credential URI |
+| `policy_id` | `["0.4.0.19475.3.1"]` | ETSI TS 119 475 v1.2.1 Table 7, clause 6.1.3 | WRPRC policy OID |
+| `certificate_policy` | URL | ETSI TS 119 475 v1.2.1 Table 7 | CPS/CP URL |
+| `iat` | Unix timestamp | ETSI TS 119 475 v1.2.1 Table 7 | Issuance time |
+| `exp` | Unix timestamp | ETSI TS 119 475 v1.2.1 Table 10, GEN-5.2.4-08 | Expiration (max 12 months after `iat`) |
+| `status` | Object | ETSI TS 119 475 v1.2.1 Table 7, GEN-6.2.6.1-04 | Status list reference |
+| `status.status_list.idx` | Number | ETSI TS 119 475 v1.2.1 GEN-6.2.6.1-04, GEN-6.2.6.1-05 | Position in status bitstring |
+| `status.status_list.uri` | URL | ETSI TS 119 475 v1.2.1 GEN-6.2.6.1-04 | Status list credential URI |
 
 ---
 
@@ -205,13 +199,11 @@ Per ETSI TS 119 475 Table 8 and GEN-5.2.4-05:
 ```json
 {
   "name": "University of Amsterdam Credential Service",
-  "sub": {
-    "legal_name": "Universiteit van Amsterdam",
-    "id": "NTRNLD-KVK34567890"
-  },
+  "sub": "NTRNLD-KVK34567890",
+  "sub_ln": "Universiteit van Amsterdam",
   "country": "NL",
   "registry_uri": "https://wrp-register.nl/api/v1/relying-parties/NL-WRP-00456",
-  "service": [
+  "srv_description": [
     {
       "lang": "nl-NL",
       "value": "Uitgifte van digitale studentenkaarten en academische credentials"
@@ -224,7 +216,7 @@ Per ETSI TS 119 475 Table 8 and GEN-5.2.4-05:
   "entitlements": [
     "https://uri.etsi.org/19475/Entitlement/Non_Q_EAA_Provider"
   ],
-  "provided_attestations": [
+  "provides_attestations": [
     {
       "format": "dc+sd-jwt",
       "meta": {
@@ -232,7 +224,7 @@ Per ETSI TS 119 475 Table 8 and GEN-5.2.4-05:
           "https://credentials.uva.nl/student-id"
         ]
       },
-      "claims": [
+      "claim": [
         { "path": ["family_name"] },
         { "path": ["given_name"] },
         { "path": ["student_id"] },
@@ -250,7 +242,7 @@ Per ETSI TS 119 475 Table 8 and GEN-5.2.4-05:
           "https://credentials.uva.nl/diploma"
         ]
       },
-      "claims": [
+      "claim": [
         { "path": ["family_name"] },
         { "path": ["given_name"] },
         { "path": ["degree_title"] },
@@ -263,7 +255,7 @@ Per ETSI TS 119 475 Table 8 and GEN-5.2.4-05:
   ],
   "privacy_policy": "https://uva.nl/privacy",
   "info_uri": "https://credentials.uva.nl",
-  "dpa": {
+  "supervisory_authority": {
     "uri": "https://autoriteitpersoonsgegevens.nl",
     "email": "info@autoriteitpersoonsgegevens.nl",
     "phone": "+31 70 888 85 00"
@@ -288,7 +280,7 @@ Per ETSI TS 119 475 Table 8 and GEN-5.2.4-05:
 
 ## Entitlements for EAA Providers
 
-Per ETSI TS 119 475 Annex A.2 and CIR 2025/848 Annex I.12:
+Per ETSI TS 119 475 v1.2.1 Annex A.2 and CIR 2025/848 Annex I.12:
 
 | Entitlement | URI | OID | ETSI Reference | Description |
 |-------------|-----|-----|----------------|-------------|
@@ -300,7 +292,7 @@ Per ETSI TS 119 475 Annex A.2 and CIR 2025/848 Annex I.12:
 
 ## Organizational Identifier Formats
 
-Per ETSI TS 119 475 clause 5.1.3 and Table 2:
+Per ETSI TS 119 475 v1.2.1 clause 5.1.3 and Table 2:
 
 | Type URI (B.2.5) | Semantic Prefix | ETSI Reference | EU Regulation |
 |------------------|-----------------|----------------|---------------|
@@ -312,7 +304,7 @@ Per ETSI TS 119 475 clause 5.1.3 and Table 2:
 
 ## WRPRC Policy OID
 
-Per ETSI TS 119 475 clause 6.1.3:
+Per ETSI TS 119 475 v1.2.1 clause 6.1.3:
 
 ```
 wrprc OBJECT IDENTIFIER ::=
@@ -325,24 +317,24 @@ OID: 0.4.0.19475.3.1
 
 ## Mapping to National Register (Annex B Classes)
 
-Per ETSI TS 119 475 Annex B:
+Per ETSI TS 119 475 v1.2.1 Annex B:
 
 | Annex B Class | Attribute | WRPRC Field | CIR 2025/848 |
 |---------------|-----------|-------------|--------------|
 | B.2.1 WalletRelyingParty | `tradeName` | `name` | Annex I.2 |
 | B.2.1 WalletRelyingParty | `registryURI` | `registry_uri` | Article 3(5) |
-| B.2.1 WalletRelyingParty | `srvDescription` | `service` | Annex I.8 |
+| B.2.1 WalletRelyingParty | `srvDescription` | `srv_description` | Annex I.8 |
 | B.2.1 WalletRelyingParty | `entitlement` | `entitlements` | Annex I.12 |
-| B.2.1 WalletRelyingParty | `providesAttestations` | `provided_attestations` | Annex I.13 |
+| B.2.1 WalletRelyingParty | `providesAttestations` | `provides_attestations` | Annex I.13 |
 | B.2.1 WalletRelyingParty | `isPSB` | `public_body` | Annex I.11 |
-| B.2.1 WalletRelyingParty | `supervisoryAuthority` | `dpa` | Annex IV.3(g) |
+| B.2.1 WalletRelyingParty | `supervisoryAuthority` | `supervisory_authority` | Annex IV.3(g) |
 | B.2.2 LegalEntity | `country` | `country` | Annex I.6 |
 | B.2.2 LegalEntity | `infoURI` | `info_uri` | Annex I.5 |
-| B.2.3 LegalPerson | `legalName` | `sub.legal_name` | Annex I.1 |
-| B.2.5 Identifier | `identifier` | `sub.id` | Annex I.3 |
-| B.2.6 MultiLangString | `lang`, `content` | `service[].lang`, `service[].value` | - |
+| B.2.3 LegalPerson | `legalName` | `sub_ln` | Annex I.1 |
+| B.2.5 Identifier | `identifier` | `sub` | Annex I.3 |
+| B.2.6 MultiLangString | `lang`, `content` | `srv_description[].lang`, `srv_description[].value` | - |
 | B.2.7 IntendedUse | `privacyPolicy` | `privacy_policy` | Article 8.2(g) |
-| B.2.9 Credential | `format`, `meta`, `claim` | `provided_attestations[].*` | Annex I.13 |
+| B.2.9 Credential | `format`, `meta`, `claim` | `provides_attestations[].*` | Annex I.13 |
 
 ---
 

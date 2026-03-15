@@ -295,7 +295,7 @@ According to ETSI TS 119 602, the certificate's subject DN must:
 ✅ **LEI (Legal Entity Identifier)**: **EXPLICITLY SUPPORTED** in ETSI EN 319 412-1 V1.6.1
   - Format: `LEIXG-[20_CHARACTER_LEI]`
   - Used in `organizationIdentifier` attribute
-  - Also referenced in ETSI TS 119 475 V1.1.1 with URI `http://data.europa.eu/eudi/id/LEI`
+  - Also referenced in ETSI TS 119 475 V1.2.1 with URI `http://data.europa.eu/eudi/id/LEI`
 
 ### Out of Scope Identifiers
 
@@ -391,11 +391,11 @@ According to ETSI TS 119 612:
   - **Section 5.1.4**: Explicitly defines LEI format as `LEIXG-[20_CHARACTER_LEI]`
   - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941201/01.06.01_60/en_31941201v010601c.pdf)
 
-- **ETSI TS 119 475 V1.1.1** (2025-10): Relying party attributes supporting EUDI Wallet User's authorisation decisions
+- **ETSI TS 119 475 V1.2.1** (2026-03): Relying party attributes supporting EUDI Wallet User's authorisation decisions
   - References LEI as a recognized identifier for legal entities
   - LEI URI: `http://data.europa.eu/eudi/id/LEI`
   - Aligns with ISO 17442-1 standards
-  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf)
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf)
 
 ### External References
 

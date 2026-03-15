@@ -41,13 +41,16 @@ jobs:
             --no-progress
             --exclude "https://www\\.etsi\\.org/deliver/"
             --exclude "https://www\\.iso\\.org/standard/"
-            --exclude "eu-digital-identity-wallet\\.github\\.io.*annex-2-high-level-requirements"
             --exclude "COMPREHENSIVE-CATALOGUE"
             --exclude "ec\\.europa\\.eu/tools/lotl/pivot-lotl-"
             --exclude "http://uri\\.etsi\\.org/"
+            --exclude "https://uri\\.etsi\\.org/19475/"
+            --exclude "http://data\\.europa\\.eu/eudi/id/"
+            --exclude "https://data\\.europa\\.eu/eudi/id/"
+            --exclude "https?://data\\.europa\\.eu/eudi/policy/"
+            --exclude "https://eudi\\.dev/"
             --exclude "http://www\\.tlsox\\.xyz/"
             --exclude "http://www\\.w3\\.org/2001/10/xml-"
-            --exclude "webuild-consortium/wp4-trust-group/blob/main/docs/wp23-stock-takings/STOCKTAKING-TO-ISSUES"
             .
           token: ${{ secrets.GITHUB_TOKEN }}
           fail: true
