@@ -781,7 +781,7 @@ The implementation guidelines and examples demonstrate practical applications of
 
 ### External Resources
 - [Zero Trust Architecture](https://www.nist.gov/publications/zero-trust-architecture)
-- [GDPR Compliance](https://gdpr.eu/)
+- [GDPR Compliance](https://ec.europa.eu/info/law/law-topic/data-protection_en)
 - [EIDAS Regulation](https://eur-lex.europa.eu/eli/reg/2014/910/oj)
 - [PCI DSS Standards](https://www.pcisecuritystandards.org/)
 
