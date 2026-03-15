@@ -580,7 +580,7 @@ This defines an **allow-list** model: requested attributes must be **in** the RP
 | Equivalent (conceptual) | Allow-list; deny-by-default for unregistered attributes      |
 
 
-*Source: [ARF Annex 2.02 – RPRC_21](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/), Topic 44.*
+*Source: [ARF Annex 2.02 – RPRC_21](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/), Topic 44.*
 
 ### 4.1 Matching Requested Attributes to Entitlements
 
