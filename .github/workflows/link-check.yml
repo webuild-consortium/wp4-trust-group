@@ -36,22 +36,7 @@ jobs:
       - name: Check links in documents
         uses: lycheeverse/lychee-action@v2
         with:
-          args: >
-            --verbose
-            --no-progress
-            --exclude "https://www\\.etsi\\.org/deliver/"
-            --exclude "https://www\\.iso\\.org/standard/"
-            --exclude "COMPREHENSIVE-CATALOGUE"
-            --exclude "ec\\.europa\\.eu/tools/lotl/pivot-lotl-"
-            --exclude "http://uri\\.etsi\\.org/"
-            --exclude "https://uri\\.etsi\\.org/19475/"
-            --exclude "http://data\\.europa\\.eu/eudi/id/"
-            --exclude "https://data\\.europa\\.eu/eudi/id/"
-            --exclude "https?://data\\.europa\\.eu/eudi/policy/"
-            --exclude "https://eudi\\.dev/"
-            --exclude "http://www\\.tlsox\\.xyz/"
-            --exclude "http://www\\.w3\\.org/2001/10/xml-"
-            .
+          args: .
           token: ${{ secrets.GITHUB_TOKEN }}
           fail: true
           failIfEmpty: true
@@ -69,4 +54,4 @@ jobs:
           node-version: "20"
 
       - name: Run markdownlint
-        run: npx --yes markdownlint-cli2 "**/*.md" "#.github" "#docs/sectorial-authorities-banking-brief.md"
+        run: npx --yes markdownlint-cli2

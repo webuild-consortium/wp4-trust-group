@@ -8,18 +8,6 @@ The group develops an implementation of the trust model based on a trusted third
 
 The group aims to create a comprehensive infrastructure of trust that supports seamless interactions among diverse entities. 
 
-## Funding
-
-Co-funded by the European Union
-
-The project is co-funded by the European Union. However, the views and opinions expressed are those of the author(s) only and do not necessarily reflect those of the European Union or the granting authority. Neither the European Union nor the granting authority can be held responsible.
-
-## Licensing
-
-Licensed to the WE BUILD Consortium under the consortium agreements. The WE BUILD Consortium licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use these files except in compliance with the License.
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
-
 ## Tasks
 
 ```mermaid
@@ -65,7 +53,7 @@ wp4-trust-group/
 │
 ├── task2-trust-framework/         # Trust Framework
 │
-├── task3-x509-pki-etsi/           # X.509 PKI with ETSI alignments
+├── task3-x509-pki-etsi/           # X.509 PKI with ETSI specializations
 │
 ├── task4-trust-infrastructure-api/ # Trust Infrastructure API and additional features
 │   ├── trust-infrastructure-api/   # Trust Infrastructure API
@@ -106,7 +94,79 @@ wp4-trust-group/
 
 ## Terms and definitions
 
-A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and-entities.md)** document collects all acronyms, key terminology, entity definitions, WEBUILD-specific entities (Trust Infrastructure Responsible Group), MVP/MVP+ definitions, and policy terms used across WP4 Trust Group deliverables. RACI definitions and matrices are kept in the onboarding documents ([Base Onboarding Framework](task1-use-cases/subtask1-1-onboarding/onboarding-base.md#raci-matrix) and each use case doc). Other documents reference the consolidated doc to avoid duplicating definitions. For policy discovery and trust verification from the wallet perspective (WRPRC/WRPAC, Trusted Lists, Registry, entitlement validation), see **[EUDI Wallet Trust and Entitlement Discovery](task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md)**.
+A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and-entities.md)** document collects all acronyms, key terminology, entity definitions, WEBUILD-specific entities (Trust Infrastructure Responsible Group), MVP/MVP+ definitions, and policy terms used across WP4 Trust Group deliverables. RACI definitions and matrices are kept in the onboarding documents ([Base Onboarding Framework](task1-use-cases/subtask1-1-onboarding/onboarding-base.md#raci-matrix) and each use case doc). For policy discovery and trust verification from the wallet perspective (WRPRC/WRPAC, Trusted Lists, Registry, entitlement validation), see **[EUDI Wallet Trust and Entitlement Discovery](task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md)**.
+
+## Reading paths by scope
+
+Reading paths group documents by the questions or problems they address. Each path lists documents with their purpose and link.
+
+### Who/what are we talking about? — Terminology and entity definitions
+
+- **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and-entities.md)** — Single source for acronyms, key terminology, entity types, WEBUILD-specific entities (Trust Infrastructure Responsible Group), MVP/MVP+ definitions, and policy terms.
+- **[Entities Involved](task2-trust-framework/entities-involved.md)** — Description of entities participating in trust evaluation, the trust registry, and trust infrastructure (aligned with the EUDIW ARF).
+
+### How do participants join the ecosystem? — Onboarding and registration
+
+- **[Base Onboarding Framework](task1-use-cases/subtask1-1-onboarding/onboarding-base.md)** — Common framework: MVP/MVP+ definitions, Member State requirements, RACI matrix; references use-case-specific documents.
+- **[Relying Party Onboarding](task1-use-cases/subtask1-1-onboarding/relying_party_onboarding.md)** — RP registration, policy acceptance, certificate validation, access control setup.
+- **[PID / EAA Provider Onboarding](task1-use-cases/subtask1-1-onboarding/pid_eaa_provider_onboarding.md)** — PID/Attestation Provider registration, attestation type declaration, access/registration certificate issuance, trust anchor publication, notification to Commission.
+- **[Wallet Provider Onboarding](task1-use-cases/subtask1-1-onboarding/wallet-provider-onboarding.md)** — Wallet Provider registration, wallet instance attestation, security compliance, trust establishment.
+- **[Onboarding API](task4-trust-infrastructure-api/onboarding-api/README.md)** — API for participant registration, certificate management, policy management, compliance and audits.
+
+### How does the trust infrastructure work? — Registration, notification, Trusted Lists
+
+- **[Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md)** — Schema and processes for registration/onboarding, notification, and Trusted List publication; responsibilities matrix (Registrar vs. EC vs. MS TLP).
+- **[Trusted List Registration Trust Evaluation Matrix](task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md)** — Requirements matrix for trusted lists, participant registration, and trust evaluation derived from EUDI Wallet ARF Annex 2.
+
+### How do participants verify each other’s trustworthiness? — Trust evaluation use cases
+
+- **[Trust Evaluation Base](task1-use-cases/subtask1-2-trust-registry/trust-evaluation-base.md)** — Trust sources, ARF requirement mapping, common terminology for trust evaluation.
+- **[Wallet Unit evaluates Credential Issuer](task1-use-cases/subtask1-2-trust-registry/wallet-unit-evaluates-credential-issuer.md)** — Wallet Unit verifies PID/Attestation Provider before requesting PID or attestation.
+- **[Credential Issuer evaluates Wallet Unit](task1-use-cases/subtask1-2-trust-registry/credential-issuer-evaluates-wallet-unit.md)** — PID/Attestation Provider verifies Wallet Unit (WUA) before issuing credentials.
+- **[Wallet Unit evaluates Relying Party](task1-use-cases/subtask1-2-trust-registry/wallet-unit-evaluates-relying-party.md)** — Wallet Unit verifies RP before presentation.
+- **[Relying Party evaluates presented credentials](task1-use-cases/subtask1-2-trust-registry/relying-party-evaluates-credentials.md)** — RP validates PID and attestation signatures using Trusted Lists.
+- **[Trusted List discovery and consumption](task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md)** — How to obtain and use LoTL and Trusted Lists for validation.
+
+### How does the wallet discover and verify trust? — Wallet (holder) perspective
+
+- **[EUDI Wallet Trust and Entitlement Discovery](task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md)** — Policy discovery and trust verification from the wallet perspective: WRPRC/WRPAC discovery, Trusted List validation, Registry lookup, entitlement and attribute validation (ARF RPRC_21, RPA_*).
+
+### What are the policy approaches (additive vs. subtractive)? — Authentication, authorization, trust marks
+
+- **[Authentication Authorization Policy Framework](task2-trust-framework/authentication-authorization-policy-framework.md)** — Distinction between authentication and authorization, additive/subtractive principles, federated trust mark use cases.
+- **[Policy Approaches Definition](task5-participants-certificates-policies/policy-approaches-definition.md)** — Additive vs. subtractive policy models, zero-trust, OpenID Federation trust mark integration, attribute/credential classification.
+- **[Trust Mark Semantics Implementation](task5-participants-certificates-policies/trust-mark-semantics-implementation.md)** — Implementation guidance for trust mark semantics for Credential Issuers and Relying Parties.
+
+### What credentials exist and who may issue them? — Credential catalogues and issuer constraints
+
+- **[Credential Catalogue](task2-trust-framework/credential-catalogue.md)** — Catalogue of attributes and attestation schemes (ARF Section 5.5, CIR 2025/1569).
+- **[Credential Catalog and Issuer Constraints](task2-trust-framework/credential-catalog-and-issuer-constraints.md)** — Overview and index linking credential catalogues and Trusted List extensions for issuer constraints.
+- **[Trusted List Extensions for Credential Issuers](task3-x509-pki-etsi/trusted-list-extensions-credential-issuers.md)** — Configuring which Credential Issuers are authorised to issue specific attestation types via Trusted List extensions.
+
+### How are Trusted Lists implemented? — ETSI Trusted Lists and X.509 PKI
+
+- **[ETSI Trusted Lists Implementation Profile](task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)** — Implementation profile for ETSI TS 119 612 and TS 119 602: signing, distribution, XML/JSON formats, examples.
+- **[ETSI Identifier Handling](task3-x509-pki-etsi/etsi-identifier-handling.md)** — Handling of VAT, LEI, and other business identifiers in ETSI profiles, trusted lists, and certificates.
+
+### What certificates exist and what policies apply? — Participant certificates and ETSI policy
+
+- **[Relying Party Access Certificate](task5-participants-certificates-policies/relying_party_access_certificate.md)** — WRPRC/WRPAC (access certificate) for Relying Parties.
+- **[Relying Party Registration Certificate](task5-participants-certificates-policies/relying_party_registration_certificate.md)** — Registration certificate for Relying Parties.
+- **[EAA Provider Access Certificate](task5-participants-certificates-policies/eaa_provider_access_certificate.md)** — Access certificate for Attestation Providers.
+- **[EAA Provider Registration Certificate](task5-participants-certificates-policies/eaa_provider_registration_certificate.md)** — Registration certificate for Attestation Providers.
+- **[PID Provider Access Certificate](task5-participants-certificates-policies/pid_provider_access_certificate.md)** — Access certificate for PID Providers.
+- **[ETSI Policy Enumeration](task5-participants-certificates-policies/etsi-policy-enumeration.md)** — Enumeration of ETSI policy identifiers and mechanisms for the trust framework.
+- **[ETSI Policy Evaluation](task5-participants-certificates-policies/etsi-policy-evaluation.md)** — How ETSI specifications apply in additive/subtractive policy evaluation.
+
+### How to consume or expose trust via APIs? — Trust Infrastructure and Onboarding APIs
+
+- **[Trust Infrastructure API](task4-trust-infrastructure-api/trust-infrastructure-api/README.md)** — Endpoints for trust management, trust evaluation, trust policies, monitoring and reporting.
+- **[Onboarding API](task4-trust-infrastructure-api/onboarding-api/README.md)** — Endpoints for participant registration, certificate management, policy management, compliance and audits.
+
+### How do wallets conform and interoperate? — Conformance and testing
+
+- **[Task 6: Wallet Conformance/Interop](task6-wallet-conformance-interop/README.md)** — Conformance areas (trust, certificates, policy, APIs), interoperability (protocols, formats, cryptography), testing frameworks, certification.
+- **[Task 7: Testing and Validation](task7-testing-validation/README.md)** — Component and integration testing, test strategy and tooling, support for WP4 deliverables and quality evidence.
 
 ## References
 
@@ -120,6 +180,10 @@ A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and
   - [Official Document](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32025R0848)
 - **CIR 2025/2164** - Commission Implementing Regulation (trusted lists context; referenced by ARF v2.8.0 for ETSI TS 119 612)
   - [Official Document](https://eur-lex.europa.eu/eli/dec_impl/2025/2164/oj)
+- **CIR (EU) 2025/1569** - Commission Implementing Regulation on catalogue of attributes and catalogue of attestation schemes (Articles 7–8)
+  - [Official Document](https://eur-lex.europa.eu/eli/reg_impl/2025/1569/oj)
+- **Commission Implementing Decision (EU) 2015/1505** - Rules for authenticating EUMS trusted lists (implemented by ETSI TS 119 615)
+  - [Official Document](https://eur-lex.europa.eu/eli/dec_impl/2015/1505/oj)
 - **Further Implementing Acts** (ARF v2.8.0): CIR 2025/2527 (qualified certificates for website authentication), 2025/2530 (qualified trust service providers), 2025/2531 (qualified electronic ledgers), 2025/2532 (qualified electronic archiving services).
 
 ### Standards
@@ -134,26 +198,50 @@ A single **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119600_119699/119615/01.03.01_60/ts_119615v010301p.pdf)
 - **ETSI TS 119 411-8** (v01.01.01) - Access Certificate Policy for EUDI Wallet Relying Parties (access certificate issuance per ARF Reg_11).
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf)
-- **ETSI EN 319 411-1** - Certificate policy requirements (NCP); Access Certificate Authorities SHALL comply with at least this for ARF Reg_11.
-  - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.01.01_60/en_31941101v010101p.pdf)
+- **ETSI EN 319 411-1** (v1.4.1, 2023-10) - Certificate policy requirements (NCP); Access Certificate Authorities SHALL comply with at least this for ARF Reg_11. CIR 2025/848 Annex IV/V mandates this version.
+  - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf)
 - **ETSI TS 119 475** (v1.2.1) - Relying party attributes supporting EUDI Wallet User's authorisation decisions (Relying Party Attributes)
   - [Official Document (ETSI TS 119 475 v1.2.1)](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf)
 - **ETSI TS 119 412-6** (v1.1.1) - Electronic Signatures and Trust Infrastructures (ESI); Certificate Profiles; Part 6: Certificate profile requirements for PID, Wallet, EAA, QEAA, and PSBEAA providers
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941206/01.01.01_60/ts_11941206v010101p.pdf)
 - **ETSI TS 119 472-2** (v1.1.1) - Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 2: Profiles for EAA/PID Presentations to Relying Party
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.01.01_60/ts_11947202v010101p.pdf)
+- **ETSI TS 119 472-3** (v1.1.1) - Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 3: Profiles for issuance of EAA or PID
+  - [Final](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947203/01.01.01_60/ts_11947203v010101p.pdf)
+- **ETSI EN 319 412-1** (V1.6.1) - Certificate Profiles; Part 1: Overview and common data structures (identifier semantics for organizationIdentifier, serialNumber)
+  - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941201/01.06.01_60/en_31941201v010601p.pdf)
+- **ETSI EN 319 412-2** - Certificate Profiles; Part 2: Certificate profile for certificates issued to natural persons
+  - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941202/01.02.01_60/en_31941202v010201p.pdf)
+- **ETSI EN 319 412-3** - Certificate Profiles; Part 3: Certificate profile for certificates issued to legal persons
+  - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941203/01.02.01_60/en_31941203v010201p.pdf)
+- **ETSI EN 319 411-2** - Policy and security requirements for TSPs issuing certificates; Part 2: Requirements for Qualified Certificate Issuers
+  - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/31941102/01.01.01_60/en_31941102v010101p.pdf)
+- **ETSI EN 319 401** - General Policy Requirements for Trust Service Providers
+  - [Official Document](https://www.etsi.org/deliver/etsi_en/319400_319499/319401/01.01.01_60/en_319401v010101p.pdf)
+- **ETSI TS 119 461** - Policy and security requirements for identity proofing of natural persons (registration identity verification)
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/119461/01.02.01_60/ts_119461v010201p.pdf)
 
 Project alignment with **EUDI Architecture and Reference Framework (ARF) v2.8.0** (terminology LoTE, Reg_10/10a/11/31, RPA_02/RPA_04, access certificate and trusted list standards).
+
+### Additional Standards and Drafts
+
+- **OpenID Federation 1.0** - [Final Specification](https://openid.net/specs/openid-federation-1_0.html)
+- **OpenID Federation Wallet Architectures 1.0** - [Draft](https://openid.net/specs/openid-federation-wallet-1_0.html)
 
 ### European Commission Technical Specifications
 
 These below may have further updates and require to considered in future milestones.
 
 - **EC TS02 v0.9** (2025-04) - Specification of systems enabling the notification and subsequent publication of Provider information
+  - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md)
+- **EC TS03** - Wallet Unit Attestation
+  - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md)
 - **EC TS05 V1.0** (2025-06) - Common Formats and API for Relying Party Registration Information (upcoming ETSI TS)
   - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
 - **EC TS06 v1.0** (2025-06) - Common set of Relying Party information to be registered
-  - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
+  - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md)
+- **EC TS11** - Interfaces and formats for catalogue of attributes and catalogue of attestation schemes
+  - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md)
 
 ### Security Guidelines
 
@@ -162,23 +250,20 @@ These below may have further updates and require to considered in future milesto
 
 #### Dependencies
 
-- **IETF RFC 5914** - Trust Anchor Format
+- **ETSI TS 119 182-1** - JAdES digital signatures; Part 1: Building blocks and JAdES baseline signatures (WRPRC JWT/CWT signing)
+  - [Official Document](https://www.etsi.org/deliver/etsi_ts/119100_119199/11918201/01.02.01_60/ts_11918201v010201p.pdf)
+- **ETSI EN 319 132-1** - XAdES digital signatures; Part 1: Building blocks and XAdES baseline signatures (Trusted List XML signing)
+  - [Official Document](https://www.etsi.org/deliver/etsi_en/319100_319199/31913201/01.03.01_60/en_31913201v010301p.pdf)
 - **IETF RFC 5280** - Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile
+- **IETF RFC 5914** - Trust Anchor Format
+- **IETF RFC 5646** - Tags for Identifying Languages (WRPRC language codes)
+- **IETF RFC 7519** - JSON Web Token (JWT)
+- **IETF RFC 8392** - CBOR Web Token (CWT)
 - **W3C XML Digital Signature** - XML Signature Syntax and Processing Version 1.1
   - [Official Specification](https://www.w3.org/TR/xmldsig-core1/)
 - **W3C XML Schema** - XML Schema Definition Language
   - [Part 1: Structures](https://www.w3.org/TR/xmlschema-1/)
   - [Part 2: Datatypes](https://www.w3.org/TR/xmlschema-2/)
-
-
-### Drafts
-
-- **ETSI TS 119 472-3** (v0.0.11 Draft) - Electronic Signatures and Trust Infrastructures (ESI); Profiles for Electronic Attestation of Attributes; Part 3: Profiles for issuance of EAA or PID
-  - [Work Item Page](https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=74935&curItemNr=121&totalNrItems=292&optDisplay=100000&qSORT=TB&qETSI_ALL=&SearchPage=TRUE&qINCLUDE_SUB_TB=&qINCLUDE_MOVED_ON=&qEND_CURRENT_STATUS_CODE=11+WI%3BM58&qSTOP_FLG=N&qKEYWORD_BOOLEAN=&qCLUSTER_BOOLEAN=&qCLUSTER=17&qFREQUENCIES_BOOLEAN=&qSTOPPING_OUTDATED=&butExpertSearch=Search&includeNonActiveTB=FALSE&includeSubProjectCode=&qREPORT_TYPE=TUBE)
-  - [Draft Document](https://docbox.etsi.org/esi/esi/70-Drafts/0019472-3/ESI-0019472-3v0011.docx)
-- **OpenID Federation 1.0** - Draft 43
-- **OpenID Federation Wallet Architectures 1.0** - Draft 03
-
 
 ## Getting Started
 
@@ -187,7 +272,7 @@ These below may have further updates and require to considered in future milesto
 3. Check the references directory for relevant standards and specifications
 4. Follow the contributing guidelines for any modifications
 
-## Contributing
+### Contributing
 
 We welcome contributions from all collaborators.
 
@@ -200,3 +285,15 @@ By contributing, you agree to follow the project's coding and documentation guid
 ## Contact
 
 For questions and discussions, please use the GitHub Issues or Discussions section of this repository.
+
+## Licensing
+
+Licensed to the WE BUILD Consortium under the consortium agreements. The WE BUILD Consortium licenses this file to you under the Apache License, Version 2.0 (the "License"); you may not use these files except in compliance with the License.
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+## Funding
+
+Co-funded by the European Union
+
+The project is co-funded by the European Union. However, the views and opinions expressed are those of the author(s) only and do not necessarily reflect those of the European Union or the granting authority. Neither the European Union nor the granting authority can be held responsible.
