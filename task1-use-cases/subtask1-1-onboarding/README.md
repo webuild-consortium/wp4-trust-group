@@ -23,5 +23,5 @@ This subtask defines the onboarding use cases for participants in the WP4 Trust 
 - **Notification to Commission**: Notification to EU Commission and other Member States (for PID Providers and PuB-EAA Providers)
 
 ### Wallet Solutions
-- **Wallet Providers** – Wallet solutions and providers registration, wallet instance attestation, security compliance verification
+- **Wallet Providers** – Wallet solutions and providers registration
 - **Notification to Commission**: Notification to EU Commission and other Member States
