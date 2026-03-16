@@ -36,19 +36,7 @@ jobs:
       - name: Check links in documents
         uses: lycheeverse/lychee-action@v2
         with:
-          args: >
-            --verbose
-            --no-progress
-            --exclude "https://www\\.etsi\\.org/deliver/"
-            --exclude "https://www\\.iso\\.org/standard/"
-            --exclude "eu-digital-identity-wallet\\.github\\.io.*annex-2-high-level-requirements"
-            --exclude "COMPREHENSIVE-CATALOGUE"
-            --exclude "ec\\.europa\\.eu/tools/lotl/pivot-lotl-"
-            --exclude "http://uri\\.etsi\\.org/"
-            --exclude "http://www\\.tlsox\\.xyz/"
-            --exclude "http://www\\.w3\\.org/2001/10/xml-"
-            --exclude "webuild-consortium/wp4-trust-group/blob/main/docs/wp23-stock-takings/STOCKTAKING-TO-ISSUES"
-            .
+          args: .
           token: ${{ secrets.GITHUB_TOKEN }}
           fail: true
           failIfEmpty: true
@@ -66,4 +54,4 @@ jobs:
           node-version: "20"
 
       - name: Run markdownlint
-        run: npx --yes markdownlint-cli2 "**/*.md" "#.github" "#docs/sectorial-authorities-banking-brief.md"
+        run: npx --yes markdownlint-cli2
