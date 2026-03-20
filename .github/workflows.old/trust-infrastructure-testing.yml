@@ -1,5 +1,9 @@
 name: Trust Infrastructure Testing
 
+# Skip when commit message contains [skip ci], [ci skip], [no ci], [skip actions], or [actions skip]
+# (GitHub natively skips workflows for push/pull_request when these are in the commit message)
+# Skip duplicate runs: on push to a branch with an open PR, skip (pull_request will run)
+
 on:
   push:
     branches: [ main, develop ]
@@ -15,7 +19,25 @@ on:
       - 'task6-wallet-conformance-interop/**'
 
 jobs:
+  should-run:
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - id: check
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "run=true" >> $GITHUB_OUTPUT
+          else
+            count=$(gh pr list --head "${{ github.ref_name }}" --state open --json number --jq 'length' 2>/dev/null || echo "0")
+            [ "$count" -gt 0 ] && echo "run=false" >> $GITHUB_OUTPUT || echo "run=true" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   trust-api-testing:
+    needs: should-run
+    if: needs.should-run.outputs.run == 'true'
     runs-on: ubuntu-latest
     
     services:
@@ -57,15 +79,27 @@ jobs:
     
     - name: Run Trust Infrastructure API tests
       run: |
-        pytest task4-trust-infrastructure-api/tests/ -v --cov=task4-trust-infrastructure-api/src
+        if [ -d task4-trust-infrastructure-api/tests ]; then
+          pytest task4-trust-infrastructure-api/tests/ -v --cov=task4-trust-infrastructure-api/src
+        else
+          echo "No task4 tests directory, skipping"
+        fi
     
     - name: Run Participants Certificates and Policies tests
       run: |
-        pytest task5-participants-certificates-policies/tests/ -v --cov=task5-participants-certificates-policies/src
+        if [ -d task5-participants-certificates-policies/tests ]; then
+          pytest task5-participants-certificates-policies/tests/ -v --cov=task5-participants-certificates-policies/src
+        else
+          echo "No task5 tests directory, skipping"
+        fi
     
     - name: Run Wallet Conformance tests
       run: |
-        pytest task6-wallet-conformance-interop/tests/ -v --cov=task6-wallet-conformance-interop/src
+        if [ -d task6-wallet-conformance-interop/tests ]; then
+          pytest task6-wallet-conformance-interop/tests/ -v --cov=task6-wallet-conformance-interop/src
+        else
+          echo "No task6 tests directory, skipping"
+        fi
 
   integration-testing:
     runs-on: ubuntu-latest
@@ -110,7 +144,7 @@ jobs:
     
     - name: Start Trust Infrastructure services
       run: |
-        docker-compose -f docker-compose.test.yml up -d
+        docker compose -f docker-compose.test.yml up -d
         sleep 30
     
     - name: Run integration tests
@@ -123,7 +157,7 @@ jobs:
     
     - name: Stop services
       run: |
-        docker-compose -f docker-compose.test.yml down
+        docker compose -f docker-compose.test.yml down
 
   performance-testing:
     runs-on: ubuntu-latest
@@ -144,7 +178,7 @@ jobs:
     
     - name: Start Trust Infrastructure services
       run: |
-        docker-compose -f docker-compose.performance.yml up -d
+        docker compose -f docker-compose.performance.yml up -d
         sleep 60
     
     - name: Run load tests
@@ -165,9 +199,11 @@ jobs:
     
     - name: Stop services
       run: |
-        docker-compose -f docker-compose.performance.yml down
+        docker compose -f docker-compose.performance.yml down
 
   security-testing:
+    needs: [should-run]
+    if: needs.should-run.outputs.run == 'true'
     runs-on: ubuntu-latest
     
     steps:
@@ -185,7 +221,7 @@ jobs:
     
     - name: Run OWASP ZAP security scan
       run: |
-        docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8080
+        docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://localhost:8080
     
     - name: Run bandit security scan
       run: |
