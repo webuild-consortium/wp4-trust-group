@@ -2,6 +2,40 @@
 
 The WP4 Trust Infrastructure requires an automated system to compile and publish List of Trusted Lists (LoTL) and Trusted Lists (TLs) in both XML and JSON formats. This document defines the **Trusted List (TL) automation scope** for the WP4 Trust Infrastructure, following the ETSI standards and the ARF, as defined in [Task 3](../task3-x509-pki-etsi/).
 
+## Process Overview
+
+```mermaid
+flowchart TB
+    subgraph inputs [TL Input Sources]
+        A[onboarding/ data]
+        B[Registry query API]
+        C[WP4 member TLs]
+    end
+
+    subgraph processing [TL Production]
+        D[Collect entity data]
+        E[Generate entity-specific TLs]
+        F[Generate Wallet Provider TL]
+        G[Include external TLs]
+        H[Generate LoTL]
+        I[Sign all TLs]
+    end
+
+    subgraph output [Publication]
+        J[GitHub Pages]
+    end
+
+    A --> D
+    B --> D
+    C --> G
+    D --> E
+    E --> F
+    F --> H
+    G --> H
+    H --> I
+    I --> J
+```
+
 ## Solution Overview
 
 This PR focuses **exclusively on Trusted List automation**:
@@ -62,7 +96,9 @@ tools/entity_registration_validator/
 │   ├── pub_eaa_validator.py # Public EAA Provider schema validator
 │   ├── pid_validator.py    # PID Provider schema validator
 │   ├── qeaa_validator.py   # Qualified EAA Provider schema validator
-│   └── eaa_validator.py    # EAA Provider schema validator
+│   ├── eaa_validator.py    # EAA Provider schema validator
+│   ├── wallet_validator.py # Wallet Provider schema validator
+│   └── ebwoid_validator.py # EBWOID Provider schema validator
 ├── README.md           # Tool documentation
 └── tests/              # Test suite
     ├── __init__.py
@@ -106,17 +142,17 @@ tools/entity_registration_validator/
   - Use Pydantic validators for extensible field-level validation (inheritable for future extensions)
 - **Schema organization**:
   - Base schema validator (`schema_validators/base.py`) with common validation logic shared across all entity types
-  - Entity-specific schema validators: `rp_validator.py`, `pub_eaa_validator.py`, `pid_validator.py`, `qeaa_validator.py`, `eaa_validator.py`
+  - Entity-specific schema validators: `rp_validator.py`, `pub_eaa_validator.py`, `pid_validator.py`, `qeaa_validator.py`, `eaa_validator.py`, `wallet_validator.py`, `ebwoid_validator.py`
   - Base field validators (`schema_validators/field_validators.py`) with common field-level validation logic
   - Each entity-specific validator inherits from base validator and extends with entity-specific requirements
 - Process JSON or YAML files describing entities
-- Support entity types: `rp`, `pub-eaa-provider`, `pid-provider`, `qeaa-provider`, `eaa-provider`
+- Support entity types: `rp`, `pub-eaa-provider`, `pid-provider`, `qeaa-provider`, `eaa-provider`, `wallet-provider`, `ebwoid-provider`
 - **X.509 Certificate Signing Request (CSR) requirement** (validated by `schema_validators/base.py`):
   - Templates MUST include X.509 CSR for the access certificate only
   - The access certificate MUST comply with specifications defined in [Task 3](../task3-x509-pki-etsi/)
   - Base validator validates CSR format, structure, and compliance with Task 3 requirements
   - **Allowed key types per eIDAS 2.0 (ETSI TS 119 312, ENISA EUCC v.2)**:
-    - **RSA**: Minimum 3000 bits (RSA 2048 is legacy, sunset date 31 Dec 2025)
+    - **RSA**: 3072 bits minimum per ETSI TS 119 312 (RSA 2048 is legacy, sunset date 31 Dec 2025)
     - **ECDSA**: Supported (curves per ETSI TS 119 312 tables 4, 6, 7)
     - **EdDSA**: Supported (per ETSI TS 119 312)
 - **Entity identifier uniqueness requirement**:
@@ -130,7 +166,7 @@ tools/entity_registration_validator/
 - All configuration in `settings.py` (no hardcoded constants)
 - **Testing**: pytest required, minimum 95% code coverage
   - Unit tests for individual components
-  - Integration tests for all entity types (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider) validating end-to-end registration flow
+  - Integration tests for all entity types (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider, wallet-provider, ebwoid-provider) validating end-to-end registration flow
 
 **CLI Interface**:
 ```bash
@@ -153,6 +189,8 @@ entity-registration-validator --file <path> --entity-type <type> [--schema <sche
   - `onboarding/pid-provider/` - PID Provider registrations
   - `onboarding/qeaa-provider/` - Qualified EAA Provider registrations
   - `onboarding/eaa-provider/` - EAA Provider registrations
+  - `onboarding/wallet-provider/` - Wallet Provider registrations
+  - `onboarding/ebwoid-provider/` - EBWOID Provider registrations
 
 **File Naming Convention**:
 - Entity files: `<entity_acronym>_<unique_identifier>.json` or `.yaml`
@@ -304,7 +342,7 @@ tools/trusted_lists/
 **Requirements**:
 - Standalone Python program with CLI
 - Generate trusted lists according to ETSI TS 119 612 (XML) and TS 119 602 (JSON/XML) in both formats
-- Support entity-specific trusted lists for all entity types (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider)
+- Support entity-specific trusted lists for all entity types (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider, wallet-provider, ebwoid-provider)
 - Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../task3-x509-pki-etsi/)
 - **Signature libraries**: `signxml` (XAdES) or `python-xades`; `jwcrypto` (JAdES) or `python-jose`; `cryptography` for certificates
 
@@ -329,9 +367,11 @@ trusted-list-producer --entity-type <type> --output-dir <path> [--sign]
 **Requirements**:
 - Standalone Python program with CLI
 - **MUST produce all trusted lists AND the List of Trusted Lists in a single execution**:
-  1. Generate all entity-specific trusted lists (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider) in both XML and JSON formats
-  2. Generate List of Trusted Lists (LoTL) referencing all generated trusted lists
-  3. All trusted lists must be signed before being referenced in the LoTL
+  1. Generate all entity-specific trusted lists (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider, wallet-provider, ebwoid-provider) in both XML and JSON formats
+  2. Generate the **Wallet Provider Trusted List** (LoTEType/EUWalletProvidersList) per ETSI TS 119 602 Annex E — this pipeline produces it
+  3. Include any additional TLs provided by WP4 members (via config file or URL list)
+  4. Generate List of Trusted Lists (LoTL) referencing all generated and integrated trusted lists
+  5. All trusted lists must be signed before being referenced in the LoTL
 - Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../task3-x509-pki-etsi/)
 - **Signature libraries**: `signxml` (XAdES) or `python-xades`; `jwcrypto` (JAdES) or `python-jose`; `cryptography` for certificates
 
@@ -368,7 +408,7 @@ python -m tools.trusted_lists.cli --list-of-trusted-lists --output-dir <path> [-
    - Group by entity type
 
 2. **Generate All Trusted Lists and List of Trusted Lists**:
-   - Execute trusted lists producer with `--all` flag to generate all entity-specific trusted lists (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider) and LoTL in both XML and JSON formats
+   - Execute trusted lists producer with `--all` flag to generate all entity-specific trusted lists (including wallet-provider and ebwoid-provider), the Wallet Provider TL, and LoTL in both XML and JSON formats
    - Output: `trusted_lists/<entity_type>_trusted_list.{xml,json}` and `trusted_lists/list_of_trusted_lists.{xml,json}` (all signed)
 
 3. **Commit and Push** (if changes):
@@ -408,6 +448,8 @@ ENTITY_SCHEMAS = {
     'pid-provider': 'schemas/pid_provider_schema.json',
     'qeaa-provider': 'schemas/qeaa_provider_schema.json',
     'eaa-provider': 'schemas/eaa_provider_schema.json',
+    'wallet-provider': 'schemas/wallet_provider_schema.json',
+    'ebwoid-provider': 'schemas/ebwoid_provider_schema.json',
     # ...
 }
 
@@ -461,7 +503,7 @@ This section addresses practical questions for WE BUILD participants:
 
 ### Entity Types
 
-- `rp` (Relying Parties), `pub-eaa-provider` (Public EAA Providers), `pid-provider` (PID Providers), `qeaa-provider` (Qualified EAA Providers), `eaa-provider` (EAA Providers)
+- `rp` (Relying Parties), `pub-eaa-provider` (Public EAA Providers), `pid-provider` (PID Providers), `qeaa-provider` (Qualified EAA Providers), `eaa-provider` (EAA Providers), `wallet-provider` (Wallet Providers), `ebwoid-provider` (EBWOID Providers)
 
 ### References
 
