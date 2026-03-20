@@ -1,19 +1,45 @@
-# [FEATURE] Implement Automated Compliance Registry with CD Pipeline
+# [FEATURE] Implement Trusted List Automation with CD Pipeline
 
-The WP4 Trust Infrastructure requires an automated system to evaluate and register the compliance of entities (Wallet Providers, Relying Parties, and PID/Attestation Providers), and to compile and publish List of Trusted Lists (LoTL) and Trusted Lists (TLs) in both XML and JSON formats. Currently, we need an automated mechanism to validate entity information, test against configured platforms, compile trusted lists, and publish them following the ETSI standards and the ARF, as defined in [Task 3](../task3-x509-pki-etsi/).
+The WP4 Trust Infrastructure requires an automated system to compile and publish List of Trusted Lists (LoTL) and Trusted Lists (TLs) in both XML and JSON formats. This document defines the **Trusted List (TL) automation scope** for the WP4 Trust Infrastructure, following the ETSI standards and the ARF, as defined in [Task 3](../task3-x509-pki-etsi/).
 
 ## Solution Overview
 
-Implement a comprehensive Continuous Deployment (CD) system that:
-1. Validates entity registration files against templates and schemas
-2. Executes compliance tests against configured test platforms provided by weBuild participants
-3. Automatically generates and signs trusted lists according to ETSI TS 119 612 and TS 119 602
-4. Publishes entities to appropriate trusted lists upon successful validation
-5. Automatically publishes trusted lists to GitHub Pages for public access
+This PR focuses **exclusively on Trusted List automation**:
+
+1. **Trusted List (TL) generation and signing** — Automatically generates and signs trusted lists according to ETSI TS 119 612 and TS 119 602
+2. **List of Trusted Lists (LoTL) generation and signing** — Produces LoTL referencing all generated TLs plus any additional TLs provided by WP4 members
+3. **Publishing TLs to GitHub Pages** — Automatically publishes all trusted lists for public access
+
+**Out of scope for this PR** (to be addressed in a separate PR):
+
+- Entity registration validation tool
+- Compliance tests against test platforms
+- Registry logic and CA provisioning details
+
+### Registry Integration Model
+
+WP4 supports multiple registries. The TL automation applies this rule:
+
+> **If a WRP with a given role is found in a registry recognised by WP4, the WRP's trust anchor is placed on the corresponding trusted list.**
+
+- **Registry query pattern**: `GET {registry}/wrp?identifier={wrpIdentifier}`
+- This PR does **not** define how entities get registered or what checks occur during registration.
+- **Wallet Provider registration** remains in scope for this TL automation (data in `onboarding/wallet-provider/`).
+
+### Access and Registration CA TLs
+
+The CA used with the baseline registry **MUST** be one of the CAs listed on the Access and Registration CA TLs. How this CA is added/listed will be defined in the separate registry/CA PR.
+
+### Integration of External TLPs and Static CA Lists
+
+- **Trusted List Providers (TLPs)**: WP4 members may supply their own TLs. The LoTL producer includes additional TLs via a configuration mechanism (e.g., config file or URL list). @cklugow and @nklomp to define integration details.
+- **Access and Registration CAs**: Static CA lists are out of scope for **automation** in this PR; the integration mechanism (how such lists are included in LoTL/TLs) is in scope.
 
 ## Functional Requirements
 
-### 1. Entity Registration Validation Tool
+### 1. Entity Registration Validation Tool *(Future / Separate PR)*
+
+*This component is out of scope for TL automation. The following describes the intended design for the separate registry/validation PR.*
 
 **Location**: `tools/entity_registration_validator/`
 
@@ -117,7 +143,7 @@ entity-registration-validator --file <path> --entity-type <type> [--schema <sche
 
 **New Directories**:
 - `trusted_lists/` - Root directory for published trusted lists
-- `onboarding/` - Directory for entity registration files organized by entity type:
+- `onboarding/` - **TL input data only** (entity id + cert). Entities registered in the baseline registry or other WP4-recognised registries may submit requests to be added to a TL via files in these directories. No validation or conformance logic is coupled to this data in the TL automation scope. Organized by entity type:
   - `onboarding/rp/` - Relying Party registrations
   - `onboarding/pub-eaa-provider/` - Public EAA Provider registrations
   - `onboarding/pid-provider/` - PID Provider registrations
@@ -128,12 +154,14 @@ entity-registration-validator --file <path> --entity-type <type> [--schema <sche
 - Entity files: `<entity_acronym>_<unique_identifier>.json` or `.yaml`
 - Example: `rp_example-corp-12345.json`
 
-### 3. GitHub Workflow for PR Validation
+### 3. GitHub Workflow for PR Validation *(Future / Separate PR)*
+
+*Validation and test platform integration are in registry scope, not TL automation. For wallet providers, the baseline registry may integrate conformance testing via GitHub. Other registries may use different integration methods. See iterative delivery coordination with @andrea-dintino.*
 
 **Location**: `.github/workflows/entity-onboarding-validation.yml`
 
 **Trigger Conditions**:
-- Activates on PRs that modify files in `onboarding/` directories
+- Activates on PRs that modify files in `onboarding/` directories (data files only)
 - Detects file additions/modifications in `onboarding/*/` paths
 
 **Workflow Steps**:
