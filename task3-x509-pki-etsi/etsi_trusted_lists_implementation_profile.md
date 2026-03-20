@@ -982,6 +982,10 @@ Use appropriate JAdES validation library (see section 12).
 - [ ] HistoricalInformationPeriod is `65535`
 - [ ] Service history uses X509SKI (not X509Certificate)
 
+### 11.5 External Validation Tools
+
+For TL validation against official eIDAS requirements, use the [eIDAS Dashboard validation tests](https://eidas.ec.europa.eu/efda/validation-tests).
+
 ## 12. Python Libraries for Signatures
 
 For detailed information on Python libraries for implementing XAdES and JAdES signatures, see the separate document:
@@ -1041,6 +1045,9 @@ This guide includes:
 
 ### Tools
 - [Trusted List Manager non-EU](https://ec.europa.eu/digital-building-blocks/sites/display/TLSO/Trusted+List+Manager+non-EU)
+
+### External Resources
+- [eIDAS Dashboard validation tests](https://eidas.ec.europa.eu/efda/validation-tests) – TL validation against official eIDAS requirements
 
 ### Regulations
 - [Regulation (EU) No 910/2014](https://eur-lex.europa.eu/eli/reg/2014/910/oj) - eIDAS
