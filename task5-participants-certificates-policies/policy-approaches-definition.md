@@ -769,19 +769,19 @@ The implementation guidelines and examples demonstrate practical applications of
 - [OpenID Federation 1.0](https://openid.net/specs/openid-federation-1_0.html)
 - [W3C Verifiable Credentials Data Model](https://www.w3.org/TR/vc-data-model/)
 - [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf)
-- [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.00.00_60/ts_119475v010000p.pdf)
+- [ETSI TS 119 475 v1.2.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf)
 - [ISO/IEC 19794](https://www.iso.org/standard/38770.html) (Biometric data)
 - [HL7 FHIR](https://www.hl7.org/fhir/) (Health data)
 
 ### Related Documents
-- [Trust Framework Definition](task2-trust-framework/README.md)
-- [Policy Data Models](data-model/README.md)
-- [Trust Evaluation Methods](trust-evaluation-methods/README.md)
-- [Use Cases](task1-use-cases/README.md)
+- [Trust Framework Definition](../task2-trust-framework/README.md)
+- [Policy Data Models](README.md#data-models)
+- [Trust Evaluation Methods](../task2-trust-framework/trust-infrastructure-schema.md)
+- [Use Cases](../task1-use-cases/README.md)
 
 ### External Resources
 - [Zero Trust Architecture](https://www.nist.gov/publications/zero-trust-architecture)
-- [GDPR Compliance](https://gdpr.eu/)
+- [GDPR Compliance](https://ec.europa.eu/info/law/law-topic/data-protection_en)
 - [EIDAS Regulation](https://eur-lex.europa.eu/eli/reg/2014/910/oj)
 - [PCI DSS Standards](https://www.pcisecuritystandards.org/)
 

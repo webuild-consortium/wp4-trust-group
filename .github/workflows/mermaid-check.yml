@@ -1,0 +1,108 @@
+name: Mermaid Check
+
+# Skip when commit message contains [skip ci], [ci skip], [no ci], etc.
+# Triggered only when markdown files change; validation runs only for files containing mermaid diagrams
+
+on:
+  push:
+    branches: ["**"]
+    paths:
+      - "**/*.md"
+  pull_request:
+    branches: ["**"]
+    paths:
+      - "**/*.md"
+
+jobs:
+  pre_job:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v5
+        with:
+          concurrent_skipping: "same_content_newer"
+          skip_after_successful_duplicate: "true"
+          paths: '["**/*.md"]'
+          do_not_skip: '["workflow_dispatch", "schedule", "merge_group"]'
+
+  filter:
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      has_mermaid: ${{ steps.filter.outputs.has_mermaid }}
+      files: ${{ steps.filter.outputs.files }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dorny/paths-filter@v3
+        id: changed
+        with:
+          filters: |
+            markdown:
+              - "**/*.md"
+          list-files: json
+
+      - name: Filter markdown files with Mermaid diagrams
+        id: filter
+        run: |
+          files_json='${{ steps.changed.outputs.markdown_files }}'
+          if [ -z "$files_json" ] || [ "$files_json" = "[]" ]; then
+            echo "has_mermaid=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          # Parse JSON array and check each file for ```mermaid
+          with_mermaid=()
+          while IFS= read -r file; do
+            file="${file%\"}"
+            file="${file#\"}"
+            if [ -f "$file" ] && grep -q '```mermaid' "$file" 2>/dev/null; then
+              with_mermaid+=("$file")
+            fi
+          done < <(echo "$files_json" | jq -c -r '.[]')
+          if [ ${#with_mermaid[@]} -eq 0 ]; then
+            echo "has_mermaid=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_mermaid=true" >> $GITHUB_OUTPUT
+            echo "files<<EOF" >> $GITHUB_OUTPUT
+            printf '%s\n' "${with_mermaid[@]}" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+
+  validate:
+    needs: filter
+    if: needs.filter.outputs.has_mermaid == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install mermaid-cli
+        run: npm install -g @mermaid-js/mermaid-cli
+
+      - name: Validate Mermaid diagrams
+        run: |
+          failed=0
+          files='${{ needs.filter.outputs.files }}'
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            echo "Validating: $file"
+            out=$(mktemp -u /tmp/mermaid-XXXXX.svg)
+            if ! npx mmdc -p .github/puppeteer-config.json -i "$file" -o "$out" -b transparent; then
+              echo "::error::Mermaid render failed in $file"
+              failed=1
+            fi
+            rm -f "$out" "${out%.svg}"-*.svg 2>/dev/null || true
+          done <<< "$files"
+          exit $failed
