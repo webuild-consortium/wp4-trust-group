@@ -1,6 +1,6 @@
 # [FEATURE] Implement Trusted List Automation with CD Pipeline
 
-The WP4 Trust Infrastructure requires an automated system to compile and publish List of Trusted Lists (LoTL) and Trusted Lists (TLs) in both XML and JSON formats. This document defines the **Trusted List (TL) automation scope** for the WP4 Trust Infrastructure, following the ETSI standards and the ARF, as defined in [Task 3](../task3-x509-pki-etsi/).
+The WP4 Trust Infrastructure requires an automated system to compile and publish List of Trusted Lists (LoTL) and Trusted Lists (TLs) in both XML and JSON formats. This document defines the **Trusted List (TL) automation scope** for the WP4 Trust Infrastructure, following the ETSI standards and the ARF, as defined in [Task 3](../../task3-x509-pki-etsi/).
 
 ## Process Overview
 
@@ -149,7 +149,7 @@ tools/entity_registration_validator/
 - Support entity types: `rp`, `pub-eaa-provider`, `pid-provider`, `qeaa-provider`, `eaa-provider`, `wallet-provider`, `ebwoid-provider`
 - **X.509 Certificate Signing Request (CSR) requirement** (validated by `schema_validators/base.py`):
   - Templates MUST include X.509 CSR for the access certificate only
-  - The access certificate MUST comply with specifications defined in [Task 3](../task3-x509-pki-etsi/)
+  - The access certificate MUST comply with specifications defined in [Task 3](../../task3-x509-pki-etsi/)
   - Base validator validates CSR format, structure, and compliance with Task 3 requirements
   - **Allowed key types per eIDAS 2.0 (ETSI TS 119 312, ENISA EUCC v.2)**:
     - **RSA**: 3072 bits minimum per ETSI TS 119 312 (RSA 2048 is legacy, sunset date 31 Dec 2025)
@@ -161,7 +161,7 @@ tools/entity_registration_validator/
   - Duplicate entity identifier values are NOT allowed - the validator MUST check against existing published entities
   - The workflow MUST detect existing entity identifiers and handle updates accordingly
 - Validate against JSON Schema templates (using Pydantic models)
-- Templates must differ based on entity type (see [Task 2](../task2-trust-framework/))
+- Templates must differ based on entity type (see [Task 2](../../task2-trust-framework/))
 - Use Pydantic validators from base or entity-specific validators (inheritable for future extensions)
 - All configuration in `settings.py` (no hardcoded constants)
 - **Testing**: pytest required, minimum 95% code coverage
@@ -249,7 +249,7 @@ entity-registration-validator --file <path> --entity-type <type> [--schema <sche
 6. **Certificate Provisioning** (when registration succeeds):
    - If all validations pass AND all test platforms return success:
      - Generate access certificate and registration certificate for the registered entity (for rp and pid/attestation providers only, excluding wallet providers)
-     - Access certificate MUST comply with specifications defined in [Task 3](../task3-x509-pki-etsi/)
+     - Access certificate MUST comply with specifications defined in [Task 3](../../task3-x509-pki-etsi/)
      - **MUST publish certificates in clear text within the PR thread** (certificates contain public keys only):
        - Post access certificate and registration certificate as PR comment, since certificates are public information
      - **Private keys for signature operations**:
@@ -343,7 +343,7 @@ tools/trusted_lists/
 - Standalone Python program with CLI
 - Generate trusted lists according to ETSI TS 119 612 (XML) and TS 119 602 (JSON/XML) in both formats
 - Support entity-specific trusted lists for all entity types (rp, pub-eaa-provider, pid-provider, qeaa-provider, eaa-provider, wallet-provider, ebwoid-provider)
-- Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../task3-x509-pki-etsi/)
+- Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../../task3-x509-pki-etsi/)
 - **Signature libraries**: `signxml` (XAdES) or `python-xades`; `jwcrypto` (JAdES) or `python-jose`; `cryptography` for certificates
 
 **CLI Interface**:
@@ -358,7 +358,7 @@ trusted-list-producer --entity-type <type> --output-dir <path> [--sign]
 - Unit tests for XML/JSON generation, signing, schema validation
 - Integration tests for all entity types in both formats
 
-**References**: See [`task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md`](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)
+**References**: See [`task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md`](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)
 
 #### 4.2 List of Trusted Lists Producer and Signer
 
@@ -372,7 +372,7 @@ trusted-list-producer --entity-type <type> --output-dir <path> [--sign]
   3. Include any additional TLs provided by WP4 members (via config file or URL list)
   4. Generate List of Trusted Lists (LoTL) referencing all generated and integrated trusted lists
   5. All trusted lists must be signed before being referenced in the LoTL
-- Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../task3-x509-pki-etsi/)
+- Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../../task3-x509-pki-etsi/)
 - **Signature libraries**: `signxml` (XAdES) or `python-xades`; `jwcrypto` (JAdES) or `python-jose`; `cryptography` for certificates
 
 **CLI Interface**:
@@ -390,7 +390,7 @@ python -m tools.trusted_lists.cli --list-of-trusted-lists --output-dir <path> [-
 - Unit tests for LoTL generation, aggregation logic, signing, schema validation
 - Integration tests for complete workflow generating all trusted lists and LoTL in single execution
 
-**References**: See [`task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md`](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)
+**References**: See [`task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md`](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)
 
 ### 5. Automated Trusted List Update Workflow
 
@@ -486,10 +486,10 @@ ETSI_LOTE_TYPE_URIS = {
 
 ## Component Affected
 
-- [x] [Task 2: Trust Framework](../task2-trust-framework/) (entity templates and requirements)
-- [x] [Task 3: X.509 PKI with ETSI alignments](../task3-x509-pki-etsi/) (trusted list generation and signing)
-- [x] [Task 4: Trust Infrastructure API](../task4-trust-infrastructure-api/) (onboarding process)
-- [x] [Task 7: Testing and Validation](../task7-testing-validation/) (test platform integration)
+- [x] [Task 2: Trust Framework](../../task2-trust-framework/) (entity templates and requirements)
+- [x] [Task 3: X.509 PKI with ETSI alignments](../../task3-x509-pki-etsi/) (trusted list generation and signing)
+- [x] [Task 4: Trust Infrastructure API](../../task4-trust-infrastructure-api/) (onboarding process)
+- [x] [Task 7: Testing and Validation](../../task7-testing-validation/) (test platform integration)
 
 ## Additional Context
 
@@ -507,8 +507,8 @@ This section addresses practical questions for WE BUILD participants:
 
 ### References
 
-- **Task 2**: [`task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md`](../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md) - Entity registration requirements
-- **Task 3**: [`task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md`](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) - Trusted list generation and signing
+- **Task 2**: [`task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md`](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md) - Entity registration requirements
+- **Task 3**: [`task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md`](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) - Trusted list generation and signing
 - **ARF Requirements**: See EUDI Wallet Architecture and Reference Framework Annex 2
 - **Implementing Acts**: CIR 2025/848 and related regulations
 
@@ -536,7 +536,7 @@ This section addresses practical questions for WE BUILD participants:
 
 ## Dependencies
 
-- [Task 2](../task2-trust-framework/) documentation (entity templates and requirements)
-- [Task 3](../task3-x509-pki-etsi/) documentation (trusted list generation and signing specifications)
+- [Task 2](../../task2-trust-framework/) documentation (entity templates and requirements)
+- [Task 3](../../task3-x509-pki-etsi/) documentation (trusted list generation and signing specifications)
 - Test platform API specifications (credimi.io and others)
 - ETSI TS 119 612 and TS 119 602 schema files

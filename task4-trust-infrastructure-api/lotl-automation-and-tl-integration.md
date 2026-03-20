@@ -121,7 +121,7 @@ Each `{participant_id}.json` file MUST contain:
 
 ### 4. LoTL Producer and Signer
 
-**Location**: `tools/lotl/` (see [tools/lotl/README.md](../../tools/lotl/README.md))
+**Location**: `tools/lotl/` (see [tools/lotl/README.md](../tools/lotl/README.md))
 
 **Data Collection** (inputs):
 - **From `lotl/tl_entries/`**: Scan all `lotl/tl_entries/{tl_type}/*.json` files; parse each entry to obtain TL URL(s) and metadata. The LoTL references these TLs by URL; TLPs publish their own TLs.
