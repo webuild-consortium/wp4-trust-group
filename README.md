@@ -8,6 +8,19 @@ The group develops an implementation of the trust model based on a trusted third
 
 The group aims to create a comprehensive infrastructure of trust that supports seamless interactions among diverse entities. 
 
+## LoTL Publication
+
+The **List of Trusted Lists (LoTL)** for the WP4 Trust Infrastructure is published at:
+
+**[https://webuild-consortium.github.io/wp4-trust-group/](https://webuild-consortium.github.io/wp4-trust-group/)**
+
+| Format | URL |
+|--------|-----|
+| JSON | [list_of_trusted_lists.json](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json) |
+| XML | [list_of_trusted_lists.xml](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml) |
+
+During the **WE BUILD MVP (pilot) phase**, the WP4 Trust Infrastructure group acts as **Ecosystem Authority** and **Trusted List Provider** for all participating entities. The LoTL is the trust anchor in the ETSI TS 119 612 model: it references the Trusted Lists for PID Providers, Wallet Providers, and other entity types, enabling Wallet Units and Relying Parties to validate certificates and trust anchors. In the production phase (MVP+), the European Commission and Member State TLPs take over these roles per the [Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md). See [LoTL automation and TL integration](task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md) for production and publication details.
+
 ## Tasks
 
 ```mermaid
