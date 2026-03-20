@@ -131,6 +131,7 @@ Each `{participant_id}.json` file MUST contain:
 tools/lotl/
 ├── __init__.py
 ├── cli.py
+├── create_signing_cert.py   # ETSI-compliant self-signed cert generator
 ├── producer.py
 ├── collector.py
 ├── validator.py
@@ -169,6 +170,43 @@ python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/
 - **Logging**: Eloquent INFO and DEBUG logging to stderr. Use `--log-level DEBUG` or `LOTL_LOG_LEVEL=DEBUG` for verbose output.
 
 **Testing**: pytest required, minimum 90% code coverage. See [Running Tests](#51-running-tests).
+
+#### 4.1 Signing Certificate Creation and Configuration
+
+The LoTL signing certificate must comply with ETSI TS 119 612 clause 5.7.1 (Subject DN, KeyUsage, ExtendedKeyUsage id-tsl-kp-tslSigning, BasicConstraints CA=false, SubjectKeyIdentifier). Use the provided command to create a self-signed, ETSI-compliant certificate:
+
+```bash
+# Create cert (default: lotl/certs/, Scheme Territory=EU)
+python -m tools.lotl.create_signing_cert
+
+# Custom scheme territory and operator name (must match LoTL scheme info)
+python -m tools.lotl.create_signing_cert \
+  --output-dir lotl/certs/ \
+  --scheme-territory IT \
+  --scheme-operator-name "Example TLP"
+```
+
+**Configuration of LOTL_SIGNING_KEY and LOTL_SIGNING_CERT**:
+
+| Method | Example |
+|--------|---------|
+| Environment variables | `export LOTL_SIGNING_KEY=$(cat lotl/certs/lotl_signing_key.pem)`<br>`export LOTL_SIGNING_CERT=$(cat lotl/certs/lotl_signing_cert.pem)` |
+| CLI arguments | `python -m tools.lotl --signing-key lotl/certs/lotl_signing_key.pem --signing-cert lotl/certs/lotl_signing_cert.pem ...` |
+
+Full workflow example:
+```bash
+# 1. Create certificate
+python -m tools.lotl.create_signing_cert -o lotl/certs/ -t EU -n "WP4 Trust Group"
+
+# 2. Produce LoTL using env vars
+export LOTL_SIGNING_KEY=$(cat lotl/certs/lotl_signing_key.pem)
+export LOTL_SIGNING_CERT=$(cat lotl/certs/lotl_signing_cert.pem)
+python -m tools.lotl --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
+
+# Or using file paths
+python -m tools.lotl --signing-key lotl/certs/lotl_signing_key.pem --signing-cert lotl/certs/lotl_signing_cert.pem \
+  --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
+```
 
 ### 5. TL Entry Validation
 

@@ -93,3 +93,5 @@ celerybeat.pid
 
 # mkdocs
 /site
+
+lotl/certs/

@@ -2,6 +2,50 @@
 
 List of Trusted Lists (LoTL) producer and validator for the WP4 Trust Infrastructure. Generates and signs LoTL in XML (XAdES Baseline B) and JSON (JAdES Compact Baseline B) formats per ETSI TS 119 612 and TS 119 602.
 
+## Creating a Signing Certificate
+
+The LoTL must be signed with an ETSI-compliant X.509 certificate. Use the provided command to generate a self-signed certificate:
+
+```bash
+# Create ETSI-compliant self-signed cert (default: lotl/certs/, Scheme Territory=EU)
+python -m tools.lotl.create_signing_cert
+
+# Custom scheme territory and operator name (must match LoTL scheme info)
+python -m tools.lotl.create_signing_cert \
+  --output-dir lotl/certs/ \
+  --scheme-territory IT \
+  --scheme-operator-name "Example TLP"
+
+# Custom output filenames
+python -m tools.lotl.create_signing_cert -o lotl/certs/ --key-file key.pem --cert-file cert.pem
+```
+
+This produces `lotl_signing_key.pem` and `lotl_signing_cert.pem` (or your chosen names) with:
+- Subject DN: `C={territory}, O={operator_name}` (per ETSI TS 119 612 clause 5.7.1)
+- KeyUsage: digitalSignature, nonRepudiation
+- ExtendedKeyUsage: id-tsl-kp-tslSigning (0.4.0.2231.3.0)
+- ECDSA P-256 (minimum 3 years usable key per ETSI TS 119 312)
+
+## Configuration: LOTL_SIGNING_KEY and LOTL_SIGNING_CERT
+
+Provide the signing key and certificate either via environment variables or CLI arguments:
+
+**Option 1: Environment variables** (PEM content as string)
+```bash
+export LOTL_SIGNING_KEY=$(cat lotl/certs/lotl_signing_key.pem)
+export LOTL_SIGNING_CERT=$(cat lotl/certs/lotl_signing_cert.pem)
+python -m tools.lotl --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
+```
+
+**Option 2: File paths** (recommended for local use)
+```bash
+python -m tools.lotl \
+  --signing-key lotl/certs/lotl_signing_key.pem \
+  --signing-cert lotl/certs/lotl_signing_cert.pem \
+  --tl-entries-dir lotl/tl_entries/ \
+  --output-dir lotl/
+```
+
 ## Usage
 
 ```bash
