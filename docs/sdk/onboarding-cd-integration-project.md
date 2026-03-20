@@ -6,7 +6,11 @@ The WP4 Trust Infrastructure requires an automated system to compile and publish
 
 This PR focuses **exclusively on Trusted List automation**:
 
-1. **Trusted List (TL) generation and signing** — Automatically generates and signs trusted lists according to ETSI TS 119 612 and TS 119 602
+1. **Trusted List (TL) generation and signing** — Automatically generates and signs trusted lists according to:
+   - **ETSI TS 119 612 v2.1.1** (XML format, TLv5 — current)
+   - **ETSI TS 119 602** (JSON/XML format)
+   - *Note: TLv6 (effective 29 April 2026) will use TS 119 612 v2.4.1 with breaking changes: new "Service supply point" attribute, optional telephone in "Electronic Address", XAdES-BASELINE-B (EN 319 132-1). See [TLv6 Upgrade](https://ec.europa.eu/digital-building-blocks/sites/spaces/DIGITAL/pages/887386519/TLv6+is+coming+Upgrade+now+to+avoid+signature+validation+failures)*
+   - For TL validation, consider [eIDAS validation tests](https://eidas.ec.europa.eu/efda/validation-tests)
 2. **List of Trusted Lists (LoTL) generation and signing** — Produces LoTL referencing all generated TLs plus any additional TLs provided by WP4 members
 3. **Publishing TLs to GitHub Pages** — Automatically publishes all trusted lists for public access
 
@@ -446,6 +450,14 @@ ETSI_LOTE_TYPE_URIS = {
 - [x] [Task 7: Testing and Validation](../task7-testing-validation/) (test platform integration)
 
 ## Additional Context
+
+### WE BUILD-Specific Practical Documentation
+
+This section addresses practical questions for WE BUILD participants:
+
+- **Validation and listing**: Registration uses a GitHub Pull Request flow; participation is filtered by formal consortium relationship. Human reviewers ensure that only WE BUILD participants (e.g. who can list themselves as "PID issuer") are accepted.
+- **Missing elements**: RP registration and access certificate (WRPAC) and registration certificate (WRPRC) provisioning are handled in the PR thread or via the review process. Certificates are public and can be posted in the PR.
+- **Functional flows**: Onboarding, registration changes, and role validation follow the PR workflow: propose → validate → merge → publish. Biweekly meetings, Slack channels, and ad-hoc meetings support coordination.
 
 ### Entity Types
 
