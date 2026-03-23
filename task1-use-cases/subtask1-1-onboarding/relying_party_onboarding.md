@@ -100,7 +100,7 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 | 1.3 Registration Confirmation | I (notified) | R, A (confirm or reject, notify) | I | I |
 | 1.4 Publication in National Register | I | R, A (publish in register) | I | I |
 
-**Note**: [MVP] The Ecosystem Authority designates one or more Registrars. When multiple registers are in operation, the Responsible (R) role for each registration step is fullfiled by the Registrar that the Relying Party has selected.
+**Note**: [MVP] The Ecosystem Authority designates one or more Registrars. When multiple registers are operational, the Responsible (R) role for each registration step is fullfiled by the Registrar that the Relying Party has selected.
 
 ## Data Model
 
