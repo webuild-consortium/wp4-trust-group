@@ -205,7 +205,7 @@ The following table lists the entities that are part of the Trust Infrastructure
 | IDunion SCE | GER-IDunion SCE | [https://www.idunion.eu](https://www.idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) | TBD |
 | Forkbomb | Forkbomb BV | [https://forkbomb.eu](https://forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) | TBD | 
 | Department for digital transformation | Department for digital transformation | [https://innovazione.gov.it](https://innovazione.gov.it) | [g.messori@innovazione.gov.it](mailto:g.messori@innovazione.gov.it) | [gi.demarco@innovazione.gov.it](mailto:gi.demarco@innovazione.gov.it) | TBD |
-| Raidiam | Raidiam Services Limited | [https://raidiam.com](https://raidiam.com) | TBD | TBD | TBD |
+| Raidiam | Raidiam Services Limited | [https://raidiam.com](https://raidiam.com) | Felipe G. (We Build Slack) | Felipe G. (We Build Slack)  | Trust Registry |
 | Sunet | Swedish Research Council | [https://www.sunet.se](https://www.sunet.se) | [steli@sunet.se](mailto:steli@sunet.se) | [anna@sunet.se](mailto:anna@sunet.se) | Registrar |
 
 **Note**: Additional entities may be added to this group as designated by the WP4 Trust Infrastructure group. Consortium participants can propose themselves by applying a Pull Request to add themselves to the list and be actively involved in the registration operations and review processes.
