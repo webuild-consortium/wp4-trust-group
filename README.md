@@ -19,7 +19,14 @@ The **List of Trusted Lists (LoTL)** for the WP4 Trust Infrastructure is publish
 | JSON | [list_of_trusted_lists.json](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json) |
 | XML | [list_of_trusted_lists.xml](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml) |
 
-During the **WE BUILD MVP (pilot) phase**, the WP4 Trust Infrastructure group acts as **Ecosystem Authority** and **Trusted List Provider** for all participating entities. The LoTL is the trust anchor in the ETSI TS 119 612 model: it references the Trusted Lists for PID Providers, Wallet Providers, and other entity types, enabling Wallet Units and Relying Parties to validate certificates and trust anchors. In the production phase (MVP+), the European Commission and Member State TLPs take over these roles per the [Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md). See [LoTL automation and TL integration](task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md) for production and publication details.
+During the **WE BUILD MVP (pilot) phase**, the WP4 Trust Infrastructure group acts as **Ecosystem Authority** and **Trusted List Provider** for all participating entities. The LoTL is the trust anchor in the ETSI TS 119 612 model: it references the Trusted Lists for PID Providers, Wallet Providers, and other entity types, enabling Wallet Units and Relying Parties to validate certificates and trust anchors. In the production phase (MVP+), the European Commission and Member State TLPs take over these roles. Registration, notification, and publication responsibilities are described in the [Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md).
+
+**Documentation (by reference)** — automation, contribution, and local tooling:
+
+- **[LoTL automation and TL integration](task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md)** — End-to-end specification: participant Trusted List Providers add `lotl/tl_entries/{tl_type}/{participant_id}.json` via pull request; CI fetches each referenced TL, validates its signature with the supplied trust anchor, and checks ETSI schema; on merge, the signed LoTL is regenerated and published to GitHub Pages. Also covers directory layout, GitHub Actions workflows, published URLs, and acceptance criteria.
+- **[LoTL producer and validator (`tools/lotl`)](tools/lotl/README.md)** — Running the Python producer locally: validating `tl_entries`, generating and signing `list_of_trusted_lists.{json,xml}`, LoTL signing certificate creation, CLI options, and tests.
+
+To **consume** the published LoTL and participant Trusted Lists in verification flows, see [Trusted List discovery and consumption](task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md).
 
 ## Tasks
 
@@ -159,6 +166,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 ### How are Trusted Lists implemented? — ETSI Trusted Lists and X.509 PKI
 
 - **[ETSI Trusted Lists Implementation Profile](task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)** — Implementation profile for ETSI TS 119 612 and TS 119 602: signing, distribution, XML/JSON formats, examples.
+- **[LoTL automation and TL integration](task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md)** — WP4 List of Trusted Lists on GitHub Pages: participant `tl_entries` pull requests, CI validation, signed LoTL regeneration, and publication (see also [tools/lotl](tools/lotl/README.md)).
 - **[ETSI Identifier Handling](task3-x509-pki-etsi/etsi-identifier-handling.md)** — Handling of VAT, LEI, and other business identifiers in ETSI profiles, trusted lists, and certificates.
 
 ### What certificates exist and what policies apply? — Participant certificates and ETSI policy

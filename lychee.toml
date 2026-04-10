@@ -29,4 +29,6 @@ exclude = [
   # TLS test / specs
   "http://www\\.tlsox\\.xyz/",
   "http://www\\.w3\\.org/2001/10/xml-",
+  # LoTL publication URLs (404 until LoTL is published to gh-pages)
+  "webuild-consortium\\.github\\.io/wp4-trust-group/list_of_trusted_lists\\.(json|xml)",
 ]
