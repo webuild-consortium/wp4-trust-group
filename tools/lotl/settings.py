@@ -33,17 +33,23 @@ VALID_TL_TYPES = frozenset(
     ]
 )
 
-# Mapping from tl_type to ETSI LoTE type URI (TS 119 602)
-TL_TYPE_TO_LOTE_URI = {
+# Mapping from tl_type to ETSI identifier for the *referenced* trusted list (LoTE type or TSL type).
+# Aligns with task2-trust-framework/trust-infrastructure-schema.md §3:
+# - PuB-EAA (EC) and national non-qualified EAA → TS 119 602 Annex H / EUPubEAAProvidersList
+# - QEAA (MS QTSP) → national TS 119 612 trusted list (TSLType EUgeneric), not Annex H
+TL_TYPE_TO_REFERENCE_URI = {
     "wrpac-provider": "http://uri.etsi.org/19602/LoTEType/EUWRPACProvidersList",
     "wrprc-provider": "http://uri.etsi.org/19602/LoTEType/EUWRPRCProvidersList",
     "pub-eaa-provider": "http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList",
     "pid-provider": "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList",
-    "qeaa-provider": "http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList",
+    "qeaa-provider": "http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric",
     "eaa-provider": "http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList",
     "wallet-provider": "http://uri.etsi.org/19602/LoTEType/EUWalletProvidersList",
     "ebwoid-provider": "http://uri.etsi.org/19602/LoTEType/EURegistrarsAndRegistersList",
 }
+
+# Backward-compatible alias (values are not always LoTEType URIs)
+TL_TYPE_TO_LOTE_URI = TL_TYPE_TO_REFERENCE_URI
 
 # Output filenames
 LOTL_JSON_FILENAME = "list_of_trusted_lists.json"

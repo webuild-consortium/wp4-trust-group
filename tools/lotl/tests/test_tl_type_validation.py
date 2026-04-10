@@ -1,6 +1,6 @@
 """Tests for TL type validation."""
 
-from tools.lotl.settings import VALID_TL_TYPES, TL_TYPE_TO_LOTE_URI
+from tools.lotl.settings import VALID_TL_TYPES, TL_TYPE_TO_REFERENCE_URI
 
 
 def test_valid_tl_types() -> None:
@@ -18,12 +18,14 @@ def test_valid_tl_types() -> None:
     assert VALID_TL_TYPES == expected
 
 
-def test_tl_type_to_lote_uri() -> None:
-    """Each TL type maps to ETSI LoTE URI."""
+def test_tl_type_to_reference_uri() -> None:
+    """Each TL type maps to an ETSI LoTE type or TSL type URI."""
     for tl_type in VALID_TL_TYPES:
-        assert tl_type in TL_TYPE_TO_LOTE_URI
-        uri = TL_TYPE_TO_LOTE_URI[tl_type]
+        assert tl_type in TL_TYPE_TO_REFERENCE_URI
+        uri = TL_TYPE_TO_REFERENCE_URI[tl_type]
         assert uri.startswith("http://uri.etsi.org/")
+    assert TL_TYPE_TO_REFERENCE_URI["qeaa-provider"].endswith("/EUgeneric")
+    assert "LoTEType" in TL_TYPE_TO_REFERENCE_URI["eaa-provider"]
 
 
 def test_get_schema_path() -> None:

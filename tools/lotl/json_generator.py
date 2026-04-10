@@ -3,7 +3,7 @@
 from datetime import datetime, timezone
 from typing import Any
 
-from tools.lotl.settings import TL_TYPE_TO_LOTE_URI
+from tools.lotl.settings import TL_TYPE_TO_REFERENCE_URI
 from tools.lotl.tl_entry import TLEntry
 
 LOTE_TAG = "http://uri.etsi.org/19602/LoTETag"
@@ -32,6 +32,7 @@ def generate_lotl_json(
     for entry in entries:
         dist = {
             "tlType": entry.tl_type,
+            "referencedListTypeUri": TL_TYPE_TO_REFERENCE_URI[entry.tl_type],
             "participantId": entry.participant_id,
             "tlUrl": entry.tl_url,
             "tlUrlJson": entry.get_tl_url_json(),

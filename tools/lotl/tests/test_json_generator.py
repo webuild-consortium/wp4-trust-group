@@ -18,5 +18,9 @@ def test_generate_with_entries(sample_tl_entry: TLEntry) -> None:
     dps = out["schemeInformation"]["distributionPoints"]
     assert len(dps) == 1
     assert dps[0]["tlType"] == "pid-provider"
+    assert (
+        dps[0]["referencedListTypeUri"]
+        == "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList"
+    )
     assert dps[0]["participantId"] == "example-tlp"
     assert dps[0]["tlUrl"] == sample_tl_entry.tl_url

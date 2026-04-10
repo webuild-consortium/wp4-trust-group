@@ -4,18 +4,20 @@ The WP4 Trust Infrastructure requires an automated system for LoTL (List of Trus
 
 ### TL Types and Published TLs
 
-The LoTL publishes the following Trusted Lists (per [Task 3 implementation profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)):
+Per the EUDIW trust model in [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md) **§3**, **PuB-EAA**, **national non-qualified EAA**, and **QEAA** are **different trusted lists** (different compilers, formats, and ETSI references). The `lotl/tl_entries/{tl_type}/` folder names below mirror that split. Normative technical detail remains in the [Task 3 implementation profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md).
 
-| TL type | Trusted List (LoTE type) |
-|---------|--------------------------|
-| `wrpac-provider` | EU WRPAC Providers List (Access Certificate Authorities) |
-| `wrprc-provider` | EU WRPRC Providers List (Registration Certificate Providers) |
-| `pub-eaa-provider` | EU Pub-EAA Providers List |
-| `pid-provider` | EU PID Providers List |
-| `qeaa-provider` | EU Pub-EAA Providers List (qualified) |
-| `eaa-provider` | EU Pub-EAA Providers List (non-qualified) |
-| `wallet-provider` | EU Wallet Providers List |
-| `ebwoid-provider` | Per Task 3 / ARF (EBWOID provider list) |
+| TL type (folder) | Trusted List (Task 2) | Compiler | Expected list format | `referencedListTypeUri` in LoTL JSON (`tools/lotl/settings.py`) |
+|------------------|----------------------|----------|----------------------|------------------------------------------------------------------|
+| `pub-eaa-provider` | EU-level **PuB-EAA** Providers TL | European Commission | TS 119 602 Annex H (LoTE) / profile §7.3 | `http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList` |
+| `eaa-provider` | National **non-qualified EAA** Provider TL | Member State TLP | TS 119 602 Annex H (LoTE) / profile §7.3 | `http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList` |
+| `qeaa-provider` | National **QTSP** TL for **QEAA** Providers | Member State TLP | **TS 119 612** national trusted list (XML TSL; Article 22 eIDAS) | `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric` |
+| `pid-provider` | EU PID Providers List | EC | Profile §7.1 | `…/LoTEType/EUPIDProvidersList` |
+| `wallet-provider` | EU Wallet Providers List | EC | Profile §7.2 | `…/LoTEType/EUWalletProvidersList` |
+| `wrpac-provider` | EU WRPAC Providers List | EC | Profile | `…/LoTEType/EUWRPACProvidersList` |
+| `wrprc-provider` | EU WRPRC Providers List | EC | Profile | `…/LoTEType/EUWRPRCProvidersList` |
+| `ebwoid-provider` | Registrars / registers (EBWOID) | Per Task 3 / ARF | Profile | `…/LoTEType/EURegistrarsAndRegistersList` |
+
+For **PuB-EAA** and **non-qualified EAA**, **`referencedListTypeUri` is the same LoTE type** because both follow **Annex H / `EUPubEAAProvidersList`**; they differ by **who publishes** (EC vs MS) and by notification rules (see Task 2). **QEAA** pointers denote **Member State national trusted lists**; consumers validate them per **ETSI TS 119 615** and TS 119 612 rules, not the Annex H LoTE profile. CI **must** validate each `tl_url` against the applicable format (LoTE JSON/XML vs TS 119 612 XML).
 
 ## Process Overview
 
