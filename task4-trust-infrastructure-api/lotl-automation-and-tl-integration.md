@@ -289,7 +289,7 @@ env/bin/pytest tools/lotl/tests/test_producer.py -v
    - Copy the LoTL (XML and JSON) to the `gh-pages` branch
    - [OPTIONAL] Set proper MIME types: `application/vnd.etsi.tsl+xml` (XML) or `application/json`/`application/vnd.etsi.lote+json` (JSON)
      - Note: The Task 3 implementation profile specifies MIME types for TL distribution; GitHub Pages does not support custom MIME type configuration. This is a platform limitation.
-   - Update GitHub Pages index with links to the published LoTL
+   - Update the GitHub Pages landing page: copy **`lotl/pages/index.html`** to the **`gh-pages` branch root**, and sync the entire **`lotl/pages/assets/`** tree to **`assets/`** on `gh-pages` (vendored WE BUILD `custom.css`, Fracktif/slick fonts, Bootstrap bundle, logos, favicon). The site does not load CSS or images from webuildconsortium.eu. Consortium portal links (Newsletter, Partner Portal, Privacy, etc.) remain absolute URLs.
 
 **LoTL publication URL** (GitHub Pages, `gh-pages` branch):
 
