@@ -1,0 +1,12 @@
+[run]
+source = tools/lotl
+omit =
+    tools/lotl/tests/*
+    tools/lotl/__main__.py
+
+[report]
+fail_under = 90
+exclude_lines =
+    pragma: no cover
+    def __repr__
+    raise NotImplementedError

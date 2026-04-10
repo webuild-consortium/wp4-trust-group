@@ -1057,6 +1057,9 @@ Use appropriate JAdES validation library (see section 12).
 ### Tools
 - [Trusted List Manager non-EU](https://ec.europa.eu/digital-building-blocks/sites/display/TLSO/Trusted+List+Manager+non-EU)
 
+### External Resources
+- [eIDAS Dashboard validation tests](https://eidas.ec.europa.eu/efda/validation-tests) – TL validation against official eIDAS requirements
+
 ### Regulations
 - [Regulation (EU) No 910/2014](https://eur-lex.europa.eu/eli/reg/2014/910/oj) - eIDAS
 - [Commission Implementing Regulation (EU) 2024/2980](https://eur-lex.europa.eu/eli/reg_impl/2024/2980/oj)
