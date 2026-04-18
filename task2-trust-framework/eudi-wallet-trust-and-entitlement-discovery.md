@@ -556,7 +556,7 @@ For a **PID Provider** or **EAA Provider** (Qualified, Non-Qualified, or Public 
 | Non-Qualified EAA Provider     | `https://uri.etsi.org/19475/Entitlement/Non_Q_EAA_Provider` | `provides_attestations`    | ETSI TS 119 475 Table 8   |
 | Public Sector EAA Provider     | `https://uri.etsi.org/19475/Entitlement/PUB_EAA_Provider`  | `provides_attestations`    | ETSI TS 119 475 Table 8   |
 
-The `provides_attestations` field specifies the attestation types the provider is authorized to issue (format, meta, claim). The wallet verifies that the attestation being issued matches the provider's authorized attestation types (format, meta, claim per ETSI TS 119 475 Table 8).
+The `provided_attestations` field specifies the attestation types the provider is authorized to issue (format, meta, claim). The wallet verifies that the attestation being issued matches the provider's authorized attestation types.
 
 ---
 
