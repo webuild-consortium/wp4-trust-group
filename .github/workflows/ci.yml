@@ -86,7 +86,7 @@ jobs:
     
     - name: Run security scan with bandit
       run: |
-        bandit -r src/ -f json -o bandit-report.json
+        bandit -r tools/ -f json -o bandit-report.json
     
     - name: Run dependency check with safety
       run: |

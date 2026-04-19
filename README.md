@@ -4,7 +4,7 @@ Public resources shared within the WE BUILD WP4 Trust Infrastructure group
 
 The Trust Registry Infrastructure group is dedicated to establishing the framework for trust evaluation and management within digital Wallet ecosystems, in compliance but not limited to the model defined by European regulation (910/2014 as amended by Regulation (EU) 2024/1183).  
 
-The group develops an implementation of the trust model based on a trusted third party (Trusted Lists) resulting in a Trust Framework and an demo infrastructure of trust. 
+The group develops an implementation of the trust model based on a trusted third party (Trusted Lists), producing a Trust Framework and a demo trust infrastructure.
 
 The group aims to create a comprehensive infrastructure of trust that supports seamless interactions among diverse entities. 
 
@@ -57,61 +57,37 @@ gantt
     Testing and Validation :task7, 2026-06-01, 2026-12-31
 ```
 
-## Directory Structure
+## Directory structure
+
+Layout as in this repository (task folders hold the deliverables; paths reflect actual names):
 
 ```
 wp4-trust-group/
-│
-├── references/                     # Standards, Drafts, Documentation
-│   ├── standards/                  # Official standards and specifications
-│   ├── drafts/                     # Draft specifications and working documents
-│   ├── reference-specifications/   # Reference implementations and profiles
-│   └── overview.md                 # Overview of all references
-│
-├── task1-use-cases/               # Use cases​
-│   ├── terms-and-entities.md      # Consolidated terms, acronyms, and entity definitions (single source)
-│   ├── subtask1-1-onboarding/     # Use cases​ onboarding
-│   └── subtask1-2-trust-registry/ # Use cases​ trust registry
-│
-├── task2-trust-framework/         # Trust Framework
-│
-├── task3-x509-pki-etsi/           # X.509 PKI with ETSI alignments
-│
-├── task4-trust-infrastructure-api/ # Trust Infrastructure API and additional features
-│   ├── trust-infrastructure-api/   # Trust Infrastructure API
-│   └── onboarding-api/             # Onboarding API
-│
-├── task5-participants-certificates-policies/ # Participants' Certificates and Policies
-│   ├── data-model/                 # Data model
-│   └── trust-evaluation-methods/   # Trust evaluation methods
-│
-├── task6-Wallet-conformance-interop/ # Wallet Instance Conformance/Interop Checks
-│
-├── task7-testing-validation/       # Testing and Validation
-│
-├── docs/                          # Documentation
-│   ├── architecture/              # Architecture documentation
-│   ├── api/                       # API documentation
-│   ├── standards/                 # Standards compliance documentation
-│   └── testing/                   # Testing documentation
-│
-├── examples/                      # Examples and use cases
-│   ├── trust-framework/           # Trust framework examples
-│   ├── api-usage/                 # API usage examples
-│   └── testing/                   # Testing examples
-│
-├── tools/                         # Development and validation tools
-│   ├── validation/                # Validation tools
-│   ├── testing/                   # Testing tools
-│   └── deployment/                # Deployment tools
-│
-├── .github/                       # CI/CD workflows and templates
-│   ├── workflows/                 # GitHub Actions workflows
-│   ├── ISSUE_TEMPLATE/            # Issue templates
-│   └── PULL_REQUEST_TEMPLATE/     # Pull request templates
-│
-├── README.md                      # This file
-└── LICENSE                        # License file
+├── references/
+│   └── etsi/                       # ETSI specs (Markdown excerpts / companion PDFs)
+├── task1-use-cases/
+│   ├── terms-and-entities.md     # Consolidated terms and entity definitions (single source)
+│   ├── subtask1-1-onboarding/
+│   └── subtask1-2-trust-registry/
+├── task2-trust-framework/         # Trust framework models, matrices, schemas
+├── task3-x509-pki-etsi/           # X.509 PKI and ETSI trusted-list implementation profile
+├── task4-trust-infrastructure-api/
+│   ├── trust-infrastructure-api/
+│   └── onboarding-api/
+├── task5-participants-certificates-policies/
+├── task6-wallet-conformance-interop/
+├── task7-testing-validation/
+├── docs/
+│   ├── architecture/              # Pointers to trust architecture (see README inside)
+│   └── …                         # ARF alignment notes, PR resolutions, etc.
+├── tools/                         # e.g. pdf_to_markdown.py, helper docs
+├── .github/
+│   ├── workflows/
+│   ├── ISSUE_TEMPLATE/            # Includes policy_approaches.md
+│   └── PULL_REQUEST_TEMPLATE/
+├── requirements-dev.txt
+├── README.md
+└── LICENSE
 ```
 
 ## Terms and definitions
@@ -157,7 +133,7 @@ Project alignment with **EUDI Architecture and Reference Framework (ARF) v2.8.0*
 
 ### European Commission Technical Specifications
 
-These below may have further updates and require to considered in future milestones.
+These documents may receive further updates and should be reconsidered in future milestones.
 
 - **EC TS02 v0.9** (2025-04) - Specification of systems enabling the notification and subsequent publication of Provider information
 - **EC TS05 V1.0** (2025-06) - Common Formats and API for Relying Party Registration Information (upcoming ETSI TS)
