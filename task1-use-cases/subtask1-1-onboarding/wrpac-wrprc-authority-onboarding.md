@@ -87,16 +87,16 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
 
 See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI acronym definition and role definitions.
 
-| RACI MATRIX — WP4 Trust Infrastructure Group                            | Lead / Co-Lead | WP4 – Testing | [Responsible](onboarding-base.md#trust-infrastructure-responsible-group) | [Participant] |
-|-------------------------------------------------------------------------|---------------|----------------|--------------------------------------------------------------------------|---------------|
-| Announce onboarding request to WRPAC/WRPRC Authorities                  | A, C          |                | R                                                                        | I             |
-| Set up and manage a form to gather data from WRPAC/WRPRC Authorities    | A, C          |                | R                                                                        | I             |
-| Review WRPAC/WRPRC Authority data                                       | A, C          |                | R                                                                        | I             |
-| Decide upon listing and de-listing (Ecosystem Authority)                | A, C          |                | R                                                                        | I             |
-| Inform about decision                                                   | A, C          |                | R                                                                        | I             |
-| Enable updates on Trusted Lists (Trusted List Provider)                 | A, C          |                | R                                                                        | I             |
-| Host the Trusted List for WRPAC/WRPRC Authorities                       | A, C          |                | R                                                                        | I             |
-| Engage with WRPAC/WRPRC Authorities during onboarding / troubleshooting | A, C          |                | R                                                                        | I             |
+| RACI MATRIX — WP4 Trust Infrastructure Group                            | Lead / Co-Lead | WP4 – Testing | IDUnion SCE | [Participant] |
+|-------------------------------------------------------------------------|---------------|----------------|-------------|---------------|
+| Announce onboarding request to WRPAC/WRPRC Authorities                  | A, C          |                | R           | I             |
+| Set up and manage a form to gather data from WRPAC/WRPRC Authorities    | A, C          |                | R           | I             |
+| Review WRPAC/WRPRC Authority data                                       | A, C          |                | R           | I             |
+| Decide upon listing and de-listing (Ecosystem Authority)                | A, C          |                | R           | I             |
+| Inform about decision                                                   | A, C          |                | R           | I             |
+| Enable updates on Trusted Lists (Trusted List Provider)                 | A, C          |                | R           | I             |
+| Host the Trusted List for WRPAC/WRPRC Authorities                       | A, C          |                | R           | I             |
+| Engage with WRPAC/WRPRC Authorities during onboarding / troubleshooting | A, C          |                | R           | I             |
 
 **Onboarding phase — responsibilities by actor**: The following table assigns Responsible (R), Accountable (A), Consulted (C), and Informed (I) for each administrative onboarding step. [MVP]: Ecosystem Authority and Trusted List Provider are the WP4 Trust Infrastructure group; [MVP+]: Member State / Supervisory Body and European Commission apply.
 
