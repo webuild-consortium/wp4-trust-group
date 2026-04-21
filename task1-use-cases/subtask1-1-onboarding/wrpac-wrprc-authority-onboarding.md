@@ -128,7 +128,7 @@ As a baseline, a single LoTL with one Trusted List (TL) SHALL be used for all WR
 ### Trusted List and Certificate Profile
 
 - Trusted Lists for WRPAC/WRPRC Authorities SHALL comply with [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for detailed implementation guidance, including the WRPAC/WRPRC Authority Trusted List data model, service entries, and profile-specific requirements.
-- WRPAC/WRPRC Authority certificates SHALL follow [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) (v01.00.00) section 5. See [Task 3 — X.509 PKI with ETSI Alignments](../../task3-x509-pki-etsi/README.md) for certificate profile specifications.
+- WRPAC/WRPRC Authority certificates SHALL follow [ETSI EN 319 412-2](https://www.etsi.org/deliver/etsi_en/319400_319499/31941202/02.04.01_60/en_31941202v020401p.pdf) (natural persons) or [ETSI EN 319 412-3](https://www.etsi.org/deliver/etsi_en/319400_319499/31941203/01.03.01_60/en_31941203v010301p.pdf) (legal persons). See [Task 3 — X.509 PKI with ETSI Alignments](../../task3-x509-pki-etsi/README.md) for certificate profile specifications.
 
 ### Data to be Provided
 
@@ -148,8 +148,8 @@ The WRPAC/WRPRC Authority SHALL provide the following data when requesting onboa
 
 *Cryptographic material* — one of the following SHALL be provided:
 
-- An X.509 Certificate Signing Request (CSR) for issuance of the Authority certificate. The certificate profile and issuance process are specified in [Task 3 — X.509 PKI with ETSI Alignments](../../task3-x509-pki-etsi/README.md) and [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) section 5. The Trusted List entry SHALL include the issued certificate per [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
-- An X.509 certificate conforming to the profile specified in [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) section 5. In this case, the WRPAC/WRPRC Authority SHALL sign a challenge provided by the [Trust Infrastructure Responsible Group](onboarding-base.md#trust-infrastructure-responsible-group) using the private key bound to the public key in the submitted certificate, in order to demonstrate possession of the corresponding private key.
+- An X.509 Certificate Signing Request (CSR) for issuance of the Authority certificate. The certificate profile and issuance process are specified in [Task 3 — X.509 PKI with ETSI Alignments](../../task3-x509-pki-etsi/README.md) and [ETSI EN 319 412-2](https://www.etsi.org/deliver/etsi_en/319400_319499/31941202/02.04.01_60/en_31941202v020401p.pdf) (natural persons) / [ETSI EN 319 412-3](https://www.etsi.org/deliver/etsi_en/319400_319499/31941203/01.03.01_60/en_31941203v010301p.pdf) (legal persons). The Trusted List entry SHALL include the issued certificate per [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
+- An X.509 certificate conforming to the profile specified in [ETSI EN 319 412-2](https://www.etsi.org/deliver/etsi_en/319400_319499/31941202/02.04.01_60/en_31941202v020401p.pdf) (natural persons) or [ETSI EN 319 412-3](https://www.etsi.org/deliver/etsi_en/319400_319499/31941203/01.03.01_60/en_31941203v010301p.pdf) (legal persons). In this case, the WRPAC/WRPRC Authority SHALL sign a challenge provided by the [Trust Infrastructure Responsible Group](onboarding-base.md#trust-infrastructure-responsible-group) using the private key bound to the public key in the submitted certificate, in order to demonstrate possession of the corresponding private key.
 
 ---
 
@@ -171,7 +171,7 @@ The WRPAC/WRPRC Authority SHALL provide the following data when requesting onboa
 
 **3. Technical Onboarding**
 
-- Certificate issuance for the WRPAC/WRPRC Authority is part of Administrative Onboarding (see 1.3 and 2.5). See [Task 3](../../task3-x509-pki-etsi/README.md), [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf), [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
+- Certificate issuance for the WRPAC/WRPRC Authority is part of Administrative Onboarding (see 1.3 and 2.5). See [Task 3](../../task3-x509-pki-etsi/README.md), [ETSI EN 319 412-2](https://www.etsi.org/deliver/etsi_en/319400_319499/31941202/02.04.01_60/en_31941202v020401p.pdf) / [ETSI EN 319 412-3](https://www.etsi.org/deliver/etsi_en/319400_319499/31941203/01.03.01_60/en_31941203v010301p.pdf), [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
 
 **4. Post-Onboarding**
 
@@ -239,7 +239,7 @@ Each WRPAC/WRPRC Authority that intends to issue Wallet-Relying Party Access Cer
     7. Statement whether the WRPAC/WRPRC Authority is a single-person company
     8. One of:
         1. An X.509 Certificate Signing Request (CSR); or
-        2. An X.509 certificate conforming to the profile in [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) section 5, together with a signature over a challenge generated by the [Trust Infrastructure Responsible Group](onboarding-base.md#trust-infrastructure-responsible-group), using the private key corresponding to the certificate's public key.
+        2. An X.509 certificate conforming to the profile in [ETSI EN 319 412-3](https://www.etsi.org/deliver/etsi_en/319400_319499/31941203/01.03.01_60/en_31941203v010301p.pdf) for legal persons and [ETSI EN 319 412-2](https://www.etsi.org/deliver/etsi_en/319400_319499/31941202/02.04.01_60/en_31941202v020401p.pdf) for natural persons, together with a signature over a challenge generated by the [Trust Infrastructure Responsible Group](onboarding-base.md#trust-infrastructure-responsible-group), using the private key corresponding to the certificate's public key.
 
 ### 1.2 Onboarding Request Review
 
@@ -298,7 +298,7 @@ Under [MVP+], the **European Commission** SHALL compile, maintain, and publish t
 
 ## 2. Technical Onboarding
 
-WRPAC/WRPRC Authorities do not have a separate technical onboarding phase. X.509 certificates for the WRPAC/WRPRC Authority SHALL be issued as part of Administrative Onboarding (see sections 1.3 and 2.5). Certificate profile and issuance are described in [Task 3 — X.509 PKI with ETSI Alignments](../../task3-x509-pki-etsi/README.md) and [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) section 5. Trusted List entries and service digital identities SHALL follow [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
+WRPAC/WRPRC Authorities do not have a separate technical onboarding phase. X.509 certificates for the WRPAC/WRPRC Authority SHALL be issued as part of Administrative Onboarding (see sections 1.3 and 2.5). Certificate profile and issuance are described in [Task 3 — X.509 PKI with ETSI Alignments](../../task3-x509-pki-etsi/README.md) and [ETSI EN 319 412-2](https://www.etsi.org/deliver/etsi_en/319400_319499/31941202/02.04.01_60/en_31941202v020401p.pdf) (natural persons) / [ETSI EN 319 412-3](https://www.etsi.org/deliver/etsi_en/319400_319499/31941203/01.03.01_60/en_31941203v010301p.pdf) (legal persons). Trusted List entries and service digital identities SHALL follow [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf).
 
 ---
 
@@ -360,5 +360,6 @@ See [Normative References](onboarding-base.md#normative-references) for all refe
 - [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf) v1.4.1 (2023-10) — General policy requirements for Trust Service Providers issuing certificates (NCP requirements)
 - [ETSI TS 119 475 v1.2.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf) — Relying party attributes supporting EUDI Wallet user's authorisation decisions (WRPRC content and format)
 - [ETSI TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) — Lists of trusted entities; data model (Trusted List structure for WRPAC/WRPRC Authorities)
-- [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) v01.00.00 — Certificate profile for PID, Wallet, EAA, QEAA, and PSBEAA providers (WRPAC/WRPRC Authority certificate profile, section 5)
+- [ETSI EN 319 412-2](https://www.etsi.org/deliver/etsi_en/319400_319499/31941202/01.02.01_60/en_31941202v010201p.pdf) v1.2.1 — Certificate Profiles; Part 2: Certificate profile for certificates issued to natural persons
+- [ETSI EN 319 412-3](https://www.etsi.org/deliver/etsi_en/319400_319499/31941203/01.02.01_60/en_31941203v010201p.pdf) v1.2.1 — Certificate Profiles; Part 3: Certificate profile for certificates issued to legal persons
 - [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/eli/reg/2024/1183/oj/eng) — Amending eIDAS; establishing the European Digital Identity Framework (eIDAS Article 22 — Trusted Lists)
