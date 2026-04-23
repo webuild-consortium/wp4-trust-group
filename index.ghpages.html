@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://webuild-consortium.github.io/wp4-trust-group/">
+  <title>WP4 List of Trusted Lists (LoTL) — WE BUILD</title>
+  <meta name="description" content="WP4 Trust Group List of Trusted Lists (LoTL), published for the WE BUILD pilot. JSON and XML endpoints for wallet and relying party trust validation.">
+  <link rel="icon" type="image/png" href="https://prod1-plate-attachments.s3.amazonaws.com/images/5548e27bf9/Favicon-70253.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <!-- WE BUILD site theme (Bootstrap 5.3 + consortium branding); hosted on webuildconsortium.eu -->
+  <link rel="stylesheet" href="https://www.webuildconsortium.eu/theme/assets/css/custom.css">
+  <style>
+    /* GitHub Pages content block: keep readability if theme section classes differ */
+    .lotl-hero {
+      background: linear-gradient(135deg, rgba(0, 51, 153, 0.08) 0%, rgba(255, 204, 0, 0.12) 100%);
+      border-bottom: 1px solid var(--bs-gray-300, #d7d5d9);
+    }
+    .lotl-endpoint-card {
+      border: 1px solid var(--bs-gray-300, #d7d5d9);
+      border-radius: 0.5rem;
+      background: var(--bs-white, #fff);
+      transition: box-shadow 0.15s ease;
+    }
+    .lotl-endpoint-card:hover {
+      box-shadow: 0 0.25rem 1rem rgba(0, 51, 153, 0.12);
+    }
+    .lotl-endpoint-card code {
+      font-size: 0.875rem;
+      word-break: break-all;
+    }
+    .lotl-muted { color: var(--bs-gray-600, #928d9a); }
+    .lotl-serif { font-family: "Noto Serif", serif; }
+    .navbar-github-note {
+      font-size: 0.75rem;
+      opacity: 0.85;
+      border-left: 1px solid rgba(255, 255, 255, 0.35);
+      padding-left: 1rem;
+      margin-left: 0.5rem;
+    }
+    @media (max-width: 991.98px) {
+      .navbar-github-note { display: none; }
+    }
+  </style>
+</head>
+<body class="body-class">
+  <header id="header" class="body-header">
+    <nav class="navbar navbar-expand-lg navbar-mainnavigation navbar-dark navbar-sticky py-lg-4" aria-label="Main navigation">
+      <div class="container">
+        <a class="navbar-brand d-flex flex-row align-items-center flex-wrap" href="https://www.webuildconsortium.eu/">
+          <img src="https://www.webuildconsortium.eu/theme/assets/images/logo-big.svg" alt="WE BUILD Consortium" width="120" height="71" class="logo-vertical d-inline d-lg-none me-2">
+          <span class="d-none d-lg-inline-flex align-items-center">
+            <img src="https://www.webuildconsortium.eu/theme/assets/images/logo-hor.svg" alt="" height="54" class="logo-horizontal">
+            <img src="https://www.webuildconsortium.eu/theme/assets/images/logo-sticky-divider.svg" alt="" height="30" class="logo-horizontal mx-2">
+            <img src="https://www.webuildconsortium.eu/theme/assets/images/logo-sticky-wallet.svg" alt="WE BUILD wallet identity mark" height="30" class="logo-horizontal">
+          </span>
+          <span class="navbar-github-note text-white">WP4 Trust · LoTL publication</span>
+        </a>
+        <button class="navbar-toggler btn btn-primary btn-icon btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon" aria-hidden="true"></span>
+        </button>
+        <div class="navbar-collapse collapse align-items-center" id="navbarNav">
+          <div class="ms-auto my-auto pt-4 pb-4 pt-lg-0 pb-lg-0">
+            <div class="d-flex flex-row button-rij">
+              <div class="button-wrapper primary-wrapper">
+                <a class="btn btn-outline-primary" href="https://www.webuildconsortium.eu/newsletter">Newsletter</a>
+              </div>
+              <div class="ms-4"></div>
+              <div class="button-wrapper white-wrapper">
+                <a class="btn btn-white btn-icon" href="https://www.linkedin.com/company/webuildconsortium/" target="_blank" rel="noopener noreferrer" aria-label="WE BUILD on LinkedIn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.706-.52-1.248-1.342-1.248-.822 0-1.359.542-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1-.016-.025V6.169h-2.4c.03.778 0 7.225 0 7.225h2.4z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" class="plate--page-content-wrapper">
+    <section class="lotl-hero py-5 py-lg-6" aria-labelledby="lotl-heading">
+      <div class="container">
+        <p class="text-uppercase fw-semibold text-secondary mb-2" style="letter-spacing: 0.06em;">WP4 — Trust Registry Infrastructure</p>
+        <h1 id="lotl-heading" class="display-6 lotl-serif fw-bold text-secondary mb-3">List of Trusted Lists (LoTL)</h1>
+        <p class="lead lotl-muted mb-0" style="max-width: 42rem;">
+          Machine-readable List of Trusted Lists for the WE BUILD pilot, following ETSI TS&nbsp;119&nbsp;612 / TS&nbsp;119&nbsp;602.
+          Use the endpoints below to fetch the signed LoTL in JSON or XML for trust validation in Wallet Units and Relying Parties.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-5" aria-labelledby="endpoints-heading">
+      <div class="container">
+        <h2 id="endpoints-heading" class="h4 lotl-serif text-secondary mb-4">Published endpoints</h2>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <article class="lotl-endpoint-card p-4 h-100">
+              <h3 class="h6 fw-bold text-secondary mb-2">LoTL (JSON)</h3>
+              <p class="small lotl-muted mb-3">JAdES-signed JSON (TS 119 602 LoTE-style).</p>
+              <p class="mb-2">
+                <a class="btn btn-secondary btn-sm" href="list_of_trusted_lists.json">Download JSON</a>
+              </p>
+              <code class="d-block p-2 bg-light rounded">https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json</code>
+            </article>
+          </div>
+          <div class="col-md-6">
+            <article class="lotl-endpoint-card p-4 h-100">
+              <h3 class="h6 fw-bold text-secondary mb-2">LoTL (XML)</h3>
+              <p class="small lotl-muted mb-3">XAdES-signed XML (TS 119 612 ListOfTrustedLists).</p>
+              <p class="mb-2">
+                <a class="btn btn-secondary btn-sm" href="list_of_trusted_lists.xml">Download XML</a>
+              </p>
+              <code class="d-block p-2 bg-light rounded">https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml</code>
+            </article>
+          </div>
+        </div>
+        <p class="small lotl-muted mt-4 mb-0">
+          Specification and contributor workflow (Trusted List Provider <code>tl_entries</code> pull requests, CI validation):
+          <a href="https://github.com/webuild-consortium/wp4-trust-group/blob/main/task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md">LoTL automation and TL integration</a>
+          in the <a href="https://github.com/webuild-consortium/wp4-trust-group">wp4-trust-group</a> repository.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="mt-5">
+    <div class="container h-100">
+      <div class="row align-items-center pt-10 pb-lg-10">
+        <div class="col-auto mb-4 mb-lg-0">
+          <a href="https://www.webuildconsortium.eu/" aria-label="WE BUILD Consortium home">
+            <img src="https://www.webuildconsortium.eu/theme/assets/images/logo-footer.svg" alt="WE BUILD Consortium" class="logo-horizontal-footer">
+          </a>
+        </div>
+        <div class="col-12 col-lg-auto ms-lg-auto pb-4 pb-lg-0 bg-secondary px-2 px-lg-3 py-2">
+          <div class="button-wrapper secondary-wrapper">
+            <a class="btn btn-secondary" href="https://www.webuildconsortium.eu/register">Partner Portal</a>
+          </div>
+        </div>
+        <div class="col-12 col-lg-auto pb-4 pb-lg-0 bg-secondary px-2 py-2">
+          <img src="https://www.webuildconsortium.eu/theme/assets/images/logo-eu.svg" alt="Co-funded by the European Union" class="logo-horizontal-footer">
+        </div>
+      </div>
+      <div class="row align-items-center pt-2 pb-4 pt-lg-1 pb-lg-0">
+        <div class="col-auto pt-3 pb-1 pb-lg-3">
+          <span class="ff-extralight fst-italic">©️ Copyright 2026 WE BUILD Consortium. All Rights Reserved.</span>
+        </div>
+        <div class="col-auto ms-lg-auto">
+          <div class="d-flex flex-row button-rij flex-wrap gap-2">
+            <div class="button-wrapper link-wrapper">
+              <a class="btn btn-link px-0" href="https://www.webuildconsortium.eu/privacy">Privacy Statement</a>
+            </div>
+            <div class="button-wrapper link-wrapper">
+              <a class="btn btn-link px-0" href="https://www.webuildconsortium.eu/cookie-policy">Cookie Policy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>

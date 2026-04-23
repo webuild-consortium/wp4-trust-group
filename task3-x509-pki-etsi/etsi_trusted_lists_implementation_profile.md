@@ -760,6 +760,19 @@ python -m jsonschema lote.json lote-schema.json
 - Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
 - Service history uses X509SKI (not X509Certificate)
 
+**QEAA (qualified EAA) — national lists**: **Annex H / `EUPubEAAProvidersList` does not replace** Member State **TS 119 612** trusted lists for **QEAA Providers** as QTSPs. Per [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) §3, QEAA trust anchors are published on **national QTSP Trusted Lists** (Article 22 eIDAS), typically with **TSLType** `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric`. The WP4 LoTL automation maps folder `qeaa-provider` to that TSL type URI in `tools/lotl/settings.py`.
+
+### 7.4 Issuer constraint extensions (ServiceInformationExtensions)
+
+To support **issuer constraints** (which Credential Issuers are allowed to issue which attestation types), Trusted List entries may carry profile-specific data in the **ServiceInformationExtensions** component (ETSI TS 119 602, clause 6.6.9). The standard defines an extensible mechanism; profile-specific extensions are not defined in the ETSI annexes.
+
+For the EUDI Wallet ecosystem, the following extensions are used when configuring allowed attestation types per issuer:
+
+- **allowedAttestationType** (repeatable): List of attestation type identifiers (e.g. `eu.europa.ec.eudi.pid.1`, `eu.europa.ec.eudi.tax-residency.1`) that the listed provider is authorised to issue. When present in the Trusted List entry, the entry can be **self-contained** for validation (Wallet Units and Relying Parties need not retrieve a separate registration certificate).
+- **registrationCertificateRef** (optional): URL or reference to the provider's registration certificate or Registrar API where the list of allowed attestation types is maintained. When absent, the Trusted List entry alone is sufficient if `allowedAttestationType` is embedded.
+
+**Reference**: Full requirements, validation behaviour, and non-normative examples are in [Trusted List extensions for Credential Issuers](trusted-list-extensions-credential-issuers.md). A proposal for an optional `registrationCertificateHash` in ServiceInformationExtensions is also described there.
+
 ## 8. Digital Signature Implementation
 
 ### 8.1 JAdES Signature (JSON - TS 119 602)
@@ -1045,6 +1058,9 @@ Use appropriate JAdES validation library (see section 12).
 
 ### Tools
 - [Trusted List Manager non-EU](https://ec.europa.eu/digital-building-blocks/sites/display/TLSO/Trusted+List+Manager+non-EU)
+
+### External Resources
+- [eIDAS Dashboard validation tests](https://eidas.ec.europa.eu/efda/validation-tests) – TL validation against official eIDAS requirements
 
 ### Regulations
 - [Regulation (EU) No 910/2014](https://eur-lex.europa.eu/eli/reg/2014/910/oj) - eIDAS

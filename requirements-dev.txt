@@ -3,3 +3,7 @@ pytest
 bandit
 safety
 pytest-cov
+signxml
+lxml
+jwcrypto
+cryptography

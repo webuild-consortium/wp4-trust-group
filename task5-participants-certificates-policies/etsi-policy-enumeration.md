@@ -586,7 +586,7 @@ This comprehensive enumeration provides the foundation for implementing robust p
 - [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.01.01_60/en_31941101v010101c.pdf)
 - [ETSI EN 319 411-2](https://www.etsi.org/deliver/etsi_en/319400_319499/31941102/01.01.01_60/en_31941102v010101c.pdf)
 - [ETSI EN 319 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.00.00_60/ts_11941108v010000c.pdf)
-- [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.00.00_60/ts_119475v010000c.pdf)
+- [ETSI TS 119 475 v1.2.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf)
 - [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119400_119499/119602/01.00.00_60/ts_119602v010000c.pdf)
 - [ETSI TS 119 612](https://www.etsi.org/deliver/etsi_ts/119400_119499/119612/02.03.01_60/ts_119612v020301c.pdf)
 

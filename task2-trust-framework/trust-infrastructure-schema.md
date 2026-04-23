@@ -137,7 +137,7 @@ All Trusted Lists must comply with ETSI TS 119 602 data model and the specific p
 The national non-qualified EAA Provider TL and Member State QTSP Trusted List for QEAA Providers processes are triggered by successful registration with the Member State Registrar. The MS TLP:
 - Receives notification of successful registration from the Registrar (or accesses Registry data).
 - Extracts trust anchors and relevant data from the Registry.
-- Compiles Trusted Lists according to ETSI TS 119 612 specifications.
+- Compiles Trusted Lists (national non-qualified EAA Provider TL per TS 119 602 LoTE model; Member State QTSP TL for QEAA Providers per TS 119 612).
 - Signs and publishes Trusted Lists.
 - Submits the Trusted List URL to the European Commission.
 
@@ -404,7 +404,7 @@ sequenceDiagram
 
     rect rgb(255, 230, 230)
         Note over TLP,TL: Phase 3: National non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers Publication and Notification
-        TLP->>TLP: 8. Compile non-qualified EAA Provider Trusted List<br/>(using ETSI TS 119 602 Annex H profile)
+        TLP->>TLP: 8. Compile non-qualified EAA Provider Trusted List<br/>(TS 119 602 LoTE model or national profile)
         Note right of TLP: Include trust anchors:<br/>non-qualified EAA Provider keys
         
         TLP->>TL: 9. Sign/Seal & Publish national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers<br/>(national extension)
@@ -497,7 +497,7 @@ sequenceDiagram
 	
 	rect rgb(230, 245, 255)
         Note over MS,TL: Phase 1: MS TLP Compiles, Signs & Publishes **national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers**
-        MS->>MS: 1. Compile national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers<br/>(national extension, using ETSI TS 119 602 Annex H profile)
+        MS->>MS: 1. Compile national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers
         Note right of MS: non-qualified EAA Provider and QEAA Provider trust anchors and registry data
         MS->>TL: 2. Sign/Seal & Publish national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers
         Note right of TL: Published at MS TLP URL<br/>ETSI TS 119 612/119 602-compliant format
