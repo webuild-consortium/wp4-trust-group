@@ -169,29 +169,27 @@ http://uri.etsi.org/19602/SvcType/Register
 #### 3.4.2 TS 119 612 Service Types
 
 ```
-# Qualified Certificate Services
+# TS 119 612 service types used in WP4 context (subset)
+# Source reference for the full list: TS 119 612 clause 5.5.1.1
+
+# Qualified certificate issuing trust service
 http://uri.etsi.org/TrstSvc/Svctype/CA/QC
 
-# Public Key Certificate Services
-http://uri.etsi.org/TrstSvc/Svctype/CA/PKC
+# Qualified certificate status service (OCSP)
+http://uri.etsi.org/TrstSvc/Svctype/Certstatus/OCSP/QC
 
-# Qualified Time Stamping
+# Qualified certificate status service (CRL)
+http://uri.etsi.org/TrstSvc/Svctype/Certstatus/CRL/QC
+
+# Qualified time-stamping
 http://uri.etsi.org/TrstSvc/Svctype/TSA/QTST
-
-# Time Stamping
-http://uri.etsi.org/TrstSvc/Svctype/TSA
-
-# Wallet Provider (custom)
-http://uri.etsi.org/TrstSvc/Svctype/WalletProvider
-http://uri.etsi.org/TrstSvc/Svctype/IndividualWalletProvider
-http://uri.etsi.org/TrstSvc/Svctype/LegalPersonWalletProvider
-
-# Credential Issuers (custom)
-http://uri.etsi.org/TrstSvc/Svctype/PID_Issuer
-http://uri.etsi.org/TrstSvc/Svctype/QEAA_Provider
-http://uri.etsi.org/TrstSvc/Svctype/PUB_EAA_Provider
-http://uri.etsi.org/TrstSvc/Svctype/Non_Q_EAA_Provider
 ```
+
+**Important profile separation**:
+- TS 119 612 service types are used for Member State trusted lists under the TS 119 612 model.
+- Wallet/PID/Pub-EAA/WRPAC/WRPRC/Registrars profiles in this document are modelled under **TS 119 602** and use the `http://uri.etsi.org/19602/...` URIs documented in section 3.4.1 and section 7.
+- Implementations should not treat custom Wallet/PID/PUB_EAA identifiers as normative TS 119 612 service type URIs.
+- Service types outside wallet trust and relying-party authentication/authorization scope are intentionally omitted from this subsection.
 
 ### 3.5 Status Determination Approach URIs
 
@@ -366,10 +364,10 @@ http://uri.etsi.org/19602/LoTETag
 - [ ] Implement validation rules
 
 #### Task 2.3: Other Profiles
-- [ ] WRPAC providers profile
-- [ ] WRPRC providers profile
+- [x] WRPAC providers profile
+- [x] WRPRC providers profile
 - [ ] Pub-EAA providers profile
-- [ ] Registrars and Registers profile
+- [x] Registrars and Registers profile
 
 ### Phase 3: Digital Signatures
 
@@ -487,12 +485,12 @@ http://uri.etsi.org/19602/LoTETag
         <TSPInformationURI>https://wallet.example.it/info</TSPInformationURI>
         <TSPServices>
           <ServiceInformation>
-            <ServiceTypeIdentifier>http://uri.etsi.org/TrstSvc/Svctype/CA/PKC</ServiceTypeIdentifier>
+            <ServiceTypeIdentifier>http://uri.etsi.org/TrstSvc/Svctype/CA/QC</ServiceTypeIdentifier>
             <ServiceName>
-              <Name xml:lang="en">Wallet Provider Services</Name>
+              <Name xml:lang="en">Issuance of qualified certificates</Name>
             </ServiceName>
             <ServiceDigitalIdentity>
-              <X509SubjectName>CN=WalletProvider-IT, O=Wallet Provider IT S.p.A., C=IT</X509SubjectName>
+              <X509SubjectName>CN=QTSP-IT, O=Qualified Trust Service Provider IT S.p.A., C=IT</X509SubjectName>
               <X509SKI>...</X509SKI>
               <X509Certificate>...</X509Certificate>
             </ServiceDigitalIdentity>
@@ -773,6 +771,53 @@ For the EUDI Wallet ecosystem, the following extensions are used when configurin
 
 **Reference**: Full requirements, validation behaviour, and non-normative examples are in [Trusted List extensions for Credential Issuers](trusted-list-extensions-credential-issuers.md). A proposal for an optional `registrationCertificateHash` in ServiceInformationExtensions is also described there.
 
+### 7.5 WRPAC Providers List (TS 119 602, Annex F)
+
+#### Required URIs
+- **LoTE Type**: `http://uri.etsi.org/19602/LoTEType/EUWRPACProvidersList`
+- **Status Determination Approach**: `http://uri.etsi.org/19602/WRPACProvidersList/StatusDetn/EU`
+- **Scheme Type/Community/Rules**: `http://uri.etsi.org/19602/WRPACProvidersList/schemerules/EU`
+- **Service Types**:
+  - `http://uri.etsi.org/19602/SvcType/WRPAC/Issuance`
+  - `http://uri.etsi.org/19602/SvcType/WRPAC/Revocation`
+
+#### Key Requirements
+- Trust anchors correspond to Access CA material used to validate relying party access certificates.
+- Next update maximum: 6 months.
+- Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML).
+- Consumers must validate signature, URI consistency, and service status semantics according to Annex F profile rules.
+
+### 7.6 WRPRC Providers List (TS 119 602, Annex G)
+
+#### Required URIs
+- **LoTE Type**: `http://uri.etsi.org/19602/LoTEType/EUWRPRCProvidersList`
+- **Status Determination Approach**: `http://uri.etsi.org/19602/WRPRCProvidersList/StatusDetn/EU`
+- **Scheme Type/Community/Rules**: `http://uri.etsi.org/19602/WRPRCProvidersList/schemerules/EU`
+- **Service Types**:
+  - `http://uri.etsi.org/19602/SvcType/WRPRC/Issuance`
+  - `http://uri.etsi.org/19602/SvcType/WRPRC/Revocation`
+
+#### Key Requirements
+- Trust anchors correspond to registration certificate provider material used to validate relying party registration certificates.
+- Next update maximum: 6 months.
+- Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML).
+- Consumers must validate signature, URI consistency, and service status semantics according to Annex G profile rules.
+
+### 7.7 Registrars and Registers List (TS 119 602, Annex I)
+
+#### Required URIs
+- **LoTE Type**: `http://uri.etsi.org/19602/LoTEType/EURegistrarsAndRegistersList`
+- **Status Determination Approach**: `http://uri.etsi.org/19602/RegistrarsAndRegistersList/StatusDetn/EU`
+- **Scheme Type/Community/Rules**: `http://uri.etsi.org/19602/RegistrarsAndRegistersList/schemerules/EU`
+- **Service Type**:
+  - `http://uri.etsi.org/19602/SvcType/Register`
+
+#### Key Requirements
+- Entries identify authoritative registrars and registers used for relying party registration and entitlement discovery.
+- `ebwoid-provider` in the WP4 LoTL pipeline maps to this profile and LoTE type URI.
+- Next update maximum: 6 months.
+- Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML).
+
 ## 8. Digital Signature Implementation
 
 ### 8.1 JAdES Signature (JSON - TS 119 602)
@@ -1025,10 +1070,10 @@ Use appropriate JAdES validation library (see section 12).
 ### Profile Implementation
 - [ ] PID Providers profile
 - [ ] Wallet Providers profile
-- [ ] WRPAC Providers profile
-- [ ] WRPRC Providers profile
+- [x] WRPAC Providers profile
+- [x] WRPRC Providers profile
 - [ ] Pub-EAA Providers profile
-- [ ] Registrars and Registers profile
+- [x] Registrars and Registers profile
 
 ### Signature Implementation
 - [ ] XAdES signature generation (XML)
