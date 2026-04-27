@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Optional
 
 from tools.lotl.collector import collect_entries
+from tools.lotl.lote_validate import validate_lote_json
 from tools.lotl.jades_signer import sign_json
 from tools.lotl.json_generator import generate_lotl_json
 from tools.lotl.log import get_logger
@@ -24,10 +25,23 @@ def get_next_sequence_number(output_dir: str | Path) -> int:
         try:
             with open(json_file, encoding="utf-8") as f:
                 data = json.load(f)
-            sig_info = data.get("schemeInformation", {})
-            seq = sig_info.get("loteSequenceNumber", 0)
-            return int(seq) + 1
-        except (json.JSONDecodeError, KeyError):
+            seq: int | None = None
+            lote = data.get("LoTE")
+            if isinstance(lote, dict):
+                lasi = lote.get("ListAndSchemeInformation", {})
+                if isinstance(lasi, dict):
+                    raw = lasi.get("LoTESequenceNumber")
+                    if raw is not None:
+                        seq = int(raw)
+            if seq is None:
+                legacy = data.get("schemeInformation", {})
+                if isinstance(legacy, dict):
+                    raw = legacy.get("loteSequenceNumber")
+                    if raw is not None:
+                        seq = int(raw)
+            if seq is not None:
+                return seq + 1
+        except (json.JSONDecodeError, KeyError, TypeError, ValueError):
             pass
 
     xml_file = path / LOTL_XML_FILENAME
@@ -92,6 +106,11 @@ def produce(
     # 4. Generate unsigned LoTL
     lotl_json = generate_lotl_json(entries, sequence_number=sequence)
     lotl_xml = generate_lotl_xml(entries, sequence_number=sequence)
+    v_errs = validate_lote_json(lotl_json)
+    if v_errs:
+        for e in v_errs:
+            logger.error("LoTE JSON validation: %s", e)
+        return 1
 
     # 5. Sign
     if not signing_key or not signing_cert:

@@ -3,24 +3,42 @@
 import json
 from typing import Any
 
+from tools.lotl.settings import LOTL_LOTE_TYPE_URI
+
 
 def make_mock_tl_json(
     sequence: int = 1,
     lote_type: str = "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList",
 ) -> dict[str, Any]:
-    """Create a minimal mock TL JSON structure (unsigned)."""
+    """Create a minimal mock LoTE JSON structure (unsigned), schema-shaped."""
     return {
-        "loteTag": "http://uri.etsi.org/19602/LoTETag",
-        "schemeInformation": {
-            "loteVersionIdentifier": 1,
-            "loteSequenceNumber": sequence,
-            "loteType": lote_type,
-            "schemeOperatorName": [{"lang": "en", "value": "Test TLP"}],
-            "schemeTerritory": "EU",
-            "listIssueDateTime": "2025-01-01T00:00:00Z",
-            "nextUpdate": "2025-07-01T00:00:00Z",
-        },
-        "trustedEntitiesList": {"trustedEntity": []},
+        "LoTE": {
+            "ListAndSchemeInformation": {
+                "LoTEVersionIdentifier": 1,
+                "LoTESequenceNumber": sequence,
+                "LoTEType": LOTL_LOTE_TYPE_URI,
+                "SchemeOperatorName": [{"lang": "en", "value": "Test TLP"}],
+                "SchemeTerritory": "EU",
+                "ListIssueDateTime": "2025-01-01T00:00:00Z",
+                "NextUpdate": "2025-07-01T00:00:00Z",
+                "PointersToOtherLoTE": [
+                    {
+                        "LoTELocation": "https://example.com/tl.json",
+                        "ServiceDigitalIdentities": [],
+                        "LoTEQualifiers": [
+                            {
+                                "LoTEType": lote_type,
+                                "SchemeOperatorName": [
+                                    {"lang": "en", "value": "Test TLP"},
+                                ],
+                                "SchemeTerritory": "EU",
+                                "MimeType": "application/json",
+                            }
+                        ],
+                    }
+                ],
+            }
+        }
     }
 
 

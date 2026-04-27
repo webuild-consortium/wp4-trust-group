@@ -532,6 +532,8 @@ The JSON schema is available at:
 
 ### 6.2 Basic JSON Structure
 
+**Normative field names (TS 119 602-1 / `1960201` JSON):** the official JSON schema uses a `LoTE` root object, **PascalCase** property names (for example `ListAndSchemeInformation`, `LoTESequenceNumber`, `uriValue` in `NonEmptyMultiLangURI`, not camelCase), and separates **URI-only** `DistributionPoints` from `PointersToOtherLoTE` (`OtherLoTEPointer` with `LoTELocation`, `ServiceDigitalIdentities`, `LoTEQualifiers`). The illustrative structure below is **informal** and mixes camelCase for readability; the WP4 LoTL JSON producer (`tools/lotl/json_generator.py`) emits the schema-shaped document (see the same repository’s conformance analysis).
+
 ```json
 {
   "loteTag": "http://uri.etsi.org/19602/LoTETag",

@@ -51,7 +51,15 @@ def test_produce_success(
     assert xml_path.exists()
     data = json.loads(json_path.read_text())
     assert "signature" in data
-    assert "schemeInformation" in data
+    assert "LoTE" in data
+
+
+def test_get_next_sequence_number_from_json_legacy_pilot_shape(tmp_path: Path) -> None:
+    """Read sequence from pre-migration (pilot) JSON shape."""
+    (tmp_path / LOTL_JSON_FILENAME).write_text(
+        json.dumps({"schemeInformation": {"loteSequenceNumber": 7}})
+    )
+    assert get_next_sequence_number(tmp_path) == 8
 
 
 def test_get_next_sequence_number_empty(tmp_path: Path) -> None:
@@ -62,7 +70,9 @@ def test_get_next_sequence_number_empty(tmp_path: Path) -> None:
 def test_get_next_sequence_number_from_json(tmp_path: Path) -> None:
     """Read sequence from existing JSON."""
     (tmp_path / LOTL_JSON_FILENAME).write_text(
-        json.dumps({"schemeInformation": {"loteSequenceNumber": 5}})
+        json.dumps(
+            {"LoTE": {"ListAndSchemeInformation": {"LoTESequenceNumber": 5}}}
+        )
     )
     assert get_next_sequence_number(tmp_path) == 6
 

@@ -151,7 +151,7 @@ tools/lotl/
 **Requirements**:
 - Standalone Python program with CLI
 - Scan `tl_entries/`; generate LoTL referencing participant TLs by URL
-- Output LoTL in both XML and JSON formats per the [Task 3 implementation profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)
+- Output LoTL in both XML and JSON formats per the [Task 3 implementation profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md). JSON (signed with JAdES) uses the TS 119 602-1 `1960201` document shape: root `LoTE`, `ListAndSchemeInformation` with `PointersToOtherLoTE` and URI-only `DistributionPoints` (see [conformance analysis](../docs/etsi-ts-119-602-1-json-schema-conformance-analysis.md) §9–10).
 - Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../task3-x509-pki-etsi/)
 - **Sequence number**: Increment on each publication
 - **Error handling**: On signing failure, exit non-zero; on TLP URL unreachable, log and optionally skip or fail

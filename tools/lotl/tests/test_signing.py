@@ -22,7 +22,7 @@ def test_jades_sign_and_verify(signing_key_and_cert: tuple[Path, Path]) -> None:
     assert "signature" in signed
     verified = verify_json(signed)
     assert "signature" not in verified
-    assert verified["schemeInformation"]["loteSequenceNumber"] == 1
+    assert verified["LoTE"]["ListAndSchemeInformation"]["LoTESequenceNumber"] == 1
 
 
 def test_xades_sign_and_verify(signing_key_and_cert: tuple[Path, Path]) -> None:
