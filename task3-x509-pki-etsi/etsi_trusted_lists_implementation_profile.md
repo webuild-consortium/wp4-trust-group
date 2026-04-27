@@ -532,133 +532,91 @@ The JSON schema is available at:
 
 ### 6.2 Basic JSON Structure
 
-**Normative field names (TS 119 602-1 / `1960201` JSON):** the official JSON schema uses a `LoTE` root object, **PascalCase** property names (for example `ListAndSchemeInformation`, `LoTESequenceNumber`, `uriValue` in `NonEmptyMultiLangURI`, not camelCase), and separates **URI-only** `DistributionPoints` from `PointersToOtherLoTE` (`OtherLoTEPointer` with `LoTELocation`, `ServiceDigitalIdentities`, `LoTEQualifiers`). The illustrative structure below is **informal** and mixes camelCase for readability; the WP4 LoTL JSON producer (`tools/lotl/json_generator.py`) emits the schema-shaped document (see the same repository’s conformance analysis).
+**TS 119 602-1** defines the `1960201` JSON model: a `LoTE` root object, **PascalCase** property names (for example `ListAndSchemeInformation`, `LoTESequenceNumber`, `uriValue` in `NonEmptyMultiLangURI`), and separate **URI-only** `DistributionPoints` and `PointersToOtherLoTE` (with `OtherLoTEPointer`, `ServiceDigitalIdentities`, `LoTEQualifiers`) when the artifact is a list of lists (LoML). Entity LoTEs (e.g. PID providers) use `TrustedEntitiesList` instead. The ETSI schema file is the source of truth for the exact key set. The example below is a **minimal PID providers LoTE** with normative `1960201` names (one entity, one service).
 
 ```json
 {
-  "loteTag": "http://uri.etsi.org/19602/LoTETag",
-  "schemeInformation": {
-    "loteVersionIdentifier": 1,
-    "loteSequenceNumber": 1,
-    "loteType": "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList",
-    "schemeOperatorName": [
-      {
-        "lang": "en",
-        "value": "European Commission"
-      }
-    ],
-    "schemeOperatorAddress": {
-      "postalAddresses": [
-        {
-          "lang": "en",
-          "streetAddress": "Rue de la Loi 200",
-          "locality": "Brussels",
-          "postalCode": "1049",
-          "country": "BE"
-        }
+  "LoTE": {
+    "ListAndSchemeInformation": {
+      "LoTEVersionIdentifier": 1,
+      "LoTESequenceNumber": 1,
+      "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList",
+      "SchemeOperatorName": [
+        { "lang": "en", "value": "European Commission" }
       ],
-      "electronicAddress": [
-        {
-          "lang": "en",
-          "uri": "mailto:trust@ec.europa.eu"
-        },
-        {
-          "lang": "en",
-          "uri": "https://ec.europa.eu"
-        }
-      ]
+      "SchemeOperatorAddress": {
+        "SchemeOperatorPostalAddress": [
+          {
+            "lang": "en",
+            "StreetAddress": "Rue de la Loi 200",
+            "Locality": "Brussels",
+            "PostalCode": "1049",
+            "Country": "BE"
+          }
+        ],
+        "SchemeOperatorElectronicAddress": [
+          { "lang": "en", "uriValue": "mailto:trust@ec.europa.eu" },
+          { "lang": "en", "uriValue": "https://ec.europa.eu" }
+        ]
+      },
+      "SchemeName": [
+        { "lang": "en", "value": "EU:PID Providers List" }
+      ],
+      "SchemeInformationURI": [
+        { "lang": "en", "uriValue": "https://ec.europa.eu/pid-providers-list" }
+      ],
+      "StatusDeterminationApproach": "http://uri.etsi.org/19602/PIDProvidersList/StatusDetn/EU",
+      "SchemeTypeCommunityRules": [
+        { "lang": "en", "uriValue": "http://uri.etsi.org/19602/PIDProviders/schemerules/EU" }
+      ],
+      "SchemeTerritory": "EU",
+      "ListIssueDateTime": "2025-01-01T00:00:00Z",
+      "NextUpdate": "2025-07-01T00:00:00Z"
     },
-    "schemeName": [
+    "TrustedEntitiesList": [
       {
-        "lang": "en",
-        "value": "EU:PID Providers List"
-      }
-    ],
-    "schemeInformationURI": [
-      {
-        "lang": "en",
-        "uri": "https://ec.europa.eu/pid-providers-list"
-      }
-    ],
-    "statusDeterminationApproach": "http://uri.etsi.org/19602/PIDProvidersList/StatusDetn/EU",
-    "schemeTypeCommunityRules": [
-      {
-        "lang": "en",
-        "uri": "http://uri.etsi.org/19602/PIDProviders/schemerules/EU"
-      }
-    ],
-    "schemeTerritory": "EU",
-    "listIssueDateTime": "2025-01-01T00:00:00Z",
-    "nextUpdate": "2025-07-01T00:00:00Z"
-  },
-  "trustedEntitiesList": {
-    "trustedEntity": [
-      {
-        "trustedEntityInformation": {
-          "teName": [
-            {
-              "lang": "en",
-              "value": "PID Provider Example Ltd."
-            }
+        "TrustedEntityInformation": {
+          "TEName": [
+            { "lang": "en", "value": "PID Provider Example Ltd." }
           ],
-          "teTradeName": [
-            {
-              "lang": "en",
-              "value": "PID-12345678"
-            }
+          "TETradeName": [
+            { "lang": "en", "value": "PID-12345678" }
           ],
-          "teAddress": {
-            "tePostalAddress": [
+          "TEAddress": {
+            "TEPostalAddress": [
               {
                 "lang": "en",
-                "streetAddress": "Example Street 1",
-                "locality": "Example City",
-                "postalCode": "12345",
-                "country": "IT"
+                "StreetAddress": "Example Street 1",
+                "Locality": "Example City",
+                "PostalCode": "12345",
+                "Country": "IT"
               }
             ],
-            "teElectronicAddress": [
-              {
-                "lang": "en",
-                "uri": "mailto:info@pid-provider.example"
-              },
-              {
-                "lang": "en",
-                "uri": "https://pid-provider.example"
-              }
+            "TEElectronicAddress": [
+              { "lang": "en", "uriValue": "mailto:info@pid-provider.example" },
+              { "lang": "en", "uriValue": "https://pid-provider.example" }
             ]
           },
-          "teInformationURI": [
-            {
-              "lang": "en",
-              "uri": "https://pid-provider.example/policies"
-            },
-            {
-              "lang": "en",
-              "uri": "http://uri.etsi.org/19602/ListOfTrustedEntities/PIDProvider/IT"
-            }
+          "TEInformationURI": [
+            { "lang": "en", "uriValue": "https://pid-provider.example/policies" },
+            { "lang": "en", "uriValue": "http://uri.etsi.org/19602/ListOfTrustedEntities/PIDProvider/IT" }
           ]
         },
-        "trustedEntityServices": {
-          "trustedEntityService": [
-            {
-              "serviceInformation": {
-                "serviceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/PID/Issuance",
-                "serviceName": [
-                  {
-                    "lang": "en",
-                    "value": "PID Issuance Service"
-                  }
-                ],
-                "serviceDigitalIdentity": {
-                  "x509Certificate": [
-                    "MIIF..."
-                  ]
-                }
+        "TrustedEntityServices": [
+          {
+            "ServiceInformation": {
+              "ServiceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/PID/Issuance",
+              "ServiceName": [
+                { "lang": "en", "value": "PID Issuance Service" }
+              ],
+              "ServiceDigitalIdentity": {
+                "X509Certificates": [
+                  { "val": "MIIF…" }
+                ]
               }
             }
-          ]
-        }
+          }
+        ]
       }
     ]
   }
@@ -668,6 +626,7 @@ The JSON schema is available at:
 ### 6.3 Multilingual Format
 
 **Multilingual String:**
+
 ```json
 {
   "lang": "en",
@@ -675,11 +634,12 @@ The JSON schema is available at:
 }
 ```
 
-**Multilingual Pointer:**
+**NonEmptyMultiLangURI** (e.g. scheme or entity electronic address):
+
 ```json
 {
   "lang": "en",
-  "uri": "https://example.org/page"
+  "uriValue": "https://example.org/page"
 }
 ```
 
@@ -931,13 +891,15 @@ Cache-Control: max-age=3600
 </DistributionPoints>
 ```
 
-**JSON:**
+**JSON** (`ListAndSchemeInformation` / `1960201` key names):
 ```json
 {
-  "schemeInformation": {
-    "distributionPoints": [
-      "https://trust-list.example.org/lote/pid-providers.json"
-    ]
+  "LoTE": {
+    "ListAndSchemeInformation": {
+      "DistributionPoints": [
+        "https://trust-list.example.org/lote/pid-providers.json"
+      ]
+    }
   }
 }
 ```
@@ -968,41 +930,35 @@ See section 5.2 for complete XML example.
 
 See section 6.2 for complete JSON example.
 
-### 10.3 Service with History (Pub-EAA)
+### 10.3 Service with history (Pub-EAA) — `TrustedEntityService` fragment
+
+`ServiceHistory` is an **array** of `ServiceHistoryInstance` objects. `ServiceDigitalIdentity` uses `X509Certificates` (array of `PKIOb` with `val`) and optional `X509SKIs` as in the ETSI JSON schema.
 
 ```json
 {
-  "serviceInformation": {
-    "serviceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/PubEAA/Issuance",
-    "serviceName": [
-      {
-        "lang": "en",
-        "value": "Pub-EAA Issuance Service"
-      }
+  "ServiceInformation": {
+    "ServiceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/PubEAA/Issuance",
+    "ServiceName": [
+      { "lang": "en", "value": "Pub-EAA Issuance Service" }
     ],
-    "serviceDigitalIdentity": {
-      "x509Certificate": ["MIIF..."]
+    "ServiceDigitalIdentity": {
+      "X509Certificates": [{ "val": "MIIF…" }]
     },
-    "serviceCurrentStatus": "http://uri.etsi.org/19602/PubEAAProvidersList/SvcStatus/notified",
-    "currentStatusStartingDateAndTime": "2025-01-01T00:00:00Z"
+    "ServiceStatus": "http://uri.etsi.org/19602/PubEAAProvidersList/SvcStatus/notified",
+    "StatusStartingTime": "2025-01-01T00:00:00Z"
   },
-  "serviceHistory": {
-    "serviceHistoryInstance": [
-      {
-        "serviceName": [
-          {
-            "lang": "en",
-            "value": "Pub-EAA Issuance Service"
-          }
-        ],
-        "serviceDigitalIdentity": {
-          "x509SKI": ["a1b2c3..."]
-        },
-        "servicePreviousStatus": "http://uri.etsi.org/19602/PubEAAProvidersList/SvcStatus/withdrawn",
-        "previousStatusStartingDateAndTime": "2024-06-01T00:00:00Z"
-      }
-    ]
-  }
+  "ServiceHistory": [
+    {
+      "ServiceName": [
+        { "lang": "en", "value": "Pub-EAA Issuance Service" }
+      ],
+      "ServiceDigitalIdentity": {
+        "X509SKIs": ["a1b2c3…"]
+      },
+      "ServiceStatus": "http://uri.etsi.org/19602/PubEAAProvidersList/SvcStatus/withdrawn",
+      "StatusStartingTime": "2024-06-01T00:00:00Z"
+    }
+  ]
 }
 ```
 
