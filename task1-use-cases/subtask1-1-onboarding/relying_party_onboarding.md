@@ -125,19 +125,24 @@ WP4 oepraters at least one register (the baseline). Where additional registers a
 
 ### Registry Data Model
 
-**Information to be provided for registration**: The Relying Party must provide at least the following when submitting a registration application. Normative: [Regulation (EU) 2025/848, Article 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) (information to be provided to national registers), [Annex I](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) (information regarding wallet-relying parties). Technical: [EC TS05 v1.0 – Common Formats and API for RP Registration Information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md), [EC TS06 v1.0 – Common Set of RP Information to be Registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md). See also [ARF Annex II – High-Level Requirements](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/) (Topic 27).
+#### Information to be provided for registration in the pilot
+The Relying Party must provide at least the following when submitting a registration application:
 
-- Official name of the wallet-relying party
-- One or more official identifiers (EORI, LEI, VAT number, etc.)
-- Physical address and Member State
-- URL belonging to the wallet-relying party where applicable
-- Detailed contact information (phone number, website or email)
-- Description of the type of services provided
-- List of attributes that the wallet-relying party intends to request for each intended use
-- Description of intended use of the data
-- Indication whether the wallet-relying party is a public sector body
-- Applicable entitlement(s) of the wallet-relying party
-- Indication if the wallet-relying party intends to act as an intermediary or to rely upon an intermediary
+- Legal name — official name of the wallet-relying party
+- Trade / service name — user-facing name shown in the wallet UI
+- Official identifier(s) — one or more; EUID (from BRIS) preferred; VAT number or LEI as fallback
+- Member State
+- Info URI — URL belonging to the wallet-relying party
+- Email address — in the pilot email is the only contact channel collected for simplicity; this email may be used for self-service access to request certificates
+- Service description — at minimum a single string; multiple strings recommended to test internationalisation
+- Public sector body flag — indication whether the wallet-relying party is a public sector body
+- Applicable entitlement(s) — one or more of: Service Provider, QEAA, EAA, PID, PuB-EAA
+- Intended use(s) — one or more records, each specifying: purpose, data requested (credential type, format, and list of claims), privacy policy URL, and supervisory authority / DPA
+- Intermediary reference(s) — zero or more records (identifier, trade name, registry URI); required if the wallet-relying party relies on an intermediary
+- Intermediary flag — indication if the wallet-relying party acts as an intermediary for other relying parties
+- Attestation type(s) — for provider/issuer entitlements: one or more records, each specified either by a catalogue URL provided by WP4 (default/baseline option) or a self-declaration of the attestation schema
+
+> **Note**: Trusted List data collection: In the pilot for WRPs that also hold a provider or issuer entitlement, the registration interaction may additionally collect the information required to publish their trust anchor on a Trusted List. This avoids requiring the applicant to go through a separate submission process at a later stage.
 
 The registry information is made available through a REST API supporting JSON format, electronically signed or sealed, in accordance with [Regulation (EU) 2025/848, Annex II](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848). See [Task 4 - Onboarding API](../../task4-trust-infrastructure-api/onboarding-api/README.md) for API specifications.
 
@@ -225,7 +230,7 @@ Each Relying Party that intends to rely on EUDI Wallets for the provision of dig
 
 ### 1.1 Registration Application
 
-**For [MVP]**: The Relying Party (Beneficiary or Associated Partner) submits the registration application to the [Trust Infrastructure Responsible Group](onboarding-base.md#trust-infrastructure-responsible-group), providing required information for WEBUILD testing purposes. The application includes entity identification, contact information, service description, and intended use of EUDI Wallet data.
+**For [MVP]**: The Relying Party (Beneficiary or Associated Partner) submits the registration application to the [Trust Infrastructure Responsible Group](../terms-and-entities.md#41-trust-infrastructure-responsible-group), providing required information for WEBUILD testing purposes. The application includes entity identification, contact information, service description, and intended use of EUDI Wallet data (see [Information to be provided for registration in the pilot](#registry-data-model)).
 
 **For [MVP+]**: The Relying Party submits the registration application to the Registrar, providing at least the information set out in Annex I. Alternatively, the Registrar may import entity information from qualified authoritative registries (see [Industrial-Scale Considerations - Entity Identification and Registry Integration](#1-entity-identification-and-registry-integration)).
 
@@ -243,28 +248,7 @@ The Registrar receives the registration application (or initiates registry impor
     - 1. Registrars shall establish **easy to use electronic, and where possible, automated registration processes** for wallet-relying parties.
 - [Regulation (EU) 2025/848, Annex I "Information regarding wallet-relying parties"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)
 See also [EC TS06 v1.0 - Common Set of Relying Party Information to be Registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md) and [EC TS05 V1.0 - Common Formats and API for Relying Party Registration Information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
-    - Summary of the information to be provided:
-        - official name of the wallet-relying party
-        - one or more official identifiers of the wallet-relying party (EORI, LEI, VAT number...)
-        - physical address and Member State if not present in official identifier
-        - URL belonging to the wallet-relying party where applicable
-        - detailed contact information (phone number, website or email)
-        - description of the type of services provided
-        - a list of the attributes that the wallet-relying party intends to request for each intended use (see [Attribute Authorization Management](#2-attribute-authorization-management) for credential catalogues, taxonomies, and sectorial templates)
-        - a description of intended use of the data
-        - indication whether the wallet-relying party is a public sector body
-        - applicable entitlement(s) of the wallet-relying party chosen between:
-            - **Service_Provider**
-            - QEAA_Provider
-            - Non_Q_EAA_Provider
-            - PUB_EAA_Provider
-            - PID_Provider
-            - QCert_for_ESeal_Provider
-            - QCert_for_ESig_Provider
-            - rQSigCDs_Provider
-            - rQSealCDs_Provider
-            - ESig_ESeal_Creation_Provider
-        - indication if the wallet-relying party intends to act **as an intermediary or to rely upon an intermediary**.
+    - Summary of the information to be provided: see [Information to be provided for registration in the pilot](#registry-data-model)
 - [Regulation (EU) 2025/848, Annex II "1.   Requirements for Electronic signature or seals applied to the information made available on registered Wallet-Relying Parties referred to in Article 3"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_II:~:text=1.%C2%A0%C2%A0%C2%A0REQUIREMENTS%20FOR%20ELECTRONIC%20SIGNATURES%20OR%20SEALS%20APPLIED%20TO%20THE%20INFORMATION%20MADE%20AVAILABLE%20ON%20REGISTERED%20WALLET%2DRELYING%20PARTIES%20REFERRED%20TO%20IN%20ARTICLE%C2%A03)
     - JavaScript Object Notation (‘JSON’).
     - JSON Web Signatures (per ETSI/ARF).
