@@ -2,7 +2,7 @@
 
 List of Trusted Lists (LoTL) producer and validator for the WP4 Trust Infrastructure. Generates and signs LoTL in XML (XAdES Baseline B) and JSON (JAdES Compact Baseline B) formats per ETSI TS 119 612 and TS 119 602.
 
-**JSON (LoTE) note:** the unsigned JSON from `json_generator.py` follows the ETSI TS 119 602-1 `1960201` JSON schema root shape (see [conformance analysis](../../docs/etsi-ts-119-602-1-json-schema-conformance-analysis.md)). Before signing, `produce` validates it with `lote_validate.py` (vendored subset schema in `tools/lotl/schemas/1960201_lote_lotl_subset.schema.json` + semantic checks; optional `LOTE_JSON_SCHEMA` path to the full ETSI `1960201_json_schema.json`).
+**JSON (LoTE) note:** the unsigned JSON from `json_generator.py` follows the ETSI TS 119 602-1 `1960201` JSON schema root shape (see [Task 3 implementation profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)). Before signing, `produce` validates it with `lote_validate.py` (vendored subset schema in `tools/lotl/schemas/1960201_lote_lotl_subset.schema.json` + semantic checks; optional `LOTE_JSON_SCHEMA` path to the full ETSI `1960201_json_schema.json`).
 
 ## Creating a Signing Certificate
 
