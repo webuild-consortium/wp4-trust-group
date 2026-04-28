@@ -10,6 +10,7 @@
 
 from __future__ import annotations
 
+import json
 import os
 import re
 from datetime import datetime
@@ -38,7 +39,7 @@ def _iter_validation_errors(
     schema: Any,
 ) -> Generator[str, None, None]:
     try:
-        from jsonschema import Draft202012Validator, FormatChecker
+        from jsonschema import FormatChecker, validators
     except ImportError:
         yield (
             "JSON Schema validation could not be performed because the "
@@ -46,7 +47,9 @@ def _iter_validation_errors(
         )
         return
 
-    v = Draft202012Validator(schema, format_checker=FormatChecker())
+    validator_cls = validators.validator_for(schema)
+    validator_cls.check_schema(schema)
+    v = validator_cls(schema, format_checker=FormatChecker())
     for e in v.iter_errors(instance):
         path = " / ".join(str(p) for p in e.absolute_path) or "$"
         yield f"{path}: {e.message}"
@@ -250,8 +253,9 @@ def validate_lote_json(document: dict[str, Any]) -> list[str]:
                 official = dict(official)
                 official["$id"] = off.resolve().as_uri()
             errors.extend(validate_json_schema(document, schema=official))
-        except OSError as e:
-            errors.append(f"Failed to read official schema: {e}")
+        except (OSError, json.JSONDecodeError, ValueError) as e:
+            errors.append(f"Failed to load official schema, falling back to subset: {e}")
+            errors.extend(validate_json_schema(document, schema=_subset_schema()))
     else:
         errors.extend(validate_json_schema(document, schema=_subset_schema()))
     lote = document.get("LoTE", {})

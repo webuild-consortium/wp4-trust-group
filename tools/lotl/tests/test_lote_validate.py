@@ -149,3 +149,13 @@ def test_validate_schema_handles_missing_jsonschema_dependency() -> None:
     with patch("builtins.__import__", side_effect=_fake_import):
         errors = validate_lote_json(doc)
     assert any("jsonschema" in e for e in errors)
+
+
+def test_validate_falls_back_to_subset_on_bad_official_schema(tmp_path: Path) -> None:
+    bad_schema = tmp_path / "bad_official_schema.json"
+    bad_schema.write_text("{not-json", encoding="utf-8")
+    doc = generate_lotl_json([], sequence_number=1)
+    with patch.dict("os.environ", {"LOTE_JSON_SCHEMA": str(bad_schema)}):
+        errors = validate_lote_json(doc)
+    assert any("falling back to subset" in e for e in errors)
+    assert not any("jsonschema" in e for e in errors)
