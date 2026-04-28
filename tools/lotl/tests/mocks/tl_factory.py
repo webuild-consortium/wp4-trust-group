@@ -6,7 +6,7 @@ from typing import Any
 from tools.lotl.settings import LOTL_LOTE_TYPE_URI
 
 
-def make_mock_tl_json(
+def make_mock_lotl_json(
     sequence: int = 1,
     qualifier_lote_type: str = "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList",
 ) -> dict[str, Any]:

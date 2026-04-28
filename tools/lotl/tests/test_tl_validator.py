@@ -6,7 +6,7 @@ from unittest.mock import patch
 import pytest
 
 from tools.lotl.jades_signer import sign_json
-from tools.lotl.tests.mocks.tl_factory import make_mock_tl_json
+from tools.lotl.tests.mocks.tl_factory import make_mock_lotl_json
 from tools.lotl.tl_entry import TLEntry
 from tools.lotl.tl_validator import (
     fetch_tl,
@@ -21,7 +21,7 @@ from tools.lotl.xades_signer import sign_xml
 def test_validate_tl_signature_json_valid(signing_key_and_cert) -> None:
     """Valid JAdES signature passes."""
     key_path, cert_path = signing_key_and_cert
-    payload = make_mock_tl_json()
+    payload = make_mock_lotl_json()
     signed = sign_json(payload, key_path.read_bytes(), cert_path.read_bytes())
     valid, err = validate_tl_signature_json(json.dumps(signed), cert_path.read_text())
     assert valid
