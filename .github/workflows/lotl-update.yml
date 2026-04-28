@@ -1,0 +1,105 @@
+name: LoTL Update and Publish
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "lotl/**"
+      - "tools/lotl/**"
+      - "requirements-dev.txt"
+      - ".github/workflows/lotl-update.yml"
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref to run (branch, tag, or SHA)"
+        required: false
+        default: "main"
+      publish:
+        description: "Publish artifacts to gh-pages"
+        required: true
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lotl-update-main
+  cancel-in-progress: false
+
+jobs:
+  lotl-test-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Validate TL entries (schema and semantic checks)
+        run: |
+          python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/
+
+      - name: Run LoTL tests (includes schema validation paths)
+        run: |
+          pytest tools/lotl/tests/ -v --cov=tools.lotl --cov-report=term-missing --cov-fail-under=90
+
+  build-and-publish:
+    needs: lotl-test-gate
+    runs-on: ubuntu-latest
+    env:
+      LOTL_SIGNING_KEY: ${{ secrets.LOTL_SIGNING_KEY }}
+      LOTL_SIGNING_CERT: ${{ secrets.LOTL_SIGNING_CERT }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate signing secrets are configured
+        run: |
+          if [ -z "${LOTL_SIGNING_KEY}" ] || [ -z "${LOTL_SIGNING_CERT}" ]; then
+            echo "LOTL_SIGNING_KEY and LOTL_SIGNING_CERT secrets must be configured."
+            exit 1
+          fi
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Produce signed LoTL artifacts
+        run: |
+          python -m tools.lotl --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
+
+      - name: Prepare gh-pages content
+        run: |
+          rm -rf .gh-pages-dist
+          mkdir -p .gh-pages-dist/assets
+          cp lotl/pages/index.html .gh-pages-dist/index.html
+          cp lotl/list_of_trusted_lists.json .gh-pages-dist/list_of_trusted_lists.json
+          cp lotl/list_of_trusted_lists.xml .gh-pages-dist/list_of_trusted_lists.xml
+          cp -r lotl/pages/assets/. .gh-pages-dist/assets/
+
+      - name: Publish to gh-pages
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.publish }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: .gh-pages-dist
+          keep_files: true
