@@ -104,9 +104,18 @@ def produce(
     sequence = get_next_sequence_number(output_dir)
 
     # 4. Generate unsigned LoTL
-    lotl_json = generate_lotl_json(entries, sequence_number=sequence)
-    lotl_xml = generate_lotl_xml(entries, sequence_number=sequence)
-    v_errs = validate_lote_json(lotl_json)
+    try:
+        lotl_json = generate_lotl_json(entries, sequence_number=sequence)
+        lotl_xml = generate_lotl_xml(entries, sequence_number=sequence)
+    except Exception as e:
+        logger.exception("LoTL generation failed: %s", e)
+        return 1
+
+    try:
+        v_errs = validate_lote_json(lotl_json)
+    except Exception as e:
+        logger.exception("LoTE JSON validation failed unexpectedly: %s", e)
+        return 1
     if v_errs:
         for e in v_errs:
             logger.error("LoTE JSON validation: %s", e)

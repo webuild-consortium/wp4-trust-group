@@ -78,6 +78,7 @@ def test_validate_rejects_extra_key_on_lote() -> None:
     doc["LoTE"]["TrustedEntitiesList"] = []
     errors = validate_lote_json(doc)
     assert errors
+    assert any("TrustedEntitiesList" in e for e in errors)
 
 
 def test_extract_unsigned_lote() -> None:
@@ -132,3 +133,19 @@ def test_produce_fails_on_invalid_lote(
 
 def test_validate_unsigned_root_missing_lote() -> None:
     assert validate_unsigned_lote_root({"foo": 1})
+
+
+def test_validate_schema_handles_missing_jsonschema_dependency() -> None:
+    doc = generate_lotl_json([], sequence_number=1)
+    import builtins
+
+    real_import = builtins.__import__
+
+    def _fake_import(name, *args, **kwargs):  # type: ignore[no-untyped-def]
+        if name == "jsonschema":
+            raise ImportError("missing")
+        return real_import(name, *args, **kwargs)
+
+    with patch("builtins.__import__", side_effect=_fake_import):
+        errors = validate_lote_json(doc)
+    assert any("jsonschema" in e for e in errors)

@@ -38,7 +38,14 @@ def _iter_validation_errors(
     instance: Any,
     schema: Any,
 ) -> Generator[str, None, None]:
-    from jsonschema import Draft202012Validator, FormatChecker
+    try:
+        from jsonschema import Draft202012Validator, FormatChecker
+    except ImportError:
+        yield (
+            "JSON Schema validation could not be performed because the "
+            "'jsonschema' package is not installed"
+        )
+        return
 
     v = Draft202012Validator(schema, format_checker=FormatChecker())
     for e in v.iter_errors(instance):
@@ -193,7 +200,7 @@ def validate_lote_semantics(lote: dict[str, Any]) -> list[str]:
     if "ListAndSchemeInformation" not in lote:
         return ['LoTE must contain "ListAndSchemeInformation"']
     err = _validate_list_and_scheme(lote["ListAndSchemeInformation"])
-    if lote.get("TrustedEntitiesList"):
+    if "TrustedEntitiesList" in lote:
         err.append(
             "This LoTL producer must not include TrustedEntitiesList in JSON (use pointers only)"
         )
