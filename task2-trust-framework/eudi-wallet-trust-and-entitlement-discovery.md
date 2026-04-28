@@ -825,4 +825,3 @@ ETSI standards, EU regulations, and document links: see [Normative References](#
 - Trust Infrastructure Schema: Onboarding and Trusted Lists ([trust-infrastructure-schema.md](trust-infrastructure-schema.md))
 - ETSI Policy Application Mechanisms (task5-participants-certificates-policies/etsi-policy-enumeration.md)
 - ETSI Policy Evaluation (task5-participants-certificates-policies/etsi-policy-evaluation.md)
-
