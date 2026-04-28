@@ -14,6 +14,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from tools.lotl.settings import (
+    LOTL_JSON_FILENAME,
     LOTL_LOTE_TYPE_URI,
     TL_TYPE_TO_REFERENCE_URI,
 )
@@ -86,7 +87,7 @@ def _default_distribution_uris(
     scheme_information_uri: str,
 ) -> list[str]:
     base = scheme_information_uri.rstrip("/")
-    return [f"{base}/list_of_trusted_lists.json"]
+    return [f"{base}/{LOTL_JSON_FILENAME}"]
 
 
 def _add_months_safe_utc(dt: datetime, months: int) -> datetime:
