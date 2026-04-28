@@ -38,10 +38,9 @@ def _iter_validation_errors(
     instance: Any,
     schema: Any,
 ) -> Generator[str, None, None]:
-    import jsonschema
-    from jsonschema import Draft202012Validator
+    from jsonschema import Draft202012Validator, FormatChecker
 
-    v = Draft202012Validator(schema)
+    v = Draft202012Validator(schema, format_checker=FormatChecker())
     for e in v.iter_errors(instance):
         path = " / ".join(str(p) for p in e.absolute_path) or "$"
         yield f"{path}: {e.message}"
