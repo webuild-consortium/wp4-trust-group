@@ -2,6 +2,7 @@
 
 import base64
 import json
+import time
 from pathlib import Path
 from typing import Any, Union
 
@@ -68,6 +69,8 @@ def sign_json(
     header = {
         "alg": algorithm,
         "x5c": [cert_b64],
+        # TS 119 182-1 §5.1.11 / Table 1 note (a): iat mandatory from 2025-07-15; replaces sigT
+        "iat": int(time.time()),
     }
 
     jws_token = jws.JWS(json_encode(payload))
@@ -76,11 +79,12 @@ def sign_json(
     compact = jws_token.serialize(compact=True)
     parts = compact.split(".")
 
-    # JAdES signature structure (protected = JWS protected header)
+    # RFC 7515 §7.2.2: "protected" = BASE64URL(UTF8(JWS Protected Header)) — the string, not the dict.
+    # Signature covers ASCII(parts[0] || "." || parts[1]); storing the raw dict and re-encoding
+    # during verify would change key order and break §5.2 step 8 validation.
     payload["signature"] = {
-        "protected": header,
+        "protected": parts[0],
         "signature": parts[2],
-        "header": {"x5c": [cert_b64]},
     }
 
     return payload
@@ -102,11 +106,19 @@ def verify_json(payload: dict[str, Any]) -> dict[str, Any]:
     if not sig:
         raise ValueError("No signature in payload")
 
-    protected = sig.get("protected")
+    protected_b64 = sig.get("protected")
     sig_b64 = sig.get("signature")
-    x5c = sig.get("header", {}).get("x5c") or (protected.get("x5c") if protected else None)
 
-    if not protected or not sig_b64 or not x5c:
+    # protected must be the base64url string stored by sign_json (RFC 7515 §7.2.2)
+    if not isinstance(protected_b64, str) or not sig_b64:
+        raise ValueError("Invalid JAdES signature structure")
+
+    # Decode once to extract x5c for key loading — do NOT re-encode for the compact token
+    padding = (4 - len(protected_b64) % 4) % 4
+    protected = json.loads(base64.urlsafe_b64decode(protected_b64 + "=" * padding))
+
+    x5c = protected.get("x5c") or sig.get("header", {}).get("x5c")
+    if not x5c:
         raise ValueError("Invalid JAdES signature structure")
 
     cert_b64 = x5c[0] if isinstance(x5c, list) else x5c
@@ -121,11 +133,11 @@ def verify_json(payload: dict[str, Any]) -> dict[str, Any]:
     payload_copy = dict(payload)
     payload_copy.pop("signature", None)
 
-    # Rebuild JWS compact: base64url(protected).base64url(payload).signature
     def b64url_encode(data: bytes) -> str:
         return base64.urlsafe_b64encode(data).decode().rstrip("=")
 
-    protected_b64 = b64url_encode(json.dumps(protected, separators=(",", ":")).encode())
+    # Rebuild JWS compact using the original protected_b64 — must not re-encode the dict
+    # (RFC 7515 §5.2 step 8: signature covers ASCII(protected_b64 || "." || payload_b64))
     payload_b64 = b64url_encode(json_encode(payload_copy).encode())
     compact = f"{protected_b64}.{payload_b64}.{sig_b64}"
 
