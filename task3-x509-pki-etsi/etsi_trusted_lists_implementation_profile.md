@@ -720,7 +720,7 @@ python -m jsonschema lote.json lote-schema.json
 - Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
 - Service history uses X509SKI (not X509Certificate)
 
-**QEAA (qualified EAA) — national lists**: **Annex H / `EUPubEAAProvidersList` does not replace** Member State **TS 119 612** trusted lists for **QEAA Providers** as QTSPs. Per [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) §3, QEAA trust anchors are published on **national QTSP Trusted Lists** (Article 22 eIDAS), typically with **TSLType** `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric`. The WP4 LoTL automation maps folder `qeaa-provider` to that TSL type URI in `tools/lotl/settings.py`.
+**QEAA (qualified EAA) — national lists**: **Annex H / `EUPubEAAProvidersList` does not replace** Member State **TS 119 612** trusted lists for **QEAA Providers** as QTSPs. Per [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md) §3, QEAA trust anchors are published on **national QTSP Trusted Lists** (Article 22 eIDAS), typically with **TSLType** `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric`. The WP4 LoTL automation maps folder `qeaa-provider` to that TSL type URI in `tools/lotl/settings.py`.
 
 ### 7.4 Issuer constraint extensions (ServiceInformationExtensions)
 
