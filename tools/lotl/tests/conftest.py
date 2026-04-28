@@ -85,14 +85,15 @@ def signing_key_and_cert(tmp_path: Path) -> tuple[Path, Path]:
 
 
 @pytest.fixture
-def sample_tl_entry() -> TLEntry:
+def sample_tl_entry(signing_key_and_cert: tuple[Path, Path]) -> TLEntry:
     """Sample TL entry for tests."""
+    _key_path, cert_path = signing_key_and_cert
     return TLEntry(
         tl_type="pid-provider",
         participant_id="example-tlp",
         tl_url="https://example.com/pid_providers.json",
         tl_url_xml="https://example.com/pid_providers.xml",
-        trust_anchor="-----BEGIN CERTIFICATE-----\nMIIB...\n-----END CERTIFICATE-----",
+        trust_anchor=cert_path.read_text(),
         metadata={"operator_name": "Example TLP", "country": "IT"},
     )
 

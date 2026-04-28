@@ -51,6 +51,9 @@ TL_TYPE_TO_REFERENCE_URI = {
 # Backward-compatible alias (values are not always LoTEType URIs)
 TL_TYPE_TO_LOTE_URI = TL_TYPE_TO_REFERENCE_URI
 
+# TS 119 602-1: document type for an EU List of Trusted Lists (LoTL) LoTE
+LOTL_LOTE_TYPE_URI = "http://uri.etsi.org/19602/LoTLType/EUListOfTrustedLists"
+
 # Output filenames
 LOTL_JSON_FILENAME = "list_of_trusted_lists.json"
 LOTL_XML_FILENAME = "list_of_trusted_lists.xml"

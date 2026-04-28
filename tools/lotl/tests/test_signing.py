@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from tools.lotl.jades_signer import sign_json, verify_json
-from tools.lotl.tests.mocks.tl_factory import make_mock_tl_json
+from tools.lotl.tests.mocks.tl_factory import make_mock_lotl_json
 from tools.lotl.xades_signer import sign_xml, verify_xml
 
 # Use xml_generator for XML content
@@ -17,12 +17,12 @@ from tools.lotl.tl_entry import TLEntry
 def test_jades_sign_and_verify(signing_key_and_cert: tuple[Path, Path]) -> None:
     """JAdES sign and verify round-trip."""
     key_path, cert_path = signing_key_and_cert
-    payload = make_mock_tl_json(sequence=1)
+    payload = make_mock_lotl_json(sequence=1)
     signed = sign_json(payload, key_path, cert_path)
     assert "signature" in signed
     verified = verify_json(signed)
     assert "signature" not in verified
-    assert verified["schemeInformation"]["loteSequenceNumber"] == 1
+    assert verified["LoTE"]["ListAndSchemeInformation"]["LoTESequenceNumber"] == 1
 
 
 def test_xades_sign_and_verify(signing_key_and_cert: tuple[Path, Path]) -> None:
