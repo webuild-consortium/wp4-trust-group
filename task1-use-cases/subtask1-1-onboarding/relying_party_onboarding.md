@@ -44,7 +44,7 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
 
 - **Success Criteria**:
     - [MVP] Pilot implementations successfully demonstrate Relying Party onboarding within WEBUILD
-    - [MVP] All Relying Parties within WEBUILD are included in a publicly accessible register maintained by the WP4 Trust Infrastructure group
+    - [MVP] All Relying Parties within WEBUILD are included in a publicly accessible register or registers maintained by the WP4 Trust Infrastructure group
     - [MVP+] The onboarding process for Relying Parties is formally defined and documented in a harmonized manner that aligns with EU regulatory and technical frameworks (ref. [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848))
     - [MVP+] See [Success Criteria](onboarding-base.md#success-criteria)
     - Additional entity-specific success criteria:
@@ -69,7 +69,8 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
 See [Preconditions](onboarding-base.md#preconditions).
 
 ### Preconditions [MVP]
-- The WEBUILD WP4 Trust Infrastructure group has established a register for Relying Parties within WEBUILD.
+- The WEBUILD WP4 Trust Infrastructure group has established at least one register for Relying Parties within WEBUILD and designated at least one Registrar to operate it.
+- The WEBUILD WP4 Trust Infrastructure group has published a list of all available Registrars, including contact information and the registraiton instructions applicable to each register.
 - The WEBUILD WP4 Trust Infrastructure group has designated representatives authorized to act as Ecosystem Authority, Access Certificate Authority, and Provider of Registration Certificate.
 - The WEBUILD WP4 Trust Infrastructure group has published registration policies for the WEBUILD testing environment.
 
@@ -90,7 +91,7 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 | Issue Registration Certificates (Provider of Registration Certificates) |       A,C     |                |      R       |       I       |
 | Engage with Relying Parties during onboarding / troubleshooting  |       A,C     |                |      R       |       I       |
 
-**Registration phase – responsibilities by actor**: The following table assigns responsibility (R), accountability (A), consulted (C), or informed (I) for each administrative registration step. [MVP]: Ecosystem Authority acts as Registrar; [MVP+]: Member State Registrar applies.
+**Registration phase – responsibilities by actor**: The following table assigns responsibility (R), accountability (A), consulted (C), or informed (I) for each administrative registration step. [MVP]: Ecosystem Authority acts as Registrar; where a member of the Trust Infrastructure Responsible Group holds a Registrar designation for a specific register, that member fulfills the Responsible (R) role for registration steps withing their register; overall accountability (A) remains with the WP4 Trust Infrastructure group Lead/Co-Lead [MVP+]: Member State Registrar applies.
 
 | Step | Relying Party | Registrar / Ecosystem Authority [MVP] | Access Certificate Authority | Provider of Registration Certificates |
 |------|---------------|----------------------------------------|------------------------------|---------------------------------------|
@@ -99,15 +100,28 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 | 1.3 Registration Confirmation | I (notified) | R, A (confirm or reject, notify) | I | I |
 | 1.4 Publication in National Register | I | R, A (publish in register) | I | I |
 
+**Note**: [MVP] The Ecosystem Authority designates one or more Registrars. When multiple registers are operational, the Responsible (R) role for each registration step is fullfiled by the Registrar that the Relying Party has selected.
+
 ## Data Model
 
 [MVP]
 
-- As a baseline, there will be a single register for all Relying Parties in WEBUILD to reduce complexity. Access Certificate validation uses the same WEBUILD trust infrastructure (LoTL as trust anchor, TL referencing the Access CA); see [MVP trust infrastructure: LoTL and Trusted Lists](onboarding-base.md#mvp-trust-infrastructure-lotl-and-trusted-lists) in the base document.
+- As a baseline, there will be at least one register for all Relying Parties in WEBUILD to reduce complexity. Access Certificate validation uses the same WEBUILD trust infrastructure (standard PKI certificate chain validation where the trust anchor is fetched within the appropriate LoTE); see [MVP trust infrastructure: LoTL and Trusted Lists](onboarding-base.md#mvp-trust-infrastructure-lotl-and-trusted-lists) in the base document.
 - Registry for Relying Parties complies with [Regulation (EU) 2025/848, Article 3 "National registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) and [EC TS05 V1.0](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
 - Access Certificate Profile: [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) - Access Certificate Policy for EUDI Wallet Relying Parties. X.509 certificate structure per ETSI EN 319 412-3 for legal persons.
 - Registration Certificate Profile: [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf) version 1.4.1 (2023-10) NCP requirements and [ETSI TS 119 475 v1.2.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf) - JWT format (rc-wrp+jwt) with relying party attributes
 - Relying Party Attributes: [ETSI TS 119 475 v1.2.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf)
+
+### Multi-Register Model Clarifications [MVP]
+
+WP4 oepraters at least one register (the baseline). Where additional registers are established, each register mimics a Member State national register and is operated by a designated Registrar. A registrar under this model may be:
+ - the WP4 Trust Infrastructure responsible group, operating under shared registration instructions; or
+ - a sub-group of the responsible group, or selected by WP4 participants authorised by WP4, operating the register independently. under theri own registration instructions.
+
+ WP4 publishes and maintains a list of all active Registrars with the information needed to contact each Registrar and located the applicabble registration instructions. Each Registrar is responsible for its own register and may define its own registration procedures and accpeted applications ofrmats, provided these remain consistent with the overall WEBUILD trust framework and the data model described below. 
+ Relying Parties may choose which Registrar, and correponsing register, they wish to register with. Where a Relying pParty has multiple intended uses that map to different registers, it may register with more than one Registrar.
+
+
 
 ### Registry Data Model
 
@@ -187,7 +201,8 @@ Each Relying Party that intends to rely on EUDI Wallets for the provision of dig
 
 *Preconditions:*
 - **Prerequisites [MVP]**:
-    - The WEBUILD WP4 Trust Infrastructure group has established a register for Relying Parties within WEBUILD.
+    - The WEBUILD WP4 Trust Infrastructure group has established at least one registers for Relying Parties within WEBUILD and has designated at least one Registrar to operate it.
+    - The WEBUILD WP4 Trust Infrastructure group has published a list of available Registrars with the contact information and the registration instructions applicable to each.
     - The WEBUILD WP4 Trust Infrastructure group has designated representatives authorized to act as Registrar.
     - The WEBUILD WP4 Trust Infrastructure group has published registration policies for the WEBUILD testing environment.
 - **Prerequisites [MVP+]**:
