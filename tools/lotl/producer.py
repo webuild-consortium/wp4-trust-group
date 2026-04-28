@@ -96,9 +96,11 @@ def produce(
 
     # 2. Collect entries
     entries = collect_entries(tl_entries_dir)
-    if not entries:  # pragma: no cover
-        logger.warning("No TL entries found")
-        # Still produce empty LoTL
+    if not entries:
+        logger.error(
+            "No TL entries found: official ETSI LoTE schema requires at least one pointer"
+        )
+        return 1
 
     # 3. Determine sequence number
     sequence = get_next_sequence_number(output_dir)

@@ -98,6 +98,22 @@ def test_produce_validation_failure(tmp_path: Path) -> None:
     assert code == 1
 
 
+def test_produce_empty_entries_returns_one(
+    tmp_path: Path,
+    signing_key_and_cert: tuple[Path, Path],
+) -> None:
+    """Produce fails clearly when no TL entries are available."""
+    key_path, cert_path = signing_key_and_cert
+    code = produce(
+        tl_entries_dir=tmp_path,
+        output_dir=tmp_path,
+        signing_key=key_path.read_text(),
+        signing_cert=cert_path.read_text(),
+        validate_only=False,
+    )
+    assert code == 1
+
+
 def test_produce_generation_exception_returns_one(
     tl_entries_dir: Path,
     tmp_path: Path,
