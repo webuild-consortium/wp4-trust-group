@@ -9,6 +9,7 @@ PascalCase property names, ``PointersToOtherLoTE`` for participant TL references
 from __future__ import annotations
 
 import base64
+from calendar import monthrange
 from datetime import datetime, timezone
 from typing import Any
 
@@ -88,6 +89,15 @@ def _default_distribution_uris(
     return [f"{base}/list_of_trusted_lists.json"]
 
 
+def _add_months_safe_utc(dt: datetime, months: int) -> datetime:
+    """Add months with year carry and day clamping."""
+    month_index = (dt.month - 1) + months
+    year = dt.year + (month_index // 12)
+    month = (month_index % 12) + 1
+    day = min(dt.day, monthrange(year, month)[1])
+    return dt.replace(year=year, month=month, day=day)
+
+
 def generate_lotl_json(
     entries: list[TLEntry],
     sequence_number: int = 1,
@@ -103,9 +113,7 @@ def generate_lotl_json(
     """
     now = datetime.now(timezone.utc)
     issue_dt = now.strftime("%Y-%m-%dT%H:%M:%SZ")
-    next_update = now.replace(month=min(now.month + 6, 12) or 12).strftime(
-        "%Y-%m-%dT%H:%M:%SZ"
-    )
+    next_update = _add_months_safe_utc(now, 6).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     pointers: list[dict[str, Any]] = []
     for entry in entries:

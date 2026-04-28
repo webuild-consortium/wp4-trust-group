@@ -1,8 +1,9 @@
 """Tests for JSON generator."""
 
+from datetime import datetime, timezone
 from pathlib import Path
 
-from tools.lotl.json_generator import generate_lotl_json
+from tools.lotl.json_generator import _add_months_safe_utc, generate_lotl_json
 from tools.lotl.settings import LOTL_LOTE_TYPE_URI
 from tools.lotl.tl_entry import TLEntry
 
@@ -54,3 +55,12 @@ def test_x509_in_pointer(
     sdi = ptr0["ServiceDigitalIdentities"]
     assert len(sdi) == 1
     assert sdi[0]["X509Certificates"][0]["val"]
+
+
+def test_add_months_safe_handles_rollover_and_day_clamp() -> None:
+    """Month addition handles year rollover and month-end day clamping."""
+    dt = datetime(2026, 8, 31, 12, 0, 0, tzinfo=timezone.utc)
+    out = _add_months_safe_utc(dt, 6)
+    assert out.year == 2027
+    assert out.month == 2
+    assert out.day == 28
