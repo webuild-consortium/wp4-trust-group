@@ -8,7 +8,7 @@ from tools.lotl.settings import LOTL_LOTE_TYPE_URI
 
 def make_mock_tl_json(
     sequence: int = 1,
-    lote_type: str = "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList",
+    qualifier_lote_type: str = "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList",
 ) -> dict[str, Any]:
     """Create a minimal mock LoTE JSON structure (unsigned), schema-shaped."""
     return {
@@ -27,7 +27,7 @@ def make_mock_tl_json(
                         "ServiceDigitalIdentities": [],
                         "LoTEQualifiers": [
                             {
-                                "LoTEType": lote_type,
+                                "LoTEType": qualifier_lote_type,
                                 "SchemeOperatorName": [
                                     {"lang": "en", "value": "Test TLP"},
                                 ],
