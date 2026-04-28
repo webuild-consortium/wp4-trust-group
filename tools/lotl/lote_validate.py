@@ -155,6 +155,12 @@ def _validate_list_and_scheme(s: Any) -> list[str]:
             continue
         if not p.get("LoTELocation"):
             err.append(f"PointersToOtherLoTE[{i}].LoTELocation is required and non-empty")
+        sdis = p.get("ServiceDigitalIdentities", [])
+        if not isinstance(sdis, list) or not sdis:
+            err.append(
+                f"PointersToOtherLoTE[{i}] must include a non-empty ServiceDigitalIdentities array "
+                "(clause 6.3.13)"
+            )
         quals = p.get("LoTEQualifiers", [])
         if not isinstance(quals, list) or not quals:
             err.append(

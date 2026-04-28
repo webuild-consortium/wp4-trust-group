@@ -24,7 +24,9 @@ def make_mock_tl_json(
                 "PointersToOtherLoTE": [
                     {
                         "LoTELocation": "https://example.com/tl.json",
-                        "ServiceDigitalIdentities": [],
+                        "ServiceDigitalIdentities": [
+                            {"X509Certificates": [{"val": "MIIB"}]}
+                        ],
                         "LoTEQualifiers": [
                             {
                                 "LoTEType": qualifier_lote_type,

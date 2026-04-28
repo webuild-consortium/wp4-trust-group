@@ -63,6 +63,10 @@ def _lote_qualifier(
 def _pointers_for_entry(entry: TLEntry) -> list[dict[str, Any]]:
     """Build ``OtherLoTEPointer`` objects for one TL entry (JSON and optional XML)."""
     sdi = _service_digital_identities_for_entry(entry)
+    if not sdi:
+        raise ValueError(
+            f"TL entry {entry.participant_id!r} must provide a valid X.509 trust_anchor"
+        )
     json_loc = entry.get_tl_url_json()
     out: list[dict[str, Any]] = [
         {
