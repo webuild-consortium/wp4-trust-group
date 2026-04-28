@@ -17,6 +17,11 @@ python -m tools.lotl \
   --signing-key lotl/certs/lotl_signing_key.pem \
   --signing-cert lotl/certs/lotl_signing_cert.pem
 
+# Or use environment variables for key/cert
+export LOTL_SIGNING_KEY="$(cat lotl/certs/lotl_signing_key.pem)"
+export LOTL_SIGNING_CERT="$(cat lotl/certs/lotl_signing_cert.pem)"
+python -m tools.lotl --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
+
 # 3) Validate input entries only (no signing)
 python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/
 ```
