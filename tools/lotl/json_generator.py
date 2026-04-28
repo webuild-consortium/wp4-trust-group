@@ -136,7 +136,13 @@ def generate_lotl_json(
         "LoTEType": LOTL_LOTE_TYPE_URI,
         "SchemeOperatorName": [{"lang": "en", "value": scheme_operator_name}],
         "SchemeOperatorAddress": {
-            "SchemeOperatorPostalAddress": [],
+            "SchemeOperatorPostalAddress": [
+                {
+                    "lang": "en",
+                    "StreetAddress": "Not specified",
+                    "Country": "EU",
+                }
+            ],
             "SchemeOperatorElectronicAddress": [
                 {"lang": "en", "uriValue": scheme_information_uri}
             ],

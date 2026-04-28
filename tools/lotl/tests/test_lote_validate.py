@@ -15,10 +15,10 @@ from tools.lotl.lote_validate import (
 from tools.lotl.tl_entry import TLEntry
 
 
-def test_validate_empty_lotl_passes() -> None:
+def test_validate_empty_lotl_fails_official_schema_min_items() -> None:
     doc = generate_lotl_json([], sequence_number=1)
     errors = validate_lote_json(doc)
-    assert errors == []
+    assert any("PointersToOtherLoTE" in e for e in errors)
 
 
 def test_validate_sample_entries_passes(sample_tl_entry: TLEntry) -> None:

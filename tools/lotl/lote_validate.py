@@ -1,12 +1,11 @@
 """Validate unsigned LoTE JSON (LoTL) for TS 119 602-1 / ``1960201`` interop.
 
-- **JSON Schema** (vendored subset) via ``jsonschema`` — always on in tests / ``produce`` when enabled.
+- **JSON Schema** via ``jsonschema``:
+  - default: vendored official ETSI ``1960201_json_schema.json`` (with local RFC refs),
+  - override: ``LOTE_JSON_SCHEMA`` path,
+  - fallback: local subset schema if official schema is unavailable.
 - **Semantic checks** — required fields, LoTL profile, ISO-8601 datetimes, pointer / qualifier invariants
   (aligned with ``sirosfoundation/g119612`` ``ListOfTrustedEntities.Validate`` where applicable).
-
-If a full official ``1960201_json_schema.json`` from ETSI is placed in
-``tools/lotl/schemas/`` (or ``LOTE_JSON_SCHEMA``), it is also applied in addition to
-the subset.
 """
 
 from __future__ import annotations
@@ -237,19 +236,24 @@ def validate_unsigned_lote_root(document: dict[str, Any]) -> list[str]:
 
 
 def validate_lote_json(document: dict[str, Any]) -> list[str]:
-    """Run subset JSON Schema, optional ETSI file if present, and semantic checks.
+    """Run JSON Schema validation (official preferred) and semantic checks.
 
     ``document`` is ``{"LoTE": {...}}`` (unsigned only).
     """
     errors: list[str] = []
-    errors.extend(validate_json_schema(document, schema=_subset_schema()))
     off = _optional_official_schema_path()
     if off is not None:
         try:
             official = _load_json(off)
+            if isinstance(official, dict) and "$id" not in official:
+                # Ensure relative $ref (e.g. rfcs/rfc7517.json) resolve from file location.
+                official = dict(official)
+                official["$id"] = off.resolve().as_uri()
             errors.extend(validate_json_schema(document, schema=official))
         except OSError as e:
-            errors.append(f"Failed to read optional official schema: {e}")
+            errors.append(f"Failed to read official schema: {e}")
+    else:
+        errors.extend(validate_json_schema(document, schema=_subset_schema()))
     lote = document.get("LoTE", {})
     if isinstance(lote, dict):
         errors.extend(validate_lote_semantics(lote))
