@@ -45,16 +45,26 @@ def sign_json(
 ) -> dict[str, Any]:
     """Sign JSON payload with JAdES Compact Baseline B.
 
-    Adds a 'signature' key to the payload with the JAdES structure.
+    Adds a ``signature`` key to the payload with the JWS JSON Serialization
+    structure (RFC 7515 §7.2.2):
+
+        payload["signature"] = {
+            "protected": "<BASE64URL(UTF8(JWS Protected Header))>",  # str
+            "signature": "<BASE64URL(JWS Signature)>",               # str
+        }
+
+    The protected header contains ``alg`` (algorithm), ``x5c`` (signing
+    certificate chain, DER base64), and ``iat`` (Unix integer timestamp,
+    mandatory from 2025-07-15 per TS 119 182-1 §5.1.11 / Table 1 note a).
 
     Args:
-        payload: Unsigned JSON-serializable dict (will be modified).
+        payload: Unsigned JSON-serializable dict (will be modified in-place copy).
         key_pem: Private key in PEM format.
         cert_pem: Signing certificate in PEM format.
         algorithm: JWS algorithm (RS256, ES256, PS256).
 
     Returns:
-        Payload dict with 'signature' key added.
+        Payload dict with ``signature`` key added.
     """
     key_data = _load_pem(key_pem)
     cert_data = _load_pem(cert_pem)
@@ -114,8 +124,13 @@ def verify_json(payload: dict[str, Any]) -> dict[str, Any]:
         raise ValueError("Invalid JAdES signature structure")
 
     # Decode once to extract x5c for key loading — do NOT re-encode for the compact token
-    padding = (4 - len(protected_b64) % 4) % 4
-    protected = json.loads(base64.urlsafe_b64decode(protected_b64 + "=" * padding))
+    try:
+        padding = (4 - len(protected_b64) % 4) % 4
+        protected = json.loads(base64.urlsafe_b64decode(protected_b64 + "=" * padding))
+    except Exception as exc:
+        raise ValueError(f"Invalid JAdES signature structure: cannot decode protected header: {exc}") from exc
+    if not isinstance(protected, dict):
+        raise ValueError("Invalid JAdES signature structure: protected header is not a JSON object")
 
     x5c = protected.get("x5c") or sig.get("header", {}).get("x5c")
     if not x5c:

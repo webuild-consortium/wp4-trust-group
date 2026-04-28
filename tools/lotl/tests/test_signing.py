@@ -1,5 +1,6 @@
 """Tests for XAdES and JAdES signing."""
 
+import base64
 import json
 from pathlib import Path
 
@@ -20,6 +21,19 @@ def test_jades_sign_and_verify(signing_key_and_cert: tuple[Path, Path]) -> None:
     payload = make_mock_lotl_json(sequence=1)
     signed = sign_json(payload, key_path, cert_path)
     assert "signature" in signed
+
+    sig = signed["signature"]
+
+    # RFC 7515 §7.2.2: protected must be a base64url string, not a dict
+    assert isinstance(sig["protected"], str), "protected must be a base64url string per RFC 7515 §7.2.2"
+
+    # Decode protected header and verify iat is present as integer (TS 119 182-1 §5.1.11)
+    padding = (4 - len(sig["protected"]) % 4) % 4
+    header = json.loads(base64.urlsafe_b64decode(sig["protected"] + "=" * padding))
+    assert "iat" in header, "iat must be present in protected header (TS 119 182-1 §5.1.11)"
+    assert isinstance(header["iat"], int), "iat must be an integer Unix timestamp"
+    assert header["iat"] > 0
+
     verified = verify_json(signed)
     assert "signature" not in verified
     assert verified["LoTE"]["ListAndSchemeInformation"]["LoTESequenceNumber"] == 1
