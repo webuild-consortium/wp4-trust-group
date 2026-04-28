@@ -82,6 +82,7 @@
         "LoTELocation": { "type": "string", "format": "uri" },
         "ServiceDigitalIdentities": {
           "type": "array",
+          "minItems": 1,
           "items": { "$ref": "#/$defs/ServiceDigitalIdentity" }
         },
         "LoTEQualifiers": {
@@ -108,17 +109,9 @@
       "required": [
         "LoTEVersionIdentifier",
         "LoTESequenceNumber",
-        "LoTEType",
         "SchemeOperatorName",
-        "SchemeOperatorAddress",
-        "SchemeName",
-        "SchemeInformationURI",
-        "StatusDeterminationApproach",
-        "SchemeTerritory",
         "ListIssueDateTime",
-        "NextUpdate",
-        "DistributionPoints",
-        "PointersToOtherLoTE"
+        "NextUpdate"
       ],
       "additionalProperties": true,
       "properties": {
