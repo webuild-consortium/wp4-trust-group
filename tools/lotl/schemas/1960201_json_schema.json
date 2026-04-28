@@ -328,9 +328,9 @@
             "$ref": "#/definitions/OtherId"
           },
           "minItems": 1
-        },
-      "additionalProperties": false
-      }
+        }
+      },
+      "additionalProperties": false
     },
     "pkiOb": {
       "type": "object",

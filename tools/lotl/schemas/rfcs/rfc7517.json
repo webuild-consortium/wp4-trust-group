@@ -18,8 +18,11 @@
 	    		},
 	    		
 	    		"key_ops": {
-	    			"type": "string",
-	    			"enum": [ "sign", "verify", "encrypt", "decrypt", "wrapKey", "unwrapKey", "deriveKey", "deriveBits" ]
+	    			"type": "array",
+	    			"items": {
+	    				"type": "string",
+	    				"enum": [ "sign", "verify", "encrypt", "decrypt", "wrapKey", "unwrapKey", "deriveKey", "deriveBits" ]
+	    			}
 	    		},
 	    		
 	    		"alg": {
