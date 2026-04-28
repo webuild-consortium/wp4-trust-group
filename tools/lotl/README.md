@@ -4,6 +4,23 @@ List of Trusted Lists (LoTL) producer and validator for the WP4 Trust Infrastruc
 
 **JSON (LoTE) note:** the unsigned JSON from `json_generator.py` follows the ETSI TS 119 602-1 `1960201` JSON schema root shape (see [Task 3 implementation profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)). Before signing, `produce` validates it with `lote_validate.py` using the vendored official ETSI full schema (`tools/lotl/schemas/1960201_json_schema.json`) plus semantic checks. `LOTE_JSON_SCHEMA` can override the schema path; the local subset schema remains a fallback.
 
+## Quick Start
+
+```bash
+# 1) Create an ETSI-compliant signing certificate
+python -m tools.lotl.create_signing_cert
+
+# 2) Produce and sign LoTL JSON + XML
+python -m tools.lotl \
+  --tl-entries-dir lotl/tl_entries/ \
+  --output-dir lotl/ \
+  --signing-key lotl/certs/lotl_signing_key.pem \
+  --signing-cert lotl/certs/lotl_signing_cert.pem
+
+# 3) Validate input entries only (no signing)
+python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/
+```
+
 ## Creating a Signing Certificate
 
 The LoTL must be signed with an ETSI-compliant X.509 certificate. Use the provided command to generate a self-signed certificate:
