@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 from tools.lotl.log import configure_logging, get_logger
+from tools.lotl.pem_util import normalize_pem_for_ci
 from tools.lotl.producer import produce
 from tools.lotl.settings import LOTL_OUTPUT_DIR, TL_ENTRIES_DIR
 
@@ -19,7 +20,10 @@ def _load_pem_from_env_or_path(env_var: str, path_arg: str | None) -> str | byte
         if p.exists():
             return p.read_text()
         return path_arg  # Inline PEM string  # pragma: no cover
-    return os.environ.get(env_var)
+    raw = os.environ.get(env_var)
+    if raw is None:
+        return None
+    return normalize_pem_for_ci(raw)
 
 
 def main(argv: list[str] | None = None) -> int:
