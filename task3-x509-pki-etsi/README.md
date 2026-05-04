@@ -5,6 +5,7 @@ This task specifies the X.509 PKI infrastructure for the WP4 Trust Infrastructur
 ## Folder contents
 
 - **`README.md`** – Overview of the PKI role and its interaction with other tasks
+- **`certificate-profiles-pid-wallet-eaa-qeaa-psbeaa-providers-etsi-ts-119-412-6.md`** – Certificate profiles for PID, Wallet, EAA, QEAA, and PSBEAA providers (ETSI TS 119 412-6) and their relation to use cases
 - **`etsi_trusted_lists_implementation_profile.md`** – Implementation profile for ETSI TS 119 612 and TS 119 602 trusted lists, including signing, distribution, examples and testing guidance
 - **`trusted-list-extensions-credential-issuers.md`** – Trusted List extensions for configuring which Credential Issuers are authorised to issue specific attestation types
 
