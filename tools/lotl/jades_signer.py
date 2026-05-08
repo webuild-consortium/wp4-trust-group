@@ -8,6 +8,7 @@ from typing import Any, Union
 from jwcrypto import jwk, jws
 from jwcrypto.common import json_encode
 
+from tools.lotl.key_alg import infer_jws_algorithm_from_private_key_pem
 from tools.lotl.log import get_logger
 
 logger = get_logger(__name__)
@@ -40,7 +41,7 @@ def sign_json(
     payload: dict[str, Any],
     key_pem: Union[bytes, str, Path],
     cert_pem: Union[bytes, str, Path],
-    algorithm: str = "RS256",
+    algorithm: str | None = None,
 ) -> dict[str, Any]:
     """Sign JSON payload with JAdES Compact Baseline B.
 
@@ -50,13 +51,16 @@ def sign_json(
         payload: Unsigned JSON-serializable dict (will be modified).
         key_pem: Private key in PEM format.
         cert_pem: Signing certificate in PEM format.
-        algorithm: JWS algorithm (RS256, ES256, PS256).
+        algorithm: JWS ``alg`` (e.g. ES256, RS256). If omitted, inferred from the private key
+            (EC P-256 defaults to ES256; RSA defaults to RS256).
 
     Returns:
         Payload dict with 'signature' key added.
     """
     key_data = _load_pem(key_pem)
     cert_data = _load_pem(cert_pem)
+    if algorithm is None:
+        algorithm = infer_jws_algorithm_from_private_key_pem(key_data)
 
     key = jwk.JWK.from_pem(key_data)
     cert_b64 = _cert_to_b64(cert_data)

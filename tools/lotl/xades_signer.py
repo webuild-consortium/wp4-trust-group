@@ -6,6 +6,7 @@ from typing import Union
 from lxml import etree
 from signxml import XMLSigner, XMLVerifier
 
+from tools.lotl.key_alg import infer_xml_signature_algorithm_fragment_from_private_key_pem
 from tools.lotl.log import get_logger
 
 logger = get_logger(__name__)
@@ -41,9 +42,11 @@ def sign_xml(
     if isinstance(cert_pem, bytes):
         cert_pem = cert_pem.decode("utf-8") if isinstance(cert_pem, bytes) else cert_pem
 
+    sig_alg = infer_xml_signature_algorithm_fragment_from_private_key_pem(key_pem)
+
     root = etree.fromstring(xml_content)
     signer = XMLSigner(
-        signature_algorithm="rsa-sha256",
+        signature_algorithm=sig_alg,
         digest_algorithm="sha256",
         c14n_algorithm="http://www.w3.org/2001/10/xml-exc-c14n#",
     )

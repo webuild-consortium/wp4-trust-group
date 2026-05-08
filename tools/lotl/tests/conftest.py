@@ -17,15 +17,15 @@ from tools.lotl.tl_entry import TLEntry
 
 @pytest.fixture
 def signing_key_and_cert(tmp_path: Path) -> tuple[Path, Path]:
-    """Generate a temporary RSA key and self-signed certificate for signing tests."""
+    """Generate a temporary EC P-256 key and self-signed certificate (LoTL default key type)."""
     import datetime
 
     from cryptography import x509
     from cryptography.hazmat.primitives import hashes, serialization
-    from cryptography.hazmat.primitives.asymmetric import rsa
+    from cryptography.hazmat.primitives.asymmetric import ec
     from cryptography.x509.oid import NameOID
 
-    key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+    key = ec.generate_private_key(ec.SECP256R1())
     pubkey = key.public_key()
     subject = issuer = x509.Name([
         x509.NameAttribute(NameOID.COUNTRY_NAME, "EU"),
