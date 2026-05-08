@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ns0:TrustServiceStatusList xmlns:ns0="http://uri.etsi.org/19612/v2.4.1#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="lotl-1" xsi:schemaLocation="http://uri.etsi.org/19612/v2.4.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd">
+  <ns0:SchemeInformation>
+    <ns0:TSLVersionIdentifier>6</ns0:TSLVersionIdentifier>
+    <ns0:TSLSequenceNumber>1</ns0:TSLSequenceNumber>
+    <ns0:TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</ns0:TSLType>
+    <ns0:SchemeOperatorName>
+      <ns0:Name xml:lang="en">WE BUILD WP4 Trust Group</ns0:Name>
+    </ns0:SchemeOperatorName>
+    <ns0:SchemeOperatorAddress>
+      <ns0:PostalAddresses>
+        <ns0:PostalAddress>
+          <ns0:StreetAddress>N/A</ns0:StreetAddress>
+          <ns0:Locality>N/A</ns0:Locality>
+          <ns0:PostalCode>N/A</ns0:PostalCode>
+          <ns0:CountryName>EU</ns0:CountryName>
+        </ns0:PostalAddress>
+      </ns0:PostalAddresses>
+      <ns0:ElectronicAddress>
+        <ns0:URI>https://webuild-consortium.github.io/wp4-trust-group/</ns0:URI>
+      </ns0:ElectronicAddress>
+    </ns0:SchemeOperatorAddress>
+    <ns0:SchemeName>
+      <ns0:Name xml:lang="en">WP4 List of Trusted Lists</ns0:Name>
+    </ns0:SchemeName>
+    <ns0:SchemeInformationURI>https://webuild-consortium.github.io/wp4-trust-group/</ns0:SchemeInformationURI>
+    <ns0:StatusDeterminationApproach>http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate</ns0:StatusDeterminationApproach>
+    <ns0:SchemeTypeCommunityRules>http://uri.etsi.org/TrstSvc/TrustedList/SchemeTypeCommunityRules/EU</ns0:SchemeTypeCommunityRules>
+    <ns0:SchemeTerritory>EU</ns0:SchemeTerritory>
+    <ns0:ListIssueDateTime>2026-05-08T14:00:41Z</ns0:ListIssueDateTime>
+    <ns0:NextUpdate>2026-11-08T14:00:41Z</ns0:NextUpdate>
+    <ns0:DistributionPoints>
+      <ns0:DistributionPoint>
+        <ns0:URI>https://webuild-consortium.github.io/wp4-trust-group/lotl/wrpac-providers-lote.json</ns0:URI>
+      </ns0:DistributionPoint>
+    </ns0:DistributionPoints>
+  </ns0:SchemeInformation>
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256"/><ds:Reference URI="#lotl-1"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>OE6x347oPxgX6vxZEVwVbflqdR/X8aA3ltW7efe/YNc=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>kIfCripGI35jkM6hrbrkaCXBgka4pUWI68+jD0AtW5+YDFC3sGQ/SCepFKjX4Cdrar9N11Iypa2x80Fwmi2DZg==</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAw
+MQswCQYDVQQGEwJFVTEhMB8GA1UECgwYV1A0IFRydXN0IFJlZ2lzdHJ5IEdyb3Vw
+MB4XDTI2MDMyMDEzMjgyNVoXDTI5MDMxOTEzMjgyNVowMDELMAkGA1UEBhMCRVUx
+ITAfBgNVBAoMGFdQNCBUcnVzdCBSZWdpc3RyeSBHcm91cDBZMBMGByqGSM49AgEG
+CCqGSM49AwEHA0IABJoI9e3meFI++UhQAG3clpKkbSTL2YIuhGZ/4C4kbPjjEgbL
+8hKywQUlCN6TXUipD8SMjceZ3PnB52qZgAK9Qh2jUjBQMA4GA1UdDwEB/wQEAwIG
+wDARBgNVHSUECjAIBgYEAJE3AwAwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUh78b
+CQwjCQICwxtn6FHEQAktn7YwCgYIKoZIzj0EAwIDRwAwRAIgfbkN22wQzj8kfoAg
+vYk1u86n/jHDB1FEXJA7aH4VuRECIHulljT498YiqnCgRU7UlRXSF/MpC02r1V1D
+jAue5lYF
+</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></ns0:TrustServiceStatusList>

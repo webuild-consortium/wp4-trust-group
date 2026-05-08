@@ -1,0 +1,90 @@
+{
+  "LoTE": {
+    "ListAndSchemeInformation": {
+      "LoTEVersionIdentifier": 1,
+      "LoTESequenceNumber": 1,
+      "LoTEType": "http://uri.etsi.org/19602/LoTLType/EUListOfTrustedLists",
+      "SchemeOperatorName": [
+        {
+          "lang": "en",
+          "value": "WE BUILD WP4 Trust Group"
+        }
+      ],
+      "SchemeOperatorAddress": {
+        "SchemeOperatorPostalAddress": [
+          {
+            "lang": "en",
+            "StreetAddress": "Not specified",
+            "Country": "EU"
+          }
+        ],
+        "SchemeOperatorElectronicAddress": [
+          {
+            "lang": "en",
+            "uriValue": "https://webuild-consortium.github.io/wp4-trust-group/"
+          }
+        ]
+      },
+      "SchemeName": [
+        {
+          "lang": "en",
+          "value": "WP4 List of Trusted Lists"
+        }
+      ],
+      "SchemeInformationURI": [
+        {
+          "lang": "en",
+          "uriValue": "https://webuild-consortium.github.io/wp4-trust-group/"
+        }
+      ],
+      "StatusDeterminationApproach": "http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate",
+      "SchemeTerritory": "EU",
+      "ListIssueDateTime": "2026-05-08T14:00:41Z",
+      "NextUpdate": "2026-11-08T14:00:41Z",
+      "DistributionPoints": [
+        "https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json"
+      ],
+      "PointersToOtherLoTE": [
+        {
+          "LoTELocation": "https://webuild-consortium.github.io/wp4-trust-group/lotl/wrpac-providers-lote.json",
+          "ServiceDigitalIdentities": [
+            {
+              "X509Certificates": [
+                {
+                  "val": "MIIFujCCA6KgAwIBAgIUUaTwXC17upDsPSF7y2a15o3IzuMwDQYJKoZIhvcNAQENBQAwdTELMAkGA1UEBhMCR0IxDTALBgNVBAoTBEVVREkxMzAxBgNVBAsTKkVVIERpZ2l0YWwgSWRlbnRpdHkgV2FsbGV0IFRydXN0IEZyYW1ld29yazEiMCAGA1UEAxMZRVVESSBTYW5kYm94IFJvb3QgQ0EgLSBHMTAeFw0yNjAzMzAxMzM4MDBaFw00MTAzMjYxMzM4MDBaMHUxCzAJBgNVBAYTAkdCMQ0wCwYDVQQKEwRFVURJMTMwMQYDVQQLEypFVSBEaWdpdGFsIElkZW50aXR5IFdhbGxldCBUcnVzdCBGcmFtZXdvcmsxIjAgBgNVBAMTGUVVREkgU2FuZGJveCBSb290IENBIC0gRzEwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDd/j1a7EK31Zhr5ulG46QJOkXXmfhaLsvMJRcOV5bKR9m7MeBotIvdSCV0MkbDWaXtTQxQZxhGqMgeYa6CCNBrTD64Nri2ypnxGdMsrOZe0N+D4I3U/3G4AGaZ9RY5khzSTWaY1kc3u5FoCKnGfPO7DAjOvhomI3xo1v0aLPBoG6C/euIu3HOcA8LTvpdCj8Kd/8+Qv3cspKTk3dVB7b3QTn44vXQTna+F8wuUyt4XcS/hz+AJr/QYZlwKNQZa22tpVWK651quMyFPNyfNSN89bd39uA2Dc8HjtgxupxGHdlspbbLsK9YLerNI7gus6rWYUzj95ZdTvYQEUSFNB4uTgo3YiG6fO5i7sWglmsjmfFX8ylBHsnD7Mu0jcYNM34j/zpVPK69XZTb14sJzDFllzX3thvKGIhO2rS7/3p6Dmkrx5tAs/WbJeAhBhX4WU1sAn8k1lZKbO1RcY8ZisLLnDPJaloy4B3c5tp/YGH0ZYGPsok/sIeDAfwACkwNP/D3dtMGMMSMDpuL05eCVwEPBMrSP0jCwsUFZjdumN28M47H/PAoVPYj90vVPLGVR2/gUJEGtgD/jnl3uMDomwg1j0+QwTJ2fYFW0c1RuXnTSYUL7kT8qBYmXI2ipcTUUtyq8VCFphmtW9rHFbuLDkWC6uGEzNlZ03D2fePhDWhrnawIDAQABo0IwQDAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUnQIZYJE9Ibg5jGQiDMJZ/FFWfrIwDQYJKoZIhvcNAQENBQADggIBAFoDml/joIZZmJfChgul6/gAIYEE/3dc6yIbUF4x+F6rFd3qsCY+uqBapqJZPAlPKV9SNzcqJuDZKQyH2MVPwGGacy71ywF4f0D7Gn+45+B+AhPdTX8lLXagtQeAgTv298Q637pZFlZCsv0W7RfWTVAhe6ZS0q0sEE+TRRHPwYmuAvTV3ZutX9pdcxtGwHd1LJi71O3LbJLHebI1lbJBNs6KLpTSmq3qN+P1s8a4MTtiUfbY+zjULnUHwqUjkY1hw69aewGTRwQvrizUOzz8/u3YZRN2f5OKtLSfozae5SM97nRRdm4fLcNKEsftkn+rifFXr/Aze7Kacn5Q5vp+aR4TSx5tBRf7Uo/sn/vsIRDXxftPQst763uokeki6HjGkT1fT2SVs7p2VzhgcjDnCsoe6G+FNgwXsTaBnqALbLEwo+ellN6dKj3FNVThJIJtMG8v96XK2TSPBBtwy0LG7IhXcj6AU/w/9BAJRvjfDCceKojJaNVbOyDc3UMZ8xwnCSNGkIPNuYLAFtRQkcwOVmiFnPtZs+hGLy/yhWDwBO1nfupzKMlG62F4LxThJ28RJ6LrMwWGpyJ2SVs1mbo/UR2xXLM7beIWJHlgOoLAhtKBZOeDcOVPMmh/xiiiwpXGwr7ArHsZ07jBhltCZZlMwkuEIjBsvNxOY3DaA7VjZUlB"
+                }
+              ]
+            }
+          ],
+          "LoTEQualifiers": [
+            {
+              "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUWRPACProvidersList",
+              "SchemeOperatorName": [
+                {
+                  "lang": "en",
+                  "value": "Raidiam Services Ltd"
+                }
+              ],
+              "SchemeTerritory": "EU",
+              "MimeType": "application/json"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "signature": {
+    "protected": {
+      "alg": "ES256",
+      "x5c": [
+        "MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAwMQswCQYDVQQGEwJFVTEhMB8GA1UECgwYV1A0IFRydXN0IFJlZ2lzdHJ5IEdyb3VwMB4XDTI2MDMyMDEzMjgyNVoXDTI5MDMxOTEzMjgyNVowMDELMAkGA1UEBhMCRVUxITAfBgNVBAoMGFdQNCBUcnVzdCBSZWdpc3RyeSBHcm91cDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJoI9e3meFI++UhQAG3clpKkbSTL2YIuhGZ/4C4kbPjjEgbL8hKywQUlCN6TXUipD8SMjceZ3PnB52qZgAK9Qh2jUjBQMA4GA1UdDwEB/wQEAwIGwDARBgNVHSUECjAIBgYEAJE3AwAwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUh78bCQwjCQICwxtn6FHEQAktn7YwCgYIKoZIzj0EAwIDRwAwRAIgfbkN22wQzj8kfoAgvYk1u86n/jHDB1FEXJA7aH4VuRECIHulljT498YiqnCgRU7UlRXSF/MpC02r1V1DjAue5lYF"
+      ]
+    },
+    "signature": "JStDSzn-IcvzADLVwcBUvVqo--VSaiXb3g9-X5nRU8ITGkn1M1ZDh4DLk8ZfTvO31oQB10Dotcb_K5uH3ZiJPg",
+    "header": {
+      "x5c": [
+        "MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAwMQswCQYDVQQGEwJFVTEhMB8GA1UECgwYV1A0IFRydXN0IFJlZ2lzdHJ5IEdyb3VwMB4XDTI2MDMyMDEzMjgyNVoXDTI5MDMxOTEzMjgyNVowMDELMAkGA1UEBhMCRVUxITAfBgNVBAoMGFdQNCBUcnVzdCBSZWdpc3RyeSBHcm91cDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJoI9e3meFI++UhQAG3clpKkbSTL2YIuhGZ/4C4kbPjjEgbL8hKywQUlCN6TXUipD8SMjceZ3PnB52qZgAK9Qh2jUjBQMA4GA1UdDwEB/wQEAwIGwDARBgNVHSUECjAIBgYEAJE3AwAwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUh78bCQwjCQICwxtn6FHEQAktn7YwCgYIKoZIzj0EAwIDRwAwRAIgfbkN22wQzj8kfoAgvYk1u86n/jHDB1FEXJA7aH4VuRECIHulljT498YiqnCgRU7UlRXSF/MpC02r1V1DjAue5lYF"
+      ]
+    }
+  }
+}
