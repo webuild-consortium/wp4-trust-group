@@ -39,14 +39,14 @@
       ],
       "StatusDeterminationApproach": "http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate",
       "SchemeTerritory": "EU",
-      "ListIssueDateTime": "2026-05-08T14:00:41Z",
-      "NextUpdate": "2026-11-08T14:00:41Z",
+      "ListIssueDateTime": "2026-05-11T07:21:16Z",
+      "NextUpdate": "2026-11-11T07:21:16Z",
       "DistributionPoints": [
         "https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json"
       ],
       "PointersToOtherLoTE": [
         {
-          "LoTELocation": "https://webuild-consortium.github.io/wp4-trust-group/lotl/wrpac-providers-lote.json",
+          "LoTELocation": "https://webuild-consortium.github.io/wp4-trust-group/lotes/wrpac-providers-lote.json",
           "ServiceDigitalIdentities": [
             {
               "X509Certificates": [
@@ -80,7 +80,7 @@
         "MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAwMQswCQYDVQQGEwJFVTEhMB8GA1UECgwYV1A0IFRydXN0IFJlZ2lzdHJ5IEdyb3VwMB4XDTI2MDMyMDEzMjgyNVoXDTI5MDMxOTEzMjgyNVowMDELMAkGA1UEBhMCRVUxITAfBgNVBAoMGFdQNCBUcnVzdCBSZWdpc3RyeSBHcm91cDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJoI9e3meFI++UhQAG3clpKkbSTL2YIuhGZ/4C4kbPjjEgbL8hKywQUlCN6TXUipD8SMjceZ3PnB52qZgAK9Qh2jUjBQMA4GA1UdDwEB/wQEAwIGwDARBgNVHSUECjAIBgYEAJE3AwAwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUh78bCQwjCQICwxtn6FHEQAktn7YwCgYIKoZIzj0EAwIDRwAwRAIgfbkN22wQzj8kfoAgvYk1u86n/jHDB1FEXJA7aH4VuRECIHulljT498YiqnCgRU7UlRXSF/MpC02r1V1DjAue5lYF"
       ]
     },
-    "signature": "JStDSzn-IcvzADLVwcBUvVqo--VSaiXb3g9-X5nRU8ITGkn1M1ZDh4DLk8ZfTvO31oQB10Dotcb_K5uH3ZiJPg",
+    "signature": "5zhuiXxYCodA2R4sobv4BNQL7iFYMh3BijH8R1l0fVY4GMvyRofUlpMajmylkPgRuk-Y1Izgq7TFQSHeS59whw",
     "header": {
       "x5c": [
         "MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAwMQswCQYDVQQGEwJFVTEhMB8GA1UECgwYV1A0IFRydXN0IFJlZ2lzdHJ5IEdyb3VwMB4XDTI2MDMyMDEzMjgyNVoXDTI5MDMxOTEzMjgyNVowMDELMAkGA1UEBhMCRVUxITAfBgNVBAoMGFdQNCBUcnVzdCBSZWdpc3RyeSBHcm91cDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJoI9e3meFI++UhQAG3clpKkbSTL2YIuhGZ/4C4kbPjjEgbL8hKywQUlCN6TXUipD8SMjceZ3PnB52qZgAK9Qh2jUjBQMA4GA1UdDwEB/wQEAwIGwDARBgNVHSUECjAIBgYEAJE3AwAwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUh78bCQwjCQICwxtn6FHEQAktn7YwCgYIKoZIzj0EAwIDRwAwRAIgfbkN22wQzj8kfoAgvYk1u86n/jHDB1FEXJA7aH4VuRECIHulljT498YiqnCgRU7UlRXSF/MpC02r1V1DjAue5lYF"
