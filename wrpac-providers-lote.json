@@ -1,0 +1,187 @@
+{
+  "LoTE": {
+    "ListAndSchemeInformation": {
+      "LoTEVersionIdentifier": 1,
+      "LoTESequenceNumber": 1,
+      "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUWRPACProvidersList",
+      "SchemeOperatorName": [
+        {
+          "lang": "en",
+          "value": "WP4"
+        }
+      ],
+      "SchemeOperatorAddress": {
+        "SchemeOperatorPostalAddress": [
+          {
+            "lang": "en",
+            "StreetAddress": "New Broad Street House, 35 New Broad Street",
+            "Locality": "London",
+            "PostalCode": "EC2",
+            "Country": "GB"
+          }
+        ],
+        "SchemeOperatorElectronicAddress": [
+          {
+            "lang": "en",
+            "uriValue": "mailto:sales@raidiam.com"
+          },
+          {
+            "lang": "en",
+            "uriValue": "https://www.raidiam.com"
+          }
+        ]
+      },
+      "SchemeName": [
+        {
+          "lang": "en",
+          "value": "Raidiam WRPAC Providers List"
+        }
+      ],
+      "SchemeInformationURI": [
+        {
+          "lang": "en",
+          "uriValue": "https://webuild-consortium.github.io/wp4-trust-group/"
+        },
+        {
+          "lang": "en",
+          "uriValue": "https://webuild-consortium.github.io/wp4-trust-group/lotl/archive/"
+        }
+      ],
+      "StatusDeterminationApproach": "http://uri.etsi.org/19602/WRPACProvidersList/StatusDetn/EU",
+      "SchemeTypeCommunityRules": [
+        {
+          "lang": "en",
+          "uriValue": "http://uri.etsi.org/19602/WRPACProvidersList/schemerules/EU"
+        }
+      ],
+      "SchemeTerritory": "EU",
+      "PointersToOtherLoTE": [
+        {
+          "LoTELocation": "https://webuild-consortium.github.io/wp4-trust-group/lotl/wrpac-providers-lote.json",
+          "ServiceDigitalIdentities": [
+            {
+              "X509Certificates": [
+                {
+                  "val": "MIIBijCCATCgAwIBAgIUGXbK+13fCUh2t9wXdSdRXM5dgXYwCgYIKoZIzj0EAwIwGzELMAkGA1UEBhMCRVUxDDAKBgNVBAoMA1dQNDAeFw0yNjA1MDYxMTE1MTRaFw0yOTA1MDUxMTE1MTRaMBsxCzAJBgNVBAYTAkVVMQwwCgYDVQQKDANXUDQwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASw9STaruujfO6V+GkB0xWp/u2Bilm0zmoIWhE3ITLCVH8RCHsssH9zsVce4Hkb3Umjklo0rbr45sBa1LZaoEWCo1IwUDAOBgNVHQ8BAf8EBAMCBsAwEQYDVR0lBAowCAYGBACRNwMAMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFMsK9Wn1/l86EhoxMktNb9CKAzwIMAoGCCqGSM49BAMCA0gAMEUCIQDriudDdhwGrY6y6F1NbAo1NmlHajCdFxwT4URnPSwagwIgbqsokmnnBScGe3Z7BmgDNxNRucpodAamv9nL5pjhTA4="
+                }
+              ]
+            }
+          ],
+          "LoTEQualifiers": [
+            {
+              "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUWRPACProvidersList",
+              "SchemeOperatorName": [
+                {
+                  "lang": "en",
+                  "value": "Raidiam Services Limited"
+                }
+              ],
+              "SchemeTerritory": "EU",
+              "MimeType": "application/json"
+            }
+          ]
+        }
+      ],
+      "ListIssueDateTime": "2026-05-06T00:00:00Z",
+      "NextUpdate": "2026-11-06T00:00:00Z",
+      "DistributionPoints": [
+        "https://webuild-consortium.github.io/wp4-trust-group/lotl/wrpac-providers-lote.json"
+      ]
+    },
+    "TrustedEntitiesList": [
+      {
+        "TrustedEntityInformation": {
+          "TEName": [
+            {
+              "lang": "en",
+              "value": "Raidiam Services Ltd"
+            }
+          ],
+          "TETradeName": [
+            {
+              "lang": "en",
+              "value": "NTRGB-10742851"
+            }
+          ],
+          "TEAddress": {
+            "TEPostalAddress": [
+              {
+                "lang": "en",
+                "StreetAddress": "New Broad Street House, 35 New Broad Street",
+                "Locality": "London",
+                "PostalCode": "EC2 1NH",
+                "Country": "GB"
+              }
+            ],
+            "TEElectronicAddress": [
+              {
+                "lang": "en",
+                "uriValue": "mailto:sales@raidiam.com"
+              },
+              {
+                "lang": "en",
+                "uriValue": "tel:+44020245836770"
+              }
+            ]
+          },
+          "TEInformationURI": [
+            {
+              "lang": "en",
+              "uriValue": "https://auth.sandbox.eudi.raidiam.io/policies/terms-of-use.pdf"
+            },
+            {
+              "lang": "en",
+              "uriValue": "https://www.raidiam.com/"
+            },
+            {
+              "lang": "en",
+              "uriValue": "http://uri.etsi.org/19602/ListOfTrustedEntities/WRPACProvider/PL"
+            }
+          ]
+        },
+        "TrustedEntityServices": [
+          {
+            "ServiceInformation": {
+              "ServiceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/WRPAC/Issuance",
+              "ServiceName": [
+                {
+                  "lang": "en",
+                  "value": "Raidiam WRPAC Issuance Service"
+                }
+              ],
+              "ServiceDigitalIdentity": {
+                "X509Certificates": [
+                  {
+                    "val": "MIIFujCCA6KgAwIBAgIUUaTwXC17upDsPSF7y2a15o3IzuMwDQYJKoZIhvcNAQENBQAwdTELMAkGA1UEBhMCR0IxDTALBgNVBAoTBEVVREkxMzAxBgNVBAsTKkVVIERpZ2l0YWwgSWRlbnRpdHkgV2FsbGV0IFRydXN0IEZyYW1ld29yazEiMCAGA1UEAxMZRVVESSBTYW5kYm94IFJvb3QgQ0EgLSBHMTAeFw0yNjAzMzAxMzM4MDBaFw00MTAzMjYxMzM4MDBaMHUxCzAJBgNVBAYTAkdCMQ0wCwYDVQQKEwRFVURJMTMwMQYDVQQLEypFVSBEaWdpdGFsIElkZW50aXR5IFdhbGxldCBUcnVzdCBGcmFtZXdvcmsxIjAgBgNVBAMTGUVVREkgU2FuZGJveCBSb290IENBIC0gRzEwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDd/j1a7EK31Zhr5ulG46QJOkXXmfhaLsvMJRcOV5bKR9m7MeBotIvdSCV0MkbDWaXtTQxQZxhGqMgeYa6CCNBrTD64Nri2ypnxGdMsrOZe0N+D4I3U/3G4AGaZ9RY5khzSTWaY1kc3u5FoCKnGfPO7DAjOvhomI3xo1v0aLPBoG6C/euIu3HOcA8LTvpdCj8Kd/8+Qv3cspKTk3dVB7b3QTn44vXQTna+F8wuUyt4XcS/hz+AJr/QYZlwKNQZa22tpVWK651quMyFPNyfNSN89bd39uA2Dc8HjtgxupxGHdlspbbLsK9YLerNI7gus6rWYUzj95ZdTvYQEUSFNB4uTgo3YiG6fO5i7sWglmsjmfFX8ylBHsnD7Mu0jcYNM34j/zpVPK69XZTb14sJzDFllzX3thvKGIhO2rS7/3p6Dmkrx5tAs/WbJeAhBhX4WU1sAn8k1lZKbO1RcY8ZisLLnDPJaloy4B3c5tp/YGH0ZYGPsok/sIeDAfwACkwNP/D3dtMGMMSMDpuL05eCVwEPBMrSP0jCwsUFZjdumN28M47H/PAoVPYj90vVPLGVR2/gUJEGtgD/jnl3uMDomwg1j0+QwTJ2fYFW0c1RuXnTSYUL7kT8qBYmXI2ipcTUUtyq8VCFphmtW9rHFbuLDkWC6uGEzNlZ03D2fePhDWhrnawIDAQABo0IwQDAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUnQIZYJE9Ibg5jGQiDMJZ/FFWfrIwDQYJKoZIhvcNAQENBQADggIBAFoDml/joIZZmJfChgul6/gAIYEE/3dc6yIbUF4x+F6rFd3qsCY+uqBapqJZPAlPKV9SNzcqJuDZKQyH2MVPwGGacy71ywF4f0D7Gn+45+B+AhPdTX8lLXagtQeAgTv298Q637pZFlZCsv0W7RfWTVAhe6ZS0q0sEE+TRRHPwYmuAvTV3ZutX9pdcxtGwHd1LJi71O3LbJLHebI1lbJBNs6KLpTSmq3qN+P1s8a4MTtiUfbY+zjULnUHwqUjkY1hw69aewGTRwQvrizUOzz8/u3YZRN2f5OKtLSfozae5SM97nRRdm4fLcNKEsftkn+rifFXr/Aze7Kacn5Q5vp+aR4TSx5tBRf7Uo/sn/vsIRDXxftPQst763uokeki6HjGkT1fT2SVs7p2VzhgcjDnCsoe6G+FNgwXsTaBnqALbLEwo+ellN6dKj3FNVThJIJtMG8v96XK2TSPBBtwy0LG7IhXcj6AU/w/9BAJRvjfDCceKojJaNVbOyDc3UMZ8xwnCSNGkIPNuYLAFtRQkcwOVmiFnPtZs+hGLy/yhWDwBO1nfupzKMlG62F4LxThJ28RJ6LrMwWGpyJ2SVs1mbo/UR2xXLM7beIWJHlgOoLAhtKBZOeDcOVPMmh/xiiiwpXGwr7ArHsZ07jBhltCZZlMwkuEIjBsvNxOY3DaA7VjZUlB"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "ServiceInformation": {
+              "ServiceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/WRPAC/Revocation",
+              "ServiceName": [
+                {
+                  "lang": "en",
+                  "value": "Raidiam WRPAC Revocation Service"
+                }
+              ],
+              "ServiceDigitalIdentity": {
+                "X509Certificates": [
+                  {
+                    "val": "MIIFujCCA6KgAwIBAgIUUaTwXC17upDsPSF7y2a15o3IzuMwDQYJKoZIhvcNAQENBQAwdTELMAkGA1UEBhMCR0IxDTALBgNVBAoTBEVVREkxMzAxBgNVBAsTKkVVIERpZ2l0YWwgSWRlbnRpdHkgV2FsbGV0IFRydXN0IEZyYW1ld29yazEiMCAGA1UEAxMZRVVESSBTYW5kYm94IFJvb3QgQ0EgLSBHMTAeFw0yNjAzMzAxMzM4MDBaFw00MTAzMjYxMzM4MDBaMHUxCzAJBgNVBAYTAkdCMQ0wCwYDVQQKEwRFVURJMTMwMQYDVQQLEypFVSBEaWdpdGFsIElkZW50aXR5IFdhbGxldCBUcnVzdCBGcmFtZXdvcmsxIjAgBgNVBAMTGUVVREkgU2FuZGJveCBSb290IENBIC0gRzEwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDd/j1a7EK31Zhr5ulG46QJOkXXmfhaLsvMJRcOV5bKR9m7MeBotIvdSCV0MkbDWaXtTQxQZxhGqMgeYa6CCNBrTD64Nri2ypnxGdMsrOZe0N+D4I3U/3G4AGaZ9RY5khzSTWaY1kc3u5FoCKnGfPO7DAjOvhomI3xo1v0aLPBoG6C/euIu3HOcA8LTvpdCj8Kd/8+Qv3cspKTk3dVB7b3QTn44vXQTna+F8wuUyt4XcS/hz+AJr/QYZlwKNQZa22tpVWK651quMyFPNyfNSN89bd39uA2Dc8HjtgxupxGHdlspbbLsK9YLerNI7gus6rWYUzj95ZdTvYQEUSFNB4uTgo3YiG6fO5i7sWglmsjmfFX8ylBHsnD7Mu0jcYNM34j/zpVPK69XZTb14sJzDFllzX3thvKGIhO2rS7/3p6Dmkrx5tAs/WbJeAhBhX4WU1sAn8k1lZKbO1RcY8ZisLLnDPJaloy4B3c5tp/YGH0ZYGPsok/sIeDAfwACkwNP/D3dtMGMMSMDpuL05eCVwEPBMrSP0jCwsUFZjdumN28M47H/PAoVPYj90vVPLGVR2/gUJEGtgD/jnl3uMDomwg1j0+QwTJ2fYFW0c1RuXnTSYUL7kT8qBYmXI2ipcTUUtyq8VCFphmtW9rHFbuLDkWC6uGEzNlZ03D2fePhDWhrnawIDAQABo0IwQDAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUnQIZYJE9Ibg5jGQiDMJZ/FFWfrIwDQYJKoZIhvcNAQENBQADggIBAFoDml/joIZZmJfChgul6/gAIYEE/3dc6yIbUF4x+F6rFd3qsCY+uqBapqJZPAlPKV9SNzcqJuDZKQyH2MVPwGGacy71ywF4f0D7Gn+45+B+AhPdTX8lLXagtQeAgTv298Q637pZFlZCsv0W7RfWTVAhe6ZS0q0sEE+TRRHPwYmuAvTV3ZutX9pdcxtGwHd1LJi71O3LbJLHebI1lbJBNs6KLpTSmq3qN+P1s8a4MTtiUfbY+zjULnUHwqUjkY1hw69aewGTRwQvrizUOzz8/u3YZRN2f5OKtLSfozae5SM97nRRdm4fLcNKEsftkn+rifFXr/Aze7Kacn5Q5vp+aR4TSx5tBRf7Uo/sn/vsIRDXxftPQst763uokeki6HjGkT1fT2SVs7p2VzhgcjDnCsoe6G+FNgwXsTaBnqALbLEwo+ellN6dKj3FNVThJIJtMG8v96XK2TSPBBtwy0LG7IhXcj6AU/w/9BAJRvjfDCceKojJaNVbOyDc3UMZ8xwnCSNGkIPNuYLAFtRQkcwOVmiFnPtZs+hGLy/yhWDwBO1nfupzKMlG62F4LxThJ28RJ6LrMwWGpyJ2SVs1mbo/UR2xXLM7beIWJHlgOoLAhtKBZOeDcOVPMmh/xiiiwpXGwr7ArHsZ07jBhltCZZlMwkuEIjBsvNxOY3DaA7VjZUlB"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "signature": {
+    "protected": "eyJhbGciOiJFUzI1NiIsImlhdCI6MTc3ODIyNjQyMywieDVjIjpbIk1JSUJpakNDQVRDZ0F3SUJBZ0lVR1hiSysxM2ZDVWgydDl3WGRTZFJYTTVkZ1hZd0NnWUlLb1pJemowRUF3SXdHekVMTUFrR0ExVUVCaE1DUlZVeEREQUtCZ05WQkFvTUExZFFOREFlRncweU5qQTFNRFl4TVRFMU1UUmFGdzB5T1RBMU1EVXhNVEUxTVRSYU1Cc3hDekFKQmdOVkJBWVRBa1ZWTVF3d0NnWURWUVFLREFOWFVEUXdXVEFUQmdjcWhrak9QUUlCQmdncWhrak9QUU1CQndOQ0FBU3c5U1RhcnV1amZPNlYrR2tCMHhXcC91MkJpbG0wem1vSVdoRTNJVExDVkg4UkNIc3NzSDl6c1ZjZTRIa2IzVW1qa2xvMHJicjQ1c0JhMUxaYW9FV0NvMUl3VURBT0JnTlZIUThCQWY4RUJBTUNCc0F3RVFZRFZSMGxCQW93Q0FZR0JBQ1JOd01BTUF3R0ExVWRFd0VCL3dRQ01BQXdIUVlEVlIwT0JCWUVGTXNLOVduMS9sODZFaG94TWt0TmI5Q0tBendJTUFvR0NDcUdTTTQ5QkFNQ0EwZ0FNRVVDSVFEcml1ZERkaHdHclk2eTZGMU5iQW8xTm1sSGFqQ2RGeHdUNFVSblBTd2Fnd0lnYnFzb2ttbm5CU2NHZTNaN0JtZ0ROeE5SdWNwb2RBYW12OW5MNXBqaFRBND0iXX0",
+    "signature": "I0puAxSzSU_WNTS7bCLr48kd-z2_LnZ8U5cAzu5_trTafxzk01DhjGNuG1VXKiP9qxa13ora5Ssc_uadTIIboA"
+  }
+}
