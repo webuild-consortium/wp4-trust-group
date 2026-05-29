@@ -3,3 +3,8 @@ pytest
 bandit
 safety
 pytest-cov
+jsonschema>=4.20
+signxml
+lxml
+jwcrypto>=1.5.6
+cryptography

@@ -1,0 +1,55 @@
+name: LoTL CI
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'lotl/**'
+      - 'tools/lotl/**'
+      - 'requirements-dev.txt'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'lotl/**'
+      - 'tools/lotl/**'
+      - 'requirements-dev.txt'
+
+# skip-duplicate-actions requires actions: write when default GITHUB_TOKEN is read-only
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  skip_check:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip.outputs.should_skip }}
+    steps:
+      - uses: fkirc/skip-duplicate-actions@v5
+        id: skip
+        with:
+          skip_after_successful_duplicate: 'true'
+          concurrent_skipping: 'same_content_newer'
+          paths: '["lotl/**", "tools/lotl/**", "requirements-dev.txt"]'
+
+  lotl_test:
+    needs: skip_check
+    if: needs.skip_check.outputs.should_skip != 'true'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Run LoTL tests
+        run: |
+          pytest tools/lotl/tests/ -v --cov=tools.lotl --cov-report=term-missing --cov-fail-under=90

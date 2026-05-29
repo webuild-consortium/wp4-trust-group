@@ -169,29 +169,27 @@ http://uri.etsi.org/19602/SvcType/Register
 #### 3.4.2 TS 119 612 Service Types
 
 ```
-# Qualified Certificate Services
+# TS 119 612 service types used in WP4 context (subset)
+# Source reference for the full list: TS 119 612 clause 5.5.1.1
+
+# Qualified certificate issuing trust service
 http://uri.etsi.org/TrstSvc/Svctype/CA/QC
 
-# Public Key Certificate Services
-http://uri.etsi.org/TrstSvc/Svctype/CA/PKC
+# Qualified certificate status service (OCSP)
+http://uri.etsi.org/TrstSvc/Svctype/Certstatus/OCSP/QC
 
-# Qualified Time Stamping
+# Qualified certificate status service (CRL)
+http://uri.etsi.org/TrstSvc/Svctype/Certstatus/CRL/QC
+
+# Qualified time-stamping
 http://uri.etsi.org/TrstSvc/Svctype/TSA/QTST
-
-# Time Stamping
-http://uri.etsi.org/TrstSvc/Svctype/TSA
-
-# Wallet Provider (custom)
-http://uri.etsi.org/TrstSvc/Svctype/WalletProvider
-http://uri.etsi.org/TrstSvc/Svctype/IndividualWalletProvider
-http://uri.etsi.org/TrstSvc/Svctype/LegalPersonWalletProvider
-
-# Credential Issuers (custom)
-http://uri.etsi.org/TrstSvc/Svctype/PID_Issuer
-http://uri.etsi.org/TrstSvc/Svctype/QEAA_Provider
-http://uri.etsi.org/TrstSvc/Svctype/PUB_EAA_Provider
-http://uri.etsi.org/TrstSvc/Svctype/Non_Q_EAA_Provider
 ```
+
+**Important profile separation**:
+- TS 119 612 service types are used for Member State trusted lists under the TS 119 612 model.
+- Wallet/PID/Pub-EAA/WRPAC/WRPRC/Registrars profiles in this document are modelled under **TS 119 602** and use the `http://uri.etsi.org/19602/...` URIs documented in section 3.4.1 and section 7.
+- Implementations should not treat custom Wallet/PID/PUB_EAA identifiers as normative TS 119 612 service type URIs.
+- Service types outside wallet trust and relying-party authentication/authorization scope are intentionally omitted from this subsection.
 
 ### 3.5 Status Determination Approach URIs
 
@@ -366,10 +364,10 @@ http://uri.etsi.org/19602/LoTETag
 - [ ] Implement validation rules
 
 #### Task 2.3: Other Profiles
-- [ ] WRPAC providers profile
-- [ ] WRPRC providers profile
+- [x] WRPAC providers profile
+- [x] WRPRC providers profile
 - [ ] Pub-EAA providers profile
-- [ ] Registrars and Registers profile
+- [x] Registrars and Registers profile
 
 ### Phase 3: Digital Signatures
 
@@ -487,12 +485,12 @@ http://uri.etsi.org/19602/LoTETag
         <TSPInformationURI>https://wallet.example.it/info</TSPInformationURI>
         <TSPServices>
           <ServiceInformation>
-            <ServiceTypeIdentifier>http://uri.etsi.org/TrstSvc/Svctype/CA/PKC</ServiceTypeIdentifier>
+            <ServiceTypeIdentifier>http://uri.etsi.org/TrstSvc/Svctype/CA/QC</ServiceTypeIdentifier>
             <ServiceName>
-              <Name xml:lang="en">Wallet Provider Services</Name>
+              <Name xml:lang="en">Issuance of qualified certificates</Name>
             </ServiceName>
             <ServiceDigitalIdentity>
-              <X509SubjectName>CN=WalletProvider-IT, O=Wallet Provider IT S.p.A., C=IT</X509SubjectName>
+              <X509SubjectName>CN=QTSP-IT, O=Qualified Trust Service Provider IT S.p.A., C=IT</X509SubjectName>
               <X509SKI>...</X509SKI>
               <X509Certificate>...</X509Certificate>
             </ServiceDigitalIdentity>
@@ -534,131 +532,91 @@ The JSON schema is available at:
 
 ### 6.2 Basic JSON Structure
 
+**TS 119 602-1** defines the `1960201` JSON model: a `LoTE` root object, **PascalCase** property names (for example `ListAndSchemeInformation`, `LoTESequenceNumber`, `uriValue` in `NonEmptyMultiLangURI`), and separate **URI-only** `DistributionPoints` and `PointersToOtherLoTE` (with `OtherLoTEPointer`, `ServiceDigitalIdentities`, `LoTEQualifiers`) when the artifact is a list of lists (LoML). Entity LoTEs (e.g. PID providers) use `TrustedEntitiesList` instead. The ETSI schema file is the source of truth for the exact key set. The example below is a **minimal PID providers LoTE** with normative `1960201` names (one entity, one service).
+
 ```json
 {
-  "loteTag": "http://uri.etsi.org/19602/LoTETag",
-  "schemeInformation": {
-    "loteVersionIdentifier": 1,
-    "loteSequenceNumber": 1,
-    "loteType": "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList",
-    "schemeOperatorName": [
-      {
-        "lang": "en",
-        "value": "European Commission"
-      }
-    ],
-    "schemeOperatorAddress": {
-      "postalAddresses": [
-        {
-          "lang": "en",
-          "streetAddress": "Rue de la Loi 200",
-          "locality": "Brussels",
-          "postalCode": "1049",
-          "country": "BE"
-        }
+  "LoTE": {
+    "ListAndSchemeInformation": {
+      "LoTEVersionIdentifier": 1,
+      "LoTESequenceNumber": 1,
+      "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList",
+      "SchemeOperatorName": [
+        { "lang": "en", "value": "European Commission" }
       ],
-      "electronicAddress": [
-        {
-          "lang": "en",
-          "uri": "mailto:trust@ec.europa.eu"
-        },
-        {
-          "lang": "en",
-          "uri": "https://ec.europa.eu"
-        }
-      ]
+      "SchemeOperatorAddress": {
+        "SchemeOperatorPostalAddress": [
+          {
+            "lang": "en",
+            "StreetAddress": "Rue de la Loi 200",
+            "Locality": "Brussels",
+            "PostalCode": "1049",
+            "Country": "BE"
+          }
+        ],
+        "SchemeOperatorElectronicAddress": [
+          { "lang": "en", "uriValue": "mailto:trust@ec.europa.eu" },
+          { "lang": "en", "uriValue": "https://ec.europa.eu" }
+        ]
+      },
+      "SchemeName": [
+        { "lang": "en", "value": "EU:PID Providers List" }
+      ],
+      "SchemeInformationURI": [
+        { "lang": "en", "uriValue": "https://ec.europa.eu/pid-providers-list" }
+      ],
+      "StatusDeterminationApproach": "http://uri.etsi.org/19602/PIDProvidersList/StatusDetn/EU",
+      "SchemeTypeCommunityRules": [
+        { "lang": "en", "uriValue": "http://uri.etsi.org/19602/PIDProviders/schemerules/EU" }
+      ],
+      "SchemeTerritory": "EU",
+      "ListIssueDateTime": "2025-01-01T00:00:00Z",
+      "NextUpdate": "2025-07-01T00:00:00Z"
     },
-    "schemeName": [
+    "TrustedEntitiesList": [
       {
-        "lang": "en",
-        "value": "EU:PID Providers List"
-      }
-    ],
-    "schemeInformationURI": [
-      {
-        "lang": "en",
-        "uri": "https://ec.europa.eu/pid-providers-list"
-      }
-    ],
-    "statusDeterminationApproach": "http://uri.etsi.org/19602/PIDProvidersList/StatusDetn/EU",
-    "schemeTypeCommunityRules": [
-      {
-        "lang": "en",
-        "uri": "http://uri.etsi.org/19602/PIDProviders/schemerules/EU"
-      }
-    ],
-    "schemeTerritory": "EU",
-    "listIssueDateTime": "2025-01-01T00:00:00Z",
-    "nextUpdate": "2025-07-01T00:00:00Z"
-  },
-  "trustedEntitiesList": {
-    "trustedEntity": [
-      {
-        "trustedEntityInformation": {
-          "teName": [
-            {
-              "lang": "en",
-              "value": "PID Provider Example Ltd."
-            }
+        "TrustedEntityInformation": {
+          "TEName": [
+            { "lang": "en", "value": "PID Provider Example Ltd." }
           ],
-          "teTradeName": [
-            {
-              "lang": "en",
-              "value": "PID-12345678"
-            }
+          "TETradeName": [
+            { "lang": "en", "value": "PID-12345678" }
           ],
-          "teAddress": {
-            "tePostalAddress": [
+          "TEAddress": {
+            "TEPostalAddress": [
               {
                 "lang": "en",
-                "streetAddress": "Example Street 1",
-                "locality": "Example City",
-                "postalCode": "12345",
-                "country": "IT"
+                "StreetAddress": "Example Street 1",
+                "Locality": "Example City",
+                "PostalCode": "12345",
+                "Country": "IT"
               }
             ],
-            "teElectronicAddress": [
-              {
-                "lang": "en",
-                "uri": "mailto:info@pid-provider.example"
-              },
-              {
-                "lang": "en",
-                "uri": "https://pid-provider.example"
-              }
+            "TEElectronicAddress": [
+              { "lang": "en", "uriValue": "mailto:info@pid-provider.example" },
+              { "lang": "en", "uriValue": "https://pid-provider.example" }
             ]
           },
-          "teInformationURI": [
-            {
-              "lang": "en",
-              "uri": "https://pid-provider.example/policies"
-            },
-            {
-              "lang": "en",
-              "uri": "http://uri.etsi.org/19602/ListOfTrustedEntities/PIDProvider/IT"
-            }
+          "TEInformationURI": [
+            { "lang": "en", "uriValue": "https://pid-provider.example/policies" },
+            { "lang": "en", "uriValue": "http://uri.etsi.org/19602/ListOfTrustedEntities/PIDProvider/IT" }
           ]
         },
-        "trustedEntityServices": {
-          "trustedEntityService": [
-            {
-              "serviceInformation": {
-                "serviceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/PID/Issuance",
-                "serviceName": [
-                  {
-                    "lang": "en",
-                    "value": "PID Issuance Service"
-                  }
-                ],
-                "serviceDigitalIdentity": {
-                  "x509Certificate": [
-                    "MIIF..."
-                  ]
-                }
+        "TrustedEntityServices": [
+          {
+            "ServiceInformation": {
+              "ServiceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/PID/Issuance",
+              "ServiceName": [
+                { "lang": "en", "value": "PID Issuance Service" }
+              ],
+              "ServiceDigitalIdentity": {
+                "X509Certificates": [
+                  { "val": "MIIF…" }
+                ]
               }
             }
-          ]
-        }
+          }
+        ]
       }
     ]
   }
@@ -668,6 +626,7 @@ The JSON schema is available at:
 ### 6.3 Multilingual Format
 
 **Multilingual String:**
+
 ```json
 {
   "lang": "en",
@@ -675,11 +634,12 @@ The JSON schema is available at:
 }
 ```
 
-**Multilingual Pointer:**
+**NonEmptyMultiLangURI** (e.g. scheme or entity electronic address):
+
 ```json
 {
   "lang": "en",
-  "uri": "https://example.org/page"
+  "uriValue": "https://example.org/page"
 }
 ```
 
@@ -759,6 +719,66 @@ python -m jsonschema lote.json lote-schema.json
 - Next update maximum: 6 months
 - Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
 - Service history uses X509SKI (not X509Certificate)
+
+**QEAA (qualified EAA) — national lists**: **Annex H / `EUPubEAAProvidersList` does not replace** Member State **TS 119 612** trusted lists for **QEAA Providers** as QTSPs. Per [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md) §3, QEAA trust anchors are published on **national QTSP Trusted Lists** (Article 22 eIDAS), typically with **TSLType** `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric`. The WP4 LoTL automation maps folder `qeaa-provider` to that TSL type URI in `tools/lotl/settings.py`.
+
+### 7.4 Issuer constraint extensions (ServiceInformationExtensions)
+
+To support **issuer constraints** (which Credential Issuers are allowed to issue which attestation types), Trusted List entries may carry profile-specific data in the **ServiceInformationExtensions** component (ETSI TS 119 602, clause 6.6.9). The standard defines an extensible mechanism; profile-specific extensions are not defined in the ETSI annexes.
+
+For the EUDI Wallet ecosystem, the following extensions are used when configuring allowed attestation types per issuer:
+
+- **allowedAttestationType** (repeatable): List of attestation type identifiers (e.g. `eu.europa.ec.eudi.pid.1`, `eu.europa.ec.eudi.tax-residency.1`) that the listed provider is authorised to issue. When present in the Trusted List entry, the entry can be **self-contained** for validation (Wallet Units and Relying Parties need not retrieve a separate registration certificate).
+- **registrationCertificateRef** (optional): URL or reference to the provider's registration certificate or Registrar API where the list of allowed attestation types is maintained. When absent, the Trusted List entry alone is sufficient if `allowedAttestationType` is embedded.
+
+**Reference**: Full requirements, validation behaviour, and non-normative examples are in [Trusted List extensions for Credential Issuers](trusted-list-extensions-credential-issuers.md). A proposal for an optional `registrationCertificateHash` in ServiceInformationExtensions is also described there.
+
+### 7.5 WRPAC Providers List (TS 119 602, Annex F)
+
+#### Required URIs
+- **LoTE Type**: `http://uri.etsi.org/19602/LoTEType/EUWRPACProvidersList`
+- **Status Determination Approach**: `http://uri.etsi.org/19602/WRPACProvidersList/StatusDetn/EU`
+- **Scheme Type/Community/Rules**: `http://uri.etsi.org/19602/WRPACProvidersList/schemerules/EU`
+- **Service Types**:
+  - `http://uri.etsi.org/19602/SvcType/WRPAC/Issuance`
+  - `http://uri.etsi.org/19602/SvcType/WRPAC/Revocation`
+
+#### Key Requirements
+- Trust anchors correspond to Access CA material used to validate relying party access certificates.
+- Next update maximum: 6 months.
+- Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML).
+- Consumers must validate signature, URI consistency, and service status semantics according to Annex F profile rules.
+
+### 7.6 WRPRC Providers List (TS 119 602, Annex G)
+
+#### Required URIs
+- **LoTE Type**: `http://uri.etsi.org/19602/LoTEType/EUWRPRCProvidersList`
+- **Status Determination Approach**: `http://uri.etsi.org/19602/WRPRCProvidersList/StatusDetn/EU`
+- **Scheme Type/Community/Rules**: `http://uri.etsi.org/19602/WRPRCProvidersList/schemerules/EU`
+- **Service Types**:
+  - `http://uri.etsi.org/19602/SvcType/WRPRC/Issuance`
+  - `http://uri.etsi.org/19602/SvcType/WRPRC/Revocation`
+
+#### Key Requirements
+- Trust anchors correspond to registration certificate provider material used to validate relying party registration certificates.
+- Next update maximum: 6 months.
+- Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML).
+- Consumers must validate signature, URI consistency, and service status semantics according to Annex G profile rules.
+
+### 7.7 Registrars and Registers List (TS 119 602, Annex I)
+
+#### Required URIs
+- **LoTE Type**: `http://uri.etsi.org/19602/LoTEType/EURegistrarsAndRegistersList`
+- **Status Determination Approach**: `http://uri.etsi.org/19602/RegistrarsAndRegistersList/StatusDetn/EU`
+- **Scheme Type/Community/Rules**: `http://uri.etsi.org/19602/RegistrarsAndRegistersList/schemerules/EU`
+- **Service Type**:
+  - `http://uri.etsi.org/19602/SvcType/Register`
+
+#### Key Requirements
+- Entries identify authoritative registrars and registers used for relying party registration and entitlement discovery.
+- `ebwoid-provider` in the WP4 LoTL pipeline maps to this profile and LoTE type URI.
+- Next update maximum: 6 months.
+- Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML).
 
 ## 8. Digital Signature Implementation
 
@@ -871,13 +891,15 @@ Cache-Control: max-age=3600
 </DistributionPoints>
 ```
 
-**JSON:**
+**JSON** (`ListAndSchemeInformation` / `1960201` key names):
 ```json
 {
-  "schemeInformation": {
-    "distributionPoints": [
-      "https://trust-list.example.org/lote/pid-providers.json"
-    ]
+  "LoTE": {
+    "ListAndSchemeInformation": {
+      "DistributionPoints": [
+        "https://trust-list.example.org/lote/pid-providers.json"
+      ]
+    }
   }
 }
 ```
@@ -908,41 +930,35 @@ See section 5.2 for complete XML example.
 
 See section 6.2 for complete JSON example.
 
-### 10.3 Service with History (Pub-EAA)
+### 10.3 Service with history (Pub-EAA) — `TrustedEntityService` fragment
+
+`ServiceHistory` is an **array** of `ServiceHistoryInstance` objects. `ServiceDigitalIdentity` uses `X509Certificates` (array of `PKIOb` with `val`) and optional `X509SKIs` as in the ETSI JSON schema.
 
 ```json
 {
-  "serviceInformation": {
-    "serviceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/PubEAA/Issuance",
-    "serviceName": [
-      {
-        "lang": "en",
-        "value": "Pub-EAA Issuance Service"
-      }
+  "ServiceInformation": {
+    "ServiceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/PubEAA/Issuance",
+    "ServiceName": [
+      { "lang": "en", "value": "Pub-EAA Issuance Service" }
     ],
-    "serviceDigitalIdentity": {
-      "x509Certificate": ["MIIF..."]
+    "ServiceDigitalIdentity": {
+      "X509Certificates": [{ "val": "MIIF…" }]
     },
-    "serviceCurrentStatus": "http://uri.etsi.org/19602/PubEAAProvidersList/SvcStatus/notified",
-    "currentStatusStartingDateAndTime": "2025-01-01T00:00:00Z"
+    "ServiceStatus": "http://uri.etsi.org/19602/PubEAAProvidersList/SvcStatus/notified",
+    "StatusStartingTime": "2025-01-01T00:00:00Z"
   },
-  "serviceHistory": {
-    "serviceHistoryInstance": [
-      {
-        "serviceName": [
-          {
-            "lang": "en",
-            "value": "Pub-EAA Issuance Service"
-          }
-        ],
-        "serviceDigitalIdentity": {
-          "x509SKI": ["a1b2c3..."]
-        },
-        "servicePreviousStatus": "http://uri.etsi.org/19602/PubEAAProvidersList/SvcStatus/withdrawn",
-        "previousStatusStartingDateAndTime": "2024-06-01T00:00:00Z"
-      }
-    ]
-  }
+  "ServiceHistory": [
+    {
+      "ServiceName": [
+        { "lang": "en", "value": "Pub-EAA Issuance Service" }
+      ],
+      "ServiceDigitalIdentity": {
+        "X509SKIs": ["a1b2c3…"]
+      },
+      "ServiceStatus": "http://uri.etsi.org/19602/PubEAAProvidersList/SvcStatus/withdrawn",
+      "StatusStartingTime": "2024-06-01T00:00:00Z"
+    }
+  ]
 }
 ```
 
@@ -1012,10 +1028,10 @@ Use appropriate JAdES validation library (see section 12).
 ### Profile Implementation
 - [ ] PID Providers profile
 - [ ] Wallet Providers profile
-- [ ] WRPAC Providers profile
-- [ ] WRPRC Providers profile
+- [x] WRPAC Providers profile
+- [x] WRPRC Providers profile
 - [ ] Pub-EAA Providers profile
-- [ ] Registrars and Registers profile
+- [x] Registrars and Registers profile
 
 ### Signature Implementation
 - [ ] XAdES signature generation (XML)
@@ -1045,6 +1061,9 @@ Use appropriate JAdES validation library (see section 12).
 
 ### Tools
 - [Trusted List Manager non-EU](https://ec.europa.eu/digital-building-blocks/sites/display/TLSO/Trusted+List+Manager+non-EU)
+
+### External Resources
+- [eIDAS Dashboard validation tests](https://eidas.ec.europa.eu/efda/validation-tests) – TL validation against official eIDAS requirements
 
 ### Regulations
 - [Regulation (EU) No 910/2014](https://eur-lex.europa.eu/eli/reg/2014/910/oj) - eIDAS

@@ -13,14 +13,19 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 | **ARF** | Architecture and Reference Framework (EUDI Wallet) | ARF |
 | **CAB** | Conformity Assessment Body | ARF |
 | **CA** | Certificate Authority | ARF |
+| **CIR** | Commission Implementing Regulation | EU |
+| **CWT** | CBOR Web Token | RFC 8392 |
+| **EAA** | Electronic Attestation of Attributes | ARF |
 | **EC** | European Commission | ARF |
 | **EAA Provider** | non-qualified Electronic Attestation of Attributes Provider | ARF |
 | **EUDI** | European Digital Identity | ARF |
 | **EUDIW** | European Digital Identity Wallet | Regulation (EU) 2024/1183 |
+| **JWT** | JSON Web Token | RFC 7519 |
 | **LoTL** | List of Trusted Lists | ARF, ETSI TS 119 612 |
 | **MS** | Member State | ARF |
 | **MS TLP** | Member State Trusted List Provider | ARF |
 | **NAB** | National Accreditation Body | ARF |
+| **OCSP** | Online Certificate Status Protocol | RFC 6960 |
 | **PID** | Person Identification Data | ARF |
 | **PuB-EAA Provider** | Public Sector Body Electronic Attestation of Attributes Provider | ARF |
 | **QEAA Provider** | Qualified Electronic Attestation of Attributes Provider (a QTSP under eIDAS) | ARF |
@@ -28,7 +33,12 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 | **RP** | Relying Party | ARF |
 | **TL** | Trusted List | ARF |
 | **TLP** | Trusted List Provider | ARF |
+| **TSL** | Trusted Service List | ETSI TS 119 612 |
+| **TSP** | Trust Service Provider | eIDAS, ETSI |
 | **WP** | Wallet Provider | ARF |
+| **WRP** | Wallet-Relying Party | CIR (EU) 2025/848, ETSI TS 119 411-8 |
+| **WRPAC** | Wallet-Relying Party Access Certificate | ETSI TS 119 411-8 |
+| **WRPRC** | Wallet-Relying Party Registration Certificate | ETSI TS 119 411-8 |
 | **WUA** | Wallet Unit Attestation | ARF |
 
 ---
@@ -196,14 +206,17 @@ The **Trust Infrastructure Responsible Group** is a designated group within the 
 - Maintaining and updating Trusted Lists
 - Hosting Trusted Lists
 - Engaging with entities during onboarding and troubleshooting
+- Operates one or more registers, either jointly under shared registration instructions or independently as a sub-group with register specific instructions
 
 The following table lists the entities that are part of the Trust Infrastructure Responsible Group:
 
-| Entity | Legal Name | Website | Administrative Contact | Technical Contact |
-|--------|------------|---------|------------------------|------------------|
-| IDunion SCE | GER-IDunion SCE | [https://www.idunion.eu](https://www.idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) |
-| Forkbomb | Forkbomb BV | [https://forkbomb.eu](https://forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) |
-| Department for digital transformation | Department for digital transformation | [https://innovazione.gov.it](https://innovazione.gov.it) | [g.messori@innovazione.gov.it](mailto:g.messori@innovazione.gov.it) | [gi.demarco@innovazione.gov.it](mailto:gi.demarco@innovazione.gov.it) |
+| Entity | Legal Name | Website | Administrative Contact | Technical Contact | Designation |
+|--------|------------|---------|------------------------|------------------|---------------|
+| IDunion SCE | GER-IDunion SCE | [https://www.idunion.eu](https://www.idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) | [info@idunion.eu](mailto:info@idunion.eu) | TBD |
+| Forkbomb | Forkbomb BV | [https://forkbomb.eu](https://forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) | [info@forkbomb.eu](mailto:info@forkbomb.eu) | TBD | 
+| Department for digital transformation | Department for digital transformation | [https://innovazione.gov.it](https://innovazione.gov.it) | [g.messori@innovazione.gov.it](mailto:g.messori@innovazione.gov.it) | [gi.demarco@innovazione.gov.it](mailto:gi.demarco@innovazione.gov.it) | TBD |
+| Raidiam | Raidiam Services Limited | [https://raidiam.com](https://raidiam.com) | Felipe G. (We Build Slack) | Felipe G. (We Build Slack)  | Trust Registry |
+| Sunet | Swedish Research Council | [https://www.sunet.se](https://www.sunet.se) | [steli@sunet.se](mailto:steli@sunet.se) | [anna@sunet.se](mailto:anna@sunet.se) | Registrar |
 
 **Note**: Additional entities may be added to this group as designated by the WP4 Trust Infrastructure group. Consortium participants can propose themselves by applying a Pull Request to add themselves to the list and be actively involved in the registration operations and review processes.
 

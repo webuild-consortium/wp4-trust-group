@@ -44,7 +44,7 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
 
 - **Success Criteria**:
     - [MVP] Pilot implementations successfully demonstrate Relying Party onboarding within WEBUILD
-    - [MVP] All Relying Parties within WEBUILD are included in a publicly accessible register maintained by the WP4 Trust Infrastructure group
+    - [MVP] All Relying Parties within WEBUILD are included in a publicly accessible register or registers maintained by the WP4 Trust Infrastructure group
     - [MVP+] The onboarding process for Relying Parties is formally defined and documented in a harmonized manner that aligns with EU regulatory and technical frameworks (ref. [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848))
     - [MVP+] See [Success Criteria](onboarding-base.md#success-criteria)
     - Additional entity-specific success criteria:
@@ -69,7 +69,8 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
 See [Preconditions](onboarding-base.md#preconditions).
 
 ### Preconditions [MVP]
-- The WEBUILD WP4 Trust Infrastructure group has established a register for Relying Parties within WEBUILD.
+- The WEBUILD WP4 Trust Infrastructure group has established at least one register for Relying Parties within WEBUILD and designated at least one Registrar to operate it.
+- The WEBUILD WP4 Trust Infrastructure group has published a list of all available Registrars, including contact information and the registraiton instructions applicable to each register.
 - The WEBUILD WP4 Trust Infrastructure group has designated representatives authorized to act as Ecosystem Authority, Access Certificate Authority, and Provider of Registration Certificate.
 - The WEBUILD WP4 Trust Infrastructure group has published registration policies for the WEBUILD testing environment.
 
@@ -90,7 +91,7 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 | Issue Registration Certificates (Provider of Registration Certificates) |       A,C     |                |      R       |       I       |
 | Engage with Relying Parties during onboarding / troubleshooting  |       A,C     |                |      R       |       I       |
 
-**Registration phase – responsibilities by actor**: The following table assigns responsibility (R), accountability (A), consulted (C), or informed (I) for each administrative registration step. [MVP]: Ecosystem Authority acts as Registrar; [MVP+]: Member State Registrar applies.
+**Registration phase – responsibilities by actor**: The following table assigns responsibility (R), accountability (A), consulted (C), or informed (I) for each administrative registration step. [MVP]: Ecosystem Authority acts as Registrar; where a member of the Trust Infrastructure Responsible Group holds a Registrar designation for a specific register, that member fulfills the Responsible (R) role for registration steps withing their register; overall accountability (A) remains with the WP4 Trust Infrastructure group Lead/Co-Lead [MVP+]: Member State Registrar applies.
 
 | Step | Relying Party | Registrar / Ecosystem Authority [MVP] | Access Certificate Authority | Provider of Registration Certificates |
 |------|---------------|----------------------------------------|------------------------------|---------------------------------------|
@@ -99,31 +100,49 @@ See [RACI Matrix](onboarding-base.md#raci-matrix) in the base document for RACI 
 | 1.3 Registration Confirmation | I (notified) | R, A (confirm or reject, notify) | I | I |
 | 1.4 Publication in National Register | I | R, A (publish in register) | I | I |
 
+**Note**: [MVP] The Ecosystem Authority designates one or more Registrars. When multiple registers are operational, the Responsible (R) role for each registration step is fullfiled by the Registrar that the Relying Party has selected.
+
 ## Data Model
 
 [MVP]
 
-- As a baseline, there will be a single register for all Relying Parties in WEBUILD to reduce complexity. Access Certificate validation uses the same WEBUILD trust infrastructure (LoTL as trust anchor, TL referencing the Access CA); see [MVP trust infrastructure: LoTL and Trusted Lists](onboarding-base.md#mvp-trust-infrastructure-lotl-and-trusted-lists) in the base document.
+- As a baseline, there will be at least one register for all Relying Parties in WEBUILD to reduce complexity. Access Certificate validation uses the same WEBUILD trust infrastructure (standard PKI certificate chain validation where the trust anchor is fetched within the appropriate LoTE); see [MVP trust infrastructure: LoTL and Trusted Lists](onboarding-base.md#mvp-trust-infrastructure-lotl-and-trusted-lists) in the base document.
 - Registry for Relying Parties complies with [Regulation (EU) 2025/848, Article 3 "National registers"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) and [EC TS05 V1.0](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
 - Access Certificate Profile: [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) - Access Certificate Policy for EUDI Wallet Relying Parties. X.509 certificate structure per ETSI EN 319 412-3 for legal persons.
-- Registration Certificate Profile: [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf) version 1.4.1 (2023-10) NCP requirements and [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf) - JWT format (rc-wrp+jwt) with relying party attributes
-- Relying Party Attributes: [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf)
+- Registration Certificate Profile: [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf) version 1.4.1 (2023-10) NCP requirements and [ETSI TS 119 475 v1.2.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf) - JWT format (rc-wrp+jwt) with relying party attributes
+- Relying Party Attributes: [ETSI TS 119 475 v1.2.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf)
+
+### Multi-Register Model Clarifications [MVP]
+
+WP4 oepraters at least one register (the baseline). Where additional registers are established, each register mimics a Member State national register and is operated by a designated Registrar. A registrar under this model may be:
+ - the WP4 Trust Infrastructure responsible group, operating under shared registration instructions; or
+ - a sub-group of the responsible group, or selected by WP4 participants authorised by WP4, operating the register independently. under theri own registration instructions.
+
+ WP4 publishes and maintains a list of all active Registrars with the information needed to contact each Registrar and located the applicabble registration instructions. Each Registrar is responsible for its own register and may define its own registration procedures and accpeted applications ofrmats, provided these remain consistent with the overall WEBUILD trust framework and the data model described below. 
+ Relying Parties may choose which Registrar, and correponsing register, they wish to register with. Where a Relying pParty has multiple intended uses that map to different registers, it may register with more than one Registrar.
+
+
 
 ### Registry Data Model
 
-**Information to be provided for registration**: The Relying Party must provide at least the following when submitting a registration application. Normative: [Regulation (EU) 2025/848, Article 5](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) (information to be provided to national registers), [Annex I](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) (information regarding wallet-relying parties). Technical: [EC TS05 v1.0 – Common Formats and API for RP Registration Information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md), [EC TS06 v1.0 – Common Set of RP Information to be Registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md). See also [ARF Annex II – High-Level Requirements](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/) (Topic 27).
+#### Information to be provided for registration in the pilot
+The Relying Party must provide at least the following when submitting a registration application:
 
-- Official name of the wallet-relying party
-- One or more official identifiers (EORI, LEI, VAT number, etc.)
-- Physical address and Member State
-- URL belonging to the wallet-relying party where applicable
-- Detailed contact information (phone number, website or email)
-- Description of the type of services provided
-- List of attributes that the wallet-relying party intends to request for each intended use
-- Description of intended use of the data
-- Indication whether the wallet-relying party is a public sector body
-- Applicable entitlement(s) of the wallet-relying party
-- Indication if the wallet-relying party intends to act as an intermediary or to rely upon an intermediary
+- Legal name — official name of the wallet-relying party
+- Trade / service name — user-facing name shown in the wallet UI
+- Official identifier(s) — one or more; EUID (from BRIS) preferred; VAT number or LEI as fallback
+- Member State
+- Info URI — URL belonging to the wallet-relying party
+- Email address — in the pilot email is the only contact channel collected for simplicity; this email may be used for self-service access to request certificates
+- Service description — at minimum a single string; multiple strings recommended to test internationalisation
+- Public sector body flag — indication whether the wallet-relying party is a public sector body
+- Applicable entitlement(s) — one or more of: Service Provider, QEAA, EAA, PID, PuB-EAA
+- Intended use(s) — one or more records, each specifying: purpose, data requested (credential type, format, and list of claims), privacy policy URL, and supervisory authority / DPA
+- Intermediary reference(s) — zero or more records (identifier, trade name, registry URI); required if the wallet-relying party relies on an intermediary
+- Intermediary flag — indication if the wallet-relying party acts as an intermediary for other relying parties
+- Attestation type(s) — for provider/issuer entitlements: one or more records, each specified either by a catalogue URL provided by WP4 (default/baseline option) or a self-declaration of the attestation schema
+
+> **Note**: Trusted List data collection: In the pilot for WRPs that also hold a provider or issuer entitlement, the registration interaction may additionally collect the information required to publish their trust anchor on a Trusted List. This avoids requiring the applicant to go through a separate submission process at a later stage.
 
 The registry information is made available through a REST API supporting JSON format, electronically signed or sealed, in accordance with [Regulation (EU) 2025/848, Annex II](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848). See [Task 4 - Onboarding API](../../task4-trust-infrastructure-api/onboarding-api/README.md) for API specifications.
 
@@ -133,7 +152,7 @@ Access Certificates for Relying Parties follow [ETSI TS 119 411-8](https://www.e
 
 ### Registration Certificate Profile
 
-Registration Certificates for Relying Parties follow [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf) version 1.4.1 (2023-10) NCP requirements and [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf) for relying party attributes. Registration Certificates are issued in JWT format (typ: "rc-wrp+jwt") with payload containing identity fields (name, sub.legal_name, sub.id, country, registry_uri), service descriptions, entitlements, purpose, credentials, privacy policy, and status information per ETSI TS 119 475 clause 5.2.4.
+Registration Certificates for Relying Parties follow [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf) version 1.4.1 (2023-10) NCP requirements and [ETSI TS 119 475 v1.2.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf) for relying party attributes. Registration Certificates are issued in JWT format (typ: "rc-wrp+jwt") with payload containing identity fields (name, sub_ln or sub_gn/sub_fn, sub, country, registry_uri), srv_description, entitlements, purpose, credentials, privacy_policy, supervisory_authority, and status (status_list with idx, uri) per ETSI TS 119 475 clause 5.2.4.
 
 [MVP+]
 
@@ -179,7 +198,7 @@ Registration may occur through **direct submission** of the registration applica
 
 ### 2. Attribute Authorization Management
 
-The list of attributes that a wallet-relying party intends to request for each intended use (Annex I) should align with **credential catalogues**, **taxonomies**, and **sectorial templates** where applicable, so that requested attributes are clearly defined and interoperable. References: [EC TS05](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md), [EC TS06](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md), [ARF Annex II](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/).
+The list of attributes that a wallet-relying party intends to request for each intended use (Annex I) should align with **credential catalogues**, **taxonomies**, and **sectorial templates** where applicable, so that requested attributes are clearly defined and interoperable. References: [EC TS05](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md), [EC TS06](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md), [ARF Annex II](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/).
 
 ## 1. Administrative Onboarding
 
@@ -187,7 +206,8 @@ Each Relying Party that intends to rely on EUDI Wallets for the provision of dig
 
 *Preconditions:*
 - **Prerequisites [MVP]**:
-    - The WEBUILD WP4 Trust Infrastructure group has established a register for Relying Parties within WEBUILD.
+    - The WEBUILD WP4 Trust Infrastructure group has established at least one registers for Relying Parties within WEBUILD and has designated at least one Registrar to operate it.
+    - The WEBUILD WP4 Trust Infrastructure group has published a list of available Registrars with the contact information and the registration instructions applicable to each.
     - The WEBUILD WP4 Trust Infrastructure group has designated representatives authorized to act as Registrar.
     - The WEBUILD WP4 Trust Infrastructure group has published registration policies for the WEBUILD testing environment.
 - **Prerequisites [MVP+]**:
@@ -210,7 +230,7 @@ Each Relying Party that intends to rely on EUDI Wallets for the provision of dig
 
 ### 1.1 Registration Application
 
-**For [MVP]**: The Relying Party (Beneficiary or Associated Partner) submits the registration application to the [Trust Infrastructure Responsible Group](onboarding-base.md#trust-infrastructure-responsible-group), providing required information for WEBUILD testing purposes. The application includes entity identification, contact information, service description, and intended use of EUDI Wallet data.
+**For [MVP]**: The Relying Party (Beneficiary or Associated Partner) submits the registration application to the [Trust Infrastructure Responsible Group](../terms-and-entities.md#41-trust-infrastructure-responsible-group), providing required information for WEBUILD testing purposes. The application includes entity identification, contact information, service description, and intended use of EUDI Wallet data (see [Information to be provided for registration in the pilot](#registry-data-model)).
 
 **For [MVP+]**: The Relying Party submits the registration application to the Registrar, providing at least the information set out in Annex I. Alternatively, the Registrar may import entity information from qualified authoritative registries (see [Industrial-Scale Considerations - Entity Identification and Registry Integration](#1-entity-identification-and-registry-integration)).
 
@@ -228,28 +248,7 @@ The Registrar receives the registration application (or initiates registry impor
     - 1. Registrars shall establish **easy to use electronic, and where possible, automated registration processes** for wallet-relying parties.
 - [Regulation (EU) 2025/848, Annex I "Information regarding wallet-relying parties"](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848)
 See also [EC TS06 v1.0 - Common Set of Relying Party Information to be Registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md) and [EC TS05 V1.0 - Common Formats and API for Relying Party Registration Information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)
-    - Summary of the information to be provided:
-        - official name of the wallet-relying party
-        - one or more official identifiers of the wallet-relying party (EORI, LEI, VAT number...)
-        - physical address and Member State if not present in official identifier
-        - URL belonging to the wallet-relying party where applicable
-        - detailed contact information (phone number, website or email)
-        - description of the type of services provided
-        - a list of the attributes that the wallet-relying party intends to request for each intended use (see [Attribute Authorization Management](#2-attribute-authorization-management) for credential catalogues, taxonomies, and sectorial templates)
-        - a description of intended use of the data
-        - indication whether the wallet-relying party is a public sector body
-        - applicable entitlement(s) of the wallet-relying party chosen between:
-            - **Service_Provider**
-            - QEAA_Provider
-            - Non_Q_EAA_Provider
-            - PUB_EAA_Provider
-            - PID_Provider
-            - QCert_for_ESeal_Provider
-            - QCert_for_ESig_Provider
-            - rQSigCDs_Provider
-            - rQSealCDs_Provider
-            - ESig_ESeal_Creation_Provider
-        - indication if the wallet-relying party intends to act **as an intermediary or to rely upon an intermediary**.
+    - Summary of the information to be provided: see [Information to be provided for registration in the pilot](#registry-data-model)
 - [Regulation (EU) 2025/848, Annex II "1.   Requirements for Electronic signature or seals applied to the information made available on registered Wallet-Relying Parties referred to in Article 3"](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202500848#anx_II:~:text=1.%C2%A0%C2%A0%C2%A0REQUIREMENTS%20FOR%20ELECTRONIC%20SIGNATURES%20OR%20SEALS%20APPLIED%20TO%20THE%20INFORMATION%20MADE%20AVAILABLE%20ON%20REGISTERED%20WALLET%2DRELYING%20PARTIES%20REFERRED%20TO%20IN%20ARTICLE%C2%A03)
     - JavaScript Object Notation (‘JSON’).
     - JSON Web Signatures (per ETSI/ARF).
@@ -261,7 +260,7 @@ See also [EC TS06 v1.0 - Common Set of Relying Party Information to be Registere
         - (d) be published as an OpenAPI version 3, together with the appropriate documentation and technical specifications ensuring interoperability across the Union;
         - (e) provide security functions, including security by default and by design, to ensure the availability and integrity of the API and the availability of information through it.
     - (2) The statements referred to in point (c) shall be expressed under the form of **electronically signed or sealed JSON files**, with a format and structure in accordance with the requirements on electronic signatures or seals set out Section 1.
-- [ARF "A.2.3.27 Topic 27 - Registration of PID Providers, Providers of QEAAs, PuB-EAAs, and non-qualified EAAs, and Relying Parties"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#a2327-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties:~:text=A.2.3.27%20Topic%2027%20%2D%20Registration%20of%20PID%20Providers%2C%20Providers%20of%20QEAAs%2C%20PuB%2DEAAs%2C%20and%20non%2Dqualified%20EAAs%2C%20and%20Relying%20Parties)
+- [ARF "A.2.3.27 Topic 27 - Registration of PID Providers, Providers of QEAAs, PuB-EAAs, and non-qualified EAAs, and Relying Parties"](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties:~:text=A.2.3.27%20Topic%2027%20%2D%20Registration%20of%20PID%20Providers%2C%20Providers%20of%20QEAAs%2C%20PuB%2DEAAs%2C%20and%20non%2Dqualified%20EAAs%2C%20and%20Relying%20Parties)
     - PID Providers, QEAA Providers, PuB-EAA Providers, non-qualified EAA Providers, and **Relying Parties register with a Registrar in their Member State**. The main goal of the registration process is for the Registrar to register relevant information about the registering entity, and make this information available online to interested parties.
 
 ### 1.2 Registration Review
@@ -300,11 +299,11 @@ The Relying Party receives positive or negative feedback on registration applica
 
 **For [MVP]**: The WEBUILD WP4 Trust Infrastructure group registers the Relying Party in the WEBUILD register and makes the information publicly accessible for testing purposes.
 
-**For [MVP+]**: The Registrar registers the Relying Party in its registry and publishes it. [ARF Topic 27](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#a2327-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties).
+**For [MVP+]**: The Registrar registers the Relying Party in its registry and publishes it. [ARF Topic 27](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties).
 
 *Requirements:*
 - [ARF "6.4.2 Relying Party registration"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#642-relying-party-registration)
-See also [ARF, Annex II - High-Level Requirements "A. General requirements for Member State registration processes"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#:~:text=A.%20General%20requirements%20for%20Member%20State%20registration%20processes) and ["E. Requirements of the registration of Relying party"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#:~:text=E.%20Requirements%20for%20the%20registration%20of%20Relying%20Parties)
+See also [ARF, Annex II - High-Level Requirements "A. General requirements for Member State registration processes"](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#:~:text=A.%20General%20requirements%20for%20Member%20State%20registration%20processes) and ["E. Requirements of the registration of Relying party"](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#:~:text=E.%20Requirements%20for%20the%20registration%20of%20Relying%20Parties)
     - [...] each Relying Party will register itself with a Registrar in its Member State. If the registration process is successful, **the Registrar includes the Relying Party in its public registry**.
 
 ## 2. Technical Onboarding
@@ -378,8 +377,8 @@ The Access Certificate Authority issues and logs the Access Certificate; the Reg
 - [ARF "6.4.2 Relying Party registration"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#642-relying-party-registration:~:text=6.4.2%20Relying%20Party-,registration,-Figure%2011%20depicts)
     - As a result of successful registration:
         - **an Access Certificate Authority (see Section 3.18) associated with the Registrar issues an access certificate to each Relying Party Instance of the Relying Party**. A Relying Party Instance needs such a certificate to authenticate itself towards Wallet Units when requesting the presentation of attributes, as described in Section 6.6.3.2. Issuing access certificates to a registered Relying Party is mandatory.
-- [ARF, Annex II, Topic 27 "Registration of PID Providers, Providers of QEAAs, PuB-EAAs, and non-qualified EAAs, and Relying Parties"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#a2327-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties)
-See also [ARF, Annex II - High-Level Requirements "B. General requirements for the issuance of access certificates"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#:~:text=B.%20General%20requirements%20for%20the%20issuance%20of%20access%20certificates) and ["F. Requirements for the contents of access certificates"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#a2331-topic-31---notification-and-publication-of-pid-provider-wallet-provider-attestation-provider-access-certificate-authority-and-provider-of-registration-certificates:~:text=F.%20Requirements%20for%20the%20contents%20of%20access%20certificates)
+- [ARF, Annex II, Topic 27 "Registration of PID Providers, Providers of QEAAs, PuB-EAAs, and non-qualified EAAs, and Relying Parties"](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties)
+See also [ARF, Annex II - High-Level Requirements "B. General requirements for the issuance of access certificates"](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#:~:text=B.%20General%20requirements%20for%20the%20issuance%20of%20access%20certificates) and ["F. Requirements for the contents of access certificates"](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2331-topic-31---notification-and-publication-of-pid-provider-wallet-provider-attestation-provider-access-certificate-authority-and-provider-of-registration-certificates:~:text=F.%20Requirements%20for%20the%20contents%20of%20access%20certificates)
     - A registering Relying Party will **receive an Access Certificate for each of the Relying Party Instances it uses** to interact with Wallet Units to request the presentation of attestations.
 - [Topic X "Relying Party Registration" / "2.2 Draft CIR on Relying Party registration"](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/discussion-topics/x-relying-party-registration.md)
     - The registrant receives **one or more Relying Party Access Certificates**.
@@ -453,10 +452,10 @@ The Provider of Registration Certificate issues and logs the Registration Certif
 - [ARF "6.4.2 Relying Party registration"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/#642-relying-party-registration:~:text=6.4.2%20Relying%20Party-,registration,-Figure%2011%20depicts)
     - As a result of successful registration:
         - **a Provider of registration certificates (see Section 3.19) associated with the Registrar will issue one or more registration certificates to the Relying Party**, if the Registrar has a policy of issuing such registration certificates. The purpose of the registration certificate is described in Section 6.6.3.3. It is up to each Registrar to decide if it issues registration certificates.
-- [ARF, Annex II, Topic 27 "Registration of PID Providers, Providers of QEAAs, PuB-EAAs, and non-qualified EAAs, and Relying Parties"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#a2327-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties)
+- [ARF, Annex II, Topic 27 "Registration of PID Providers, Providers of QEAAs, PuB-EAAs, and non-qualified EAAs, and Relying Parties"](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties)
     - Finally, the registering entity will **receive one or more Registration Certificates containing the registered information**, if the Registrar has a policy of issuing such registration certificates.
-- [ARF, Annex II, Topic 44 "Registration certificates for PID Providers, Providers of QEAAs, PuB-EAAs, and non-qualified EAAs, and Relying Parties"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#a2327-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties:~:text=A.2.3.44%20Topic%2044%20%2D%20Registration%20certificates%20for%20PID%20Providers%2C%20Providers%20of%20QEAAs%2C%20PuB%2DEAAs%2C%20and%20non%2Dqualified%20EAAs%2C%20and%20Relying%20Parties)
-See also ["A. Generic requirements on the specification and contents of registration certificates"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#a2327-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties:~:text=A.%20Generic%20requirements%20on%20the%20specification%20and%20contents%20of%20registration%20certificates) and  ["B. Requirements on the issuance of registration certificates to Relying Parties"](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/annexes/annex-2/annex-2-high-level-requirements/#a2327-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties:~:text=B%20Requirements%20on%20the%20issuance%20of%20registration%20certificates%20to%20Relying%20Parties).
+- [ARF, Annex II, Topic 44 "Registration certificates for PID Providers, Providers of QEAAs, PuB-EAAs, and non-qualified EAAs, and Relying Parties"](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2326-topic-44---registration-certificates-for-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties)
+See also ["A. Generic requirements on the specification and contents of registration certificates"](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties:~:text=A.%20Generic%20requirements%20on%20the%20specification%20and%20contents%20of%20registration%20certificates) and  ["B. Requirements on the issuance of registration certificates to Relying Parties"](https://eudi.dev/2.7.3/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties:~:text=B%20Requirements%20on%20the%20issuance%20of%20registration%20certificates%20to%20Relying%20Parties).
     - As a Relying party is obliged to register for each purpose ("intended use") separately, multiple registration certificates may be issued to a single Relying party, where **each certificate is related to one specific intended use**. As specified in Technical Specification 5, the Registrar assigns an identifier to each registered intended use of a Relying party. A registration certificate also contains information about the intermediary used by this Relying Party, if applicable.
 - [Topic X "Relying Party Registration" / "2.2 Draft CIR on Relying Party registration"](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/discussion-topics/x-relying-party-registration.md)
     - The registrant receives **one or more Relying Party Registration Certificates**.

@@ -1,0 +1,8 @@
+{
+  // Shared by Makefile and CI (.github/workflows/link-check.yml)
+  "globs": [
+    "**/*.md",
+    "#.github",
+    "#docs/sectorial-authorities-banking-brief.md"
+  ]
+}

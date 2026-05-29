@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://webuild-consortium.org/wp4/schemas/1960201_lote_lotl_subset",
+  "title": "Subset: unsigned LoTL LoTE (TS 119 602-1 JSON) for WP4 LoTL",
+  "type": "object",
+  "required": ["LoTE"],
+  "additionalProperties": false,
+  "properties": {
+    "LoTE": { "$ref": "#/$defs/LoTE" }
+  },
+  "$defs": {
+    "LoTE": {
+      "type": "object",
+      "required": ["ListAndSchemeInformation"],
+      "additionalProperties": false,
+      "properties": {
+        "ListAndSchemeInformation": { "$ref": "#/$defs/ListAndSchemeInformation" }
+      }
+    },
+    "multiLangString": {
+      "type": "object",
+      "required": ["lang", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "lang": { "type": "string", "minLength": 1 },
+        "value": { "type": "string" }
+      }
+    },
+    "NonEmptyMultiLangURI": {
+      "type": "object",
+      "required": ["lang", "uriValue"],
+      "additionalProperties": false,
+      "properties": {
+        "lang": { "type": "string", "minLength": 1 },
+        "uriValue": { "type": "string", "format": "uri" }
+      }
+    },
+    "PKIOb": {
+      "type": "object",
+      "required": ["val"],
+      "additionalProperties": true,
+      "properties": {
+        "encoding": { "type": "string" },
+        "specRef": { "type": "string" },
+        "val": { "type": "string", "minLength": 1 }
+      }
+    },
+    "ServiceDigitalIdentity": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "X509Certificates": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/PKIOb" }
+        }
+      }
+    },
+    "LoTEQualifier": {
+      "type": "object",
+      "required": ["LoTEType", "SchemeOperatorName", "MimeType"],
+      "additionalProperties": true,
+      "properties": {
+        "LoTEType": { "type": "string", "format": "uri" },
+        "SchemeOperatorName": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/multiLangString" }
+        },
+        "SchemeTypeCommunityRules": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/NonEmptyMultiLangURI" }
+        },
+        "SchemeTerritory": { "type": "string" },
+        "MimeType": { "type": "string", "minLength": 1 }
+      }
+    },
+    "OtherLoTEPointer": {
+      "type": "object",
+      "required": ["LoTELocation", "ServiceDigitalIdentities", "LoTEQualifiers"],
+      "additionalProperties": false,
+      "properties": {
+        "LoTELocation": { "type": "string", "format": "uri" },
+        "ServiceDigitalIdentities": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/ServiceDigitalIdentity" }
+        },
+        "LoTEQualifiers": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/LoTEQualifier" }
+        }
+      }
+    },
+    "SchemeOperatorAddress": {
+      "type": "object",
+      "required": ["SchemeOperatorPostalAddress", "SchemeOperatorElectronicAddress"],
+      "additionalProperties": false,
+      "properties": {
+        "SchemeOperatorPostalAddress": { "type": "array" },
+        "SchemeOperatorElectronicAddress": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/NonEmptyMultiLangURI" }
+        }
+      }
+    },
+    "ListAndSchemeInformation": {
+      "type": "object",
+      "required": [
+        "LoTEVersionIdentifier",
+        "LoTESequenceNumber",
+        "SchemeOperatorName",
+        "ListIssueDateTime",
+        "NextUpdate"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "LoTEVersionIdentifier": { "type": "integer", "minimum": 0 },
+        "LoTESequenceNumber": { "type": "integer", "minimum": 0 },
+        "LoTEType": { "type": "string", "format": "uri" },
+        "SchemeOperatorName": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/multiLangString" }
+        },
+        "SchemeOperatorAddress": { "$ref": "#/$defs/SchemeOperatorAddress" },
+        "SchemeName": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/multiLangString" }
+        },
+        "SchemeInformationURI": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/NonEmptyMultiLangURI" }
+        },
+        "StatusDeterminationApproach": { "type": "string", "format": "uri" },
+        "SchemeTypeCommunityRules": { "type": "array" },
+        "PolicyOrLegalNotice": { "type": "array" },
+        "HistoricalInformationPeriod": { "type": "integer" },
+        "SchemeTerritory": { "type": "string" },
+        "ListIssueDateTime": { "type": "string" },
+        "NextUpdate": { "type": "string" },
+        "DistributionPoints": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" }
+        },
+        "PointersToOtherLoTE": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/OtherLoTEPointer" }
+        },
+        "SchemeExtensions": { "type": "array" }
+      }
+    }
+  }
+}

@@ -22,6 +22,6 @@ This subtask defines the onboarding use cases for participants in the WP4 Trust 
 - **Trust Anchor Publication**: Trust anchor inclusion in Trusted Lists (for PID Providers, QEAA Providers, and PuB-EAA Providers)
 - **Notification to Commission**: Notification to EU Commission and other Member States (for PID Providers and PuB-EAA Providers)
 
-- **Trust Service Providers (TSPs)** – Registration, certificate submission and validation, policy compliance checks, and trust mark issuance.
-- **Wallet Providers** – Provider registration, wallet instance attestation, security compliance verification, and trust establishment.
-- **Relying Parties (RPs)** – RP registration, policy acceptance, certificate validation and access‑control configuration.
+### Wallet Solutions
+- **Wallet Providers** – Wallet solutions and providers registration
+- **Notification to Commission**: Notification to EU Commission and other Member States
