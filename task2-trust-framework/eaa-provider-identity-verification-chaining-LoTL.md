@@ -183,7 +183,7 @@ Certificate chaining is **orthogonal** to LoTL chaining but converges at the **t
 
 ARF TS02 additionally models provider notification with **X.509 certificate chains** and **service digital identities** per TS 119 612 clause 5.5.3.
 
-For **presented** credentials, the attestation format (e.g. `dc+sd-jwt`, `mso_mdoc` per ETSI TS 119 472-2) embeds or references signature material; the RP builds the validation path from that material to the trust anchor discovered via LoTL, without contacting the EAA provider’s issuance endpoint.
+For **presented** credentials, the attestation format (e.g. `dc+sd-jwt`, `mso_mdoc` per ETSI TS 119 472-2) embeds or references signature material; the RP builds the validation path from that material to the trust anchor discovered via LoTL, without contacting the EAA provider.
 
 ---
 
