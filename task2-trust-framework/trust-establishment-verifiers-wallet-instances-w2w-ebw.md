@@ -1,7 +1,7 @@
 # Trust establishment: Verifiers, Wallet Instances, Wallet-to-Wallet, and European Business Wallets
 
 **Document type:** Technical–legal evidence report  
-**Sources:** [eudi-doc-architecture-and-reference-framework](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework), [eidas-legal-tech-references](https://github.com/eu-digital-identity-wallet/eidas-legal-tech-references), Commission proposal **COM(2025) 838** (*Proposal EU Business Wallet.docx*)  
+**Sources:** [eudi-doc-architecture-and-reference-framework](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework), [eidas-legal-tech-references](https://github.com/peppelinux/eidas-references-search-engine), Commission proposal **COM(2025) 838** (*Proposal EU Business Wallet.docx*)  
 **Date:** 2026-05-28
 
 ---
@@ -100,7 +100,7 @@ flowchart TB
 | **Art. 5b(7)–(9)** | MS common WRP mechanism; WRP identification; WRP validates PID/EAA | Same |
 | **Art. 43** | Qualified electronic registered delivery (QERDS) — integrated in EBW proposal | Same |
 
-**Local mirror:** `eidas-legal-tech-references/regulation/eidas-consolidated/eidas-consolidated.md`
+**Local mirror:** [`eidas-legal-tech-references/regulation/eidas-consolidated/eidas-consolidated.md`](https://github.com/peppelinux/eidas-references-search-engine/blob/main/regulation/eidas-consolidated/eidas-consolidated.md)
 
 ### 4.2 CIR (EU) 2024/2982 — Protocols and interfaces
 
@@ -116,7 +116,7 @@ flowchart TB
 
 - **EUR-Lex:** https://data.europa.eu/eli/reg_impl/2024/2982/oj  
 - **ARF mirror:** `eudi-doc-architecture-and-reference-framework/regulations/cir_2024_2982.md`  
-- **Legal-tech mirror:** `eidas-legal-tech-references/implementing-acts/2024-2982/2024-2982.md`
+- **Legal-tech mirror:** [`eidas-legal-tech-references/implementing-acts/2024-2982/2024-2982.md`](https://github.com/peppelinux/eidas-references-search-engine/blob/main/implementing-acts/2024-2982/2024-2982.md)
 
 ### 4.3 CIR (EU) 2024/2977 — PID/EAA lifecycle
 
@@ -226,7 +226,7 @@ Notifications include **authenticity and validity of wallet units**; RFC 3647 ce
 | **OpenID4VCI** Appx E / F | WIA / KA verification | **WUA_25**, **WUA_11a** |
 | **ETSI TS 119 412-6** | Certificates for signing WIAs/KAs | **WUA_10** |
 
-**Catalogue:** `eidas-legal-tech-references/report/REFERENCES-REPORT.md`
+**Catalogue:** [`eidas-legal-tech-references/report/REFERENCES-REPORT.md`](https://github.com/peppelinux/eidas-references-search-engine/blob/main/report/REFERENCES-REPORT.md)
 
 ---
 
@@ -484,7 +484,7 @@ sequenceDiagram
 | W2W discussion | `docs/discussion-topics/j-wallet-to-wallet-interactions.md` |
 | W2W Verifier auth RR | `docs/discussion-topics/j-rr-wallet-to-wallet-interactions.md` |
 
-### eidas-legal-tech-references
+### [eidas-legal-tech-references](https://github.com/peppelinux/eidas-references-search-engine)
 
 | Document | Path |
 |----------|------|
