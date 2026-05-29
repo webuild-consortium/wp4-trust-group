@@ -14,7 +14,7 @@ In the European Digital Identity (EUDI) Wallet ecosystem, **electronic attestati
 
 This report synthesises normative material and WP4 profiles on **EAA provider identity verification** when it relies on **chaining** (trust-list discovery and X.509 path validation) and on the **List of Trusted Lists (LoTL)**—often referred to informally as “TLOL” in discussion, but **not** as an acronym in either repository (the canonical term is **LoTL**).
 
-The central finding is that **“identity verification” is overloaded**: it can mean (1) verifying the **end-user** before issuing a QEAA, (2) verifying the **EAA provider’s entitlement** at registration, (3) verifying the **provider cryptographically** via certificate chains and trusted lists, or (4) verifying the **wallet unit** before issuance. Chaining and LoTL primarily address layers (2) and (3), with certificate `x5c` chains supporting layers (3) and (4).
+The central finding is that **“identity verification” is overloaded**: it can mean (1) verifying the **end-user** before issuing a QEAA, (2) verifying the **EAA provider’s entitlement** at registration, (3) verifying the **provider cryptographically** via certificate chains and trusted lists, (4) verifying the **wallet unit** before issuance, or (5) a **Relying Party (RP) inferring trust in the EAA issuer** from an attestation **presented by the wallet unit** (signature validation against the correct TL/LoTE via LoTL chaining). Chaining and LoTL primarily address layers (2), (3), and (5); certificate `x5c` chains and qualified-signature paths support layers (3), (4), and (5).
 
 ---
 
@@ -100,6 +100,36 @@ Post-issuance attestation trust uses separate requirements:
 - **ISSU_09:** PuB-EAA qualified signature + QTSP cert validation via Art. 22 TL + Art. 45f attributes.
 - **ISSU_10:** Non-qualified EAA per applicable **Rulebook** (Topic 12).
 
+### 3.5 Relying Party trust evaluation on presented EAAs (OIA_13–OIA_15)
+
+After the holder approves a presentation, the **wallet unit** delivers PID and/or **EAA credentials** to the **Relying Party** (proximity or remote, per ETSI TS 119 472-2 / OpenID4VP). The RP does **not** re-run wallet-side issuer discovery (ISSU_34/34a); instead it **evaluates the presented credential itself** to establish trust in the **attestation issuer** (the EAA provider) and the integrity of the attributes.
+
+| Attestation type | RP requirement | Trust anchor / list (via LoTL) |
+|------------------|----------------|------------------------------|
+| **QEAA** | Validate **qualified signature** per eIDAS Art. 32 (**OIA_13**) | Trust anchor from **QEAA Provider TL** (Member State QTSP TL, Art. 22) |
+| **PuB-EAA** | Validate qualified signature per Art. 32; validate **QTSP certificate** via Art. 22 TL; verify **Art. 45f** certified attributes (**OIA_14**) | QTSP public key + national TL; PuB-EAA provider context on EC list / LoTE |
+| **Non-qualified EAA** | Validate signature per mechanism in applicable **Rulebook** (**OIA_15**) | Rulebook-defined anchors (often national EAA LoTE or MS policy) |
+
+**Procedure (WP4 UC-TE-05):**
+
+1. RP receives presented credential(s) from the wallet unit (presentation flow complete; user approved per RPA_10).
+2. RP resolves the correct TL(s) through **LoTL chaining** (authenticate LoTL → follow pointer → validate TL signature → obtain trust anchors), per **ETSI TS 119 615**.
+3. RP validates the **attestation signature** (and, for PuB-EAA, the **supporting QTSP certificate chain**) against those anchors.
+4. RP checks **issuer entity status** in the TL (e.g. not `Invalid` after suspension/cancellation — **GenNot_05**).
+5. Where specifications require it, RP verifies **attestation revocation** status.
+
+At presentation time the RP trusts the **EAA provider as issuer** only indirectly: through the **cryptographic binding** between the presented credential and a **listed, qualified, and non-revoked** issuer on the appropriate trusted list—not through WRPAC/WRPRC of the EAA provider (those are used when the **wallet** evaluates the provider at **issuance**). Symmetrically, the wallet evaluates the **RP** (WRPAC/WRPRC, registry) before release; the RP evaluates the **credential issuer** after receipt.
+
+**Presentation vs issuance — who validates what:**
+
+| Phase | Evaluator | EAA-related check |
+|-------|-----------|-------------------|
+| **Issuance** (OpenID4VCI) | Wallet unit | ISSU_34/34a (provider access cert + registration); ISSU_08–10 (optional pre-storage validation) |
+| **Presentation** (OpenID4VP / ISO 18013-5) | Wallet unit | RP authentication (WRPAC/WRPRC, RPRC_16–21) |
+| **Presentation** (after delivery) | Relying Party | OIA_13–15 (attestation signature + TL anchor + revocation) |
+
+See also: [UC-TE-05: Relying Party evaluates presented credentials](../task1-use-cases/subtask1-2-trust-registry/relying-party-evaluates-credentials.md), [Trust Infrastructure Schema §8](trust-infrastructure-schema.md#83-trust-evaluation-points).
+
 ---
 
 ## 4. Chaining mechanisms
@@ -118,16 +148,17 @@ flowchart TB
     end
 
     subgraph use["Validation use"]
-        WRPAC["WRPAC validation"]
-        WRPRC["WRPRC validation"]
-        QEAAval["QEAA signature validation"]
-        WUA["WUA/KA validation"]
+        WRPAC["WRPAC validation<br/>(wallet / RP)"]
+        WRPRC["WRPRC validation<br/>(wallet)"]
+        QEAAvalWU["EAA signature validation<br/>(wallet ISSU_08–10)"]
+        QEAAvalRP["EAA signature validation<br/>(RP OIA_13–15)"]
+        WUA["WUA/KA validation<br/>(provider)"]
     end
 
     LoTL --> Ptr
     Ptr --> TL1 & TL2 & TL3
     TL1 & TL2 & TL3 --> TA
-    TA --> WRPAC & WRPRC & QEAAval & WUA
+    TA --> WRPAC & WRPRC & QEAAvalWU & QEAAvalRP & WUA
 ```
 
 **Consumption procedure** (normative): **ETSI TS 119 615** — authenticate LoTL, follow pointers, validate TL signatures using pointer-supplied `ServiceDigitalIdentities`, then use TL trust anchors for credential validation.
@@ -148,8 +179,11 @@ Certificate chaining is **orthogonal** to LoTL chaining but converges at the **t
 | **WRPAC** (access cert) | `x5c` in JAdES; path validation per RFC 5280 | Access CA LoTE |
 | **WUA / KA** (wallet unit attestation) | Verify signing cert in `x5c` to anchor on **Wallet Provider TL** (ARF TS03) | EC Wallet Provider TL |
 | **QEAA attestation** | Qualified signature path; issuer QTSP on national TL | Member State QTSP TL |
+| **Presented EAA** (QEAA / PuB-EAA / non-Q) | RP validates attestation signature (and QTSP cert for PuB-EAA) on credential received from wallet | Same TL/LoTE as issuance-side validation (OIA_13–15) |
 
 ARF TS02 additionally models provider notification with **X.509 certificate chains** and **service digital identities** per TS 119 612 clause 5.5.3.
+
+For **presented** credentials, the attestation format (e.g. `dc+sd-jwt`, `mso_mdoc` per ETSI TS 119 472-2) embeds or references signature material; the RP builds the validation path from that material to the trust anchor discovered via LoTL, without contacting the EAA provider’s issuance endpoint.
 
 ---
 
@@ -235,6 +269,46 @@ sequenceDiagram
     WU->>TL: ISSU_08/09/10: validate attestation signature
 ```
 
+### 6.3 Relying Party presentation — trust in EAA via presented credential
+
+After issuance and storage in the wallet, attributes are **released to an RP** only following user approval. The RP then validates the **presented** PID/EAA, establishing trust in the **EAA provider as issuer** through signature verification chained to LoTL-resolved trust anchors (not through a live call to the provider).
+
+```mermaid
+sequenceDiagram
+    participant User as Holder
+    participant WU as Wallet Unit
+    participant RP as Relying Party Instance
+    participant LoTL as LoTL
+    participant TL as EAA Provider TL / LoTE
+
+    RP->>WU: Presentation request (WRPAC, WRPRC, requested attributes)
+    Note over WU: Wallet verifies RP<br/>(RPA_04, RPRC_16–21)
+    User->>WU: Approve presentation (RPA_10)
+    WU->>RP: Present PID and/or EAA credential(s)<br/>(ETSI TS 119 472-2 / OpenID4VP)
+
+    RP->>LoTL: Fetch & authenticate LoTL
+    RP->>TL: Resolve pointer (QEAA / PuB-EAA / non-Q EAA list)
+    Note over RP: OIA_13 / OIA_14 / OIA_15<br/>Validate attestation signature<br/>+ issuer status in TL (GenNot_05)
+    opt Where required by specs
+        RP->>RP: Verify attestation not revoked
+    end
+    alt Validation succeeds
+        RP->>RP: Accept attributes for service
+    else Validation fails
+        RP->>User: Reject presentation (wallet may show reason)
+    end
+```
+
+**Per attestation class (mirrors wallet ISSU_08–10, evaluator = RP):**
+
+| Step | QEAA (OIA_13) | PuB-EAA (OIA_14) | Non-qualified EAA (OIA_15) |
+|------|---------------|------------------|----------------------------|
+| LoTL → TL | National **QTSP TL** (`qeaa-provider`) | **PuB-EAA LoTE** + QTSP cert on **Art. 22 TL** | **National EAA LoTE** or Rulebook mechanism |
+| Signature | Qualified signature per Art. 32 | Qualified signature + QTSP cert chain | Per Rulebook (Topic 12) |
+| Extra checks | Issuer status; revocation if required | Art. 45f certified attributes; revocation if required | Issuer status where applicable; revocation per rulebook |
+
+The **catalogue** (`trustedAuthorities` in ARF TS11) may be used by RPs or verifier components to select the correct LoTL pointer or trust scheme for a given attestation type before performing OIA_13–15 validation.
+
 ---
 
 ## 7. Normative reference map
@@ -261,6 +335,7 @@ sequenceDiagram
 | ETSI TS 119 461 | Identity proofing at registration / QEAA issuance |
 | ETSI TS 119 475 | WRPAC/WRPRC attributes and entitlements |
 | ETSI TS 119 411-8 | Access certificate policy |
+| ETSI TS 119 472-2 | EAA/PID **presentation** profiles (credential delivery to RP) |
 | ETSI TS 119 472-3 | Credential issuer metadata (registration cert by value) |
 | ARF TS03 | WUA/KA `x5c` chaining to Wallet Provider TL |
 | ARF TS11 | Catalogue `trustedAuthorities`; LoTL vs LoTE per attestation type |
@@ -275,6 +350,8 @@ sequenceDiagram
 | `task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md` | LoTL automation, `tl_entries` layout |
 | `task5-participants-certificates-policies/eaa_provider_*_certificate.md` | WRPAC/WRPRC examples for three entitlements |
 | `task1-use-cases/.../pid_eaa_provider_onboarding.md` | Onboarding flows and trust-chain requirements |
+| `task1-use-cases/subtask1-2-trust-registry/relying-party-evaluates-credentials.md` | UC-TE-05: RP validates presented EAA/PID (OIA_13–15) |
+| `task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md` | Presentation vs issuance discovery flows |
 
 ---
 
@@ -283,7 +360,7 @@ sequenceDiagram
 | Issue | Description |
 |-------|-------------|
 | **TLOL vs LoTL** | No normative “TLOL” string; use **LoTL** in implementations and documentation. |
-| **Overloaded “identity verification”** | Legal, registration, cryptographic, and end-user meanings coexist; implementers must map controls to the correct layer. |
+| **Overloaded “identity verification”** | Legal, registration, cryptographic, end-user, **wallet-at-issuance**, and **RP-at-presentation** meanings coexist; implementers must map controls to the correct layer (see §3.4 vs §3.5). |
 | **ARF vs ETSI on EAA registration** | ARF Topic 27 requires all attestation providers to register with a Registrar; **TS 119 602 does not define EAA/QEAA provider registration as attestation providers** — only PuB-EAA via Annex H. **TS 119 612** covers QEAA as trust services. WP4 documents this mismatch explicitly. |
 | **Wallet QEAA validation algorithm** | CIR 2024/2981 states the security goal; step-by-step “registered to issue this attestation type” logic is distributed across ARF, OpenID4VP, and ETSI validation specs. |
 | **ETSI TS 119 602 in spec corpus** | Referenced in ARF TS11 but not fully mirrored in `eidas-references-search-engine/referenced-standards/` (draft/issue link only). |
@@ -294,15 +371,17 @@ sequenceDiagram
 
 ## 9. Conclusions
 
-1. **EAA provider identity verification** in the EUDI Wallet is not a single check but a **stack**: MS registrar vetting and TS 119 461 proofing → publication of trust anchors in the correct TL/LoTE → LoTL-mediated discovery → runtime validation of WRPAC/WRPRC and attestation signatures via **chained** trust material.
+1. **EAA provider identity verification** in the EUDI Wallet is not a single check but a **stack**: MS registrar vetting and TS 119 461 proofing → publication of trust anchors in the correct TL/LoTE → LoTL-mediated discovery → runtime validation of WRPAC/WRPRC (wallet, at issuance) and **attestation signatures** (wallet at storage and **RP at presentation**) via **chained** trust material.
 
-2. **LoTL chaining** answers: *Which signed list should I trust, and with which anchor?* It routes verifiers to the correct national QTSP list (QEAA), EC PuB-EAA list, or national non-qualified EAA LoTE.
+2. **LoTL chaining** answers: *Which signed list should I trust, and with which anchor?* It routes **wallet units and Relying Parties** to the correct national QTSP list (QEAA), EC PuB-EAA list, or national non-qualified EAA LoTE.
 
-3. **Certificate chaining** answers: *Does this presented credential chain to an anchor I already trust from those lists?* It applies to WRPAC, WRPRC, WUA, and QEAA signature validation paths.
+3. **Certificate chaining** answers: *Does this presented credential chain to an anchor I already trust from those lists?* It applies to WRPAC, WRPRC, WUA, and **QEAA/PuB-EAA/non-Q EAA signature validation**—including when the RP validates a credential **received from the wallet** after presentation (OIA_13–15).
 
 4. **QEAA providers** are dual nature: they **register** as attestation providers (ARF) and appear on **national QTSP trusted lists** (eIDAS Art. 22), not on the PuB-EAA Annex H LoTE profile.
 
-5. WP4 profiles operationalise the standards split (612 vs 602, LoTL automation, §7.3 Annex H) but pilots remain **partially populated** for EAA-specific LoTL entries.
+5. **Presentation is symmetric to issuance for trust lists**: the wallet uses TL/LoTE + registry to trust the **RP** before release; the RP uses the **same TL/LoTE ecosystem** to trust the **EAA issuer** on the presented credential after receipt—without re-using the EAA provider’s WRPAC/WRPRC in that step.
+
+6. WP4 profiles operationalise the standards split (612 vs 602, LoTL automation, §7.3 Annex H) but pilots remain **partially populated** for EAA-specific LoTL entries.
 
 ---
 
@@ -325,6 +404,7 @@ sequenceDiagram
 - `task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md`
 - `task5-participants-certificates-policies/eaa_provider_access_certificate.md`
 - `task5-participants-certificates-policies/eaa_provider_registration_certificate.md`
+- `task1-use-cases/subtask1-2-trust-registry/relying-party-evaluates-credentials.md` — UC-TE-05 (OIA_13–15)
 
 ---
 
