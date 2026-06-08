@@ -39,12 +39,137 @@
       ],
       "StatusDeterminationApproach": "http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate",
       "SchemeTerritory": "EU",
-      "ListIssueDateTime": "2026-05-11T07:21:16Z",
-      "NextUpdate": "2026-11-11T07:21:16Z",
+      "ListIssueDateTime": "2026-06-08T08:28:13Z",
+      "NextUpdate": "2026-12-08T08:28:13Z",
       "DistributionPoints": [
         "https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json"
       ],
       "PointersToOtherLoTE": [
+        {
+          "LoTELocation": "https://tl-api.dev.idunion.info/api/v1/ZKMUspmG/etsi/tl.xml",
+          "ServiceDigitalIdentities": [
+            {
+              "X509Certificates": [
+                {
+                  "val": "MIIDODCCAt2gAwIBAgIRAOTecMTC/6j9gA3N7IWi++swCgYIKoZIzj0EAwIwgagxCzAJBgNVBAYTAk5MMQkwBwYDVQQIEwAxCTAHBgNVBAcTADEJMAcGA1UECRMAMQkwBwYDVQQREwAxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMSowKAYDVQQDEyFodHRwczovL3d3dy53ZWJ1aWxkY29uc29ydGl1bS5ldS8wHhcNMjYwMzE3MTIyMzU5WhcNMjYwNDE2MTEyNDAwWjCBqDELMAkGA1UEBhMCTkwxCTAHBgNVBAgTADEJMAcGA1UEBxMAMQkwBwYDVQQJEwAxCTAHBgNVBBETADFBMD8GA1UEChM4V0VCVUlMRCAtIFdQIDQgLSBHcm91cCA1IC0gVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxKjAoBgNVBAMTIWh0dHBzOi8vd3d3LndlYnVpbGRjb25zb3J0aXVtLmV1LzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABAfF/31w4BW3PZb6MoXR9ZT9C1rFsaml5s2dcKTUrSB46+PYys4rCUxm/oqjiqoxse+y0qVqo9EjfhTqNniGdhujgeUwgeIwDgYDVR0PAQH/BAQDAgeAMBIGA1UdJQQLMAkGByiBjF0FAQYwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUlmVor/hKzKRe/jbILRr5aA/WxhowHwYDVR0jBBgwFoAUlmVor/hKzKRe/jbILRr5aA/WxhowbgYDVR0RBGcwZYEPaW5mb0BpZHVuaW9uLmV1hlJodHRwczovL2FwaS53YWxsZXQuaWR1bmlvbi5pbmZvL2FwaS92MS9pc3N1ZXIvMDE5Y2ZiYzAtNmIyNy03YWRhLWIyNTItNjYzOGI0Nzk1YzhmMAoGCCqGSM49BAMCA0kAMEYCIQCwVLE8OKmoU3XPakOGvKtCaXVj4l4zbCXuIB6/Tlt0kAIhAOSUBTeO02rYjraY6DKy2UzmjgC7LKw9O4Lv0+XDLu9Q"
+                }
+              ]
+            }
+          ],
+          "LoTEQualifiers": [
+            {
+              "LoTEType": "http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric",
+              "SchemeOperatorName": [
+                {
+                  "lang": "en",
+                  "value": "IDunion SCE"
+                }
+              ],
+              "SchemeTerritory": "DE",
+              "MimeType": "application/json"
+            }
+          ]
+        },
+        {
+          "LoTELocation": "https://tl-api.dev.idunion.info/api/v1/3Krx8SGl/etsi/tl.xml",
+          "ServiceDigitalIdentities": [
+            {
+              "X509Certificates": [
+                {
+                  "val": "MIIDNjCCAt2gAwIBAgIRAPizi5ysHpfDE4dq2mvY04IwCgYIKoZIzj0EAwIwgagxCzAJBgNVBAYTAk5MMQkwBwYDVQQIEwAxCTAHBgNVBAcTADEJMAcGA1UECRMAMQkwBwYDVQQREwAxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMSowKAYDVQQDEyFodHRwczovL3d3dy53ZWJ1aWxkY29uc29ydGl1bS5ldS8wHhcNMjYwMzE3MTIxNzU4WhcNMjYwNDE2MTExNzU5WjCBqDELMAkGA1UEBhMCTkwxCTAHBgNVBAgTADEJMAcGA1UEBxMAMQkwBwYDVQQJEwAxCTAHBgNVBBETADFBMD8GA1UEChM4V0VCVUlMRCAtIFdQIDQgLSBHcm91cCA1IC0gVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxKjAoBgNVBAMTIWh0dHBzOi8vd3d3LndlYnVpbGRjb25zb3J0aXVtLmV1LzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABF0d/6yzUsMfHZXEnDiWLT32Pmlm5Lfk1jFXMvKjh0hK7XN7bCVqGREwUrphK2FTRejroxeIJkV1eEq+l9ZHoG+jgeUwgeIwDgYDVR0PAQH/BAQDAgeAMBIGA1UdJQQLMAkGByiBjF0FAQYwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUE6KqoSEvHSA1Tj4o7DRDfaPmlhQwHwYDVR0jBBgwFoAUE6KqoSEvHSA1Tj4o7DRDfaPmlhQwbgYDVR0RBGcwZYEPaW5mb0BpZHVuaW9uLmV1hlJodHRwczovL2FwaS53YWxsZXQuaWR1bmlvbi5pbmZvL2FwaS92MS9pc3N1ZXIvMDE5Y2ZiYmItMDNlZC03M2JiLWI1OGYtMDg1Nzk1MTk1N2I3MAoGCCqGSM49BAMCA0cAMEQCIDSI1TVjHaYS20ih1z4FASPDyz4qrM+UWJ4pHAcs6EO3AiAExJXZ/H8JoEge8bpbRmgmtwsT8oFSZ5tTHS4/lAiTZw=="
+                }
+              ]
+            }
+          ],
+          "LoTEQualifiers": [
+            {
+              "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUWalletProvidersList",
+              "SchemeOperatorName": [
+                {
+                  "lang": "en",
+                  "value": "IDunion SCE"
+                }
+              ],
+              "SchemeTerritory": "DE",
+              "MimeType": "application/json"
+            }
+          ]
+        },
+        {
+          "LoTELocation": "https://tl-api.dev.idunion.info/api/v1/hD5M82eY/etsi/tl.xml",
+          "ServiceDigitalIdentities": [
+            {
+              "X509Certificates": [
+                {
+                  "val": "MIIDNzCCAtygAwIBAgIQM1UO5jZ6E4IpRup89qp09jAKBggqhkjOPQQDAjCBqDELMAkGA1UEBhMCTkwxCTAHBgNVBAgTADEJMAcGA1UEBxMAMQkwBwYDVQQJEwAxCTAHBgNVBBETADFBMD8GA1UEChM4V0VCVUlMRCAtIFdQIDQgLSBHcm91cCA1IC0gVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxKjAoBgNVBAMTIWh0dHBzOi8vd3d3LndlYnVpbGRjb25zb3J0aXVtLmV1LzAeFw0yNjAzMTcxMjI1MzVaFw0yNjA0MTYxMTI1MzVaMIGoMQswCQYDVQQGEwJOTDEJMAcGA1UECBMAMQkwBwYDVQQHEwAxCTAHBgNVBAkTADEJMAcGA1UEERMAMUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEqMCgGA1UEAxMhaHR0cHM6Ly93d3cud2VidWlsZGNvbnNvcnRpdW0uZXUvMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEuj+OZpOIYCVgV3JEegeK2RjHVgu+NymOFptPQTxjnkd0lZZcNzGawLQqDMH+ubAGxF8z5/b1mi+8ynKQ40iZ5KOB5TCB4jAOBgNVHQ8BAf8EBAMCB4AwEgYDVR0lBAswCQYHKIGMXQUBBjAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQ+OieS/unwOVMIcBgVH82oMA9lozAfBgNVHSMEGDAWgBQ+OieS/unwOVMIcBgVH82oMA9lozBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMTljZmJjMi0wOGY4LTdiNTctYjc2Mi0xN2M1ZGY0MWJiZDYwCgYIKoZIzj0EAwIDSQAwRgIhAO3xSqqXf4mCWRDWcJU1JnIi+m3QNw06/4UK5ROm7BoSAiEAnjG2wvR4IpaRxaI8SONlkt1h5epFcrn8disD4dsrMbw="
+                }
+              ]
+            }
+          ],
+          "LoTEQualifiers": [
+            {
+              "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUWRPRCProvidersList",
+              "SchemeOperatorName": [
+                {
+                  "lang": "en",
+                  "value": "IDunion SCE"
+                }
+              ],
+              "SchemeTerritory": "DE",
+              "MimeType": "application/json"
+            }
+          ]
+        },
+        {
+          "LoTELocation": "https://tl-api.dev.idunion.info/api/v1/jyM6L3Q5/etsi/tl.xml",
+          "ServiceDigitalIdentities": [
+            {
+              "X509Certificates": [
+                {
+                  "val": "MIIDNzCCAt2gAwIBAgIRAPBbvlZh774Y22YfHjNdWOgwCgYIKoZIzj0EAwIwgagxCzAJBgNVBAYTAk5MMQkwBwYDVQQIEwAxCTAHBgNVBAcTADEJMAcGA1UECRMAMQkwBwYDVQQREwAxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMSowKAYDVQQDEyFodHRwczovL3d3dy53ZWJ1aWxkY29uc29ydGl1bS5ldS8wHhcNMjYwMzE3MTIyNjQ0WhcNMjYwNDE2MTEyNjQ0WjCBqDELMAkGA1UEBhMCTkwxCTAHBgNVBAgTADEJMAcGA1UEBxMAMQkwBwYDVQQJEwAxCTAHBgNVBBETADFBMD8GA1UEChM4V0VCVUlMRCAtIFdQIDQgLSBHcm91cCA1IC0gVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxKjAoBgNVBAMTIWh0dHBzOi8vd3d3LndlYnVpbGRjb25zb3J0aXVtLmV1LzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABEEzB8wpVcIk05kxjkXtwE5OQul7Rc8M9TY1D8a6X6t6DP7FGSJeD6UbL7mb+6W6BJh6aCthL49h3MIYxJtZgxejgeUwgeIwDgYDVR0PAQH/BAQDAgeAMBIGA1UdJQQLMAkGByiBjF0FAQYwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUEEomu3FrCG5XvPONx2V1pokCET0wHwYDVR0jBBgwFoAUEEomu3FrCG5XvPONx2V1pokCET0wbgYDVR0RBGcwZYEPaW5mb0BpZHVuaW9uLmV1hlJodHRwczovL2FwaS53YWxsZXQuaWR1bmlvbi5pbmZvL2FwaS92MS9pc3N1ZXIvMDE5Y2ZiYzMtMTY2MC03NWFkLThjNjAtNGRlOTkyNTc5NzVlMAoGCCqGSM49BAMCA0gAMEUCIQD0IxBq0pu5Hmp2Zay6XNplBfeoeA/THj6KQt9bTSfCzAIgAXsTypzBV/5Q9ZbSkmC71GuRV92vjxgbqrRtIAXEv5o="
+                }
+              ]
+            }
+          ],
+          "LoTEQualifiers": [
+            {
+              "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList",
+              "SchemeOperatorName": [
+                {
+                  "lang": "en",
+                  "value": "IDunion SCE"
+                }
+              ],
+              "SchemeTerritory": "DE",
+              "MimeType": "application/json"
+            }
+          ]
+        },
+        {
+          "LoTELocation": "https://tl-api.dev.idunion.info/api/v1/dYDa2hfg/etsi/tl.xml",
+          "ServiceDigitalIdentities": [
+            {
+              "X509Certificates": [
+                {
+                  "val": "MIIDNzCCAt2gAwIBAgIRALUp+JCkJEnajmFEheCyDFswCgYIKoZIzj0EAwIwgagxCzAJBgNVBAYTAk5MMQkwBwYDVQQIEwAxCTAHBgNVBAcTADEJMAcGA1UECRMAMQkwBwYDVQQREwAxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMSowKAYDVQQDEyFodHRwczovL3d3dy53ZWJ1aWxkY29uc29ydGl1bS5ldS8wHhcNMjYwMzE3MTIxMzE0WhcNMjYwNDE2MTExMzE1WjCBqDELMAkGA1UEBhMCTkwxCTAHBgNVBAgTADEJMAcGA1UEBxMAMQkwBwYDVQQJEwAxCTAHBgNVBBETADFBMD8GA1UEChM4V0VCVUlMRCAtIFdQIDQgLSBHcm91cCA1IC0gVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxKjAoBgNVBAMTIWh0dHBzOi8vd3d3LndlYnVpbGRjb25zb3J0aXVtLmV1LzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDc7U1nKB9NI6iYyyByZvDzCJIkgFShox+asYwq7rBmjxA+QlRBj4GXEIYiN6dfmiqoGo/AuoACfpQtJoVQ5H6qjgeUwgeIwDgYDVR0PAQH/BAQDAgeAMBIGA1UdJQQLMAkGByiBjF0FAQYwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUcxcvpxaCurp+CG0JQ4ETF2jauhgwHwYDVR0jBBgwFoAUcxcvpxaCurp+CG0JQ4ETF2jauhgwbgYDVR0RBGcwZYEPaW5mb0BpZHVuaW9uLmV1hlJodHRwczovL2FwaS53YWxsZXQuaWR1bmlvbi5pbmZvL2FwaS92MS9pc3N1ZXIvMDE5Y2ZiYjYtODQ4NS03YTAyLTkzYWItNWM4ZmZjNmYwMjM2MAoGCCqGSM49BAMCA0gAMEUCIQCyQ+drTqZbIsv2YWi8A6jwNozz+hUZWxugQPs8skXofQIgUVU/IDnNAuOEb2Ut+l9dRshGw4rRt7BzN6GzjJxsNUY="
+                }
+              ]
+            }
+          ],
+          "LoTEQualifiers": [
+            {
+              "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUWRPACProvidersList",
+              "SchemeOperatorName": [
+                {
+                  "lang": "en",
+                  "value": "IDunion SCE"
+                }
+              ],
+              "SchemeTerritory": "DE",
+              "MimeType": "application/json"
+            }
+          ]
+        },
         {
           "LoTELocation": "https://webuild-consortium.github.io/wp4-trust-group/lotes/wrpac-providers-lote.json",
           "ServiceDigitalIdentities": [
@@ -69,6 +194,31 @@
               "MimeType": "application/json"
             }
           ]
+        },
+        {
+          "LoTELocation": "https://tl-api.dev.idunion.info/api/v1/OT60PCYh/etsi/tl.xml",
+          "ServiceDigitalIdentities": [
+            {
+              "X509Certificates": [
+                {
+                  "val": "MIIDNzCCAtygAwIBAgIQFaNOwKwgTq/0hz86UmX4xTAKBggqhkjOPQQDAjCBqDELMAkGA1UEBhMCTkwxCTAHBgNVBAgTADEJMAcGA1UEBxMAMQkwBwYDVQQJEwAxCTAHBgNVBBETADFBMD8GA1UEChM4V0VCVUlMRCAtIFdQIDQgLSBHcm91cCA1IC0gVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxKjAoBgNVBAMTIWh0dHBzOi8vd3d3LndlYnVpbGRjb25zb3J0aXVtLmV1LzAeFw0yNjAzMTcxMjEwMzlaFw0yNjA0MTYxMTEwMzlaMIGoMQswCQYDVQQGEwJOTDEJMAcGA1UECBMAMQkwBwYDVQQHEwAxCTAHBgNVBAkTADEJMAcGA1UEERMAMUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEqMCgGA1UEAxMhaHR0cHM6Ly93d3cud2VidWlsZGNvbnNvcnRpdW0uZXUvMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+8YxSGeEgjDMWUh2OJtyiX4A94kStp9zxr3oiaL+0iKjjIO15H45m2cYjQPT8fpnfGvYRju0bcUyYnxkus5Wv6OB5TCB4jAOBgNVHQ8BAf8EBAMCB4AwEgYDVR0lBAswCQYHKIGMXQUBBjAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQY8HnM41E+ZkE/12gArJUJp4D2PTAfBgNVHSMEGDAWgBQY8HnM41E+ZkE/12gArJUJp4D2PTBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMTljZmJiMy1mYTM5LTczZDgtYjRiYy0xOGNjNTQ1YjMyMGEwCgYIKoZIzj0EAwIDSQAwRgIhAKvKc5O8TIUmb70twuzFr+GG3zolvRK0D9rZhhhDePPQAiEAlcYRMaJLmcX2p1p2y6qe93L47tF8XiV0v8BJQ+RBmd4="
+                }
+              ]
+            }
+          ],
+          "LoTEQualifiers": [
+            {
+              "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList",
+              "SchemeOperatorName": [
+                {
+                  "lang": "en",
+                  "value": "IDunion SCE"
+                }
+              ],
+              "SchemeTerritory": "DE",
+              "MimeType": "application/json"
+            }
+          ]
         }
       ]
     }
@@ -80,7 +230,7 @@
         "MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAwMQswCQYDVQQGEwJFVTEhMB8GA1UECgwYV1A0IFRydXN0IFJlZ2lzdHJ5IEdyb3VwMB4XDTI2MDMyMDEzMjgyNVoXDTI5MDMxOTEzMjgyNVowMDELMAkGA1UEBhMCRVUxITAfBgNVBAoMGFdQNCBUcnVzdCBSZWdpc3RyeSBHcm91cDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJoI9e3meFI++UhQAG3clpKkbSTL2YIuhGZ/4C4kbPjjEgbL8hKywQUlCN6TXUipD8SMjceZ3PnB52qZgAK9Qh2jUjBQMA4GA1UdDwEB/wQEAwIGwDARBgNVHSUECjAIBgYEAJE3AwAwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUh78bCQwjCQICwxtn6FHEQAktn7YwCgYIKoZIzj0EAwIDRwAwRAIgfbkN22wQzj8kfoAgvYk1u86n/jHDB1FEXJA7aH4VuRECIHulljT498YiqnCgRU7UlRXSF/MpC02r1V1DjAue5lYF"
       ]
     },
-    "signature": "5zhuiXxYCodA2R4sobv4BNQL7iFYMh3BijH8R1l0fVY4GMvyRofUlpMajmylkPgRuk-Y1Izgq7TFQSHeS59whw",
+    "signature": "JwlsTfn7OHmZx9BBeBNXUwJMmZih3l_RVHcdwI2taqcHSou6_yspEfvqwEv7MbB3sEUz7N1vS2RFBoc3OOW_WQ",
     "header": {
       "x5c": [
         "MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAwMQswCQYDVQQGEwJFVTEhMB8GA1UECgwYV1A0IFRydXN0IFJlZ2lzdHJ5IEdyb3VwMB4XDTI2MDMyMDEzMjgyNVoXDTI5MDMxOTEzMjgyNVowMDELMAkGA1UEBhMCRVUxITAfBgNVBAoMGFdQNCBUcnVzdCBSZWdpc3RyeSBHcm91cDBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJoI9e3meFI++UhQAG3clpKkbSTL2YIuhGZ/4C4kbPjjEgbL8hKywQUlCN6TXUipD8SMjceZ3PnB52qZgAK9Qh2jUjBQMA4GA1UdDwEB/wQEAwIGwDARBgNVHSUECjAIBgYEAJE3AwAwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUh78bCQwjCQICwxtn6FHEQAktn7YwCgYIKoZIzj0EAwIDRwAwRAIgfbkN22wQzj8kfoAgvYk1u86n/jHDB1FEXJA7aH4VuRECIHulljT498YiqnCgRU7UlRXSF/MpC02r1V1DjAue5lYF"
