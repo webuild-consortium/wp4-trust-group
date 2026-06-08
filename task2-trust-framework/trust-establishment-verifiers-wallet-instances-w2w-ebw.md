@@ -319,7 +319,7 @@ See: [j-rr-wallet-to-wallet-interactions.md](https://github.com/eu-digital-ident
 
 | Item | Detail |
 |------|--------|
-| **Document** | `Proposal EU Business Wallet.docx` (user path: `/home/wert/Scaricati/`) |
+| **Document** | `Proposal EU Business Wallet.docx` |
 | **Official reference** | **COM(2025) 838 final** — Proposal for a Regulation on the establishment of European Business Wallets |
 | **Procedure** | 2025/0358 (COD) |
 | **Date** | Brussels, 19 November 2025 |
