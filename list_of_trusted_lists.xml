@@ -27,20 +27,20 @@
     <ns0:StatusDeterminationApproach>http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate</ns0:StatusDeterminationApproach>
     <ns0:SchemeTypeCommunityRules>http://uri.etsi.org/TrstSvc/TrustedList/SchemeTypeCommunityRules/EU</ns0:SchemeTypeCommunityRules>
     <ns0:SchemeTerritory>EU</ns0:SchemeTerritory>
-    <ns0:ListIssueDateTime>2026-06-10T05:41:04Z</ns0:ListIssueDateTime>
-    <ns0:NextUpdate>2026-12-10T05:41:04Z</ns0:NextUpdate>
+    <ns0:ListIssueDateTime>2026-06-10T05:43:00Z</ns0:ListIssueDateTime>
+    <ns0:NextUpdate>2026-12-10T05:43:00Z</ns0:NextUpdate>
     <ns0:DistributionPoints>
+      <ns0:DistributionPoint>
+        <ns0:URI>https://tl-api.dev.idunion.info/api/v1/hD5M82eY/etsi/tl.xml</ns0:URI>
+      </ns0:DistributionPoint>
+      <ns0:DistributionPoint>
+        <ns0:URI>https://tl-api.dev.idunion.info/api/v1/OT60PCYh/etsi/tl.xml</ns0:URI>
+      </ns0:DistributionPoint>
       <ns0:DistributionPoint>
         <ns0:URI>https://tl-api.dev.idunion.info/api/v1/ZKMUspmG/etsi/tl.xml</ns0:URI>
       </ns0:DistributionPoint>
       <ns0:DistributionPoint>
         <ns0:URI>https://tl-api.dev.idunion.info/api/v1/3Krx8SGl/etsi/tl.xml</ns0:URI>
-      </ns0:DistributionPoint>
-      <ns0:DistributionPoint>
-        <ns0:URI>https://tl-api.dev.idunion.info/api/v1/hD5M82eY/etsi/tl.xml</ns0:URI>
-      </ns0:DistributionPoint>
-      <ns0:DistributionPoint>
-        <ns0:URI>https://tl-api.dev.idunion.info/api/v1/jyM6L3Q5/etsi/tl.xml</ns0:URI>
       </ns0:DistributionPoint>
       <ns0:DistributionPoint>
         <ns0:URI>https://tl-api.dev.idunion.info/api/v1/dYDa2hfg/etsi/tl.xml</ns0:URI>
@@ -49,11 +49,11 @@
         <ns0:URI>https://webuild-consortium.github.io/wp4-trust-group/lotes/wrpac-providers-lote.json</ns0:URI>
       </ns0:DistributionPoint>
       <ns0:DistributionPoint>
-        <ns0:URI>https://tl-api.dev.idunion.info/api/v1/OT60PCYh/etsi/tl.xml</ns0:URI>
+        <ns0:URI>https://tl-api.dev.idunion.info/api/v1/jyM6L3Q5/etsi/tl.xml</ns0:URI>
       </ns0:DistributionPoint>
     </ns0:DistributionPoints>
   </ns0:SchemeInformation>
-<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256"/><ds:Reference URI="#lotl-1"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>mNxv41Vwg2fuXXHwQktXGhgh8EQEw61+sbz04Gjzyqo=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>Pt2jP7PjbDATfsSa1gWxXjKkiZqE8I4EzXels1Qva4b6oOepkvs3G3J4iALLHtPCOjXUKDbeBatssLi8hbRunA==</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAw
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256"/><ds:Reference URI="#lotl-1"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>2vxmNpnezKXwguOXMnJODap5ILqbGc619mwm4oYeST4=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>8XTUj7GnqXpTHGWGwqFtKzwuBTV8sLbCX2x2oMt/WMzybrMYRBeKRyNvRJCfRryPIqSBsrALCwU3HwwAr/Wasw==</ds:SignatureValue><ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAw
 MQswCQYDVQQGEwJFVTEhMB8GA1UECgwYV1A0IFRydXN0IFJlZ2lzdHJ5IEdyb3Vw
 MB4XDTI2MDMyMDEzMjgyNVoXDTI5MDMxOTEzMjgyNVowMDELMAkGA1UEBhMCRVUx
 ITAfBgNVBAoMGFdQNCBUcnVzdCBSZWdpc3RyeSBHcm91cDBZMBMGByqGSM49AgEG
