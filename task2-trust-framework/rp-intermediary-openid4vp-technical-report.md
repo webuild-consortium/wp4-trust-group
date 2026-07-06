@@ -29,10 +29,10 @@ This document is **informative**. Normative requirements remain in the cited spe
 
 | Question | Short answer |
 |----------|--------------|
-| How does the Wallet know the Verifier is an intermediary? | There is **no** dedicated `is_intermediary` flag. The Wallet infers intermediation when the **WRPAC** identity (intermediary) differs from the **registration data** in `verifier_info` (intermediated Relying Party). |
+| How does the Wallet know the Relying Party is an intermediary? | There is **no** dedicated `is_intermediary` flag. The Wallet infers intermediation when the **WRPAC** identity (intermediary) differs from the **registration data** in `verifier_info` (intermediated Relying Party). |
 | Who sends the OpenID4VP request? | The **intermediary** signs and sends the Authorization Request / Request Object. The intermediated Relying Party does not connect to the Wallet directly. |
 | What does the intermediary expose for authentication? | Its own **WRPAC** (JWT header `x5c`, `x509_hash` `client_id`). |
-| What WRPRC is in `verifier_info`? | The **intermediated Relying Party's** certificate (if issued), not the intermediary's WRPRC in intermediated transactions. |
+| What WRPRC is in `verifier_info`? | The **intermediated Relying Party's** certificate (if issued). |
 | Where is the intermediary's WRPRC exposed? | **Not** in intermediated transactions. Only when the intermediary acts **in its own capacity** as a direct Relying Party, or via public Registry data. |
 
 ---
@@ -44,7 +44,7 @@ This document is **informative**. Normative requirements remain in the cited spe
 | [OpenID4VP 1.0](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html) | Base protocol; defines optional `verifier_info` (Section 5.11). Does **not** define intermediary semantics. |
 | [OpenID4VC-HAIP](https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-1_0-06.html) | High-assurance profile (`x509_hash`, `direct_post.jwt`, Request Object by reference). |
 | [ETSI TS 119 472-2](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.02.01_60/ts_11947202v010201p.pdf) | EUDI profile: mandatory `verifier_info` with `registrar_dataset` and optional `registration_cert`. |
-| [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf) | WRPAC attributes supporting Wallet user authorisation decisions. |
+| [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf) | WRPRC attributes supporting Wallet user authorisation decisions. |
 | [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) | WRPAC / WRPRC policy framework. |
 | [CIR (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) | Wallet-relying party registration; WRPAC/WRPRC issuance. |
 | [EUDI ARF §6.6.5](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/architecture-and-reference-framework-main.md) | Narrative flow for presentation to an intermediary. |
@@ -64,7 +64,7 @@ Within the WP4 trust model ([Entities Involved](entities-involved.md), [Trust In
 |--------|-------------------|
 | **Intermediary** | Special class of Relying Party ([Terms — §3.16](../task1-use-cases/terms-and-entities.md#316-intermediary)); registers as RP; obtains WRPAC from a **WRPAC Authority** (Access CA); may obtain WRPRC from a **WRPRC Provider**. |
 | **Intermediated RP** | Registered at a **Registrar**; registration data published in the **Registry**; may receive WRPRC per intended use. |
-| **Wallet Unit** | Validates intermediary WRPAC against the **Access CA Trusted List**; validates intermediated RP WRPRC against the **WRPRC Provider Trusted List**; may query the Registry via `registryURI`. |
+| **Wallet Unit** | Validates intermediary WRPAC against the **Access CA Trusted List**; validates intermediated RP WRPRC against the **WRPRC Provider Trusted List**; or query the Registry via `registryURI`. |
 
 Relying Parties are **not** listed in Trusted Lists; trust is established through WRPAC chain validation and Registry / WRPRC verification — see [EUDI Wallet Trust and Entitlement Discovery](eudi-wallet-trust-and-entitlement-discovery.md).
 
@@ -360,14 +360,12 @@ The intermediated RP's WRPRC (carried in `verifier_info`, not shown decoded abov
 
 ```json
 {
-  "subject": {
-    "identifier": "urn:eu:wrp:eu:98765432109:0001",
-    "tradeName": "Example Cinema Ltd.",
-    "intendedUse": "urn:eu:wrp-intended-use:eu:cinema-age-check"
-  },
-  "associationToIntermediary": {
-    "identifier": "urn:eu:wrp:eu:11111111111:0001",
-    "tradeName": "Example Intermediary Provider"
+    "sub": "urn:eu:wrp:eu:98765432109:0001",
+    "name": "Example Cinema Ltd.",
+    ...
+  "intermediary": {
+    "sub": "urn:eu:wrp:eu:11111111111:0001",
+    "name": "Example Intermediary Provider"
   }
 }
 ```
