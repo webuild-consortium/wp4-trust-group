@@ -1,142 +1,30 @@
-# Subtask 1.2: Trust Registry Use Cases
+# Subtask 1.2: Trust Registry and Trust Evaluation Use Cases
 
-This subtask focuses on defining use cases for trust registry operations in the WP4 Trust Infrastructure.
+This subtask contains use cases for **trust registry operations** and **trust evaluation**: how ecosystem participants use Trusted Lists, registries, and certificates to establish and verify trust during credential issuance and presentation.
 
-## Trust Registry Operations
+## Scope
 
-### Trust Establishment
-- **Initial Trust Setup**: Establishing initial trust relationships
-- **Create a new Trusted List**: Setting up a new trust list
-- **Trust Anchor Configuration**: Configuring trust anchors
-- **Trust Chain Validation**: Validating trust chains
-- **Trust Policy Enforcement**: Enforcing trust policies
-- **Schema registration**: Managing data models and semantic standards
+- **Trust evaluation**: How Wallet Units, Relying Parties, PID Providers, Attestation Providers, and Holders (Users using the Wallet Unit) evaluate the trustworthiness of other participants — and how Holders assess their own Wallet Instance via Trust Marks (Regulation (EU) 2024/1183 Art. 5a(5), 5d) — using Trusted Lists (TL), List of Trusted Lists (LoTL), Registrar registries, and Trust Marks.
 
-### Trust Evaluation
-- **Certificate Validation**: Validating certificates
-- **Policy Compliance Checking**: Checking policy compliance
-- **Trust Level Assessment**: Assessing trust levels
-- **Risk Evaluation**: Evaluating risks
+For terminology and entity definitions, see [Consolidated Terms and Entity Definitions](../terms-and-entities.md).
+- **Trust sources**: Access CA Trusted Lists, PID Provider TL, Attestation Provider TL (QEAA/PuB-EAA/EAA), Wallet Provider TL, Registration Certificate Provider TL, and National Registers (per [Trust Infrastructure Schema - Trust Evaluation](../../task2-trust-framework/trust-infrastructure-schema.md#8-trust-evaluation)).
 
-### Trust Maintenance
-- **Certificate Renewal**: Renewing certificates
-- **Policy Updates**: Updating policies
-- **Trust Level Adjustments**: Adjusting trust levels
-- **Monitoring and Reporting**: Monitoring and reporting
-- **Access controls**: Managing who can perform which operations
-- **Approval workflow**: Managing multi-step approval processes for sensitive
-- **Delegation Management**: Handling authority delegation and subordinate
+These use cases are aligned with the [EUDI Wallet Architecture and Reference Framework (ARF)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/) and the [Trusted List / Registration / Trust Evaluation requirements matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md).
 
-### Trust Revocation
-- **Certificate Revocation**: Revoking certificates
-- **Trust Suspension**: Suspending trust
-- **Emergency Revocation**: Emergency revocation procedures
-- **Revocation List Management**: Managing revocation lists
+## Use Case Documents
 
-### Trust Discovery
-- **Finding existing Trust Registries**
-- **Fetching data from Trust Registries**
-- **Finding a trust chain**
-- **Notifications**
+| Use case | Document | Summary |
+|----------|----------|---------|
+| **UC-TE-01** | [Trust evaluation base](trust-evaluation-base.md) | Common terminology, trust sources, and ARF requirement mapping |
+| **UC-TE-02** | [Wallet Unit evaluates Credential Issuer](wallet-unit-evaluates-credential-issuer.md) | Wallet Unit verifies PID/Attestation Provider before requesting PID or attestation |
+| **UC-TE-03** | [Credential Issuer evaluates Wallet Unit](credential-issuer-evaluates-wallet-unit.md) | PID/Attestation Provider verifies Wallet Unit (WUA) before issuing |
+| **UC-TE-04** | [Wallet Unit evaluates Relying Party](wallet-unit-evaluates-relying-party.md) | Wallet Unit verifies RP before presentation |
+| **UC-TE-05** | [Relying Party evaluates presented credentials](relying-party-evaluates-credentials.md) | RP validates PID and attestation signatures using Trusted Lists |
+| **UC-TE-06** | [Trusted List discovery and consumption](trusted-list-discovery-consumption.md) | Obtaining and using LoTL and Trusted Lists for validation |
 
-## Use Case Categories
+## Relationship to Other Tasks
 
-### Trust Establishment
-1. **Initial Trust Setup**
-   - System establishes initial trust relationships
-   - System configures trust anchors
-   - System validates trust chains
-   - System enforces trust policies
-
-2. **Trust Anchor Configuration**
-   - Administrator configures Trust Anchor
-   - System validates Trust Anchor certificate
-   - System establishes Trust Anchor relationship
-   - System activates Trust Anchor
-
-3. **Trust Chain Validation**
-   - System retrieves certificate chain
-   - System validates certificate chain
-   - System verifies trust chain integrity
-   - System returns validation result
-
-4. **Trust Policy Enforcement**
-   - System retrieves trust policy
-   - System validates policy compliance
-   - System enforces policy rules
-   - System reports policy violations
-
-### Trust Evaluation
-1. **Certificate Validation**
-   - System retrieves certificate
-   - System validates certificate format
-   - System checks certificate chain
-   - System verifies revocation status
-
-2. **Policy Compliance Checking**
-   - System retrieves participant policy
-   - System validates policy against standards
-   - System checks compliance status
-   - System generates compliance report
-
-3. **Trust Level Assessment**
-   - System evaluates trust factors
-   - System calculates trust score
-   - System determines trust level
-   - System updates trust status
-
-4. **Risk Evaluation**
-   - System analyzes risk factors
-   - System calculates risk score
-   - System determines risk level
-   - System reports risk assessment
-
-### Trust Maintenance
-1. **Certificate Renewal**
-   - System monitors certificate expiration
-   - System notifies participant of renewal
-   - System processes renewal request
-   - System updates certificate registry
-
-2. **Policy Updates**
-   - System monitors policy changes
-   - System notifies participants of updates
-   - System processes policy updates
-   - System updates policy registry
-
-3. **Trust Level Adjustments**
-   - System monitors trust factors
-   - System adjusts trust levels
-   - System notifies participants of changes
-   - System updates trust registry
-
-4. **Monitoring and Reporting**
-   - System monitors trust status
-   - System generates trust reports
-   - System alerts on trust issues
-   - System maintains audit logs
-
-### Trust Revocation
-1. **Certificate Revocation**
-   - System receives revocation request
-   - System validates revocation request
-   - System revokes certificate
-   - System updates revocation list
-
-2. **Trust Suspension**
-   - System receives suspension request
-   - System validates suspension request
-   - System suspends trust relationship
-   - System notifies stakeholders
-
-3. **Emergency Revocation**
-   - System receives emergency revocation
-   - System validates emergency request
-   - System immediately revokes trust
-   - System notifies all stakeholders
-
-4. **Revocation List Management**
-   - System maintains revocation lists
-   - System publishes revocation lists
-   - System validates revocation status
-   - System updates revocation lists
+- **Task 2** – [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) (Section 8: Trust Evaluation), [Entities Involved](../../task2-trust-framework/entities-involved.md), [Requirements matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md)
+- **Task 3** – [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for TL format and validation
+- **Task 4** – Trust infrastructure APIs for registry and TL access
+- **Task 5** – Certificate and policy evaluation (e.g. ETSI policy evaluation)

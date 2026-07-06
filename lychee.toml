@@ -1,0 +1,34 @@
+# Lychee link checker configuration
+# Shared by Makefile and CI (.github/workflows/link-check.yml)
+
+verbose = "info"
+no_progress = true
+
+# Exclude URLs from checking (regex patterns)
+exclude = [
+  # Mailto and anchors
+  "^mailto:",
+  "^#",
+  # ETSI
+  "https://www\\.etsi\\.org/deliver/",
+  "http://uri\\.etsi\\.org/",
+  "https://uri\\.etsi\\.org/19475/",
+  # ISO
+  "https://www\\.iso\\.org/standard/",
+  # EU data.europa.eu
+  "http://data\\.europa\\.eu/eudi/id/",
+  "https://data\\.europa\\.eu/eudi/id/",
+  "https?://data\\.europa\\.eu/eudi/policy/",
+  # ec.europa.eu
+  "ec\\.europa\\.eu/tools/lotl/pivot-lotl-",
+  # EUDI
+  "https://eudi\\.dev/",
+  "COMPREHENSIVE-CATALOGUE",
+  "COMPREHENSIVE-CATALOGUE-EAA-QEAA-REFERENCES",
+  "eu-digital-identity-wallet\\.github\\.io.*annex-2-high-level-requirements",
+  # TLS test / specs
+  "http://www\\.tlsox\\.xyz/",
+  "http://www\\.w3\\.org/2001/10/xml-",
+  # LoTL publication URLs (404 until LoTL is published to gh-pages)
+  "webuild-consortium\\.github\\.io/wp4-trust-group/list_of_trusted_lists\\.(json|xml)",
+]

@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TL Entry",
+  "description": "Trusted List entry for LoTL - one file per participant per TL type",
+  "type": "object",
+  "required": ["tl_url", "trust_anchor"],
+  "properties": {
+    "tl_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the TL (JSON or XML; at least one format)"
+    },
+    "tl_url_xml": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the TL in XML format (if different from tl_url)"
+    },
+    "tl_url_json": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL of the TL in JSON format (if different from tl_url)"
+    },
+    "trust_anchor": {
+      "type": "string",
+      "description": "X.509 certificate in PEM format - used to validate the TL signature"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata per TL type (e.g. operator name, country)",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

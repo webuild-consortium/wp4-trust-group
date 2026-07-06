@@ -1,33 +1,14 @@
 # Trust Infrastructure API
 
-This directory contains the implementation of the Trust Infrastructure API for the WP4 Trust Infrastructure.
+This directory contains the implementation and detailed specification of the Trust Infrastructure API for the WP4 Trust Infrastructure.
 
-## API Overview
+## Folder contents
 
-The Trust Infrastructure API provides comprehensive services for trust management, evaluation, validation, and monitoring within the digital Wallet ecosystem.
+- **`README.md`** – Summary of the Trust Infrastructure API responsibilities and main service areas
 
-## Core Services
+## Scope of the Trust Infrastructure API
 
-### Trust Management Services
-- **Trust Establishment**: Establish trust relationships between entities
-- **Trust Maintenance**: Maintain and update trust relationships
-- **Trust Revocation**: Revoke trust relationships when necessary
-- **Trust Status**: Query and monitor trust status
-
-### Trust Evaluation Services
-- **Trust Scoring**: Calculate trust scores for entities
-- **Trust Assessment**: Assess trust levels and factors
-- **Trust Validation**: Validate trust relationships
-- **Trust History**: Track trust history and changes
-
-### Trust Policy Services
-- **Policy Management**: Manage trust policies
-- **Policy Enforcement**: Enforce trust policies
-- **Policy Compliance**: Check policy compliance
-- **Policy Updates**: Update and modify policies
-
-### Trust Monitoring Services
-- **Status Monitoring**: Monitor trust status
-- **Alert Management**: Manage trust alerts
-- **Reporting**: Generate trust reports
-- **Analytics**: Trust analytics and insights
+- **Trust management** – Establish, maintain, revoke and query trust relationships between participants and components.
+- **Trust evaluation** – Compute trust scores, assess trust levels and validate relationships based on the framework defined in Task 2 and data from Tasks 3 and 5.
+- **Trust policies** – Manage, enforce and check compliance against trust policies used in the ecosystem.
+- **Monitoring and reporting** – Expose trust status, alerts, history and reporting/analytics endpoints to other components and tooling.

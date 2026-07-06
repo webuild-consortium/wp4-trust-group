@@ -1,0 +1,11 @@
+# Shared by Makefile and CI (.github/workflows/ci.yml)
+# https://flake8.pycqa.org/en/latest/user/configuration.html
+
+[flake8]
+# Ignore local virtual environments
+exclude =
+    .git,
+    __pycache__,
+    .venv,
+    venv,
+    env
