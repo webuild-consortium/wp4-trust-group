@@ -1,27 +1,36 @@
 # Certificate Profiles for PID, Wallet, EAA, QEAA, and PSBEAA Providers (ETSI TS 119 412-6)
 
-This document describes the content of **ETSI TS 119 412-6** (Certificate profile requirements for PID, Wallet, EAA, QEAA, and PSBEAA providers) and its relation to WP4 Trust Group use cases.
+This document describes the content of ETSI TS 119 412-6 (Certificate profile requirements for PID, Wallet Instance Attestation (WIA), Key Attestation (KA), EAA, QEAA, and PuB-EAA providers) and its relationship to WP4 Trust Group use cases.
+
+These certificates are used by various entities to sign the attestations they issue. For other entities to trust these signatures, a copy of the certificate MUST be available as a trust anchor in a trusted location. Depending on the entity type, this location will be either a LoTE or a TL (see [ARF § 3.5](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/architecture-and-reference-framework-main.md#35-trusted-list-or-lote-provider)).
+
+When validating the signature/seal of a PID, (Q)EAA, PuB-EAA, WIA, or KA, a Wallet Instance or Relying Party MUST verify the LoTE or TL corresponding to the issuing entity type and inspect the **serviceDigitalIdentity** component related to the entity to retrive the trust anchor certificate. This certificate MUST then be used as the trusted source for the public key required to validate the cryptographic signature or seal.
 
 ## Scope of TS 119 412-6
 
-ETSI TS 119 412-6 specifies requirements on **end-entity certificates used by providers** to sign their outputs:
+ETSI TS 119 412-6 specifies requirements on **end-entity certificates used by providers** to sign their outputs. The following table specifies the certificate type, its usage, where it can be retrived as a trust anchor, and and the normative reference detailing its profile.
 
-| Certificate type | Used for | Standard |
-|------------------|----------|----------|
-| **Sign/seal certificates** (TS 119 412-6) | PID attestations, Wallet output, EAA attestations | ETSI TS 119 412-6 |
-| **Access certificates** ([WRPAC](../task5-participants-certificates-policies/relying_party_access_certificate.md)) | Authenticating entities to the EUDI Wallet | [ETSI TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
+| Certificate type | Used for | Trust anchor location | Standard |
+|------------------|----------|------------------------|----------|
+| PID Provider Sign/seal certificate | signing PID | PID Providers LoTE | ETSI TS 119 412-6, clause 4 |
+| Wallet Provider Sign/seal certificate | WIA, KA | Wallet Providers LoTE  | ETSI TS 119 412-6, clause 5 |
+| EAA Provider Sign/seal certificate | signing EAA | MS decision | ETSI TS 119 412-6, clause 6 |
+| QEAA Provider Sign/seal certificate | signing QEAA | TL | ETSI TS 119 412-6, clause 7 |
+| Pub-EAA Provider Sign/seal certificate | signing  PuB-EAA | Pub-EAA Providers LoTE | ETSI TS 119 412-6, clause 8 |
+| **Access certificates** ([WRPAC](../task5-participants-certificates-policies/relying_party_access_certificate.md)) | Authenticating entities to the EUDI Wallet ecosystem | WRPAC Provider LoTE | [ETSI TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
+| **Registration certificates** ([WRPAC](../task5-participants-certificates-policies/relying_party_registration_certificate.md)) | Validating the authorization profile of entities in the EUDI Wallet ecosystem | WRPRC Provider LoTE | [ETSI TS 119 411-8](../references/etsi/ETSI_TS_119_475.md) |
 
-These are **different certificates** with different purposes. TS 119 412-6 applies to sign/seal certificates only.
+**Note**: Signature/Seal certificates are different from Access and Registration certificates: while the former are used to sign/seal attestations, the latter are used to convey the identity of an entity (Access certificates) and its authorization profile (Registration certificate) within the ecosystem. ETSI TS 119 412-6 applies to sign/seal certificates only.
 
 ## Profiles by Entity Type
 
-| Entity | TS 119 412-6 Clause | QcType / Statement | Base Profile |
+| Entity | TS 119 412-6 Clause | QcType (OID) | Base Profile |
 |-------|---------------------|-------------------|--------------|
 | **PID Provider** | Clause 4 | `id-etsi-qct-pid` (0.4.0.194126.1.1) | [EN 319 412-2](../references/etsi/ETSI_EN_319_412-2_V2.4.1.md) (natural) or [EN 319 412-3](../references/etsi/ETSI_EN_319_412-3_V1.3.1.md) (legal person) |
 | **Wallet Provider** | Clause 5 | `id-etsi-qct-wal` (0.4.0.194126.1.2) | Inherits 4.1–4.4 from [EN 319 412-2](../references/etsi/ETSI_EN_319_412-2_V2.4.1.md) / [EN 319 412-3](../references/etsi/ETSI_EN_319_412-3_V1.3.1.md) |
 | **EAA Provider** | Clause 6 | — | [EN 319 412-2](../references/etsi/ETSI_EN_319_412-2_V2.4.1.md) or [EN 319 412-3](../references/etsi/ETSI_EN_319_412-3_V1.3.1.md) |
 | **QEAA Provider** | Clause 7 | — | [EN 319 412-2](../references/etsi/ETSI_EN_319_412-2_V2.4.1.md) or [EN 319 412-3](../references/etsi/ETSI_EN_319_412-3_V1.3.1.md); issuer shall be QTSP |
-| **PSBEAA Provider** | Clause 8 | QcPSB qcStatement (legislation, authentic source) | [EN 319 412-2](../references/etsi/ETSI_EN_319_412-2_V2.4.1.md) or [EN 319 412-3](../references/etsi/ETSI_EN_319_412-3_V1.3.1.md) |
+| **PuB-EAA Provider** | Clause 8 | QcPSB qcStatement (legislation, authentic source) | [EN 319 412-2](../references/etsi/ETSI_EN_319_412-2_V2.4.1.md) or [EN 319 412-3](../references/etsi/ETSI_EN_319_412-3_V1.3.1.md) |
 
 Common requirements across profiles: key usage, Subject Key Identifier, Authority Information Access (AIA). EAA/QEAA/PSBEAA add OCSP/CRL constraints for attestation revocation.
 
@@ -35,8 +44,8 @@ Common requirements across profiles: key usage, Subject Key Identifier, Authorit
 |--------|--------------------------------------|----------------------------------|
 | PID Provider | Clause 4 — QcType `id-etsi-qct-pid` | [WRPAC](../task5-participants-certificates-policies/pid_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
 | QEAA Provider | Clause 7 — qualified cert, QTSP issuer | [WRPAC](../task5-participants-certificates-policies/eaa_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
-| PUB-EAA Provider | Clause 8 — QcPSB qcStatement | [WRPAC](../task5-participants-certificates-policies/eaa_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
-| Non-Q EAA Provider | Clause 6 — EN 319 412-2/3 | [WRPAC](../task5-participants-certificates-policies/eaa_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
+| PuB-EAA Provider | Clause 8 — QcPSB qcStatement | [WRPAC](../task5-participants-certificates-policies/eaa_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
+| EAA Provider | Clause 6 — EN 319 412-2/3 | [WRPAC](../task5-participants-certificates-policies/eaa_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
 
 **PID Provider:** Certificate used to sign PID attribute attestations. Must include QcType `id-etsi-qct-pid`. Subject per [EN 319 412-2](../references/etsi/ETSI_EN_319_412-2_V2.4.1.md) (natural person) or [EN 319 412-3](../references/etsi/ETSI_EN_319_412-3_V1.3.1.md) (legal person).
 
