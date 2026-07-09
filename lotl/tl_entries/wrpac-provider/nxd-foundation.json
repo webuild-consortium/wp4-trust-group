@@ -1,0 +1,10 @@
+{
+  "tl_url": "https://trustlist.nxd.foundation/trust-lists/nxd-wrpac-providers-lote.json",
+  "tl_url_xml": "https://trustlist.nxd.foundation/trust-lists/NXD-TL-WRPAC.xml",
+  "tl_url_json": "https://trustlist.nxd.foundation/trust-lists/nxd-wrpac-providers-lote.json",
+  "trust_anchor": "-----BEGIN CERTIFICATE-----\nMIIBnzCCAUagAwIBAgIUTtUzk8xi3gSAgdmjOB3Ngvj72bQwCgYIKoZIzj0EAwIw\nJjELMAkGA1UEBhMCVFQxFzAVBgNVBAoMDk5YRCBGb3VuZGF0aW9uMB4XDTI2MDcw\nOTEwMjM0NloXDTI5MDcwODEwMjM0NlowJjELMAkGA1UEBhMCVFQxFzAVBgNVBAoM\nDk5YRCBGb3VuZGF0aW9uMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEQVTqk6oG\nWN4G15IcOeW27Pp4Akfu54kGaoT1JNNAJbnB7v3zZu1o/9/gHoyrN6Yyu9ww0dAU\nxsWPQFcq2/+U56NSMFAwDgYDVR0PAQH/BAQDAgbAMBEGA1UdJQQKMAgGBgQAkTcD\nADAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQVww37whbwN3DMilF8pSAtQRgIsTAK\nBggqhkjOPQQDAgNHADBEAiA+ISJxsJUvpgYGwAwGo9lBW5e4Z8xxuiFxD4okDlVA\n5gIgUUn3SoF11O2xO8/G9xRHRGENgDQutBst2x26txx0VEI=\n-----END CERTIFICATE-----\n",
+  "metadata": {
+    "operator_name": "NXD Foundation",
+    "country": "SE"
+  }
+}
