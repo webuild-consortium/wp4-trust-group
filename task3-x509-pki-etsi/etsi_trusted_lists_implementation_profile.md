@@ -1015,6 +1015,33 @@ Use appropriate JAdES validation library (see section 12).
 - [ ] HistoricalInformationPeriod is `65535`
 - [ ] Service history uses X509SKI (not X509Certificate)
 
+#### WRPAC Providers List
+- [ ] LoTE type URI is `http://uri.etsi.org/19602/LoTEType/EUWRPACProvidersList`
+- [ ] Status determination approach URI is correct
+- [ ] Scheme type/community/rules URI is correct
+- [ ] Service type URIs match Annex F (Issuance / Revocation)
+- [ ] Trust anchors are Access CA certificates used to validate Access Certificates
+- [ ] Next update is within 6 months
+- [ ] Signature is Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
+
+#### WRPRC Providers List
+- [ ] LoTE type URI is `http://uri.etsi.org/19602/LoTEType/EUWRPRCProvidersList`
+- [ ] Status determination approach URI is correct
+- [ ] Scheme type/community/rules URI is correct
+- [ ] Service type URIs match Annex G (Issuance / Revocation)
+- [ ] Trust anchors are Registration Certificate Provider certificates used to validate registration certificates
+- [ ] Next update is within 6 months
+- [ ] Signature is Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
+
+#### Registrars and Registers List (EBWOID)
+- [ ] LoTE type URI is `http://uri.etsi.org/19602/LoTEType/EURegistrarsAndRegistersList`
+- [ ] Status determination approach URI is correct
+- [ ] Scheme type/community/rules URI is correct
+- [ ] Service type URI is `http://uri.etsi.org/19602/SvcType/Register`
+- [ ] Entries identify authoritative registrars/registers used for relying-party registration and entitlement discovery
+- [ ] Next update is within 6 months
+- [ ] Signature is Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
+
 ## Implementation Checklist
 
 ### Core Implementation
