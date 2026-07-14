@@ -154,6 +154,28 @@ Member States SHALL notify all PID Providers, PuB-EAA Providers, Wallet Provider
 
 > **Note**: Wallet Providers are notified by Member States to the European Commission (per **GenNot_01**, **WPNot_01**, **WPNot_02**), and are not registered with Registrars. The European Commission compiles, signs/seals, and publishes Trusted Lists for Wallet Providers (per **WPNot_04**, **WPNot_05**), PID Providers (per **PPNot_05**), Access CAs (per **PPNot_06**, **RPACANot_04**), and Registration Cert Providers (per **RPACANot_04**).
 
+### 3.1.2 Wallet Provider Trusted List — Publisher and Publication References
+
+The **List of Certified Wallets** (Wallet Provider Trusted List) is a Commission-compiled artifact. This subsection consolidates the publisher, publication location, and the normative references that govern each publication artifact — separate from the notification-content requirements listed in §3.1.1.
+
+**Publisher:** The **European Commission** compiles, signs/seals, and publishes the Wallet Provider Trusted List (per **WPNot_04**, **WPNot_05**). The publication location (the `ListOfCertifiedWalletsURL`) and the trust anchors used to seal the list are published by the Commission in the **Official Journal of the European Union (OJEU)** per **TLPub_06** and **TLPub_07**; the LoTL pivot mechanism ([ETSI TS 119 615 §4.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119615/01.03.01_60/ts_119615v010301p.pdf)) is used when either changes.
+
+**Reference matrix — publication artifacts, publisher, ETSI mapping, ARF/CIR references:**
+
+| Publication artifact | Publisher | ETSI TS 119 602 field | ARF (Topic 31) | Implementing / delegated act |
+|----------------------|-----------|-----------------------|----------------|------------------------------|
+| `ListOfCertifiedWalletsURL` | European Commission | `SchemeInformationURI`, `DistributionPoints` (Annex E) | GenNot_01, WPNot_04, WPNot_05, TLPub_01, TLPub_06 | [CIR 2025/849](https://eur-lex.europa.eu/eli/reg_impl/2025/849/oj) |
+| `ListOfCertifiedWalletsQRCode` | European Commission | Derived from `SchemeInformationURI` | TLPub_06 | [CIR 2025/849](https://eur-lex.europa.eu/eli/reg_impl/2025/849/oj) |
+| `WalletSolutionInfoPageURL` | Wallet Provider (notified by MS, published in TL entry) | `TEInformationURI` (Annex E, Table E.2) | GenNot_01, WPNot_02 | [CIR 2025/849](https://eur-lex.europa.eu/eli/reg_impl/2025/849/oj) |
+| `WalletSolutionInfoPageQRCode` | Wallet Provider | Derived from `TEInformationURI` | WPNot_02 | [CIR 2025/849](https://eur-lex.europa.eu/eli/reg_impl/2025/849/oj) |
+| `WalletSolutionID` (unique reference identifier) | Supervisory Body / MS (issued to wallet solution) | `ServiceUniqueIdentifier` (Annex E, Table E.3) | WPNot_02 | [CIR 2025/849 Annex 2(a)](https://eur-lex.europa.eu/eli/reg_impl/2025/849/oj); [Reg. (EU) 910/2014 Art. 5d](https://eur-lex.europa.eu/eli/reg/2014/910/oj) (as amended by [Reg. (EU) 2024/1183](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)) |
+| Wallet Provider trust anchors | European Commission (published in TL, sealed by EC) | `TrustedEntityInformation` / `ServiceDigitalIdentity` (Annex E) | WPNot_04, WPNot_05, TLPub_07 | [CIR 2025/849](https://eur-lex.europa.eu/eli/reg_impl/2025/849/oj); [Reg. (EU) 910/2014 Art. 5d](https://eur-lex.europa.eu/eli/reg/2014/910/oj) |
+| Certification data of the wallet solution | Supervisory Body / MS (notified to EC) | Included in `TrustedEntityInformation` payload | GenNot_04, WPNot_02 | [CIR 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj) (conformity assessment) |
+
+For the technical structure of the fields listed above, see [ETSI Trusted Lists Implementation Profile §7.2](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md#72-wallet-providers-list-ts-119-602-annex-e) and §7.8 (traceability). For the data a Wallet Provider must submit for these fields to be populated, see [Wallet Provider Onboarding — Data to be provided](../task1-use-cases/subtask1-1-onboarding/wallet-provider-onboarding.md#data-to-be-provided).
+
+**Additional references:** [EC TS02 — Notification and publication of Provider information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md); [ARF Topic 31](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md).
+
 ### 3.2 European Commission Verification and LoTL Maintenance
 
 The European Commission:

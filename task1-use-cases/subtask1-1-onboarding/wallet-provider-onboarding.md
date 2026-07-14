@@ -133,6 +133,20 @@ The Wallet Provider must provide the following when requesting onboarding. [MVP]
 - X.509 certificate signing request (required for issuance of the wallet solution certificate; certificate profile and issuance process: [Task 3 - X.509 PKI with ETSI Alignments](../../task3-x509-pki-etsi/README.md), [ETSI EN 319 412-6](https://www.etsi.org/deliver/etsi_en/319400_319499/31941206/01.00.00_20/en_31941206v010000c.pdf) section 5; Trusted List entry includes the issued certificate per [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf))
 - Unique reference identifier of the wallet solution (optional; [MVP+] per CIR 2025/849 Annex 2(a))
 
+#### Normative references for publication artifacts
+
+The data listed above feeds a set of well-defined publication artifacts. The table maps each artifact to the regulation, implementing act, and ETSI structure that governs it.
+
+| Publication artifact | Normative source | ETSI mapping (TS 119 602, Annex E) |
+|----------------------|------------------|-------------------------------------|
+| **WalletSolutionID** — unique reference identifier of the wallet solution | [CIR 2025/849 Annex 2(a)](https://eur-lex.europa.eu/eli/reg_impl/2025/849/oj); [Reg. (EU) 910/2014 Art. 5d](https://eur-lex.europa.eu/eli/reg/2014/910/oj) (as amended by [Reg. (EU) 2024/1183](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)) | `ServiceUniqueIdentifier` — [TS 119 602 v1.1.1](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) Annex E, Table E.3 |
+| **WalletSolutionInfoPageURL** — URL to the wallet solution info page (policies, terms, support) | [CIR 2025/849](https://eur-lex.europa.eu/eli/reg_impl/2025/849/oj) | `TEInformationURI` — TS 119 602 Annex E, Table E.2 |
+| **WalletSolutionInfoPageQRCode** — QR encoding of the info page URL | [CIR 2025/849](https://eur-lex.europa.eu/eli/reg_impl/2025/849/oj) (see also [EC TS02](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md)) | Derived from `TEInformationURI`; no dedicated ETSI field |
+| **ListOfCertifiedWalletsURL** — URL to the Trusted List of Wallet Providers | [CIR 2025/849](https://eur-lex.europa.eu/eli/reg_impl/2025/849/oj); ARF [Topic 31](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md) (**WPNot_04**, **WPNot_05**, **TLPub_06**, **TLPub_07**) | `SchemeInformationURI`, `DistributionPoints` — TS 119 602 Annex E |
+| **ListOfCertifiedWalletsQRCode** — QR encoding of the list URL | [CIR 2025/849](https://eur-lex.europa.eu/eli/reg_impl/2025/849/oj) | Derived from `SchemeInformationURI`; no dedicated ETSI field |
+
+Additional normative baseline for the *content* of a Wallet Provider Trusted List entry: [CIR 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj) (conformity assessment and certification of EUDI Wallets); [ETSI Trusted Lists Implementation Profile §7.2](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md#72-wallet-providers-list-ts-119-602-annex-e). Publisher of the list and OJEU publication of trust anchors: [Trust Infrastructure Schema §3.1.2](../../task2-trust-framework/trust-infrastructure-schema.md#312-wallet-provider-trusted-list--publisher-and-publication-references).
+
 ## Main Flow
 
 **1. Onboarding via Trust Infrastructure Responsible Group [MVP]**

@@ -780,6 +780,31 @@ For the EUDI Wallet ecosystem, the following extensions are used when configurin
 - Next update maximum: 6 months.
 - Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML).
 
+### 7.8 Traceability: LoTE Fields to ARF Topic 31 and CIR 2025/849
+
+The table below maps the ETSI TS 119 602 LoTE fields used in the Wallet Provider Trusted List profile (§7.2, Annex E) to the ARF Topic 31 requirements they satisfy and to the CIR 2025/849 publication obligations. It is intended for auditors and implementers who need to trace each field back to its regulatory driver.
+
+| LoTE field (TS 119 602) | Profile section | ARF Topic 31 requirement | CIR 2025/849 obligation |
+|-------------------------|-----------------|--------------------------|--------------------------|
+| `LoTEType` = `EUWalletProvidersList` | §7.2 | GenNot_01, WPNot_04 | List identification (Annex 2) |
+| `SchemeOperatorName` = European Commission | §7.2 | WPNot_04, WPNot_05 | Publisher identification |
+| `SchemeInformationURI` (`ListOfCertifiedWalletsURL`) | §7.2 | TLPub_01, TLPub_06 | Publication of list URL |
+| `DistributionPoints` | §7.2 | TLPub_06 | Publication endpoints |
+| `TrustedEntityInformation.TEName` | §7.2 | WPNot_02 (identification data) | Annex 2(a) — legal name |
+| `TrustedEntityInformation.TETradeName` | §7.2 | WPNot_02 (identification data) | Annex 2(a) — trade name / EUID |
+| `TrustedEntityInformation.TEAddress` | §7.2 | WPNot_02 (identification data) | Annex 2(a) — legal address |
+| `TrustedEntityInformation.TEInformationURI` (`WalletSolutionInfoPageURL`) | §7.2 (Table E.2) | WPNot_02 (service supply point) | Publication of wallet-solution info page |
+| `ServiceDigitalIdentity.X509Certificates` (Wallet Provider trust anchors) | §7.2 | WPNot_02, WPNot_04, WPNot_05, TLPub_07 | Publication of trust anchors (OJEU) |
+| `ServiceInformation.ServiceUniqueIdentifier` (`WalletSolutionID`) | §7.2 (Table E.3) | WPNot_02 | Annex 2(a) — unique reference identifier of the wallet solution |
+| `NextUpdate` (≤ 6 months) | §7.2 | TLPub_01 | Freshness of published list |
+
+**Notes:**
+
+- Wallet Providers do not register with Registrars; the ARF Topic 27 requirements (Reg_01, Reg_19, Reg_21) do not apply. Notification is the sole trust path (**GenNot_01**, **WPNot_01**–**WPNot_05**). See [Trust Infrastructure Schema §3.1.1](../task2-trust-framework/trust-infrastructure-schema.md#311-member-state-notification-to-european-commission).
+- CIR 2025/849 publication artifacts that do not have a dedicated ETSI field (QR-code encodings of `ListOfCertifiedWalletsURL` and `TEInformationURI`) are derived by the publisher from the corresponding URL field. When the regulation text is available in the repo, replace this note with the exact article reference.
+- For the corresponding publisher/OJEU-publication references, see [Trust Infrastructure Schema §3.1.2](../task2-trust-framework/trust-infrastructure-schema.md#312-wallet-provider-trusted-list--publisher-and-publication-references).
+- For the data a Wallet Provider submits that becomes these LoTE fields, see [Wallet Provider Onboarding — Data to be provided](../task1-use-cases/subtask1-1-onboarding/wallet-provider-onboarding.md#data-to-be-provided).
+
 ## 8. Digital Signature Implementation
 
 ### 8.1 JAdES Signature (JSON - TS 119 602)
