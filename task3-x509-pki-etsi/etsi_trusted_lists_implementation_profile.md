@@ -34,7 +34,7 @@ This implementation profile provides unified guidance for implementing both ETSI
 - Service type definitions and status management
 - XAdES digital signatures
 
-**ETSI TS 119 602 v1.1.1 (2025-11)** (per ARF v2.8.0 STS list) (“Lists of trusted entities; Data model”) defines:
+**ETSI TS 119 602 v1.1.1 (2025-11)** (per ARF v2.9.0 STS list) (“Lists of trusted entities; Data model”) defines:
 - Abstract data model for Lists of Trusted Entities (LoTE)
 - JSON and XML bindings
 - Profile-based approach for different entity types
@@ -699,7 +699,7 @@ python -m jsonschema lote.json lote-schema.json
 
 ### 7.3 Pub-EAA Providers List and national non-qualified EAA Provider lists (TS 119 602, Annex H)
 
-**Scope**: Annex H defines the LoTE profile for **Pub-EAA Providers** (EC-compiled list) and is also used for **national non-qualified EAA Provider Trusted Lists** compiled and published by Member State TLPs (per ARF v2.8.0 and the trust infrastructure schema).
+**Scope**: Annex H defines the LoTE profile for **Pub-EAA Providers** (EC-compiled list) and is also used for **national non-qualified EAA Provider Trusted Lists** compiled and published by Member State TLPs (per ARF v2.9.0 and the trust infrastructure schema).
 
 #### Required URIs
 - **LoTE Type**: `http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList`
@@ -1069,11 +1069,11 @@ Use appropriate JAdES validation library (see section 12).
 - [Regulation (EU) No 910/2014](https://eur-lex.europa.eu/eli/reg/2014/910/oj) - eIDAS
 - [Commission Implementing Regulation (EU) 2024/2980](https://eur-lex.europa.eu/eli/reg_impl/2024/2980/oj)
 - [Commission Implementing Regulation (EU) 2025/1569](https://eur-lex.europa.eu/eli/reg_impl/2025/1569/oj)
-- [Commission Implementing Regulation (EU) 2025/2164](https://eur-lex.europa.eu/eli/reg_impl/2025/2164/oj) – trusted lists / TS 119 612 (marked Done in ARF v2.8.0 STS list)
+- [Commission Implementing Regulation (EU) 2025/2164](https://eur-lex.europa.eu/eli/reg_impl/2025/2164/oj) – trusted lists / TS 119 612 (marked Done in ARF v2.9.0 STS list)
 
 ---
 
 **Document Version**: 1.1  
 **Last Updated**: 2025-02-02  
-**ARF alignment**: v2.8.0 (ETSI TS 119 602 title "Lists of trusted entities; Data model" V1.1.1 (2025-11); Annex H for Pub-EAA and national non-qualified EAA Provider lists; TS 119 612 / CIR 2025/2164)
+**ARF alignment**: v2.9.0 (ETSI TS 119 602 title "Lists of trusted entities; Data model" V1.1.1 (2025-11); Annex H for Pub-EAA and national non-qualified EAA Provider lists; TS 119 612 / CIR 2025/2164)
 

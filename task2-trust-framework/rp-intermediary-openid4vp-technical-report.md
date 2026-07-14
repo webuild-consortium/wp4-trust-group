@@ -6,7 +6,7 @@
 | **WP4 task** | Task 2 — Trust Framework |
 | **Scope** | EUDI Wallet remote presentation; Relying Party intermediaries; WRPAC / WRPRC trust evaluation |
 | **Related WP4 docs** | [Entities Involved](entities-involved.md), [EUDI Wallet Trust and Entitlement Discovery](eudi-wallet-trust-and-entitlement-discovery.md), [Trust Infrastructure Schema](trust-infrastructure-schema.md), [Consolidated Terms — Intermediary](../task1-use-cases/terms-and-entities.md#316-intermediary) |
-| **Primary normative sources** | OpenID4VP 1.0, OpenID4VC-HAIP, ETSI TS 119 472-2, ETSI TS 119 475, EUDI ARF (Topic 44, Topic 52, Topic X) |
+| **Primary normative sources** | OpenID4VP 1.0, OpenID4VC-HAIP, ETSI TS 119 472-2, ETSI TS 119 475, EUDI ARF v2.9.0 (Topic 44, Topic 52, Topic X) |
 
 ---
 
@@ -47,9 +47,9 @@ This document is **informative**. Normative requirements remain in the cited spe
 | [ETSI TS 119 475](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.01.01_60/ts_119475v010101p.pdf) | WRPRC attributes supporting Wallet user authorisation decisions. |
 | [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) | WRPAC / WRPRC policy framework. |
 | [CIR (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) | Wallet-relying party registration; WRPAC/WRPRC issuance. |
-| [EUDI ARF §6.6.5](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/architecture-and-reference-framework-main.md) | Narrative flow for presentation to an intermediary. |
-| [ARF Topic 52 — Relying Party intermediaries](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a2330-topic-52-relying-party-intermediaries) | High-level requirements RPI_01–RPI_10. |
-| [ARF Topic 44 — Registration certificates](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a2326-topic-44---registration-certificates-for-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties) | RPRC_04, RPRC_19, RPRC_19a, RPRC_20a. |
+| [EUDI ARF v2.9.0 §6.6.5](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#665-presentation-to-an-intermediary) | Narrative flow for presentation to an intermediary. |
+| [ARF Topic 52 — Relying Party intermediaries](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/v2.9.0/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a2330-topic-52-relying-party-intermediaries) | High-level requirements RPI_01–RPI_10. |
+| [ARF Topic 44 — Registration certificates](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/v2.9.0/docs/annexes/annex-2/annex-2.02-high-level-requirements-by-topic.md#a2326-topic-44-registration-certificates-for-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties) | RPRC_04, RPRC_19, RPRC_19a, RPRC_20a. |
 | [ARF Topic X — Relying Party registration (RR)](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/discussion-topics/x-rr-relying-party-registration.md) | Registry model, `usesIntermediary`, evolving Service identifiers. |
 
 OpenID4VP 1.1 is expected to be non-breaking relative to 1.0; `verifier_info` is already present in 1.0 (renamed from `verifier_attestations` in late drafts).

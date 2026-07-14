@@ -2,7 +2,7 @@
 
 This document is the single source of truth for **terms**, **acronyms**, and **entity definitions** used across WP4 Trust Group deliverables. Other documents in the repository reference this document to avoid duplicating definitions.
 
-**Scope**: EUDI Wallet ecosystem trust infrastructure, onboarding, and trust evaluation, aligned with the [EUDI Wallet Architecture and Reference Framework (ARF)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/).
+**Scope**: EUDI Wallet ecosystem trust infrastructure, onboarding, and trust evaluation, aligned with the [EUDI Wallet Architecture and Reference Framework (ARF)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.9.0/architecture-and-reference-framework-main/).
 
 ---
 
@@ -21,6 +21,8 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 | **EUDI** | European Digital Identity | ARF |
 | **EUDIW** | European Digital Identity Wallet | Regulation (EU) 2024/1183 |
 | **JWT** | JSON Web Token | RFC 7519 |
+| **KA** | Key Attestation — attests to security properties of cryptographic keys in a WSCD or keystore; used during PID and device-bound attestation issuance | ARF Topic 9, TS3 |
+| **LoTE** | List of Trusted Entities — consumption artifact for trust anchors (ETSI TS 119 602) | ARF, ETSI TS 119 602 |
 | **LoTL** | List of Trusted Lists | ARF, ETSI TS 119 612 |
 | **MS** | Member State | ARF |
 | **MS TLP** | Member State Trusted List Provider | ARF |
@@ -39,7 +41,8 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 | **WRP** | Wallet-Relying Party | CIR (EU) 2025/848, ETSI TS 119 411-8 |
 | **WRPAC** | Wallet-Relying Party Access Certificate | ETSI TS 119 411-8 |
 | **WRPRC** | Wallet-Relying Party Registration Certificate | ETSI TS 119 411-8 |
-| **WUA** | Wallet Unit Attestation | ARF |
+| **WIA** | Wallet Instance Attestation — attests to integrity and authenticity of the Wallet Instance; used during all PID and attestation issuance | ARF Topic 9, TS3 |
+| **WUA** | Wallet Unit Attestation — umbrella term covering WIA and KA (per ARF v2.9.0 Topic 9) | ARF |
 
 ---
 
@@ -59,7 +62,8 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 - **Provider of Registration Certificates**: Optionally issues certificates detailing entitlements for registered entities (ARF Section 3.19).
 - **Trusted List Provider (TLP)**: A body responsible for maintaining, managing, and publishing a Trusted List (ARF Section 3.5).
 - **Member State Trusted List Provider (MS TLP)**: Compiles, signs, and publishes national Trusted Lists for non-qualified EAA Providers and Member State QTSP Trusted Lists for QEAA Providers.
-- **Trusted List (TL)**: A list containing trust anchors for validation purposes, published by Trusted List Providers.
+- **List of Trusted Entities (LoTE)**: A machine-readable list of trusted entities and their trust anchors, consumed during trust evaluation (ETSI TS 119 602). EC-compiled LoTEs cover PID Providers, Wallet Providers, PuB-EAA Providers, Access CAs, and Registration Certificate Providers.
+- **Trusted List (TL)**: A list containing trust anchors for validation purposes, published by Trusted List Providers. Where the ARF refers to LoTE consumption (e.g. OIA_12, ISSU_19), implementers use the LoTE profile; QEAA Provider national trusted lists follow ETSI TS 119 612.
 - **List of Trusted Lists (LoTL)**: Maintained by the European Commission, contains pointers to all published Trusted Lists (ETSI TS 119 612 D.5).
 - **Registry**: Publicly accessible register maintained by Registrars containing registration information about entities.
 - **Access Certificate**: Certificate issued by Access Certificate Authority to registered entities for authentication.
@@ -71,7 +75,8 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 - **Trust anchor**: Public key (or certificate) in a Trusted List used to validate signatures or certificate chains.
 - **Entity status (in TL)**: Trusted List entries may carry a status (e.g. Valid / Invalid). Suspended or cancelled entities have status **Invalid** in the TL (GenNot_05). Evaluators should use only entries with valid status.
 - **Certificate revocation**: Access certificates and registration certificates can be revoked (Reg_14, Reg_15, RPRC_01, RPRC_02). Validators obtain revocation information (e.g. CRL, OCSP) as specified by the applicable Certificate Policy and check that certificates are not revoked at validation time.
-- **Credential / attestation revocation**: PID, attestations (EAA), and Wallet Unit Attestations (WUA) may be revocable. Where technical specifications or Topic 38 (WUA) require it, evaluators verify that the credential or attestation is not revoked.
+- **Credential / attestation revocation**: PID and attestations (EAA) may be revocable. Evaluators verify revocation status where required by technical specifications.
+- **Wallet Instance / WSCD revocation**: Per ARF Topic 38, revocation of a Wallet Instance is signalled via the WIA; revocation of a WSCD or keystore is signalled via the KA. WUAs (WIAs and KAs) carry revocation maintenance periods independent of their technical validity period (ARF Topic 9, TS3 V1.5).
 - **Trust Mark (EUDI Wallet)**: A verifiable, simple, and recognisable indication capable of ensuring that the authenticity and validity of European Digital Identity Wallets can be verified. Holders use Trust Marks to assess the trustworthiness of their Wallet Instance. *Regulation (EU) 2024/1183, Articles 3(50), 5a(5), 5a(8), 5d.*
 
 *For the trust-evaluation context of LoTL and Registry, see also the Trust Sources table in [trust-evaluation-base.md](subtask1-2-trust-registry/trust-evaluation-base.md#trust-sources-used-in-evaluation).*
@@ -171,7 +176,7 @@ The following entities are involved in trust evaluation, trust registry, and tru
 ### 3.14 Wallet Provider
 
 - **Role**: Make certified Wallet Solutions available to Users.
-- **Trust Evaluation Involvement**: Wallet Solutions must be certified by CABs; trust anchors notified to Commission and published in Wallet Provider Trusted List; can be suspended or cancelled by Commission; supervised by Supervisory Bodies.
+- **Trust Evaluation Involvement**: Wallet Solutions must be certified by CABs; trust anchors notified to Commission and published in Wallet Provider LoTE; can be suspended or cancelled by Commission; supervised by Supervisory Bodies.
 
 ### 3.15 Relying Party (RP)
 
