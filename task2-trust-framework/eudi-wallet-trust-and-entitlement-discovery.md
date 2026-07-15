@@ -96,6 +96,8 @@ graph TD
 > Custom `TrstSvc/Svctype/...` labels such as `.../WalletProvider`, `.../PID_Issuer`, `.../PUB_EAA_Provider` are not used as normative ETSI identifiers.
 >
 > **Operational note:** WRPAC/WRPRC providers are notified by Member States to the EC (not registered in RP registries). Registrars manage PID/attestation/RP registration and entitlement data. See [Trust Infrastructure Schema](trust-infrastructure-schema.md#overview).
+>
+> **Domestic classification (Layer 2):** Member State economic activity codes (e.g. ATECO/NACE) and optional CPC service codes support Registrar onboarding and sector policy templates. They complement — but do not replace — the identifiers above. See [Entity and Service Taxonomy](../task5-participants-policies/entity-service-taxonomy.md).
 
 ---
 
@@ -582,7 +584,7 @@ This defines an **allow-list** model: requested attributes must be **in** the RP
 
 *Source: [ARF Annex 2.02 – RPRC_21](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/), Topic 44.*
 
-WP4 maps this ARF behaviour to the **additive** policy approach and documents an optional **subtractive** extension for non-EUDIW deployments. See [Policy Approaches Definition — EUDIW and ARF Alignment](../task5-participants-policies/policy-approaches-definition.md#eudiw-and-arf-alignment) and [Issue #2 Resolution](../task5-participants-policies/issue-2-resolution.md).
+WP4 maps this ARF behaviour to the **additive** policy approach and documents an optional **subtractive** extension for non-EUDIW deployments. See [Policy Approaches Definition — EUDIW and ARF Alignment](../task5-participants-policies/policy-approaches-definition.md#eudiw-and-arf-alignment).
 
 ### 4.1 Matching Requested Attributes to Entitlements
 

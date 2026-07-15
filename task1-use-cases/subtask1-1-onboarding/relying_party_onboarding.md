@@ -141,6 +141,8 @@ The Relying Party must provide at least the following when submitting a registra
 - Intermediary reference(s) — zero or more records (identifier, trade name, registry URI); required if the wallet-relying party relies on an intermediary
 - Intermediary flag — indication if the wallet-relying party acts as an intermediary for other relying parties
 - Attestation type(s) — for provider/issuer entitlements: one or more records, each specified either by a catalogue URL provided by WP4 (default/baseline option) or a self-declaration of the attestation schema
+- Economic activity (optional) — NACE Rev.2 code with optional national scheme (e.g. ATECO); used for sector policy templates and register routing. See [Entity and Service Taxonomy](../../task5-participants-policies/entity-service-taxonomy.md).
+- Service classification (optional) — UN CPC code for the digital service offered; complements `srvDescription` and intended use.
 
 > **Note**: Trusted List data collection: In the pilot for WRPs that also hold a provider or issuer entitlement, the registration interaction may additionally collect the information required to publish their trust anchor on a Trusted List. This avoids requiring the applicant to go through a separate submission process at a later stage.
 

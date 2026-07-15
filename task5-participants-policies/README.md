@@ -7,7 +7,7 @@ This task defines the data models and trust evaluation methods for participants'
 ## Folder contents
 
 - **`README.md`** – Overview of Task 5 and its subcomponents
-- **`issue-2-resolution.md`** – Resolution note for GitHub issue #2 (additive vs. subtractive policy approaches)
+- **`entity-service-taxonomy.md`** – Two-layer taxonomy: EU entitlements (Layer 1) and domestic activity codes (Layer 2)
 - **`policy-approaches-definition.md`** – Description of additive vs. subtractive policy approaches in the WP4 trust framework
 - **`etsi-policy-enumeration.md`** – Enumeration of ETSI policy identifiers and mechanisms relevant for the trust framework
 - **`etsi-policy-evaluation.md`** – Analysis of ETSI specifications and how they are applied in additive/subtractive policy evaluation
