@@ -14,7 +14,7 @@ This note summarises **Technical Specification 5 (TS5)** from the European Commi
 
 ## Purpose in the trust architecture
 
-- **Member State Registrars** publish PID Providers, Attestation Providers, and **Relying Parties** in a national registry.
+- **Member State Registrars** publish Attestation Providers and **Relying Parties** in a national registry.
 - **Wallet units** use the Registrar’s online service (among other sources) to verify registration and **intended uses** (e.g. attributes requested, purposes, policies), especially when **registration certificates** are not used or are insufficient.
 - **Relying parties** are **not** published on EU/Member State **Trusted Lists** in the same way as QTSPs; **TS5** is the primary **interoperable machine interface** for RP registration data, alongside sealed human-readable publication.
 
@@ -23,6 +23,8 @@ TS5 requires:
 - **REST** API, **JSON** payloads, OpenAPI 3.x description.
 - **Read** endpoints: **open** access over a secure channel (no client authentication required); implementers should apply rate limiting, caching, and DDoS mitigations as described in TS5.
 - **Write** endpoints (`POST` / `PUT` / `DELETE` on `/wrp`): **authenticated and authorised** clients only; national choice of mechanism, documented in the OpenAPI `securitySchemes`.
+
+>  **Pilot Scope Note** TS5 leaves open: the registration-write path (POST parked) and the certificate issuance/retrieval API. Optional in the pilot: /wrp PUT/DELETE (management may be happening via UI/other APIs).
 - Successful **read** responses: payload integrity via **JWS** (JWT in compact serialization), as specified in the OpenAPI annex.
 
 ## API surface (read path)
@@ -159,7 +161,7 @@ When declaring **conformance**, teams should:
 
 - **Property names:** Annex A.1 uses **`credentials`** and **`claims`**. The published OpenAPI component names sometimes use **`credential`** / **`claim`** — implementations should **not** treat the OpenAPI schema fragment as overriding Annex A.1 for instance data until the Commission publishes a single aligned release.
 - **`privacyPolicy`:** TS5 **narrative** describes an **array** of policies; **Annex A.1** references a **single** `Policy` object. Prefer **Annex A.1** for JSON Schema validation; follow MS/registry guidance if the narrative interpretation is adopted nationally.
-- **`Claim.path`:** The schema types `path` as a string while the description refers to path structure per OpenID4WP — agree encoding (string vs JSON array) with your registry and test vectors.
+- **`Claim.path`:** The schema types `path` as a string while the description refers to path structure per OpenID4VP — agree encoding (string vs JSON array) with your registry and test vectors.
 
 ## Relation to Task 5 certificates
 
