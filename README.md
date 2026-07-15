@@ -4,7 +4,7 @@ Public resources shared within the WE BUILD WP4 Trust Infrastructure group
 
 The Trust Registry Infrastructure group is dedicated to establishing the framework for trust evaluation and management within digital Wallet ecosystems, in compliance but not limited to the model defined by European regulation (910/2014 as amended by Regulation (EU) 2024/1183).  
 
-The group develops an implementation of the trust model based on a trusted third party (Trusted Lists) resulting in a Trust Framework and an demo infrastructure of trust. 
+The group develops an implementation of the trust model based on a trusted third party (Trusted Lists), producing a Trust Framework and a demo trust infrastructure.
 
 The group aims to create a comprehensive infrastructure of trust that supports seamless interactions among diverse entities. 
 
@@ -225,7 +225,7 @@ In addition to the above, this project is developed in constant alignment with *
 
 ### European Commission Technical Specifications
 
-The following specifications are subject to ongoing updates, which will be integrated and addressed in future project milestones.
+These documents may receive further updates and should be reconsidered in future milestones.
 
 - **EC TS02 v0.9** (2025-04) - Specification of systems enabling the notification and subsequent publication of Provider information
   - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md)
