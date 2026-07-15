@@ -10,7 +10,22 @@ This directory contains the implementation and detailed specification of the Onb
 
 ## Scope of the Onboarding API
 
-- **Participant registration and management** – Register participants (TSPs, Wallet Providers, RPs, CAs), manage their data and track registration status.
-- **Certificate management** – Submit, validate, store, retrieve and revoke participant certificates used by the trust infrastructure.
-- **Policy management** – Submit, review and manage participant policies in the identity, security, operational and legal domains.
-- **Compliance and audits** – Run compliance checks, manage audits and publish compliance status and reports for participants.
+The Onboarding API exposes endpoints for:
+
+- **Participant registration** — Submitting registration requests and identification data (aligned with [EC TS06](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md); ARF **Reg_01a**).
+- **Certificate management** — Access Certificate and Registration Certificate issuance and lifecycle.
+- **Policy management** — Attaching and querying entitlement and policy data.
+- **Compliance and audit** — Verification of registered data and audit trail access.
+
+Registry publication and retrieval follow [EC TS05](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md) (ARF **Reg_03**, **Reg_06**). Provider notification and publication follow [EC TS02](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md) (ARF Topic 31, **GenNot_01**). [ETSI EN 319 486](https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=74933) (upcoming) will standardize the registry formats and API based on EC TS05.
+
+## Normative References
+
+The Onboarding API aligns with the following specifications for registration data and registry APIs:
+
+- **EC TS05** — [Common Formats and API for Relying Party Registration Information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md) — Registry API formats, signed JSON publication, and retrieval endpoints (ARF **Reg_03**, **Reg_06**)
+- **EC TS06** — [Common set of Relying Party information to be registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md) — Minimum data set for registration (ARF **Reg_01a**)
+- **EC TS02** — [Specification of systems enabling notification and publication of Provider information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md) — Provider notification and publication flows (ARF Topic 31, **GenNot_01**)
+- **ETSI EN 319 486** (upcoming) — Will standardize common formats and API for Relying Party Registry information based on EC TS05
+
+These specifications are indexed in the [ARF technical specifications](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/tree/main/docs/technical-specifications). See also the [Task 4 overview](../README.md#normative-references) and [onboarding use cases](../../task1-use-cases/subtask1-1-onboarding/onboarding-base.md).
