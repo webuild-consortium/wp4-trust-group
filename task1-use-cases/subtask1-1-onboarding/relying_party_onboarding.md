@@ -140,6 +140,8 @@ The Relying Party must provide at least the following when submitting a registra
 - Intended use(s) — one or more records, each specifying: purpose, data requested (credential type, format, and list of claims), privacy policy URL, and supervisory authority / DPA
 - Intermediary reference(s) — zero or more records (identifier, trade name, registry URI); required if the wallet-relying party relies on an intermediary
 - Intermediary flag — indication if the wallet-relying party acts as an intermediary for other relying parties
+
+See [UC-RPI-01 — Relying Party Intermediary](../subtask1-2-trust-registry/relying-party-intermediary-use-case.md) for intermediated presentation flows.
 - Attestation type(s) — for provider/issuer entitlements: one or more records, each specified either by a catalogue URL provided by WP4 (default/baseline option) or a self-declaration of the attestation schema
 - Economic activity (optional) — NACE Rev.2 code with optional national scheme (e.g. ATECO); used for sector policy templates and register routing. See [Entity and Service Taxonomy](../../task5-participants-policies/entity-service-taxonomy.md).
 - Service classification (optional) — UN CPC code for the digital service offered; complements `srvDescription` and intended use.

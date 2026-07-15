@@ -5,7 +5,7 @@
 | **Status** | Draft technical report (non-normative) |
 | **WP4 task** | Task 2 — Trust Framework |
 | **Scope** | EUDI Wallet remote presentation; Relying Party intermediaries; WRPAC / WRPRC trust evaluation |
-| **Related WP4 docs** | [Entities Involved](entities-involved.md), [EUDI Wallet Trust and Entitlement Discovery](eudi-wallet-trust-and-entitlement-discovery.md), [Trust Infrastructure Schema](trust-infrastructure-schema.md), [Consolidated Terms — Intermediary](../task1-use-cases/terms-and-entities.md#316-intermediary) |
+| **Related WP4 docs** | [UC-RPI-01 — Relying Party Intermediary](../task1-use-cases/subtask1-2-trust-registry/relying-party-intermediary-use-case.md), [Entities Involved](entities-involved.md), [EUDI Wallet Trust and Entitlement Discovery](eudi-wallet-trust-and-entitlement-discovery.md), [Trust Infrastructure Schema](trust-infrastructure-schema.md), [Consolidated Terms — Intermediary](../task1-use-cases/terms-and-entities.md#316-intermediary) |
 | **Primary normative sources** | OpenID4VP 1.0, OpenID4VC-HAIP, ETSI TS 119 472-2, ETSI TS 119 475, EUDI ARF v2.9.0 (Topic 44, Topic 52, Topic X) |
 
 ---

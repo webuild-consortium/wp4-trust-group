@@ -4,6 +4,8 @@
 
 Before the User approves **presentation** of attributes to a Relying Party, the Wallet Unit evaluates the Relying Party: it verifies the RP's access certificate using the **Access Certificate Authority Trusted List**, checks that **certificates are not revoked**, and optionally verifies the RP's **registration** (and requested attributes) via registration certificate or **Registrar registry**, so the User can make an informed decision.
 
+For **intermediated** presentation (intermediary acting on behalf of another RP), see [UC-RPI-01 — Relying Party Intermediary](relying-party-intermediary-use-case.md).
+
 ## Actors
 
 - **Primary**: Wallet Unit (on behalf of the Holder)
