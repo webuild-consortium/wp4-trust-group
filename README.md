@@ -55,61 +55,35 @@ gantt
     Testing and Validation :task7, 2026-06-01, 2026-12-31
 ```
 
-## Directory Structure
+## Directory structure
+
+Deliverables and published trust data (task folders and LoTL). Tooling, CI, and reference material live elsewhere in the repository.
 
 ```
 wp4-trust-group/
-│
-├── references/                     # Standards, Drafts, Documentation
-│   ├── standards/                  # Official standards and specifications
-│   ├── drafts/                     # Draft specifications and working documents
-│   ├── reference-specifications/   # Reference implementations and profiles
-│   └── overview.md                 # Overview of all references
-│
-├── task1-use-cases/               # Use cases​
-│   ├── terms-and-entities.md      # Consolidated terms, acronyms, and entity definitions (single source)
-│   ├── subtask1-1-onboarding/     # Use cases​ onboarding
-│   └── subtask1-2-trust-registry/ # Use cases​ trust registry
-│
-├── task2-trust-framework/         # Trust Framework
-│
-├── task3-x509-pki-etsi/           # X.509 PKI with ETSI specializations
-│
-├── task4-trust-infrastructure-api/ # Trust Infrastructure API and additional features
-│   ├── trust-infrastructure-api/   # Trust Infrastructure API
-│   └── onboarding-api/             # Onboarding API
-│
-├── task5-participants-policies/ # Participants' Certificates and Policies
-│   ├── data-model/                 # Data model
-│   └── trust-evaluation-methods/   # Trust evaluation methods
-│
-├── task6-Wallet-conformance-interop/ # Wallet Instance Conformance/Interop Checks
-│
-├── task7-testing-validation/       # Testing and Validation
-│
-├── docs/                          # Documentation
-│   ├── architecture/              # Architecture documentation
-│   ├── api/                       # API documentation
-│   ├── standards/                 # Standards compliance documentation
-│   └── testing/                   # Testing documentation
-│
-├── examples/                      # Examples and use cases
-│   ├── trust-framework/           # Trust framework examples
-│   ├── api-usage/                 # API usage examples
-│   └── testing/                   # Testing examples
-│
-├── tools/                         # Development and validation tools
-│   ├── validation/                # Validation tools
-│   ├── testing/                   # Testing tools
-│   └── deployment/                # Deployment tools
-│
-├── .github/                       # CI/CD workflows and templates
-│   ├── workflows/                 # GitHub Actions workflows
-│   ├── ISSUE_TEMPLATE/            # Issue templates
-│   └── PULL_REQUEST_TEMPLATE/     # Pull request templates
-│
-├── README.md                      # This file
-└── LICENSE                        # License file
+├── lotl/                              # List of Trusted Lists (LoTL) — published trust anchor
+│   ├── tl_entries/                    # Participant TL entries (one JSON per TLP, by TL type)
+│   │   ├── pid-provider/
+│   │   ├── wallet-provider/
+│   │   ├── wrpac-provider/
+│   │   ├── wrprc-provider/
+│   │   ├── eaa-provider/
+│   │   ├── qeaa-provider/
+│   │   ├── pub-eaa-provider/
+│   │   └── ebwoid-provider/
+│   └── pages/                         # GitHub Pages landing page
+├── task1-use-cases/                   # Use cases: onboarding and trust evaluation
+│   ├── subtask1-1-onboarding/
+│   └── subtask1-2-trust-registry/
+├── task2-trust-framework/             # Trust framework models, matrices, schemas
+├── task3-x509-pki-etsi/               # X.509 PKI and ETSI Trusted List implementation profile
+├── task4-trust-infrastructure-api/    # Trust infrastructure and onboarding APIs
+│   ├── trust-infrastructure-api/
+│   └── onboarding-api/
+├── task5-participants-certificates-policies/  # TS5 registry API and data formats
+├── task5-participants-policies/       # Participant certificates, policies, trust marks
+├── task6-wallet-conformance-interop/  # Wallet conformance and interoperability
+└── task7-testing-validation/          # Testing and validation
 ```
 
 ## Terms and definitions
