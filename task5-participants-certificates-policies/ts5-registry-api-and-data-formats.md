@@ -24,7 +24,8 @@ TS5 requires:
 - **Read** endpoints: **open** access over a secure channel (no client authentication required); implementers should apply rate limiting, caching, and DDoS mitigations as described in TS5.
 - **Write** endpoints (`POST` / `PUT` / `DELETE` on `/wrp`): **authenticated and authorised** clients only; national choice of mechanism, documented in the OpenAPI `securitySchemes`.
 
->  **Pilot Scope Note** TS5 leaves open: the registration-write path (POST parked) and the certificate issuance/retrieval API. Optional in the pilot: /wrp PUT/DELETE (management may be happening via UI/other APIs).
+> **Pilot scope note:** The pilot may depart from full TS5 conformance in several areas. See [Pilot implementation remarks](#pilot-implementation-remarks) below.
+
 - Successful **read** responses: payload integrity via **JWS** (JWT in compact serialization), as specified in the OpenAPI annex.
 
 ## API surface (read path)
@@ -162,6 +163,37 @@ When declaring **conformance**, teams should:
 - **Property names:** Annex A.1 uses **`credentials`** and **`claims`**. The published OpenAPI component names sometimes use **`credential`** / **`claim`** — implementations should **not** treat the OpenAPI schema fragment as overriding Annex A.1 for instance data until the Commission publishes a single aligned release.
 - **`privacyPolicy`:** TS5 **narrative** describes an **array** of policies; **Annex A.1** references a **single** `Policy` object. Prefer **Annex A.1** for JSON Schema validation; follow MS/registry guidance if the narrative interpretation is adopted nationally.
 - **`Claim.path`:** The schema types `path` as a string while the description refers to path structure per OpenID4VP — agree encoding (string vs JSON array) with your registry and test vectors.
+
+## Pilot implementation remarks
+
+The following remarks apply to the **pilot** implementation of the TS5 registry API and data model. They clarify operational choices, relaxations, and gaps relative to the normative specification.
+
+### Registration and intermediary workflows
+
+- **RP creation by intermediary** — The RP identity record must exist before an intermediary can register intended uses or certificates on its behalf. When the WRP is not yet registered, its record may be created by an intermediary request via an API or via a registration form (the form is the primary path; API bootstrap is optional in the pilot).
+- **WRP–intermediary relationship setup** — The process by which an RP's `usesIntermediary` is set, and by which an intermediary's parameters are obtained, is determined by the registry. For that reason, the parameters required by `usesIntermediary` may be taken from the authentication context when an intermediary calls an API to register an intended use.
+
+### Ownership and data model
+
+- **Per-owner model** — Every intended use is managed and can be leveraged only by the party who registered it (an intermediary or the RP directly).
+- **Provided attestations** — Defined as part of the WRPRC data model; by default they are issued in WRPRCs for the relying party itself.
+- **`/wrp` extended additively** — The extended view is an owner-attributed union of entries from all intermediaries and from the RP directly.
+
+### Certificates
+
+- **Certificate granularity** — One WRPRC per intended use, plus one issuer certificate for provided attestations owned by the WRP.
+- **Retrieval is registry-defined** — How WRPRC issuance and retrieval is handled is up to the registry; there may be no certificate history, and only one certificate may be active per intended use.
+
+### API behaviour and TS5 gaps
+
+- **No credential catalogue presence validation** — Credential ID inputs are accepted as provided, with optional checks against the credential catalogue.
+- **Optional in the pilot: `/wrp` PUT/DELETE** — WRP data may be maintained by the WRP itself, or (for parts such as intended uses) by intermediaries, via a UI or other APIs.
+- **TS5 facts** — `POST /wrp` is not harmonised ("parked"). A registration-certificate retrieval API is anticipated but deferred; a certificate issuance API is not defined in TS5.
+- **Relaxed in the pilot: `/wrp` query and pagination** — `/wrp` may support only a subset of the query filters (TS5 requires the full set), and pagination may not be implemented.
+
+### Non-functional maturity
+
+As a pilot, the implementation is not required to be production-grade. Non-functional qualities are pilot-level and may fall short of production — among others high availability/scalability, DDoS/rate-limiting/caching, catalogue validation, localisation enforcement, and audit logging/retention.
 
 ## Relation to Task 5 certificates
 
