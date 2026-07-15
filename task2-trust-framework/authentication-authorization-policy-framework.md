@@ -119,7 +119,7 @@ Credential Issuer authorization defines semantics for credential types (Verifiab
 
 #### Relying Party Authorization
 
-Relying Party authorization defines semantics for purposes (authentication, authorization, service delivery, compliance), purpose classification (ATECO codes, business purpose), attribute requirements, and data processing scope (retention, processing purposes, consent requirements).
+Relying Party authorization defines semantics for purposes (authentication, authorization, service delivery, compliance), purpose classification (ATECO codes, business purpose), attribute requirements, and data processing scope (retention, processing purposes, consent requirements). Domestic activity codes are defined in [Entity and Service Taxonomy](../task5-participants-policies/entity-service-taxonomy.md); EU entitlements remain normative for trust evaluation.
 
 ## Credential Issuer Use Cases
 

@@ -121,6 +121,96 @@ Each `{participant_id}.json` file MUST contain:
 }
 ```
 
+#### 3.1 Metadata per TL Type
+
+The `metadata` field in the base entry format is generic (`operator_name`, `country`). Different TL types benefit from different fields; the table below defines the required and optional metadata per `tl_type`. CI validates only the base schema; per-type metadata semantics are informative unless a per-type sub-schema is added later.
+
+| TL type | Required metadata | Optional metadata | Notes |
+|---------|-------------------|-------------------|-------|
+| `pid-provider` | `operator_name`, `country` | `scheme_territory`, `scheme_operator_name` | `country` = ISO 3166-1 alpha-2 |
+| `wallet-provider` | `operator_name`, `country` | — | Same as LoTL scheme territory when EC-compiled |
+| `wrpac-provider` | `operator_name`, `country` | — | Access CA trust anchor territory |
+| `wrprc-provider` | `operator_name`, `country` | — | Registration Certificate Provider territory |
+| `pub-eaa-provider` | `operator_name`, `country` | — | EC-compiled; `country` = MS notifying |
+| `qeaa-provider` | `operator_name`, `country` | — | MS TLP; `country` = MS territory |
+| `eaa-provider` | `operator_name`, `country` | — | MS TLP; `country` = MS territory |
+| `ebwoid-provider` | `operator_name`, `country` | `registry_uri` | Registrars/Registers list |
+
+**Example TL entry for `qeaa-provider` (Member State QTSP TL):**
+
+```json
+{
+  "tl_url": "https://tsp.difi.no/national-qtsp-list.json",
+  "tl_url_xml": "https://tsp.difi.no/national-qtsp-list.xml",
+  "trust_anchor": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
+  "metadata": {
+    "operator_name": "Norwegian Digitalisation Agency",
+    "country": "NO",
+    "scheme_territory": "NO"
+  }
+}
+```
+
+#### 3.2 Examples per TL Type
+
+The base entry example in §3 covers `pid-provider`. Concrete examples for other TL types follow.
+
+**`lotl/tl_entries/wallet-provider/ec.json`:**
+
+```json
+{
+  "tl_url": "https://ec.europa.eu/digital-building-blocks/wallet-providers/list.json",
+  "tl_url_xml": "https://ec.europa.eu/digital-building-blocks/wallet-providers/list.xml",
+  "trust_anchor": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
+  "metadata": {
+    "operator_name": "European Commission",
+    "country": "EU"
+  }
+}
+```
+
+**`lotl/tl_entries/wrpac-provider/ms-access-ca.json`:**
+
+```json
+{
+  "tl_url": "https://access-ca.example.gov/tsl/wrpac-providers.json",
+  "trust_anchor": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
+  "metadata": {
+    "operator_name": "National Access CA Authority",
+    "country": "DE"
+  }
+}
+```
+
+**`lotl/tl_entries/ebwoid-provider/ms-registry.json`:**
+
+```json
+{
+  "tl_url": "https://registry.example.gov/registrars-and-registers.json",
+  "trust_anchor": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
+  "metadata": {
+    "operator_name": "Member State Registry Authority",
+    "country": "IT",
+    "registry_uri": "https://registry.example.gov/api"
+  }
+}
+```
+
+#### 3.3 ETSI Schema per TL Type
+
+Signature validation with `trust_anchor` is implemented today. Per-type ETSI schema validation is **planned** — the table maps each `tl_type` to the ETSI standard and schema source that CI should enforce once the validator is extended (see §6.1).
+
+| `tl_type` | ETSI Standard | Schema source | CI validation |
+|-----------|---------------|---------------|---------------|
+| `pid-provider` | TS 119 602 Annex D | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
+| `wallet-provider` | TS 119 602 Annex E | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
+| `pub-eaa-provider` | TS 119 602 Annex H | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
+| `qeaa-provider` | TS 119 612 (national QTSP TL) | https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd | [ ] Planned |
+| `eaa-provider` | TS 119 602 Annex H | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
+| `wrpac-provider` | TS 119 602 Annex F | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
+| `wrprc-provider` | TS 119 602 Annex G | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
+| `ebwoid-provider` | TS 119 602 Annex I | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
+
 ### 4. LoTL Producer and Signer
 
 **Location**: `tools/lotl/` (see [tools/lotl/README.md](../tools/lotl/README.md))

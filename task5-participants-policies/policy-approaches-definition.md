@@ -1,19 +1,24 @@
 # Policy Approaches Definition: Additive vs Subtractive
 
+> **Issue resolution:** This document resolves [GitHub issue #2](https://github.com/webuild-consortium/wp4-trust-group/issues/2). See [issue-2-resolution.md](issue-2-resolution.md) for requirement traceability and closure notes.
+
 ## Executive Summary
 
 This document defines two distinct policy approaches for the WP4 Trust Infrastructure framework: **Additive** and **Subtractive** policy models. These approaches provide different security paradigms suitable for various deployment scenarios, from high-security zero-trust environments to flexible permissive ecosystems.
+
+WP4 **defaults to additive** policy for EUDIW-conformant deployments. The **subtractive** approach is an optional WP4 extension for permissive ecosystems where participants declare restrictions rather than exhaustive grants.
 
 ## Table of Contents
 
 1. [Introduction](#introduction)
 2. [Policy Approach Definitions](#policy-approach-definitions)
 3. [Application to Trust Framework](#application-to-trust-framework)
-4. [OpenID Federation Trust Mark Integration](#openid-federation-trust-mark-integration)
-5. [Attribute and Credential Classification](#attribute-and-credential-classification)
-6. [Implementation Guidelines](#implementation-guidelines)
-7. [Security Considerations](#security-considerations)
-8. [Examples and Use Cases](#examples-and-use-cases)
+4. [EUDIW and ARF Alignment](#eudiw-and-arf-alignment)
+5. [OpenID Federation Trust Mark Integration](#openid-federation-trust-mark-integration)
+6. [Attribute and Credential Classification](#attribute-and-credential-classification)
+7. [Implementation Guidelines](#implementation-guidelines)
+8. [Security Considerations](#security-considerations)
+9. [Examples and Use Cases](#examples-and-use-cases)
 
 ## Introduction
 
@@ -169,6 +174,41 @@ The **Subtractive Policy Approach** implements an explicit deny-list model where
 }
 ```
 
+#### Data Model Compliance
+
+Credential Issuer policies MUST ensure that issued credentials comply with the predefined data models governing each authorized credential type. Compliance is enforced regardless of whether the participant uses an additive or subtractive policy approach.
+
+| Compliance dimension | Additive enforcement | Subtractive enforcement |
+| ------------------ | -------------------- | ----------------------- |
+| **Attestation schema** | Only schemas listed in `authorized_credential_types` may be issued; each type MUST validate against its registered schema (ARF Section 5.5, CIR 2025/1569) | All schemas are permitted unless the credential type or attribute group appears in `restricted_credential_types` or `restricted_attribute_groups` |
+| **Attribute catalogue** | Attributes MUST belong to an `authorized_attribute_groups` entry and conform to the [Credential Catalogue](../task2-trust-framework/credential-catalogue.md) definition for that group | Attributes are permitted unless they fall within a `restricted_attribute_groups` entry |
+| **Issuer eligibility** | Issuer MUST appear in the Trusted List extension for the attestation type ([Trusted List Extensions for Credential Issuers](../task3-x509-pki-etsi/trusted-list-extensions-credential-issuers.md)) | Issuer is eligible unless explicitly excluded by policy or Trusted List status |
+| **ETSI certificate profile** | Registration certificate contents MUST comply with ETSI TS 119 412-6 for the provider category | Same baseline compliance; subtractive policies add explicit restriction overlays |
+| **Validation at issuance** | `credential_schema_valid` and `compliance_verified` conditions in the policy model MUST be evaluated before issuance | Restricted types and groups are checked; all other types undergo standard schema validation |
+
+```json
+{
+  "participant_type": "credential_issuer",
+  "policy_approach": "additive",
+  "data_model_compliance": {
+    "schema_validation": "required",
+    "catalogue_reference": "credential-catalogue-v1",
+    "authorized_schemas": [
+      {
+        "credential_type": "EUDIWalletCredential",
+        "schema_uri": "https://schemas.eudi.dev/attestations/pid/v1",
+        "etsi_profile": "ETSI_TS_119_412_6"
+      }
+    ],
+    "validation_rules": [
+      "all_required_attributes_present",
+      "no_undeclared_attributes",
+      "issuer_in_trusted_list_for_type"
+    ]
+  }
+}
+```
+
 ### For Relying Parties
 
 #### Additive Approach for Relying Parties
@@ -230,6 +270,40 @@ The **Subtractive Policy Approach** implements an explicit deny-list model where
   ]
 }
 ```
+
+## EUDIW and ARF Alignment
+
+The EUDI Wallet Architecture and Reference Framework (ARF) does not name policy approaches "additive" or "subtractive," but its entitlement validation rules map directly to the additive model. WP4 defines both approaches so that policy artefacts remain flexible; deployments targeting EUDIW interoperability SHOULD use additive policy unless a documented exception applies.
+
+### Relying Parties — ARF RPRC_21 (additive)
+
+ARF **RPRC_21** (Topic 44) requires the Wallet Unit to verify that **all attributes requested in a presentation are included in the list registered by the Registrar**. If verification fails, the Wallet Unit notifies the User about unregistered attributes.
+
+This is an explicit **allow-list**: unregistered attributes are denied by default. There is no ARF provision for a deny-list model where all attributes are permitted except those explicitly restricted.
+
+| Aspect | EUDIW (ARF) | WP4 additive | WP4 subtractive |
+| ------ | ----------- | ------------ | --------------- |
+| Default for unlisted attributes | Deny | Deny | Allow |
+| Validation rule | Requested ⊆ registered | Requested ⊆ authorized | Requested ∩ restricted = ∅ |
+| EUDIW conformance | Native | Aligned | Extension (not ARF-native) |
+
+*Source: [EUDI Wallet Trust and Entitlement Discovery](../task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md#40-default-policy-approach-in-eudiw).*
+
+### Credential Issuers — ARF RPRC_15 (additive)
+
+ARF **RPRC_15** requires registration certificates for PID, QEAA, PuB-EAA, and non-qualified EAA Providers to contain the **type(s) of attestation** the entity intends to issue. This is an explicit allow-list of issuable credential types.
+
+Subtractive issuer policy in WP4 is useful for innovation or research environments where an issuer is broadly authorized but must not issue specific sensitive credential types (for example, biometric or special-category health credentials).
+
+### WP4 default and migration path
+
+| Deployment phase | Recommended approach | Rationale |
+| ---------------- | -------------------- | --------- |
+| Production / EUDIW-interop | **Additive** | Matches ARF validation; lowest risk |
+| Development / open ecosystem | **Subtractive** (optional) | Faster onboarding; explicit blocks for sensitive data |
+| Migration to production | Subtractive → additive | Replace restriction lists with explicit grants before go-live |
+
+Policy approach is declared per participant in registration certificates, trust marks, and onboarding records. Evaluators MUST read the `policy_approach` field (or equivalent certificate extension) before applying allow-list or deny-list logic. See [etsi-policy-evaluation.md](etsi-policy-evaluation.md#additive-vs-subtractive-policy-support) for evaluation algorithms.
 
 ## OpenID Federation Trust Mark Integration
 
@@ -774,7 +848,10 @@ The implementation guidelines and examples demonstrate practical applications of
 - [HL7 FHIR](https://www.hl7.org/fhir/) (Health data)
 
 ### Related Documents
+- [Issue #2 Resolution](issue-2-resolution.md)
 - [Trust Framework Definition](../task2-trust-framework/README.md)
+- [EUDI Wallet Trust and Entitlement Discovery](../task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md)
+- [ETSI Policy Evaluation](etsi-policy-evaluation.md)
 - [Policy Data Models](README.md#data-models)
 - [Trust Evaluation Methods](../task2-trust-framework/trust-infrastructure-schema.md)
 - [Use Cases](../task1-use-cases/README.md)

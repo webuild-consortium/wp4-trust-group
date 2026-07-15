@@ -7,11 +7,12 @@ This task defines the data models and trust evaluation methods for participants'
 ## Folder contents
 
 - **`README.md`** – Overview of Task 5 and its subcomponents
+- **`entity-service-taxonomy.md`** – Two-layer taxonomy: EU entitlements (Layer 1) and domestic activity codes (Layer 2)
 - **`policy-approaches-definition.md`** – Description of additive vs. subtractive policy approaches in the WP4 trust framework
 - **`etsi-policy-enumeration.md`** – Enumeration of ETSI policy identifiers and mechanisms relevant for the trust framework
 - **`etsi-policy-evaluation.md`** – Analysis of ETSI specifications and how they are applied in additive/subtractive policy evaluation
 - **`trust-mark-semantics-implementation.md`** – Guidance on implementing trust mark semantics for Credential Issuers and Relying Parties
-- **`ts5-registry-api-and-data-formats.md`** – TS5 registrar API, JWS response shapes, and Annex A.1 data model notes (wallet-relying party registry)
+- **[`../task5-participants-certificates-policies/ts5-registry-api-and-data-formats.md`](../task5-participants-certificates-policies/ts5-registry-api-and-data-formats.md)** – TS5 registrar API, JWS response shapes, and Annex A.1 data model notes (wallet-relying party registry)
 - **`data-model/`** – Subtask 5.1: data model specifications for certificates, policies, participants and relationships
 - **`trust-evaluation-methods/`** – Subtask 5.2: algorithms and methods for trust scoring, assessment, validation and monitoring
 
