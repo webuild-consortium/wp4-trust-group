@@ -10,10 +10,14 @@ This directory contains the implementation and detailed specification of the Onb
 
 ## Scope of the Onboarding API
 
-- **Participant registration and management** – Register participants (TSPs, Wallet Providers, RPs, CAs), manage their data and track registration status.
-- **Certificate management** – Submit, validate, store, retrieve and revoke participant certificates used by the trust infrastructure.
-- **Policy management** – Submit, review and manage participant policies in the identity, security, operational and legal domains.
-- **Compliance and audits** – Run compliance checks, manage audits and publish compliance status and reports for participants.
+The Onboarding API exposes endpoints for:
+
+- **Participant registration** — Submitting registration requests and identification data (aligned with [EC TS06](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md); ARF **Reg_01a**).
+- **Certificate management** — Access Certificate and Registration Certificate issuance and lifecycle.
+- **Policy management** — Attaching and querying entitlement and policy data.
+- **Compliance and audit** — Verification of registered data and audit trail access.
+
+Registry publication and retrieval follow [EC TS05](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md) (ARF **Reg_03**, **Reg_06**). Provider notification and publication follow [EC TS02](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md) (ARF Topic 31, **GenNot_01**). [ETSI EN 319 486](https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=74933) (upcoming) will standardize the registry formats and API based on EC TS05.
 
 ## Normative References
 
