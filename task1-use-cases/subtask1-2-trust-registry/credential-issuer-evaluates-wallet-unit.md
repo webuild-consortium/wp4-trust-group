@@ -2,45 +2,47 @@
 
 ## Scope
 
-Before issuing a **PID** or an **attestation (EAA)**, the **PID Provider** or **Attestation Provider** evaluates the Wallet Unit by verifying the **Wallet Unit Attestation (WUA)**. The provider ensures the request comes from a Wallet Unit belonging to a Wallet Provider that is listed in the **Wallet Provider Trusted List** with **valid entity status** (not Invalid), and that the WUA is authentic and **not revoked**.
+Before issuing a **PID** or an **attestation (EAA)**, the **PID Provider** or **Attestation Provider** evaluates the Wallet Unit by verifying **Wallet Unit Attestations (WUA)** — specifically the **Wallet Instance Attestation (WIA)** and, where applicable, the **Key Attestation (KA)**. The provider ensures the request comes from a Wallet Unit whose Wallet Provider is listed in the **Wallet Provider LoTE** with **valid entity status** (not Invalid), and that the Wallet Instance and WSCD/keystore referenced in the attestations are **not revoked**.
 
 ## Actors
 
 - **Primary**: Credential Issuer (PID Provider or Attestation Provider)
-- **Secondary**: Holder (User using the Wallet Unit), Wallet Unit (presents WUA), Wallet Provider Trusted List (and LoTL for discovery)
+- **Secondary**: Holder (User using the Wallet Unit), Wallet Unit (presents WIA and KA), Wallet Provider LoTE (and LoTL for discovery)
 
 ## Goal
 
-- **Business**: Issue credentials only to Wallet Units that are bound to a notified, trusted Wallet Provider.
-- **Technical**: Authenticate and validate the WUA using trust anchors from the Wallet Provider Trusted List; verify the Wallet Provider is in that TL with valid status (not Invalid) and the WUA is not revoked.
+- **Business**: Issue credentials only to Wallet Units bound to a notified, trusted Wallet Provider.
+- **Technical**: Authenticate and validate the WIA (and KA where device-bound) using trust anchors from the Wallet Provider LoTE; verify the Wallet Instance and WSCD/keystore are not revoked (Topic 38).
 
 ## Preconditions
 
-- Credential Issuer has (or can obtain) the Wallet Provider Trusted List(s) it needs (ISSU_19, ISSU_28).
-- Wallet Unit presents a valid Wallet Unit Attestation in the issuance flow (ARF Topic 9).
+- Credential Issuer has (or can obtain) the Wallet Provider LoTE(s) it needs (ISSU_19, ISSU_28).
+- Wallet Unit presents a valid WIA in the issuance flow; for PID issuance and device-bound attestations, the Wallet Unit also presents a KA (ARF Topic 9, [TS3 V1.5](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md)).
 
 ## Main Flow (Short)
 
-1. Holder initiates issuance and presents its **Wallet Unit Attestation (WUA)** to the Credential Issuer.
-2. **Trust anchors**: Credential Issuer accepts trust anchors from the **Wallet Provider Trusted List** (ISSU_19 for PID Provider, ISSU_28 for Attestation Provider).
-3. **Wallet Provider in TL**: Credential Issuer verifies that the Wallet Provider referenced in the WUA is **present in the Wallet Provider Trusted List** and has **valid entity status** (not Invalid; GenNot_05) (ISSU_21, ISSU_30).
-4. **WUA validation**: Credential Issuer authenticates and validates the WUA using the trust anchor(s) registered for that Wallet Provider in the TL; verifies the WUA is **not revoked** (ISSU_21, ISSU_30; Topic 38).
-5. If any check fails: reject the issuance request, (the Wallet Unit informs the User of the reason). If all checks pass, proceed with issuance.
+1. Holder initiates issuance; the Wallet Unit presents its **WIA** (and **KA** for PID issuance or device-bound attestations) to the Credential Issuer.
+2. **Trust anchors**: Credential Issuer accepts trust anchors from the **Wallet Provider LoTE** (ISSU_19 for PID Provider, ISSU_28 for Attestation Provider).
+3. **WIA validation (all issuance)**: Credential Issuer authenticates and validates the WIA using trust anchor(s) from the Wallet Provider LoTE; verifies the **Wallet Instance** referenced in the WIA has not been revoked (ISSU_21, ISSU_30a; Topic 38).
+4. **KA validation (PID and device-bound attestations)**: Credential Issuer authenticates and validates the KA using trust anchor(s) from the Wallet Provider LoTE; verifies the **WSCD or keystore** referenced in the KA has not been revoked (ISSU_21, ISSU_30; Topic 38).
+5. **Entity status**: Credential Issuer uses only Wallet Provider LoTE entries with valid status (not Invalid; GenNot_05).
+6. If any check fails: reject the issuance request (the Wallet Unit informs the User of the reason). If all checks pass, proceed with issuance.
 
 ## Success Criteria
 
-- Only Wallet Providers that appear in the Wallet Provider Trusted List with valid status (not Invalid) are accepted.
-- WUA signature validation and WUA revocation check succeed before issuance.
+- Only Wallet Providers that appear in the Wallet Provider LoTE with valid status (not Invalid) are accepted.
+- WIA and KA (where applicable) signature validation succeed; Wallet Instance and WSCD/keystore revocation checks pass before issuance.
 
 ## ARF Requirements (Key)
 
 | Identifier | Requirement |
 |------------|-------------|
-| ISSU_19   | PID Provider SHALL accept trust anchors in the Wallet Provider Trusted List it needs. |
-| ISSU_21   | PID Provider SHALL verify Wallet Provider is in Wallet Provider TL; authenticate/validate WUA; verify WUA not revoked. |
-| ISSU_28   | Attestation Provider SHALL accept trust anchors in the Wallet Provider Trusted List. |
-| ISSU_30   | Attestation Provider SHALL verify Wallet Provider in TL; authenticate/validate WUA; verify WUA not revoked. |
-| GenNot_05 | Suspended/cancelled Wallet Providers have status Invalid in TL; Credential Issuer SHALL use only valid-status entries. |
+| ISSU_19   | PID Provider SHALL accept trust anchors in the Wallet Provider LoTE(s) it needs for WIA and KA verification. |
+| ISSU_21   | PID Provider SHALL verify the Wallet Unit's WIA and KA using a trust anchor in the Wallet Provider LoTE; verify Wallet Instance and WSCD not revoked. |
+| ISSU_28   | Attestation Provider SHALL accept trust anchors in the Wallet Provider LoTE for WIA and KA verification. |
+| ISSU_30   | Attestation Provider SHALL verify the KA (device-bound attestations) using a trust anchor in the Wallet Provider LoTE; verify WSCD/keystore not revoked. |
+| ISSU_30a  | Attestation Provider SHALL verify the WIA (all attestations) using a trust anchor in the Wallet Provider LoTE; verify Wallet Instance not revoked. |
+| GenNot_05 | Suspended/cancelled Wallet Providers have status Invalid in LoTE; Credential Issuer SHALL use only valid-status entries. |
 
 ## References
 

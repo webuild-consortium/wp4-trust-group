@@ -1,6 +1,6 @@
 # Credential Catalogue: Catalogue of Attributes and Catalogue of Attestation Schemes
 
-This document compiles evidence, references, and specifications for the EUDI Wallet **catalogue of attributes** and **catalogue of attestation schemes**, as defined in the Architecture and Reference Framework (ARF) v2.8.0 and Commission Implementing Regulation (EU) 2025/1569.
+This document compiles evidence, references, and specifications for the EUDI Wallet **catalogue of attributes** and **catalogue of attestation schemes**, as defined in the Architecture and Reference Framework (ARF) v2.9.0 and Commission Implementing Regulation (EU) 2025/1569.
 
 For Trusted List extensions used to configure which Credential Issuers are authorised to issue specific attestation types, see [trusted-list-extensions-credential-issuers.md](../task3-x509-pki-etsi/trusted-list-extensions-credential-issuers.md).
 
@@ -8,7 +8,7 @@ For Trusted List extensions used to configure which Credential Issuers are autho
 
 **Entity and trust terminology**: See [terms-and-entities.md](../task1-use-cases/terms-and-entities.md).
 
-**Catalogue and attestation concepts**: See [ARF v2.8.0 Section 5.5](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes) and [Technical Specification 11](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md).
+**Catalogue and attestation concepts**: See [ARF v2.9.0 Section 5.5](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes) and [Technical Specification 11](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md).
 
 ## Credential Catalogues Overview
 
@@ -21,19 +21,19 @@ The EUDI Wallet ecosystem defines **two distinct catalogues** to support discove
 
 ### Key Documents
 
-#### Main Architecture Document (ARF v2.8.0)
-- [Section 5.5 - Catalogue of attributes and catalogue of attestation schemes](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes)
+#### Main Architecture Document (ARF v2.9.0)
+- [Section 5.5 - Catalogue of attributes and catalogue of attestation schemes](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes)
 
 #### Discussion Paper
-- [Topic O - Catalogues for Attestations](https://eudi.dev/2.8.0/discussion-topics/o-catalogues-for-attestations/) (Version 1.0, updated 29 Sep 2025)
+- [Topic O - Catalogues for Attestations](https://eudi.dev/2.9.0/discussion-topics/o-catalogues-for-attestations/) (Version 1.0, updated 29 Sep 2025)
 - [GitHub Discussion](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/discussions/557)
 
 #### Technical Specification
 - [Technical Specification 11 - Interfaces and formats for catalogue of attributes and catalogue of schemes](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md)
 
-#### Requirements Documents (ARF v2.8.0 Annex 2.02)
-- [Topic 25 - Unified definition and controlled vocabularies for attributes](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2315-topic-25---unified-definition-and-controlled-vocabularies-for-attributes)
-- Topic 26 (References to catalogue of Attestation Rulebooks) has been removed in ARF v2.8.0; see [Discussion Paper Topic O](https://eudi.dev/2.8.0/discussion-topics/o-catalogues-for-attestations/) Section 3.2.
+#### Requirements Documents (ARF v2.9.0 Annex 2.02)
+- [Topic 25 - Unified definition and controlled vocabularies for attributes](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2315-topic-25---unified-definition-and-controlled-vocabularies-for-attributes)
+- Topic 26 (References to catalogue of Attestation Rulebooks) has been removed in ARF v2.9.0; see [Discussion Paper Topic O](https://eudi.dev/2.9.0/discussion-topics/o-catalogues-for-attestations/) Section 3.2.
 
 ### Objectives
 
@@ -72,7 +72,7 @@ Through clear definitions of attestation contents:
 
 The catalogue of attributes is **exclusively intended for use by QTSPs** issuing QEAAs. It enables them to find the access point of the Authentication Source responsible for a given attribute, at which the QTSP can verify the value of that attribute for a given User.
 
-*ARF v2.8.0 Section 5.5.2*
+*ARF v2.9.0 Section 5.5.2*
 
 ### Scope
 
@@ -107,7 +107,7 @@ According to **Article 7 of Commission Implementing Regulation 2025/1569**, a re
 
 ### High-Level Requirements
 
-From **Topic 25** (ARF v2.8.0 Annex 2.02; former catalogue HLRs have been removed per Discussion Paper Topic O):
+From **Topic 25** (ARF v2.9.0 Annex 2.02; former catalogue HLRs have been removed per Discussion Paper Topic O):
 
 | **Index** | **Requirement Specification** |
 |-----------|-------------------------------|
@@ -180,7 +180,7 @@ According to **Article 8 of Commission Implementing Regulation 2025/1569**, a re
 
 ### High-Level Requirements
 
-From **Topic 12** (Attestation Rulebooks, ARF v2.8.0 Annex 2.02):
+From **Topic 12** (Attestation Rulebooks, ARF v2.9.0 Annex 2.02):
 
 | **Index** | **Requirement Specification** |
 |-----------|-------------------------------|
@@ -232,13 +232,13 @@ See [terms-and-entities.md](../task1-use-cases/terms-and-entities.md) for entity
 
 ### Catalogue Registration Principles
 
-- Registration in catalogues is **not mandatory** for QEAAs and PuB-EAAs (ARF v2.8.0 Section 5.5.3).
-- Registration does not create any obligation for acceptance of the relevant type of attestation by any actor. Neither does it automatically imply cross-border recognition (ARF v2.8.0 Section 5.5.3).
+- Registration in catalogues is **not mandatory** for QEAAs and PuB-EAAs (ARF v2.9.0 Section 5.5.3).
+- Registration does not create any obligation for acceptance of the relevant type of attestation by any actor. Neither does it automatically imply cross-border recognition (ARF v2.9.0 Section 5.5.3).
 
 ### Catalogue Terminology
 
 - The term "catalogue of published Attestation Rulebooks" is being rephrased to "catalogue of schemes for the attestation of attributes" (Discussion Paper Topic O Section 3.3)
-- ARF v2.8.0 has incorporated the changes discussed in [Discussion Paper Topic O](https://eudi.dev/2.8.0/discussion-topics/o-catalogues-for-attestations/): the former HLRs in Topics 25 and 26 have been removed; Topic 25 now contains only CAT_04 (verification point for attributes), and Topic 26 has been removed.
+- ARF v2.9.0 has incorporated the changes discussed in [Discussion Paper Topic O](https://eudi.dev/2.9.0/discussion-topics/o-catalogues-for-attestations/): the former HLRs in Topics 25 and 26 have been removed; Topic 25 now contains only CAT_04 (verification point for attributes), and Topic 26 has been removed.
 
 ## Legal and Regulatory References
 
@@ -282,12 +282,12 @@ This specification defines:
 - Interfaces for querying the catalogue of attestation schemes
 - Formats for machine-readable attestation schemes
 
-## Related Topics and Cross-References (ARF v2.8.0)
+## Related Topics and Cross-References (ARF v2.9.0)
 
-- [Topic 12 - Attestation Rulebooks](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a239-topic-12---attestation-rulebooks)
-- [Topic 25 - Unified definition and controlled vocabularies for attributes](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2315-topic-25---unified-definition-and-controlled-vocabularies-for-attributes)
-- Topic 26 - Removed in ARF v2.8.0; see [Discussion Paper Topic O](https://eudi.dev/2.8.0/discussion-topics/o-catalogues-for-attestations/) Section 3.2.
-- [Topic 42 - Requirements for QTSPs to Access Authentic Sources](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2324-topic-42---requirements-for-qtsps-to-access-authentic-sources) - Related to the catalogue of attributes (verification points)
+- [Topic 12 - Attestation Rulebooks](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a239-topic-12---attestation-rulebooks)
+- [Topic 25 - Unified definition and controlled vocabularies for attributes](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2315-topic-25---unified-definition-and-controlled-vocabularies-for-attributes)
+- Topic 26 - Removed in ARF v2.9.0; see [Discussion Paper Topic O](https://eudi.dev/2.9.0/discussion-topics/o-catalogues-for-attestations/) Section 3.2.
+- [Topic 42 - Requirements for QTSPs to Access Authentic Sources](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2324-topic-42---requirements-for-qtsps-to-access-authentic-sources) - Related to the catalogue of attributes (verification points)
 
 ## References
 
@@ -296,7 +296,7 @@ This specification defines:
 - [Commission Implementing Regulation (EU) 2025/1569](http://data.europa.eu/eli/reg_impl/2025/1569/oj)
 - [Regulation (EU) No 910/2014](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0910) (eIDAS Regulation)
 
-### Architecture Documents (ARF v2.8.0)
-- [Architecture and Reference Framework Main Document - Section 5.5](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes)
-- [Annex 2.02 - High-Level Requirements by Topic](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/)
-- [Discussion Paper on Topic O](https://eudi.dev/2.8.0/discussion-topics/o-catalogues-for-attestations/)
+### Architecture Documents (ARF v2.9.0)
+- [Architecture and Reference Framework Main Document - Section 5.5](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes)
+- [Annex 2.02 - High-Level Requirements by Topic](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/)
+- [Discussion Paper on Topic O](https://eudi.dev/2.9.0/discussion-topics/o-catalogues-for-attestations/)
