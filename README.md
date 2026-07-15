@@ -19,7 +19,7 @@ The **List of Trusted Lists (LoTL)** for the WP4 Trust Infrastructure is publish
 | JSON | [list_of_trusted_lists.json](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json) |
 | XML | [list_of_trusted_lists.xml](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml) |
 
-During the **WE BUILD MVP (pilot) phase**, the WP4 Trust Infrastructure group acts as **Ecosystem Authority** and **Trusted List Provider** for all participating entities. The LoTL is the trust anchor in the ETSI TS 119 612 model: it references the Trusted Lists for PID Providers, Wallet Providers, and other entity types, enabling Wallet Units and Relying Parties to validate certificates and trust anchors. In the production phase (MVP+), the European Commission and Member State TLPs take over these roles. Registration, notification, and publication responsibilities are described in the [Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md).
+During the **WE BUILD MVP (pilot) phase**, the WP4 Trust Infrastructure group acts as **Ecosystem Authority** and **Trusted List Provider** for all participating entities. The LoTL is the trust anchor in the ETSI TS 119 612 model: it references the Trusted Lists for PID Providers, Wallet Providers, and other entity types, enabling Wallet Units and Relying Parties to validate certificates and trust anchors. In the production phase (MVP+), the European Commission and Member State TLPs take over these roles. Registration, notification, and publication responsibilities are described in the [Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md). **To register as a TL/LoTE-listed entity in the pilot**, see **[Onboarding to the Trusted Lists](task1-use-cases/subtask1-1-onboarding/trusted-lists-onboarding.md)** (IDunion console). **Relying Parties** are not listed in TLs/LoTEs — see [Relying Party Onboarding](task1-use-cases/subtask1-1-onboarding/relying_party_onboarding.md).
 
 **Documentation (by reference)** — automation, contribution, and local tooling:
 
@@ -101,8 +101,9 @@ Reading paths group documents by the questions or problems they address. Each pa
 
 ### How do participants join the ecosystem? — Onboarding and registration
 
+- **[Onboarding to the Trusted Lists (MVP)](task1-use-cases/subtask1-1-onboarding/trusted-lists-onboarding.md)** — **Start here for TL/LoTE registration in the pilot**: step-by-step guide (IDunion console) for Wallet Providers, PID/EAA Providers, Access CAs, and Registration Certificate Providers; includes a table distinguishing TL-listed entities from Relying Parties.
 - **[Base Onboarding Framework](task1-use-cases/subtask1-1-onboarding/onboarding-base.md)** — Common framework: MVP/MVP+ definitions, Member State requirements, RACI matrix; references use-case-specific documents.
-- **[Relying Party Onboarding](task1-use-cases/subtask1-1-onboarding/relying_party_onboarding.md)** — RP registration, policy acceptance, certificate validation, access control setup.
+- **[Relying Party Onboarding](task1-use-cases/subtask1-1-onboarding/relying_party_onboarding.md)** — RP registration (National Register — not TL/LoTE-listed), policy acceptance, certificate validation, access control setup.
 - **[PID / EAA Provider Onboarding](task1-use-cases/subtask1-1-onboarding/pid_eaa_provider_onboarding.md)** — PID/Attestation Provider registration, attestation type declaration, access/registration certificate issuance, trust anchor publication, notification to Commission.
 - **[Wallet Provider Onboarding](task1-use-cases/subtask1-1-onboarding/wallet-provider-onboarding.md)** — Wallet Provider registration, wallet instance attestation, security compliance, trust establishment.
 - **[Onboarding API](task4-trust-infrastructure-api/onboarding-api/README.md)** — API for participant registration, certificate management, policy management, compliance and audits.
