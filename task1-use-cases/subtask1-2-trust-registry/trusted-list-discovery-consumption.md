@@ -31,7 +31,7 @@ Participants (Wallet Units, Relying Parties, PID Providers, Attestation Provider
    - **UC-TE-03**: Wallet Provider TL for Credential Issuer evaluating Wallet Unit
    - **UC-TE-04**: Access CA TL (and Reg Cert Provider TL) for Wallet Unit evaluating Relying Party
    - **UC-TE-05**: PID Provider TL, QEAA/PuB-EAA/EAA TLs for Relying Party evaluating credentials
-6. **Revocation information**: Where evaluation requires certificate or credential revocation checks, participant obtains revocation information (e.g. CRL, OCSP for access/registration certificates per Reg_14, RPRC_02; WUA/PID/attestation revocation per Topic 38 and applicable specs) from the sources defined in the relevant policies.
+6. **Revocation information**: Where evaluation requires certificate or credential revocation checks, participant obtains revocation information (e.g. CRL, OCSP for access/registration certificates per ETSI TS 119 411-8; Wallet Instance revocation via WIA and WSCD/keystore revocation via KA per Topic 38; PID/attestation revocation per applicable specs) from the sources defined in the relevant policies.
 7. **Refresh**: Participant refreshes LoTL and TLs according to policy (availability and authenticity of full history per TLPub_08).
 
 ## Success Criteria

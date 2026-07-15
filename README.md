@@ -142,7 +142,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 
 - **[Trust Evaluation Base](task1-use-cases/subtask1-2-trust-registry/trust-evaluation-base.md)** — Trust sources, ARF requirement mapping, common terminology for trust evaluation.
 - **[Wallet Unit evaluates Credential Issuer](task1-use-cases/subtask1-2-trust-registry/wallet-unit-evaluates-credential-issuer.md)** — Wallet Unit verifies PID/Attestation Provider before requesting PID or attestation.
-- **[Credential Issuer evaluates Wallet Unit](task1-use-cases/subtask1-2-trust-registry/credential-issuer-evaluates-wallet-unit.md)** — PID/Attestation Provider verifies Wallet Unit (WUA) before issuing credentials.
+- **[Credential Issuer evaluates Wallet Unit](task1-use-cases/subtask1-2-trust-registry/credential-issuer-evaluates-wallet-unit.md)** — PID/Attestation Provider verifies WIA and KA (WUA) before issuing credentials.
 - **[Wallet Unit evaluates Relying Party](task1-use-cases/subtask1-2-trust-registry/wallet-unit-evaluates-relying-party.md)** — Wallet Unit verifies RP before presentation.
 - **[Relying Party evaluates presented credentials](task1-use-cases/subtask1-2-trust-registry/relying-party-evaluates-credentials.md)** — RP validates PID and attestation signatures using Trusted Lists.
 - **[Trusted List discovery and consumption](task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md)** — How to obtain and use LoTL and Trusted Lists for validation.
@@ -199,13 +199,13 @@ Reading paths group documents by the questions or problems they address. Each pa
   - [Official Document](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)
 - **CIR (EU) 2025/848** - Commission Implementing Regulation on the registration of wallet-relying parties
   - [Official Document](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32025R0848)
-- **CIR 2025/2164** - Commission Implementing Regulation (trusted lists context; referenced by ARF v2.8.0 for ETSI TS 119 612)
+- **CIR 2025/2164** - Commission Implementing Regulation (trusted lists context; referenced by ARF v2.9.0 for ETSI TS 119 612)
   - [Official Document](https://eur-lex.europa.eu/eli/dec_impl/2025/2164/oj)
 - **CIR (EU) 2025/1569** - Commission Implementing Regulation on catalogue of attributes and catalogue of attestation schemes (Articles 7–8)
   - [Official Document](https://eur-lex.europa.eu/eli/reg_impl/2025/1569/oj)
 - **Commission Implementing Decision (EU) 2015/1505** - Rules for authenticating EUMS trusted lists (implemented by ETSI TS 119 615)
   - [Official Document](https://eur-lex.europa.eu/eli/dec_impl/2015/1505/oj)
-- **Further Implementing Acts** (ARF v2.8.0): CIR 2025/2527 (qualified certificates for website authentication), 2025/2530 (qualified trust service providers), 2025/2531 (qualified electronic ledgers), 2025/2532 (qualified electronic archiving services).
+- **Further Implementing Acts** (ARF v2.9.0): CIR 2025/2527 (qualified certificates for website authentication), 2025/2530 (qualified trust service providers), 2025/2531 (qualified electronic ledgers), 2025/2532 (qualified electronic archiving services).
 
 ### Standards
 
@@ -242,7 +242,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 - **ETSI TS 119 461** - Policy and security requirements for identity proofing of natural persons (registration identity verification)
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/119461/01.02.01_60/ts_119461v010201p.pdf)
 
-In addition to the above, this project is developed in constant alignment with **EUDI Architecture and Reference Framework (ARF) v2.8.0** specifications, adopting LoTE terminology and including core regulatory frameworks (Reg_10/11/31, RPA_02/RPA_04),  and access certificate and trusted list standards. 
+In addition to the above, this project is developed in constant alignment with **EUDI Architecture and Reference Framework (ARF) v2.9.0** specifications, adopting LoTE terminology and including core regulatory frameworks (Reg_10/11/31, RPA_02/RPA_04),  and access certificate and trusted list standards. 
 
 ### Additional Standards and Drafts
 
@@ -255,7 +255,7 @@ The following specifications are subject to ongoing updates, which will be integ
 
 - **EC TS02 v0.9** (2025-04) - Specification of systems enabling the notification and subsequent publication of Provider information
   - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md)
-- **EC TS03** - Wallet Unit Attestation
+- **EC TS03 V1.5** — Wallet Unit Attestation (WIA and KA; aligned with ARF v2.9.0 Topic 9)
   - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md)
 - **EC TS05 V1.0** (2025-06) - Common Formats and API for Relying Party Registration Information (upcoming ETSI TS)
   - [Official Document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md)

@@ -154,6 +154,6 @@ Illustrative only; no ETSI encoding prescribed.
 ## References
 
 - [credential-catalogue.md](../task2-trust-framework/credential-catalogue.md) | [trust-infrastructure-schema.md](../task2-trust-framework/trust-infrastructure-schema.md) | [terms-and-entities.md](../task1-use-cases/terms-and-entities.md)
-- ARF: [Topic 27](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties) | [Topic 31](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2320-topic-31---notification-and-publication-of-pid-provider-wallet-provider-attestation-provider-access-certificate-authority-and-provider-of-registration-certificates)
+- ARF: [Topic 27](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties) | [Topic 31](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2320-topic-31---notification-and-publication-of-pid-provider-wallet-provider-attestation-provider-access-certificate-authority-and-provider-of-registration-certificates)
 - ETSI TS 119 602 v1.1.1 (6.3.15) | ETSI TS 119 615 v1.3.1 (4.4)
 - [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183) | [eIDAS 910/2014 Art.22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0910)
