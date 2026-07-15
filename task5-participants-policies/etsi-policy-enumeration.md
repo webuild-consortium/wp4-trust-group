@@ -538,6 +538,8 @@ This document provides a comprehensive enumeration of ETSI (European Telecommuni
 | Security Requirements | EN 319 411-1 | Security Baseline | ✅ Full Support |
 | Qualified Issuers | EN 319 411-2 | EIDAS Compliance | ✅ Full Support |
 | Relying Parties | EN 319 411-8 | Attribute Access | ✅ Full Support |
+| WRPRC transfer | TS 119 472-2 | Protocol delivery to wallet | ✅ Full Support |
+| VCI registration | TS 119 412-6 | Attestation type eligibility | ✅ Full Support |
 | Trust Lists | TS 119 612 | Trust Establishment | ✅ Full Support |
 
 ### Subtractive Policy Implementation
@@ -553,6 +555,8 @@ This document provides a comprehensive enumeration of ETSI (European Telecommuni
 | Security Requirements | EN 319 411-1 | Security Restrictions | ✅ Full Support |
 | Qualified Issuers | EN 319 411-2 | Compliance Exclusions | ✅ Full Support |
 | Relying Parties | EN 319 411-8 | Attribute Restrictions | ✅ Full Support |
+| WRPRC transfer | TS 119 472-2 | Transfer restrictions | ✅ Full Support |
+| VCI registration | TS 119 412-6 | Attestation type restrictions | ✅ Full Support |
 | Trust Lists | TS 119 612 | Trust Revocation | ✅ Full Support |
 
 ## Conclusion

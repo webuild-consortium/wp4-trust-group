@@ -128,8 +128,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 ### What are the policy approaches (additive vs. subtractive)? — Authentication, authorization, trust marks
 
 - **[Authentication Authorization Policy Framework](task2-trust-framework/authentication-authorization-policy-framework.md)** — Distinction between authentication and authorization, additive/subtractive principles, federated trust mark use cases.
-- **[Policy Approaches Definition](task5-participants-policies/policy-approaches-definition.md)** — Additive vs. subtractive policy models, zero-trust, EUDIW/ARF alignment, OpenID Federation trust mark integration, attribute/credential classification. Resolves [issue #2](https://github.com/webuild-consortium/wp4-trust-group/issues/2).
-- **[Issue #2 Resolution](task5-participants-policies/issue-2-resolution.md)** — Requirement traceability and closure notes for additive/subtractive policy approaches.
+- **[Policy Approaches Definition](task5-participants-policies/policy-approaches-definition.md)** — Additive vs. subtractive policy models, zero-trust, EUDIW/ARF alignment, OpenID Federation trust mark integration, attribute/credential classification.
 - **[Trust Mark Semantics Implementation](task5-participants-policies/trust-mark-semantics-implementation.md)** — Implementation guidance for trust mark semantics for Credential Issuers and Relying Parties.
 
 ### What credentials exist and who may issue them? — Credential catalogues and issuer constraints

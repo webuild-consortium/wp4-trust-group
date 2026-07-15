@@ -9,6 +9,7 @@ This example demonstrates Wallet-Relying Party Registration Certificates (WRPRC)
 | Reference | Document |
 |-----------|----------|
 | ETSI TS 119 475 v1.2.1 | Relying party attributes supporting EUDI Wallet user's authorization decisions |
+| ETSI TS 119 472-2 | Profiles for EAA/PID Presentations to Relying Party (WRPRC transfer) |
 | ETSI TS 119 182-1 | JAdES digital signatures; Part 1: Building blocks and JAdES baseline signatures |
 | ETSI EN 319 411-1 | Policy and security requirements for Trust Service Providers; Part 1: General requirements |
 | CIR (EU) 2025/848 | Commission Implementing Regulation on the registration of wallet-relying parties |

@@ -2,8 +2,6 @@
 
 This task defines the data models and trust evaluation methods for participants' certificates and policies in the WP4 Trust Infrastructure.
 
-**Issue #2 resolved:** Additive and subtractive policy approaches are defined in [policy-approaches-definition.md](policy-approaches-definition.md). See [issue-2-resolution.md](issue-2-resolution.md) for requirement traceability and GitHub closure notes.
-
 **Note on Schema Harmonization**: The data models defined in this task are harmonized with the [Onboarding API schemas](../task4-trust-infrastructure-api/onboarding-api/README.md#data-models) and the [onboarding use case documents](../task1-use-cases/subtask1-1-onboarding/onboarding-base.md) to ensure consistency across the trust infrastructure. Participant types, status values, certificate types, and certificate status values are aligned across all specifications.
 
 ## Folder contents

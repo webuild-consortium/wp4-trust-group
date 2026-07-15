@@ -9,10 +9,11 @@ This document evaluates ETSI (European Telecommunications Standards Institute) s
 1. [ETSI Policy Framework Overview](#etsi-policy-framework-overview)
 2. [Certificate Profile Standards](#certificate-profile-standards)
 3. [Trust Service Provider Standards](#trust-service-provider-standards)
-4. [Policy Application Mechanisms](#policy-application-mechanisms)
-5. [Additive vs Subtractive Policy Support](#additive-vs-subtractive-policy-support)
-6. [Implementation Guidelines](#implementation-guidelines)
-7. [Compliance Requirements](#compliance-requirements)
+4. [ARF Registration Certificate Specifications](#arf-registration-certificate-specifications)
+5. [Policy Application Mechanisms](#policy-application-mechanisms)
+6. [Additive vs Subtractive Policy Support](#additive-vs-subtractive-policy-support)
+7. [Implementation Guidelines](#implementation-guidelines)
+8. [Compliance Requirements](#compliance-requirements)
 
 ## ETSI Policy Framework Overview
 
@@ -222,6 +223,85 @@ Operational Level (Trust Service Provider policies)
   ]
 }
 ```
+
+## ARF Registration Certificate Specifications
+
+This section addresses the ETSI specifications listed in [issue #3](https://github.com/webuild-consortium/wp4-trust-group/issues/3) for registration certificate policy application.
+
+### Specification map
+
+| Spec | Role | Policy application |
+| ---- | ---- | ------------------ |
+| **TS 119 411-8** | RP access certificate CP/CPS | Authenticates the RP; defines certificate policy OIDs and CPS references |
+| **TS 119 475** | WRPRC data model | Carries entitled attributes (RP) or attestation types (VCI) and user-authorisation metadata |
+| **TS 119 472-2** | WRPRC transfer protocol | Delivers WRPRC from RP Instance to Wallet Unit (ISO/IEC 18013-5, OpenID4VP) |
+| **EN 319 412-1** | DN / identifier semantics | Formats EU-wide unique identifiers in access and registration certificates |
+| **TS 119 412-6** | VCI registration cert profile | Defines eligible attestation types per provider category (ARF RPRC_15) |
+| **TS 119 612** | Trusted Lists | Distributes trust anchors for registration certificate and access CA providers |
+| **TS 119 182-1** | JAdES signatures | Signs WRPRC JWT/CWT payloads |
+
+### ETSI TS 119 472-2: WRPRC transfer
+
+**Purpose:** Protocol extensions for transferring a Relying Party registration certificate (or RPRC_19a information) from an RP Instance to a Wallet Unit.
+
+**ARF requirements:**
+- **RPRC_20** — support ISO/IEC 18013-5 or OpenID4VP extension for single WRPRC transfer
+- **RPRC_20a** — support same extensions for RPRC_19a information
+
+**Policy application:** The WRPRC is the policy artefact the wallet evaluates. TS 119 472-2 does not define entitlements; it defines **how** the wallet obtains them:
+
+| Channel | Mechanism | Reference |
+| ------- | --------- | --------- |
+| Proximity | `euWrprc` in ISO/IEC 18013-5 DeviceRequest | TS 119 472-2 |
+| Remote | `verifier_info.registration_cert` in OpenID4VP Request Object | TS 119 472-2 clause 6.3.1.4 |
+| Registry fallback | Wallet retrieves WRPRC from national registry API | ARF RPRC_19a |
+
+See [EUDI Wallet Trust and Entitlement Discovery](../task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md#312-wrprc-sources) for discovery flows.
+
+### ETSI TS 119 412-6: Credential Issuer registration certificates
+
+**Purpose:** Certificate profile for PID, Wallet, EAA, QEAA, and PuB-EAA providers. Defines what attestation types each issuer is eligible to issue.
+
+**ARF requirement:** **RPRC_15** — registration certificates for attestation providers SHALL contain the type(s) of attestation the entity intends to issue.
+
+**Policy application (additive allow-list):**
+
+```json
+{
+  "provides_attestations": [
+    {
+      "format": "dc+sd-jwt",
+      "meta": { "vct": "urn:eu.eudi:pid:1" },
+      "claim": ["family_name", "given_name", "birth_date"]
+    }
+  ]
+}
+```
+
+Only attestation types listed in `provides_attestations` are policy-authorised. See [eaa_provider_registration_certificate.md](eaa_provider_registration_certificate.md).
+
+### Registration certificate policy summary
+
+#### Relying Party WRPRC
+
+Per ARF Topic 44 and CIR 2025/848:
+
+1. **Certificate policy** — IETF RFC 3647 CP/CPS framework; IETF RFC 5755 for attribute expression
+2. **Required content** — EU-wide identifier (EN 319 412-1 DN), user-friendly name, Annex I registration data, signature-cert location, machine-processable CP/CPS reference
+3. **Entitlements** — `credentials` array in WRPRC (TS 119 475) lists attributes the RP may request per intended use
+4. **Transfer** — TS 119 472-2 extensions to wallet
+
+Example: [relying_party_registration_certificate.md](relying_party_registration_certificate.md)
+
+#### Credential Issuer WRPRC
+
+Per ARF Topic 44:
+
+1. **Certificate profile** — TS 119 412-6
+2. **Required content** — attestation type(s) to issue (RPRC_15), EU-wide identifier, user-friendly name
+3. **Distribution** — all service supply points; included in Issuer metadata (OpenID4VCI)
+
+Example: [eaa_provider_registration_certificate.md](eaa_provider_registration_certificate.md)
 
 ## Policy Application Mechanisms
 
@@ -565,6 +645,9 @@ The evaluation demonstrates that ETSI standards fully support both policy approa
 - [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.01.01_60/en_31941101v010101c.pdf) - General Requirements for TSPs
 - [ETSI EN 319 411-2](https://www.etsi.org/deliver/etsi_en/319400_319499/31941102/01.01.01_60/en_31941102v010101c.pdf) - Requirements for Qualified Certificate Issuers
 - [ETSI EN 319 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.00.00_60/ts_11941108v010000c.pdf) - Access Certificate Policy for EUDI Wallet Relying Parties
+- [ETSI TS 119 472-2](https://www.etsi.org/deliver/etsi_ts/119400_119499/11947202/01.02.01_60/ts_11947202v010201p.pdf) - Profiles for EAA/PID Presentations to Relying Party
+- [ETSI TS 119 412-6](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941206/01.01.01_60/ts_11941206v010101p.pdf) - Certificate profile for PID, Wallet, EAA, QEAA, and PSBEAA providers
+- [ETSI TS 119 182-1](https://www.etsi.org/deliver/etsi_ts/119100_119199/11918201/01.02.01_60/ts_11918201v010201p.pdf) - JAdES baseline signatures
 - [ETSI TS 119 475 v1.2.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf) - Relying Party Attributes
 - [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119400_119499/119602/01.00.00_60/ts_119602v010000c.pdf) - Trusted Lists Data Model
 - [ETSI TS 119 612](https://www.etsi.org/deliver/etsi_ts/119400_119499/119612/02.03.01_60/ts_119612v020301c.pdf) - Trusted Lists
