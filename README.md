@@ -19,7 +19,7 @@ The **List of Trusted Lists (LoTL)** for the WP4 Trust Infrastructure is publish
 | JSON | [list_of_trusted_lists.json](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json) |
 | XML | [list_of_trusted_lists.xml](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml) |
 
-During the **WE BUILD MVP (pilot) phase**, the WP4 Trust Infrastructure group acts as **Ecosystem Authority** and **Trusted List Provider** for all participating entities. The LoTL is the trust anchor in the ETSI TS 119 612 model: it references the Trusted Lists for PID Providers, Wallet Providers, and other entity types, enabling Wallet Units and Relying Parties to validate certificates and trust anchors. In the production phase (MVP+), the European Commission and Member State TLPs take over these roles. Registration, notification, and publication responsibilities are described in the [Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md). **To register as a TL/LoTE-listed entity in the pilot**, see **[Onboarding to the Trusted Lists](task1-use-cases/subtask1-1-onboarding/trusted-lists-onboarding.md)** (IDunion console). **Relying Parties** are not listed in TLs/LoTEs — see [Relying Party Onboarding](task1-use-cases/subtask1-1-onboarding/relying_party_onboarding.md).
+During the **WE BUILD MVP (pilot) phase**, the WP4 Trust Infrastructure group acts as **Ecosystem Authority** and **Trusted List Provider** for all participating entities. The LoTL is the trust anchor in the ETSI TS 119 612 model: it references the Trusted Lists for PID Providers, Wallet Providers, and other entity types, enabling Wallet Units and Relying Parties to validate certificates and trust anchors. In the production phase (MVP+), the European Commission and Member State TLPs take over these roles. Registration, notification, and publication responsibilities are described in the [Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md). 
 
 **Documentation (by reference)** — automation, contribution, and local tooling:
 
@@ -27,6 +27,12 @@ During the **WE BUILD MVP (pilot) phase**, the WP4 Trust Infrastructure group ac
 - **[LoTL producer and validator (`tools/lotl`)](tools/lotl/README.md)** — Running the Python producer locally: validating `tl_entries`, generating and signing `list_of_trusted_lists.{json,xml}`, LoTL signing certificate creation, CLI options, and tests.
 
 To **consume** the published LoTL and participant Trusted Lists in verification flows, see [Trusted List discovery and consumption](task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md).
+
+## Entities Registration
+
+**To register as a TL/LoTE-listed entity in the pilot**, see **[Onboarding to the Trusted Lists](task1-use-cases/subtask1-1-onboarding/trusted-lists-onboarding.md)** (IDunion console). 
+
+Since **Relying Parties** are not listed in TLs/LoTEs, to register a Relying Party see [Relying Party Onboarding](task1-use-cases/subtask1-1-onboarding/relying_party_onboarding.md).
 
 ## Tasks
 
