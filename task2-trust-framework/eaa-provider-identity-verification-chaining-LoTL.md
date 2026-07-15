@@ -108,7 +108,7 @@ After the holder approves a presentation, the **wallet unit** delivers PID and/o
 |------------------|----------------|------------------------------|
 | **QEAA** | Validate **qualified signature** per eIDAS Art. 32 (**OIA_13**) | Trust anchor from **QEAA Provider TL** (Member State QTSP TL, Art. 22) |
 | **PuB-EAA** | Validate qualified signature per Art. 32; validate **QTSP certificate** via Art. 22 TL; verify **Art. 45f** certified attributes (**OIA_14**) | QTSP public key + national TL; PuB-EAA provider context on EC list / LoTE |
-| **Non-qualified EAA** | Validate signature per mechanism in applicable **Rulebook** (**OIA_15**) | Rulebook-defined anchors (often national EAA LoTE or MS policy) |
+| **Non-qualified EAA** | Validate signature per mechanism in applicable **Rulebook** (**OIA_15**) | Rulebook-defined anchors: national **EAA LoTE** (via LoTL) **or** **OpenID Federation** trust marks, per applicable Rulebook (Topic 12) |
 
 **Procedure (WP4 UC-TE-05):**
 
@@ -303,11 +303,15 @@ sequenceDiagram
 
 | Step | QEAA (OIA_13) | PuB-EAA (OIA_14) | Non-qualified EAA (OIA_15) |
 |------|---------------|------------------|----------------------------|
-| LoTL → TL | National **QTSP TL** (`qeaa-provider`) | **PuB-EAA LoTE** + QTSP cert on **Art. 22 TL** | **National EAA LoTE** or Rulebook mechanism |
+| Trust discovery | National **QTSP TL** via LoTL (`qeaa-provider`) | **PuB-EAA LoTE** via LoTL + QTSP cert on **Art. 22 TL** | Per applicable **Rulebook** (Topic 12): **national EAA LoTE** via LoTL (`eaa-provider`) **or** **OpenID Federation** trust marks |
 | Signature | Qualified signature per Art. 32 | Qualified signature + QTSP cert chain | Per Rulebook (Topic 12) |
 | Extra checks | Issuer status; revocation if required | Art. 45f certified attributes; revocation if required | Issuer status where applicable; revocation per rulebook |
 
-The **catalogue** (`trustedAuthorities` in ARF TS11) may be used by RPs or verifier components to select the correct LoTL pointer or trust scheme for a given attestation type before performing OIA_13–15 validation.
+**Non-qualified EAA and LoTL:** A national non-qualified EAA provider **does not always** need to appear on the LoTL. ARF TS11 states that the LoTE data model **MAY** be used for non-qualified EAAs; the applicable **Attestation Rulebook** (Topic 12) defines which trust mechanism(s) apply. When the Rulebook specifies a **national EAA LoTE**, the Member State TLP publishes that list and submits its URL to the EC for inclusion in the LoTL (`eaa-provider` pointer) — the same LoTL-chaining procedure as for QEAA and PuB-EAA. When the Rulebook specifies another mechanism (e.g. **OpenID Federation**), verifiers resolve trust anchors through that mechanism instead of LoTL chaining.
+
+**WP4 pilot — Rulebook mechanism:** In the pilot, both **LoTE** (discovered via LoTL) and **OpenID Federation** are supported as Rulebook-defined trust mechanisms for non-qualified EAAs. The LoTEs or Federations used in the pilot **must be provided by WP4 participants** that operate components of the trust infrastructure (e.g. MS TLPs, EC LoTL publication, or trust-registry / federation operators).
+
+The **catalogue** (`trustedAuthorities` in ARF TS11) may be used by RPs or verifier components to select the correct LoTL pointer, federation trust mark, or trust scheme for a given attestation type before performing OIA_13–15 validation.
 
 ---
 
@@ -373,7 +377,7 @@ The **catalogue** (`trustedAuthorities` in ARF TS11) may be used by RPs or verif
 
 1. **EAA provider identity verification** in the EUDI Wallet is not a single check but a **stack**: MS registrar vetting and TS 119 461 proofing → publication of trust anchors in the correct TL/LoTE → LoTL-mediated discovery → runtime validation of WRPAC/WRPRC (wallet, at issuance) and **attestation signatures** (wallet at storage and **RP at presentation**) via **chained** trust material.
 
-2. **LoTL chaining** answers: *Which signed list should I trust, and with which anchor?* It routes **wallet units and Relying Parties** to the correct national QTSP list (QEAA), EC PuB-EAA list, or national non-qualified EAA LoTE.
+2. **LoTL chaining** answers: *Which signed list should I trust, and with which anchor?* It routes **wallet units and Relying Parties** to the correct national QTSP list (QEAA), EC PuB-EAA list, or — where the applicable Rulebook specifies LoTE — national non-qualified EAA LoTE. For non-qualified EAAs whose Rulebook defines **OpenID Federation** instead, trust discovery follows federation trust marks rather than LoTL pointers.
 
 3. **Certificate chaining** answers: *Does this presented credential chain to an anchor I already trust from those lists?* It applies to WRPAC, WRPRC, WUA, and **QEAA/PuB-EAA/non-Q EAA signature validation**—including when the RP validates a credential **received from the wallet** after presentation (OIA_13–15).
 
