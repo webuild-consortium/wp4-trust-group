@@ -1,7 +1,5 @@
 # Policy Approaches Definition: Additive vs Subtractive
 
-> **Issue resolution:** This document resolves [GitHub issue #2](https://github.com/webuild-consortium/wp4-trust-group/issues/2). See [issue-2-resolution.md](issue-2-resolution.md) for requirement traceability and closure notes.
-
 ## Executive Summary
 
 This document defines two distinct policy approaches for the WP4 Trust Infrastructure framework: **Additive** and **Subtractive** policy models. These approaches provide different security paradigms suitable for various deployment scenarios, from high-security zero-trust environments to flexible permissive ecosystems.
@@ -848,7 +846,6 @@ The implementation guidelines and examples demonstrate practical applications of
 - [HL7 FHIR](https://www.hl7.org/fhir/) (Health data)
 
 ### Related Documents
-- [Issue #2 Resolution](issue-2-resolution.md)
 - [Trust Framework Definition](../task2-trust-framework/README.md)
 - [EUDI Wallet Trust and Entitlement Discovery](../task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md)
 - [ETSI Policy Evaluation](etsi-policy-evaluation.md)

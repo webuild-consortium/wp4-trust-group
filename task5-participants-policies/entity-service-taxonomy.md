@@ -84,4 +84,4 @@ Member States may require these fields in national registration policy. They are
 
 ## Related policy work
 
-Domestic classification selects **policy templates** applied at registration (allowed attributes in WRPRC `credentials`, or optional subtractive rules). See [policy approaches](policy-approaches-definition.md) and [issue #2 resolution](issue-2-resolution.md).
+Domestic classification selects **policy templates** applied at registration (allowed attributes in WRPRC `credentials`, or optional subtractive rules). See [policy approaches](policy-approaches-definition.md).
