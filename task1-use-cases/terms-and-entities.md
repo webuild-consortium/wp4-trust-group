@@ -278,7 +278,7 @@ Onboarding use cases distinguish between two phases. Entity-specific onboarding 
 
 **Characteristics**: Default action: deny all; authorization model: explicit allow-list; security posture: conservative, high-security; configuration: grant specific permissions. Suitable for zero-trust and high-security environments.
 
-*Source: [Policy Approaches Definition](../task5-participants-certificates-policies/policy-approaches-definition.md).*
+*Source: [Policy Approaches Definition](../task5-participants-policies/policy-approaches-definition.md).*
 
 ### 6.4 Subtractive Policy Approach
 
@@ -286,7 +286,7 @@ Onboarding use cases distinguish between two phases. Entity-specific onboarding 
 
 **Characteristics**: Default action: allow all; authorization model: explicit deny-list; security posture: permissive; configuration: block specific restrictions. Suitable for open ecosystems and development.
 
-*Source: [Policy Approaches Definition](../task5-participants-certificates-policies/policy-approaches-definition.md).*
+*Source: [Policy Approaches Definition](../task5-participants-policies/policy-approaches-definition.md).*
 
 ---
 

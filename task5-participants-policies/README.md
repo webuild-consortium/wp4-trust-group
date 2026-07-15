@@ -2,16 +2,19 @@
 
 This task defines the data models and trust evaluation methods for participants' certificates and policies in the WP4 Trust Infrastructure.
 
+**Issue #2 resolved:** Additive and subtractive policy approaches are defined in [policy-approaches-definition.md](policy-approaches-definition.md). See [issue-2-resolution.md](issue-2-resolution.md) for requirement traceability and GitHub closure notes.
+
 **Note on Schema Harmonization**: The data models defined in this task are harmonized with the [Onboarding API schemas](../task4-trust-infrastructure-api/onboarding-api/README.md#data-models) and the [onboarding use case documents](../task1-use-cases/subtask1-1-onboarding/onboarding-base.md) to ensure consistency across the trust infrastructure. Participant types, status values, certificate types, and certificate status values are aligned across all specifications.
 
 ## Folder contents
 
 - **`README.md`** – Overview of Task 5 and its subcomponents
+- **`issue-2-resolution.md`** – Resolution note for GitHub issue #2 (additive vs. subtractive policy approaches)
 - **`policy-approaches-definition.md`** – Description of additive vs. subtractive policy approaches in the WP4 trust framework
 - **`etsi-policy-enumeration.md`** – Enumeration of ETSI policy identifiers and mechanisms relevant for the trust framework
 - **`etsi-policy-evaluation.md`** – Analysis of ETSI specifications and how they are applied in additive/subtractive policy evaluation
 - **`trust-mark-semantics-implementation.md`** – Guidance on implementing trust mark semantics for Credential Issuers and Relying Parties
-- **`ts5-registry-api-and-data-formats.md`** – TS5 registrar API, JWS response shapes, and Annex A.1 data model notes (wallet-relying party registry)
+- **[`../task5-participants-certificates-policies/ts5-registry-api-and-data-formats.md`](../task5-participants-certificates-policies/ts5-registry-api-and-data-formats.md)** – TS5 registrar API, JWS response shapes, and Annex A.1 data model notes (wallet-relying party registry)
 - **`data-model/`** – Subtask 5.1: data model specifications for certificates, policies, participants and relationships
 - **`trust-evaluation-methods/`** – Subtask 5.2: algorithms and methods for trust scoring, assessment, validation and monitoring
 

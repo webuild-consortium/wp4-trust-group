@@ -128,8 +128,9 @@ Reading paths group documents by the questions or problems they address. Each pa
 ### What are the policy approaches (additive vs. subtractive)? — Authentication, authorization, trust marks
 
 - **[Authentication Authorization Policy Framework](task2-trust-framework/authentication-authorization-policy-framework.md)** — Distinction between authentication and authorization, additive/subtractive principles, federated trust mark use cases.
-- **[Policy Approaches Definition](task5-participants-certificates-policies/policy-approaches-definition.md)** — Additive vs. subtractive policy models, zero-trust, OpenID Federation trust mark integration, attribute/credential classification.
-- **[Trust Mark Semantics Implementation](task5-participants-certificates-policies/trust-mark-semantics-implementation.md)** — Implementation guidance for trust mark semantics for Credential Issuers and Relying Parties.
+- **[Policy Approaches Definition](task5-participants-policies/policy-approaches-definition.md)** — Additive vs. subtractive policy models, zero-trust, EUDIW/ARF alignment, OpenID Federation trust mark integration, attribute/credential classification. Resolves [issue #2](https://github.com/webuild-consortium/wp4-trust-group/issues/2).
+- **[Issue #2 Resolution](task5-participants-policies/issue-2-resolution.md)** — Requirement traceability and closure notes for additive/subtractive policy approaches.
+- **[Trust Mark Semantics Implementation](task5-participants-policies/trust-mark-semantics-implementation.md)** — Implementation guidance for trust mark semantics for Credential Issuers and Relying Parties.
 
 ### What credentials exist and who may issue them? — Credential catalogues and issuer constraints
 
@@ -145,13 +146,13 @@ Reading paths group documents by the questions or problems they address. Each pa
 
 ### What certificates exist and what policies apply? — Participant certificates and ETSI policy
 
-- **[Relying Party Access Certificate](task5-participants-certificates-policies/relying_party_access_certificate.md)** — WRPRC/WRPAC (access certificate) for Relying Parties.
-- **[Relying Party Registration Certificate](task5-participants-certificates-policies/relying_party_registration_certificate.md)** — Registration certificate for Relying Parties.
-- **[EAA Provider Access Certificate](task5-participants-certificates-policies/eaa_provider_access_certificate.md)** — Access certificate for Attestation Providers.
-- **[EAA Provider Registration Certificate](task5-participants-certificates-policies/eaa_provider_registration_certificate.md)** — Registration certificate for Attestation Providers.
-- **[PID Provider Access Certificate](task5-participants-certificates-policies/pid_provider_access_certificate.md)** — Access certificate for PID Providers.
-- **[ETSI Policy Enumeration](task5-participants-certificates-policies/etsi-policy-enumeration.md)** — Enumeration of ETSI policy identifiers and mechanisms for the trust framework.
-- **[ETSI Policy Evaluation](task5-participants-certificates-policies/etsi-policy-evaluation.md)** — How ETSI specifications apply in additive/subtractive policy evaluation.
+- **[Relying Party Access Certificate](task5-participants-policies/relying_party_access_certificate.md)** — WRPRC/WRPAC (access certificate) for Relying Parties.
+- **[Relying Party Registration Certificate](task5-participants-policies/relying_party_registration_certificate.md)** — Registration certificate for Relying Parties.
+- **[EAA Provider Access Certificate](task5-participants-policies/eaa_provider_access_certificate.md)** — Access certificate for Attestation Providers.
+- **[EAA Provider Registration Certificate](task5-participants-policies/eaa_provider_registration_certificate.md)** — Registration certificate for Attestation Providers.
+- **[PID Provider Access Certificate](task5-participants-policies/pid_provider_access_certificate.md)** — Access certificate for PID Providers.
+- **[ETSI Policy Enumeration](task5-participants-policies/etsi-policy-enumeration.md)** — Enumeration of ETSI policy identifiers and mechanisms for the trust framework.
+- **[ETSI Policy Evaluation](task5-participants-policies/etsi-policy-evaluation.md)** — How ETSI specifications apply in additive/subtractive policy evaluation.
 
 ### How to consume or expose trust via APIs? — Trust Infrastructure and Onboarding APIs
 

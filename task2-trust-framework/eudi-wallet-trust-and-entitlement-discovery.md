@@ -582,6 +582,8 @@ This defines an **allow-list** model: requested attributes must be **in** the RP
 
 *Source: [ARF Annex 2.02 – RPRC_21](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/), Topic 44.*
 
+WP4 maps this ARF behaviour to the **additive** policy approach and documents an optional **subtractive** extension for non-EUDIW deployments. See [Policy Approaches Definition — EUDIW and ARF Alignment](../task5-participants-policies/policy-approaches-definition.md#eudiw-and-arf-alignment) and [Issue #2 Resolution](../task5-participants-policies/issue-2-resolution.md).
+
 ### 4.1 Matching Requested Attributes to Entitlements
 
 Per RPRC_21, the wallet verifies that requested attributes are included in the RP's registered entitlements (WRPRC `credentials` claim). Attributes not in WRPRC are uncovered; see [§4.3.1](#431-uncovered-attributes-and-user-autonomous-authorization).
@@ -823,5 +825,5 @@ ETSI standards, EU regulations, and document links: see [Normative References](#
 ### Related Documents
 
 - Trust Infrastructure Schema: Onboarding and Trusted Lists ([trust-infrastructure-schema.md](trust-infrastructure-schema.md))
-- ETSI Policy Application Mechanisms (task5-participants-certificates-policies/etsi-policy-enumeration.md)
-- ETSI Policy Evaluation (task5-participants-certificates-policies/etsi-policy-evaluation.md)
+- ETSI Policy Application Mechanisms (task5-participants-policies/etsi-policy-enumeration.md)
+- ETSI Policy Evaluation (task5-participants-policies/etsi-policy-evaluation.md)
