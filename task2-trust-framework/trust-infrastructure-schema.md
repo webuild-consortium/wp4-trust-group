@@ -1,6 +1,6 @@
 # Trust Infrastructure Schema: Onboarding and Trusted Lists
 
-This document describes the schema and graphical representation of the EUDI Wallet trust infrastructure. It focuses on three closely related processes: **Registration/Onboarding**, **Notification**, and **Trusted List Publication**, which are separated to align with the Architecture and Reference Framework (ARF). The document is aligned with **ARF v2.8.0**.
+This document describes the schema and graphical representation of the EUDI Wallet trust infrastructure. It focuses on three closely related processes: **Registration/Onboarding**, **Notification**, and **Trusted List Publication**, which are separated to align with the Architecture and Reference Framework (ARF). The document is aligned with **ARF v2.9.0**.
 
 ## Overview
 
@@ -22,7 +22,7 @@ The following table summarizes the registration requirement and the authority re
 | :--- | :--- | :--- | :--- |
 | **PID Provider** | **Register with MS Registrar** | **European Commission** (EU-level TL for PID Providers) | None (no national TL for PID Providers) |
 | **Attestation Provider** | **Register with MS Registrar** | **Member State / MS TLP** (national QTSP TL for QEAA Providers; national TL for non-qualified EAA Providers; PuB-EAA Providers notified to EC per Topic 31) | Compiles, signs, and publishes national Trusted Lists (QTSP TL for QEAA Providers per Article 22; EAA Provider TL for non-qualified EAA Providers per Section 3). *Note*: EAA/QEAA Providers are also trust services according to **ETSI TS 119 612**. The type "PuB-EAA Provider" is compiled into EC-level TLs (not MS TLP) per Topic 31. |
-| **Relying Party (RP)** | **Register with MS Registrar** | N/A (Uses Access Certificates/Registry) | None (not listed in TLs) |
+| **Relying Party (RP)** | **Register with MS Registrar** | **N/A** (wallet-relying party **WRPAC**; **not** an EC/MS TL product) | **Member State** (Registrar) operates the national registry: **TS5** sealed/signed machine-readable publication + common API (**Reg_03**, **Reg_06**). RP **not** listed in TLs. |
 | **Wallet Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for Wallet Providers) | Not applicable in pilot (notification from MS to EC only) |
 | **WRPAC Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for WRPAC Providers) | Not applicable in pilot (notification from MS to EC only) |
 | **WRPRC Provider** | *Notification only* (by MS to EC) | **European Commission** (EU-level TL for WRPRC Providers) | Not applicable in pilot (notification from MS to EC only) |
@@ -63,7 +63,7 @@ The registration process is managed by Member State Registrars and involves (for
 
 ### 2.1 Registration Data and Requirements
 
-Entities register with their Member State Registrar before participating in the ecosystem. The common set of data to be registered is specified in [ARF Section 6.3.2.2](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#6322-data-about-the-pid-provider-or-attestation-provider-is-included-in-the-registry) and [Section 6.4.2](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#642-relying-party-registration), and detailed in [Technical Specification 6](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md) per requirement **Reg_01a** (Topic 27).
+Entities register with their Member State Registrar before participating in the ecosystem. The common set of data to be registered is specified in [ARF Section 6.3.2.2](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#6322-data-about-the-pid-provider-or-attestation-provider-is-included-in-the-registry) and [Section 6.4.2](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#642-relying-party-registration), and detailed in [Technical Specification 6](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md) per requirement **Reg_01a** (Topic 27).
 
 The registration data includes:
 
@@ -76,10 +76,10 @@ The registration data includes:
   - **For Relying Parties**: Attributes that the Relying Party intends to request from Wallet Units, and for what purpose (intended use). The Registrar also registers if the Relying Party intends to use the services of an intermediary, and if so, which one.
 - **Service supply points**: URLs where services are available (e.g., PID issuance endpoint, attestation issuance endpoint, presentation request endpoint).
 
-> **Note**: Wallet Providers do not register with Registrars. They are notified by Member States to the European Commission for Trusted List inclusion (see [Section 3.1.1](#311-wallet-provider-notification)). Wallet Providers do not receive access certificates or registration certificates, as they are not registered with Registrars. The Wallet Solution provided by the Wallet Provider must be certified by Conformity Assessment Bodies (CABs) as described in [ARF Chapter 7](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#7-wallet-solution-certification-and-risk-management).
+> **Note**: Wallet Providers do not register with Registrars. They are notified by Member States to the European Commission for Trusted List inclusion (see [Section 3.1.1](#311-wallet-provider-notification)). Wallet Providers do not receive access certificates or registration certificates, as they are not registered with Registrars. The Wallet Solution provided by the Wallet Provider must be certified by Conformity Assessment Bodies (CABs) as described in [ARF Chapter 7](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#7-wallet-solution-certification-and-risk-management).
 
 > **Disambiguation – QEAA Providers and Registration**  
-> In this document, **QEAA Providers are treated as a specific type of Attestation Provider**. As such, they **MUST register with a Member State Registrar** together with other Attestation Providers, in line with **ARF Section 3.17 (Registrars)** and **Topic 27 (Reg_01, Reg_21)**. The registration data for QEAA Providers – including identification data, attestation types they intend to issue, and service supply points – is part of the **common registration dataset** described in [ARF Section 6.3.2.2](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#6322-data-about-the-pid-provider-or-attestation-provider-is-included-in-the-registry) and referenced in this section.  
+> In this document, **QEAA Providers are treated as a specific type of Attestation Provider**. As such, they **MUST register with a Member State Registrar** together with other Attestation Providers, in line with **ARF Section 3.17 (Registrars)** and **Topic 27 (Reg_01, Reg_21)**. The registration data for QEAA Providers – including identification data, attestation types they intend to issue, and service supply points – is part of the **common registration dataset** described in [ARF Section 6.3.2.2](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#6322-data-about-the-pid-provider-or-attestation-provider-is-included-in-the-registry) and referenced in this section.  
 > **QEAA Providers are Qualified Trust Service Providers (QTSPs)**. After successful registration and approval at Member State level, QEAA Providers are included in **Member State Trusted Lists for QTSPs**, which are published by **Member States** in accordance with **Article 22 of the eIDAS Regulation (EU) No 910/2014)** and **notified to the European Commission** per Article 22(3) so that pointers and signing keys can be exposed via the **List of Trusted Lists (LoTL)**. Trust anchors for QEAA Providers are published in these Member State QTSP Trusted Lists, as referenced in ARF requirements **OIA_13** and **ISSU_08** (see [COMPREHENSIVE-CATALOGUE-EAA-QEAA-REFERENCES.md](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/development-issues/COMPREHENSIVE-CATALOGUE-EAA-QEAA-REFERENCES.md#registration-and-trusted-lists)). The European Commission maintains the **List of Trusted Lists (LoTL)** that references all Member State Trusted Lists, including QTSP Trusted Lists.
 >
 > **Note on ETSI alignment**: ARF Section 3.17 states that "All PID Providers, QEAA Providers, PuB-EAA Providers, non-qualified EAA Providers and Relying Parties in the EUDI Wallet ecosystem are registered by a Registrar in the Member State where they reside." However, **ETSI TS 119 602** does not specify how to register EAA/QEAA Providers as attestation providers. ETSI TS 119 602 specifies how to register PuB-EAA Providers. **ETSI TS 119 612** specifies how to register EAA/QEAA Providers as trust services. There is thus a mismatch between ETSI TS 119 602 and the ARF (Section 3.17, Topic 27) regarding the registration of EAA/QEAA Providers.
@@ -120,7 +120,7 @@ The Trusted List publication process is separate from registration. See [Overvie
 
 ### 3.1 Trusted List Publication by Trusted List Provider
 
-> **Note on Trusted List Provider Organizational Level**: The ARF ([Section 3.5](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#35-trusted-list-or-lote-provider)) defines a Trusted List Provider (TLP) as "a body responsible for maintaining, managing, and publishing a Trusted List." Both Member State TLPs and the European Commission act as TLPs with distinct scopes (see [Responsibilities Matrix](#overview)). Member State TLPs operate at Member State level per notification requirements (GenNot_01).
+> **Note on Trusted List Provider Organizational Level**: The ARF ([Section 3.5](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#35-trusted-list-or-lote-provider)) defines a Trusted List Provider (TLP) as "a body responsible for maintaining, managing, and publishing a Trusted List." Both Member State TLPs and the European Commission act as TLPs with distinct scopes (see [Responsibilities Matrix](#overview)). Member State TLPs operate at Member State level per notification requirements (GenNot_01).
 
 The Member State Trusted List Provider (MS TLP) is responsible **for national non-qualified EAA Provider Trusted Lists** and **for the Member State QTSP Trusted Lists for QEAA Providers**, in line with Article 22 of eIDAS Regulation (EU) No 910/2014:
 
@@ -130,7 +130,7 @@ The Member State Trusted List Provider (MS TLP) is responsible **for national no
 
 3. **Publishing Trusted Lists**: The MS TLP publishes the signed **non-qualified EAA Provider Trusted Lists** and the Member State QTSP Trusted Lists for QEAA Providers in machine-readable and human-readable formats at a publicly accessible URL. Per [ETSI TS 119 602 V1.1.1 (2025-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) (*Lists of trusted entities; Data model*), **Attestation Provider Trusted Lists** (ETSI TS 119 602 Annex H, published by an MS TLP) may be used as the profile for these national non-qualified EAA Provider TLs and may be published in either **JSON format with compact JAdES Baseline B signature** OR **XML format with XAdES Baseline B signature** (per ETSI EN 319 132-1). When XML is used, it must be an enveloped digital signature.
 
-All Trusted Lists must comply with ETSI TS 119 602 data model and the specific profiles defined in the annexes, or with ETSI TS 119 612 or a suitable profile derived from ETSI TS 102 231 (per **WPNot_05**, **PPNot_07**, **RPACANot_05**). When validating trust service outputs against trusted lists (LoTE), implementers SHALL follow the procedures in **ETSI TS 119 615** (procedures for using and interpreting EUMS national trusted lists).
+EC-compiled LoTEs (per **WPNot_05**, **PPNot_07**, **RPACANot_05**, **RPACANot_05a**) SHALL comply with **ETSI TS 119 602 v1.1.1** and the applicable annex profile (Annex D–G). QEAA Provider national trusted lists and other TS 119 612 artefacts follow ETSI TS 119 612 or a suitable profile derived from ETSI TS 102 231. When validating trust service outputs against trusted lists (LoTE), implementers SHALL follow the procedures in **ETSI TS 119 615** (procedures for using and interpreting EUMS national trusted lists).
 
 4. **Submitting to European Commission**: The MS TLP submits the published **non-qualified EAA Provider Trusted List URL** and the Member State QTSP Trusted List URL for QEAA Providers to the European Commission so it can be referenced from the LoTL.
 
@@ -421,7 +421,7 @@ sequenceDiagram
 
 ### 5.3.1 Submission and Update Models: Registration to Trusted List
 
-The relationship between Registrar and Trusted List Provider (TLP) can be implemented in two ways (illustrated in Diagram 5.3). Note: The ARF ([Section 6.3.2](https://eudi.dev/2.8.0/architecture-and-reference-framework-main/#632-pid-provider-or-attestation-provider-registration-and-notification)) describes the registration and notification processes but does not explicitly specify these two implementation models. The models presented here are implementation approaches based on the ARF requirements:
+The relationship between Registrar and Trusted List Provider (TLP) can be implemented in two ways (illustrated in Diagram 5.3). Note: The ARF ([Section 6.3.2](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#632-pid-provider-or-attestation-provider-registration-and-notification)) describes the registration and notification processes but does not explicitly specify these two implementation models. The models presented here are implementation approaches based on the ARF requirements:
 
 #### Model A: Automatic Trigger (Recommended)
 
@@ -716,8 +716,10 @@ Member States may publish additional Trusted Lists within their own perimeter fo
 
 | Requirement | Description | Source |
 |------------|-------------|--------|
-| **ISSU_19** | PID Providers SHALL accept trust anchors in Wallet Provider Trusted Lists | Topic 31 |
-| **ISSU_21** | PID Providers SHALL verify Wallet Provider presence in Trusted List | Topic 31 |
+| **ISSU_19** | PID Providers SHALL accept trust anchors in Wallet Provider LoTE(s) for WIA and KA verification | Topic 10, Topic 31 |
+| **ISSU_21** | PID Providers SHALL verify WIA and KA using Wallet Provider LoTE; verify Wallet Instance and WSCD not revoked | Topic 10, Topic 9, Topic 38 |
+| **ISSU_30a** | Attestation Providers SHALL verify WIA using Wallet Provider LoTE; verify Wallet Instance not revoked | Topic 10, Topic 9, Topic 38 |
+| **ISSU_30** | Attestation Providers SHALL verify KA (device-bound) using Wallet Provider LoTE; verify WSCD/keystore not revoked | Topic 10, Topic 9, Topic 38 |
 | **ISSU_24** | Wallet Units SHALL authenticate and validate access certificates using Access CA Trusted Lists | Topic 27 |
 | **ISSU_24a** | Wallet Units SHALL verify PID Provider registration before PID issuance | Topic 27, Topic 44 |
 | **ISSU_34a** | Wallet Units SHALL verify Attestation Provider registration before attestation issuance | Topic 27, Topic 44 |
@@ -738,7 +740,7 @@ graph LR
 
     subgraph Providers["Credential Providers"]
         PIDProv[PID Provider<br/>ISSU_19, ISSU_21]
-        AttProv[Attestation Provider<br/>ISSU_30]
+        AttProv[Attestation Provider<br/>ISSU_30, ISSU_30a]
     end
 
     subgraph RP["Relying Party"]
@@ -746,9 +748,9 @@ graph LR
     end
 
     subgraph TrustSources["Trust Sources"]
-        WPTL[Wallet Provider TL<br/>ISSU_19, ISSU_21]
-        PIDTL[PID Provider TL<br/>OIA_12]
-        APTL[Attestation Provider TL<br/>OIA_13, OIA_14]
+        WPTL[Wallet Provider LoTE<br/>ISSU_19, ISSU_21, ISSU_30a]
+        PIDTL[PID Provider LoTE<br/>OIA_12]
+        APTL[PuB-EAA / QEAA / EAA TL<br/>OIA_13, OIA_14, OIA_15]
         ACATL[Access CA TL<br/>ISSU_24]
         Registry[Registry<br/>ISSU_24a, ISSU_34a, RPRC_16]
         RegCertTL[Registration Cert Provider TL<br/>ISSU_33a]
@@ -756,14 +758,14 @@ graph LR
 
     %% PID Issuance Trust Evaluation
     WU -->|1. Request PID| PIDProv
-    PIDProv -->|2. Verify WUA in TL<br/>ISSU_21| WPTL
+    PIDProv -->|2. Verify WIA + KA in LoTE<br/>ISSU_21| WPTL
     WU -->|3. Verify Access Cert in TL<br/>ISSU_24| ACATL
     WU -->|4. Verify Registration<br/>ISSU_24a| Registry
     WU -.->|5. Verify Reg Cert in TL<br/>ISSU_33a| RegCertTL
 
     %% Attestation Issuance Trust Evaluation
     WU -->|1. Request Attestation| AttProv
-    AttProv -->|2. Verify WUA in TL<br/>ISSU_30| WPTL
+    AttProv -->|2. Verify WIA + KA in LoTE<br/>ISSU_30, ISSU_30a| WPTL
     WU -->|3. Verify Access Cert in TL<br/>ISSU_24| ACATL
     WU -->|4. Verify Registration & Entitlements<br/>ISSU_34a| Registry
     WU -.->|5. Verify Reg Cert in TL<br/>ISSU_33a| RegCertTL
@@ -792,11 +794,13 @@ Trust evaluation occurs at multiple points using different trust sources:
 
 1. **During Credential Issuance**:
    - Wallet Units verify Provider registration (Registry) - **ISSU_24a, ISSU_34a**
-   - Providers verify Wallet Provider in Trusted List - **ISSU_21, ISSU_30**
+   - Providers verify WIA and KA via Wallet Provider LoTE - **ISSU_21, ISSU_30, ISSU_30a**; verify Wallet Instance and WSCD/keystore not revoked (Topic 38)
 
 2. **During Presentation**:
    - Wallet Units verify Relying Party registration (Registry) - **RPRC_16, RPRC_21**
    - Wallet Units verify Access Certificates using LoTE(s) of Access Certificate Authorities - **ISSU_24, RPA_04**
-   - Relying Parties validate PID signatures using Member State LoTE for PID Providers - **OIA_12**
-   - Relying Parties validate attestation signatures using Attestation Provider TL - **OIA_13, OIA_14**
+   - Relying Parties validate PID signatures using PID Provider LoTE - **OIA_12**
+   - Relying Parties validate QEAA signatures using QEAA Provider Trusted List (Art. 22) - **OIA_13**
+   - Relying Parties validate PuB-EAA signatures using PuB-EAA Provider LoTE - **OIA_14**
+   - Relying Parties validate non-qualified EAA signatures per applicable Rulebook - **OIA_15**
 

@@ -8,7 +8,7 @@ This use case aligns with the [Trust Infrastructure Schema](../../task2-trust-fr
 
 This document follows the WEBUILD ecosystem structure; see [MVP and MVP+ Definitions](onboarding-base.md#mvp-and-mvp-definitions) in the base document.
 
-Wherever feasible, this specification aligns with processes defined in Regulation (EU) 2024/1183 and the [Architecture and Reference Framework](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/), interpreting them for the testing purposes specific to WEBUILD.
+Wherever feasible, this specification aligns with processes defined in Regulation (EU) 2024/1183 and the [Architecture and Reference Framework](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.9.0/architecture-and-reference-framework-main/), interpreting them for the testing purposes specific to WEBUILD.
 
 For the common framework (terminology, MVP/MVP+, success criteria, preconditions), see [Base Onboarding Framework](onboarding-base.md). This document defines only **Wallet Provider–specific** content; it does not duplicate the base.
 
@@ -302,7 +302,7 @@ Once a Wallet Provider and its wallet solution(s) are listed on the Trusted List
 
 ### 3.1 Trusted List / Wallet Provider Monitoring
 
-The Supervisory Body and Trusted List Provider monitor listed Wallet Providers and their wallet solutions for continued compliance with [CIR 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj) and [CIR 2025/849](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849). Monitoring may include conformity surveillance, changes in legal or certification status, and notifications from competent authorities. Trusted Lists are maintained and published per [ETSI TS 119 612](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) and [ARF – Trusted Lists](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.7.3/architecture-and-reference-framework-main/).
+The Supervisory Body and Trusted List Provider monitor listed Wallet Providers and their wallet solutions for continued compliance with [CIR 2024/2981](https://data.europa.eu/eli/reg_impl/2024/2981/oj) and [CIR 2025/849](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202500849). Monitoring may include conformity surveillance, changes in legal or certification status, and notifications from competent authorities. Trusted Lists are maintained and published per [ETSI TS 119 612](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf) and [ETSI TS 119 602](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf). See [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) and [ARF – Trusted Lists](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.9.0/architecture-and-reference-framework-main/).
 
 ### 3.2 Trusted List Update
 

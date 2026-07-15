@@ -556,7 +556,7 @@ For a **PID Provider** or **EAA Provider** (Qualified, Non-Qualified, or Public 
 | Non-Qualified EAA Provider     | `https://uri.etsi.org/19475/Entitlement/Non_Q_EAA_Provider` | `provides_attestations`    | ETSI TS 119 475 Table 8   |
 | Public Sector EAA Provider     | `https://uri.etsi.org/19475/Entitlement/PUB_EAA_Provider`  | `provides_attestations`    | ETSI TS 119 475 Table 8   |
 
-The `provides_attestations` field specifies the attestation types the provider is authorized to issue (format, meta, claim). The wallet verifies that the attestation being issued matches the provider's authorized attestation types (format, meta, claim per ETSI TS 119 475 Table 8).
+The `provided_attestations` field specifies the attestation types the provider is authorized to issue (format, meta, claim). The wallet verifies that the attestation being issued matches the provider's authorized attestation types.
 
 ---
 
@@ -580,7 +580,7 @@ This defines an **allow-list** model: requested attributes must be **in** the RP
 | Equivalent (conceptual) | Allow-list; deny-by-default for unregistered attributes      |
 
 
-*Source: [ARF Annex 2.02 – RPRC_21](https://eudi.dev/2.8.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/), Topic 44.*
+*Source: [ARF Annex 2.02 – RPRC_21](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/), Topic 44.*
 
 ### 4.1 Matching Requested Attributes to Entitlements
 
