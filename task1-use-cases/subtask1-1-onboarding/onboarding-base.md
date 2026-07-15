@@ -6,9 +6,11 @@ This document provides only the **common** framework: terminology, MVP/MVP+, and
 
 | Use case | Document |
 |----------|----------|
+| **MVP** TL/LoTE onboarding (operational) | [Onboarding to the Trusted Lists](trusted-lists-onboarding.md) — IDunion console; which roles are TL-listed vs RP National Register |
 | **UC-01** Relying Party | [Relying Party Onboarding](relying_party_onboarding.md) |
 | **UC-02** PID / Attestation Provider | [PID / Attestation Provider Onboarding](pid_eaa_provider_onboarding.md) |
 | **UC-03** Wallet Provider | [Wallet Provider Onboarding](wallet-provider-onboarding.md) |
+| **UC-04** WRPAC / WRPRC Authority | [WRPAC/WRPRC Authority Onboarding](wrpac-wrprc-authority-onboarding.md) |
 
 ## Terminology and Acronyms
 

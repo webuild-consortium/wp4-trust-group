@@ -13,6 +13,22 @@ WEBUILD beneficiaries and Associated Partners may decide to onboard to one or se
 
 Organizations should onboard to the Trusted List(s) that correspond to the role(s) they play in their pilot Use Case(s). An organization participating in multiple roles may need to onboard to more than one Trusted List.
 
+## Which registration path applies?
+
+Not every ecosystem participant is listed in a Trusted List (TL) or List of Trusted Entities (LoTE). Use **this guide** when your organization must appear on a WE BUILD pilot TL/LoTE so that Wallet Units, Credential Issuers, and Relying Parties can validate your trust anchor.
+
+| Participant role | Listed in TL/LoTE? | Where to register |
+|------------------|-------------------|-------------------|
+| QEAA Provider | Yes (provider LoTE) | **This document** — WEBUILD - QEAA Providers |
+| PuB-EAA Provider | Yes | **This document** — WEBUILD - PuB-EAA Providers |
+| PID Provider | Yes | **This document** — WEBUILD - PID Providers |
+| Wallet Provider | Yes | **This document** — WEBUILD - Wallet Providers |
+| Access Certificate Authority (WRPAC Provider) | Yes | **This document** — WEBUILD - Access Certificate Authorities |
+| Provider of Registration Certificates (WRPRC Provider) | Yes | **This document** — WEBUILD - Providers of Registration Certificates |
+| **Relying Party (RP)** | **No** — RPs are registered in a National Register, not in TLs/LoTEs | [Relying Party Onboarding](relying_party_onboarding.md) |
+
+For the normative registration, notification, and TL publication model (MVP+), see the [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix). For RP registration use cases and certificate flows, see [Relying Party Onboarding](relying_party_onboarding.md). For WRPAC/WRPRC Authority onboarding procedures, see [WRPAC/WRPRC Authority Onboarding](wrpac-wrprc-authority-onboarding.md).
+
 ## Where to request onboarding
 
 Onboarding to the Trusted Lists can be requested via the IDunion console:
@@ -47,5 +63,6 @@ To request any of these, contact the WP4 Trust Infrastructure group.
 ## Related documentation
 
 - [Base Onboarding Framework](../onboarding-base.md) — MVP/MVP+ definitions, Member State requirements, RACI matrix.
-- [Trust Infrastructure Schema](../../../task2-trust-framework/trust-infrastructure-schema.md) — registration, notification, and Trusted List publication processes.
+- [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) — registration, notification, and Trusted List publication processes.
+- [Relying Party Onboarding](relying_party_onboarding.md) — RP registration (National Register; not TL/LoTE-listed).
 - [Trusted List discovery and consumption](../../subtask1-2-trust-registry/trusted-list-discovery-consumption.md) — how to obtain and use the LoTL and Trusted Lists for validation.

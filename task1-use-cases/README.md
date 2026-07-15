@@ -10,6 +10,6 @@ This task collects the high‑level use cases that drive the design of the WP4 T
 
 ## Scope of Task 1
 
-- **Onboarding scenarios**: Define how ecosystem participants (TSPs, Wallet Providers, RPs, CAs) are registered, validated, and brought under the trust infrastructure.
+- **Onboarding scenarios**: Define how ecosystem participants (TSPs, Wallet Providers, RPs, CAs) are registered, validated, and brought under the trust infrastructure. For **MVP pilot registration** to Trusted Lists / LoTEs (and how that differs from Relying Party National Register registration), see **[Onboarding to the Trusted Lists](subtask1-1-onboarding/trusted-lists-onboarding.md)**.
 - **Trust registry scenarios**: Define how trusted lists, trust anchors, trust levels and trust chains are created, evaluated, maintained and revoked.
 - **Input to other tasks**: These use cases provide requirements for the Trust Framework (Task 2), PKI and trusted lists (Task 3), APIs (Task 4), certificate and policy models (Task 5), conformance/interop (Task 6) and testing (Task 7).
