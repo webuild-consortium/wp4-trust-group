@@ -7,9 +7,12 @@ This task defines and implements the APIs used to expose the WP4 Trust Infrastru
 - **`README.md`** – Overview of the APIs and how this task fits in WP4
 - **`trust-infrastructure-api/`** – Implementation and detailed specification of the Trust Infrastructure API (see its `README.md`)
 - **`onboarding-api/`** – Implementation and detailed specification of the Onboarding API (see its `README.md`)
+- **`credential-catalog-service.md`** – Service description of the weBuild Credential Catalog at registry.siros.org
+- **`lotl-automation-and-tl-integration.md`** – LoTL publication and Trusted Lists integration
 
 ## Scope of Task 4
 
 - **Trust Infrastructure API** – Endpoints and models for trust management, evaluation, validation, policies and monitoring, built on top of the trust framework and PKI from Tasks 2 and 3.
 - **Onboarding API** – Endpoints and models for participant registration, certificate and policy submission, compliance validation and audit support.
+- **Credential Catalog Service** – The weBuild Credential Catalog ([registry.siros.org](https://registry.siros.org)), implementing the TS11 catalogue of attestation schemes for credential type discovery and interoperability.
 - **Cross‑cutting API aspects** – Common design and runtime concerns such as REST style, OpenAPI descriptions, authentication and authorization (OAuth 2.0 / OpenID Connect / JWT), error handling, monitoring and versioning.
