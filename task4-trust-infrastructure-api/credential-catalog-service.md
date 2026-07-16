@@ -105,18 +105,35 @@ The **webuild-attestation-rulebooks-catalog** repository contains EUDI-style rul
 The initial set of weBuild credential types was onboarded through:
 
 1. **Consortium agreement** — Credential types for the pilot were defined collaboratively in WP4 Task 2 and Task 5
-2. **Rulebook creation** — Each credential type was documented as an attestation rulebook in the [webuild-attestation-rulebooks-catalog](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog) repository
-3. **Automated ingestion** — The catalog's build pipeline discovers the rulebook repository and publishes the credential type metadata with TS11-compliant schema information
+2. **Schema and rulebook creation** — Each credential type was defined as a JSON Schema 2020-12 data definition (under `data-schemas/sd-jwt/`) together with a governance rulebook (under `rulebooks/rb-<slug>/`) in the [webuild-attestation-rulebooks-catalog](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog) repository
+3. **Automated ingestion** — The catalog's build pipeline discovers the rulebook repository, converts JSON Schema definitions into VCTM format, and publishes the credential type metadata with TS11-compliant schema information
 
 ## How to Onboard New Credential Types
 
 There are two methods for adding new credential types to the weBuild Credential Catalog:
 
-### Method 1: Attestation Rulebook (Recommended for weBuild)
+### Method 1: Attestation Rulebook + Data Schema (Recommended for weBuild)
 
-1. **Create an attestation rulebook** in the [webuild-attestation-rulebooks-catalog](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog) repository
-2. **Open a Pull Request** with the rulebook definition (YAML/Markdown with required metadata: VCT identifier, claims, format, attestation level of security, binding type)
-3. **Review and merge** — Consortium members review the PR; on merge, the catalog picks up the new credential type within 6 hours
+The [webuild-attestation-rulebooks-catalog](https://github.com/webuild-consortium/webuild-attestation-rulebooks-catalog) follows the EUDI ARF directory layout. Adding a new credential type requires **both** a JSON Schema data definition **and** a governance rulebook:
+
+**Required directory structure:**
+```
+data-schemas/
+  sd-jwt/<slug>-sd-jwt.json       # JSON Schema 2020-12 — defines claims, types, mandatory/optional
+  mdoc/<slug>-mdoc.json            # mDOC schema (if the credential supports mso_mdoc)
+rulebooks/
+  rb-<slug>/README.md              # Governance rulebook (EUDI template)
+```
+
+**Steps:**
+1. **Create the JSON Schema** under `data-schemas/sd-jwt/<slug>-sd-jwt.json`. This is a JSON Schema 2020-12 document that defines the credential's claims, types, and validation rules. The `vct` identifier is extracted from `properties.vct.const` or `properties.vct.examples[0]`. Claims in the `required` array are marked mandatory; descriptions containing "selectively disclosable" set `sd: "always"`.
+2. **Create the governance rulebook** under `rulebooks/rb-<slug>/README.md` following the EUDI attestation rulebook template
+3. **(Optional) Add an mDOC schema** under `data-schemas/mdoc/<slug>-mdoc.json` if the credential type also supports mso_mdoc format
+4. **(Optional) Add visual assets** — see [Visual Assets (SVG Card Templates and Logos)](#visual-assets-svg-card-templates-and-logos) below
+5. **Open a Pull Request** in the rulebooks catalog repository
+6. **Review and merge** — Consortium members review the PR; on merge, the catalog picks up the new credential type within 6 hours
+
+> **Note:** The JSON Schema is the primary input — the catalog's build tool (`registry-cli`) automatically converts it into VCTM (Verifiable Credential Type Metadata) format with TS11-compliant claim structures. The rulebook provides the governance context (issuer requirements, legal basis, attribute semantics).
 
 ### Method 2: VCTM in Own Repository
 
@@ -124,6 +141,37 @@ There are two methods for adding new credential types to the weBuild Credential 
 2. **Tag the repository** with the `vctm` GitHub topic for autodiscovery, **or** request addition to `sources.yaml` in the [registry.siros.org](https://github.com/sirosfoundation/registry.siros.org) repository
 3. **Include a `schema-meta.yaml`** envelope with TS11-required fields (attestation level of security, binding type, rulebook reference)
 4. The catalog will discover and include the credential type on the next build cycle (every 6 hours or on manual trigger)
+
+### Visual Assets (SVG Card Templates and Logos)
+
+Credential types can include SVG card templates and logos for rich visual rendering in wallets and the catalog site. The build tool discovers visual assets by convention from several locations (searched in priority order):
+
+**Preferred: `assets/<slug>/` directory**
+```
+assets/
+  <slug>/
+    card.svg              # Card template (light mode)
+    card-dark.svg          # Card template (dark mode, optional)
+    logo.svg               # Issuer/credential logo (SVG preferred)
+    logo.png               # Issuer/credential logo (PNG fallback)
+```
+
+**Alternative: co-located with schema**
+```
+data-schemas/
+  sd-jwt/
+    <slug>-card.svg        # Card template next to the JSON Schema
+    <slug>-logo.svg        # Logo next to the JSON Schema
+```
+
+**Alternative: `display/` directory**
+```
+display/
+  <slug>-card.svg          # Card template
+  <slug>-logo.svg          # Logo
+```
+
+Discovered SVG templates are embedded as `svg_templates` references in the published VCTM, enabling wallets to render credential cards. Logos are included as `logo` references.
 
 ### Validation
 
