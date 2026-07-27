@@ -11,14 +11,16 @@ This task focuses on comprehensive testing and validation of the WP4 Trust Infra
 - **Test strategy and tooling** – Define common testing approaches, environments and tools reused across conformance, interoperability and functional tests.
 - **Support for deliverables** – Provide evidence and reporting needed for WP4 deliverables related to quality, validation and verification.
 
-Testing tools
-EUDI Trust Inspector
+## Testing tools
+### EUDI Trust Inspector
 
 EUDI Trust Inspector is an open-source tool for testing, validating and debugging EUDI trust infrastructure artifacts.
 
-It can audit WE BUILD LoTLs and referenced ETSI TS 119 602 LoTE and TS 119 612 Trusted List artifacts, inspect XML/JSON/JAdES content, assess certificate chains, signatures, schemas, list pointers and service metadata, and produce machine-readable JSON and human-readable Markdown evidence reports. It also provides dedicated checks supporting the preparation of trust-authority fixtures for wallet testing.
+It can **audit WE BUILD LoTLs and referenced ETSI TS 119 602 LoTE and TS 119 612 Trusted Lists**, inspect XML/JSON/JAdES content, assess certificate chains, signatures, schemas, list pointers and service metadata, and produce machine-readable JSON and human-readable Markdown evidence reports. It also provides dedicated checks supporting the preparation of trust-authority fixtures for wallet testing.
 
-The tool is evidence-oriented and does not claim complete legal or normative ETSI conformance.
+The tool is evidence-oriented and does not claim complete legal or normative ETSI conformance. 
+
+The tool has a Web GUI, OpenAPI documentation, source code is available under Apache2 and is deployed at a stable URL. 
 
 Deployment: https://trust-inspector.credimi.io/
 Interactive API documentation: https://trust-inspector.credimi.io/docs
