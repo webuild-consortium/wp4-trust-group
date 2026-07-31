@@ -114,7 +114,7 @@ Extensions not listed in the table MUST NOT be present.
 
 **PID Provider:** Certificate used to sign PID attribute attestations. It MUST be formatted as described in [PID Provider Sign/Seal Certificate](#pid-provider-signseal-certificate).
 
-**Attestation Providers (EAA, QEAA, PSBEAA):** Certificates used to sign attestations. These MUST be formatted as described in [(Q)EAA Provider Sign/Seal Certificate](#qeaa-provider-signseal-certificate), [PuB-EAA Provider Sign/Seal Certificate](#puB-eaa-provider-signseal-certificate).
+**Attestation Providers (EAA, QEAA, PuB-EAA):** Certificates used to sign attestations. These MUST be formatted as described in [(Q)EAA Provider Sign/Seal Certificate](#qeaa-provider-signseal-certificate) and [PuB-EAA Provider Sign/Seal Certificate](#pub-eaa-provider-signseal-certificate).
 
 
 When OCSP/CRL is used for attestation revocation, the OCSP responder cert or CRL MUST be issued/signed by the CA issuing the respective Sign/Seal certificate.
