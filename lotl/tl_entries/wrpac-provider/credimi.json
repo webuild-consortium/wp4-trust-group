@@ -1,0 +1,9 @@
+{
+  "tl_url": "https://lote.credimi.io/lists/eu_credimi_wrpac_trust_registry_infrastruct/latest/lote.jades",
+  "tl_url_json": "https://lote.credimi.io/lists/eu_credimi_wrpac_trust_registry_infrastruct/latest/lote.json",
+  "trust_anchor": "-----BEGIN CERTIFICATE-----\nMIICfTCCAiSgAwIBAgIUM2795qKczc8jTWWry8i/xOxF1qEwCgYIKoZIzj0EAwIw\ngY0xCzAJBgNVBAYTAkVVMTQwMgYDVQQKDCtDcmVkaW1pIFdSUEFDIFRydXN0IFJl\nZ2lzdHJ5IEluZnJhc3RydWN0dXJlMUgwRgYDVQQDDD9DcmVkaW1pIFdSUEFDIFRy\ndXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlIFRydXN0ZWQgTGlzdCBTaWduZXIw\nHhcNMjYwODA0MTMyMjI1WhcNMjcwODA0MTMyMjI1WjCBjTELMAkGA1UEBhMCRVUx\nNDAyBgNVBAoMK0NyZWRpbWkgV1JQQUMgVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1\nY3R1cmUxSDBGBgNVBAMMP0NyZWRpbWkgV1JQQUMgVHJ1c3QgUmVnaXN0cnkgSW5m\ncmFzdHJ1Y3R1cmUgVHJ1c3RlZCBMaXN0IFNpZ25lcjBZMBMGByqGSM49AgEGCCqG\nSM49AwEHA0IABJmg2iEDUo34qLTSG91aANAAjHhIQDEwGBYZQQ9YIQYYcJP/Rf8Y\nElM/jD3GqW+VBsTcV3DbTuuO1CiSsACCdLujYDBeMB8GA1UdIwQYMBaAFC/O0sXY\n2JLkof983FdkiiiMF6f2MAwGA1UdEwEB/wQCMAAwDgYDVR0PAQH/BAQDAgeAMB0G\nA1UdDgQWBBQvztLF2NiS5KH/fNxXZIoojBen9jAKBggqhkjOPQQDAgNHADBEAiBM\nL2LU6bKkqSoU8TtWfO0eysUIEhHxpv64kdncxzp+igIgGD0OAN9bZ53lBk4F9AMZ\nzpa4JFHiKafxpEbmjsSJUH0=\n-----END CERTIFICATE-----\n",
+  "metadata": {
+    "operator_name": "Credimi WRPAC Trust Registry Infrastructure",
+    "country": "EU"
+  }
+}
