@@ -32,7 +32,7 @@ To **consume** the published LoTL and participant Trusted Lists in verification 
 
 **To register as a TL/LoTE-listed entity in the pilot**, see **[Onboarding to the Trusted Lists](task1-use-cases/subtask1-1-onboarding/trusted-lists-onboarding.md)** (IDunion console). 
 
-Since **Relying Parties** are not listed in TLs/LoTEs, to register a Relying Party see [Relying Party Onboarding](task1-use-cases/subtask1-1-onboarding/relying_party_onboarding.md).
+Since **Relying Parties** are not listed in TLs/LoTEs, to register a Relying Party see [Relying Party Onboarding](task1-use-cases/subtask1-1-onboarding/relying-party-registry-onboarding.md).
 
 ## Tasks
 
