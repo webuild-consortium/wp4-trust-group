@@ -13,6 +13,7 @@ This task defines the conceptual trust framework for the WP4 Trust Infrastructur
 - **`trust-infrastructure-schema.md`** – Structural schema of the trust infrastructure, including registries, entities and relationships
 - **`eudi-wallet-trust-and-entitlement-discovery.md`** – Policy discovery and trust verification from wallet (holder) perspective: WRPRC/WRPAC discovery, Trusted List validation, Registry lookup, entitlement and attribute validation (ARF RPRC_21, RPA_*)
 - **`rp-intermediary-openid4vp-technical-report.md`** – Non-normative technical report on Relying Party intermediaries in remote OpenID4VP flows: `verifier_info`, WRPAC/WRPRC exposure, intermediary detection, and examples (ARF Topic 52, ETSI TS 119 472-2)
+- **`attestation-centric-trust-evaluation-p2p-technical-report.md`** – Non-normative technical report on **hybrid trust evaluation** (federated LoTL/WRPAC/WRPRC + decentralised rulebook/EDP/user-autonomous/P2P models), attestation-centric composition, trust discovery vectors, age-proof example, and anti-patterns
 - **`issue-mdl-pub-eaa-discovery.md`** – Issue note on mDL, EAA publication and discovery in relation to the trust framework
 - **`etsi-identifier-handling.md`** – Handling of ETSI identifiers and their mapping into the trust infrastructure
 
