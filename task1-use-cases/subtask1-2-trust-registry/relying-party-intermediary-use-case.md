@@ -79,7 +79,9 @@ An entity registered as intermediary may also act **in its own capacity** (RPI_0
 ## Onboarding (summary)
 
 Both the Intermediary and the Intermediated RP are considered RP. The onboarding process shall follow the detailed steps in: [Relying Party Onboarding](../subtask1-1-onboarding/relying_party_onboarding.md).
-The following table highlight the on-boarding step differences between Intermediary and Intermediated RP
+
+The following table highlights the onboarding step differences between Intermediary and Intermediated RP.
+
 | Step | Intermediary | Intermediated RP |
 | ---- | ------------ | ---------------- |
 | Register | As RP with `isIntermediary: true` (RPI_01, Reg_26) | At Registrar in establishment MS (RPI_03) |
