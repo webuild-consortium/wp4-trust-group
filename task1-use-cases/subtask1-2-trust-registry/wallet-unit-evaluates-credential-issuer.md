@@ -2,7 +2,7 @@
 
 ## Scope
 
-Before requesting a **PID** or an **attestation (EAA)**, the Wallet Unit evaluates the Credential Issuer (PID Provider or Attestation Provider) so that the User only interacts with registered, authorised providers. Trust evaluation uses Access CA LoTEs, optional Registration Certificate Provider LoTEs, the Registrar's registry (or registration certificate), **certificate revocation** checks, and **entity status** in LoTEs (Valid/Invalid per GenNot_05).
+Before requesting a **PID** or an **attestation (EAA)**, the Wallet Unit evaluates the Credential Issuer (PID Provider or Attestation Provider) so that the User only interacts with registered, authorised providers. Trust evaluation uses Access CA LoTEs, Registration Certificate Provider LoTEs, the Registrar's registry (or registration certificate), **certificate revocation** checks, and **entity status** in LoTEs (Valid/Invalid per GenNot_05).
 
 ## Actors
 
@@ -12,17 +12,17 @@ Before requesting a **PID** or an **attestation (EAA)**, the Wallet Unit evaluat
 ## Goal
 
 - **Business**: Ensure the Holder requests credentials only from providers that are registered and entitled to issue the requested credential type.
-- **Technical**: Validate the Credential Issuer's access certificate (and optional registration certificate), confirm they are not revoked, confirm Provider entity status in TL is valid, and verify registration/entitlements before starting the issuance flow.
+- **Technical**: Validate the Credential Issuer's access certificate and registration certificate (issued per **RPRC_13**), confirm they are not revoked, confirm Provider entity status in TL is valid, and verify registration/entitlements before starting the issuance flow.
 
 ## Preconditions
 
-- Wallet Unit has (or can obtain) the relevant LoTEs: Access CA LoTE; optionally Registration Certificate Provider LoTE ([trust-evaluation-base](trust-evaluation-base.md)).
-- Credential Issuer exposes access certificate (and optionally registration certificate) in Issuer metadata (e.g. OpenID4VCI); ARF ISSU_22, ISSU_22a, ISSU_32, RPRC_22.
+- Wallet Unit has (or can obtain) the relevant LoTEs: Access CA LoTE; Registration Certificate Provider LoTE ([trust-evaluation-base](trust-evaluation-base.md)).
+- Credential Issuer exposes access certificate and registration certificate in Issuer metadata (e.g. OpenID4VCI); ARF ISSU_22, ISSU_22a, ISSU_32, **RPRC_22**. If the registration certificate is not in metadata, **ISSU_24a** / **ISSU_34a** allow a Registrar query.
 - Registrar registry is available per Reg_06 (common API) if registration certificate is not used.
 
 ## Main Flow (Short)
 
-1. Wallet Unit obtains Credential Issuer metadata (e.g. credential endpoint), including access certificate (and optionally registration certificate).
+1. Wallet Unit obtains Credential Issuer metadata (e.g. credential endpoint), including access certificate and registration certificate (RPRC_22).
 2. **Access certificate**: Wallet Unit verifies the access certificate is authentic, valid at validation time, and issued by a CA present in the applicable **Access Certificate Authority LoTE** with **valid entity status** (not Invalid); verifies the access certificate is **not revoked** and includes a valid SCT where required (CT_05, ETSI TS 119 411-8) (ISSU_24 for PID, ISSU_34 for Attestation Provider).
 3. **Registration certificate** (if present): Wallet Unit verifies authenticity and validity using **Registration Certificate Provider LoTE** (entry with valid status); verifies the registration certificate is **not revoked** per ETSI TS 119 475 / RPRC_02 technical specification.
 4. **Registration / entitlements**: Wallet Unit verifies the provider is registered and entitled to issue the requested credential type:

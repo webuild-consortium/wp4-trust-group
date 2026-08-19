@@ -2,50 +2,50 @@
 
 ## Scope
 
-Before the User approves **presentation** of attributes to a Relying Party, the Wallet Unit evaluates the Relying Party: it verifies the RP's access certificate using the **Access Certificate Authority Trusted List**, checks that **certificates are not revoked**, and optionally verifies the RP's **registration** (and requested attributes) via registration certificate or **Registrar registry**, so the User can make an informed decision.
+Before the User approves **presentation** of attributes to a Relying Party, the Wallet Unit evaluates the Relying Party: it verifies the RP's access certificate using the **Access Certificate Authority Trusted List**, checks that **certificates are not revoked**, and verifies the **WRPRC included in the presentation request** (authenticity, binding to the access certificate / Service, and requested attributes), so the User can make an informed decision.
 
 ## Actors
 
 - **Primary**: Wallet Unit (on behalf of the Holder)
-- **Secondary**: Holder (User using the Wallet Unit), Relying Party Instance, Access CA Trusted List, Registrar registry (or Provider of Registration Certificates)
+- **Secondary**: Holder (User using the Wallet Unit), Relying Party Instance, Access CA Trusted List, Provider of Registration Certificates (WRPRC Provider Trusted List)
 
 ## Goal
 
-- **Business**: Ensure the Holder presents attributes only to Relying Parties that are registered and, if the Holder opts in, that the requested attributes match what is registered.
-- **Technical**: Validate RP access certificate (and registration certificate if present), verify they are not revoked, and when the Holder requests it, RP registration and requested-attributes consistency (and that RP is not suspended/cancelled).
+- **Business**: Ensure the Holder presents attributes only to Relying Parties that are registered and that the requested attributes match what is registered for that Service and intended use.
+- **Technical**: Validate RP access certificate and the WRPRC in the request, verify they are not revoked, and report failed verifications when asking for approval.
 
 ## Preconditions
 
-- Wallet Unit has (or can obtain) the relevant **Access Certificate Authority Trusted List(s)** for Relying Parties (RPA_04).
-- Relying Party Instance sends presentation request including access certificate and, if applicable, registration certificate and RP info (RPRC_19, RPRC_19a).
-- Wallet Unit offers the User the option to verify RP registration (RPRC_16).
+- Wallet Unit has (or can obtain) the relevant **Access Certificate Authority Trusted List(s)** for Relying Parties (RPA_04) and the **Registration Certificate Provider Trusted List** (RPRC_17).
+- Relying Party Instance sends a presentation request including the access certificate and a single WRPRC by value (RPRC_19).
 
 ## Main Flow (Short)
 
-1. Relying Party Instance sends a presentation request to the Wallet Unit (access certificate, and optionally registration certificate and RPRC_19a data).
-2. **Access certificate**: Wallet Unit verifies the RP Instance access certificate using trust anchors from the **Relying Party Access Certificate Authority Trusted List(s)** (RPA_04); verifies the access certificate is **not revoked** (Reg_14). If a registration certificate is present, verifies it is **not revoked** (RPRC_02).
-3. **Optional User verification**: If the User has chosen to verify the information registered about the Relying Party (RPRC_16):
-   - If **registration certificate** is present: Wallet Unit verifies authenticity and validity (e.g. using Registration Certificate Provider TL) per RPRC_17; if verification fails, notify the User when asking for approval (RPRC_17).
-   - If **no registration certificate**: Wallet Unit uses the **Registrar online service URL** from the request to fetch registered information; if unavailable or invalid, notify the User when asking for approval (RPRC_18).
-   - Wallet Unit verifies that **all attributes requested** in the presentation request are **included in the registered list** (RPRC_21); if not, notify the User about unregistered attributes (RPRC_21). Optionally confirm RP is not suspended/cancelled (Reg_09).
-4. Wallet Unit asks for User approval (RPA_07); any negative verification outcome is communicated to the User at this step.
+1. Relying Party Instance sends a presentation request to the Wallet Unit (access certificate and WRPRC for the current Service and intended use).
+2. **Access certificate**: Wallet Unit verifies the RP Instance access certificate using trust anchors from the **Relying Party Access Certificate Authority Trusted List(s)** (RPA_04); verifies the access certificate is **not revoked** (Reg_14).
+3. **WRPRC in the request** (RPRC_17): Wallet Unit verifies format, authenticity, and validity of the registration certificate. If the certificate is absent, malformed, inauthentic, or expired, the Wallet Unit **warns the User** when asking for approval (RPA_07). The Wallet Provider’s risk policy determines whether approval is still allowed.
+4. **Binding** (RPRC_17a): Wallet Unit verifies that the WRPRC contains the same unique Relying Party identifier and Service identifier as the access certificate, or that the WRPRC shows the intermediated RP uses this intermediary.
+5. **Attributes** (RPRC_21): Wallet Unit verifies that **all attributes requested** are included in the WRPRC in the same request; if not, warn the User. Optionally confirm RP is not suspended/cancelled (Reg_09).
+6. Wallet Unit asks for User approval (RPA_07 / RPA_06). For an intermediary, it SHALL NOT display the intermediary’s trade names (RPI_07).
 
 ## Success Criteria
 
-- RP access certificate (and registration certificate if present) is validated via the applicable Trusted List(s) and verified not revoked.
-- When the User opts in, registration and attribute checks are performed and failures are clearly reported.
+- RP access certificate and WRPRC are validated via the applicable Trusted List(s) and verified not revoked.
+- Binding and attribute checks are performed and failures are clearly reported at approval.
 
 ## ARF Requirements (Key)
 
 | Identifier | Requirement |
 |------------|-------------|
 | RPA_04    | Wallet Unit SHALL accept trust anchors in the Trusted List(s) of Relying Party Access CAs (all Member States). |
-| RPRC_16   | Wallet Unit SHALL offer the User the possibility to verify information registered about the RP. |
-| RPRC_17   | If User wants verification and RP sent registration cert: verify authenticity/validity; on failure, notify User at approval. |
-| RPRC_18   | If User wants verification and no registration cert: obtain info from Registrar URL; on failure, notify User at approval. |
-| RPRC_21   | When verified, Wallet Unit SHALL verify requested attributes are in the list registered by the Registrar; on failure, notify User. |
+| RPA_06    | Display Relying Party and Service trade names from the access certificate, except for intermediaries (RPI_07). |
+| RPRC_17   | Verify authenticity/validity of the WRPRC in the request; on failure, warn User at approval. |
+| RPRC_17a  | WRPRC unique identifier and Service identifier SHALL match the access certificate, or the WRPRC SHALL show use of this intermediary. |
+| RPRC_19   | Relying Party Instance SHALL include a single WRPRC by value in each presentation request. |
+| RPRC_21   | Wallet Unit SHALL verify requested attributes are in the WRPRC in the same request; on failure, notify User. |
+| RPRC_16 / RPRC_18 | Empty in ARF v3.0.0 (no user-opt-in Registrar lookup). |
 | Reg_14    | Access CA provides revocation method(s); Wallet Unit SHALL verify access certificate not revoked. |
-| RPRC_02   | Technical spec describes revocation of registration certificates; Wallet Unit SHALL verify reg cert not revoked when used. |
+| RPRC_02   | Technical spec describes revocation of registration certificates; Wallet Unit SHALL verify WRPRC not revoked when used. |
 
 ## References
 

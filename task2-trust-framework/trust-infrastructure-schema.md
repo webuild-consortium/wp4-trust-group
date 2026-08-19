@@ -1,6 +1,6 @@
 # Trust Infrastructure Schema: Onboarding and Trusted Lists
 
-This document describes the schema and graphical representation of the EUDI Wallet trust infrastructure. It focuses on three closely related processes: **Registration/Onboarding**, **Notification**, and **Trusted List Publication**, which are separated to align with the Architecture and Reference Framework (ARF). The document is aligned with **ARF v2.9.0**.
+This document describes the schema and graphical representation of the EUDI Wallet trust infrastructure. It focuses on three closely related processes: **Registration/Onboarding**, **Notification**, and **Trusted List Publication**, which are separated to align with the Architecture and Reference Framework (ARF). The document is aligned with **ARF v3.0.0**.
 
 ## Overview
 
@@ -39,7 +39,7 @@ The following table summarizes the registration requirement and the authority re
     *   Maintains and publishes the **List of Trusted Lists (LoTL)** containing pointers to all published Trusted Lists.
 *   **Member State TLP**: Compiles, signs, and publishes **national Trusted Lists for non-qualified EAA Providers** and submits the non-qualified EAA Provider TL URL to the Commission for inclusion in the LoTL. **QEAA Providers are included in Member State QTSP Trusted Lists** published by Member States per **Article 22 of eIDAS Regulation (EU) No 910/2014** and **notified to the European Commission** per Article 22(3). **PuB-EAA Providers** are notified to and published by the European Commission according to **Topic 31**. *Note*: EAA/QEAA Providers are also trust services according to **ETSI TS 119 612**.
 *   **WRPAC Provider** (Access Certificate Authority): Issues access certificates to registered entities. Notified by MS to the Commission; does not interact with Registrars.
-*   **WRPRC Provider** (Provider of Registration Certificates): Optionally issues certificates detailing entitlements. Notified by MS to the Commission.
+*   **WRPRC Provider** (Provider of Registration Certificates): Issues registration certificates; for Relying Parties, issuance is automated after registration (**RPRC_09**). Notified by MS to the Commission.
 
 ### 1.2 Registered Entities
 
@@ -55,15 +55,15 @@ The registration process is managed by Member State Registrars and involves (for
 
 1. Entity registration with identification data and entitlements.
 2. Access certificate issuance by Access Certificate Authority.
-3. Optional registration certificate issuance by Provider of Registration Certificates.
-4. Registry publication for transparency and online verification (per **Reg_03**, **Reg_04**). The registry is always published for all registered entities (PID Providers, Attestation Providers, Relying Parties) and serves as an alternative source when registration certificates are not available. Member States SHALL support the common API specified in [Technical Specification 5](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md) for automated retrieval of registry entries (per **Reg_06**, Topic 27). The API uses a secure channel and does not require authentication. Wallet Units use the Registrar's online service URL to verify:
+3. Registration certificate issuance by Provider of Registration Certificates (automated: **RPRC_09** for Relying Parties; **RPRC_13** for PID/Attestation Providers).
+4. Registry publication for transparency and online verification (per **Reg_03**, **Reg_04**). The registry is always published for all registered entities (PID Providers, Attestation Providers, Relying Parties). Member States SHALL support the common API specified in [Technical Specification 5](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md) for automated retrieval of registry entries (per **Reg_06**, Topic 27). The API uses a secure channel and does not require authentication. Wallet Units use:
    - PID Provider registration (per **ISSU_24a**).
    - Attestation Provider registration and attestation types (per **ISSU_34a**).
-   - Relying Party registration and requested attributes (per **RPRC_18**).
+   - Relying Party registration and requested attributes from the WRPRC **in the presentation request** (per **RPRC_17**, **RPRC_19**, **RPRC_21**; **RPRC_16** and **RPRC_18** are empty in ARF v3.0.0).
 
 ### 2.1 Registration Data and Requirements
 
-Entities register with their Member State Registrar before participating in the ecosystem. The common set of data to be registered is specified in [ARF Section 6.3.2.2](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#6322-data-about-the-pid-provider-or-attestation-provider-is-included-in-the-registry) and [Section 6.4.2](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#642-relying-party-registration), and detailed in [Technical Specification 6](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md) per requirement **Reg_01a** (Topic 27).
+Entities register with their Member State Registrar before participating in the ecosystem. The common set of data to be registered is specified in [ARF Section 6.3.2.2](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#6322-data-about-the-pid-provider-or-attestation-provider-is-included-in-the-registry) and [Section 6.4.2](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#642-relying-party-registration), and detailed in [Technical Specification 6](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md) per requirement **Reg_01a** (Topic 27).
 
 The registration data includes:
 
@@ -73,13 +73,13 @@ The registration data includes:
   - **For QEAA Providers**: Attestation type(s) that the Provider intends to issue to Wallet Units (e.g., diplomas, professional qualifications).
   - **For PuB-EAA Providers**: Attestation type(s) that the Provider intends to issue to Wallet Units (e.g., mDLs, vehicle registration cards).
   - **For non-qualified EAA Providers**: Attestation type(s) that the Provider intends to issue to Wallet Units.
-  - **For Relying Parties**: Attributes that the Relying Party intends to request from Wallet Units, and for what purpose (intended use). The Registrar also registers if the Relying Party intends to use the services of an intermediary, and if so, which one.
+  - **For Relying Parties**: Attributes that the Relying Party intends to request from Wallet Units, and for what purpose (intended use). The Registrar also registers **Relying Party Services** (**Reg_10a**, **Reg_10d**, **Reg_33**, **Reg_34**), and if the Relying Party intends to use the services of an intermediary, which one (**RPRC_04**, **Reg_34a**).
 - **Service supply points**: URLs where services are available (e.g., PID issuance endpoint, attestation issuance endpoint, presentation request endpoint).
 
-> **Note**: Wallet Providers do not register with Registrars. They are notified by Member States to the European Commission for Trusted List inclusion (see [Section 3.1.1](#311-wallet-provider-notification)). Wallet Providers do not receive access certificates or registration certificates, as they are not registered with Registrars. The Wallet Solution provided by the Wallet Provider must be certified by Conformity Assessment Bodies (CABs) as described in [ARF Chapter 7](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#7-wallet-solution-certification-and-risk-management).
+> **Note**: Wallet Providers do not register with Registrars. They are notified by Member States to the European Commission for Trusted List inclusion (see [Section 3.1.1](#311-wallet-provider-notification)). Wallet Providers do not receive access certificates or registration certificates, as they are not registered with Registrars. The Wallet Solution provided by the Wallet Provider must be certified by Conformity Assessment Bodies (CABs) as described in [ARF Chapter 7](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#7-wallet-solution-certification-and-risk-management).
 
 > **Disambiguation – QEAA Providers and Registration**  
-> In this document, **QEAA Providers are treated as a specific type of Attestation Provider**. As such, they **MUST register with a Member State Registrar** together with other Attestation Providers, in line with **ARF Section 3.17 (Registrars)** and **Topic 27 (Reg_01, Reg_21)**. The registration data for QEAA Providers – including identification data, attestation types they intend to issue, and service supply points – is part of the **common registration dataset** described in [ARF Section 6.3.2.2](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#6322-data-about-the-pid-provider-or-attestation-provider-is-included-in-the-registry) and referenced in this section.  
+> In this document, **QEAA Providers are treated as a specific type of Attestation Provider**. As such, they **MUST register with a Member State Registrar** together with other Attestation Providers, in line with **ARF Section 3.17 (Registrars)** and **Topic 27 (Reg_01, Reg_21)**. The registration data for QEAA Providers – including identification data, attestation types they intend to issue, and service supply points – is part of the **common registration dataset** described in [ARF Section 6.3.2.2](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#6322-data-about-the-pid-provider-or-attestation-provider-is-included-in-the-registry) and referenced in this section.  
 > **QEAA Providers are Qualified Trust Service Providers (QTSPs)**. After successful registration and approval at Member State level, QEAA Providers are included in **Member State Trusted Lists for QTSPs**, which are published by **Member States** in accordance with **Article 22 of the eIDAS Regulation (EU) No 910/2014)** and **notified to the European Commission** per Article 22(3) so that pointers and signing keys can be exposed via the **List of Trusted Lists (LoTL)**. Trust anchors for QEAA Providers are published in these Member State QTSP Trusted Lists, as referenced in ARF requirements **OIA_13** and **ISSU_08** (see [COMPREHENSIVE-CATALOGUE-EAA-QEAA-REFERENCES.md](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/development-issues/COMPREHENSIVE-CATALOGUE-EAA-QEAA-REFERENCES.md#registration-and-trusted-lists)). The European Commission maintains the **List of Trusted Lists (LoTL)** that references all Member State Trusted Lists, including QTSP Trusted Lists.
 >
 > **Note on ETSI alignment**: ARF Section 3.17 states that "All PID Providers, QEAA Providers, PuB-EAA Providers, non-qualified EAA Providers and Relying Parties in the EUDI Wallet ecosystem are registered by a Registrar in the Member State where they reside." However, **ETSI TS 119 602** does not specify how to register EAA/QEAA Providers as attestation providers. ETSI TS 119 602 specifies how to register PuB-EAA Providers. **ETSI TS 119 612** specifies how to register EAA/QEAA Providers as trust services. There is thus a mismatch between ETSI TS 119 602 and the ARF (Section 3.17, Topic 27) regarding the registration of EAA/QEAA Providers.
@@ -96,18 +96,18 @@ After registration of entities (PID Providers, Attestation Providers, Relying Pa
 - Authenticate entities during service interactions.
 - Reference the registry for entitlement verification.
 
-Issuance **SHALL** comply with **ETSI TS 119 411-8**; the Access Certificate Authority **SHALL** comply with at least **ETSI EN 319 411-1** NCP requirements (per **Reg_11**, Topic 27). Certificate policy details (including Certificate Transparency/SCT where applicable) are specified in those ETSI standards (ARF Reg_12–Reg_18 have been moved there). Each access certificate **SHALL** contain a name suitable for presenting to the User (per **Reg_31**). For Relying Parties, a **separate access certificate** is issued **per Relying Party Instance** (per **Reg_10a**).
+Issuance **SHALL** comply with **ETSI TS 119 411-8**; the Access Certificate Authority **SHALL** comply with at least **ETSI EN 319 411-1** NCP requirements (per **Reg_11**, Topic 27). Certificate policy details (including Certificate Transparency/SCT where applicable) are specified in those ETSI standards (ARF Reg_12–Reg_18 have been moved there). Each access certificate **SHALL** contain a trade name suitable for presenting to the User (per **Reg_31**) and, for Relying Parties and intermediaries, a **Relying Party Service identifier** and Service trade name (per **Reg_33**, **Reg_34**). A registering entity **SHALL** register one or more Services and receive at least one access certificate per registered Service (**Reg_10a**). An intermediary receives a separate set of access certificates for each intermediated Relying Party (**Reg_34a**).
 
-### 2.3 Registration Certificate Issuance (Optional)
+### 2.3 Registration Certificate Issuance
 
-If the Registrar policy requires it, the provider of Registration Certificates issues registration certificates that:
+The provider of Registration Certificates issues registration certificates that:
 - Detail the entity's registration status.
-- Specify entitlements for the specific entity, including available attestation types from Credential Issuers and attributes requested by Relying Parties.
-- Enable Wallet Units to verify entity entitlements.
+- Specify entitlements for the specific entity, including available attestation types from Credential Issuers and attributes requested by Relying Parties, plus the Relying Party Service identifier and trade name (**RPRC_07a**).
+- Enable Wallet Units to verify entity entitlements from the presentation request (no user-opt-in Registrar lookup; **RPRC_16** and **RPRC_18** are empty in ARF v3.0.0).
 
 Registration certificates are issued per:
-- **RPRC_09**: For Relying Parties (Registrar MAY decide to issue registration certificates to Relying Parties).
-- **RPRC_13**: For Credential Issuers (PID Providers, Attestation Providers) (Registrar MAY decide to issue registration certificates to Providers).
+- **RPRC_09**: For Relying Parties, a WRPRC **SHALL** be created automatically for each combination of intended use and Relying Party Service (**Reg_10d**), without undue delay (CIR 2025/848 as amended by CIR 2026/1730).
+- **RPRC_13**: For Credential Issuers (PID Providers, Attestation Providers), a WRPRC **SHALL** be created for each registered Service (**Reg_10c**, **Reg_10e**).
 
 ## 3. Trusted List Publication Process
 
@@ -120,7 +120,7 @@ The Trusted List publication process is separate from registration. See [Overvie
 
 ### 3.1 Trusted List Publication by Trusted List Provider
 
-> **Note on Trusted List Provider Organizational Level**: The ARF ([Section 3.5](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#35-trusted-list-or-lote-provider)) defines a Trusted List Provider (TLP) as "a body responsible for maintaining, managing, and publishing a Trusted List." Both Member State TLPs and the European Commission act as TLPs with distinct scopes (see [Responsibilities Matrix](#overview)). Member State TLPs operate at Member State level per notification requirements (GenNot_01).
+> **Note on Trusted List Provider Organizational Level**: The ARF ([Section 3.5](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#35-trusted-list-or-lote-provider)) defines a Trusted List Provider (TLP) as "a body responsible for maintaining, managing, and publishing a Trusted List." Both Member State TLPs and the European Commission act as TLPs with distinct scopes (see [Responsibilities Matrix](#overview)). Member State TLPs operate at Member State level per notification requirements (GenNot_01).
 
 The Member State Trusted List Provider (MS TLP) is responsible **for national non-qualified EAA Provider Trusted Lists** and **for the Member State QTSP Trusted Lists for QEAA Providers**, in line with Article 22 of eIDAS Regulation (EU) No 910/2014:
 
@@ -193,15 +193,15 @@ The matrix collects all the ARF HLRs about the registration phase.
 |------------|-------------|--------|
 | **Reg_01** | Member States SHALL provide processes for entity registration | Topic 27 |
 | **Reg_10** | Access Certificate Authority SHALL issue access certificates to all PID Providers, QEAAs, PuB-EAAs, and non-qualified EAAs in registries. | Topic 27, Topic 31 |
-| **Reg_10a** | Member State SHALL ensure Access Certificate Authority issues one or more access certificates to all Relying Parties in registries. A Relying Party SHALL receive a separate access certificate for each of its Relying Party Instances. | Topic 27 |
+| **Reg_10a** | A registering entity SHALL register one or more Services, and SHALL receive at least one access certificate for each registered Service, complying with Reg_33 and Reg_34. | Topic 27 |
 | **Reg_11** | Access certificate issuance SHALL comply with ETSI TS 119 411-8; Access Certificate Authority SHALL comply with at least ETSI EN 319 411-1 NCP requirements. | Topic 27 |
 | **Reg_19** | Member States SHALL approve PID Providers according to well-defined policy | Topic 27 |
 | **Reg_21** | Member States SHALL approve Attestation Providers according to well-defined policy | Topic 27 |
 | **Reg_25** | Member States SHALL identify Relying Parties at appropriate confidence level | Topic 27 |
-| **RPRC_09** | Registrar MAY decide to issue registration certificates to Relying Parties | Topic 27, Topic 44 |
-| **RPRC_13** | Registrar MAY decide to issue registration certificates to Providers | Topic 27, Topic 44 |
+| **RPRC_09** | Provider of registration certificates SHALL issue a separate WRPRC for each combination of intended use and Relying Party Service (Reg_10d), automated and without undue delay | Topic 27, Topic 44 |
+| **RPRC_13** | Provider of registration certificates SHALL issue a separate WRPRC for each registered Service of a PID Provider or Attestation Provider | Topic 27, Topic 44 |
 
-**Note**: **Reg_01** applies to PID Providers, Attestation Providers, and Relying Parties. **Reg_10** requires access certificates for PID Providers, QEAAs, PuB-EAAs, and non-qualified EAAs; **Reg_10a** requires one or more access certificates for each Relying Party, with a **separate access certificate per Relying Party Instance**. Access certificate issuance and ACA policy follow **ETSI TS 119 411-8** and **ETSI EN 319 411-1** (Reg_11); former Reg_12–Reg_18 content is specified in those standards. **Reg_31** requires that an access certificate SHALL contain a name suitable for presenting to the User. **RPRC_13** applies to Registration Certificates for Credential Issuers (PID Providers, Attestation Providers). See [Overview](#overview) for entity registration responsibilities.
+**Note**: **Reg_01** applies to PID Providers, Attestation Providers, and Relying Parties. **Reg_10** requires access certificates for PID Providers, QEAAs, PuB-EAAs, non-qualified EAAs, and Relying Parties; **Reg_10a** requires one or more **Services** and at least one access certificate **per Service** (**Reg_33**, **Reg_34**). Access certificate issuance and ACA policy follow **ETSI TS 119 411-8** and **ETSI EN 319 411-1** (Reg_11); former Reg_12–Reg_18 content is specified in those standards. **Reg_31** requires that an access certificate SHALL contain a name suitable for presenting to the User. **RPRC_09** and **RPRC_13** issue registration certificates automatically after registration. See [Overview](#overview) for entity registration responsibilities.
 
 ### 4.2 Trusted List Requirements
 
@@ -283,9 +283,9 @@ graph TB
     RegCertProv -.->|MS notifies Registration Cert Provider to Commission<br/>GenNot_01, RPACANot_01, RPACANot_02| ECNotify
     
     Registrar -->|Approve & Register<br/>Reg_19, Reg_21| Registry
-    Registrar -->|Request Access Cert<br/>Reg_10| AccessCA
+    Registrar -->|Request Access Cert<br/>Reg_10, Reg_10a| AccessCA
     AccessCA -->|"Issue Access Certificate<br/>Reg_10, Reg_10a, Reg_11 (ETSI TS 119 411-8)"| EntitiesScope
-    Registrar -.->|Optional: Request Reg Cert<br/>RPRC_09, RPRC_13| RegCertProv
+    Registrar -->|Request Reg Cert<br/>RPRC_09, RPRC_13| RegCertProv
     RegCertProv -.->|Issue Registration Certificate<br/>RPRC_02| EntitiesScope
     
     %% Submission and Update: Registration triggers Trusted List publication (Attestation Providers only)
@@ -339,17 +339,10 @@ sequenceDiagram
 
     AccessCA->>Entity: 5. Issue Access Certificate<br/>(Reg_10, Reg_10a, Reg_11, ETSI TS 119 411-8)
 
-    alt Registrar Policy Requires Registration Certificate
-        alt Relying Party
-            Registrar->>RegCertProv: 6a. Request Registration Certificate<br/>(RPRC_09)
-            Note right of RegCertProv: For Relying Parties<br/>One per intended use
-        else Credential Issuer (PID/Attestation Provider)
-            Registrar->>RegCertProv: 6b. Request Registration Certificate<br/>(RPRC_13)
-            Note right of RegCertProv: For Credential Issuers<br/>(PID/Attestation Providers)<br/>One certificate per provider
-        end
+    Registrar->>RegCertProv: 6. Request Registration Certificate<br/>(RPRC_09 RP: per intended use × Service;<br/>RPRC_13 Providers: per Service)
+    Note right of RegCertProv: Automated issuance<br/>Reg_10c, RPRC_09, RPRC_13
 
-        RegCertProv->>Entity: 7. Issue Registration Certificate<br/>(RPRC_02, RPRC_14)
-    end
+    RegCertProv->>Entity: 7. Issue Registration Certificate
 
     Entity->>Registry: 8. Update Information<br/>(Reg_07, Reg_08)
     
@@ -421,7 +414,7 @@ sequenceDiagram
 
 ### 5.3.1 Submission and Update Models: Registration to Trusted List
 
-The relationship between Registrar and Trusted List Provider (TLP) can be implemented in two ways (illustrated in Diagram 5.3). Note: The ARF ([Section 6.3.2](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#632-pid-provider-or-attestation-provider-registration-and-notification)) describes the registration and notification processes but does not explicitly specify these two implementation models. The models presented here are implementation approaches based on the ARF requirements:
+The relationship between Registrar and Trusted List Provider (TLP) can be implemented in two ways (illustrated in Diagram 5.3). Note: The ARF ([Section 6.3.2](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#632-pid-provider-or-attestation-provider-registration-and-notification)) describes the registration and notification processes but does not explicitly specify these two implementation models. The models presented here are implementation approaches based on the ARF requirements:
 
 #### Model A: Automatic Trigger (Recommended)
 
@@ -593,8 +586,8 @@ graph TB
 graph TB
     subgraph Registration["Registration Process<br/>Managed by MS Registrar"]
         RegStep1["1. Entity Registration<br/>Reg_01 (PID/Attestation Providers, RP)<br/>Reg_19, Reg_21, Reg_25"]
-        RegStep2["2. Access Certificate Issuance<br/>Reg_10, Reg_10a, Reg_11<br/>(one per RP Instance for RPs)"]
-        RegStep3["3. Optional Registration Certificate<br/>RPRC_09 (RP), RPRC_13 (Credential Issuers)"]
+        RegStep2["2. Access Certificate Issuance<br/>Reg_10, Reg_10a, Reg_11<br/>(at least one per Service)"]
+        RegStep3["3. Registration Certificate<br/>RPRC_09 (RP, automated), RPRC_13 (Providers, per Service)"]
         RegStep4[4. Registry Publication<br/>Reg_03, Reg_04]
     end
 
@@ -724,8 +717,8 @@ Member States may publish additional Trusted Lists within their own perimeter fo
 | **ISSU_24a** | Wallet Units SHALL verify PID Provider registration before PID issuance | Topic 27, Topic 44 |
 | **ISSU_34a** | Wallet Units SHALL verify Attestation Provider registration before attestation issuance | Topic 27, Topic 44 |
 | **RPA_04** | Wallet Units SHALL accept trust anchors in LoTE(s) of all Access Certificate Authorities notified by Member States (Relying Party access certificate validation). | Topic 6, Topic 31 |
-| **RPRC_16** | Wallet Units SHALL offer Users possibility to verify Relying Party registration | Topic 44 |
-| **RPRC_21** | Wallet Units SHALL verify requested attributes are registered | Topic 44 |
+| **RPRC_17** | Wallet Units SHALL verify the WRPRC included in the presentation request | Topic 44 |
+| **RPRC_21** | Wallet Units SHALL verify requested attributes are registered in that WRPRC | Topic 44 |
 
 ### 8.2 Trust Evaluation Flow
 
@@ -735,7 +728,7 @@ Member States may publish additional Trusted Lists within their own perimeter fo
 ```mermaid
 graph LR
     subgraph WalletUnit["Wallet Unit"]
-        WU[Wallet Unit<br/>ISSU_24, ISSU_34a, RPRC_16]
+        WU[Wallet Unit<br/>ISSU_24, ISSU_34a, RPRC_17]
     end
 
     subgraph Providers["Credential Providers"]
@@ -752,7 +745,7 @@ graph LR
         PIDTL[PID Provider LoTE<br/>OIA_12]
         APTL[PuB-EAA / QEAA / EAA TL<br/>OIA_13, OIA_14, OIA_15]
         ACATL[Access CA TL<br/>ISSU_24]
-        Registry[Registry<br/>ISSU_24a, ISSU_34a, RPRC_16]
+        Registry[Registry<br/>ISSU_24a, ISSU_34a, Reg_03]
         RegCertTL[Registration Cert Provider TL<br/>ISSU_33a]
     end
 
@@ -773,9 +766,8 @@ graph LR
     %% Presentation Trust Evaluation
     RPInst -->|1. Present Request| WU
     WU -->|2. Verify Access Cert in TL<br/>RPA_04| ACATL
-    WU -->|3. Verify Registration<br/>RPRC_16| Registry
-    WU -->|4. Verify Requested Attributes<br/>RPRC_21| Registry
-    WU -.->|5. Verify Reg Cert in TL<br/>RPRC_17| RegCertTL
+    WU -->|3. Verify WRPRC in request<br/>RPRC_17| RegCertTL
+    WU -->|4. Verify Requested Attributes<br/>RPRC_21| RPInst
 
     %% RP Validation
     RPInst -->|Validate PID Signature<br/>OIA_12| PIDTL
@@ -797,7 +789,7 @@ Trust evaluation occurs at multiple points using different trust sources:
    - Providers verify WIA and KA via Wallet Provider LoTE - **ISSU_21, ISSU_30, ISSU_30a**; verify Wallet Instance and WSCD/keystore not revoked (Topic 38)
 
 2. **During Presentation**:
-   - Wallet Units verify Relying Party registration (Registry) - **RPRC_16, RPRC_21**
+   - Wallet Units verify the WRPRC in the presentation request - **RPRC_17, RPRC_21**
    - Wallet Units verify Access Certificates using LoTE(s) of Access Certificate Authorities - **ISSU_24, RPA_04**
    - Relying Parties validate PID signatures using PID Provider LoTE - **OIA_12**
    - Relying Parties validate QEAA signatures using QEAA Provider Trusted List (Art. 22) - **OIA_13**

@@ -16,6 +16,7 @@ This example demonstrates Wallet-Relying Party Access Certificates (WRPAC) for *
 | ETSI EN 319 411-1 | Policy and security requirements for Trust Service Providers issuing certificates; Part 1: General requirements |
 | ETSI EN 319 411-2 | Policy and security requirements for Trust Service Providers issuing certificates; Part 2: Requirements for trust service providers issuing EU qualified certificates |
 | CIR (EU) 2025/848 | Commission Implementing Regulation on the registration of wallet-relying parties |
+| CIR (EU) 2026/1730 | Amending CIR 2025/848 (Service identifiers, intermediary–RP association) |
 | IETF RFC 5280 | Internet X.509 Public Key Infrastructure Certificate and CRL Profile |
 | ITU-T X.520 | Information technology - Open Systems Interconnection - The Directory: Selected attribute types |
 

@@ -16,7 +16,7 @@ This task defines and implements the APIs used to expose the WP4 Trust Infrastru
 
 ## Normative References
 
-The APIs in this task align with the following European Commission technical specifications and related standards. The [EUDI Wallet Architecture and Reference Framework (ARF) v2.9.0](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/) indexes these specifications under [Technical Specifications](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/tree/main/docs/technical-specifications); the canonical documents are published in the [eudi-doc-standards-and-technical-specifications](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications) repository.
+The APIs in this task align with the following European Commission technical specifications and related standards. The [EUDI Wallet Architecture and Reference Framework (ARF) v3.0.0](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/) indexes these specifications under [Technical Specifications](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/tree/main/docs/technical-specifications); the canonical documents are published in the [eudi-doc-standards-and-technical-specifications](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications) repository.
 
 ### European Commission Technical Specifications
 

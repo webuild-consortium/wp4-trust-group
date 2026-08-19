@@ -242,11 +242,12 @@ This section addresses the ETSI specifications listed in [issue #3](https://gith
 
 ### ETSI TS 119 472-2: WRPRC transfer
 
-**Purpose:** Protocol extensions for transferring a Relying Party registration certificate (or RPRC_19a information) from an RP Instance to a Wallet Unit.
+**Purpose:** Protocol extensions for transferring a Relying Party registration certificate from an RP Instance to a Wallet Unit.
 
 **ARF requirements:**
 - **RPRC_20** — support ISO/IEC 18013-5 or OpenID4VP extension for single WRPRC transfer
-- **RPRC_20a** — support same extensions for RPRC_19a information
+- **RPRC_19** — include that WRPRC **by value** in each presentation request
+- **RPRC_20a** — empty in ARF v3.0.0 (no parallel RPRC_19a dataset)
 
 **Policy application:** The WRPRC is the policy artefact the wallet evaluates. TS 119 472-2 does not define entitlements; it defines **how** the wallet obtains them:
 
@@ -254,7 +255,7 @@ This section addresses the ETSI specifications listed in [issue #3](https://gith
 | ------- | --------- | --------- |
 | Proximity | `euWrprc` in ISO/IEC 18013-5 DeviceRequest | TS 119 472-2 |
 | Remote | `verifier_info.registration_cert` in OpenID4VP Request Object | TS 119 472-2 clause 6.3.1.4 |
-| Registry fallback | Wallet retrieves WRPRC from national registry API | ARF RPRC_19a |
+| Registry | Publication API (**Reg_03**, **Reg_06**); not a presentation-time substitute for a missing WRPRC | ARF v3.0.0 |
 
 See [EUDI Wallet Trust and Entitlement Discovery](../task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md#312-wrprc-sources) for discovery flows.
 

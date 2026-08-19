@@ -15,7 +15,7 @@ During presentation, EDP are evaluated by the Wallet Unit together with the pres
 
 ### 1.2 Normative References and EDP Requirements 
 
-- **ARF Topic 43**: Defines the high-level requirements for EDPs. The following ARF 2.9.0 requirements (EDP_01 through EDP_11) are specified:
+- **ARF Topic 43**: Defines the high-level requirements for EDPs. The following ARF v3.0.0 requirements (EDP_01 through EDP_11) are specified:
 
   - **EDP_01**: A Wallet Unit SHALL enable an Attestation Provider to optionally express an embedded disclosure policy for a QEAA, PuB-EAA, or non-qualified EAA. *Note: The European Digital Identity Regulation does not contain a requirement for PIDs to be able to contain an embedded disclosure policy.*
 

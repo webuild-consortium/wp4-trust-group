@@ -125,7 +125,7 @@ At presentation time the RP trusts the **EAA provider as issuer** only indirectl
 | Phase | Evaluator | EAA-related check |
 |-------|-----------|-------------------|
 | **Issuance** (OpenID4VCI) | Wallet unit | ISSU_34/34a (provider access cert + registration); ISSU_08–10 (optional pre-storage validation) |
-| **Presentation** (OpenID4VP / ISO 18013-5) | Wallet unit | RP authentication (WRPAC/WRPRC, RPRC_16–21) |
+| **Presentation** (OpenID4VP / ISO 18013-5) | Wallet unit | RP authentication (WRPAC/WRPRC, RPRC_17, RPRC_19, RPRC_21) |
 | **Presentation** (after delivery) | Relying Party | OIA_13–15 (attestation signature + TL anchor + revocation) |
 
 See also: [UC-TE-05: Relying Party evaluates presented credentials](../task1-use-cases/subtask1-2-trust-registry/relying-party-evaluates-credentials.md), [Trust Infrastructure Schema §8](trust-infrastructure-schema.md#83-trust-evaluation-points).
@@ -282,7 +282,7 @@ sequenceDiagram
     participant TL as EAA Provider TL / LoTE
 
     RP->>WU: Presentation request (WRPAC, WRPRC, requested attributes)
-    Note over WU: Wallet verifies RP<br/>(RPA_04, RPRC_16–21)
+    Note over WU: Wallet verifies RP<br/>(RPA_04, RPRC_17, RPRC_19, RPRC_21)
     User->>WU: Approve presentation (RPA_10)
     WU->>RP: Present PID and/or EAA credential(s)<br/>(ETSI TS 119 472-2 / OpenID4VP)
 

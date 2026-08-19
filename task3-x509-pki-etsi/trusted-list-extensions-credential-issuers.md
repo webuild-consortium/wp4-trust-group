@@ -17,11 +17,10 @@ Trusted Lists and registration certificates configure which Credential Issuers a
 
 Per [trust-infrastructure-schema.md](../task2-trust-framework/trust-infrastructure-schema.md), Trusted Lists are published by Trusted List Providers (European Commission or Member State TLPs). For sector-specific or scheme-specific Trusted Lists, the entity accountable for the list is sometimes referred to as **Trusted List Owner**, **Ecosystem Authority**, or **Scheme Owner** (see [terms-and-entities.md](../task1-use-cases/terms-and-entities.md)).
 
-### Registration Certificate as Source of Truth (when available)
+### Registration Certificate as Source of Truth
 
-- As specified in the ARF (Topic 27 and the registration certificate requirements, e.g. RPRC_15), a **registration certificate** issued to a PID Provider, QEAA Provider, PuB-EAA Provider, or non-qualified EAA Provider **SHALL contain the type(s) of attestation that this entity intends to issue to Wallet Units**.
-- However, registration certificates are **optional** - they are issued "if the Registrar has a policy of issuing such certificates" (ARF Section 6.3.2.2).
-- When a registration certificate is available, per ARF RPRC_22 it SHALL be included **by value** in Credential Issuer metadata during issuance (ETSI TS 119 472-3, §4.2.3), providing a self-contained verification; Trusted List entries may optionally reference it via `registrationCertificateRef` (ETSI TS 119 602, clause 6.6.9).
+- As specified in the ARF (Topic 27 and **RPRC_13** / **RPRC_15**), a **registration certificate** **SHALL** be issued to a PID Provider, QEAA Provider, PuB-EAA Provider, or non-qualified EAA Provider for each registered Service, and **SHALL contain the type(s) of attestation that the applicable Service intends to issue to Wallet Units**.
+- Per ARF RPRC_22 it SHALL be included **by value** in Credential Issuer metadata during issuance (ETSI TS 119 472-3, §4.2.3), providing a self-contained verification; Trusted List entries may optionally reference it via `registrationCertificateRef` (ETSI TS 119 602, clause 6.6.9). If metadata does not carry a usable certificate, **ISSU_24a** / **ISSU_34a** still allow a Registrar query.
 
 ### Trusted List Entry for Each Provider
 
@@ -154,6 +153,6 @@ Illustrative only; no ETSI encoding prescribed.
 ## References
 
 - [credential-catalogue.md](../task2-trust-framework/credential-catalogue.md) | [trust-infrastructure-schema.md](../task2-trust-framework/trust-infrastructure-schema.md) | [terms-and-entities.md](../task1-use-cases/terms-and-entities.md)
-- ARF: [Topic 27](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties) | [Topic 31](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2320-topic-31---notification-and-publication-of-pid-provider-wallet-provider-attestation-provider-access-certificate-authority-and-provider-of-registration-certificates)
+- ARF: [Topic 27](https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties) | [Topic 31](https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2320-topic-31---notification-and-publication-of-pid-provider-wallet-provider-attestation-provider-access-certificate-authority-and-provider-of-registration-certificates)
 - ETSI TS 119 602 v1.1.1 (6.3.15) | ETSI TS 119 615 v1.3.1 (4.4)
 - [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32024R1183) | [eIDAS 910/2014 Art.22](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32014R0910)

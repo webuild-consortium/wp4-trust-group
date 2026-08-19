@@ -9,7 +9,7 @@ This subtask contains use cases for **trust registry operations** and **trust ev
 For terminology and entity definitions, see [Consolidated Terms and Entity Definitions](../terms-and-entities.md).
 - **Trust sources**: Access CA Trusted Lists, PID Provider TL, Attestation Provider TL (QEAA/PuB-EAA/EAA), Wallet Provider TL, Registration Certificate Provider TL, and National Registers (per [Trust Infrastructure Schema - Trust Evaluation](../../task2-trust-framework/trust-infrastructure-schema.md#8-trust-evaluation)).
 
-These use cases are aligned with the [EUDI Wallet Architecture and Reference Framework (ARF)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.9.0/architecture-and-reference-framework-main/) and the [Trusted List / Registration / Trust Evaluation requirements matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md).
+These use cases are aligned with the [EUDI Wallet Architecture and Reference Framework (ARF) v3.0.0](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/) and the [Trusted List / Registration / Trust Evaluation requirements matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md).
 
 ## Use Case Documents
 
