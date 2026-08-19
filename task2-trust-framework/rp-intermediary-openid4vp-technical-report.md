@@ -5,7 +5,7 @@
 | **Status** | Draft technical report (non-normative) |
 | **WP4 task** | Task 2 — Trust Framework |
 | **Scope** | EUDI Wallet remote presentation; Relying Party intermediaries; WRPAC / WRPRC trust evaluation |
-| **Related WP4 docs** | [Entities Involved](entities-involved.md), [EUDI Wallet Trust and Entitlement Discovery](eudi-wallet-trust-and-entitlement-discovery.md), [Trust Infrastructure Schema](trust-infrastructure-schema.md), [Consolidated Terms — Intermediary](../task1-use-cases/terms-and-entities.md#316-intermediary) |
+| **Related WP4 docs** | [UC-RPI-01 — Relying Party Intermediary](../task1-use-cases/subtask1-2-trust-registry/relying-party-intermediary-use-case.md), [Entities Involved](entities-involved.md), [EUDI Wallet Trust and Entitlement Discovery](eudi-wallet-trust-and-entitlement-discovery.md), [Trust Infrastructure Schema](trust-infrastructure-schema.md), [Consolidated Terms — Intermediary](../task1-use-cases/terms-and-entities.md#316-intermediary) |
 | **Primary normative sources** | OpenID4VP 1.0, OpenID4VC-HAIP, ETSI TS 119 472-2, ETSI TS 119 475, EUDI ARF v2.9.0 (Topic 44, Topic 52, Topic X) |
 
 ---
@@ -115,7 +115,7 @@ Topic X (revision round) describes the registration-side model:
 - Intermediated Relying Party registry data include `usesIntermediary`.
 - Intermediated RP WRPRCs contain the intermediary's RP identifier (RPRC_04).
 - During a transaction, the intermediary sends its WRPAC plus the intermediated RP's WRPRC and identifier in the request.
-- Evolution: with Relying Party Services, Service identifiers for both intermediary and intermediated RP may also be required.
+- Evolution: with Relying Party Services, Service identifiers for both intermediary and intermediated RP may also be required. Under TS5 v1.4, a Relying Party (WalletRelyingParty) registers one or more services (walletRelyingPartyService). Each service defines its own serviceIdentifier, serviceTradeName, intendedUse, and usesIntermediary array. Intermediation is bound at the service level: an Intermediated RP specifies which Intermediary service (WalletRelyingPartyService) it relies upon for a specific business flow. During a transaction, the Wallet evaluates both the RP identifier + serviceIdentifier from the Intermediary's WRPAC against the Intermediated RP's registrar_dataset / WRPRC.
 
 ---
 
@@ -385,11 +385,10 @@ When the intermediary interacts with the Wallet **for its own service** (RPI_01 
 | **RPI_01** | Intermediary registers as RP; obtains WRPAC; optional own WRPRC **not used** in intermediated transactions. |
 | **RPI_03** | Intermediary registers each intermediated RP; may hold intermediated RP WRPRCs. |
 | **RPI_05** | Intermediated RP instructs intermediary what to include in the request. |
-| **RPI_06** | Intermediary sends request with own WRPAC + intermediated RP data/WRPRC. |
-| **RPI_07** | Wallet detects intermediation via identity mismatch; displays both parties. |
-| **RPI_07a** | Wallet verifies intermediary–RP relationship (WRPRC or Registrar). |
+| **RPI_06** | Intermediary sends request with specific a WRPAC (may have more than one WRPAC for every intermediated Relying Parties Service, see Reg_34a ) and the related intermediated RP data/WRPRC. |
+| **RPI_07** | Wallet detects intermediation via identity mismatch; displays to users only intermediated RP info. |
 | **RPRC_04** | Intermediated RP WRPRC contains intermediary association. |
-| **RPRC_19 / 19a** | Registration data and WRPRC included in presentation request extension. |
+| **RPRC_19** | Registration data and WRPRC included in presentation request extension. The WRPRC is specific to the Service and intended use. |
 | **RPRC_20a** | OpenID4VP / ISO 18013-5 extension for RPRC_19a transport (`verifier_info`). |
 
 ---
@@ -399,7 +398,7 @@ When the intermediary interacts with the Wallet **for its own service** (RPI_01 
 | Item | Notes |
 |------|-------|
 | Proximity flow (`ISO 18013-5` `euWrpRegistrarInfo` / `euWrprc`) | Parallel extension model in ETSI TS 119 472-2 clause 5.3; not covered in this report. |
-| Topic X RR — Relying Party Service identifiers | May extend `registrar_dataset` with Service IDs for both intermediary and intermediated RP. |
+| Topic X RR — Relying Party Service identifiers | May extend `registrar_dataset` with Service IDs for both intermediary and intermediated RP.  See TS5 v1.4 alignment for WalletRelyingPartyService|
 | IA vs ETSI field alignment | Implementing Act drafts reference `tradeName`; ETSI TS 119 472-2 v1.2.1 uses `srvDescription` — align when IA is final. |
 | WEBUILD trust evaluation matrix | Intermediated flows may require additional matrix rows for dual-identity validation; see [Trusted List Registration Trust Evaluation Matrix](trusted-list-registration-trust-evaluation-matrix.md). |
 | Embedded disclosure policies (EDP_02, EDP_03) | When RP is intermediary, Wallet compares authorised identifiers / roots of trust against **intermediated** RP data from the request or WRPRC, not the intermediary WRPAC. |

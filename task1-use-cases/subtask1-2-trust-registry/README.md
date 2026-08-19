@@ -19,6 +19,7 @@ These use cases are aligned with the [EUDI Wallet Architecture and Reference Fra
 | **UC-TE-02** | [Wallet Unit evaluates Credential Issuer](wallet-unit-evaluates-credential-issuer.md) | Wallet Unit verifies PID/Attestation Provider before requesting PID or attestation |
 | **UC-TE-03** | [Credential Issuer evaluates Wallet Unit](credential-issuer-evaluates-wallet-unit.md) | PID/Attestation Provider verifies WIA and KA before issuing |
 | **UC-TE-04** | [Wallet Unit evaluates Relying Party](wallet-unit-evaluates-relying-party.md) | Wallet Unit verifies RP before presentation |
+| **UC-RPI-01** | [Relying Party Intermediary](relying-party-intermediary-use-case.md) | Intermediary presents on behalf of another RP; dual-identity wallet evaluation |
 | **UC-TE-05** | [Relying Party evaluates presented credentials](relying-party-evaluates-credentials.md) | RP validates PID and attestation signatures using Trusted Lists |
 | **UC-TE-06** | [Trusted List discovery and consumption](trusted-list-discovery-consumption.md) | Obtaining and using LoTL and Trusted Lists for validation |
 

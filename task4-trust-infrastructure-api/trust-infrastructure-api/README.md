@@ -8,7 +8,15 @@ This directory contains the implementation and detailed specification of the Tru
 
 ## Scope of the Trust Infrastructure API
 
-- **Trust management** – Establish, maintain, revoke and query trust relationships between participants and components.
-- **Trust evaluation** – Compute trust scores, assess trust levels and validate relationships based on the framework defined in Task 2 and data from Tasks 3 and 5.
-- **Trust policies** – Manage, enforce and check compliance against trust policies used in the ecosystem.
-- **Monitoring and reporting** – Expose trust status, alerts, history and reporting/analytics endpoints to other components and tooling.
+The Trust Infrastructure API exposes endpoints for:
+
+- **Trust management** — Publishing and querying Trusted List entries and trust anchors.
+- **Trust evaluation** — Validating access certificates and registration certificates against Trusted Lists.
+- **Trust policies** — Managing and querying trust policy configurations.
+- **Monitoring and reporting** — Observability for trust infrastructure operations.
+
+## Normative References
+
+- **EC TS02** — [Specification of systems enabling notification and publication of Provider information](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md) — Provider notification and publication flows (ARF Topic 31, **GenNot_01**)
+
+See also the [Task 4 overview](../README.md#normative-references) and [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md).
