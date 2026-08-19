@@ -51,15 +51,16 @@ sequenceDiagram
     IRP->>INT: Request attributes (RPI_05 metadata)
     INT->>W: OpenID4VP Request Object<br/>(INT WRPAC + IRP verifier_info)
     W->>W: Detect intermediation (RPI_07)<br/>Validate INT WRPAC + IRP WRPRC/registry
-    W->>U: Show INT and IRP names; request consent
+    W->>U: Show Intermediated RP names + ask user for consent
     U->>W: Approve or deny
     W->>INT: Authorization Response (response_uri)
-    INT->>IRP: Forward attributes (RPI_08/09); delete after use (RPI_10)
+    INT->>IRP: Forward attributes (RPI_08/09) 
+    INT->>INT: delete attributes after use (RPI_10)
 ```
 
 1. Intermediated RP instructs the intermediary (RPI_05).
 2. Intermediary builds and signs the OpenID4VP Request Object with its **WRPAC**; includes intermediated RP `registrar_dataset` and optional `registration_cert` in `verifier_info` (RPI_06, RPRC_19a).
-3. Wallet detects intermediation when WRPAC `organizationIdentifier` ≠ `registrar_dataset.identifier` (RPI_07).
+3. Wallet detects an intermediated presentation when WRPAC `organizationIdentifier` ≠ `registrar_dataset.identifier` (RPI_07).
 4. Wallet validates intermediary WRPAC (Access CA TL) and intermediated RP WRPRC/registry entitlements ([UC-TE-04](wallet-unit-evaluates-relying-party.md)).
 5. Wallet displays **both** trade names; User approves (RPA_07).
 6. If User opted to verify registration, Wallet checks intermediary–RP relationship via WRPRC `intermediary` field (RPRC_04) or Registrar API (RPI_07a).
@@ -67,7 +68,7 @@ sequenceDiagram
 
 **Postconditions (success)**
 
-- User saw both intermediary and intermediated RP before consent.
+- The wallet does not display the information of the intermediary and its Service to the User before asking for  consent. Only the information of the intermediated RP are shown. The intermediary name and service are logged by the Wallet Unit. 
 - Attributes disclosed only match intermediated RP registered entitlements (RPRC_21).
 - Intermediary deletes received credentials immediately after forwarding (RPI_10).
 
@@ -77,8 +78,8 @@ An entity registered as intermediary may also act **in its own capacity** (RPI_0
 
 ## Onboarding (summary)
 
-Detailed steps: [Relying Party Onboarding](../subtask1-1-onboarding/relying_party_onboarding.md).
-
+Both the Intermediary and the Intermediated RP are considered RP. The onboarding process shall follow the detailed steps in: [Relying Party Onboarding](../subtask1-1-onboarding/relying_party_onboarding.md).
+The following table highlight the on-boarding step differences between Intermediary and Intermediated RP
 | Step | Intermediary | Intermediated RP |
 | ---- | ------------ | ---------------- |
 | Register | As RP with `isIntermediary: true` (RPI_01, Reg_26) | At Registrar in establishment MS (RPI_03) |
@@ -93,17 +94,20 @@ Detailed steps: [Relying Party Onboarding](../subtask1-1-onboarding/relying_part
 | Check | Source | Applies to |
 | ----- | ------ | ---------- |
 | WRPAC chain + revocation | Access CA TL | Intermediary |
+| Intermediation Detection | WRPAC from intermediary differs from verifier_info | Both|
+| Request Object Signature | public key contained in x5c | Intermediary |
+| WRPAC chain + revocation | Access CA TL | Intermediary |
 | WRPRC signature + entitlements | WRPRC Provider TL / registry | Intermediated RP |
 | Requested attributes ⊆ registered | RPRC_21 | Intermediated RP |
-| Dual identity displayed | RPI_07 | Both |
-| Relationship registered | RPI_07a, RPRC_04 | Intermediary ↔ IRP |
+| Only Intermediated RP displayed | RPI_07 | Intermediated RP|
+| Relationship registered | 6.6.5 ARF | Intermediary ↔ Intermediated RP |
 | EDP (if present) | EDP_02/03 | Evaluate against **intermediated** RP id/root, not intermediary WRPAC |
 
 ## Success criteria
 
 - Intermediary authenticated via valid WRPAC.
 - Intermediated RP identity and entitlements verified (WRPRC or registry).
-- User informed of both parties before consent.
+- User informed only of Intermediated RP informations before consent.
 - Intermediated transaction does not expose intermediary WRPRC in `verifier_info`.
 
 ## ARF requirements (key)
@@ -115,11 +119,10 @@ Detailed steps: [Relying Party Onboarding](../subtask1-1-onboarding/relying_part
 | RPI_04 | Registrar verifies and records intermediary relationship |
 | RPI_05 | Intermediated RP supplies request metadata to intermediary |
 | RPI_06 | Intermediary sends request with own WRPAC + IRP data/WRPRC |
-| RPI_07 | Wallet detects and displays both identities |
-| RPI_07a | Wallet verifies registered relationship when User requests |
+| RPI_07 | Wallet detects and displays only intermediated RP identity |
+| Topic 52  | Wallet verifies registered relationship when User requests |
 | RPI_08–10 | Forwarding, verification, immediate deletion by intermediary |
 | RPRC_04 | Intermediated WRPRC contains intermediary association |
-| RPRC_19a | Registration data in presentation request extension |
 
 Full matrix: [Trusted List / Registration / Trust Evaluation Matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md) §7.
 
