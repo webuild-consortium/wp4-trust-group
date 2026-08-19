@@ -1,0 +1,9 @@
+{
+  "tl_url": "https://lote.credimi.io/lists/eu_credimi_wallet_trust_registry_infrastruc/latest/lote.jades",
+  "tl_url_json": "https://lote.credimi.io/lists/eu_credimi_wallet_trust_registry_infrastruc/latest/lote.json",
+  "trust_anchor": "-----BEGIN CERTIFICATE-----\nMIICgjCCAiigAwIBAgIUFF107a1pQGSiR9AJck/5vY9o1FcwCgYIKoZIzj0EAwIw\ngY8xCzAJBgNVBAYTAkVVMTUwMwYDVQQKDCxDcmVkaW1pIFdhbGxldCBUcnVzdCBS\nZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTFJMEcGA1UEAwxAQ3JlZGltaSBXYWxsZXQg\nVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUgVHJ1c3RlZCBMaXN0IFNpZ25l\ncjAeFw0yNjA4MDQxMzE5MjBaFw0yNzA4MDQxMzE5MjBaMIGPMQswCQYDVQQGEwJF\nVTE1MDMGA1UECgwsQ3JlZGltaSBXYWxsZXQgVHJ1c3QgUmVnaXN0cnkgSW5mcmFz\ndHJ1Y3R1cmUxSTBHBgNVBAMMQENyZWRpbWkgV2FsbGV0IFRydXN0IFJlZ2lzdHJ5\nIEluZnJhc3RydWN0dXJlIFRydXN0ZWQgTGlzdCBTaWduZXIwWTATBgcqhkjOPQIB\nBggqhkjOPQMBBwNCAAS0SEvENvGzAZCBPxEJl1JUyUKiaTLSvqOzwUh3wsqn4QaG\nbcpKLgm3dlQQ5yrz6Ucx6/JC9jZPYaK0YYryYcmxo2AwXjAfBgNVHSMEGDAWgBSa\nO5PZByTwUTmX9GrH+8nTuSTujDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB/wQEAwIH\ngDAdBgNVHQ4EFgQUmjuT2Qck8FE5l/Rqx/vJ07kk7owwCgYIKoZIzj0EAwIDSAAw\nRQIgMSfhr8YuOe/yO6DId7GvjWD5slc4yTrCap58yaoSuZoCIQCpYGejheCam5Ae\nTiIesaMFILSgOXRZ+R2fB536if5SaA==\n-----END CERTIFICATE-----\n",
+  "metadata": {
+    "operator_name": "Credimi Wallet Trust Registry Infrastructure",
+    "country": "EU"
+  }
+}
