@@ -59,3 +59,5 @@ Participants (Wallet Units, Relying Parties, PID Providers, Attestation Provider
 
 - **Terminology**: [Consolidated Terms and Entity Definitions](../terms-and-entities.md)
 - [Trust evaluation base](trust-evaluation-base.md), [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) (Section 3: Trusted List Publication), [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md), [Trusted list / trust evaluation matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md)
+- **Pilot LoTL**: [https://webuild-consortium.github.io/wp4-trust-group/](https://webuild-consortium.github.io/wp4-trust-group/) — see [LoTL automation](../../task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md)
+- **Testing**: [EUDI Trusted Lists Inspector](../../task7-testing-validation/README.md#eudi-trusted-lists-inspector)

@@ -25,9 +25,9 @@ Not every ecosystem participant is listed in a Trusted List (TL) or List of Trus
 | Wallet Provider | Yes | **This document** — WEBUILD - Wallet Providers |
 | Access Certificate Authority (WRPAC Provider) | Yes | **This document** — WEBUILD - Access Certificate Authorities |
 | Provider of Registration Certificates (WRPRC Provider) | Yes | **This document** — WEBUILD - Providers of Registration Certificates |
-| **Relying Party (RP)** | **No** — RPs are registered in a National Register, not in TLs/LoTEs | [Relying Party Onboarding](relying_party_onboarding.md) |
+| **Relying Party (RP)** | **No** — RPs are registered in a National Register, not in TLs/LoTEs | [Wallet Relying Party Registry Onboarding](relying-party-registry-onboarding.md) (pilot); [UC-01](relying_party_onboarding.md) (use case) |
 
-For the normative registration, notification, and TL publication model (MVP+), see the [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix). For RP registration use cases and certificate flows, see [Relying Party Onboarding](relying_party_onboarding.md). For WRPAC/WRPRC Authority onboarding procedures, see [WRPAC/WRPRC Authority Onboarding](wrpac-wrprc-authority-onboarding.md).
+For the normative registration, notification, and TL publication model (MVP+), see the [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix). For RP registration in the WE BUILD pilot, see [Wallet Relying Party Registry Onboarding](relying-party-registry-onboarding.md). For RP registration use cases and certificate flows, see [UC-01 Relying Party Onboarding](relying_party_onboarding.md). For WRPAC/WRPRC Authority onboarding procedures, see [WRPAC/WRPRC Authority Onboarding](wrpac-wrprc-authority-onboarding.md).
 
 ## Where to request onboarding
 
@@ -39,7 +39,9 @@ A step-by-step User Guide is available at:
 
 **[https://docs.dev.idunion.info/docs/user-guide/#onboarding-to-a-trusted-list](https://docs.dev.idunion.info/docs/user-guide/#onboarding-to-a-trusted-list)**
 
-A proposal of debug and testing tool for LoTL, TLs and LOTEs is also available at  [https://lote.credimi.io/](https://lote.credimi.io/). Click on onboarding and choose a TL family, then select the TL to be onboarded into. Onboarding is fully automatic (configurable in the Admin panel). The software is open source and Apache 2.0 licensed.
+A proposal of debug and testing tool for LoTL, TLs and LoTEs is also available at [https://lote.credimi.io/](https://lote.credimi.io/). Click **Onboarding**, choose a TL family, then select the TL to be onboarded into. Onboarding is fully automatic (configurable in the Admin panel). The software is open source and Apache 2.0 licensed.
+
+To **audit** published LoTL/TL/LoTE artefacts (signatures, schemas, certificate chains), use the [EUDI Trusted Lists Inspector](../../task7-testing-validation/README.md#eudi-trusted-lists-inspector).
 
 ## How onboarding works
 
@@ -64,7 +66,8 @@ To request any of these, contact the WP4 Trust Infrastructure group.
 
 ## Related documentation
 
-- [Base Onboarding Framework](../onboarding-base.md) — MVP/MVP+ definitions, Member State requirements, RACI matrix.
+- [Base Onboarding Framework](onboarding-base.md) — MVP/MVP+ definitions, Member State requirements, RACI matrix.
 - [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) — registration, notification, and Trusted List publication processes.
-- [Relying Party Onboarding](relying_party_onboarding.md) — RP registration (National Register; not TL/LoTE-listed).
-- [Trusted List discovery and consumption](../../subtask1-2-trust-registry/trusted-list-discovery-consumption.md) — how to obtain and use the LoTL and Trusted Lists for validation.
+- [Wallet Relying Party Registry Onboarding](relying-party-registry-onboarding.md) — RP registration in the WE BUILD pilot (Raidiam sandbox; not TL/LoTE-listed).
+- [Relying Party Onboarding (UC-01)](relying_party_onboarding.md) — RP registration use case (National Register; not TL/LoTE-listed).
+- [Trusted List discovery and consumption](../subtask1-2-trust-registry/trusted-list-discovery-consumption.md) — how to obtain and use the LoTL and Trusted Lists for validation.

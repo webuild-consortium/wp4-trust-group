@@ -4,7 +4,7 @@ This matrix extracts all requirements related to trusted lists, participant regi
 
 **Terminology (ARF v2.9.0):** Where validation/consumption of trust anchors is described (e.g. OIA_12, RPA_04), the ARF uses **LoTE** (List of Trusted Entities). Publication artifacts may still be referred to as Trusted Lists (TL) where aligned with ETSI TS 119 612 / eIDAS (e.g. QEAA Provider national trusted lists). **WUA** is an umbrella term covering **WIA** (Wallet Instance Attestation) and **KA** (Key Attestation); see ARF Topic 9 and [Technical Specification 3](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md) V1.5.
 
-> **Note on Reg_12–Reg_18:** In ARF v2.9.0 these HLRs are empty; access certificate policy requirements (including Certificate Transparency) are specified in **ETSI TS 119 411-8** and **ETSI EN 319 411-1**. See [Task 5 certificate profiles](../task5-participants-certificates-policies/).
+> **Note on Reg_12–Reg_18:** In ARF v2.9.0 these HLRs are empty; access certificate policy requirements (including Certificate Transparency) are specified in **ETSI TS 119 411-8** and **ETSI EN 319 411-1**. See [Task 5 certificate profiles](../task5-participants-policies/).
 
 ---
 

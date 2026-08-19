@@ -4,11 +4,11 @@ This document describes the content of ETSI TS 119 412-6 (Certificate profile re
 
 These certificates are used by various entities to sign the attestations they issue. For other entities to trust these signatures, a copy of the certificate MUST be available as a trust anchor in a trusted location. Depending on the entity type, this location will be either a LoTE or a TL (see [ARF § 3.5](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/architecture-and-reference-framework-main.md#35-trusted-list-or-lote-provider)).
 
-When validating the signature/seal of a PID, (Q)EAA, PuB-EAA, WIA, or KA, a Wallet Instance or Relying Party MUST verify the LoTE or TL corresponding to the issuing entity type and inspect the **serviceDigitalIdentity** component related to the entity to retrive the trust anchor certificate. This certificate MUST then be used as the trusted source for the public key required to validate the cryptographic signature or seal.
+When validating the signature/seal of a PID, (Q)EAA, PuB-EAA, WIA, or KA, a Wallet Instance or Relying Party MUST verify the LoTE or TL corresponding to the issuing entity type and inspect the **serviceDigitalIdentity** component related to the entity to retrieve the trust anchor certificate. This certificate MUST then be used as the trusted source for the public key required to validate the cryptographic signature or seal.
 
 ## Scope of TS 119 412-6
 
-ETSI TS 119 412-6 specifies requirements on **end-entity certificates used by providers** to sign their outputs. The basic certificate fields are described in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and further specialized by the [ETSI EN 319 412] series. The following table specifies the certificate type, its usage, where it can be retrived as a trust anchor, and and the normative reference detailing its profile.
+ETSI TS 119 412-6 specifies requirements on **end-entity certificates used by providers** to sign their outputs. The basic certificate fields are described in [RFC 5280](https://datatracker.ietf.org/doc/html/rfc5280) and further specialized by the [ETSI EN 319 412] series. The following table specifies the certificate type, its usage, where it can be retrieved as a trust anchor, and the normative reference detailing its profile.
 
 | Certificate type | Used for | Trust anchor location | Standard |
 |------------------|----------|------------------------|----------|
@@ -17,8 +17,8 @@ ETSI TS 119 412-6 specifies requirements on **end-entity certificates used by pr
 | EAA Provider Sign/seal certificate | signing EAA | MS decision | ETSI TS 119 412-6, clause 6 |
 | QEAA Provider Sign/seal certificate | signing QEAA | TL | ETSI TS 119 412-6, clause 7 |
 | Pub-EAA Provider Sign/seal certificate | signing  PuB-EAA | Pub-EAA Providers LoTE | ETSI TS 119 412-6, clause 8 |
-| **Access certificates** ([WRPAC](../task5-participants-certificates-policies/relying_party_access_certificate.md)) | Authenticating entities to the EUDI Wallet ecosystem | WRPAC Provider LoTE | [ETSI TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
-| **Registration certificates** ([WRPAC](../task5-participants-certificates-policies/relying_party_registration_certificate.md)) | Validating the authorization profile for entities in the EUDI Wallet ecosystem | WRPRC Provider LoTE | [ETSI TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
+| **Access certificates** ([WRPAC](../task5-participants-policies/relying_party_access_certificate.md)) | Authenticating entities to the EUDI Wallet ecosystem | WRPAC Provider LoTE | [ETSI TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
+| **Registration certificates** ([WRPRC](../task5-participants-policies/relying_party_registration_certificate.md)) | Validating the authorization profile for entities in the EUDI Wallet ecosystem | WRPRC Provider LoTE | [ETSI TS 119 475](../references/etsi/ETSI_TS_119_475.md) |
 
 **Note**: Signature/Seal certificates are different from Access and Registration certificates: while the former are used to sign/seal attestations, the latter are used to convey the identity of an entity (Access certificates) and its authorization profile (Registration certificate) within the ecosystem. ETSI TS 119 412-6 applies to sign/seal certificates only.
 
@@ -107,10 +107,10 @@ Extensions not listed in the table MUST NOT be present.
 
 | Entity | Sign/seal certificate (TS 119 412-6) | Access certificate (TS 119 411-8) |
 |--------|--------------------------------------|----------------------------------|
-| PID Provider | Clause 4 — QcType `id-etsi-qct-pid` | [WRPAC](../task5-participants-certificates-policies/pid_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
-| QEAA Provider | Clause 7 — qualified cert, QTSP issuer | [WRPAC](../task5-participants-certificates-policies/eaa_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
-| PuB-EAA Provider | Clause 8 — QcPSB qcStatement | [WRPAC](../task5-participants-certificates-policies/eaa_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
-| EAA Provider | Clause 6 — EN 319 412-2/3 | [WRPAC](../task5-participants-certificates-policies/eaa_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
+| PID Provider | Clause 4 — QcType `id-etsi-qct-pid` | [WRPAC](../task5-participants-policies/pid_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
+| QEAA Provider | Clause 7 — qualified cert, QTSP issuer | [WRPAC](../task5-participants-policies/eaa_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
+| PuB-EAA Provider | Clause 8 — QcPSB qcStatement | [WRPAC](../task5-participants-policies/eaa_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
+| EAA Provider | Clause 6 — EN 319 412-2/3 | [WRPAC](../task5-participants-policies/eaa_provider_access_certificate.md) per [TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md) |
 
 **PID Provider:** Certificate used to sign PID attribute attestations. It MUST be formatted as described in [PID Provider Sign/Seal Certificate](#pid-provider-signseal-certificate).
 
@@ -131,7 +131,7 @@ When OCSP/CRL is used for attestation revocation, the OCSP responder cert or CRL
 
 ### Relying Party Onboarding
 
-**Not covered by TS 119 412-6.** Relying parties use **access certificates** ([WRPAC](../task5-participants-certificates-policies/relying_party_access_certificate.md)) per [ETSI TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md), not the sign/seal profiles in TS 119 412-6. See also [Trust and Entitlement Discovery](../task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md) for WRPAC validation flow.
+**Not covered by TS 119 412-6.** Relying parties use **access certificates** ([WRPAC](../task5-participants-policies/relying_party_access_certificate.md)) per [ETSI TS 119 411-8](../references/etsi/ETSI_TS_119_411-8_V1.1.1.md), not the sign/seal profiles in TS 119 412-6. See also [Trust and Entitlement Discovery](../task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md) for WRPAC validation flow.
 
 ## OIDs (Annex A)
 

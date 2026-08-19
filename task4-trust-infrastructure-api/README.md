@@ -32,6 +32,8 @@ The APIs in this task align with the following European Commission technical spe
 - **EC TS06** — Common set of Relying Party information to be registered (minimum data set for participant registration; see ARF Topic 27, **Reg_01a**)
   - [Official document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md)
   - [ARF index](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md)
+- **EC TS11** — Interfaces and formats for catalogue of attributes and catalogue of attestation schemes (implemented by the [Credential Catalog Service](credential-catalog-service.md))
+  - [Official document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md)
 
 ### ETSI (upcoming)
 
@@ -41,4 +43,5 @@ The APIs in this task align with the following European Commission technical spe
 
 - [Onboarding use cases](../task1-use-cases/subtask1-1-onboarding/onboarding-base.md) — Participant registration flows that inform the Onboarding API
 - [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md) — Registry publication and API requirements (**Reg_03**, **Reg_06**)
+- [Credential Catalog Service](credential-catalog-service.md) — TS11 catalogue of attestation schemes at registry.siros.org
 - [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) — Legal basis for RP registration and registry APIs (Annex II)

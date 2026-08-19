@@ -54,3 +54,4 @@ Before requesting a **PID** or an **attestation (EAA)**, the Wallet Unit evaluat
 
 - **Terminology**: [Consolidated Terms and Entity Definitions](../terms-and-entities.md)
 - [Trust evaluation base](trust-evaluation-base.md), [Trust Infrastructure Schema §8](../../task2-trust-framework/trust-infrastructure-schema.md#8-trust-evaluation), [Trusted list / trust evaluation matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md)
+- [Credential Catalog Service](../../task4-trust-infrastructure-api/credential-catalog-service.md) — canonical attestation-type identifiers for entitlement checks (ISSU_24a, ISSU_34a)

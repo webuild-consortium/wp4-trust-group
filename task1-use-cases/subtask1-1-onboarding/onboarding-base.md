@@ -7,6 +7,7 @@ This document provides only the **common** framework: terminology, MVP/MVP+, and
 | Use case | Document |
 |----------|----------|
 | **MVP** TL/LoTE onboarding (operational) | [Onboarding to the Trusted Lists](trusted-lists-onboarding.md) — IDunion console; which roles are TL-listed vs RP National Register |
+| **MVP** RP registry onboarding (operational) | [Wallet Relying Party Registry Onboarding](relying-party-registry-onboarding.md) — Raidiam sandbox; WRPAC issuance and discovery API |
 | **UC-01** Relying Party | [Relying Party Onboarding](relying_party_onboarding.md) |
 | **UC-02** PID / Attestation Provider | [PID / Attestation Provider Onboarding](pid_eaa_provider_onboarding.md) |
 | **UC-03** Wallet Provider | [Wallet Provider Onboarding](wallet-provider-onboarding.md) |

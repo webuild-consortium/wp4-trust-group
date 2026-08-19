@@ -4,9 +4,7 @@ This subtask contains use cases for **trust registry operations** and **trust ev
 
 ## Scope
 
-- **Trust evaluation**: How Wallet Units, Relying Parties, PID Providers, Attestation Providers, and Holders (Users using the Wallet Unit) evaluate the trustworthiness of other participants — and how Holders assess their own Wallet Instance via Trust Marks (Regulation (EU) 2024/1183 Art. 5a(5), 5d) — using Trusted Lists (TL), List of Trusted Lists (LoTL), Registrar registries, and Trust Marks.
-
-For terminology and entity definitions, see [Consolidated Terms and Entity Definitions](../terms-and-entities.md).
+- **Trust evaluation**: How Wallet Units, Relying Parties, PID Providers, Attestation Providers, and Holders (Users using the Wallet Unit) evaluate the trustworthiness of other participants — and how Holders assess their own Wallet Instance via Trust Marks (Regulation (EU) 2024/1183 Art. 5a(5), 5d) — using Trusted Lists (TL), List of Trusted Lists (LoTL), Registrar registries, and Trust Marks. Terminology: [Consolidated Terms and Entity Definitions](../terms-and-entities.md).
 - **Trust sources**: Access CA Trusted Lists, PID Provider TL, Attestation Provider TL (QEAA/PuB-EAA/EAA), Wallet Provider TL, Registration Certificate Provider TL, and National Registers (per [Trust Infrastructure Schema - Trust Evaluation](../../task2-trust-framework/trust-infrastructure-schema.md#8-trust-evaluation)).
 
 These use cases are aligned with the [EUDI Wallet Architecture and Reference Framework (ARF)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.9.0/architecture-and-reference-framework-main/) and the [Trusted List / Registration / Trust Evaluation requirements matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md).
@@ -25,7 +23,8 @@ These use cases are aligned with the [EUDI Wallet Architecture and Reference Fra
 
 ## Relationship to Other Tasks
 
-- **Task 2** – [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) (Section 8: Trust Evaluation), [Entities Involved](../../task2-trust-framework/entities-involved.md), [Requirements matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md)
+- **Task 2** – [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) (Section 8: Trust Evaluation), [Entities Involved](../../task2-trust-framework/entities-involved.md), [Requirements matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md), [RP Intermediary OpenID4VP report](../../task2-trust-framework/rp-intermediary-openid4vp-technical-report.md)
 - **Task 3** – [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for TL format and validation
-- **Task 4** – Trust infrastructure APIs for registry and TL access
+- **Task 4** – Trust infrastructure APIs for registry and TL access; [Credential Catalog Service](../../task4-trust-infrastructure-api/credential-catalog-service.md) for attestation-type discovery
 - **Task 5** – Certificate and policy evaluation (e.g. ETSI policy evaluation)
+- **Task 7** – [EUDI Trusted Lists Inspector](../../task7-testing-validation/README.md#eudi-trusted-lists-inspector) for auditing LoTL, LoTE, and Trusted Lists

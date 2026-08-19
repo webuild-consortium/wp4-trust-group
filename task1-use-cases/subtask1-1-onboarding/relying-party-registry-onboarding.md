@@ -50,4 +50,5 @@ Registered relying parties are published through the public `GET /wrp` Discovery
 - [Base Onboarding Framework](onboarding-base.md) — MVP/MVP+ definitions, Member State requirements, terminology.
 - [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) — registration, notification, and Trusted List publication processes.
 - [Trusted List discovery and consumption](../subtask1-2-trust-registry/trusted-list-discovery-consumption.md) — how to obtain and use the LoTL and Trusted Lists for validation.
+- [Onboarding to the Trusted Lists](trusted-lists-onboarding.md) — TL/LoTE onboarding for Wallet Providers, PID/EAA Providers, and certificate authorities (not RPs).
 - [Onboarding API](../../task4-trust-infrastructure-api/onboarding-api/README.md) — the common REST API for registry information.
