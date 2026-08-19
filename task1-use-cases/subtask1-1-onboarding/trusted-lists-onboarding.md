@@ -39,6 +39,8 @@ A step-by-step User Guide is available at:
 
 **[https://docs.dev.idunion.info/docs/user-guide/#onboarding-to-a-trusted-list](https://docs.dev.idunion.info/docs/user-guide/#onboarding-to-a-trusted-list)**
 
+A proposal of debug and testing tool for LoTL, TLs and LOTEs is also available at  [https://lote.credimi.io/](https://lote.credimi.io/). Click on onboarding and choose a TL family, then select the TL to be onboarded into. Onboarding is fully automatic (configurable in the Admin panel). The software is open source and Apache 2.0 licensed.
+
 ## How onboarding works
 
 There are two ways to onboard to a Trusted List:
