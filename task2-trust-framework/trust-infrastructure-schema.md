@@ -339,7 +339,7 @@ sequenceDiagram
 
     AccessCA->>Entity: 5. Issue Access Certificate<br/>(Reg_10, Reg_10a, Reg_11, ETSI TS 119 411-8)
 
-    Registrar->>RegCertProv: 6. Request Registration Certificate<br/>(RPRC_09 RP: per intended use × Service;<br/>RPRC_13 Providers: per Service)
+    Registrar->>RegCertProv: 6. Request Registration Certificate<br/>(RPRC_09 RP per intended use x Service<br/>RPRC_13 Providers per Service)
     Note right of RegCertProv: Automated issuance<br/>Reg_10c, RPRC_09, RPRC_13
 
     RegCertProv->>Entity: 7. Issue Registration Certificate
