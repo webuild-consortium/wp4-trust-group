@@ -51,6 +51,6 @@ Covers:
 ### Trust Infrastructure
 - [trust-infrastructure-schema.md](trust-infrastructure-schema.md) – Registration, notification, Trusted List publication
 
-### ARF v2.9.0
-- [Section 5.5 - Catalogue of attributes and catalogue of attestation schemes](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes)
-- [Annex 2.02 - High-Level Requirements by Topic](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/)
+### ARF v3.0.0
+- [Section 5.5 - Catalogue of attributes and catalogue of attestation schemes](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes)
+- [Annex 2.02 - High-Level Requirements by Topic](https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/)

@@ -15,7 +15,7 @@ The WP4 Trust Infrastructure includes a **Credential Catalog** that serves as th
 
 ## Role in the WP4 Trust Infrastructure
 
-The Credential Catalog implements the **Catalogue of Attestation Schemes** concept from the ARF (Architecture and Reference Framework) v2.9.0 Section 5.5 and [Technical Specification 11 (TS11)](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md). It provides:
+The Credential Catalog implements the **Catalogue of Attestation Schemes** concept from the ARF (Architecture and Reference Framework) v3.0.0 Section 5.5 and [Technical Specification 11 (TS11)](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md). It provides:
 
 1. **Discovery** — Relying Parties, Wallet Units, and Attestation Providers can discover which credential types exist in the weBuild ecosystem
 2. **Interoperability** — Machine-readable metadata (schema, claims, formats) enabling technical and semantic interoperability across participants
@@ -194,7 +194,7 @@ registry-cli validate --sources sources.yaml
 
 ## References
 
-- [ARF v2.9.0 Section 5.5 — Catalogue of attributes and catalogue of attestation schemes](https://eudi.dev/2.9.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes)
+- [ARF v3.0.0 Section 5.5 — Catalogue of attributes and catalogue of attestation schemes](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes)
 - [Technical Specification 11 — Interfaces and formats for catalogue of attributes and catalogue of schemes](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md)
 - [Credential Catalogue (WP4)](../task2-trust-framework/credential-catalogue.md) — Background on EUDI catalogues
 - [LoTL automation and TL integration](lotl-automation-and-tl-integration.md) — Companion trust infrastructure service

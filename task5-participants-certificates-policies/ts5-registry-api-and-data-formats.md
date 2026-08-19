@@ -1,6 +1,6 @@
 # TS5: Common Formats and API for Relying Party Registration Information
 
-This note summarises **Technical Specification 5 (TS5)** from the European Commission’s EUDI Wallet standards package: the **machine-readable data model** and **Registrar REST API** for **wallet-relying party** registration. It aligns national registry publication with **ARF** requirements (e.g. registry transparency, **Reg_06**, **Topic 27**) and the **CIR (EU) 2025/848** rules on registers.
+This note summarises **Technical Specification 5 (TS5)** from the European Commission’s EUDI Wallet standards package: the **machine-readable data model** and **Registrar REST API** for **wallet-relying party** registration. It aligns national registry publication with **ARF v3.0.0** requirements (e.g. registry transparency, **Reg_03**, **Reg_06**, **Topic 27**, Relying Party **Services**) and **CIR (EU) 2025/848** as amended by **CIR (EU) 2026/1730**.
 
 ## Normative references
 
@@ -11,11 +11,12 @@ This note summarises **Technical Specification 5 (TS5)** from the European Commi
 | [TS5 – OpenAPI 3.1](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/api/ts5-openapi31-registrar-api.yml) | Normative HTTP operations and **JWS** response wrapper |
 | [TS6 – Common set of RP information to be registered](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md) | Minimum registration dataset (CIR Annex I alignment) |
 | [CIR (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32025R0848) | Implementing act on wallet-relying party registration |
+| [CIR (EU) 2026/1730](https://eur-lex.europa.eu/eli/reg_impl/2026/1730/oj) | Amends 2025/848: Services, intermediary–RP association, automated WRPRC issuance |
 
 ## Purpose in the trust architecture
 
 - **Member State Registrars** publish Attestation Providers and **Relying Parties** in a national registry.
-- **Wallet units** use the Registrar’s online service (among other sources) to verify registration and **intended uses** (e.g. attributes requested, purposes, policies), especially when **registration certificates** are not used or are insufficient.
+- **Wallet units** use the Registrar’s online service for **publication and transparency** (**Reg_03**, **Reg_06**), and for PID/attestation issuer checks when a registration certificate is not in metadata (**ISSU_24a**, **ISSU_34a**). For **presentation**, ARF v3.0.0 requires the WRPRC **in the request** (**RPRC_19**); the registry is **not** a substitute for a missing RP WRPRC.
 - **Relying parties** are **not** published on EU/Member State **Trusted Lists** in the same way as QTSPs; **TS5** is the primary **interoperable machine interface** for RP registration data, alongside sealed human-readable publication.
 
 TS5 requires:
@@ -55,7 +56,7 @@ The root type combines **Provider** + **LegalEntity** (via `allOf`) with WRP-spe
 Notable WRP-specific attributes:
 
 - **`entitlements`**: array of entitlement URIs (ETSI / CIR roles, e.g. `Service_Provider`, attestation-provider entitlements).
-- **`intendedUse`**: zero or more **IntendedUse** objects (service providers declare purposes, policies, and requestable attestations; intermediaries may have none).
+- **`intendedUse`**: zero or more **IntendedUse** objects (service providers declare purposes, policies, and requestable attestations; intermediaries may have none). Under TS5 v1.4 these sit on **`walletRelyingPartyService`** objects (`serviceIdentifier`, `serviceTradeName`, `usesIntermediary`) so intermediation is bound at **Service** level (**Reg_10a**, **Reg_10d**, **Reg_34a**).
 - **`supportURI`**: **array** of strings (contact / support; data-deletion-related URI strongly recommended per TS5).
 - **`srvDescription`**: array of **arrays** of `MultiLangString` (localised service descriptions).
 - **`supervisoryAuthority`**: DPA contact (name, country, email / phone / form URI — at least one contact path expected in practice).
@@ -181,8 +182,8 @@ The following remarks apply to the **pilot** implementation of the TS5 registry 
 
 ### Certificates
 
-- **Certificate granularity** — One WRPRC per intended use, plus one issuer certificate for provided attestations owned by the WRP.
-- **Retrieval is registry-defined** — How WRPRC issuance and retrieval is handled is up to the registry; there may be no certificate history, and only one certificate may be active per intended use.
+- **Certificate granularity** — ARF v3.0.0 **RPRC_09**: one WRPRC per **intended use × Service**, issued automatically. The pilot registry may still expose a simpler “one active certificate per intended use” view.
+- **Retrieval is registry-defined** — How WRPRC retrieval from the registry is handled is up to the registry (publication). Presentation still includes the WRPRC **by value** in the request (**RPRC_19**).
 
 ### API behaviour and TS5 gaps
 

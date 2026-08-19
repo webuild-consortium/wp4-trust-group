@@ -16,7 +16,7 @@ After receiving **PID** and/or **attestations (EAA)** from a Wallet Unit (proxim
 
 ## Preconditions
 
-- Holder, after reviewing the identity of the RP (RPA_05), the intended use and any privacy policies, if available, as shown by the Wallet Unit — and, when opted in, after verifying that all attributes requested in the presentation request are included in the list of attributes registered by the Registrar (RPRC_21) — approved the presentation (RPA_10).
+- Holder, after reviewing the identity of the RP and Service (RPA_06 / RPI_07) and the intended use and any privacy policies, if available, as shown by the Wallet Unit — and after the Wallet verified that all attributes requested are in the WRPRC included in the same request (RPRC_21) — approved the presentation (RPA_10).
 - Relying Party has (or can obtain) the LoTEs/TLs needed for the credential types it accepts: PID Provider LoTE; QEAA Provider Trusted List (Member State QTSP TL per Art. 22); PuB-EAA Provider LoTE; for non-qualified EAA, mechanism per applicable Rulebook (Topic 12).
 - Presented credentials (PID, QEAA, PuB-EAA, or non-qualified EAA) are available for signature verification.
 

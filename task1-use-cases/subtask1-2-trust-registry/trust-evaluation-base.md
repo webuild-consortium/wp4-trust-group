@@ -17,7 +17,7 @@ See [Consolidated Terms and Entity Definitions](../terms-and-entities.md) for al
 | **Wallet Provider LoTE** | Trust anchors for WIAs and KAs | PID Provider, Attestation Provider | ISSU_19, ISSU_21, ISSU_28, ISSU_30, ISSU_30a |
 | **Access CA LoTE** | Trust anchors for access certificates | Wallet Unit | ISSU_23, ISSU_24, ISSU_33, ISSU_34, RPA_04 |
 | **Registration Certificate Provider LoTE** | Trust anchors for registration certificates | Wallet Unit | ISSU_33a, RPRC_17 |
-| **National Register / Registrar API** | Registered attributes, intended use, attestation types; suspension/cancellation (Reg_09) | Wallet Unit, (optional) User | ISSU_24a, ISSU_34a, RPRC_16–21, Reg_06 |
+| **National Register / Registrar API** | Registered attributes, intended use, attestation types, Services; suspension/cancellation (Reg_09) | Wallet Unit (PID/attestation issuer checks; publication) | ISSU_24a, ISSU_34a, Reg_06 |
 | **Revocation information (certificates)** | CRL, OCSP or other means per ETSI TS 119 411-8 / ETSI TS 119 475 | Wallet Unit, Relying Party, Providers | CT_05, ETSI TS 119 411-8, RPRC_02 (TS) |
 | **Revocation information (Wallet Instance / WSCD)** | WIA revocation status (Wallet Instance); KA revocation status (WSCD/keystore) per Topic 38 | Credential Issuer | ISSU_21, ISSU_30, ISSU_30a, Topic 38 |
 | **Trust Mark (EUDI Wallet)** | Verifiable, simple, recognisable indication of wallet authenticity and validity; displayed by Wallet Instance for Holder assessment | Holder | Regulation (EU) 2024/1183 Art. 3(50), 5a(5), 5a(8), 5d |
@@ -40,13 +40,13 @@ Holder evaluates: and is informed about the validity status of their Wallet Unit
    Provider evaluates: WIA and KA (via Wallet Provider LoTE); **Wallet Instance not revoked** (WIA, Topic 38); **WSCD/keystore not revoked** (KA, Topic 38); **Wallet Provider entity status in LoTE not Invalid** (GenNot_05).
 
 2. **Before presentation (Relying Party → Wallet Unit)**  
-   Wallet Unit evaluates: Relying Party Access Certificate (via Access CA LoTE), **access certificate not revoked and SCT valid** (CT_05, ETSI TS 119 411-8), **registration certificate not revoked** where used (ETSI TS 119 475), RP registration and requested attributes (Registry / registration certificate); **RP not suspended/cancelled** (registry/Reg_09).
+   Wallet Unit evaluates: Relying Party Access Certificate (via Access CA LoTE), **access certificate not revoked and SCT valid** (CT_05, ETSI TS 119 411-8), **WRPRC in the request** (RPRC_17, RPRC_17a, RPRC_19), **registration certificate not revoked** (ETSI TS 119 475), requested attributes in that WRPRC (RPRC_21); **RP not suspended/cancelled** (registry/Reg_09). For an intermediary, display the intermediated RP only (RPI_07).
 
 3. **After presentation (Relying Party)**  
    Relying Party evaluates: PID signature (PID Provider TL), attestation signatures (QEAA/PuB-EAA/EAA TLs); **issuer entity status in TL not Invalid** (GenNot_05); **credential/attestation revocation** where required by technical specifications (e.g. PID/EAA revocation mechanisms).
 
 ## Normative References
 
-- **ARF**: [EUDI Wallet Architecture and Reference Framework 2.9.0](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.9.0/architecture-and-reference-framework-main/), Annex II High-Level Requirements
+- **ARF**: [EUDI Wallet Architecture and Reference Framework 3.0.0](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/), Annex II High-Level Requirements
 - **Regulation**: [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1183) (European Digital Identity Regulation), Articles 3(50), 5a(5), 5a(8), 5d (Trust Marks for EUDI Wallets)
 - **Project**: [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md), [Entities Involved](../../task2-trust-framework/entities-involved.md), [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)

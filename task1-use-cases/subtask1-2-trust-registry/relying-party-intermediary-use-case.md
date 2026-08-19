@@ -4,23 +4,23 @@
 
 An **Intermediary** is a Relying Party that requests attribute presentation from a Wallet Unit **on behalf of** another registered Relying Party (the **intermediated RP**). Typical examples: identity/interop gateways, sector platforms, or SaaS verifiers that serve multiple service providers.
 
-This use case covers registration, intermediated remote presentation (OpenID4VP), and wallet-side trust evaluation. Protocol details and JSON examples: [RPI OpenID4VP technical report](../../task2-trust-framework/rp-intermediary-openid4vp-technical-report.md).
+This use case covers registration, intermediated remote presentation (OpenID4VP), and wallet-side trust evaluation under **ARF v3.0.0**. Protocol details and JSON examples: [RPI OpenID4VP technical report](../../task2-trust-framework/rp-intermediary-openid4vp-technical-report.md).
 
 ## Actors
 
 | Actor | Role |
 | ----- | ---- |
-| **Intermediary** | Registers as RP with `isIntermediary`; holds **WRPAC**; sends presentation requests |
-| **Intermediated RP** | Registered at a Registrar; may hold **WRPRC** per intended use; instructs intermediary what to request |
-| **Registrar** | Registers both parties; records `usesIntermediary` relationship (RPI_04) |
-| **Access CA / WRPRC Provider** | Issues WRPAC to intermediary; WRPRC to intermediated RP |
-| **Wallet Unit** | Authenticates intermediary; displays both identities; evaluates intermediated RP entitlements |
+| **Intermediary** | Registers as RP indicating it acts as intermediary (**RPI_01**); holds a **separate WRPAC set per intermediated RP** (**Reg_34a**); sends presentation requests |
+| **Intermediated RP** | Registered at a Registrar; receives WRPRCs automatically per intended use × Service (**RPRC_09**); indicates which single WRPRC to include (**RPI_05**) |
+| **Registrar** | Registers both parties; records the intermediary–RP relationship (**RPI_04**) |
+| **Access CA / WRPRC Provider** | Issues WRPACs to the intermediary (bound to the intermediated RP/Service); issues WRPRCs to the intermediated RP |
+| **Wallet Unit** | Authenticates the intermediary WRPAC; verifies the WRPRC in the request; **SHALL NOT** display intermediary trade names (**RPI_07**) |
 | **Holder (User)** | Approves or denies presentation |
 
 ## Goal
 
-- **Business**: Allow service providers to use a trusted third-party verifier without each holding a direct wallet connection, while keeping the User informed of **both** the technical caller and the service consuming the data.
-- **Technical**: Intermediary authenticates with its WRPAC; intermediated RP identity and authorisation travel in `verifier_info`; wallet validates both per ARF Topic 52.
+- **Business**: Allow service providers to use a trusted third-party verifier without each holding a direct wallet connection, while showing the User the **intermediated RP** (the service consuming the data), not the intermediary.
+- **Technical**: Intermediary authenticates with the WRPAC associated to this RP (**Reg_34a**); the intermediated RP’s identity, Service, intended use, and entitlements travel in the **WRPRC** (**RPRC_19**); the Wallet validates both per ARF Topic 52 and Topic 44.
 
 ## Scenarios
 
@@ -35,9 +35,9 @@ This use case covers registration, intermediated remote presentation (OpenID4VP)
 
 **Preconditions**
 
-- Intermediary registered with `isIntermediary: true` and valid **WRPAC**.
-- Intermediated RP registered; intended use and optional **WRPRC** issued; `usesIntermediary` points to the intermediary (RPI_04).
-- Intermediated RP provided the intermediary with: trade name, identifier, Registrar URL, intended-use id, attribute list, optional WRPRC reference (RPI_05).
+- Intermediary registered indicating it acts as intermediary, with a valid **WRPAC** associated to this intermediated RP and Service (**Reg_34a**).
+- Intermediated RP registered; intended uses mapped to Services (**Reg_10d**); **WRPRC issued automatically** per intended use × Service (**RPRC_09**); relationship recorded (**RPI_04**).
+- Intermediated RP indicated **which single WRPRC** the intermediary must include (**RPI_05**).
 
 **Main flow**
 
@@ -48,90 +48,91 @@ sequenceDiagram
     participant W as Wallet Unit
     participant U as User
 
-    IRP->>INT: Request attributes (RPI_05 metadata)
-    INT->>W: OpenID4VP Request Object<br/>(INT WRPAC + IRP verifier_info)
-    W->>W: Detect intermediation (RPI_07)<br/>Validate INT WRPAC + IRP WRPRC/registry
-    W->>U: Show Intermediated RP names + ask user for consent
+    IRP->>INT: Which WRPRC to include (RPI_05)
+    INT->>W: OpenID4VP Request Object<br/>(INT WRPAC per Reg_34a + IRP WRPRC)
+    W->>W: Validate INT WRPAC (RPA_04)<br/>Validate IRP WRPRC (RPRC_17, RPRC_17a, RPRC_21)
+    W->>U: Show intermediated RP and Service only (RPI_07)
     U->>W: Approve or deny
     W->>INT: Authorization Response (response_uri)
-    INT->>IRP: Forward attributes (RPI_08/09) 
-    INT->>INT: delete attributes after use (RPI_10)
+    INT->>IRP: Forward attributes (RPI_08/09)
+    INT->>INT: Delete attributes after use (RPI_10)
 ```
 
-1. Intermediated RP instructs the intermediary (RPI_05).
-2. Intermediary builds and signs the OpenID4VP Request Object with its **WRPAC**; includes intermediated RP `registrar_dataset` and optional `registration_cert` in `verifier_info` (RPI_06, RPRC_19a).
-3. Wallet detects an intermediated presentation when WRPAC `organizationIdentifier` ≠ `registrar_dataset.identifier` (RPI_07).
-4. Wallet validates intermediary WRPAC (Access CA TL) and intermediated RP WRPRC/registry entitlements ([UC-TE-04](wallet-unit-evaluates-relying-party.md)).
-5. Wallet displays **both** trade names; User approves (RPA_07).
-6. If User opted to verify registration, Wallet checks intermediary–RP relationship via WRPRC `intermediary` field (RPRC_04) or Registrar API (RPI_07a).
-7. Wallet sends response to intermediary `response_uri`; intermediary forwards to intermediated RP.
+1. Intermediated RP instructs the intermediary which WRPRC to include (**RPI_05**).
+2. Intermediary builds and signs the OpenID4VP Request Object with the **applicable WRPAC** (**Reg_34a**) and includes the intermediated RP **WRPRC by value** (**RPI_06**, **RPRC_19**).
+3. Wallet detects intermediation when the WRPAC subject is the intermediary and the WRPRC identifies a different entity that uses this intermediary (**RPRC_17a**).
+4. Wallet validates the intermediary WRPAC (Access CA TL) and the WRPRC in the request ([UC-TE-04](wallet-unit-evaluates-relying-party.md)).
+5. Wallet **SHALL NOT** display the intermediary or intermediary-Service trade names (**RPI_07** / **RPA_06** note b). It displays the **intermediated RP** and its Service; User approves (**RPA_07**).
+6. There is no user-opt-in Registrar lookup (**RPI_07a**, **RPRC_16**, **RPRC_18** are empty in ARF v3.0.0). Binding is in the WRPRC (**RPRC_04**, **RPRC_17a**).
+7. Wallet sends the response to the intermediary `response_uri`; intermediary forwards to the intermediated RP after agreed verifications (**RPI_08**, **RPI_09**) and deletes received credentials immediately (**RPI_10**).
 
 **Postconditions (success)**
 
-- The wallet does not display the information of the intermediary and its Service to the User before asking for  consent. Only the information of the intermediated RP are shown. The intermediary name and service are logged by the Wallet Unit. 
-- Attributes disclosed only match intermediated RP registered entitlements (RPRC_21).
-- Intermediary deletes received credentials immediately after forwarding (RPI_10).
+- The Wallet displays only the intermediated RP (and its Service) before consent. Intermediary name and Service MAY be logged by the Wallet Unit.
+- Attributes disclosed match the intermediated RP registered entitlements in the WRPRC in the same request (**RPRC_21**).
+- Intermediary deletes received credentials immediately after forwarding (**RPI_10**).
 
 ### S2 — Intermediary as direct Relying Party
 
-An entity registered as intermediary may also act **in its own capacity** (RPI_01 note c): WRPAC and `verifier_info` refer to the **same** party. Flow matches [UC-TE-04](wallet-unit-evaluates-relying-party.md) without dual-identity handling.
+An entity registered as intermediary may also act **in its own capacity** (**RPI_01** note c): WRPAC and WRPRC refer to the **same** party. Flow matches [UC-TE-04](wallet-unit-evaluates-relying-party.md).
 
 ## Onboarding (summary)
 
-Both the Intermediary and the Intermediated RP are considered RP. The onboarding process shall follow the detailed steps in: [Relying Party Onboarding](../subtask1-1-onboarding/relying_party_onboarding.md).
-
-The following table highlights the onboarding step differences between Intermediary and Intermediated RP.
+Both the Intermediary and the Intermediated RP are Relying Parties. Follow [Relying Party Onboarding](../subtask1-1-onboarding/relying_party_onboarding.md).
 
 | Step | Intermediary | Intermediated RP |
 | ---- | ------------ | ---------------- |
-| Register | As RP with `isIntermediary: true` (RPI_01, Reg_26) | At Registrar in establishment MS (RPI_03) |
-| Relationship | — | Provide evidence of intermediary use; Registrar sets `usesIntermediary` (RPI_04) |
-| Certificates | **WRPAC** (mandatory); own WRPRC only for direct use (S2) | **WRPRC** per intended use; includes `intermediary` association (RPRC_04) |
-| Registry API | May register intended uses on behalf of WRP ([TS5 notes](../../task5-participants-certificates-policies/ts5-registry-api-and-data-formats.md)) | — |
+| Register | As RP indicating intermediary role (**RPI_01**); register **Services** (**Reg_10a**) | At Registrar in establishment MS (**RPI_03**); register Services and intended uses (**Reg_10d**) |
+| Relationship | Receives a separate WRPAC set per intermediated RP (**Reg_34a**) | Provide evidence of intermediary use; Registrar records it (**RPI_04**) |
+| Certificates | **WRPAC** per Service / intermediated RP (**Reg_34a**). Own WRPRC only for direct use (S2) | **WRPRC** issued automatically per intended use × Service (**RPRC_09**); includes intermediary association (**RPRC_04**) |
+| Registry API | May register intended uses on behalf of the WRP ([TS5 notes](../../task5-participants-certificates-policies/ts5-registry-api-and-data-formats.md)) | Publication (**Reg_03**, **Reg_06**); not a presentation-time substitute for the WRPRC |
 
-**Note:** Intermediated RPs do **not** need a WRPAC (ARF §6.6.5).
+**Note:** In an intermediated transaction the intermediated RP does **not present** a WRPAC and therefore does **not need one for that role** (ARF §6.6.5). If that RP also registers Services that talk to Wallet Units directly, **Reg_10a** still applies.
 
 ## Wallet evaluation checklist
 
 | Check | Source | Applies to |
 | ----- | ------ | ---------- |
-| WRPAC chain + revocation | Access CA TL | Intermediary |
-| Intermediation Detection | WRPAC from intermediary differs from verifier_info | Both|
-| Request Object Signature | public key contained in x5c | Intermediary |
-| WRPAC chain + revocation | Access CA TL | Intermediary |
-| WRPRC signature + entitlements | WRPRC Provider TL / registry | Intermediated RP |
-| Requested attributes ⊆ registered | RPRC_21 | Intermediated RP |
-| Only Intermediated RP displayed | RPI_07 | Intermediated RP|
-| Relationship registered | 6.6.5 ARF | Intermediary ↔ Intermediated RP |
+| WRPAC chain + revocation | Access CA TL (**RPA_04**) | Intermediary |
+| Request Object signature | Public key in `x5c` | Intermediary |
+| WRPAC bound to this RP/Service | **Reg_34a** | Intermediary ↔ Intermediated RP |
+| WRPRC in the request (by value) | **RPRC_19** | Intermediated RP |
+| WRPRC authenticity, validity, revocation | WRPRC Provider TL (**RPRC_17**) | Intermediated RP |
+| WRPRC identifier/Service match, or uses this intermediary | **RPRC_17a**, **RPRC_04** | Both |
+| Requested attributes ⊆ WRPRC | **RPRC_21** | Intermediated RP |
+| Only intermediated RP displayed | **RPI_07** | User approval |
 | EDP (if present) | EDP_02/03 | Evaluate against **intermediated** RP id/root, not intermediary WRPAC |
 
 ## Success criteria
 
-- Intermediary authenticated via valid WRPAC.
-- Intermediated RP identity and entitlements verified (WRPRC or registry).
-- User informed only of Intermediated RP informations before consent.
-- Intermediated transaction does not expose intermediary WRPRC in `verifier_info`.
+- Intermediary authenticated via a valid WRPAC associated to this intermediated RP (**Reg_34a**).
+- Intermediated RP identity and entitlements verified from the **WRPRC in the request** (**RPRC_17**, **RPRC_19**, **RPRC_21**).
+- User is shown only the intermediated RP (and its Service) before consent (**RPI_07**).
+- Intermediated transaction does not expose the intermediary’s own WRPRC in `verifier_info`.
 
 ## ARF requirements (key)
 
 | ID | Summary |
 | -- | ------- |
-| RPI_01 | Intermediary registers as RP; obtains WRPAC |
-| RPI_03 | Intermediary registers each intermediated RP |
-| RPI_04 | Registrar verifies and records intermediary relationship |
-| RPI_05 | Intermediated RP supplies request metadata to intermediary |
-| RPI_06 | Intermediary sends request with own WRPAC + IRP data/WRPRC |
-| RPI_07 | Wallet detects and displays only intermediated RP identity |
-| Topic 52  | Wallet verifies registered relationship when User requests |
-| RPI_08–10 | Forwarding, verification, immediate deletion by intermediary |
-| RPRC_04 | Intermediated WRPRC contains intermediary association |
+| RPI_01 | Intermediary registers as RP; obtains WRPAC (and Service identifiers) |
+| RPI_03 | Intermediary registers each intermediated RP and receives that RP’s WRPRCs (**RPRC_09**) |
+| RPI_04 | Registrar verifies and records the intermediary relationship |
+| RPI_05 | Intermediated RP indicates which single WRPRC to include |
+| RPI_06 | Intermediary sends request with applicable WRPAC (**Reg_34a**) and that WRPRC |
+| RPI_07 | Wallet SHALL NOT display intermediary / intermediary-Service trade names |
+| RPI_07a | Empty in ARF v3.0.0 |
+| RPI_08–10 | Forward only to that RP; verify if agreed; delete immediately |
+| RPRC_04 | Intermediated WRPRC contains intermediary unique identifier and Service identifier |
+| RPRC_09 | WRPRC issued automatically per intended use × Service |
+| RPRC_19 | Single WRPRC included in the presentation request by value |
+| RPRC_16 / RPRC_18 / RPRC_19a | Empty in ARF v3.0.0 |
 
-Full matrix: [Trusted List / Registration / Trust Evaluation Matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md) §7.
+Full matrix: [Trusted List / Registration / Trust Evaluation Matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md).
 
 ## Out of scope (this use case)
 
 - Proximity presentation (ISO 18013-5 / TS 119 472-2 clause 5.3) — see technical report §12
-- Architecture-group implementation scenario variants ([architecture PR #31](https://github.com/webuild-consortium/architecture/pull/31))
+- Architecture-group implementation scenario variants
 
 ## References
 
@@ -140,4 +141,4 @@ Full matrix: [Trusted List / Registration / Trust Evaluation Matrix](../../task2
 - [EUDI Wallet Trust and Entitlement Discovery](../../task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md)
 - [WRPRC Example 3 — With Intermediary](../../task5-participants-policies/relying_party_registration_certificate.md)
 - [Embedded Disclosure Policies](../../task5-participants-policies/embedded-disclosure-policies-implementation.md)
-- [ARF Topic 52 — Relying Party intermediaries](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2330-topic-52-relying-party-intermediaries)
+- [ARF Topic 52 — Relying Party intermediaries](https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2330-topic-52-relying-party-intermediaries)

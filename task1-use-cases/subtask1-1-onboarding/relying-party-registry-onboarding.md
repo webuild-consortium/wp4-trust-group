@@ -46,7 +46,8 @@ Registered relying parties are published through the public `GET /wrp` Discovery
 
 ## Related documentation
 
-- [Relying Party Onboarding (UC-01)](relying_party_onboarding.md) — the normative onboarding use case (administrative + technical onboarding, Regulation (EU) 2025/848 requirements, data model, RACI).
+- [Relying Party Onboarding (UC-01)](relying_party_onboarding.md) — the normative onboarding use case (administrative + technical onboarding, Regulation (EU) 2025/848 as amended by CIR 2026/1730, data model, RACI). WRPRC issuance is **automated** per Service × intended use (**RPRC_09**); the sandbox currently emphasises WRPAC issuance.
+- [Relying Party Intermediary (UC-RPI-01)](../subtask1-2-trust-registry/relying-party-intermediary-use-case.md) — intermediary registration (**Reg_34a**) and intermediated presentation.
 - [Base Onboarding Framework](onboarding-base.md) — MVP/MVP+ definitions, Member State requirements, terminology.
 - [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) — registration, notification, and Trusted List publication processes.
 - [Trusted List discovery and consumption](../subtask1-2-trust-registry/trusted-list-discovery-consumption.md) — how to obtain and use the LoTL and Trusted Lists for validation.

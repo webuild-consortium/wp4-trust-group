@@ -2,7 +2,7 @@
 
 This document is the single source of truth for **terms**, **acronyms**, and **entity definitions** used across WP4 Trust Group deliverables. Other documents in the repository reference this document to avoid duplicating definitions.
 
-**Scope**: EUDI Wallet ecosystem trust infrastructure, onboarding, and trust evaluation, aligned with the [EUDI Wallet Architecture and Reference Framework (ARF)](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/2.9.0/architecture-and-reference-framework-main/).
+**Scope**: EUDI Wallet ecosystem trust infrastructure, onboarding, and trust evaluation, aligned with the [EUDI Wallet Architecture and Reference Framework (ARF) v3.0.0](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/).
 
 ---
 
@@ -33,6 +33,8 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 | **QEAA Provider** | Qualified Electronic Attestation of Attributes Provider (a QTSP under eIDAS) | ARF |
 | **QTSP** | Qualified Trust Service Provider (under eIDAS) | eIDAS Regulation |
 | **RP** | Relying Party | ARF |
+| **RPI** | Relying Party Intermediary | ARF Topic 52 |
+| **Service** | Relying Party Service (or Provider Service): first-class registration object; access and registration certificates carry its identifier and trade name | ARF v3.0.0 §3.11.2, Reg_10a |
 | **TL** | Trusted List | ARF |
 | **TLP** | Trusted List Provider | ARF |
 | **TSL** | Trusted Service List | ETSI TS 119 612 |
@@ -42,7 +44,7 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 | **WRPAC** | Wallet-Relying Party Access Certificate | ETSI TS 119 411-8 |
 | **WRPRC** | Wallet-Relying Party Registration Certificate | ETSI TS 119 411-8 |
 | **WIA** | Wallet Instance Attestation — attests to integrity and authenticity of the Wallet Instance; used during all PID and attestation issuance | ARF Topic 9, TS3 |
-| **WUA** | Wallet Unit Attestation — umbrella term covering WIA and KA (per ARF v2.9.0 Topic 9) | ARF |
+| **WUA** | Wallet Unit Attestation — umbrella term covering WIA and KA (per ARF v3.0.0 Topic 9) | ARF |
 
 ---
 
@@ -181,12 +183,12 @@ The following entities are involved in trust evaluation, trust registry, and tru
 ### 3.15 Relying Party (RP)
 
 - **Role**: Request and receive attributes from a Wallet Unit.
-- **Trust Evaluation Involvement**: Must be registered by a Registrar; must be identified at appropriate confidence level; receives access certificate(s) from Access Certificate Authority (one per Relying Party Instance); may receive registration certificate(s) from Provider of registration certificates (one per intended use); registration data includes attributes they intend to request and intended use; can be cancelled by Registrar.
+- **Trust Evaluation Involvement**: Must be registered by a Registrar; must be identified at appropriate confidence level; registers one or more **Services** and receives at least one access certificate per Service from the Access Certificate Authority (**Reg_10a**, **Reg_33**, **Reg_34**); receives registration certificate(s) automatically for each intended use × Service (**RPRC_09**); registration data includes attributes they intend to request, intended use, and Services; can be cancelled by Registrar.
 
 ### 3.16 Intermediary
 
 - **Role**: Special class of Relying Party that acts on behalf of other Relying Parties.
-- **Trust Evaluation Involvement**: Must register as a Relying Party, indicating intent to act as intermediary; must register each intermediated Relying Party at appropriate Registrar; must provide legally valid evidence of relationship with intermediated Relying Party; receives access certificates and registration certificates; relationship with intermediated Relying Party must be registered and verifiable.
+- **Trust Evaluation Involvement**: Must register as a Relying Party, indicating intent to act as intermediary; must register each intermediated Relying Party at appropriate Registrar; must provide legally valid evidence of relationship with intermediated Relying Party; receives a **separate set of access certificates per intermediated RP** (**Reg_34a**) and the intermediated RP’s registration certificates (**RPI_03**, **RPRC_09**); the Wallet SHALL NOT display the intermediary’s trade names in an intermediated transaction (**RPI_07**).
 
 ### 3.17 Attestation Scheme Provider
 

@@ -13,6 +13,7 @@ This example demonstrates Wallet-Relying Party Registration Certificates (WRPRC)
 | ETSI TS 119 182-1 | JAdES digital signatures; Part 1: Building blocks and JAdES baseline signatures |
 | ETSI EN 319 411-1 | Policy and security requirements for Trust Service Providers; Part 1: General requirements |
 | CIR (EU) 2025/848 | Commission Implementing Regulation on the registration of wallet-relying parties |
+| CIR (EU) 2026/1730 | Amending CIR 2025/848 (automated WRPRC issuance, Service identifiers, intermediary association) |
 | IETF RFC 7519 | JSON Web Token (JWT) |
 | IETF RFC 5646 | Tags for Identifying Languages |
 

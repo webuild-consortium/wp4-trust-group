@@ -2,6 +2,8 @@
 
 This document describes the policy discovery process performed by an EUDI Wallet Instance (holder) when interacting with **Relying Parties (RPs)** and **Attestation Providers** (PID Providers, QEAA Providers, PuB-EAA Providers, non-qualified EAA Providers). The discovery mechanism enables the wallet to verify the trustworthiness and entitlements of counterparties before disclosing user attributes.
 
+**ARF v3.0.0:** Wallet Units verify the **WRPRC included in the presentation request** (**RPRC_17**, **RPRC_19**, **RPRC_21**). **RPRC_16**, **RPRC_18**, and **RPRC_19a** are empty: there is no user-opt-in Registrar lookup as a substitute for a missing WRPRC. Registry APIs (**Reg_03**, **Reg_06**) remain for publication and transparency. For intermediaries, the WRPAC is bound to the intermediated RP (**Reg_34a**); the Wallet SHALL NOT display the intermediary’s trade names (**RPI_07**).
+
 ## Abbreviations
 
 See [Terms and Entities](../task1-use-cases/terms-and-entities.md#1-acronyms).
@@ -23,7 +25,8 @@ For official document links and extended references (including TS 119 615, TS 11
 | ETSI EN 319 401          | General Policy Requirements for Trust Service Providers                                                                           |
 | ETSI EN 319 411-1        | Policy and security requirements for TSPs issuing certificates; Part 1: General requirements                                      |
 | ETSI EN 319 411-2        | Policy and security requirements for TSPs issuing certificates; Part 2: Requirements for Qualified Certificate Issuers            |
-| CIR (EU) 2025/848        | Commission Implementing Regulation on the registration of wallet-relying parties                                                  |
+| CIR (EU) 2025/848        | Commission Implementing Regulation on the registration of wallet-relying parties (as amended by CIR (EU) 2026/1730) |
+| CIR (EU) 2026/1730        | Amending CIR 2025/848 (standards, intermediary–RP association, certificate profiles, automated WRPRC issuance) |
 
 
 ---
@@ -67,7 +70,7 @@ graph TD
         spacer3[" "]
         style spacer3 fill:none,stroke:none,color:none
         REG_ENT[Registrar<br/>Reg_01: PID/Attestation/RP]
-        REGISTRY[Registry<br/>Reg_03, Reg_04<br/>ISSU_24a, ISSU_34a, RPRC_18]
+        REGISTRY[Registry<br/>Reg_03, Reg_04<br/>ISSU_24a, ISSU_34a]
     end
     
     L --> EC_TL
@@ -110,11 +113,10 @@ sequenceDiagram
     participant W as Wallet Instance
     participant RP as Relying Party
     participant TL as Trusted List
-    participant NR as Registry
     participant OCSP as OCSP/CRL Responder
     participant RCStatus as WRPRC Status List API
 
-    RP->>W: 1. Presentation Request (WRPAC + WRPRC if available)
+    RP->>W: 1. Presentation Request (WRPAC + WRPRC)
     Note over W: 2. Extract RP WRPAC<br/>(from TLS or signed request)
     Note over W: 3. Parse requested credential types<br/>from presentation request
     W->>TL: 4. Fetch Trusted List
@@ -123,13 +125,7 @@ sequenceDiagram
     W->>OCSP: 7. HTTPS GET /ocsp or /crl<br/>for WRPAC status
     OCSP-->>W: 8. OCSP/CRL HTTP Response
     
-    alt WRPRC provided by RP
-        Note over W: 9a. Validate WRPRC signature<br/>- Verify WRPRC Provider in Registration Cert Provider TL
-    else WRPRC not provided
-        W->>NR: 9b. Query Registry<br/>by entity id (from WRPAC)
-        NR-->>W: 10. Return RP WRPRC(s)
-        Note over W: 11. Validate WRPRC signature
-    end
+    Note over W: 9. Validate WRPRC in the request (RPRC_17)<br/>- Verify WRPRC Provider in Registration Cert Provider TL<br/>- If absent or invalid, warn User (RPA_07)
     
     W->>RCStatus: 12. HTTPS GET /wrprc/status-list<br/>(WRPRC status check)
     RCStatus-->>W: 13. Status List HTTP Response
@@ -241,7 +237,7 @@ When a wallet receives a WRPRC, it validates the issuing WRPRC Provider:
 
 #### 2.3.4 Credential Catalogue, WRPRC Policy, and Sector Authorities
 
-The **catalogue of attributes** and **catalogue of attestation schemes** are established by the Commission (CIR 2025/1569 Art. 7–8, ARF 5.5). Per ARF RPRC_09 and RPRC_13, registration certificates (WRPRC) are **optional**—the Registrar MAY decide to issue them. When a WRPRC exists, future Relying Parties rely on **issuer authorization** to trust credential content; this is not solely a user decision. The catalogue of schemes (CIR 2025/1569 Art. 8) can specify "requirements concerning providers"; sector- or scheme-specific rules may impose when WRPRC or equivalent issuer authorization is required. For definitions, data model, scope, and maintenance, see [Credential Catalogue](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task2-trust-framework/credential-catalogue.md) and ETSI TS 119 475.
+The **catalogue of attributes** and **catalogue of attestation schemes** are established by the Commission (CIR 2025/1569 Art. 7–8, ARF 5.5). Per ARF **RPRC_09** and **RPRC_13**, registration certificates (WRPRC) **SHALL** be issued after registration (one per intended use × Service for Relying Parties; one per Service for Providers). When a WRPRC exists, Relying Parties and Wallets rely on **issuer authorization** to trust credential content; this is not solely a user decision. The catalogue of schemes (CIR 2025/1569 Art. 8) can specify "requirements concerning providers"; sector- or scheme-specific rules may impose additional constraints. For definitions, data model, scope, and maintenance, see [Credential Catalogue](https://github.com/webuild-consortium/wp4-trust-group/blob/main/task2-trust-framework/credential-catalogue.md) and ETSI TS 119 475.
 
 #### 2.3.5 WRPAC vs WRPRC
 
@@ -259,9 +255,11 @@ The **catalogue of attributes** and **catalogue of attestation schemes** are est
 
 ### 2.4 WRPRC Discovery via Registry
 
-When an RP presents only a WRPAC without a WRPRC, the wallet discovers the RP's registration information and WRPRCs through the **Registry** (per Reg_03, Reg_04; CIR 2025/848 Art. 3(5)). The Registry is published by the Member State Registrar. See [§2.3.4 Credential Catalogue, WRPRC Policy, and Sector Authorities](#234-credential-catalogue-wrprc-policy-and-sector-authorities).
+For **presentation**, ARF v3.0.0 requires the WRPRC **in the presentation request** (**RPRC_19**). **RPRC_16** and **RPRC_18** are empty: the Wallet does not use a user-opt-in Registrar lookup as a substitute for a missing WRPRC. If the WRPRC is absent or invalid, the Wallet **warns the User** at approval (**RPRC_17**).
 
-**Query order:** The wallet SHALL query by **entity id** (from WRPAC) to obtain WRPRC(s) or registry information for the specific RP or Provider.
+**Registry APIs remain** for publication (**Reg_03**, **Reg_04**, **Reg_06**; CIR 2025/848 Art. 3(5) as amended) and for PID/attestation issuer checks (**ISSU_24a**, **ISSU_34a**). See [§2.3.4 Credential Catalogue, WRPRC Policy, and Sector Authorities](#234-credential-catalogue-wrprc-policy-and-sector-authorities).
+
+The sequence below is the **publication / transparency** query, not the presentation-time entitlement path.
 
 ```mermaid
 sequenceDiagram
@@ -430,12 +428,12 @@ The wallet obtains the counterparty's certificates:
 
 | Source              | Description                                         | Reference                                      |
 | ------------------- | --------------------------------------------------- | ---------------------------------------------- |
-| Included in Request (proximity) | RP includes WRPRC in ISO/IEC 18013-5 DeviceRequest (requestInfo / euWrprc) | ETSI TS 119 472-2 ISO/IEC 18013-5-REQ-11 |
-| Registry API        | Wallet queries Registry using identifier from WRPAC | Reg_06, Reg_03, Reg_04; CIR 2025/848 Art. 3(5) |
-| OpenID4VP Request   | WRPRC in Request Object (RO) JWT body via verifier_info (e.g. registration_cert) | ETSI TS 119 472-2 clause 6.3.1.4 (OIDFVP-HAIP_COMMON_RO_REQ-05, -06) |
+| Included in Request (proximity) | RP includes WRPRC in ISO/IEC 18013-5 DeviceRequest (requestInfo / euWrprc) | ETSI TS 119 472-2 ISO/IEC 18013-5-REQ-11; ARF **RPRC_19** |
+| OpenID4VP Request   | WRPRC in Request Object (RO) JWT body via `verifier_info` (`registration_cert`) | ETSI TS 119 472-2 clause 6.3.1.4; ARF **RPRC_19**, **RPRC_20** |
+| Registry API        | Publication and transparency; PID/attestation issuer checks. **Not** a presentation-time substitute for a missing RP WRPRC (**RPRC_18** empty) | Reg_06, Reg_03, Reg_04; ISSU_24a, ISSU_34a |
 
 
-> **Note:** If WRPRC is not provided by the counterparty, the wallet SHALL query the **Registry** by **entity id** from the WRPAC (`organizationIdentifier` for legal persons, `serialNumber` for natural persons), per **RPRC_18** and [Trust Infrastructure Schema](trust-infrastructure-schema.md) Reg_03, Reg_04. See [§2.4 WRPRC Discovery via Registry](#24-wrprc-discovery-via-registry).
+> **Note:** ARF v3.0.0 **RPRC_19** requires the WRPRC **by value** in each presentation request. If it is absent, malformed, inauthentic, or expired, the Wallet warns the User (**RPRC_17**). See [§2.4 WRPRC Discovery via Registry](#24-wrprc-discovery-via-registry) for Registry publication APIs.
 
 ### 3.2 Step 2: Trusted List Lookup
 
@@ -582,7 +580,7 @@ This defines an **allow-list** model: requested attributes must be **in** the RP
 | Equivalent (conceptual) | Allow-list; deny-by-default for unregistered attributes      |
 
 
-*Source: [ARF Annex 2.02 – RPRC_21](https://eudi.dev/2.9.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/), Topic 44.*
+*Source: [ARF Annex 2.02 – RPRC_21](https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/), Topic 44.*
 
 WP4 maps this ARF behaviour to the **additive** policy approach and documents an optional **subtractive** extension for non-EUDIW deployments. See [Policy Approaches Definition — EUDIW and ARF Alignment](../task5-participants-policies/policy-approaches-definition.md#eudiw-and-arf-alignment).
 
@@ -646,11 +644,13 @@ When an RP requests attributes and the WRPRC(s) from the RP or Registry do not c
 | Attribute not in any WRPRC (uncovered) | User-autonomous      | Alert user; require explicit approval to disclose; do not disclose by default |
 
 
-#### 4.3.2 No WRPRC Scenario and User Default Policy
+#### 4.3.2 Missing or invalid WRPRC
 
-When the wallet does **not** query a policy repository (Registry/Registrar)—e.g., offline, user has chosen not to verify (RPRC_16, RPRC_18), or WRPRC is unavailable—the wallet has only the attribute request. In that case:
+If the presentation request has no usable WRPRC (absent, malformed, inauthentic, or expired), **RPRC_17** requires the Wallet to **warn the User** at approval. The Wallet Provider’s risk analysis and security policy determine whether the User may still approve. This is not a user-opt-in Registrar lookup (**RPRC_16** and **RPRC_18** are empty).
 
-1. **Responsibility:** There is no WRPRC to validate against; the responsibility for deciding what to disclose falls entirely on the user.
+When the Wallet cannot validate entitlements against a WRPRC (including offline, if the request did not carry a usable certificate):
+
+1. **Responsibility:** There is no validated WRPRC; the Wallet warns the User and applies the Wallet Provider policy and the user’s **default policy**.
 2. **Wallet behaviour:** The wallet SHALL present all requested attributes for user consent, applying the user's **default policy** configured in the wallet instance.
 
 **UX protection through attribute marking:** To support informed consent, the wallet SHALL visually distinguish on the consent screen:
