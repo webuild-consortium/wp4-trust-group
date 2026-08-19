@@ -8,6 +8,8 @@ Under [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/
 
 > **Not a Relying Party?** Wallet Providers, PID/EAA Providers, Access CAs, and Registration Certificate Providers are listed in Trusted Lists / LoTEs, not in the RP National Register. For WE BUILD MVP pilot onboarding to those lists, see **[Onboarding to the Trusted Lists](trusted-lists-onboarding.md)**.
 
+For **WE BUILD MVP pilot registration** (Raidiam EUDI Trust Registry Sandbox, WRPAC issuance, and `GET /wrp` discovery), see **[Wallet Relying Party Registry Onboarding](relying-party-registry-onboarding.md)**. This document is the normative use case (administrative and technical onboarding, Regulation (EU) 2025/848, data model, RACI).
+
 This document follows the WEBUILD ecosystem structure; see [MVP and MVP+ Definitions](onboarding-base.md#mvp-and-mvp-definitions) in the base document.
 
 Wherever feasible, this specification aligns with processes defined in [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) as amended by [CIR (EU) 2026/1730](https://eur-lex.europa.eu/eli/reg_impl/2026/1730/oj) and the [Architecture and Reference Framework v3.0.0](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/), interpreting them for the testing purposes specific to WEBUILD.
@@ -145,6 +147,8 @@ The Relying Party must provide at least the following when submitting a registra
 - **Relying Party Service(s)** — one or more Services (**Reg_10a**, **Reg_10d**); each Service has an identifier and trade name (**Reg_33**, **Reg_34**) and is mapped to intended uses
 - Intermediary reference(s) — zero or more records (identifier, Service identifier, trade name, registry URI); required if the wallet-relying party relies on an intermediary (**RPRC_04**, **Reg_34a**)
 - Intermediary flag — indication if the wallet-relying party acts as an intermediary for other relying parties
+
+See [UC-RPI-01 — Relying Party Intermediary](../subtask1-2-trust-registry/relying-party-intermediary-use-case.md) for intermediated presentation flows.
 - Attestation type(s) — for provider/issuer entitlements: one or more records, each specified either by a catalogue URL provided by WP4 (default/baseline option) or a self-declaration of the attestation schema
 - Economic activity (optional) — NACE Rev.2 code with optional national scheme (e.g. ATECO); used for sector policy templates and register routing. See [Entity and Service Taxonomy](../../task5-participants-policies/entity-service-taxonomy.md).
 - Service classification (optional) — UN CPC code for the digital service offered; complements `srvDescription` and intended use.

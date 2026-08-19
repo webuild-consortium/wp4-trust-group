@@ -10,7 +10,7 @@ WRPAC/WRPRC Authorities are **notified** by Member States to the European Commis
 
 This document follows the WEBUILD ecosystem structure; see [MVP and MVP+ Definitions](onboarding-base.md#mvp-and-mvp-definitions) in the base document.
 
-Wherever feasible, this specification aligns with processes defined in [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/eli/reg/2024/1183/oj/eng), [CIR (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848), and the [Architecture and Reference Framework](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/), interpreting them for the testing purposes specific to WEBUILD.
+Wherever feasible, this specification aligns with processes defined in [Regulation (EU) 2024/1183](https://eur-lex.europa.eu/eli/reg/2024/1183/oj/eng), [CIR (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) as amended by [CIR (EU) 2026/1730](https://eur-lex.europa.eu/eli/reg_impl/2026/1730/oj), and the [Architecture and Reference Framework v3.0.0](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/), interpreting them for the testing purposes specific to WEBUILD.
 
 For the common framework (terminology, MVP/MVP+, RACI definitions), see [Base Onboarding Framework](onboarding-base.md). This document defines only **WRPAC/WRPRC Authority–specific** content and does not duplicate the base.
 

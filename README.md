@@ -25,14 +25,15 @@ During the **WE BUILD MVP (pilot) phase**, the WP4 Trust Infrastructure group ac
 
 - **[LoTL automation and TL integration](task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md)** — End-to-end specification: participant Trusted List Providers add `lotl/tl_entries/{tl_type}/{participant_id}.json` via pull request; CI fetches each referenced TL, validates its signature with the supplied trust anchor, and checks ETSI schema; on merge, the signed LoTL is regenerated and published to GitHub Pages. Also covers directory layout, GitHub Actions workflows, published URLs, and acceptance criteria.
 - **[LoTL producer and validator (`tools/lotl`)](tools/lotl/README.md)** — Running the Python producer locally: validating `tl_entries`, generating and signing `list_of_trusted_lists.{json,xml}`, LoTL signing certificate creation, CLI options, and tests.
+- **[EUDI Trusted Lists Inspector](task7-testing-validation/README.md#eudi-trusted-lists-inspector)** — Open-source audit/debug tool for LoTL, LoTE, and Trusted Lists ([trust-inspector.credimi.io](https://trust-inspector.credimi.io/)).
 
 To **consume** the published LoTL and participant Trusted Lists in verification flows, see [Trusted List discovery and consumption](task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md).
 
 ## Entities Registration
 
-**To register as a TL/LoTE-listed entity in the pilot**, see **[Onboarding to the Trusted Lists](task1-use-cases/subtask1-1-onboarding/trusted-lists-onboarding.md)** (IDunion console). 
+**To register as a TL/LoTE-listed entity in the pilot**, see **[Onboarding to the Trusted Lists](task1-use-cases/subtask1-1-onboarding/trusted-lists-onboarding.md)** (IDunion console).
 
-Since **Relying Parties** are not listed in TLs/LoTEs, to register a Relying Party see [Relying Party Onboarding](task1-use-cases/subtask1-1-onboarding/relying-party-registry-onboarding.md).
+Since **Relying Parties** are not listed in TLs/LoTEs, use the **[Wallet Relying Party Registry Onboarding](task1-use-cases/subtask1-1-onboarding/relying-party-registry-onboarding.md)** guide (Raidiam sandbox) for the pilot. The normative use case is [UC-01 Relying Party Onboarding](task1-use-cases/subtask1-1-onboarding/relying_party_onboarding.md).
 
 ## Tasks
 
@@ -108,10 +109,12 @@ Reading paths group documents by the questions or problems they address. Each pa
 ### How do participants join the ecosystem? — Onboarding and registration
 
 - **[Onboarding to the Trusted Lists (MVP)](task1-use-cases/subtask1-1-onboarding/trusted-lists-onboarding.md)** — **Start here for TL/LoTE registration in the pilot**: step-by-step guide (IDunion console) for Wallet Providers, PID/EAA Providers, Access CAs, and Registration Certificate Providers; includes a table distinguishing TL-listed entities from Relying Parties.
+- **[Wallet Relying Party Registry Onboarding (MVP)](task1-use-cases/subtask1-1-onboarding/relying-party-registry-onboarding.md)** — **Start here for RP registration in the pilot**: Raidiam EUDI Trust Registry Sandbox (WRPAC issuance and `GET /wrp` discovery).
 - **[Base Onboarding Framework](task1-use-cases/subtask1-1-onboarding/onboarding-base.md)** — Common framework: MVP/MVP+ definitions, Member State requirements, RACI matrix; references use-case-specific documents.
-- **[Relying Party Onboarding](task1-use-cases/subtask1-1-onboarding/relying_party_onboarding.md)** — RP registration (National Register — not TL/LoTE-listed), policy acceptance, certificate validation, access control setup.
+- **[Relying Party Onboarding (UC-01)](task1-use-cases/subtask1-1-onboarding/relying_party_onboarding.md)** — RP registration use case (National Register — not TL/LoTE-listed), policy acceptance, certificate validation, access control setup.
 - **[PID / EAA Provider Onboarding](task1-use-cases/subtask1-1-onboarding/pid_eaa_provider_onboarding.md)** — PID/Attestation Provider registration, attestation type declaration, access/registration certificate issuance, trust anchor publication, notification to Commission.
 - **[Wallet Provider Onboarding](task1-use-cases/subtask1-1-onboarding/wallet-provider-onboarding.md)** — Wallet Provider registration, wallet instance attestation, security compliance, trust establishment.
+- **[WRPAC/WRPRC Authority Onboarding (UC-04)](task1-use-cases/subtask1-1-onboarding/wrpac-wrprc-authority-onboarding.md)** — Access CA and Registration Certificate Provider onboarding.
 - **[Onboarding API](task4-trust-infrastructure-api/onboarding-api/README.md)** — API for participant registration, certificate management, policy management, compliance and audits.
 
 ### How does the trust infrastructure work? — Registration, notification, Trusted Lists
@@ -125,22 +128,27 @@ Reading paths group documents by the questions or problems they address. Each pa
 - **[Wallet Unit evaluates Credential Issuer](task1-use-cases/subtask1-2-trust-registry/wallet-unit-evaluates-credential-issuer.md)** — Wallet Unit verifies PID/Attestation Provider before requesting PID or attestation.
 - **[Credential Issuer evaluates Wallet Unit](task1-use-cases/subtask1-2-trust-registry/credential-issuer-evaluates-wallet-unit.md)** — PID/Attestation Provider verifies WIA and KA (WUA) before issuing credentials.
 - **[Wallet Unit evaluates Relying Party](task1-use-cases/subtask1-2-trust-registry/wallet-unit-evaluates-relying-party.md)** — Wallet Unit verifies RP before presentation.
+- **[Relying Party Intermediary (UC-RPI-01)](task1-use-cases/subtask1-2-trust-registry/relying-party-intermediary-use-case.md)** — Intermediary presents on behalf of another RP; Wallet authenticates the intermediary WRPAC (`Reg_34a`) and displays only the intermediated RP (`RPI_07`).
 - **[Relying Party evaluates presented credentials](task1-use-cases/subtask1-2-trust-registry/relying-party-evaluates-credentials.md)** — RP validates PID and attestation signatures using Trusted Lists.
 - **[Trusted List discovery and consumption](task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md)** — How to obtain and use LoTL and Trusted Lists for validation.
 
 ### How does the wallet discover and verify trust? — Wallet (holder) perspective
 
 - **[EUDI Wallet Trust and Entitlement Discovery](task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md)** — Policy discovery and trust verification from the wallet perspective: WRPRC/WRPAC discovery, Trusted List validation, Registry lookup, entitlement and attribute validation (ARF RPRC_21, RPA_*).
+- **[RP Intermediary OpenID4VP Technical Report](task2-trust-framework/rp-intermediary-openid4vp-technical-report.md)** — Non-normative protocol report: `verifier_info`, WRPAC/WRPRC exposure, intermediary detection (ARF Topic 52, ETSI TS 119 472-2).
 
 ### What are the policy approaches (additive vs. subtractive)? — Authentication, authorization, trust marks
 
 - **[Authentication Authorization Policy Framework](task2-trust-framework/authentication-authorization-policy-framework.md)** — Distinction between authentication and authorization, additive/subtractive principles, federated trust mark use cases.
 - **[Policy Approaches Definition](task5-participants-policies/policy-approaches-definition.md)** — Additive vs. subtractive policy models, zero-trust, EUDIW/ARF alignment, OpenID Federation trust mark integration, attribute/credential classification.
+- **[Entity and Service Taxonomy](task5-participants-policies/entity-service-taxonomy.md)** — Two-layer taxonomy: EU entitlements (Layer 1) and domestic activity codes (Layer 2).
 - **[Trust Mark Semantics Implementation](task5-participants-policies/trust-mark-semantics-implementation.md)** — Implementation guidance for trust mark semantics for Credential Issuers and Relying Parties.
+- **[Embedded Disclosure Policies](task5-participants-policies/embedded-disclosure-policies-implementation.md)** — Implementation guidance for disclosure policies embedded in presentation requests.
 
 ### What credentials exist and who may issue them? — Credential catalogues and issuer constraints
 
 - **[Credential Catalogue](task2-trust-framework/credential-catalogue.md)** — Catalogue of attributes and attestation schemes (ARF Section 5.5, CIR 2025/1569).
+- **[Credential Catalog Service](task4-trust-infrastructure-api/credential-catalog-service.md)** — weBuild Credential Catalog at [registry.siros.org](https://registry.siros.org) (TS11 catalogue of attestation schemes).
 - **[Credential Catalog and Issuer Constraints](task2-trust-framework/credential-catalog-and-issuer-constraints.md)** — Overview and index linking credential catalogues and Trusted List extensions for issuer constraints.
 - **[Trusted List Extensions for Credential Issuers](task3-x509-pki-etsi/trusted-list-extensions-credential-issuers.md)** — Configuring which Credential Issuers are authorised to issue specific attestation types via Trusted List extensions.
 
@@ -148,6 +156,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 
 - **[ETSI Trusted Lists Implementation Profile](task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)** — Implementation profile for ETSI TS 119 612 and TS 119 602: signing, distribution, XML/JSON formats, examples.
 - **[LoTL automation and TL integration](task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md)** — WP4 List of Trusted Lists on GitHub Pages: participant `tl_entries` pull requests, CI validation, signed LoTL regeneration, and publication (see also [tools/lotl](tools/lotl/README.md)).
+- **[EAA Provider Identity Verification (chaining and LoTL)](task2-trust-framework/eaa-provider-identity-verification-chaining-LoTL.md)** — How EAA provider identity is verified via LoTL/TL chaining and X.509 path validation.
 - **[ETSI Identifier Handling](task3-x509-pki-etsi/etsi-identifier-handling.md)** — Handling of VAT, LEI, and other business identifiers in ETSI profiles, trusted lists, and certificates.
 
 ### What certificates exist and what policies apply? — Participant certificates and ETSI policy
@@ -157,6 +166,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 - **[EAA Provider Access Certificate](task5-participants-policies/eaa_provider_access_certificate.md)** — Access certificate for Attestation Providers.
 - **[EAA Provider Registration Certificate](task5-participants-policies/eaa_provider_registration_certificate.md)** — Registration certificate for Attestation Providers.
 - **[PID Provider Access Certificate](task5-participants-policies/pid_provider_access_certificate.md)** — Access certificate for PID Providers.
+- **[Certificate Profiles (ETSI TS 119 412-6)](task3-x509-pki-etsi/certificate-profiles-pid-wallet-eaa-qeaa-psbeaa-providers-etsi-ts-119-412-6.md)** — Sign/seal certificate profiles for PID, Wallet, EAA, QEAA, and PuB-EAA providers.
 - **[ETSI Policy Enumeration](task5-participants-policies/etsi-policy-enumeration.md)** — Enumeration of ETSI policy identifiers and mechanisms for the trust framework.
 - **[ETSI Policy Evaluation](task5-participants-policies/etsi-policy-evaluation.md)** — How ETSI specifications apply in additive/subtractive policy evaluation.
 
@@ -164,11 +174,12 @@ Reading paths group documents by the questions or problems they address. Each pa
 
 - **[Trust Infrastructure API](task4-trust-infrastructure-api/trust-infrastructure-api/README.md)** — Exposes endpoints for trust management (publishing and querying Trusted List entries and trust anchors), trust evaluation (validating access certificates and registration certificates against Trusted Lists), trust policies (managing and querying trust policy configurations), and monitoring and reporting (observability for trust infrastructure operations). Aligns with [EC TS02](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts2-notification-publication-provider-information.md) for provider notification and publication.
 - **[Onboarding API](task4-trust-infrastructure-api/onboarding-api/README.md)** — Exposes endpoints for participant registration (submitting registration requests and identification data per [EC TS06](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md)), certificate management (Access Certificate and Registration Certificate issuance and lifecycle), policy management (attaching and querying entitlement and policy data), and compliance and audit (verification of registered data and audit trail access). Registry APIs follow [EC TS05](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts5-common-formats-and-api-for-rp-registration-information.md); [ETSI EN 319 486](https://portal.etsi.org/webapp/WorkProgram/Report_WorkItem.asp?WKI_ID=74933) (upcoming) will standardize these formats.
+- **[Credential Catalog Service](task4-trust-infrastructure-api/credential-catalog-service.md)** — TS11 catalogue of attestation schemes at [registry.siros.org](https://registry.siros.org) (credential type discovery and interoperability).
 
 ### How do wallets conform and interoperate? — Conformance and testing
 
 - **[Task 6: Wallet Conformance/Interop](task6-wallet-conformance-interop/README.md)** — Conformance areas (trust, certificates, policy, APIs), interoperability (protocols, formats, cryptography), testing frameworks, certification.
-- **[Task 7: Testing and Validation](task7-testing-validation/README.md)** — Component and integration testing, test strategy and tooling, support for WP4 deliverables and quality evidence.
+- **[Task 7: Testing and Validation](task7-testing-validation/README.md)** — Component and integration testing, test strategy and tooling, including the [EUDI Trusted Lists Inspector](task7-testing-validation/README.md#eudi-trusted-lists-inspector) (`trust-inspector.credimi.io`).
 
 ## References
 
@@ -225,7 +236,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 - **ETSI TS 119 461** - Policy and security requirements for identity proofing of natural persons (registration identity verification)
   - [Official Document](https://www.etsi.org/deliver/etsi_ts/119400_119499/119461/01.02.01_60/ts_119461v010201p.pdf)
 
-In addition to the above, this project is developed in constant alignment with **EUDI Architecture and Reference Framework (ARF) v3.0.0** specifications, adopting LoTE terminology and including core regulatory frameworks (Reg_10/10a/33/34/34a, RPRC_09/13 SHALL, RPA_02/RPA_04, RPI_07), and access certificate and trusted list standards. 
+In addition to the above, this project is developed in constant alignment with **EUDI Architecture and Reference Framework (ARF) v3.0.0** specifications, adopting LoTE terminology and including core regulatory frameworks (Reg_10/10a/33/34/34a, RPRC_09/13 SHALL, RPA_02/RPA_04, RPI_07), and access certificate and trusted list standards.
 
 ### Additional Standards and Drafts
 
@@ -271,9 +282,6 @@ These documents may receive further updates and should be reconsidered in future
 
 ## Getting Started
 
-1. Clone the repository
-2. Review the task directories for specific implementation details
-3. Check the references directory for relevant standards and specifications
 1. Clone the repository.
 2. Review the task directories for specific implementation details.
 3. Check the references directory for relevant standards and specifications.
@@ -283,8 +291,6 @@ These documents may receive further updates and should be reconsidered in future
 
 We welcome contributions from all collaborators.
 
-- Open issues for bugs, improvements, or questions
-- Submit pull requests following the repository structure
 - Open issues for bugs, improvements, or questions.
 - Submit pull requests following the repository structure.
 - Use discussions (if enabled) for ideas and proposals.

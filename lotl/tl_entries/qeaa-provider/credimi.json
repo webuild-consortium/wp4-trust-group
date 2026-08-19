@@ -1,0 +1,9 @@
+{
+  "tl_url": "https://lote.credimi.io/lists/it_credimi_qeaa_trust_registry_infrastructu/latest/trusted-list.xml",
+  "tl_url_xml": "https://lote.credimi.io/lists/it_credimi_qeaa_trust_registry_infrastructu/latest/trusted-list.xml",
+  "trust_anchor": "-----BEGIN CERTIFICATE-----\nMIICkDCCAjagAwIBAgIUKY5Ypn2tibtBnbyWpyXX2liR7QAwCgYIKoZIzj0EAwIw\ngYsxCzAJBgNVBAYTAklUMTMwMQYDVQQKDCpDcmVkaW1pIFFFQUEgVHJ1c3QgUmVn\naXN0cnkgSW5mcmFzdHJ1Y3R1cmUxRzBFBgNVBAMMPkNyZWRpbWkgUUVBQSBUcnVz\ndCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZSBUcnVzdGVkIExpc3QgU2lnbmVyMB4X\nDTI2MDgwNTEwMzEzN1oXDTI3MDgwNTEwMzEzN1owgYsxCzAJBgNVBAYTAklUMTMw\nMQYDVQQKDCpDcmVkaW1pIFFFQUEgVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1\ncmUxRzBFBgNVBAMMPkNyZWRpbWkgUUVBQSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0\ncnVjdHVyZSBUcnVzdGVkIExpc3QgU2lnbmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0D\nAQcDQgAE3sT7htkTq+Tzq1LFc95vXcaxUQhiSKE0c6oL1qZI5La8duPZWPpuOX+K\nuG1k1PezXxEA9IBQu3iA4WG/9HIxj6N2MHQwHwYDVR0jBBgwFoAU7/o+v+zFVJcj\nEDEHQALfv/q+1MMwDAYDVR0TAQH/BAIwADAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0O\nBBYEFO/6Pr/sxVSXIxAxB0AC37/6vtTDMBQGA1UdJQEB/wQKMAgGBgQAkTcDADAK\nBggqhkjOPQQDAgNIADBFAiAfipQO7pkbiyALAnCElxK5aKFHxGspUik9O5Sve8ce\nJgIhAPQ6d5+2fXDdUw120AKDy+YGQb8PNYwn8HmGC3838NoN\n-----END CERTIFICATE-----\n",
+  "metadata": {
+    "operator_name": "Credimi QEAA Trust Registry Infrastructure",
+    "country": "IT"
+  }
+}

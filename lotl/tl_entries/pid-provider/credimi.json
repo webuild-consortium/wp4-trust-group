@@ -1,0 +1,9 @@
+{
+  "tl_url": "https://lote.credimi.io/lists/eu_credimi_pid_trust_registry_infrastructur/latest/lote.jades",
+  "tl_url_json": "https://lote.credimi.io/lists/eu_credimi_pid_trust_registry_infrastructur/latest/lote.json",
+  "trust_anchor": "-----BEGIN CERTIFICATE-----\nMIICdjCCAhygAwIBAgIUD18jIeuM////itEzYgyGKUU5zmQwCgYIKoZIzj0EAwIw\ngYkxCzAJBgNVBAYTAkVVMTIwMAYDVQQKDClDcmVkaW1pIFBJRCBUcnVzdCBSZWdp\nc3RyeSBJbmZyYXN0cnVjdHVyZTFGMEQGA1UEAww9Q3JlZGltaSBQSUQgVHJ1c3Qg\nUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUgVHJ1c3RlZCBMaXN0IFNpZ25lcjAeFw0y\nNjA4MDMwOTQ3MTdaFw0yNzA4MDMwOTQ3MTdaMIGJMQswCQYDVQQGEwJFVTEyMDAG\nA1UECgwpQ3JlZGltaSBQSUQgVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUx\nRjBEBgNVBAMMPUNyZWRpbWkgUElEIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0\ndXJlIFRydXN0ZWQgTGlzdCBTaWduZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNC\nAAQLjUTu4WW0pbcIK9Ve4O8uWHaONCJ/9UC5Cbee70esNJXHeJuPnrvyirCmsIfq\nMpGj/4fARmvq+BMoa+OQJ7bRo2AwXjAfBgNVHSMEGDAWgBTF/QxSqPeNBcXBLzuA\nPJa96JOIwDAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB/wQEAwIHgDAdBgNVHQ4EFgQU\nxf0MUqj3jQXFwS87gDyWveiTiMAwCgYIKoZIzj0EAwIDSAAwRQIhAJjJU7vrd629\nVYQxLSSEhbIjR8EiR/g2OuAjXgvSnx07AiBI1ErRfPcL1j9LLk0tWv7pYRg4UfqX\nJQum30AjcKc6dg==\n-----END CERTIFICATE-----\n",
+  "metadata": {
+    "operator_name": "Credimi PID Trust Registry Infrastructure",
+    "country": "EU"
+  }
+}

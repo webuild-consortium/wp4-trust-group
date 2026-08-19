@@ -352,7 +352,7 @@ The **catalogue** (`trustedAuthorities` in ARF TS11) may be used by RPs or verif
 | `task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md` | ISSU_08–10, ISSU_34/34a, OIA_13–15 |
 | `task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md` | Unified TS 119 612/602/615 binding; §7.3 PuB-EAA |
 | `task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md` | LoTL automation, `tl_entries` layout |
-| `task5-participants-certificates-policies/eaa_provider_*_certificate.md` | WRPAC/WRPRC examples for three entitlements |
+| `task5-participants-policies/eaa_provider_*_certificate.md` | WRPAC/WRPRC examples for three entitlements |
 | `task1-use-cases/.../pid_eaa_provider_onboarding.md` | Onboarding flows and trust-chain requirements |
 | `task1-use-cases/subtask1-2-trust-registry/relying-party-evaluates-credentials.md` | UC-TE-05: RP validates presented EAA/PID (OIA_13–15) |
 | `task2-trust-framework/eudi-wallet-trust-and-entitlement-discovery.md` | Presentation vs issuance discovery flows |
@@ -368,7 +368,7 @@ The **catalogue** (`trustedAuthorities` in ARF TS11) may be used by RPs or verif
 | **ARF vs ETSI on EAA registration** | ARF Topic 27 requires all attestation providers to register with a Registrar; **TS 119 602 does not define EAA/QEAA provider registration as attestation providers** — only PuB-EAA via Annex H. **TS 119 612** covers QEAA as trust services. WP4 documents this mismatch explicitly. |
 | **Wallet QEAA validation algorithm** | CIR 2024/2981 states the security goal; step-by-step “registered to issue this attestation type” logic is distributed across ARF, OpenID4VP, and ETSI validation specs. |
 | **ETSI TS 119 602 in spec corpus** | Referenced in ARF TS11 but not fully mirrored in `eidas-references-search-engine/referenced-standards/` (draft/issue link only). |
-| **LoTL pilot coverage** | WP4 `lotl/tl_entries/` currently has only `wrpac-provider` populated; EAA/QEAA/PuB-EAA folders are defined but largely empty. |
+| **LoTL pilot coverage** | WP4 `lotl/tl_entries/` is populated for PID, Wallet, WRPAC, WRPRC, QEAA, PuB-EAA, and non-qualified EAA provider types (IDunion, Credimi/Forkbomb, NXD Foundation, Raidiam). Coverage remains a pilot subset, not production Member State lists. |
 | **Precedence TL vs WRPRC** | Proposed: TL canonical for RP presentation (OIA_12–15); registry/WRPRC for wallet issuance (ISSU_34a) — not fully harmonised in law. |
 
 ---
@@ -385,7 +385,7 @@ The **catalogue** (`trustedAuthorities` in ARF TS11) may be used by RPs or verif
 
 5. **Presentation is symmetric to issuance for trust lists**: the wallet uses TL/LoTE + registry to trust the **RP** before release; the RP uses the **same TL/LoTE ecosystem** to trust the **EAA issuer** on the presented credential after receipt—without re-using the EAA provider’s WRPAC/WRPRC in that step.
 
-6. WP4 profiles operationalise the standards split (612 vs 602, LoTL automation, §7.3 Annex H) but pilots remain **partially populated** for EAA-specific LoTL entries.
+6. WP4 profiles operationalise the standards split (612 vs 602, LoTL automation, §7.3 Annex H). Pilot LoTL entries now cover PID, Wallet, WRPAC, WRPRC, QEAA, PuB-EAA, and non-qualified EAA provider types, still as a consortium subset rather than production Member State lists.
 
 ---
 
@@ -406,8 +406,8 @@ The **catalogue** (`trustedAuthorities` in ARF TS11) may be used by RPs or verif
 - `task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md`
 - `task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md` (§7.3)
 - `task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md`
-- `task5-participants-certificates-policies/eaa_provider_access_certificate.md`
-- `task5-participants-certificates-policies/eaa_provider_registration_certificate.md`
+- `task5-participants-policies/eaa_provider_access_certificate.md`
+- `task5-participants-policies/eaa_provider_registration_certificate.md`
 - `task1-use-cases/subtask1-2-trust-registry/relying-party-evaluates-credentials.md` — UC-TE-05 (OIA_13–15)
 
 ---

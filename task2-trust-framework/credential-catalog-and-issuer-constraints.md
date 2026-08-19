@@ -39,6 +39,7 @@ Covers:
 |-------|---------|-------------------|
 | **Catalogue of attributes** | Verification points for QTSPs issuing QEAAs | [credential-catalogue.md](credential-catalogue.md#catalogue-of-attributes) |
 | **Catalogue of attestation schemes** | Attestation types and their structure | [credential-catalogue.md](credential-catalogue.md#catalogue-of-attestation-schemes) |
+| **weBuild Credential Catalog** | Pilot TS11 instance of the catalogue of attestation schemes | [credential-catalog-service.md](../task4-trust-infrastructure-api/credential-catalog-service.md) |
 | **Trusted Lists** | Which issuers are authorised for which attestation types | [trusted-list-extensions-credential-issuers.md](../task3-x509-pki-etsi/trusted-list-extensions-credential-issuers.md) |
 | **Registration certificates** | Attestation types an issuer intends to issue (when available) | [trusted-list-extensions-credential-issuers.md](../task3-x509-pki-etsi/trusted-list-extensions-credential-issuers.md#registration-certificate-as-source-of-truth-when-available) |
 

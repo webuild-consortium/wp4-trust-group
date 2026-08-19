@@ -6,10 +6,10 @@ This task collects the high‑level use cases that drive the design of the WP4 T
 
 - **`README.md`** – Overview of Task 1 and pointers to the detailed use cases
 - **`subtask1-1-onboarding/`** – Onboarding use cases for Trust Service Providers, Wallet Providers, Relying Parties, and Certificate Authorities (see its `README.md`)
-- **`subtask1-2-trust-registry/`** – Use cases for trust registry operations and **trust evaluation**: Wallet Unit vs Credential Issuer/Relying Party, Credential Issuer vs Wallet Unit, Relying Party credential validation, and Trusted List discovery/consumption (see its `README.md`)
+- **`subtask1-2-trust-registry/`** – Use cases for trust registry operations and **trust evaluation**: Wallet Unit vs Credential Issuer/Relying Party, Credential Issuer vs Wallet Unit, Relying Party Intermediary ([UC-RPI-01](subtask1-2-trust-registry/relying-party-intermediary-use-case.md)), Relying Party credential validation, and Trusted List discovery/consumption (see its `README.md`)
 
 ## Scope of Task 1
 
-- **Onboarding scenarios**: Define how ecosystem participants (TSPs, Wallet Providers, RPs, CAs) are registered, validated, and brought under the trust infrastructure. For **MVP pilot registration** to Trusted Lists / LoTEs (and how that differs from Relying Party National Register registration), see **[Onboarding to the Trusted Lists](subtask1-1-onboarding/trusted-lists-onboarding.md)**.
-- **Trust registry scenarios**: Define how trusted lists, trust anchors, trust levels and trust chains are created, evaluated, maintained and revoked.
+- **Onboarding scenarios**: Define how ecosystem participants (TSPs, Wallet Providers, RPs, CAs) are registered, validated, and brought under the trust infrastructure. For **MVP pilot registration** to Trusted Lists / LoTEs, see **[Onboarding to the Trusted Lists](subtask1-1-onboarding/trusted-lists-onboarding.md)**. For **MVP RP registry registration**, see **[Wallet Relying Party Registry Onboarding](subtask1-1-onboarding/relying-party-registry-onboarding.md)**.
+- **Trust registry scenarios**: Define how trusted lists, trust anchors, trust levels and trust chains are created, evaluated, maintained and revoked, including [trust evaluation use cases](subtask1-2-trust-registry/README.md) and [UC-RPI-01 Relying Party Intermediary](subtask1-2-trust-registry/relying-party-intermediary-use-case.md).
 - **Input to other tasks**: These use cases provide requirements for the Trust Framework (Task 2), PKI and trusted lists (Task 3), APIs (Task 4), certificate and policy models (Task 5), conformance/interop (Task 6) and testing (Task 7).

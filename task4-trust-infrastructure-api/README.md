@@ -7,11 +7,14 @@ This task defines and implements the APIs used to expose the WP4 Trust Infrastru
 - **`README.md`** – Overview of the APIs and how this task fits in WP4
 - **`trust-infrastructure-api/`** – Implementation and detailed specification of the Trust Infrastructure API (see its `README.md`)
 - **`onboarding-api/`** – Implementation and detailed specification of the Onboarding API (see its `README.md`)
+- **`credential-catalog-service.md`** – Service description of the weBuild Credential Catalog at registry.siros.org
+- **`lotl-automation-and-tl-integration.md`** – LoTL publication and Trusted Lists integration
 
 ## Scope of Task 4
 
 - **Trust Infrastructure API** – Endpoints and models for trust management, evaluation, validation, policies and monitoring, built on top of the trust framework and PKI from Tasks 2 and 3.
 - **Onboarding API** – Endpoints and models for participant registration, certificate and policy submission, compliance validation and audit support. Aligns with EC TS05 and EC TS06 for registry data models and retrieval APIs, and with EC TS02 for provider notification and publication flows.
+- **Credential Catalog Service** – The weBuild Credential Catalog ([registry.siros.org](https://registry.siros.org)), implementing the TS11 catalogue of attestation schemes for credential type discovery and interoperability.
 - **Cross‑cutting API aspects** – Common design and runtime concerns such as REST style, OpenAPI descriptions, authentication and authorization (OAuth 2.0 / OpenID Connect / JWT), error handling, monitoring and versioning.
 
 ## Normative References
@@ -29,6 +32,8 @@ The APIs in this task align with the following European Commission technical spe
 - **EC TS06** — Common set of Relying Party information to be registered (minimum data set for participant registration; see ARF Topic 27, **Reg_01a**)
   - [Official document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md)
   - [ARF index](https://github.com/eu-digital-identity-wallet/eudi-doc-architecture-and-reference-framework/blob/main/docs/technical-specifications/ts6-common-set-of-rp-information-to-be-registered.md)
+- **EC TS11** — Interfaces and formats for catalogue of attributes and catalogue of attestation schemes (implemented by the [Credential Catalog Service](credential-catalog-service.md))
+  - [Official document](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md)
 
 ### ETSI (upcoming)
 
@@ -38,4 +43,5 @@ The APIs in this task align with the following European Commission technical spe
 
 - [Onboarding use cases](../task1-use-cases/subtask1-1-onboarding/onboarding-base.md) — Participant registration flows that inform the Onboarding API
 - [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md) — Registry publication and API requirements (**Reg_03**, **Reg_06**)
-- [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) — Legal basis for RP registration and registry APIs (Annex II)
+- [Credential Catalog Service](credential-catalog-service.md) — TS11 catalogue of attestation schemes at registry.siros.org
+- [Regulation (EU) 2025/848](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=OJ:L_202500848) as amended by [CIR (EU) 2026/1730](https://eur-lex.europa.eu/eli/reg_impl/2026/1730/oj) — Legal basis for RP registration and registry APIs (Annex II)

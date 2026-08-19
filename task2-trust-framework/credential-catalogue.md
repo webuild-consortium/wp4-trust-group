@@ -10,6 +10,8 @@ For Trusted List extensions used to configure which Credential Issuers are autho
 
 **Catalogue and attestation concepts**: See [ARF v3.0.0 Section 5.5](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes) and [Technical Specification 11](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts11-interfaces-and-formats-for-catalogue-of-attributes-and-catalogue-of-schemes.md).
 
+The weBuild pilot instance of the catalogue of attestation schemes is the [Credential Catalog Service](../task4-trust-infrastructure-api/credential-catalog-service.md) at [registry.siros.org](https://registry.siros.org).
+
 ## Credential Catalogues Overview
 
 ### Definition
@@ -300,3 +302,6 @@ This specification defines:
 - [Architecture and Reference Framework Main Document - Section 5.5](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#55-catalogue-of-attributes-and-catalogue-of-attestation-schemes)
 - [Annex 2.02 - High-Level Requirements by Topic](https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/)
 - [Discussion Paper on Topic O](https://eudi.dev/3.0.0/discussion-topics/o-catalogues-for-attestations/)
+
+### weBuild instance
+- [Credential Catalog Service](../task4-trust-infrastructure-api/credential-catalog-service.md) — TS11 catalogue at [registry.siros.org](https://registry.siros.org)
