@@ -161,6 +161,8 @@ The registry information is made available through a REST API supporting JSON fo
 
 Access Certificates for Relying Parties follow [ETSI TS 119 411-8](https://www.etsi.org/deliver/etsi_ts/119400_119499/11941108/01.01.01_60/ts_11941108v010101p.pdf) - Access Certificate Policy for EUDI Wallet Relying Parties. The certificate profile specifies X.509 certificate structure with subject distinguished name fields (countryName, organizationName, organizationIdentifier, commonName), subject alternative name extensions (URI, email, telephoneNumber), certificate policies, and key usage extensions per ETSI EN 319 412-3 for legal persons.
 
+**Identifier binding.** The Provider of registration certificates SHALL set WRPRC `sub` to the same value as this WRP’s WRPAC `organizationIdentifier` (legal person) or `serialNumber` (natural person) and SHALL verify the match before issuance (ETSI TS 119 475 GEN-5.1.1-02). Semantics remain ETSI EN 319 412-1. See [Binding WRPAC identifier to WRPRC `sub`](../../task3-x509-pki-etsi/etsi-identifier-handling.md#binding-wrpac-identifier-to-wrprc-sub).
+
 ### Registration Certificate Profile
 
 Registration Certificates for Relying Parties follow [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf) version 1.4.1 (2023-10) NCP requirements and [ETSI TS 119 475 v1.2.1](https://www.etsi.org/deliver/etsi_ts/119400_119499/119475/01.02.01_60/ts_119475v010201p.pdf) for relying party attributes. Registration Certificates are issued in JWT format (typ: "rc-wrp+jwt") with payload containing identity fields (name, sub_ln or sub_gn/sub_fn, sub, country, registry_uri), srv_description, entitlements, purpose, credentials, privacy_policy, supervisory_authority, and status (status_list with idx, uri) per ETSI TS 119 475 clause 5.2.4.
@@ -464,6 +466,7 @@ The Provider of Registration Certificate issues and logs the Registration Certif
 - [ARF "6.4.2 Relying Party registration"](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/#642-relying-party-registration:~:text=6.4.2%20Relying%20Party-,registration,-Figure%2011%20depicts)
     - As a result of successful registration:
         - **a Provider of registration certificates SHALL issue a separate registration certificate for each combination of intended use and Relying Party Service** (**RPRC_09**), automated and without undue delay. CIR (EU) 2026/1730 amends CIR 2025/848 on this point.
+        - Each issued WRPRC JWT `sub` SHALL equal that WRP’s WRPAC `organizationIdentifier` (legal person) or `serialNumber` (natural person) (**RPRC_07**, ETSI TS 119 475 GEN-5.1.1-02).
 - [ARF, Annex II, Topic 27](https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2316-topic-27---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties---registration-of-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties)
     - The registering entity **receives at least one registration certificate for each registered Service** (**Reg_10c**).
 - [ARF, Annex II, Topic 44](https://eudi.dev/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/#a2326-topic-44---registration-certificates-for-pid-providers-providers-of-qeaas-pub-eaas-and-non-qualified-eaas-and-relying-parties)

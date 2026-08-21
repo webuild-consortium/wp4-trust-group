@@ -4,6 +4,8 @@
 
 This example demonstrates Wallet-Relying Party Registration Certificates (WRPRC) for **Electronic Attestation of Attributes (EAA) Providers**. The WRPRC provides detailed information about the provider's entitlements, the attestations they issue, and their intended use.
 
+**Identifier binding.** JWT `sub` SHALL equal the provider’s WRPAC `organizationIdentifier` (legal person) or `serialNumber` (natural person). See [Binding WRPAC identifier to WRPRC `sub`](../task3-x509-pki-etsi/etsi-identifier-handling.md#binding-wrpac-identifier-to-wrprc-sub).
+
 ## Normative References
 
 | Reference | Document |

@@ -4,6 +4,8 @@
 
 This example demonstrates a Wallet-Relying Party Access Certificate (WRPAC) for a **PID Provider** (Person Identification Data Provider) - an entity authorized to issue person identification data to EUDIW users.
 
+**Identifier binding.** Subject `organizationIdentifier` is copied into the paired WRPRC JWT `sub`. See [Binding WRPAC identifier to WRPRC `sub`](../task3-x509-pki-etsi/etsi-identifier-handling.md#binding-wrpac-identifier-to-wrprc-sub).
+
 ## Normative References
 
 | Reference | Document |

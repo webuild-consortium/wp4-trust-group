@@ -12,8 +12,9 @@ This document analyzes how specific business and tax identifiers (VAT registrati
 4. [ETSI EN 319 412-1 - Certificate Profile Requirements](#etsi-en-319-412-1)
 5. [Identifier Format Specifications](#identifier-format-specifications)
 6. [Usage in Certificates](#usage-in-certificates)
-7. [Usage in Trusted Lists](#usage-in-trusted-lists)
-8. [Gaps and Considerations](#gaps-and-considerations)
+7. [Binding WRPAC identifier to WRPRC `sub`](#binding-wrpac-identifier-to-wrprc-sub)
+8. [Usage in Trusted Lists](#usage-in-trusted-lists)
+9. [Gaps and Considerations](#gaps-and-considerations)
 
 ## Overview
 
@@ -249,6 +250,25 @@ According to ETSI TS 119 602, the certificate's subject DN must:
 2. Include the registration number from `TETradeName` component (where applicable)
 3. Match the format specified in the trusted list entry
 
+## Binding WRPAC identifier to WRPRC `sub`
+
+WP4 **consumes** ETSI TS 119 475 clause 5.1 (WRP identification attributes matching). It does not define a parallel identifier profile.
+
+Access Certificates are X.509. Registration Certificates are JWT (`typ`: `rc-wrp+jwt`). The register identifier (CIR 2025/848 Annex I.3 / ETSI TS 119 475 B.2.5) is carried as:
+
+| Registered entity | WRPAC field | WRPRC field | ETSI mapping |
+| ----------------- | ----------- | ----------- | ------------ |
+| Legal person | X.509 subject `organizationIdentifier` | JWT `sub` | TS 119 475 Table 1; GEN-5.1.3-01 / GEN-5.1.3-03; EN 319 412-1 clause 5.1.4 |
+| Natural person | X.509 subject `serialNumber` | JWT `sub` | TS 119 475 Table 3; GEN-5.1.5-01 / GEN-5.1.5-03; EN 319 412-1 clause 5.1.3 |
+
+**Issuance (Registrars / Providers of registration certificates).** Before issuing a WRPRC, the provider SHALL verify that an identifier in that WRPRC matches an identifier in the WRPAC of the same WRP (**GEN-5.1.1-02**). For a legal person, `WRPRC.sub` SHALL equal `WRPAC.organizationIdentifier` (same string, including `TYPE`, country or `XG`, hyphen, and identifier). For a natural person, `WRPRC.sub` SHALL equal `WRPAC.serialNumber`. If other identification attributes differ, linkage SHALL rely solely on that matching identifier (**GEN-5.1.1-03**).
+
+**Wallet evaluation (direct presentation).** The Wallet Unit SHALL treat that equality as the unique Relying Party identifier match in **RPRC_17a** (see [UC-TE-04](../task1-use-cases/subtask1-2-trust-registry/wallet-unit-evaluates-relying-party.md)).
+
+**Intermediated presentation.** Equality is for the **same registered entity's** access and registration certificates. The Wallet SHALL NOT require the intermediary WRPAC identifier to equal the beneficiary WRPRC `sub`. Intermediation is the **RPRC_17a** alternative (WRPRC shows use of this intermediary, **RPRC_04** / **Reg_34a**). See [UC-RPI-01](../task1-use-cases/subtask1-2-trust-registry/relying-party-intermediary-use-case.md).
+
+Certificate examples: [Relying Party access](../task5-participants-policies/relying_party_access_certificate.md) and [registration](../task5-participants-policies/relying_party_registration_certificate.md) certificates.
+
 ## Usage in Trusted Lists
 
 ### TS 119 612 (XML Trusted Lists)
@@ -358,6 +378,7 @@ According to ETSI TS 119 612:
 - [ ] Include registration identifier in certificate subject DN
 - [ ] Use `organizationIdentifier` attribute for legal entities
 - [ ] Use `serialNumber` attribute for natural persons
+- [ ] Set WRPRC JWT `sub` to the same string as WRPAC `organizationIdentifier` (legal person) or `serialNumber` (natural person)
 - [ ] Match format exactly with trusted list entry
 - [ ] Validate format during certificate issuance
 

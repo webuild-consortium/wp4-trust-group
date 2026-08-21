@@ -4,6 +4,8 @@
 
 This example demonstrates Wallet-Relying Party Access Certificates (WRPAC) for **Electronic Attestation of Attributes (EAA) Providers** - entities authorized to issue electronic attestations of attributes to EUDIW users.
 
+**Identifier binding.** Subject `organizationIdentifier` is copied into the paired WRPRC JWT `sub`. See [Binding WRPAC identifier to WRPRC `sub`](../task3-x509-pki-etsi/etsi-identifier-handling.md#binding-wrpac-identifier-to-wrprc-sub).
+
 ## Normative References
 
 | Reference | Document |

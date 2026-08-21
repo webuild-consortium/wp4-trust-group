@@ -4,6 +4,8 @@
 
 This example demonstrates Wallet-Relying Party Access Certificates (WRPAC) for **Service Providers** - general relying parties that request attributes from EUDIW users for service provision.
 
+**Identifier binding.** Subject `organizationIdentifier` (legal person) or `serialNumber` (natural person) is the unique Relying Party identifier copied into the paired WRPRC JWT `sub`. See [Binding WRPAC identifier to WRPRC `sub`](../task3-x509-pki-etsi/etsi-identifier-handling.md#binding-wrpac-identifier-to-wrprc-sub) and the [registration certificate examples](relying_party_registration_certificate.md).
+
 ## Normative References
 
 | Reference | Document |
@@ -285,7 +287,7 @@ Per ETSI TS 119 475 clause 5.1.2 and ETSI TS 119 411-8 GEN-6.6.1-10:
 |------------------------------|-------------------|--------------|
 | `legalName` (B.2.3 LegalPerson) | `organizationName` | Annex I.1 |
 | `tradeName` (B.2.1 WalletRelyingParty) | `commonName` | Annex I.2 |
-| `identifier` (B.2.5 Identifier) | `organizationIdentifier` | Annex I.3 |
+| `identifier` (B.2.5 Identifier) | `organizationIdentifier` (paired WRPRC JWT `sub` SHALL equal this value) | Annex I.3 |
 | `country` (B.2.2 LegalEntity) | `countryName` | Annex I.6 |
 | `supportURI` (B.2.1 WalletRelyingParty) | SAN URI | Annex I.7(a) |
 | `email` (B.2.2 LegalEntity) | SAN rfc822Name | Annex I.7(c) |

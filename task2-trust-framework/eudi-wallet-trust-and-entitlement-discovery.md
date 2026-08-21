@@ -503,7 +503,7 @@ The wallet performs the following lookups:
 | Provider Status                | Verify `ServiceCurrentStatus` is `granted` in Registration Cert Provider TL              | ETSI TS 119 612 clause 5.5.4                                                                         |
 | Signature Verification         | Verify WRPRC signature using `x5c` (JWT) or `x5chain` (CWT)                              | ETSI TS 119 475 clause 5.2.2, 5.2.3                                                                  |
 | WRPRC Validity                 | Check `iat` timestamp and `status` claim                                                 | ETSI TS 119 475 Table 7                                                                              |
-| Identifier Match               | Verify WRPRC `sub` matches WRPAC `organizationIdentifier`                                  | ETSI TS 119 475 GEN-5.1.1-02                                                                         |
+| Identifier Match               | WRPRC `sub` SHALL equal WRPAC `organizationIdentifier` (legal person) or `serialNumber` (natural person). Same-entity pair only; intermediated flows use RPRC_17a / RPRC_04 instead of identifier equality. | ETSI TS 119 475 GEN-5.1.1-02; [identifier binding](../task3-x509-pki-etsi/etsi-identifier-handling.md#binding-wrpac-identifier-to-wrprc-sub) |
 
 
 ### 3.5 Step 5: Entitlement Verification

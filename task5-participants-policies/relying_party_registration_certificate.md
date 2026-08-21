@@ -4,6 +4,8 @@
 
 This example demonstrates Wallet-Relying Party Registration Certificates (WRPRC) for **Service Providers** - general relying parties that request attributes from EUDIW users.
 
+**Identifier binding.** For a legal-person WRP, JWT `sub` SHALL equal that WRP’s WRPAC X.509 `organizationIdentifier` (ETSI TS 119 475 Table 1, GEN-5.1.1-02, GEN-5.1.3-03; same ETSI EN 319 412-1 string, including `LEIXG-` for LEI). For a natural-person WRP, `sub` SHALL equal WRPAC `serialNumber` (Table 3). This is the same-entity pair, not the intermediary WRPAC versus beneficiary WRPRC. See [Binding WRPAC identifier to WRPRC `sub`](../task3-x509-pki-etsi/etsi-identifier-handling.md#binding-wrpac-identifier-to-wrprc-sub).
+
 ## Normative References
 
 | Reference | Document |
@@ -47,7 +49,7 @@ Per ETSI TS 119 475 v1.2.1 Table 7: subject is conveyed by `sub` (identifier str
 {
   "name": "Online Shop AG",
   "sub_ln": "Online Shop AG",
-  "sub": "LEIDE-529900T8BM49AURSDO55",
+  "sub": "LEIXG-529900T8BM49AURSDO55",
   "country": "DE",
   "registry_uri": "https://wrp-register.de/api/v1/relying-parties/DE-WRP-00789",
   "srv_description": [
@@ -93,7 +95,7 @@ Per ETSI TS 119 475 v1.2.1 Table 7 and GEN-5.2.4-02: subject uses flat `sub` (id
 |-------|----------------|--------------|-------------|
 | `name` | Table 7; B.2.1 `tradeName` | Annex I.2 | Trade/service name |
 | `sub_ln` | Table 7; B.2.3 `legalName` | Annex I.1 | Official legal name (legal person) |
-| `sub` | Table 7, GEN-5.2.4-02; B.2.5 | Annex I.3 | Identifier per clause 5.1.3 |
+| `sub` | Table 7, GEN-5.2.4-02; B.2.5; GEN-5.1.1-02 | Annex I.3 | Identifier; SHALL equal WRPAC `organizationIdentifier` (legal person) or `serialNumber` (natural person) |
 | `country` | Table 7; B.2.2 `country` | Annex I.6 | ISO 3166-1 alpha-2 |
 | `registry_uri` | Table 7; B.2.1 `registryURI` | Article 3(5) | National registry API |
 
@@ -137,7 +139,7 @@ Per ETSI TS 119 475 v1.2.1 Table 9 and GEN-5.2.4-06:
 {
   "name": "Dutch Bank Customer Onboarding",
   "sub_ln": "Dutch Bank N.V.",
-  "sub": "LEINL-724500VKKSH9QOLTFR81",
+  "sub": "LEIXG-724500VKKSH9QOLTFR81",
   "country": "NL",
   "registry_uri": "https://wrp-register.nl/api/v1/relying-parties/NL-WRP-00234",
   "srv_description": [

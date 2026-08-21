@@ -98,7 +98,7 @@ Both the Intermediary and the Intermediated RP are Relying Parties. Follow [Rely
 | WRPAC bound to this RP/Service | **Reg_34a** | Intermediary ↔ Intermediated RP |
 | WRPRC in the request (by value) | **RPRC_19** | Intermediated RP |
 | WRPRC authenticity, validity, revocation | WRPRC Provider TL (**RPRC_17**) | Intermediated RP |
-| WRPRC identifier/Service match, or uses this intermediary | **RPRC_17a**, **RPRC_04** | Both |
+| WRPRC identifier/Service match, or uses this intermediary | **RPRC_17a**, **RPRC_04**. Direct-use equality is `WRPRC.sub` = WRPAC `organizationIdentifier` / `serialNumber`; intermediated flows do not require that equality. | Both |
 | Requested attributes ⊆ WRPRC | **RPRC_21** | Intermediated RP |
 | Only intermediated RP displayed | **RPI_07** | User approval |
 | EDP (if present) | EDP_02/03 | Evaluate against **intermediated** RP id/root, not intermediary WRPAC |

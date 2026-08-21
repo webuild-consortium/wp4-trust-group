@@ -26,7 +26,7 @@ For **intermediated** presentation (intermediary acting on behalf of another RP)
 1. Relying Party Instance sends a presentation request to the Wallet Unit (access certificate and WRPRC for the current Service and intended use).
 2. **Access certificate**: Wallet Unit verifies the RP Instance access certificate using trust anchors from the **Relying Party Access Certificate Authority Trusted List(s)** (RPA_04); verifies the access certificate is **not revoked** (Reg_14).
 3. **WRPRC in the request** (RPRC_17): Wallet Unit verifies format, authenticity, and validity of the registration certificate. If the certificate is absent, malformed, inauthentic, or expired, the Wallet Unit **warns the User** when asking for approval (RPA_07). The Wallet Provider’s risk policy determines whether approval is still allowed.
-4. **Binding** (RPRC_17a): Wallet Unit verifies that the WRPRC contains the same unique Relying Party identifier and Service identifier as the access certificate, or that the WRPRC shows the intermediated RP uses this intermediary.
+4. **Binding** (RPRC_17a): Wallet Unit verifies that the WRPRC contains the same unique Relying Party identifier and Service identifier as the access certificate, or that the WRPRC shows the intermediated RP uses this intermediary. For a legal person, the unique identifier match is `WRPRC.sub` = `WRPAC.organizationIdentifier`; for a natural person, `WRPRC.sub` = `WRPAC.serialNumber` (ETSI TS 119 475 GEN-5.1.1-02). Intermediated flows do not require those two certificates to carry the same identifier.
 5. **Attributes** (RPRC_21): Wallet Unit verifies that **all attributes requested** are included in the WRPRC in the same request; if not, warn the User. Optionally confirm RP is not suspended/cancelled (Reg_09).
 6. Wallet Unit asks for User approval (RPA_07 / RPA_06). For an intermediary, it SHALL NOT display the intermediary’s trade names (RPI_07).
 
@@ -42,7 +42,7 @@ For **intermediated** presentation (intermediary acting on behalf of another RP)
 | RPA_04    | Wallet Unit SHALL accept trust anchors in the Trusted List(s) of Relying Party Access CAs (all Member States). |
 | RPA_06    | Display Relying Party and Service trade names from the access certificate, except for intermediaries (RPI_07). |
 | RPRC_17   | Verify authenticity/validity of the WRPRC in the request; on failure, warn User at approval. |
-| RPRC_17a  | WRPRC unique identifier and Service identifier SHALL match the access certificate, or the WRPRC SHALL show use of this intermediary. |
+| RPRC_17a  | WRPRC unique identifier and Service identifier SHALL match the access certificate, or the WRPRC SHALL show use of this intermediary. Unique identifier: JWT `sub` vs X.509 `organizationIdentifier` (legal person) or `serialNumber` (natural person). |
 | RPRC_19   | Relying Party Instance SHALL include a single WRPRC by value in each presentation request. |
 | RPRC_21   | Wallet Unit SHALL verify requested attributes are in the WRPRC in the same request; on failure, notify User. |
 | RPRC_16 / RPRC_18 | Empty in ARF v3.0.0 (no user-opt-in Registrar lookup). |

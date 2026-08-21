@@ -8,7 +8,7 @@ This task defines the data models and trust evaluation methods for participants'
 
 - **`README.md`** – Overview of Task 5 and its subcomponents
 - **`relying_party_access_certificate.md`** – WRPAC (access certificate) profile for Relying Parties
-- **`relying_party_registration_certificate.md`** – WRPRC (registration certificate) profile for Relying Parties
+- **`relying_party_registration_certificate.md`** – WRPRC (registration certificate) profile for Relying Parties. JWT `sub` SHALL equal the paired WRPAC `organizationIdentifier` (legal person) or `serialNumber` (natural person); see [identifier binding](../task3-x509-pki-etsi/etsi-identifier-handling.md#binding-wrpac-identifier-to-wrprc-sub).
 - **`pid_provider_access_certificate.md`** – Access certificate profile for PID Providers
 - **`eaa_provider_access_certificate.md`** – Access certificate profile for Attestation Providers
 - **`eaa_provider_registration_certificate.md`** – Registration certificate profile for Attestation Providers

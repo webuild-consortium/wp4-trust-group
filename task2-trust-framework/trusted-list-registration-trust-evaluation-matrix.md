@@ -7,6 +7,8 @@ This matrix extracts all requirements related to trusted lists, participant regi
 > **Note on Reg_12–Reg_18:** In ARF v3.0.0 these HLRs are empty; access certificate policy requirements (including Certificate Transparency) are specified in **ETSI TS 119 411-8** and **ETSI EN 319 411-1**. See [Task 5 certificate profiles](../task5-participants-policies/).
 >
 > **ARF v3.0.0 (Topic X / CIR 2026/1730):** Relying Party **Services** are first-class registration objects. Access certificates carry a Service identifier and trade name (**Reg_33**, **Reg_34**). WRPRC issuance is **automated and mandatory** for Relying Parties (**RPRC_09** SHALL, one certificate per intended use × Service) and for PID/Attestation Providers (**RPRC_13** SHALL, one certificate per Service). **RPRC_16**, **RPRC_18**, **RPRC_18a**, and **RPRC_19a** are empty: the Wallet verifies the WRPRC in the request (**RPRC_17**, **RPRC_19**, **RPRC_21**), not a user-opt-in Registrar lookup. Intermediary WRPACs bind the intermediated RP via **Reg_34a**. **RPI_07** SHALL NOT display intermediary names.
+>
+> **Identifier binding (RPRC_07 / RPRC_17a):** The EU-wide unique identifier in the WRPRC is JWT `sub`. For a legal person it SHALL equal WRPAC X.509 `organizationIdentifier`; for a natural person, WRPAC `serialNumber` (ETSI TS 119 475 GEN-5.1.1-02). See [Binding WRPAC identifier to WRPRC `sub`](../task3-x509-pki-etsi/etsi-identifier-handling.md#binding-wrpac-identifier-to-wrprc-sub).
 
 ---
 
