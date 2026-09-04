@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from typing import Optional
 
+from tools.lotl.cert_expiry import certificate_pem_errors
 from tools.lotl.settings import VALID_TL_TYPES, get_schema_path
 
 
@@ -39,11 +40,13 @@ def validate_tl_entry_file(file_path: str | Path) -> list[str]:
     elif not isinstance(data["trust_anchor"], str):
         errors.append("trust_anchor must be a string")
 
-    # Validate trust_anchor PEM format
+    # Validate trust_anchor PEM format and that the certificate is currently valid
     if "trust_anchor" in data and isinstance(data["trust_anchor"], str):
         ta = data["trust_anchor"]
         if "-----BEGIN CERTIFICATE-----" not in ta or "-----END CERTIFICATE-----" not in ta:
             errors.append("trust_anchor must be a valid X.509 PEM certificate")
+        else:
+            errors.extend(certificate_pem_errors(ta, "trust_anchor"))
 
     # Optional URL fields
     for field in ("tl_url_xml", "tl_url_json"):

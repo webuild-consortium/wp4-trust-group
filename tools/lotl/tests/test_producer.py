@@ -20,6 +20,23 @@ def test_produce_validate_only(tl_entries_dir: Path, tmp_path: Path) -> None:
     assert code == 0
 
 
+def test_produce_rejects_expired_signing_cert(
+    tl_entries_dir: Path,
+    tmp_path: Path,
+    signing_key_and_cert: tuple[Path, Path],
+    expired_cert_pem: str,
+) -> None:
+    """Produce fails when the LoTL signing certificate is expired."""
+    key_path, _cert_path = signing_key_and_cert
+    code = produce(
+        tl_entries_dir=tl_entries_dir,
+        output_dir=tmp_path,
+        signing_key=key_path.read_text(),
+        signing_cert=expired_cert_pem,
+    )
+    assert code == 1
+
+
 def test_produce_requires_signing(tl_entries_dir: Path, tmp_path: Path) -> None:
     """Produce without key/cert returns 1."""
     code = produce(
