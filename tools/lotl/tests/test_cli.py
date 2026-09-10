@@ -44,6 +44,7 @@ def test_cli_help() -> None:
     )
     assert result.returncode == 0, (result.stdout, result.stderr)
     assert "tl-entries-dir" in result.stdout
+    assert "validate-published" in result.stdout
 
 
 def test_cli_main_invocation(tl_entries_dir: Path) -> None:
@@ -71,3 +72,21 @@ def test_cli_inline_pem_path_nonexistent(tl_entries_dir: Path, signing_key_and_c
         "--output-dir", str(tl_entries_dir),
     ])
     assert exit_code != 0  # Produce fails with invalid key
+
+
+def test_cli_validate_published(tl_entries_dir: Path) -> None:
+    """--validate-published fetches and profile-validates published lists."""
+    from unittest.mock import patch
+
+    from tools.lotl.cli import main
+
+    with patch(
+        "tools.lotl.published_validate.run_published_validation",
+        return_value=0,
+    ) as mocked:
+        exit_code = main([
+            "--validate-published",
+            "--tl-entries-dir", str(tl_entries_dir),
+        ])
+    assert exit_code == 0
+    mocked.assert_called_once()
