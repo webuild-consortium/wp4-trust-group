@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Union
 
 from lxml import etree
+from signxml.exceptions import InvalidSignature
 from signxml.xades import (
     XAdESDataObjectFormat,
     XAdESSignatureConfiguration,
@@ -69,6 +70,22 @@ class LoTLXAdESSigner(XAdESSigner):
         )
 
 
+def _parse(xml_content: bytes) -> etree._Element:
+    """Parse untrusted XML without DTD loading, entity expansion or network access.
+
+    A LoTL can come from a remote publisher, so guard against XXE and entity
+    expansion attacks. lxml parsers must not be shared across threads, so build a
+    fresh one per call.
+    """
+    parser = etree.XMLParser(
+        resolve_entities=False,
+        load_dtd=False,
+        no_network=True,
+        huge_tree=False,
+    )
+    return etree.fromstring(xml_content, parser=parser)
+
+
 def _load_pem(pem: Union[bytes, str, Path]) -> str:
     """Accept a PEM string, PEM bytes, or a path to a PEM file."""
     if isinstance(pem, Path):
@@ -98,7 +115,7 @@ def sign_xml(
     key_pem = _load_pem(key_pem)
     cert_pem = _load_pem(cert_pem)
 
-    root = etree.fromstring(xml_content)
+    root = _parse(xml_content)
 
     if not root.get("Id"):
         raise ValueError(
@@ -154,14 +171,35 @@ def verify_xml(
         The verified, signed XML.
 
     Raises:
-        ValueError: If neither cert_pem nor ca_pem_file is given.
+        ValueError: If neither cert_pem nor ca_pem_file is given. The caller is at
+            fault; nothing was read from xml_content.
+        InvalidSignature: If the list must not be trusted -- it carries other than
+            exactly one signature, or no ds:Reference covers the list itself.
+            signxml raises the same type for a bad digest, key or certificate, so
+            one handler covers every "do not trust this list" outcome.
     """
     if cert_pem is None and ca_pem_file is None:
         raise ValueError(
             "A trust anchor is required: pass cert_pem or ca_pem_file."
         )
 
-    root = etree.fromstring(xml_content)
+    root = _parse(xml_content)
+
+    # Annex B.0 binds the XML schema, whose TrustStatusListType declares
+    # ds:Signate with an implicit maxOccurs="1". signxml verifies only the first
+    # ds:Signature it finds, so reject extras rather than silently ignores them 
+    signatures = root.findall(f"{{{DS}}}Signature")
+    if len(signatures) != 1:
+        raise InvalidSignature(
+            f"A trusted list carries exactly one signature, found {len(signatures)}"
+        )
+
+    root_id = root.get("Id")
+    if not root_id:
+        raise InvalidSignature(
+            "Root element carries no Id, so no ds:Reference can cover it "
+            "(TS 119 612 Annex B.1.0 rule 2b)"
+        )
 
     kwargs: dict = {}
     if cert_pem is not None:
@@ -175,9 +213,23 @@ def verify_xml(
         **kwargs,
     )
 
-    signed_xml = (
-        results[0].signed_xml if isinstance(results, list) else results.signed_xml
-    )
+    # Annex B.1.0 rule 2: a ds:Reference covers the TrustServiceStatusList itself.
+    # Select that reference by the root's Id
+    verified = results if isinstance(results, list) else [results]
+    covered = [
+        result.signed_xml
+        for result in verified
+        if result.signed_xml is not None
+        and result.signed_xml.tag == root.tag
+        and result.signed_xml.get("Id") == root_id
+    ]
+    if len(covered) != 1:
+        raise InvalidSignature(
+            f"Expected exactly one ds:Reference covering the trusted list "
+            f"#{root_id}, found {len(covered)}"
+        )
+    signed_xml = covered[0]
+
     return etree.tostring(
         signed_xml,
         encoding="utf-8",
