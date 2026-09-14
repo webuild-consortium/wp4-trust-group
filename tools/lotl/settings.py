@@ -58,6 +58,12 @@ LOTL_LOTE_TYPE_URI = "http://uri.etsi.org/19602/LoTLType/EUListOfTrustedLists"
 LOTL_JSON_FILENAME = "list_of_trusted_lists.json"
 LOTL_XML_FILENAME = "list_of_trusted_lists.xml"
 
+# Published LoTL (GitHub Pages) — used by the scheduled expiry check
+PUBLISHED_LOTL_JSON_URL = os.environ.get(
+    "LOTL_PUBLISHED_JSON_URL",
+    "https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json",
+)
+
 
 def get_schema_path() -> Path:
     """Return path to the TL entry JSON schema."""
