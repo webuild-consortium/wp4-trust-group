@@ -4,7 +4,7 @@ bandit
 safety
 pytest-cov
 jsonschema>=4.20
-signxml
+signxml>=4.4,<5
 lxml
 jwcrypto>=1.5.6
 cryptography
