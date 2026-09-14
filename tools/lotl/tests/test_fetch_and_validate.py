@@ -13,6 +13,13 @@ def test_fetch_tl_unreachable() -> None:
     assert raw is None
 
 
+def test_fetch_tl_rejects_non_http_scheme() -> None:
+    """file:/ and other schemes are not fetched."""
+    content, raw, ctype = fetch_tl("file:///etc/passwd")
+    assert content is None
+    assert raw is None
+
+
 @patch("tools.lotl.tl_validator.urlopen")
 def test_fetch_tl_success(mock_urlopen: MagicMock) -> None:
     """Fetch returns content."""

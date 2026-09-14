@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from lxml import etree
+from lxml import etree  # nosec B410
 
 from tools.lotl.settings import (
     LOTL_HISTORICAL_INFORMATION_PERIOD,
@@ -21,6 +21,7 @@ from tools.lotl.settings import (
     TL_TYPE_TO_REFERENCE_URI,
     TSL_TAG_URI,
 )
+from tools.lotl.xml_safe import safe_fromstring, safe_parse
 
 NS = {"tsl": NS_TSL, "tslx": NS_TSL_ADDITIONAL}
 NS_XML = "http://www.w3.org/XML/1998/namespace"
@@ -35,13 +36,7 @@ def get_tsl_xsd_path() -> Path:
 
 
 def _safe_parse(xml_content: bytes) -> etree._Element:
-    parser = etree.XMLParser(
-        resolve_entities=False,
-        load_dtd=False,
-        no_network=True,
-        huge_tree=False,
-    )
-    return etree.fromstring(xml_content, parser=parser)
+    return safe_fromstring(xml_content)
 
 
 def validate_against_xsd(xml_content: bytes) -> list[str]:
@@ -50,13 +45,7 @@ def validate_against_xsd(xml_content: bytes) -> list[str]:
     if not xsd_path.is_file():
         return [f"TS 119 612 XSD not found: {xsd_path}"]
     try:
-        parser = etree.XMLParser(
-            resolve_entities=False,
-            load_dtd=False,
-            no_network=True,
-            huge_tree=False,
-        )
-        schema_doc = etree.parse(str(xsd_path), parser)
+        schema_doc = safe_parse(str(xsd_path))
         schema = etree.XMLSchema(schema_doc)
         doc = _safe_parse(xml_content)
         if not schema.validate(doc):

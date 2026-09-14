@@ -9,7 +9,7 @@ import datetime
 from pathlib import Path
 from typing import Union
 
-from lxml import etree
+from lxml import etree  # nosec B410
 from signxml.exceptions import InvalidSignature
 from signxml.xades import (
     XAdESDataObjectFormat,
@@ -22,6 +22,7 @@ from tools.lotl.key_alg import (
     infer_xml_signature_algorithm_fragment_from_private_key_pem,
 )
 from tools.lotl.log import get_logger
+from tools.lotl.xml_safe import safe_fromstring
 
 logger = get_logger(__name__)
 
@@ -71,19 +72,8 @@ class LoTLXAdESSigner(XAdESSigner):
 
 
 def _parse(xml_content: bytes) -> etree._Element:
-    """Parse untrusted XML without DTD loading, entity expansion or network access.
-
-    A LoTL can come from a remote publisher, so guard against XXE and entity
-    expansion attacks. lxml parsers must not be shared across threads, so build a
-    fresh one per call.
-    """
-    parser = etree.XMLParser(
-        resolve_entities=False,
-        load_dtd=False,
-        no_network=True,
-        huge_tree=False,
-    )
-    return etree.fromstring(xml_content, parser=parser)
+    """Parse untrusted XML without DTD loading, entity expansion or network access."""
+    return safe_fromstring(xml_content)
 
 
 def _load_pem(pem: Union[bytes, str, Path]) -> str:

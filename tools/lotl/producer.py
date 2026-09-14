@@ -48,16 +48,19 @@ def get_next_sequence_number(output_dir: str | Path) -> int:
     xml_file = path / LOTL_XML_FILENAME
     if xml_file.exists():
         try:
-            from lxml import etree
+            from tools.lotl.xml_safe import safe_parse
 
-            tree = etree.parse(str(xml_file))
+            tree = safe_parse(str(xml_file))
             root = tree.getroot()
             for ns_uri in (NS_TSL, NS_TSL_LEGACY):
                 seq_elem = root.find(f".//{{{ns_uri}}}TSLSequenceNumber")
                 if seq_elem is not None and seq_elem.text:
                     return int(seq_elem.text) + 1
-        except Exception:  # noqa: S110
-            pass
+        except Exception:
+            logger.debug(
+                "Could not read TSLSequenceNumber from existing XML",
+                exc_info=True,
+            )
 
     return 1
 
