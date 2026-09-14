@@ -9,10 +9,11 @@ from tools.lotl.lote_validate import validate_lote_json
 from tools.lotl.jades_signer import sign_json
 from tools.lotl.json_generator import generate_lotl_json
 from tools.lotl.log import get_logger
-from tools.lotl.settings import LOTL_JSON_FILENAME, LOTL_XML_FILENAME
+from tools.lotl.settings import LOTL_JSON_FILENAME, LOTL_XML_FILENAME, NS_TSL, NS_TSL_LEGACY
 from tools.lotl.validator import validate_tl_entries_dir
 from tools.lotl.xades_signer import sign_xml
 from tools.lotl.xml_generator import generate_lotl_xml
+from tools.lotl.xml_validate import validate_lotl_xml
 
 logger = get_logger(__name__)
 
@@ -51,10 +52,10 @@ def get_next_sequence_number(output_dir: str | Path) -> int:
 
             tree = etree.parse(str(xml_file))
             root = tree.getroot()
-            ns = {"tsl": "http://uri.etsi.org/19612/v2.4.1#"}
-            seq_elem = root.find(".//tsl:TSLSequenceNumber", ns)
-            if seq_elem is not None and seq_elem.text:
-                return int(seq_elem.text) + 1
+            for ns_uri in (NS_TSL, NS_TSL_LEGACY):
+                seq_elem = root.find(f".//{{{ns_uri}}}TSLSequenceNumber")
+                if seq_elem is not None and seq_elem.text:
+                    return int(seq_elem.text) + 1
         except Exception:  # noqa: S110
             pass
 
@@ -121,6 +122,16 @@ def produce(
     if v_errs:
         for e in v_errs:
             logger.error("LoTE JSON validation: %s", e)
+        return 1
+
+    try:
+        xml_errs = validate_lotl_xml(lotl_xml)
+    except Exception as e:
+        logger.exception("LoTL XML validation failed unexpectedly: %s", e)
+        return 1
+    if xml_errs:
+        for e in xml_errs:
+            logger.error("LoTL XML validation: %s", e)
         return 1
 
     # 5. Sign
