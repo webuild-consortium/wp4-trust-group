@@ -3,7 +3,7 @@
 from datetime import datetime, timezone
 from typing import Any
 
-from lxml import etree
+from lxml import etree  # nosec B410
 
 from tools.lotl.json_generator import _add_months_safe_utc, _pointers_for_entry
 from tools.lotl.settings import (
