@@ -33,6 +33,12 @@ PUB_RULES = "http://uri.etsi.org/19602/PubEAAProvidersList/schemerules/EU"
 PUB_SVC = "http://uri.etsi.org/19602/SvcType/PubEAA/Issuance"
 PUB_STATUS = "http://uri.etsi.org/19602/PubEAAProvidersList/SvcStatus/notified"
 
+TSL_EUGENERIC = "http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric"
+TSL_DETN = "http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate"
+TSL_RULES = "http://uri.etsi.org/TrstSvc/TrustedList/schemerules/EUcommon"
+SVC_EAA = "http://uri.etsi.org/TrstSvc/Svctype/EAA"
+SVC_EAA_Q = "http://uri.etsi.org/TrstSvc/Svctype/EAA/Q"
+
 
 def _xml(
     *,
@@ -196,7 +202,7 @@ def test_annex_h_requires_hip_and_status() -> None:
             status=None,
             hip=None,
         ),
-        tl_type="eaa-provider",
+        tl_type="pub-eaa-provider",
     )
     assert any("HistoricalInformationPeriod" in e for e in errors)
     assert any("ServiceStatus shall be present" in e for e in errors)
@@ -212,7 +218,7 @@ def test_annex_h_xml_profile_passes() -> None:
             status=PUB_STATUS,
             hip="65535",
         ),
-        tl_type="eaa-provider",
+        tl_type="pub-eaa-provider",
     )
     assert errors == []
 
@@ -264,6 +270,66 @@ def test_qeaa_must_be_tsl_root() -> None:
         tl_type="qeaa-provider",
     )
     assert any("TrustServiceStatusList" in e for e in errors)
+
+
+def test_eaa_must_be_tsl_root() -> None:
+    errors = validate_xml_list(
+        _xml(
+            lote_type="",
+            tsl_type=TSL_EUGENERIC,
+            detn=TSL_DETN,
+            rules=TSL_RULES,
+            svc=SVC_EAA,
+            root="TrustedEntitiesList",
+        ),
+        tl_type="eaa-provider",
+    )
+    assert any("TrustServiceStatusList" in e for e in errors)
+
+
+def test_eaa_612_xml_profile_passes() -> None:
+    errors = validate_xml_list(
+        _xml(
+            lote_type="",
+            tsl_type=TSL_EUGENERIC,
+            detn=TSL_DETN,
+            rules=TSL_RULES,
+            svc=SVC_EAA,
+            root="TrustServiceStatusList",
+        ),
+        tl_type="eaa-provider",
+    )
+    assert errors == []
+
+
+def test_qeaa_612_xml_profile_passes() -> None:
+    errors = validate_xml_list(
+        _xml(
+            lote_type="",
+            tsl_type=TSL_EUGENERIC,
+            detn=TSL_DETN,
+            rules=TSL_RULES,
+            svc=SVC_EAA_Q,
+            root="TrustServiceStatusList",
+        ),
+        tl_type="qeaa-provider",
+    )
+    assert errors == []
+
+
+def test_eaa_612_requires_svctype_eaa() -> None:
+    errors = validate_xml_list(
+        _xml(
+            lote_type="",
+            tsl_type=TSL_EUGENERIC,
+            detn=TSL_DETN,
+            rules=TSL_RULES,
+            svc=SVC_EAA_Q,
+            root="TrustServiceStatusList",
+        ),
+        tl_type="eaa-provider",
+    )
+    assert any(SVC_EAA in e for e in errors)
 
 
 def test_unknown_tl_type() -> None:
@@ -379,6 +445,12 @@ def test_json_qeaa_rejected() -> None:
     assert any("612 XML" in e for e in errors)
 
 
+def test_json_eaa_rejected() -> None:
+    errors = validate_json_list(b"{}", tl_type="eaa-provider")
+    assert any("612 XML" in e for e in errors)
+    assert any("Non-qualified EAA" in e for e in errors)
+
+
 def test_json_malformed() -> None:
     errors = validate_json_list(b"{", tl_type="pid-provider")
     assert any("not well-formed" in e for e in errors)
@@ -436,7 +508,7 @@ def test_json_annex_h_missing_hip() -> None:
         hip=None,
     )
     doc["signature"] = {"protected": header, "signature": "sig"}
-    errors = validate_json_list(json.dumps(doc), tl_type="eaa-provider")
+    errors = validate_json_list(json.dumps(doc), tl_type="pub-eaa-provider")
     assert any("HistoricalInformationPeriod" in e for e in errors)
 
 
@@ -453,7 +525,7 @@ def test_json_annex_h_passes_with_hip() -> None:
         hip=65535,
     )
     doc["signature"] = {"protected": header, "signature": "sig"}
-    errors = validate_json_list(json.dumps(doc), tl_type="eaa-provider")
+    errors = validate_json_list(json.dumps(doc), tl_type="pub-eaa-provider")
     assert errors == []
 
 

@@ -45,7 +45,7 @@ _FIX_HINTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "HistoricalInformationPeriod",
-        "Annex H (Pub-EAA / national EAA) requires HistoricalInformationPeriod = 65535.",
+        "Annex H (Pub-EAA) requires HistoricalInformationPeriod = 65535.",
     ),
     (
         "no TrustedEntity",
@@ -95,7 +95,17 @@ _FIX_HINTS: tuple[tuple[str, str], ...] = (
     ),
     (
         "QEAA Provider lists must be",
-        "QEAA lists must be TS 119 612 XML TrustServiceStatusList (TSLType EUgeneric).",
+        "QEAA lists must be TS 119 612 XML TrustServiceStatusList (TSLType EUgeneric, Svctype/EAA/Q).",
+    ),
+    (
+        "Non-qualified EAA Provider lists must be",
+        "Non-qualified EAA lists must be TS 119 612 XML TrustServiceStatusList "
+        "(TSLType EUgeneric, ServiceTypeIdentifier Svctype/EAA). Annex H is Pub-EAA only.",
+    ),
+    (
+        "must include ServiceTypeIdentifier",
+        "National TS 119 612 lists under eaa-provider must include Svctype/EAA; "
+        "qeaa-provider must include Svctype/EAA/Q.",
     ),
     (
         "document Reference transforms",

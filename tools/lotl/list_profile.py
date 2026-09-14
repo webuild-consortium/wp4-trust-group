@@ -17,7 +17,12 @@ from typing import Any
 
 from lxml import etree
 
-from tools.lotl.settings import TL_TYPE_TO_REFERENCE_URI
+from tools.lotl.settings import (
+    SVC_TYPE_EAA,
+    SVC_TYPE_EAA_Q,
+    TS_119_612_TL_TYPES,
+    TL_TYPE_TO_REFERENCE_URI,
+)
 
 ENVELOPED_SIGNATURE_URI = "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
 EXCLUSIVE_C14N_URI = "http://www.w3.org/2001/10/xml-exc-c14n#"
@@ -39,7 +44,7 @@ MANDATED_DOCUMENT_TRANSFORMS = (ENVELOPED_SIGNATURE_URI, EXCLUSIVE_C14N_URI)
 
 SIGNED_PROPERTIES_TYPE_MARKER = "SignedProperties"
 
-ANNEX_H_TL_TYPES = frozenset({"pub-eaa-provider", "eaa-provider"})
+ANNEX_H_TL_TYPES = frozenset({"pub-eaa-provider"})
 NO_HIP_TL_TYPES = frozenset({"pid-provider", "wallet-provider"})
 NO_SERVICE_STATUS_TL_TYPES = frozenset({"pid-provider", "wallet-provider"})
 NEXT_UPDATE_MAX_MONTHS_TL_TYPES = frozenset(
@@ -49,7 +54,6 @@ NEXT_UPDATE_MAX_MONTHS_TL_TYPES = frozenset(
         "wrpac-provider",
         "wrprc-provider",
         "pub-eaa-provider",
-        "eaa-provider",
         "ebwoid-provider",
     }
 )
@@ -60,7 +64,7 @@ STATUS_DETN_URI = {
     "wrpac-provider": "http://uri.etsi.org/19602/WRPACProvidersList/StatusDetn/EU",
     "wrprc-provider": "http://uri.etsi.org/19602/WRPRCProvidersList/StatusDetn/EU",
     "pub-eaa-provider": "http://uri.etsi.org/19602/PubEAAProvidersList/StatusDetn/EU",
-    "eaa-provider": "http://uri.etsi.org/19602/PubEAAProvidersList/StatusDetn/EU",
+    "eaa-provider": "http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate",
     "qeaa-provider": "http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate",
     "ebwoid-provider": "http://uri.etsi.org/19602/RegistrarsAndRegistersList/StatusDetn/EU",
 }
@@ -71,8 +75,14 @@ SCHEME_RULES_URI = {
     "wrpac-provider": "http://uri.etsi.org/19602/WRPACProvidersList/schemerules/EU",
     "wrprc-provider": "http://uri.etsi.org/19602/WRPRCProvidersList/schemerules/EU",
     "pub-eaa-provider": "http://uri.etsi.org/19602/PubEAAProvidersList/schemerules/EU",
-    "eaa-provider": "http://uri.etsi.org/19602/PubEAAProvidersList/schemerules/EU",
     "ebwoid-provider": "http://uri.etsi.org/19602/RegistrarsAndRegistersList/schemerules/EU",
+}
+
+# TS 119 612 lists are mixed national TSLs; require the distinguishing service
+# type when entities are present, but do not forbid other 612 service types.
+REQUIRED_612_SERVICE_TYPE = {
+    "eaa-provider": SVC_TYPE_EAA,
+    "qeaa-provider": SVC_TYPE_EAA_Q,
 }
 
 ALLOWED_SERVICE_TYPES = {
@@ -101,12 +111,6 @@ ALLOWED_SERVICE_TYPES = {
         }
     ),
     "pub-eaa-provider": frozenset(
-        {
-            "http://uri.etsi.org/19602/SvcType/PubEAA/Issuance",
-            "http://uri.etsi.org/19602/SvcType/PubEAA/Revocation",
-        }
-    ),
-    "eaa-provider": frozenset(
         {
             "http://uri.etsi.org/19602/SvcType/PubEAA/Issuance",
             "http://uri.etsi.org/19602/SvcType/PubEAA/Revocation",
@@ -264,9 +268,14 @@ def _check_common_profile(
         errors.append(f"Unknown TL type {tl_type!r}")
         return errors
 
-    if tl_type == "qeaa-provider" and root_local and root_local != "TrustServiceStatusList":
+    if tl_type in TS_119_612_TL_TYPES and root_local and root_local != "TrustServiceStatusList":
+        label = (
+            "Non-qualified EAA Provider"
+            if tl_type == "eaa-provider"
+            else "QEAA Provider"
+        )
         errors.append(
-            "QEAA Provider lists must be ETSI TS 119 612 XML Trusted Lists "
+            f"{label} lists must be ETSI TS 119 612 XML Trusted Lists "
             f"(root TrustServiceStatusList); got {root_local!r}"
         )
 
@@ -314,6 +323,16 @@ def _check_common_profile(
                     f"ServiceTypeIdentifier {svc!r} is not allowed for {tl_type}; "
                     f"allowed={sorted(allowed_svc)}"
                 )
+    elif tl_type in TS_119_612_TL_TYPES:
+        for svc in service_types:
+            errors.extend(_flag_etsi_registry_uri(svc, "ServiceTypeIdentifier"))
+        required_svc = REQUIRED_612_SERVICE_TYPE.get(tl_type)
+        if required_svc and has_entities and required_svc not in service_types:
+            errors.append(
+                f"{tl_type} TS 119 612 lists must include ServiceTypeIdentifier "
+                f"{required_svc!r} when TrustServiceProviders are present "
+                "(EAA vs QEAA vs Pub-EAA are distinguished by Svctype, not LoTEType)"
+            )
 
     for st in service_statuses:
         errors.extend(_flag_etsi_registry_uri(st, "ServiceStatus"))
@@ -327,7 +346,7 @@ def _check_common_profile(
         if historical_period != "65535":
             errors.append(
                 "HistoricalInformationPeriod shall be present with value 65535 "
-                f"on Annex H (Pub-EAA / national EAA) lists; got {historical_period!r}"
+                f"on Annex H (Pub-EAA) lists; got {historical_period!r}"
             )
         if has_entities and not service_statuses:
             errors.append(
@@ -475,7 +494,7 @@ def validate_xml_list(xml_bytes: bytes, *, tl_type: str) -> list[str]:
     root_local = _local_name(root.tag)
     lote_type = _first_text(root, "LoTEType")
     tsl_type = _first_text(root, "TSLType")
-    list_type = tsl_type if tl_type == "qeaa-provider" else (lote_type or tsl_type)
+    list_type = tsl_type if tl_type in TS_119_612_TL_TYPES else (lote_type or tsl_type)
     errors.extend(
         _check_common_profile(
             tl_type=tl_type,
@@ -595,9 +614,14 @@ def _validate_json_signature(doc: dict[str, Any]) -> list[str]:
 
 def validate_json_list(raw: bytes | str, *, tl_type: str) -> list[str]:
     """Validate a published JSON LoTE against the WP4/ETSI profile."""
-    if tl_type == "qeaa-provider":
+    if tl_type in TS_119_612_TL_TYPES:
+        label = (
+            "Non-qualified EAA Provider"
+            if tl_type == "eaa-provider"
+            else "QEAA Provider"
+        )
         return [
-            "QEAA Provider lists must be ETSI TS 119 612 XML Trusted Lists, "
+            f"{label} lists must be ETSI TS 119 612 XML Trusted Lists, "
             "not a TS 119 602 JSON LoTE"
         ]
     try:

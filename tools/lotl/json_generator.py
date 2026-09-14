@@ -16,7 +16,9 @@ from typing import Any
 from tools.lotl.settings import (
     LOTL_JSON_FILENAME,
     LOTL_LOTE_TYPE_URI,
+    MIME_TSL_XML,
     TL_TYPE_TO_REFERENCE_URI,
+    TS_119_612_TL_TYPES,
 )
 from tools.lotl.tl_entry import TLEntry
 
@@ -67,6 +69,14 @@ def _pointers_for_entry(entry: TLEntry) -> list[dict[str, Any]]:
         raise ValueError(
             f"TL entry {entry.participant_id!r} must provide a valid X.509 trust_anchor"
         )
+    if entry.tl_type in TS_119_612_TL_TYPES:
+        return [
+            {
+                "LoTELocation": entry.get_tl_url_xml(),
+                "ServiceDigitalIdentities": sdi,
+                "LoTEQualifiers": [_lote_qualifier(entry, MIME_TSL_XML)],
+            }
+        ]
     json_loc = entry.get_tl_url_json()
     out: list[dict[str, Any]] = [
         {
