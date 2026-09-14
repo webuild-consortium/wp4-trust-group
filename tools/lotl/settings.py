@@ -54,6 +54,29 @@ TL_TYPE_TO_LOTE_URI = TL_TYPE_TO_REFERENCE_URI
 # TS 119 602-1: document type for an EU List of Trusted Lists (LoTL) LoTE
 LOTL_LOTE_TYPE_URI = "http://uri.etsi.org/19602/LoTLType/EUListOfTrustedLists"
 
+# TS 119 612 XML namespace (Annex B.0 / D.1). The 19612_xsd.xsd targetNamespace
+# is 02231/v2#, not the document-number URI used in some WP4 drafts.
+NS_TSL = "http://uri.etsi.org/02231/v2#"
+NS_TSL_LEGACY = "http://uri.etsi.org/19612/v2.4.1#"
+NS_TSL_ADDITIONAL = "http://uri.etsi.org/02231/v2/additionaltypes#"
+TSL_XSD_SCHEMA_LOCATION = (
+    "https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd"
+)
+
+# TS 119 612 compiled-list (LoTL) identifiers (clause 5.3.3 / D.5)
+TSL_TAG_URI = "http://uri.etsi.org/19612/TSLTag"
+LOTL_TSL_TYPE_URI = (
+    "http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUlistofthelists"
+)
+LOTL_SCHEME_RULES_URI = (
+    "http://uri.etsi.org/TrstSvc/TrustedList/schemerules/EUlistofthelists"
+)
+LOTL_STATUS_DETN_URI = (
+    "http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate"
+)
+# Clause 5.3.12: 65535 means historical information is never removed.
+LOTL_HISTORICAL_INFORMATION_PERIOD = 65535
+
 # Output filenames
 LOTL_JSON_FILENAME = "list_of_trusted_lists.json"
 LOTL_XML_FILENAME = "list_of_trusted_lists.xml"
