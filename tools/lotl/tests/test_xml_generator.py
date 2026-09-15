@@ -11,6 +11,7 @@ from tools.lotl.settings import (
     NS_TSL,
     NS_TSL_ADDITIONAL,
     TSL_TAG_URI,
+    TSL_XSD_SCHEMA_LOCATION,
 )
 from tools.lotl.tl_entry import TLEntry
 from tools.lotl.xml_generator import generate_lotl_xml
@@ -63,13 +64,12 @@ def test_generate_with_entries(sample_tl_entry: TLEntry) -> None:
     assert scheme_uri is not None
     assert scheme_uri.get(f"{{{NS_XML}}}lang") == "en"
 
-    eaddr = root.find(
+    eaddrs = root.findall(
         "tsl:SchemeInformation/tsl:SchemeOperatorAddress/tsl:ElectronicAddress/tsl:URI",
         namespaces=NS,
     )
-    assert eaddr is not None
-    assert eaddr.text.startswith("https://")
-    assert eaddr.get(f"{{{NS_XML}}}lang") == "en"
+    assert [u.text.split(":")[0] for u in eaddrs] == ["mailto", "https"]
+    assert all(u.get(f"{{{NS_XML}}}lang") == "en" for u in eaddrs)
 
     next_dt = root.findtext(
         "tsl:SchemeInformation/tsl:NextUpdate/tsl:dateTime", namespaces=NS
@@ -96,6 +96,13 @@ def test_generate_with_entries(sample_tl_entry: TLEntry) -> None:
         )
     ]
     assert "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList" in tsl_types
+
+    for p in pointers:
+        op_names = p.findall(
+            "tsl:AdditionalInformation/tsl:OtherInformation/tsl:SchemeOperatorName/tsl:Name",
+            namespaces=NS,
+        )
+        assert op_names and all((n.text or "").strip() for n in op_names)
 
     mimes = [
         m.text
@@ -137,6 +144,15 @@ def test_generate_custom_distribution_points(sample_tl_entry: TLEntry) -> None:
         )
     ]
     assert dps == ["https://example.test/list_of_trusted_lists.xml"]
+
+
+def test_generate_schema_location_hint(sample_tl_entry: TLEntry) -> None:
+    """xsi:schemaLocation names the TS 119 612 XSD, declared once on the root."""
+    xml = generate_lotl_xml([sample_tl_entry])
+    root = _root(xml)
+    location = root.get("{http://www.w3.org/2001/XMLSchema-instance}schemaLocation")
+    assert location == f"{NS_TSL} {TSL_XSD_SCHEMA_LOCATION}"
+    assert xml.count(b"xmlns:xsi=") == 1
 
 
 def test_generate_rejects_missing_trust_anchor(sample_tl_entry: TLEntry) -> None:

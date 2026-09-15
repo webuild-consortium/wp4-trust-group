@@ -239,6 +239,22 @@ http://uri.etsi.org/19602/PubEAAProvidersList/schemerules/EU
 http://uri.etsi.org/19602/RegistrarsAndRegistersList/schemerules/EU
 ```
 
+#### 3.6.1 Qualifiers in LoTL pointers
+
+Each pointer in the JSON LoTL (`OtherLoTEPointer`) carries list type, scheme operator name, scheme territory and MIME type (TS 119 602 clause 6.3.13 c) makes scheme type/community/rules optional).
+
+Each pointer in the XML LoTL (`OtherTSLPointer`) carries list type, scheme operator name, scheme territory and MIME type (TS 119 612 clause 5.3.13 c)).
+
+**MIME type.** The value depends on the format of the file the pointer points to:
+
+| The pointed-to list is… | List type | `MimeType` |
+|---|---|---|
+| a TS 119 612 XML trusted list | `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric` | `application/vnd.etsi.tsl+xml` |
+| a TS 119 602 LoTE in XML | `http://uri.etsi.org/19602/LoTEType/…` | `application/xml` |
+| a TS 119 602 LoTE in JSON | `http://uri.etsi.org/19602/LoTEType/…` | `application/json` |
+
+`application/vnd.etsi.tsl+xml` is the only registered value (TS 119 612 clause 6.2.2). TS 119 602 V1.1.1 requires a MIME type qualifier but registers no media type for LoTEs, so `application/xml` and `application/json` are a WP4 convention. External validators must be configured to accept them.
+
 ### 3.7 Service Status URIs
 
 #### 3.7.1 TS 119 612 Status Values

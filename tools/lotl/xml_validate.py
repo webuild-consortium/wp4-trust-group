@@ -11,6 +11,12 @@ from pathlib import Path
 
 from lxml import etree  # nosec B410
 
+from tools.lotl.lotl_profile import (
+    electronic_address_errors,
+    pointer_mime_type_errors,
+    postal_address_errors,
+    scheme_name_errors,
+)
 from tools.lotl.settings import (
     LOTL_HISTORICAL_INFORMATION_PERIOD,
     LOTL_SCHEME_RULES_URI,
@@ -95,21 +101,40 @@ def validate_lotl_xml_semantics(root: etree._Element) -> list[str]:
     elif scheme_uri.get(f"{{{NS_XML}}}lang") is None:
         err.append("SchemeInformationURI/URI must carry xml:lang")
 
-    eaddr = root.find(
+    eaddrs = root.findall(
         "tsl:SchemeInformation/tsl:SchemeOperatorAddress/tsl:ElectronicAddress/tsl:URI",
         namespaces=NS,
     )
-    if eaddr is None or not (eaddr.text or "").strip():
-        err.append("ElectronicAddress must contain a URI (mailto: or https:)")
-    else:
-        href = eaddr.text.strip()
-        if not (href.startswith("mailto:") or href.startswith("http://") or href.startswith("https://")):
-            err.append(
-                "ElectronicAddress URI must be a mailto: address or a web site "
-                f"(Annex B.0), got {href!r}"
+    err.extend(
+        electronic_address_errors(
+            [(u.text or "").strip() for u in eaddrs], "ElectronicAddress/URI"
+        )
+    )
+    for i, uri in enumerate(eaddrs):
+        if uri.get(f"{{{NS_XML}}}lang") is None:
+            err.append(f"ElectronicAddress/URI[{i}] must carry xml:lang")
+
+    postal_addresses = root.findall(
+        "tsl:SchemeInformation/tsl:SchemeOperatorAddress/tsl:PostalAddresses/tsl:PostalAddress",
+        namespaces=NS,
+    )
+    for i, pa in enumerate(postal_addresses):
+        err.extend(
+            postal_address_errors(
+                {
+                    tag: pa.findtext(f"tsl:{tag}", namespaces=NS)
+                    for tag in ("StreetAddress", "Locality", "CountryName")
+                },
+                f"PostalAddress[{i}]",
             )
-        if eaddr.get(f"{{{NS_XML}}}lang") is None:
-            err.append("ElectronicAddress/URI must carry xml:lang")
+        )
+
+    territory = root.findtext("tsl:SchemeInformation/tsl:SchemeTerritory", namespaces=NS)
+    names = [
+        n.text or ""
+        for n in root.findall("tsl:SchemeInformation/tsl:SchemeName/tsl:Name", namespaces=NS)
+    ]
+    err.extend(scheme_name_errors(names, territory))
 
     hip = root.findtext(
         "tsl:SchemeInformation/tsl:HistoricalInformationPeriod",
@@ -149,7 +174,10 @@ def validate_lotl_xml_semantics(root: etree._Element) -> list[str]:
                 f"DistributionPoints must include this LoTL XML ({LOTL_XML_FILENAME})"
             )
 
-    if root.find("tsl:SchemeInformation/tsl:DistributionPoints/tsl:DistributionPoint", namespaces=NS) is not None:
+    if (
+        root.find("tsl:SchemeInformation/tsl:DistributionPoints/tsl:DistributionPoint", namespaces=NS)
+        is not None
+    ):
         err.append(
             "DistributionPoints must be a list of URI children, not DistributionPoint wrappers"
         )
@@ -189,12 +217,29 @@ def validate_lotl_xml_semantics(root: etree._Element) -> list[str]:
                     err.append(
                         f"OtherTSLPointer[{i}] TSLType is not a known TL/LoTE type URI: {qt!r}"
                     )
-        mimes = ptr.findall(
-            "tsl:AdditionalInformation/tsl:OtherInformation/tslx:MimeType",
-            namespaces=NS,
-        )
-        if not mimes or not any((m.text or "").strip() for m in mimes):
+        if not ptr.findtext(
+            "tsl:AdditionalInformation/tsl:OtherInformation/tsl:SchemeTerritory", namespaces=NS
+        ):
+            err.append(
+                f"OtherTSLPointer[{i}] must carry SchemeTerritory in AdditionalInformation "
+                "(TS 119 615 PRO-4.2.4-03 selects pointers by it)"
+            )
+        mimes = [
+            (m.text or "").strip()
+            for m in ptr.findall(
+                "tsl:AdditionalInformation/tsl:OtherInformation/tslx:MimeType",
+                namespaces=NS,
+            )
+        ]
+        if not any(mimes):
             err.append(f"OtherTSLPointer[{i}] must carry MimeType in AdditionalInformation")
+        err.extend(
+            pointer_mime_type_errors(
+                f"OtherTSLPointer[{i}]",
+                tsl_types[0] if tsl_types else None,
+                [m for m in mimes if m],
+            )
+        )
     return err
 
 

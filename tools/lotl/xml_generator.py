@@ -1,14 +1,27 @@
-"""Generate LoTL in XML format (TS 119 612 compiled list / EUlistofthelists)."""
+"""Generate LoTL in XML format (TS 119 612 compiled list / EUlistofthelists).
+
+Emits every scheme information field TS 119 612 clause 5.3 marks "shall be present",
+plus DistributionPoints (clause 5.3.16). Pointer qualifiers are TSLType,
+SchemeOperatorName, SchemeTerritory and MimeType.
+"""
 
 from datetime import datetime, timezone
 from typing import Any
 
 from lxml import etree  # nosec B410
 
-from tools.lotl.json_generator import _add_months_safe_utc, _pointers_for_entry
+from tools.lotl.json_generator import (
+    _add_months_safe_utc,
+    _electronic_address_uris,
+    _pointers_for_entry,
+)
 from tools.lotl.settings import (
     LOTL_HISTORICAL_INFORMATION_PERIOD,
+    LOTL_OPERATOR_EMAIL,
+    LOTL_OPERATOR_POSTAL_ADDRESS,
+    LOTL_OPERATOR_WEBSITE,
     LOTL_SCHEME_RULES_URI,
+    LOTL_SCHEME_TERRITORY,
     LOTL_STATUS_DETN_URI,
     LOTL_TSL_TYPE_URI,
     LOTL_XML_FILENAME,
@@ -22,8 +35,10 @@ from tools.lotl.tl_entry import TLEntry
 NS_XSI = "http://www.w3.org/2001/XMLSchema-instance"
 NS_XML = "http://www.w3.org/XML/1998/namespace"
 
+# Declared once on the root, so no element carries a generated ns0/ns1 prefix.
 NAMESPACES = {
     None: NS_TSL,
+    "tslx": NS_TSL_ADDITIONAL,
     "xsi": NS_XSI,
 }
 
@@ -97,7 +112,7 @@ def _add_other_tsl_pointer(parent: etree._Element, pointer: dict[str, Any]) -> N
             _add_other_information(addl, st)
 
         mime = etree.Element(f"{{{NS_TSL_ADDITIONAL}}}MimeType")
-        mime.text = str(q.get("MimeType", "application/xml"))
+        mime.text = q["MimeType"]
         _add_other_information(addl, mime)
 
 
@@ -113,6 +128,9 @@ def generate_lotl_xml(
     scheme_name: str = "WP4 List of Trusted Lists",
     scheme_information_uri: str = "https://webuild-consortium.github.io/wp4-trust-group/",
     distribution_point_uris: list[str] | None = None,
+    scheme_operator_email: str = LOTL_OPERATOR_EMAIL,
+    scheme_operator_website: str = LOTL_OPERATOR_WEBSITE,
+    scheme_operator_postal_address: dict[str, str] | None = None,
 ) -> bytes:
     """Generate LoTL as unsigned TS 119 612 XML (compiled list of pointers).
 
@@ -124,7 +142,7 @@ def generate_lotl_xml(
     issue_dt = now.strftime("%Y-%m-%dT%H:%M:%SZ")
     next_update = _add_months_safe_utc(now, 6).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    root = _make_elem("TrustServiceStatusList")
+    root = etree.Element(f"{{{NS_TSL}}}TrustServiceStatusList", nsmap=NAMESPACES)
     root.set("Id", "lotl-1")
     root.set("TSLTag", TSL_TAG_URI)
     root.set(
@@ -143,14 +161,15 @@ def generate_lotl_xml(
     postal = _make_elem("PostalAddresses", op_addr)
     pa = _make_elem("PostalAddress", postal)
     pa.set(f"{{{NS_XML}}}lang", "en")
-    _make_elem("StreetAddress", pa).text = "N/A"
-    _make_elem("Locality", pa).text = "N/A"
-    _make_elem("PostalCode", pa).text = "N/A"
-    _make_elem("CountryName", pa).text = "EU"
+    address = scheme_operator_postal_address or LOTL_OPERATOR_POSTAL_ADDRESS
+    for tag in ("StreetAddress", "Locality", "PostalCode", "CountryName"):
+        if address.get(tag):
+            _make_elem(tag, pa).text = address[tag]
     elec = _make_elem("ElectronicAddress", op_addr)
-    _add_lang_uri(elec, scheme_information_uri)
+    for href in _electronic_address_uris(scheme_operator_email, scheme_operator_website):
+        _add_lang_uri(elec, href)
 
-    _add_name(scheme_info, "SchemeName", scheme_name)
+    _add_name(scheme_info, "SchemeName", f"{LOTL_SCHEME_TERRITORY}:{scheme_name}")
 
     scheme_uri = _make_elem("SchemeInformationURI", scheme_info)
     _add_lang_uri(scheme_uri, scheme_information_uri)
@@ -160,7 +179,7 @@ def generate_lotl_xml(
     rules = _make_elem("SchemeTypeCommunityRules", scheme_info)
     _add_lang_uri(rules, LOTL_SCHEME_RULES_URI)
 
-    _make_elem("SchemeTerritory", scheme_info).text = "EU"
+    _make_elem("SchemeTerritory", scheme_info).text = LOTL_SCHEME_TERRITORY
 
     policy = _make_elem("PolicyOrLegalNotice", scheme_info)
     notice = _make_elem("TSLLegalNotice", policy)
@@ -192,6 +211,7 @@ def generate_lotl_xml(
     for href in dist:
         _add_plain_uri(dist_el, href)
 
+    etree.cleanup_namespaces(root, top_nsmap=NAMESPACES)
     return etree.tostring(
         root,
         encoding="utf-8",

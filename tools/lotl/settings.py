@@ -77,6 +77,31 @@ LOTL_STATUS_DETN_URI = (
 # Clause 5.3.12: 65535 means historical information is never removed.
 LOTL_HISTORICAL_INFORMATION_PERIOD = 65535
 
+# Clause 5.3.10. Also the "CC:" prefix of the scheme name (clause 5.3.6).
+LOTL_SCHEME_TERRITORY = "EU"
+
+# Scheme operator contact (clause 5.3.5). Override with the LOTL_OPERATOR_* environment variables.
+LOTL_OPERATOR_EMAIL = os.environ.get("LOTL_OPERATOR_EMAIL", "wp4-trust@example.org")
+LOTL_OPERATOR_WEBSITE = os.environ.get(
+    "LOTL_OPERATOR_WEBSITE", "https://webuild-consortium.github.io/wp4-trust-group/"
+)
+LOTL_OPERATOR_POSTAL_ADDRESS = {
+    "StreetAddress": os.environ.get("LOTL_OPERATOR_STREET", "Rome"),
+    "Locality": os.environ.get("LOTL_OPERATOR_LOCALITY", "Rome"),
+    "PostalCode": os.environ.get("LOTL_OPERATOR_POSTAL_CODE", "00100"),
+    "CountryName": os.environ.get("LOTL_OPERATOR_COUNTRY", "IT"),
+}
+
+TSL_TYPE_EU_GENERIC = "http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric"
+
+# MimeType qualifier of a pointer (clause 5.3.13 c)). Only the TSL type is registered
+# (clause 6.2.2). TS 119 602 V1.1.1 requires a MimeType but registers no LoTE media
+# type, so the two LoTE values are a WP4 convention (Task 3 implementation profile).
+MIME_TSL_XML = "application/vnd.etsi.tsl+xml"
+MIME_LOTE_XML = "application/xml"
+MIME_LOTE_JSON = "application/json"
+POINTER_MIME_TYPES = frozenset([MIME_TSL_XML, MIME_LOTE_XML, MIME_LOTE_JSON])
+
 # Output filenames
 LOTL_JSON_FILENAME = "list_of_trusted_lists.json"
 LOTL_XML_FILENAME = "list_of_trusted_lists.xml"

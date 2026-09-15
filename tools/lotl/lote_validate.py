@@ -17,6 +17,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Generator
 
+from tools.lotl.lotl_profile import (
+    electronic_address_errors,
+    pointer_mime_type_errors,
+    postal_address_errors,
+    scheme_name_errors,
+)
 from tools.lotl.settings import LOTL_LOTE_TYPE_URI, TL_TYPE_TO_REFERENCE_URI
 
 _SUBSET_NAME = "1960201_lote_lotl_subset.schema.json"
@@ -138,13 +144,28 @@ def _validate_list_and_scheme(s: Any) -> list[str]:
             if k not in addr or not isinstance(addr[k], list):
                 err.append(f"SchemeOperatorAddress must contain a {k} array")
         eaddr = addr.get("SchemeOperatorElectronicAddress", [])
-        if eaddr:
+        if isinstance(eaddr, list) and eaddr:
             for i, m in enumerate(eaddr):
                 if not isinstance(m, dict) or "uriValue" not in m:
                     err.append(
                         f"SchemeOperatorElectronicAddress[{i}] must be NonEmptyMultiLangURI "
                         "with uriValue"
                     )
+            err.extend(
+                electronic_address_errors(
+                    [str(m.get("uriValue", "")) for m in eaddr if isinstance(m, dict)],
+                    "SchemeOperatorElectronicAddress",
+                )
+            )
+        postal = addr.get("SchemeOperatorPostalAddress", [])
+        for i, pa in enumerate(postal if isinstance(postal, list) else []):
+            if isinstance(pa, dict):
+                err.extend(
+                    postal_address_errors(
+                        {k: pa.get(k) for k in ("StreetAddress", "Locality", "Country")},
+                        f"SchemeOperatorPostalAddress[{i}]",
+                    )
+                )
     dps = s.get("DistributionPoints", [])
     if dps is not None:
         if not isinstance(dps, list):
@@ -192,6 +213,21 @@ def _validate_list_and_scheme(s: Any) -> list[str]:
                         f"PointersToOtherLoTE[{i}].LoTEQualifiers[{j}].LoTEType "
                         f"is not a known TL/LoTE type URI: {qt!r}"
                     )
+                err.extend(
+                    pointer_mime_type_errors(
+                        f"PointersToOtherLoTE[{i}].LoTEQualifiers[{j}]",
+                        qt if isinstance(qt, str) else None,
+                        [str(q["MimeType"])] if q.get("MimeType") else [],
+                    )
+                )
+    names = s.get("SchemeName")
+    if isinstance(names, list):
+        err.extend(
+            scheme_name_errors(
+                [str(n.get("value", "")) for n in names if isinstance(n, dict)],
+                s.get("SchemeTerritory"),
+            )
+        )
     return err
 
 

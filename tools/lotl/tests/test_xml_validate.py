@@ -113,12 +113,16 @@ def test_semantics_cover_required_lotl_fields(sample_tl_entry: TLEntry) -> None:
     )
     if mime is not None:
         mime.text = ""
+    territory = root.find(".//tsl:OtherInformation/tsl:SchemeTerritory", namespaces=NS)
+    assert territory is not None
+    territory.getparent().getparent().remove(territory.getparent())
     errors = validate_lotl_xml_semantics(root)
     joined = " ".join(errors)
     assert "Id" in joined
     assert "TSLTag" in joined
     assert "HistoricalInformationPeriod" in joined
     assert "NextUpdate" in joined
+    assert "SchemeTerritory" in joined
     assert "DistributionPoints" in joined
     assert "TSLLocation" in joined
     assert "X509Certificate" in joined
