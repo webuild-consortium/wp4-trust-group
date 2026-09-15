@@ -52,7 +52,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--validate-only",
         action="store_true",
-        help="Only validate tl_entries, do not produce/sign",
+        help="Only validate local tl_entries files, do not produce/sign",
+    )
+    parser.add_argument(
+        "--validate-published",
+        action="store_true",
+        help=(
+            "Validate local tl_entries, then fetch every published TL/LoTE and "
+            "enforce the WP4/ETSI signature and list profile (blocks CI on "
+            "XPath Filter 2.0, wrong list type URIs, missing JAdES/XAdES, …)"
+        ),
     )
     parser.add_argument(
         "--log-level",
@@ -64,6 +73,11 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     configure_logging(level=args.log_level)
+
+    if args.validate_published:
+        from tools.lotl.published_validate import run_published_validation
+
+        return run_published_validation(args.tl_entries_dir)
 
     signing_key = _load_pem_from_env_or_path("LOTL_SIGNING_KEY", args.signing_key)
     signing_cert = _load_pem_from_env_or_path("LOTL_SIGNING_CERT", args.signing_cert)

@@ -128,7 +128,7 @@ The Member State Trusted List Provider (MS TLP) is responsible **for national no
 
 2. **Signing Trusted Lists**: The MS TLP signs/seals the non-qualified EAA Provider Trusted Lists and the Member State QTSP Trusted Lists for QEAA Providers using its signing key.
 
-3. **Publishing Trusted Lists**: The MS TLP publishes the signed **non-qualified EAA Provider Trusted Lists** and the Member State QTSP Trusted Lists for QEAA Providers in machine-readable and human-readable formats at a publicly accessible URL. Per [ETSI TS 119 602 V1.1.1 (2025-11)](https://www.etsi.org/deliver/etsi_ts/119600_119699/119602/01.01.01_60/ts_119602v010101p.pdf) (*Lists of trusted entities; Data model*), **Attestation Provider Trusted Lists** (ETSI TS 119 602 Annex H, published by an MS TLP) may be used as the profile for these national non-qualified EAA Provider TLs and may be published in either **JSON format with compact JAdES Baseline B signature** OR **XML format with XAdES Baseline B signature** (per ETSI EN 319 132-1). When XML is used, it must be an enveloped digital signature.
+3. **Publishing Trusted Lists**: The MS TLP publishes the signed **non-qualified EAA Provider Trusted Lists** and the Member State QTSP Trusted Lists for QEAA Providers in machine-readable and human-readable formats at a publicly accessible URL. Per [ETSI TS 119 612](https://www.etsi.org/deliver/etsi_ts/119600_119699/119612/02.04.01_60/ts_119612v020401p.pdf), both lists are **XML Trusted Lists** (`TrustServiceStatusList`, **TSLType** `EUgeneric`), signed with enveloped XAdES Baseline B. Non-qualified EAA vs QEAA is distinguished by **ServiceTypeIdentifier** `http://uri.etsi.org/TrstSvc/Svctype/EAA` vs `http://uri.etsi.org/TrstSvc/Svctype/EAA/Q`. TS 119 602 Annex H (`EUPubEAAProvidersList`) is the EC **PuB-EAA** LoTE only and SHALL NOT be reused as the national non-qualified EAA list type. ARF TS11 still **MAY** allow a Rulebook to use a LoTE or OpenID Federation as an additional trust mechanism for non-qualified EAAs; that optional path is not Annex H.
 
 EC-compiled LoTEs (per **WPNot_05**, **PPNot_07**, **RPACANot_05**, **RPACANot_05a**) SHALL comply with **ETSI TS 119 602 v1.1.1** and the applicable annex profile (Annex D–G). QEAA Provider national trusted lists and other TS 119 612 artefacts follow ETSI TS 119 612 or a suitable profile derived from ETSI TS 102 231. When validating trust service outputs against trusted lists (LoTE), implementers SHALL follow the procedures in **ETSI TS 119 615** (procedures for using and interpreting EUMS national trusted lists).
 
@@ -137,7 +137,7 @@ EC-compiled LoTEs (per **WPNot_05**, **PPNot_07**, **RPACANot_05**, **RPACANot_0
 The national non-qualified EAA Provider TL and Member State QTSP Trusted List for QEAA Providers processes are triggered by successful registration with the Member State Registrar. The MS TLP:
 - Receives notification of successful registration from the Registrar (or accesses Registry data).
 - Extracts trust anchors and relevant data from the Registry.
-- Compiles Trusted Lists (national non-qualified EAA Provider TL per TS 119 602 LoTE model; Member State QTSP TL for QEAA Providers per TS 119 612).
+- Compiles Trusted Lists (national non-qualified EAA Provider TL and Member State QTSP TL for QEAA Providers per TS 119 612, distinguished by `Svctype/EAA` vs `Svctype/EAA/Q`).
 - Signs and publishes Trusted Lists.
 - Submits the Trusted List URL to the European Commission.
 
@@ -397,7 +397,7 @@ sequenceDiagram
 
     rect rgb(255, 230, 230)
         Note over TLP,TL: Phase 3: National non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers Publication and Notification
-        TLP->>TLP: 8. Compile non-qualified EAA Provider Trusted List<br/>(TS 119 602 LoTE model or national profile)
+        TLP->>TLP: 8. Compile non-qualified EAA Provider Trusted List<br/>(TS 119 612 TSL; Svctype/EAA)
         Note right of TLP: Include trust anchors:<br/>non-qualified EAA Provider keys
         
         TLP->>TL: 9. Sign/Seal & Publish national non-qualified EAA Provider Trusted List and Member State QTSP Trusted List for QEAA Providers<br/>(national extension)

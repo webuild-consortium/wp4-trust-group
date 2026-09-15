@@ -40,16 +40,16 @@ Three provider classes drive different trust paths:
 | Class | Entitlement (ETSI TS 119 475) | Trusted-list basis | Compiler |
 |-------|------------------------------|-------------------|----------|
 | **QEAA Provider** | `QEAA_Provider` | Member State **national QTSP TL** (ETSI TS 119 612, eIDAS Art. 22) | Member State TLP |
-| **Non-qualified EAA Provider** | `Non_Q_EAA_Provider` | National **LoTE** (TS 119 602 Annex H) where applicable; else MS registration policy | Member State TLP |
-| **PuB-EAA Provider** | `PUB_EAA_Provider` | EC **PuB-EAA Providers LoTE** + Commission list (Art. 45f(3)) | European Commission |
+| **Non-qualified EAA Provider** | `Non_Q_EAA_Provider` | National **TS 119 612 TSL** (`Svctype/EAA`) where the Rulebook uses LoTL; else MS registration / OpenID Federation | Member State TLP |
+| **PuB-EAA Provider** | `PUB_EAA_Provider` | EC **PuB-EAA Providers LoTE** (TS 119 602 Annex H) + Commission list (Art. 45f(3)) | European Commission |
 
 WP4 maps LoTL pointer folders accordingly (`lotl/tl_entries/{tl_type}/`):
 
-- `qeaa-provider` → TS 119 612 XML (`TSLType/EUgeneric`)
-- `eaa-provider` → TS 119 602 Annex H (national non-qualified)
+- `qeaa-provider` → TS 119 612 XML (`TSLType/EUgeneric`, `Svctype/EAA/Q`)
+- `eaa-provider` → TS 119 612 XML (`TSLType/EUgeneric`, `Svctype/EAA`)
 - `pub-eaa-provider` → TS 119 602 Annex H (`EUPubEAAProvidersList`)
 
-**Important:** Annex H / `EUPubEAAProvidersList` does **not** replace national TS 119 612 lists for QEAA providers. QEAA trust anchors live on **Member State QTSP trusted lists**, not on the PuB-EAA LoTE profile.
+**Important:** Annex H / `EUPubEAAProvidersList` is **Pub-EAA only**. It does **not** replace national TS 119 612 lists for QEAA or non-qualified EAA providers.
 
 ---
 
@@ -195,9 +195,9 @@ From WP4 **Trust Infrastructure Schema**:
 
 | Entity | Registration | TL publication | LoTL pointer |
 |--------|-------------|----------------|--------------|
-| QEAA Provider | MS Registrar | MS **QTSP TL** (TS 119 612) | `qeaa-provider` |
-| Non-qualified EAA | MS Registrar | MS **EAA LoTE** (Annex H) | `eaa-provider` |
-| PuB-EAA Provider | MS Registrar | EC **PuB-EAA LoTE** | `pub-eaa-provider` |
+| QEAA Provider | MS Registrar | MS **QTSP TL** (TS 119 612, `Svctype/EAA/Q`) | `qeaa-provider` |
+| Non-qualified EAA | MS Registrar | MS **EAA TSL** (TS 119 612, `Svctype/EAA`) | `eaa-provider` |
+| PuB-EAA Provider | MS Registrar | EC **PuB-EAA LoTE** (Annex H) | `pub-eaa-provider` |
 
 The **European Commission** maintains the LoTL with pointers to all published lists (ARF Topic 31; `trust-infrastructure-schema.md` §3).
 
@@ -209,9 +209,9 @@ ARF Technical Specification 11 states:
 
 Catalogue metadata exposes `trustedAuthorities` / `isLoTE` so verifiers know whether to use LoTL (612) or LoTE (602).
 
-### 5.3 Profile constraints (WP4 §7.3 — PuB-EAA / national EAA LoTE)
+### 5.3 Profile constraints (WP4 §7.3 — PuB-EAA LoTE vs national 612 TSL)
 
-For Annex H lists (PuB-EAA and national non-qualified EAA):
+For Annex H lists (**PuB-EAA only**):
 
 - Mandatory `ServiceStatus` and `StatusStartingTime`
 - `HistoricalInformationPeriod` = 65535
@@ -219,6 +219,8 @@ For Annex H lists (PuB-EAA and national non-qualified EAA):
 - Status: `SvcStatus/notified`, `SvcStatus/withdrawn`
 - Max update interval: **6 months**
 - Signatures: Compact JAdES B (JSON) or XAdES B (XML)
+
+For national **non-qualified EAA** and **QEAA** lists (`eaa-provider` / `qeaa-provider`): TS 119 612 XML `TrustServiceStatusList`, `TSLType/EUgeneric`, enveloped XAdES B (enveloped-signature then exclusive C14N). Distinguishing service types: `Svctype/EAA` vs `Svctype/EAA/Q`.
 
 ---
 
@@ -303,11 +305,11 @@ sequenceDiagram
 
 | Step | QEAA (OIA_13) | PuB-EAA (OIA_14) | Non-qualified EAA (OIA_15) |
 |------|---------------|------------------|----------------------------|
-| Trust discovery | National **QTSP TL** via LoTL (`qeaa-provider`) | **PuB-EAA LoTE** via LoTL + QTSP cert on **Art. 22 TL** | Per applicable **Rulebook** (Topic 12): **national EAA LoTE** via LoTL (`eaa-provider`) **or** **OpenID Federation** trust marks |
+| Trust discovery | National **QTSP TL** via LoTL (`qeaa-provider`) | **PuB-EAA LoTE** via LoTL + QTSP cert on **Art. 22 TL** | Per applicable **Rulebook** (Topic 12): **national EAA TSL** via LoTL (`eaa-provider`, TS 119 612 `Svctype/EAA`) **or** **OpenID Federation** trust marks |
 | Signature | Qualified signature per Art. 32 | Qualified signature + QTSP cert chain | Per Rulebook (Topic 12) |
 | Extra checks | Issuer status; revocation if required | Art. 45f certified attributes; revocation if required | Issuer status where applicable; revocation per rulebook |
 
-**Non-qualified EAA and LoTL:** A national non-qualified EAA provider **does not always** need to appear on the LoTL. ARF TS11 states that the LoTE data model **MAY** be used for non-qualified EAAs; the applicable **Attestation Rulebook** (Topic 12) defines which trust mechanism(s) apply. When the Rulebook specifies a **national EAA LoTE**, the Member State TLP publishes that list and submits its URL to the EC for inclusion in the LoTL (`eaa-provider` pointer) — the same LoTL-chaining procedure as for QEAA and PuB-EAA. When the Rulebook specifies another mechanism (e.g. **OpenID Federation**), verifiers resolve trust anchors through that mechanism instead of LoTL chaining.
+**Non-qualified EAA and LoTL:** A national non-qualified EAA provider **does not always** need to appear on the LoTL. ARF TS11 states that the LoTE data model **MAY** be used for non-qualified EAAs; the applicable **Attestation Rulebook** (Topic 12) defines which trust mechanism(s) apply. When the Rulebook specifies a **national EAA Trusted List**, the Member State TLP publishes a **TS 119 612** TSL (`TSLType/EUgeneric`, `Svctype/EAA`) and submits its URL to the EC for inclusion in the LoTL (`eaa-provider` pointer) — the same LoTL-chaining procedure as for QEAA. That list is **not** TS 119 602 Annex H (`EUPubEAAProvidersList`). When the Rulebook specifies another mechanism (e.g. **OpenID Federation**), verifiers resolve trust anchors through that mechanism instead of LoTL chaining.
 
 **WP4 pilot — Rulebook mechanism:** In the pilot, both **LoTE** (discovered via LoTL) and **OpenID Federation** are supported as Rulebook-defined trust mechanisms for non-qualified EAAs. The LoTEs or Federations used in the pilot **must be provided by WP4 participants** that operate components of the trust infrastructure (e.g. MS TLPs, EC LoTL publication, or trust-registry / federation operators).
 
@@ -365,7 +367,7 @@ The **catalogue** (`trustedAuthorities` in ARF TS11) may be used by RPs or verif
 |-------|-------------|
 | **TLOL vs LoTL** | No normative “TLOL” string; use **LoTL** in implementations and documentation. |
 | **Overloaded “identity verification”** | Legal, registration, cryptographic, end-user, **wallet-at-issuance**, and **RP-at-presentation** meanings coexist; implementers must map controls to the correct layer (see §3.4 vs §3.5). |
-| **ARF vs ETSI on EAA registration** | ARF Topic 27 requires all attestation providers to register with a Registrar; **TS 119 602 does not define EAA/QEAA provider registration as attestation providers** — only PuB-EAA via Annex H. **TS 119 612** covers QEAA as trust services. WP4 documents this mismatch explicitly. |
+| **ARF vs ETSI on EAA registration** | ARF Topic 27 requires all attestation providers to register with a Registrar; **TS 119 602 does not define EAA/QEAA provider registration as attestation providers** — only PuB-EAA via Annex H. **TS 119 612** covers EAA and QEAA as trust services (`Svctype/EAA` vs `Svctype/EAA/Q`). WP4 LoTL `eaa-provider` therefore points at a 612 TSL, not Annex H. |
 | **Wallet QEAA validation algorithm** | CIR 2024/2981 states the security goal; step-by-step “registered to issue this attestation type” logic is distributed across ARF, OpenID4VP, and ETSI validation specs. |
 | **ETSI TS 119 602 in spec corpus** | Referenced in ARF TS11 but not fully mirrored in `eidas-references-search-engine/referenced-standards/` (draft/issue link only). |
 | **LoTL pilot coverage** | WP4 `lotl/tl_entries/` is populated for PID, Wallet, WRPAC, WRPRC, QEAA, PuB-EAA, and non-qualified EAA provider types (IDunion, Credimi/Forkbomb, NXD Foundation, Raidiam). Coverage remains a pilot subset, not production Member State lists. |
@@ -377,7 +379,7 @@ The **catalogue** (`trustedAuthorities` in ARF TS11) may be used by RPs or verif
 
 1. **EAA provider identity verification** in the EUDI Wallet is not a single check but a **stack**: MS registrar vetting and TS 119 461 proofing → publication of trust anchors in the correct TL/LoTE → LoTL-mediated discovery → runtime validation of WRPAC/WRPRC (wallet, at issuance) and **attestation signatures** (wallet at storage and **RP at presentation**) via **chained** trust material.
 
-2. **LoTL chaining** answers: *Which signed list should I trust, and with which anchor?* It routes **wallet units and Relying Parties** to the correct national QTSP list (QEAA), EC PuB-EAA list, or — where the applicable Rulebook specifies LoTE — national non-qualified EAA LoTE. For non-qualified EAAs whose Rulebook defines **OpenID Federation** instead, trust discovery follows federation trust marks rather than LoTL pointers.
+2. **LoTL chaining** answers: *Which signed list should I trust, and with which anchor?* It routes **wallet units and Relying Parties** to the correct national QTSP list (QEAA, `Svctype/EAA/Q`), EC PuB-EAA Annex H list, or — where the applicable Rulebook specifies a national Trusted List — national non-qualified EAA TSL (`Svctype/EAA`). For non-qualified EAAs whose Rulebook defines **OpenID Federation** instead, trust discovery follows federation trust marks rather than LoTL pointers.
 
 3. **Certificate chaining** answers: *Does this presented credential chain to an anchor I already trust from those lists?* It applies to WRPAC, WRPRC, WUA, and **QEAA/PuB-EAA/non-Q EAA signature validation**—including when the RP validates a credential **received from the wallet** after presentation (OIA_13–15).
 
@@ -385,7 +387,7 @@ The **catalogue** (`trustedAuthorities` in ARF TS11) may be used by RPs or verif
 
 5. **Presentation is symmetric to issuance for trust lists**: the wallet uses TL/LoTE + registry to trust the **RP** before release; the RP uses the **same TL/LoTE ecosystem** to trust the **EAA issuer** on the presented credential after receipt—without re-using the EAA provider’s WRPAC/WRPRC in that step.
 
-6. WP4 profiles operationalise the standards split (612 vs 602, LoTL automation, §7.3 Annex H). Pilot LoTL entries now cover PID, Wallet, WRPAC, WRPRC, QEAA, PuB-EAA, and non-qualified EAA provider types, still as a consortium subset rather than production Member State lists.
+6. WP4 profiles operationalise the standards split (612 vs 602, LoTL automation, §7.3 Annex H for PuB-EAA, §7.3.1 for national EAA/QEAA). Pilot LoTL entries now cover PID, Wallet, WRPAC, WRPRC, QEAA, PuB-EAA, and non-qualified EAA provider types, still as a consortium subset rather than production Member State lists.
 
 ---
 

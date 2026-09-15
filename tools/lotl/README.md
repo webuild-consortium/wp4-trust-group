@@ -79,8 +79,14 @@ python -m tools.lotl --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
 # With inline key/cert
 python -m tools.lotl --signing-key key.pem --signing-cert cert.pem --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
 
-# Validate-only (for CI, no signing required)
+# Validate-only (local tl_entries files, no signing required)
 python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/
+
+# Fetch every published TL/LoTE pointed to by lotl/tl_entries and enforce
+# the WP4/ETSI profile (enveloped-signature then exclusive C14N; compact
+# JAdES Baseline B; list type URIs). Fails CI if a participant uses
+# XPath Filter 2.0 or any other off-profile algorithm/list type.
+python -m tools.lotl --validate-published --tl-entries-dir lotl/tl_entries/
 
 # Verbose logging
 python -m tools.lotl --log-level DEBUG ...
