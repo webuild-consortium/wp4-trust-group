@@ -144,7 +144,7 @@ def _validate_list_and_scheme(s: Any) -> list[str]:
             if k not in addr or not isinstance(addr[k], list):
                 err.append(f"SchemeOperatorAddress must contain a {k} array")
         eaddr = addr.get("SchemeOperatorElectronicAddress", [])
-        if isinstance(eaddr, list) and eaddr:
+        if isinstance(eaddr, list):
             for i, m in enumerate(eaddr):
                 if not isinstance(m, dict) or "uriValue" not in m:
                     err.append(

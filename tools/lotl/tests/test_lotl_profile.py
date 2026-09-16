@@ -162,6 +162,14 @@ def test_json_validator_rejects_profile_violations(sample_tl_entry: TLEntry) -> 
     assert "points to a TS 119 602 LoTE" in joined
 
 
+def test_json_validator_rejects_empty_electronic_address(sample_tl_entry: TLEntry) -> None:
+    doc = generate_lotl_json([sample_tl_entry])
+    doc["LoTE"]["ListAndSchemeInformation"]["SchemeOperatorAddress"][
+        "SchemeOperatorElectronicAddress"
+    ] = []
+    assert any("mailto" in e for e in validate_lote_json(doc))
+
+
 def test_validators_require_tsl_mime_type_for_qeaa(sample_tl_entry: TLEntry) -> None:
     entry = _qeaa(sample_tl_entry)
     doc = generate_lotl_json([entry])
