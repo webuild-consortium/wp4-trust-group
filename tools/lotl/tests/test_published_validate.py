@@ -284,6 +284,14 @@ def test_format_report_local_errors() -> None:
 def test_finding_title_and_hint() -> None:
     assert "XPath Filter 2.0" in finding_title("XPath Filter 2.0 is not permitted")
     assert "enveloped-signature" in finding_hint("XPath Filter 2.0 is not permitted")
+    assert "two ds:Reference" in finding_title(
+        "XML signature verification failed: XAdES Baseline B requires at least "
+        "2 ds:Reference elements (document and SignedProperties); found 1"
+    )
+    assert "SignedProperties" in finding_hint(
+        "XML signature verification failed: XAdES Baseline B requires at least "
+        "2 ds:Reference elements (document and SignedProperties); found 1"
+    )
     assert finding_title("something unexpected") == "Profile violation"
     assert "implementation profile" in finding_hint("something unexpected")
 

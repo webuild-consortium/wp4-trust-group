@@ -70,6 +70,11 @@ _FIX_HINTS: tuple[tuple[str, str], ...] = (
         "Include the profile SchemeTypeCommunityRules URI for this list type.",
     ),
     (
+        "at least 2 ds:Reference",
+        "XAdES Baseline B needs a document ds:Reference and a SignedProperties "
+        "ds:Reference (EN 319 132-1 Table 2). A KeyInfo reference is optional.",
+    ),
+    (
         "signature verification failed",
         "The certificate in lotl/tl_entries trust_anchor must verify the published signature.",
     ),
@@ -160,6 +165,8 @@ def finding_title(message: str) -> str:
         return "Missing HistoricalInformationPeriod"
     if "no trustedentity" in lowered:
         return "Empty trusted-entity list"
+    if "at least 2 ds:reference" in lowered:
+        return "XAdES Baseline B needs two ds:Reference elements"
     if "signature verification failed" in lowered:
         return "Signature does not verify"
     if "jades" in lowered:
@@ -237,8 +244,9 @@ def _try_crypto_verify(
         valid, err = validate_tl_signature_xml(body, trust_anchor)
         if valid:
             return []
-        # signxml is not a full XAdES verifier; an extra SignedProperties
-        # ds:Reference is required by XAdES Baseline B and is not a profile fail.
+        # signxml's default expect_references=1 rejects a valid extra
+        # SignedProperties ds:Reference. Participant verify uses the actual
+        # count (>= 2); keep this guard if an older path still surfaces it.
         if err and "Expected to find 1 references" in err:
             return []
         return [f"XML signature verification failed: {err}"]
