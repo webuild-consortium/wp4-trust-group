@@ -1,0 +1,5 @@
+# Auto-discovered when running: bandit -r tools/
+# Pytest assert (B101) is not a product vulnerability.
+[bandit]
+exclude: lotl/tests,tools/lotl/tests
+skips: B101

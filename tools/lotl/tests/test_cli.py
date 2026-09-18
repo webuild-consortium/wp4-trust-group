@@ -45,6 +45,7 @@ def test_cli_help() -> None:
     assert result.returncode == 0, (result.stdout, result.stderr)
     assert "tl-entries-dir" in result.stdout
     assert "validate-published" in result.stdout
+    assert "check-expiry" in result.stdout
 
 
 def test_cli_main_invocation(tl_entries_dir: Path) -> None:
@@ -173,6 +174,8 @@ def test_cli_check_expiry_published_lotl(
         "--lotl-json", str(lotl_path),
     ])
     assert exit_code == 0
+
+
 def test_cli_validate_published(tl_entries_dir: Path) -> None:
     """--validate-published fetches and profile-validates published lists."""
     from unittest.mock import patch

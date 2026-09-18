@@ -7,7 +7,7 @@ import pytest
 from unittest.mock import patch
 
 from tools.lotl.producer import get_next_sequence_number, produce
-from tools.lotl.settings import LOTL_JSON_FILENAME, LOTL_XML_FILENAME
+from tools.lotl.settings import LOTL_JSON_FILENAME, LOTL_TSL_TYPE_URI, LOTL_XML_FILENAME, NS_TSL
 
 
 def test_produce_validate_only(tl_entries_dir: Path, tmp_path: Path) -> None:
@@ -70,6 +70,11 @@ def test_produce_success(
     data = json.loads(json_path.read_text())
     assert "signature" in data
     assert "LoTE" in data
+    xml_text = xml_path.read_bytes()
+    assert LOTL_TSL_TYPE_URI.encode() in xml_text
+    assert b"PointersToOtherTSL" in xml_text
+    assert b"OtherTSLPointer" in xml_text
+    assert NS_TSL.encode() in xml_text
 
 
 def test_get_next_sequence_number_from_json_legacy_pilot_shape(tmp_path: Path) -> None:
@@ -96,7 +101,7 @@ def test_get_next_sequence_number_from_json(tmp_path: Path) -> None:
 
 
 def test_get_next_sequence_number_from_xml(tmp_path: Path) -> None:
-    """Read sequence from existing XML."""
+    """Read sequence from existing XML (legacy 19612 namespace)."""
     xml_content = """<?xml version="1.0"?>
 <TrustServiceStatusList xmlns="http://uri.etsi.org/19612/v2.4.1#">
   <SchemeInformation>
@@ -105,6 +110,18 @@ def test_get_next_sequence_number_from_xml(tmp_path: Path) -> None:
 </TrustServiceStatusList>"""
     (tmp_path / LOTL_XML_FILENAME).write_text(xml_content)
     assert get_next_sequence_number(tmp_path) == 4
+
+
+def test_get_next_sequence_number_from_xml_02231(tmp_path: Path) -> None:
+    """Read sequence from TS 119 612 namespace XML."""
+    xml_content = f"""<?xml version="1.0"?>
+<TrustServiceStatusList xmlns="{NS_TSL}">
+  <SchemeInformation>
+    <TSLSequenceNumber>9</TSLSequenceNumber>
+  </SchemeInformation>
+</TrustServiceStatusList>"""
+    (tmp_path / LOTL_XML_FILENAME).write_text(xml_content)
+    assert get_next_sequence_number(tmp_path) == 10
 
 
 def test_produce_validation_failure(tmp_path: Path) -> None:
@@ -160,6 +177,44 @@ def test_produce_validation_exception_returns_one(
 
     key_path, cert_path = signing_key_and_cert
     with patch.object(producer, "validate_lote_json", side_effect=RuntimeError("boom")):
+        code = produce(
+            tl_entries_dir=tl_entries_dir,
+            output_dir=tmp_path,
+            signing_key=key_path.read_text(),
+            signing_cert=cert_path.read_text(),
+        )
+    assert code == 1
+
+
+def test_produce_xml_validation_errors_returns_one(
+    tl_entries_dir: Path,
+    tmp_path: Path,
+    signing_key_and_cert: tuple[Path, Path],
+) -> None:
+    """XML semantic/schema errors are handled as non-zero exit."""
+    from tools.lotl import producer
+
+    key_path, cert_path = signing_key_and_cert
+    with patch.object(producer, "validate_lotl_xml", return_value=["bad xml"]):
+        code = produce(
+            tl_entries_dir=tl_entries_dir,
+            output_dir=tmp_path,
+            signing_key=key_path.read_text(),
+            signing_cert=cert_path.read_text(),
+        )
+    assert code == 1
+
+
+def test_produce_xml_validation_exception_returns_one(
+    tl_entries_dir: Path,
+    tmp_path: Path,
+    signing_key_and_cert: tuple[Path, Path],
+) -> None:
+    """XML validation exceptions are handled as non-zero exit."""
+    from tools.lotl import producer
+
+    key_path, cert_path = signing_key_and_cert
+    with patch.object(producer, "validate_lotl_xml", side_effect=RuntimeError("boom")):
         code = produce(
             tl_entries_dir=tl_entries_dir,
             output_dir=tmp_path,

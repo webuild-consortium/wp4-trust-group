@@ -15,7 +15,7 @@ from calendar import monthrange
 from datetime import datetime, timezone
 from typing import Any
 
-from lxml import etree
+from lxml import etree  # nosec B410
 
 from tools.lotl.settings import (
     SVC_TYPE_EAA,
@@ -23,6 +23,7 @@ from tools.lotl.settings import (
     TS_119_612_TL_TYPES,
     TL_TYPE_TO_REFERENCE_URI,
 )
+from tools.lotl.xml_safe import safe_fromstring
 
 ENVELOPED_SIGNATURE_URI = "http://www.w3.org/2000/09/xmldsig#enveloped-signature"
 EXCLUSIVE_C14N_URI = "http://www.w3.org/2001/10/xml-exc-c14n#"
@@ -486,7 +487,7 @@ def _validate_xml_signatures(root: etree._Element) -> list[str]:
 def validate_xml_list(xml_bytes: bytes, *, tl_type: str) -> list[str]:
     """Validate a published XML TL/LoTE against the WP4/ETSI profile."""
     try:
-        root = etree.fromstring(xml_bytes)
+        root = safe_fromstring(xml_bytes)
     except etree.XMLSyntaxError as exc:
         return [f"XML is not well-formed: {exc}"]
 
@@ -731,7 +732,7 @@ def summarize_published_document(
     info: dict[str, str] = {"format": fmt}
     if fmt == "xml":
         try:
-            root = etree.fromstring(content)
+            root = safe_fromstring(content)
         except etree.XMLSyntaxError as exc:
             info["parse_error"] = str(exc)
             return info
