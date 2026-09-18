@@ -82,7 +82,7 @@ def test_jades_verify_invalid_fails() -> None:
 DS = "http://www.w3.org/2000/09/xmldsig#"
 XADES = "http://uri.etsi.org/01903/v1.3.2#"
 NS = {"ds": DS, "xades": XADES}
-TSL = "http://uri.etsi.org/19612/v2.4.1#"
+from tools.lotl.settings import NS_TSL as TSL
 TSL_MIME_TYPE = "application/vnd.etsi.tsl+xml"
 
 
