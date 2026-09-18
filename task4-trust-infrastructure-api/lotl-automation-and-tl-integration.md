@@ -9,15 +9,15 @@ Per the EUDIW trust model in [Trust Infrastructure Schema](../task2-trust-framew
 | TL type (folder) | Trusted List (Task 2) | Compiler | Expected list format | `referencedListTypeUri` in LoTL JSON (`tools/lotl/settings.py`) |
 |------------------|----------------------|----------|----------------------|------------------------------------------------------------------|
 | `pub-eaa-provider` | EU-level **PuB-EAA** Providers TL | European Commission | TS 119 602 Annex H (LoTE) / profile §7.3 | `http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList` |
-| `eaa-provider` | National **non-qualified EAA** Provider TL | Member State TLP | TS 119 602 Annex H (LoTE) / profile §7.3 | `http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList` |
-| `qeaa-provider` | National **QTSP** TL for **QEAA** Providers | Member State TLP | **TS 119 612** national trusted list (XML TSL; Article 22 eIDAS) | `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric` |
+| `eaa-provider` | National **non-qualified EAA** Provider TL | Member State TLP | **TS 119 612** national trusted list (XML TSL; `Svctype/EAA`) | `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric` |
+| `qeaa-provider` | National **QTSP** TL for **QEAA** Providers | Member State TLP | **TS 119 612** national trusted list (XML TSL; Article 22 eIDAS; `Svctype/EAA/Q`) | `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric` |
 | `pid-provider` | EU PID Providers List | EC | Profile §7.1 | `…/LoTEType/EUPIDProvidersList` |
 | `wallet-provider` | EU Wallet Providers List | EC | Profile §7.2 | `…/LoTEType/EUWalletProvidersList` |
 | `wrpac-provider` | EU WRPAC Providers List | EC | Profile | `…/LoTEType/EUWRPACProvidersList` |
 | `wrprc-provider` | EU WRPRC Providers List | EC | Profile | `…/LoTEType/EUWRPRCProvidersList` |
 | `ebwoid-provider` | Registrars / registers (EBWOID) | Per Task 3 / ARF | Profile | `…/LoTEType/EURegistrarsAndRegistersList` |
 
-For **PuB-EAA** and **non-qualified EAA**, **`referencedListTypeUri` is the same LoTE type** because both follow **Annex H / `EUPubEAAProvidersList`**; they differ by **who publishes** (EC vs MS) and by notification rules (see Task 2). **QEAA** pointers denote **Member State national trusted lists**; consumers validate them per **ETSI TS 119 615** and TS 119 612 rules, not the Annex H LoTE profile. CI **must** validate each `tl_url` against the applicable format (LoTE JSON/XML vs TS 119 612 XML).
+For **PuB-EAA**, **`referencedListTypeUri` is Annex H / `EUPubEAAProvidersList`**. For **non-qualified EAA** and **QEAA**, the pointer URI is the same national **TS 119 612** `TSLType/EUgeneric`; consumers disambiguate by **ServiceTypeIdentifier** (`Svctype/EAA` vs `Svctype/EAA/Q`), not by reusing the Pub-EAA LoTE type. CI **must** validate each `tl_url` against the applicable format (LoTE JSON/XML vs TS 119 612 XML).
 
 ## Process Overview
 
@@ -206,7 +206,7 @@ Signature validation with `trust_anchor` is implemented today. Per-type ETSI sch
 | `wallet-provider` | TS 119 602 Annex E | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
 | `pub-eaa-provider` | TS 119 602 Annex H | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
 | `qeaa-provider` | TS 119 612 (national QTSP TL) | https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd | [ ] Planned |
-| `eaa-provider` | TS 119 602 Annex H | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
+| `eaa-provider` | TS 119 612 (national EAA TSL) | https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd | [ ] Planned |
 | `wrpac-provider` | TS 119 602 Annex F | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
 | `wrprc-provider` | TS 119 602 Annex G | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
 | `ebwoid-provider` | TS 119 602 Annex I | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |

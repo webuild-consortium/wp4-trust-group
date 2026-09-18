@@ -63,6 +63,12 @@ jobs:
         run: |
           python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/
 
+      - name: Validate published TLs/LoTEs against WP4/ETSI profile
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python -m tools.lotl --validate-published --tl-entries-dir lotl/tl_entries/
+
       - name: Run LoTL tests (includes schema validation paths)
         run: |
           pytest tools/lotl/tests/ -v --cov=tools.lotl --cov-report=term-missing --cov-fail-under=90
