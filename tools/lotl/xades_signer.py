@@ -34,8 +34,10 @@ EXC_C14N = "http://www.w3.org/2001/10/xml-exc-c14n#"
 # TS 119 612 clause 6.2.2 registers this media type for trusted lists.
 TSL_MIME_TYPE = "application/vnd.etsi.tsl+xml"
 
-# The document, SignedProperties and KeyInfo. Only verify_xml's default: EN 319 132-1
-# Table 2 gives ds:Reference ">= 2" and TS 119 612 Annex B.1.0 rule 4 permits more.
+# EN 319 132-1 Table 2: ds:Reference ">= 2" (document + SignedProperties).
+# TS 119 612 Annex B.1.0 rule 4 / TS 119 602 Annex H.4 rule 4 permit more.
+MIN_XADES_B_REFERENCES = 2
+# LoTL production profile: document, SignedProperties and KeyInfo.
 EXPECTED_REFERENCES = 3
 
 # EN 319 132-1 Table 2 note k requires DataObjectFormat.
@@ -74,6 +76,30 @@ class LoTLXAdESSigner(XAdESSigner):
 def _parse(xml_content: bytes) -> etree._Element:
     """Parse untrusted XML without DTD loading, entity expansion or network access."""
     return safe_fromstring(xml_content)
+
+
+def _signed_info_references(signature: etree._Element) -> list[etree._Element]:
+    """Return ds:Reference elements under this signature's ds:SignedInfo."""
+    signed_info = signature.find(f"{{{DS}}}SignedInfo")
+    if signed_info is None:
+        return []
+    return signed_info.findall(f"{{{DS}}}Reference")
+
+
+def _has_empty_document_uri(signature: etree._Element) -> bool:
+    """True when a non-SignedProperties ds:Reference uses URI='' (whole document).
+
+    TS 119 602 Annex H.4 mandates URI='' for XML LoTEs. TS 119 612 Annex B.1.0
+    rule 2 also allows a same-document URI that covers TrustServiceStatusList;
+    XML-DSig URI='' covers the enveloping root.
+    """
+    for ref in _signed_info_references(signature):
+        typ = ref.get("Type") or ""
+        if "SignedProperties" in typ:
+            continue
+        if (ref.get("URI") or "") == "":
+            return True
+    return False
 
 
 def _load_pem(pem: Union[bytes, str, Path]) -> str:
@@ -140,9 +166,9 @@ def verify_xml(
     xml_content: bytes,
     cert_pem: Union[bytes, str, Path] | None = None,
     ca_pem_file: Union[str, Path] | None = None,
-    expect_references: int = EXPECTED_REFERENCES,
+    expect_references: int | None = EXPECTED_REFERENCES,
 ) -> bytes:
-    """Verify the XAdES signature on a LoTL.
+    """Verify the XAdES signature on a LoTL or published trusted list.
 
     A trust anchor is mandatory. Given neither argument, signxml falls back to the
     certifi CA bundle and validates the embedded certificate as a TLS client
@@ -153,9 +179,10 @@ def verify_xml(
         xml_content: Signed XML bytes.
         cert_pem: Certificate the signature must have been made with.
         ca_pem_file: CA file for chain validation (e.g. a self-signed test cert).
-        expect_references: Number of ds:Reference elements the signature must carry.
-            Raise this for a signature carrying further references, as TS 119 612
-            Annex B.1.0 rule 4 permits.
+        expect_references: Exact ds:Reference count signxml must see. The LoTL
+            signer emits 3 (default). Pass None for published participant lists:
+            EN 319 132-1 Table 2 requires >= 2 (document + SignedProperties);
+            Annex B.1.0 / H.4 rule 4 permits more, so the actual count is used.
 
     Returns:
         The verified, signed XML.
@@ -184,11 +211,22 @@ def verify_xml(
             f"A trusted list carries exactly one signature, found {len(signatures)}"
         )
 
+    n_refs = len(_signed_info_references(signatures[0]))
+    if expect_references is None:
+        if n_refs < MIN_XADES_B_REFERENCES:
+            raise InvalidSignature(
+                "XAdES Baseline B requires at least "
+                f"{MIN_XADES_B_REFERENCES} ds:Reference elements "
+                f"(document and SignedProperties); found {n_refs}"
+            )
+        expect_references = n_refs
+
     root_id = root.get("Id")
-    if not root_id:
+    empty_uri = _has_empty_document_uri(signatures[0])
+    if not root_id and not empty_uri:
         raise InvalidSignature(
             "Root element carries no Id, so no ds:Reference can cover it "
-            "(TS 119 612 Annex B.1.0 rule 2b)"
+            "(TS 119 612 Annex B.1.0 rule 2)"
         )
 
     kwargs: dict = {}
@@ -203,20 +241,24 @@ def verify_xml(
         **kwargs,
     )
 
-    # Annex B.1.0 rule 2: a ds:Reference covers the TrustServiceStatusList itself.
-    # Select that reference by the root's Id
+    # Annex B.1.0 rule 2 / Annex H.4: a ds:Reference covers the list itself,
+    # either by fragment Id or by URI="" over the enveloping document.
     verified = results if isinstance(results, list) else [results]
-    covered = [
-        result.signed_xml
-        for result in verified
-        if result.signed_xml is not None
-        and result.signed_xml.tag == root.tag
-        and result.signed_xml.get("Id") == root_id
-    ]
+    covered = []
+    for result in verified:
+        signed = result.signed_xml
+        if signed is None or signed.tag != root.tag:
+            continue
+        if root_id:
+            if signed.get("Id") == root_id:
+                covered.append(signed)
+        else:
+            covered.append(signed)
     if len(covered) != 1:
+        target = f"#{root_id}" if root_id else 'URI=""'
         raise InvalidSignature(
             f"Expected exactly one ds:Reference covering the trusted list "
-            f"#{root_id}, found {len(covered)}"
+            f"{target}, found {len(covered)}"
         )
     signed_xml = covered[0]
 

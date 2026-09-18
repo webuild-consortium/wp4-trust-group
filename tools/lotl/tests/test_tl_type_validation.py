@@ -25,7 +25,14 @@ def test_tl_type_to_reference_uri() -> None:
         uri = TL_TYPE_TO_REFERENCE_URI[tl_type]
         assert uri.startswith("http://uri.etsi.org/")
     assert TL_TYPE_TO_REFERENCE_URI["qeaa-provider"].endswith("/EUgeneric")
-    assert "LoTEType" in TL_TYPE_TO_REFERENCE_URI["eaa-provider"]
+    assert TL_TYPE_TO_REFERENCE_URI["eaa-provider"].endswith("/EUgeneric")
+    assert TL_TYPE_TO_REFERENCE_URI["eaa-provider"] == TL_TYPE_TO_REFERENCE_URI[
+        "qeaa-provider"
+    ]
+    assert "LoTEType" not in TL_TYPE_TO_REFERENCE_URI["eaa-provider"]
+    assert TL_TYPE_TO_REFERENCE_URI["pub-eaa-provider"].endswith(
+        "/EUPubEAAProvidersList"
+    )
 
 
 def test_get_schema_path() -> None:

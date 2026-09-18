@@ -25,6 +25,7 @@ from tools.lotl.settings import (
     MIME_LOTE_XML,
     MIME_TSL_XML,
     TL_TYPE_TO_REFERENCE_URI,
+    TS_119_612_TL_TYPES,
     TSL_TYPE_EU_GENERIC,
 )
 from tools.lotl.tl_entry import TLEntry
@@ -87,7 +88,11 @@ def _pointers_for_entry(entry: TLEntry) -> list[dict[str, Any]]:
         raise ValueError(
             f"TL entry {entry.participant_id!r} must provide a valid X.509 trust_anchor"
         )
-    locations = dict.fromkeys([entry.get_tl_url_json(), entry.get_tl_url_xml()])
+    # National EAA/QEAA lists are TS 119 612 XML only (not a JSON LoTE).
+    if entry.tl_type in TS_119_612_TL_TYPES:
+        locations = dict.fromkeys([entry.get_tl_url_xml()])
+    else:
+        locations = dict.fromkeys([entry.get_tl_url_json(), entry.get_tl_url_xml()])
     return [
         {
             "LoTELocation": loc,

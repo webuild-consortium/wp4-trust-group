@@ -79,8 +79,20 @@ python -m tools.lotl --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
 # With inline key/cert
 python -m tools.lotl --signing-key key.pem --signing-cert cert.pem --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
 
-# Validate-only (for CI, no signing required)
+# Validate-only (for CI, no signing required). Fails if any trust_anchor is expired.
 python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/
+
+# Certificate expiry only (tl_entries, optional published LoTL, optional signing cert)
+python -m tools.lotl --check-expiry --tl-entries-dir lotl/tl_entries/
+python -m tools.lotl --check-expiry \
+  --tl-entries-dir lotl/tl_entries/ \
+  --lotl-json https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json
+
+# Fetch every published TL/LoTE pointed to by lotl/tl_entries and enforce
+# the WP4/ETSI profile (enveloped-signature then exclusive C14N; compact
+# JAdES Baseline B; list type URIs). Fails CI if a participant uses
+# XPath Filter 2.0 or any other off-profile algorithm/list type.
+python -m tools.lotl --validate-published --tl-entries-dir lotl/tl_entries/
 
 # Verbose logging
 python -m tools.lotl --log-level DEBUG ...

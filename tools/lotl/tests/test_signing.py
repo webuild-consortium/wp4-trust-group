@@ -183,6 +183,20 @@ def _take_document_reference(root: etree._Element) -> etree._Element:
     return document_reference
 
 
+def _drop_references_except_document(root: etree._Element, *, keep_signed_properties: bool) -> None:
+    """Remove KeyInfo (and optionally SignedProperties) ds:Reference elements."""
+    signed_info = root.find(f"{{{DS}}}Signature/{{{DS}}}SignedInfo")
+    root_id = root.get("Id")
+    for ref in list(signed_info.findall(f"{{{DS}}}Reference")):
+        uri = ref.get("URI") or ""
+        typ = ref.get("Type") or ""
+        if uri == f"#{root_id}":
+            continue
+        if keep_signed_properties and "SignedProperties" in typ:
+            continue
+        signed_info.remove(ref)
+
+
 def _resign(root: etree._Element, key_path: Path) -> bytes:
     """Recompute ds:SignatureValue after SignedInfo was edited.
 
@@ -267,6 +281,74 @@ def test_xades_verify_requires_a_root_id(
 
     with pytest.raises(InvalidSignature, match="no Id"):
         verify_xml(etree.tostring(root), ca_pem_file=cert_path)
+
+
+def test_xades_verify_published_profile_accepts_two_references(
+    signing_key_and_cert: tuple[Path, Path],
+) -> None:
+    """EN 319 132-1 Table 2: document + SignedProperties is XAdES-B; KeyInfo is extra."""
+    key_path, cert_path = signing_key_and_cert
+    signed = sign_xml(generate_lotl_xml([], sequence_number=1), key_path, cert_path)
+    root = etree.fromstring(signed)
+    _drop_references_except_document(root, keep_signed_properties=True)
+    two_ref = _resign(root, key_path)
+
+    with pytest.raises(InvalidSignature, match="Expected to find 3 references"):
+        verify_xml(two_ref, ca_pem_file=cert_path)
+
+    assert verify_xml(two_ref, ca_pem_file=cert_path, expect_references=None)
+
+
+def test_xades_verify_published_profile_rejects_one_reference(
+    signing_key_and_cert: tuple[Path, Path],
+) -> None:
+    """A document-only ds:Reference is not XAdES Baseline B."""
+    key_path, cert_path = signing_key_and_cert
+    signed = sign_xml(generate_lotl_xml([], sequence_number=1), key_path, cert_path)
+    root = etree.fromstring(signed)
+    _drop_references_except_document(root, keep_signed_properties=False)
+    one_ref = _resign(root, key_path)
+
+    with pytest.raises(InvalidSignature, match="at least 2 ds:Reference"):
+        verify_xml(one_ref, ca_pem_file=cert_path, expect_references=None)
+
+
+def test_xades_verify_accepts_empty_uri_without_root_id(
+    signing_key_and_cert: tuple[Path, Path],
+) -> None:
+    """TS 119 602 Annex H.4: URI='' covers the document; root Id is not required."""
+    from tools.lotl.key_alg import (
+        infer_xml_signature_algorithm_fragment_from_private_key_pem,
+    )
+    from tools.lotl.xades_signer import DATA_OBJECT_FORMAT, LoTLXAdESSigner
+
+    key_path, cert_path = signing_key_and_cert
+    ns = "http://uri.etsi.org/02231/v2#"
+    root = etree.Element(f"{{{ns}}}TrustServiceStatusList")
+    etree.SubElement(root, f"{{{ns}}}TrustServiceProvider")
+    signer = LoTLXAdESSigner(
+        signature_algorithm=infer_xml_signature_algorithm_fragment_from_private_key_pem(
+            key_path.read_text()
+        ),
+        digest_algorithm="sha256",
+        c14n_algorithm=EXC_C14N,
+        data_object_format=DATA_OBJECT_FORMAT,
+    )
+    signed_root = signer.sign(
+        root,
+        key=key_path.read_text(),
+        cert=cert_path.read_text(),
+        always_add_key_value=False,
+    )
+    assert not signed_root.get("Id")
+    uris = [
+        ref.get("URI")
+        for ref in signed_root.findall(f".//{{{DS}}}SignedInfo/{{{DS}}}Reference")
+    ]
+    assert "" in uris
+
+    xml = etree.tostring(signed_root, encoding="utf-8", xml_declaration=True)
+    assert verify_xml(xml, ca_pem_file=cert_path, expect_references=None)
 
 
 def test_xades_verify_requires_a_reference_covering_the_list(

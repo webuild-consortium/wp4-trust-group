@@ -59,9 +59,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-dev.txt
 
-      - name: Validate TL entries (schema and semantic checks)
+      - name: Validate TL entries (schema, PEM, certificate expiry)
         run: |
           python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/
+
+      - name: Validate published TLs/LoTEs against WP4/ETSI profile
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python -m tools.lotl --validate-published --tl-entries-dir lotl/tl_entries/
 
       - name: Run LoTL tests (includes schema validation paths)
         run: |
@@ -104,6 +110,10 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements-dev.txt
+
+      - name: Reject expired certificates (entries and LoTL signing cert)
+        run: |
+          python -m tools.lotl --check-expiry --tl-entries-dir lotl/tl_entries/
 
       - name: Produce signed LoTL artifacts
         run: |
