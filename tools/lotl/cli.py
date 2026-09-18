@@ -5,10 +5,11 @@ import os
 import sys
 from pathlib import Path
 
+from tools.lotl.cert_expiry import run_expiry_checks
 from tools.lotl.log import configure_logging, get_logger
 from tools.lotl.pem_util import normalize_pem_for_ci
 from tools.lotl.producer import produce
-from tools.lotl.settings import LOTL_OUTPUT_DIR, TL_ENTRIES_DIR
+from tools.lotl.settings import LOTL_OUTPUT_DIR, PUBLISHED_LOTL_JSON_URL, TL_ENTRIES_DIR
 
 logger = get_logger(__name__)
 
@@ -64,6 +65,23 @@ def main(argv: list[str] | None = None) -> int:
         ),
     )
     parser.add_argument(
+        "--check-expiry",
+        action="store_true",
+        help=(
+            "Check certificate expiry for tl_entries trust anchors, an optional "
+            "published LoTL (--lotl-json), and the signing certificate if provided. "
+            "Does not produce or sign."
+        ),
+    )
+    parser.add_argument(
+        "--lotl-json",
+        help=(
+            "Path or URL of a published LoTL JSON to inspect for expired "
+            f"signing and pointer certificates (default for scheduled CI: "
+            f"{PUBLISHED_LOTL_JSON_URL})"
+        ),
+    )
+    parser.add_argument(
         "--log-level",
         default=os.environ.get("LOTL_LOG_LEVEL", "INFO"),
         choices=["DEBUG", "INFO", "WARNING", "ERROR"],
@@ -81,6 +99,28 @@ def main(argv: list[str] | None = None) -> int:
 
     signing_key = _load_pem_from_env_or_path("LOTL_SIGNING_KEY", args.signing_key)
     signing_cert = _load_pem_from_env_or_path("LOTL_SIGNING_CERT", args.signing_cert)
+
+    if args.check_expiry:
+        entries_dir = Path(args.tl_entries_dir)
+        entries_arg = entries_dir if entries_dir.exists() else None
+        if entries_arg is None and not args.lotl_json and not signing_cert:
+            logger.error(
+                "Nothing to check: provide --tl-entries-dir, --lotl-json, "
+                "or a signing certificate"
+            )
+            return 1
+        errors = run_expiry_checks(
+            tl_entries_dir=entries_arg,
+            lotl_json_source=args.lotl_json,
+            signing_cert_pem=signing_cert,
+        )
+        for err in errors:
+            logger.error(err)
+        if errors:
+            logger.error("Certificate expiry check failed (%d error(s))", len(errors))
+            return 1
+        logger.info("Certificate expiry check passed")
+        return 0
 
     return produce(
         tl_entries_dir=args.tl_entries_dir,

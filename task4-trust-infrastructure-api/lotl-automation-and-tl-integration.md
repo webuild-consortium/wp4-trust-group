@@ -252,8 +252,10 @@ tools/lotl/
 python -m tools.lotl --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
 # With inline key/cert:
 python -m tools.lotl --signing-key key.pem --signing-cert cert.pem --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
-# Validate-only (for CI): no signing required
+# Validate-only (for CI): no signing required; fails if any trust_anchor is expired
 python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/
+# Expiry check of entries plus a published LoTL (signing x5c and pointer certs)
+python -m tools.lotl --check-expiry --tl-entries-dir lotl/tl_entries/ --lotl-json https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json
 ```
 
 - **LoTL is signed**: XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON).
@@ -309,7 +311,7 @@ python -m tools.lotl --signing-key lotl/certs/lotl_signing_key.pem --signing-cer
 2. On success: collect entries, generate LoTL, sign LoTL
 3. On failure: produce exits non-zero
 
-For CI (PR validation without producing): `python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/` (no signing required).
+For CI (PR validation without producing): `python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/` (no signing required). Validation includes certificate expiry: an expired or not-yet-valid `trust_anchor` fails the PR. The produce path also rejects an expired LoTL signing certificate.
 
 ### 5.1 Running Tests
 
@@ -347,11 +349,22 @@ env/bin/pytest tools/lotl/tests/test_producer.py -v
 **Steps**:
 1. For each new or modified `lotl/tl_entries/{tl_type}/*.json`:
    - Parse the file; validate against the TL entry JSON schema (required fields: `tl_url`, `trust_anchor`)
+   - Reject the entry if `trust_anchor` cannot be parsed or is expired / not yet valid
    - Fetch the TL from `tl_url` (or `tl_url_json`/`tl_url_xml`)
    - Validate the TL signature using the provided `trust_anchor` (X.509 certificate)
    - Validate the TL against the ETSI schema for that TL type (per [Task 3 implementation profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md))
 2. If all validations pass: PR is mergeable
 3. If any validation fails: CI fails; PR cannot be merged
+
+#### 6.1a Scheduled LoTL certificate expiry
+
+**Location**: `.github/workflows/lotl-cert-expiry.yml`
+
+**Trigger**: Daily at 06:00 UTC, and `workflow_dispatch`.
+
+**Steps**: `python -m tools.lotl --check-expiry --tl-entries-dir lotl/tl_entries/ --lotl-json https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json`
+
+The job fails if any `trust_anchor` in the repository, the published LoTL signing certificate (`x5c`), or any LoTL pointer certificate is expired or not yet valid. This catches certificates that expire after merge.
 
 #### 6.2 LoTL Update on Merge
 
@@ -366,6 +379,7 @@ env/bin/pytest tools/lotl/tests/test_producer.py -v
 1. **Load TL Entries**:
    - Scan `lotl/tl_entries/{tl_type}/*.json` for all valid entries
    - Parse each file to obtain TL URL(s) and metadata
+   - Fail the PR or publish job if any `trust_anchor` or the LoTL signing certificate is expired
 
 2. **Generate and Sign LoTL**:
    - Execute LoTL producer with `--tl-entries-dir` and `--output-dir`

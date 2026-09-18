@@ -8,14 +8,25 @@ import pytest
 from tools.lotl.validator import validate_tl_entry_file, validate_tl_entries_dir
 
 
-def test_validate_valid_file(tmp_path: Path) -> None:
+def test_validate_valid_file(tmp_path: Path, valid_cert_pem: str) -> None:
     """Valid file has no errors."""
     f = tmp_path / "entry.json"
     f.write_text(json.dumps({
         "tl_url": "https://example.com/tl.json",
-        "trust_anchor": "-----BEGIN CERTIFICATE-----\nMIIB\n-----END CERTIFICATE-----",
+        "trust_anchor": valid_cert_pem,
     }))
     assert validate_tl_entry_file(f) == []
+
+
+def test_validate_expired_trust_anchor(tmp_path: Path, expired_cert_pem: str) -> None:
+    """Expired trust_anchor fails validation."""
+    f = tmp_path / "entry.json"
+    f.write_text(json.dumps({
+        "tl_url": "https://example.com/tl.json",
+        "trust_anchor": expired_cert_pem,
+    }))
+    errors = validate_tl_entry_file(f)
+    assert any("expired" in e.lower() for e in errors)
 
 
 def test_validate_missing_tl_url(tmp_path: Path) -> None:
