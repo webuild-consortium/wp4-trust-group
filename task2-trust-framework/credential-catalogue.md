@@ -305,3 +305,7 @@ This specification defines:
 
 ### weBuild instance
 - [Credential Catalog Service](../task4-trust-infrastructure-api/credential-catalog-service.md) — TS11 catalogue at [registry.siros.org](https://registry.siros.org)
+
+### European Business Wallet (gap)
+
+**EBWOID / LPID is not yet a catalogue scheme** in this document or in the weBuild TS11 instance. Until a canonical attestation-type identifier is registered, ISSU_34a entitlement checks for owner identification data have no shared scheme id. See [EBW trust framework](european-business-wallet-trust-framework.md) and [EWC rb001](https://github.com/EWC-consortium/eudi-wallet-rulebooks-and-schemas/blob/main/rulebooks/rb001-legal-person-identification-data.md).

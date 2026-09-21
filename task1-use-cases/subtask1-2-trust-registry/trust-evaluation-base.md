@@ -24,6 +24,8 @@ See [Consolidated Terms and Entity Definitions](../terms-and-entities.md) for al
 
 Full requirement set: [Trusted list registration trust evaluation matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md).
 
+When the Wallet Unit is a **European Business Wallet**, apply [UC-TE-07](european-business-wallet-trust-evaluation.md) on top of this table: EBWOID uses QEAA/PuB-EAA/EAA lists (not the PID Provider LoTE); `ebwoid-provider` LoTL entries are **registrars/registers**, not EBWOID issuers. Framework: [EBW trust framework](../../task2-trust-framework/european-business-wallet-trust-framework.md).
+
 ## Trust Evaluation Points (Summary)
 
 **0. Holder evaluates own Wallet Instance (via Trust Marks)**  

@@ -38,5 +38,6 @@ This subtask defines the onboarding use cases for participants in the WP4 Trust 
 - **Notification to Commission**: Notification to EU Commission and other Member States (for PID Providers and PuB-EAA Providers)
 
 ### Wallet Solutions
-- **Wallet Providers** – Wallet solutions and providers registration
+- **Wallet Providers** – Wallet solutions and providers registration (EUDI Wallet for natural persons or European Business Wallet for legal persons; same Trusted List type). Framework: [EBW trust framework](../../task2-trust-framework/european-business-wallet-trust-framework.md). Evaluation overlay: [UC-TE-07](../subtask1-2-trust-registry/european-business-wallet-trust-evaluation.md).
 - **Notification to Commission**: Notification to EU Commission and other Member States
+- **EBWOID Providers** – onboard as Attestation Providers ([UC-02](pid_eaa_provider_onboarding.md)); they are **not** the LoTL folder `ebwoid-provider` (that folder is the registrars/registers list)

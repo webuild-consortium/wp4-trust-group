@@ -2,6 +2,8 @@
 
 This document describes the schema and graphical representation of the EUDI Wallet trust infrastructure. It focuses on three closely related processes: **Registration/Onboarding**, **Notification**, and **Trusted List Publication**, which are separated to align with the Architecture and Reference Framework (ARF). The document is aligned with **ARF v3.0.0**.
 
+European Business Wallet (EBW) Providers use the **Wallet Provider** row of the responsibilities matrix (same `EUWalletProvidersList`). EBWOID issuers use the **Attestation Provider** row. The LoTL folder `ebwoid-provider` is the **registrars/registers** list, not EBWOID issuers. Details: [European Business Wallet in the WP4 Trust Framework](european-business-wallet-trust-framework.md).
+
 ## Overview
 
 The trust infrastructure relies on three distinct but complementary processes:

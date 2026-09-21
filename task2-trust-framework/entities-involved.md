@@ -24,6 +24,7 @@ All **definitions** (roles, responsibilities, trust evaluation involvement) for 
 | 12 | PuB-EAA Provider |
 | 13 | EAA Provider |
 | 14 | Wallet Provider |
+| 14a | EBWOID Provider |
 | 15 | Relying Party (RP) |
 | 16 | Intermediary |
 | 17 | Attestation Scheme Provider |

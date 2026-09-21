@@ -14,6 +14,7 @@ This task defines the conceptual trust framework for the WP4 Trust Infrastructur
 - **`eudi-wallet-trust-and-entitlement-discovery.md`** – Policy discovery and trust verification from wallet (holder) perspective: WRPRC/WRPAC discovery, Trusted List validation, Registry lookup, entitlement and attribute validation (ARF RPRC_21, RPA_*)
 - **`rp-intermediary-openid4vp-technical-report.md`** – Non-normative technical report on Relying Party intermediaries in remote OpenID4VP flows: `verifier_info`, WRPAC/WRPRC exposure, intermediary detection, and examples (ARF Topic 52, ETSI TS 119 472-2). Use case: [UC-RPI-01](../task1-use-cases/subtask1-2-trust-registry/relying-party-intermediary-use-case.md).
 - **`eaa-provider-identity-verification-chaining-LoTL.md`** – EAA provider identity verification via LoTL/TL chaining and X.509 path validation
+- **`european-business-wallet-trust-framework.md`** – WP4 trust-layer view of the European Business Wallet: entity mapping, LoTE/LoTL types, evaluation points, gaps, and sources (COM(2025) 838 / Council general approach). Use cases: [UC-TE-07](../task1-use-cases/subtask1-2-trust-registry/european-business-wallet-trust-evaluation.md).
 
 ## Scope of Task 2
 

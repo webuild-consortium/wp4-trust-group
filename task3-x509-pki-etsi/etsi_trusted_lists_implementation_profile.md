@@ -1033,12 +1033,12 @@ Use appropriate JAdES validation library (see section 12).
 - [ ] Next update is within 6 months
 - [ ] Signature is Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
 
-#### Registrars and Registers List (EBWOID)
+#### Registrars and Registers List (pipeline folder `ebwoid-provider`)
 - [ ] LoTE type URI is `http://uri.etsi.org/19602/LoTEType/EURegistrarsAndRegistersList`
 - [ ] Status determination approach URI is correct
 - [ ] Scheme type/community/rules URI is correct
 - [ ] Service type URI is `http://uri.etsi.org/19602/SvcType/Register`
-- [ ] Entries identify authoritative registrars/registers used for relying-party registration and entitlement discovery
+- [ ] Entries identify authoritative registrars/registers used for relying-party registration and entitlement discovery — **not** EBWOID issuers ([EBW trust framework](../task2-trust-framework/european-business-wallet-trust-framework.md#lotl--lote-mapping-do-not-confuse-the-names))
 - [ ] Next update is within 6 months
 - [ ] Signature is Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
 
