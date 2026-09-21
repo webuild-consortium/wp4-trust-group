@@ -13,7 +13,8 @@ Per ETSI TS 119 612 clause 5.7.1 and Annex B:
 """
 
 import argparse
-import subprocess
+import shutil
+import subprocess  # nosec B404
 import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
@@ -105,12 +106,15 @@ def create_lotl_signing_cert(
 def _print_cert_diagnostic(cert_path: Path, cert_pem: bytes) -> None:
     """Print certificate diagnostic (ASN.1 / OpenSSL text) and raw PEM."""
     print("--- Certificate (diagnostic ASN / OpenSSL text) ---")
-    result = subprocess.run(
-        ["openssl", "x509", "-in", str(cert_path), "-text", "-noout"],
-        capture_output=True,
-        text=True,
-    )
-    if result.returncode == 0:
+    openssl = shutil.which("openssl")
+    result = None
+    if openssl:
+        result = subprocess.run(  # nosec B603
+            [openssl, "x509", "-in", str(cert_path), "-text", "-noout"],
+            capture_output=True,
+            text=True,
+        )
+    if result is not None and result.returncode == 0:
         print(result.stdout)
     else:
         # Fallback: basic Python representation

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Minimal XMLDSig schema for offline validation of unsigned TS 119 612 lists.
+  The official W3C schema pulls XMLSchema.dtd; this stub only declares the
+  elements referenced by 19612_xsd.xsd (ds:Signature, ds:KeyValue).
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+           targetNamespace="http://www.w3.org/2000/09/xmldsig#"
+           elementFormDefault="qualified">
+  <xs:element name="Signature" type="ds:SignatureType"/>
+  <xs:complexType name="SignatureType" mixed="true">
+    <xs:sequence>
+      <xs:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+    </xs:sequence>
+    <xs:attribute name="Id" type="xs:ID" use="optional"/>
+  </xs:complexType>
+  <xs:element name="KeyValue" type="xs:anyType"/>
+</xs:schema>

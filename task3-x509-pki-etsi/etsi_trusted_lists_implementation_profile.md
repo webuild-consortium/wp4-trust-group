@@ -239,6 +239,22 @@ http://uri.etsi.org/19602/PubEAAProvidersList/schemerules/EU
 http://uri.etsi.org/19602/RegistrarsAndRegistersList/schemerules/EU
 ```
 
+#### 3.6.1 Qualifiers in LoTL pointers
+
+Each pointer in the JSON LoTL (`OtherLoTEPointer`) carries list type, scheme operator name, scheme territory and MIME type (TS 119 602 clause 6.3.13 c) makes scheme type/community/rules optional).
+
+Each pointer in the XML LoTL (`OtherTSLPointer`) carries list type, scheme operator name, scheme territory and MIME type (TS 119 612 clause 5.3.13 c)).
+
+**MIME type.** The value depends on the format of the file the pointer points to:
+
+| The pointed-to list is… | List type | `MimeType` |
+|---|---|---|
+| a TS 119 612 XML trusted list | `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric` | `application/vnd.etsi.tsl+xml` |
+| a TS 119 602 LoTE in XML | `http://uri.etsi.org/19602/LoTEType/…` | `application/xml` |
+| a TS 119 602 LoTE in JSON | `http://uri.etsi.org/19602/LoTEType/…` | `application/json` |
+
+`application/vnd.etsi.tsl+xml` is the only registered value (TS 119 612 clause 6.2.2). TS 119 602 V1.1.1 requires a MIME type qualifier but registers no media type for LoTEs, so `application/xml` and `application/json` are a WP4 convention. External validators must be configured to accept them.
+
 ### 3.7 Service Status URIs
 
 #### 3.7.1 TS 119 612 Status Values
@@ -403,16 +419,19 @@ http://uri.etsi.org/19602/LoTETag
 #### 5.1.1 Schema Location
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<TrustServiceStatusList xmlns="http://uri.etsi.org/19612/v2.4.1#"
-                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xsi:schemaLocation="http://uri.etsi.org/19612/v2.4.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd"
-                       Id="tsl-1">
+<TrustServiceStatusList xmlns="http://uri.etsi.org/02231/v2#"
+                        xmlns:tslx="http://uri.etsi.org/02231/v2/additionaltypes#"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://uri.etsi.org/02231/v2# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd"
+                        TSLTag="http://uri.etsi.org/19612/TSLTag"
+                        Id="tsl-1">
   <!-- TSL content -->
 </TrustServiceStatusList>
 ```
 
 #### 5.1.2 Required Namespaces
-- `http://uri.etsi.org/19612/v2.4.1#` - Main TSL namespace
+- `http://uri.etsi.org/02231/v2#` - Main TSL namespace (default namespace above)
+- `http://uri.etsi.org/02231/v2/additionaltypes#` - TSL additional types (`tslx:MimeType` on pointers)
 - `http://www.w3.org/2001/XMLSchema-instance` - XML Schema instance
 - `http://www.w3.org/2000/09/xmldsig#` - XML Digital Signature
 
@@ -420,11 +439,13 @@ http://uri.etsi.org/19602/LoTETag
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<TrustServiceStatusList xmlns="http://uri.etsi.org/19612/v2.4.1#"
-                       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                       xsi:schemaLocation="http://uri.etsi.org/19612/v2.4.1# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd"
-                       Id="tsl-1">
-  
+<TrustServiceStatusList xmlns="http://uri.etsi.org/02231/v2#"
+                        xmlns:tslx="http://uri.etsi.org/02231/v2/additionaltypes#"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://uri.etsi.org/02231/v2# https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd"
+                        TSLTag="http://uri.etsi.org/19612/TSLTag"
+                        Id="tsl-1">
+
   <SchemeInformation>
     <!-- TS 119 612 clause 5.3.1: value shall be "6" -->
     <TSLVersionIdentifier>6</TSLVersionIdentifier>
@@ -435,7 +456,7 @@ http://uri.etsi.org/19602/LoTETag
     </SchemeOperatorName>
     <SchemeOperatorAddress>
       <PostalAddresses>
-        <PostalAddress>
+        <PostalAddress xml:lang="en">
           <StreetAddress>Via Roma 123</StreetAddress>
           <Locality>Roma</Locality>
           <PostalCode>00100</PostalCode>
@@ -443,26 +464,31 @@ http://uri.etsi.org/19602/LoTETag
         </PostalAddress>
       </PostalAddresses>
       <ElectronicAddress>
-        <URI>mailto:trust@wallet.gov.it</URI>
-        <URI>https://wallet.gov.it</URI>
+        <URI xml:lang="en">mailto:trust@wallet.gov.it</URI>
+        <URI xml:lang="en">https://wallet.gov.it</URI>
       </ElectronicAddress>
     </SchemeOperatorAddress>
     <SchemeName>
-      <Name xml:lang="en">Wallet Trusted List</Name>
+      <Name xml:lang="en">IT:Wallet Trusted List</Name>
     </SchemeName>
-    <SchemeInformationURI>https://trust-list.example.org/scheme-info</SchemeInformationURI>
+    <SchemeInformationURI>
+      <URI xml:lang="en">https://trust-list.example.org/scheme-info</URI>
+    </SchemeInformationURI>
     <StatusDeterminationApproach>http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate</StatusDeterminationApproach>
-    <SchemeTypeCommunityRules>http://uri.etsi.org/TrstSvc/TrustedList/SchemeTypeCommunityRules/EU</SchemeTypeCommunityRules>
+    <SchemeTypeCommunityRules>
+      <URI xml:lang="en">http://uri.etsi.org/TrstSvc/TrustedList/schemerules/EU</URI>
+    </SchemeTypeCommunityRules>
     <SchemeTerritory>IT</SchemeTerritory>
+    <HistoricalInformationPeriod>65535</HistoricalInformationPeriod>
     <ListIssueDateTime>2025-01-01T00:00:00Z</ListIssueDateTime>
-    <NextUpdate>2025-07-01T00:00:00Z</NextUpdate>
+    <NextUpdate>
+      <dateTime>2025-07-01T00:00:00Z</dateTime>
+    </NextUpdate>
     <DistributionPoints>
-      <DistributionPoint>
-        <URI>https://trust-list.example.org/tsl/tsl.xml</URI>
-      </DistributionPoint>
+      <URI>https://trust-list.example.org/tsl/tsl.xml</URI>
     </DistributionPoints>
   </SchemeInformation>
-  
+
   <TrustServiceProviderList>
     <TrustServiceProvider>
       <TSPInformation>
@@ -471,7 +497,7 @@ http://uri.etsi.org/19602/LoTETag
         </TSPName>
         <TSPAddress>
           <PostalAddresses>
-            <PostalAddress>
+            <PostalAddress xml:lang="en">
               <StreetAddress>Via Milano 456</StreetAddress>
               <Locality>Milano</Locality>
               <PostalCode>20100</PostalCode>
@@ -479,34 +505,43 @@ http://uri.etsi.org/19602/LoTETag
             </PostalAddress>
           </PostalAddresses>
           <ElectronicAddress>
-            <URI>mailto:info@wallet.example.it</URI>
+            <URI xml:lang="en">mailto:info@wallet.example.it</URI>
+            <URI xml:lang="en">https://wallet.example.it</URI>
           </ElectronicAddress>
         </TSPAddress>
-        <TSPInformationURI>https://wallet.example.it/info</TSPInformationURI>
-        <TSPServices>
+        <TSPInformationURI>
+          <URI xml:lang="en">https://wallet.example.it/info</URI>
+        </TSPInformationURI>
+      </TSPInformation>
+      <TSPServices>
+        <TSPService>
           <ServiceInformation>
             <ServiceTypeIdentifier>http://uri.etsi.org/TrstSvc/Svctype/CA/QC</ServiceTypeIdentifier>
             <ServiceName>
               <Name xml:lang="en">Issuance of qualified certificates</Name>
             </ServiceName>
             <ServiceDigitalIdentity>
-              <X509SubjectName>CN=QTSP-IT, O=Qualified Trust Service Provider IT S.p.A., C=IT</X509SubjectName>
-              <X509SKI>...</X509SKI>
-              <X509Certificate>...</X509Certificate>
+              <DigitalId>
+                <X509SubjectName>CN=QTSP-IT, O=Qualified Trust Service Provider IT S.p.A., C=IT</X509SubjectName>
+              </DigitalId>
+              <DigitalId>
+                <X509SKI>MEIwEDEOMAwGA1UEAwwFZHVtbXk=</X509SKI>
+              </DigitalId>
+              <DigitalId>
+                <X509Certificate>MIIBkTCB+wIJAKZ0dHVtbXkwDQYJKoZIhvcNAQELBQAwDTELMAkGA1UEAwwCY2E=</X509Certificate>
+              </DigitalId>
             </ServiceDigitalIdentity>
-            <ServiceCurrentStatus>http://uri.etsi.org/TrstSvc/TrustedList/Svcstatus/granted</ServiceCurrentStatus>
-            <CurrentStatusStartingDate>2025-01-01T00:00:00Z</CurrentStatusStartingDate>
+            <ServiceStatus>http://uri.etsi.org/TrstSvc/TrustedList/Svcstatus/granted</ServiceStatus>
+            <StatusStartingTime>2025-01-01T00:00:00Z</StatusStartingTime>
             <ServiceSupplyPoints>
-              <ServiceSupplyPoint>
-                <URI>https://wallet.example.it/api</URI>
-              </ServiceSupplyPoint>
+              <ServiceSupplyPoint>https://wallet.example.it/api</ServiceSupplyPoint>
             </ServiceSupplyPoints>
           </ServiceInformation>
-        </TSPServices>
-      </TSPInformation>
+        </TSPService>
+      </TSPServices>
     </TrustServiceProvider>
   </TrustServiceProviderList>
-  
+
   <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
     <!-- XAdES signature -->
   </Signature>

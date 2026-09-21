@@ -12,11 +12,20 @@ import base64
 from calendar import monthrange
 from datetime import datetime, timezone
 from typing import Any
+from urllib.parse import urlsplit
 
 from tools.lotl.settings import (
     LOTL_JSON_FILENAME,
     LOTL_LOTE_TYPE_URI,
+    LOTL_OPERATOR_EMAIL,
+    LOTL_OPERATOR_POSTAL_ADDRESS,
+    LOTL_OPERATOR_WEBSITE,
+    LOTL_SCHEME_TERRITORY,
+    MIME_LOTE_JSON,
+    MIME_LOTE_XML,
+    MIME_TSL_XML,
     TL_TYPE_TO_REFERENCE_URI,
+    TSL_TYPE_EU_GENERIC,
 )
 from tools.lotl.tl_entry import TLEntry
 
@@ -44,10 +53,21 @@ def _service_digital_identities_for_entry(entry: TLEntry) -> list[dict[str, Any]
     return [{"X509Certificates": [{"val": val}]}]
 
 
-def _lote_qualifier(
-    entry: TLEntry,
-    mime_type: str = "application/json",
-) -> dict[str, Any]:
+def _pointer_mime_type(entry: TLEntry, url: str) -> str:
+    """MimeType of the list at ``url``, from its file extension and the list type."""
+    ref = TL_TYPE_TO_REFERENCE_URI[entry.tl_type]
+    path = urlsplit(url).path.lower()
+    if path.endswith((".xml", ".xtsl")):
+        return MIME_TSL_XML if ref == TSL_TYPE_EU_GENERIC else MIME_LOTE_XML
+    if path.endswith(".json") and ref != TSL_TYPE_EU_GENERIC:
+        return MIME_LOTE_JSON
+    raise ValueError(
+        f"TL entry {entry.participant_id!r} ({entry.tl_type}): cannot derive MimeType "
+        f"from {url!r}. Use a .xml URL, or .json for a TS 119 602 LoTE"
+    )
+
+
+def _lote_qualifier(entry: TLEntry, mime_type: str) -> dict[str, Any]:
     ref = TL_TYPE_TO_REFERENCE_URI[entry.tl_type]
     meta = entry.metadata or {}
     op_name = meta.get("operator_name", entry.participant_id)
@@ -61,30 +81,27 @@ def _lote_qualifier(
 
 
 def _pointers_for_entry(entry: TLEntry) -> list[dict[str, Any]]:
-    """Build ``OtherLoTEPointer`` objects for one TL entry (JSON and optional XML)."""
+    """Build one ``OtherLoTEPointer`` per distinct TL URL of an entry (JSON and XML)."""
     sdi = _service_digital_identities_for_entry(entry)
     if not sdi:
         raise ValueError(
             f"TL entry {entry.participant_id!r} must provide a valid X.509 trust_anchor"
         )
-    json_loc = entry.get_tl_url_json()
-    out: list[dict[str, Any]] = [
+    locations = dict.fromkeys([entry.get_tl_url_json(), entry.get_tl_url_xml()])
+    return [
         {
-            "LoTELocation": json_loc,
+            "LoTELocation": loc,
             "ServiceDigitalIdentities": sdi,
-            "LoTEQualifiers": [_lote_qualifier(entry, "application/json")],
+            "LoTEQualifiers": [_lote_qualifier(entry, _pointer_mime_type(entry, loc))],
         }
+        for loc in locations
     ]
-    xml_loc = entry.get_tl_url_xml()
-    if xml_loc != json_loc:
-        out.append(
-            {
-                "LoTELocation": xml_loc,
-                "ServiceDigitalIdentities": sdi,
-                "LoTEQualifiers": [_lote_qualifier(entry, "application/xml")],
-            }
-        )
-    return out
+
+
+def _electronic_address_uris(email: str, website: str) -> list[str]:
+    """TS 119 612 clause 5.3.5.2: the e-mail address as a mailto: URI, then the web site."""
+    mailto = email if email.startswith("mailto:") else f"mailto:{email}"
+    return [mailto, website]
 
 
 def _default_distribution_uris(
@@ -110,6 +127,9 @@ def generate_lotl_json(
     scheme_name: str = "WP4 List of Trusted Lists",
     scheme_information_uri: str = "https://webuild-consortium.github.io/wp4-trust-group/",
     distribution_point_uris: list[str] | None = None,
+    scheme_operator_email: str = LOTL_OPERATOR_EMAIL,
+    scheme_operator_website: str = LOTL_OPERATOR_WEBSITE,
+    scheme_operator_postal_address: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     """Generate unsigned LoTE JSON (LoTL) per TS 119 602-1 JSON schema root shape.
 
@@ -130,31 +150,39 @@ def generate_lotl_json(
         else _default_distribution_uris(scheme_information_uri)
     )
 
+    address = scheme_operator_postal_address or LOTL_OPERATOR_POSTAL_ADDRESS
+    postal: dict[str, str] = {"lang": "en"}
+    for xml_name, json_name in (
+        ("StreetAddress", "StreetAddress"),
+        ("Locality", "Locality"),
+        ("PostalCode", "PostalCode"),
+        ("CountryName", "Country"),
+    ):
+        if address.get(xml_name):
+            postal[json_name] = address[xml_name]
+
     list_and_scheme: dict[str, Any] = {
         "LoTEVersionIdentifier": 1,
         "LoTESequenceNumber": sequence_number,
         "LoTEType": LOTL_LOTE_TYPE_URI,
         "SchemeOperatorName": [{"lang": "en", "value": scheme_operator_name}],
         "SchemeOperatorAddress": {
-            "SchemeOperatorPostalAddress": [
-                {
-                    "lang": "en",
-                    "StreetAddress": "Not specified",
-                    "Country": "EU",
-                }
-            ],
+            "SchemeOperatorPostalAddress": [postal],
             "SchemeOperatorElectronicAddress": [
-                {"lang": "en", "uriValue": scheme_information_uri}
+                {"lang": "en", "uriValue": uri}
+                for uri in _electronic_address_uris(
+                    scheme_operator_email, scheme_operator_website
+                )
             ],
         },
-        "SchemeName": [{"lang": "en", "value": scheme_name}],
+        "SchemeName": [{"lang": "en", "value": f"{LOTL_SCHEME_TERRITORY}:{scheme_name}"}],
         "SchemeInformationURI": [
             {"lang": "en", "uriValue": scheme_information_uri}
         ],
         "StatusDeterminationApproach": (
             "http://uri.etsi.org/TrstSvc/TrustedList/StatusDetn/EUappropriate"
         ),
-        "SchemeTerritory": "EU",
+        "SchemeTerritory": LOTL_SCHEME_TERRITORY,
         "ListIssueDateTime": issue_dt,
         "NextUpdate": next_update,
         "DistributionPoints": dist,

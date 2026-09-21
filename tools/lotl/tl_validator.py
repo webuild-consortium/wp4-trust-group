@@ -2,8 +2,9 @@
 
 import json
 from typing import Optional
-from urllib.request import Request, urlopen
 from urllib.error import URLError
+from urllib.parse import urlparse
+from urllib.request import Request, urlopen
 
 from tools.lotl.log import get_logger
 from tools.lotl.tl_entry import TLEntry
@@ -22,8 +23,11 @@ def fetch_tl(url: str, timeout: int = 30) -> tuple[Optional[str], Optional[bytes
         Tuple of (content_str, content_bytes, content_type). None on failure.
     """
     try:
+        if urlparse(url).scheme not in ("http", "https"):
+            logger.warning("Refusing to fetch non-HTTP(S) URL: %s", url)
+            return None, None, None
         req = Request(url, headers={"User-Agent": "WP4-LoTL-Validator/1.0"})
-        with urlopen(req, timeout=timeout) as resp:
+        with urlopen(req, timeout=timeout) as resp:  # nosec B310
             data = resp.read()
             content_type = resp.headers.get("Content-Type", "")
             try:
