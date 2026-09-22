@@ -1,0 +1,183 @@
+{
+  "LoTE": {
+    "ListAndSchemeInformation": {
+      "LoTEVersionIdentifier": 1,
+      "LoTESequenceNumber": 1,
+      "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUWRPRCProvidersList",
+      "SchemeOperatorName": [
+        {
+          "lang": "en",
+          "value": "WP4"
+        }
+      ],
+      "SchemeOperatorAddress": {
+        "SchemeOperatorPostalAddress": [
+          {
+            "lang": "en",
+            "StreetAddress": "New Broad Street House, 35 New Broad Street",
+            "Locality": "London",
+            "PostalCode": "EC2",
+            "Country": "GB"
+          }
+        ],
+        "SchemeOperatorElectronicAddress": [
+          {
+            "lang": "en",
+            "uriValue": "mailto:sales@raidiam.com"
+          },
+          {
+            "lang": "en",
+            "uriValue": "https://www.raidiam.com"
+          }
+        ]
+      },
+      "SchemeName": [
+        {
+          "lang": "en",
+          "value": "Raidiam WRPRC Providers List"
+        }
+      ],
+      "SchemeInformationURI": [
+        {
+          "lang": "en",
+          "uriValue": "https://webuild-consortium.github.io/wp4-trust-group/"
+        },
+        {
+          "lang": "en",
+          "uriValue": "https://webuild-consortium.github.io/wp4-trust-group/lotl/archive/"
+        }
+      ],
+      "StatusDeterminationApproach": "http://uri.etsi.org/19602/WRPRCProvidersList/StatusDetn/EU",
+      "SchemeTypeCommunityRules": [
+        {
+          "lang": "en",
+          "uriValue": "http://uri.etsi.org/19602/WRPRCProvidersList/schemerules/EU"
+        }
+      ],
+      "SchemeTerritory": "EU",
+      "PointersToOtherLoTE": [
+        {
+          "LoTELocation": "https://webuild-consortium.github.io/wp4-trust-group/lotl/wrprc-providers-lote.json",
+          "ServiceDigitalIdentities": [
+            {
+              "X509Certificates": [
+                {
+                  "val": "MIIBijCCATCgAwIBAgIUGXbK+13fCUh2t9wXdSdRXM5dgXYwCgYIKoZIzj0EAwIwGzELMAkGA1UEBhMCRVUxDDAKBgNVBAoMA1dQNDAeFw0yNjA1MDYxMTE1MTRaFw0yOTA1MDUxMTE1MTRaMBsxCzAJBgNVBAYTAkVVMQwwCgYDVQQKDANXUDQwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASw9STaruujfO6V+GkB0xWp/u2Bilm0zmoIWhE3ITLCVH8RCHsssH9zsVce4Hkb3Umjklo0rbr45sBa1LZaoEWCo1IwUDAOBgNVHQ8BAf8EBAMCBsAwEQYDVR0lBAowCAYGBACRNwMAMAwGA1UdEwEB/wQCMAAwHQYDVR0OBBYEFMsK9Wn1/l86EhoxMktNb9CKAzwIMAoGCCqGSM49BAMCA0gAMEUCIQDriudDdhwGrY6y6F1NbAo1NmlHajCdFxwT4URnPSwagwIgbqsokmnnBScGe3Z7BmgDNxNRucpodAamv9nL5pjhTA4="
+                }
+              ]
+            }
+          ],
+          "LoTEQualifiers": [
+            {
+              "LoTEType": "http://uri.etsi.org/19602/LoTEType/EUWRPRCProvidersList",
+              "SchemeOperatorName": [
+                {
+                  "lang": "en",
+                  "value": "Raidiam Services Limited"
+                }
+              ],
+              "SchemeTerritory": "EU",
+              "MimeType": "application/json"
+            }
+          ]
+        }
+      ],
+      "ListIssueDateTime": "2026-09-22T00:00:00Z",
+      "NextUpdate": "2027-03-22T00:00:00Z",
+      "DistributionPoints": [
+        "https://webuild-consortium.github.io/wp4-trust-group/lotl/wrprc-providers-lote.json"
+      ]
+    },
+    "TrustedEntitiesList": [
+      {
+        "TrustedEntityInformation": {
+          "TEName": [
+            {
+              "lang": "en",
+              "value": "Raidiam Services Ltd"
+            }
+          ],
+          "TETradeName": [
+            {
+              "lang": "en",
+              "value": "NTRGB-10742851"
+            }
+          ],
+          "TEAddress": {
+            "TEPostalAddress": [
+              {
+                "lang": "en",
+                "StreetAddress": "New Broad Street House, 35 New Broad Street",
+                "Locality": "London",
+                "PostalCode": "EC2 1NH",
+                "Country": "GB"
+              }
+            ],
+            "TEElectronicAddress": [
+              {
+                "lang": "en",
+                "uriValue": "mailto:sales@raidiam.com"
+              },
+              {
+                "lang": "en",
+                "uriValue": "tel:+44020245836770"
+              }
+            ]
+          },
+          "TEInformationURI": [
+            {
+              "lang": "en",
+              "uriValue": "https://auth.sandbox.eudi.raidiam.io/policies/terms-of-use.pdf"
+            },
+            {
+              "lang": "en",
+              "uriValue": "https://www.raidiam.com/"
+            },
+            {
+              "lang": "en",
+              "uriValue": "http://uri.etsi.org/19602/ListOfTrustedEntities/WRPRCProvider/PL"
+            }
+          ]
+        },
+        "TrustedEntityServices": [
+          {
+            "ServiceInformation": {
+              "ServiceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/WRPRC/Issuance",
+              "ServiceName": [
+                {
+                  "lang": "en",
+                  "value": "Raidiam WRPRC Issuance Service"
+                }
+              ],
+              "ServiceDigitalIdentity": {
+                "X509Certificates": [
+                  {
+                    "val": "MIIDQzCCAiugAwIBAgIFXpo73NswDQYJKoZIhvcNAQELBQAwYzELMAkGA1UEBhMCR0IxHTAbBgNVBAoMFFJhaWRpYW0gU2VydmljZXMgTHRkMTUwMwYDVQQDDCxFVURJIFNhbmRib3ggUmVnaXN0cmF0aW9uIENlcnRpZmljYXRlIFNpZ25lcjAeFw0yNjA5MTgxNjAwNDBaFw0yNzEwMTgxNjAwNDBaMGMxCzAJBgNVBAYTAkdCMR0wGwYDVQQKDBRSYWlkaWFtIFNlcnZpY2VzIEx0ZDE1MDMGA1UEAwwsRVVESSBTYW5kYm94IFJlZ2lzdHJhdGlvbiBDZXJ0aWZpY2F0ZSBTaWduZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDaN+7O9dDWMEtuICRcBYzKhAIp74Sa9XcOFaAYkvhiFPAokT3rpjDiDPBKfR7qK8oIPQwv3zz1Z9MwxYvLRiks9NIGvDlLxIXYCbd6JYVK9BZxRvm3fFZTdpLlT6GEmgwolyhJFVTg2WfgrAmVB9gUU9VC1v7dLLKgmApniSJlYHbQTW0y46oF9JRSKxc6KXR3qMsa063l5LGa0ouRs5j3Dec3vaJHAI6CzLiJ5ZEkZCuY4KZrgda7nqmTzB2QRmobdgEMzOAMbiTxJyDM/NhOHEQWkArrL+8b84drQThLIsEpVFyFGcji7sixC7av5AYZKb+FdmqoBEeDmVLgjqjJAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAGYHa14y8YJYZIHQAmcYuAoUr9GXqmIFHyNXkBCcZovq4y3iGWn8t3Ru2waETu/71E5RuSoH+ZiFRG9sGn3nIJXTeTojWB9iYNYz67G8sRmBzO2Af18uVLrytxb45J+F36ILlwBtIWSeEVCak/aRZfVEUIa9mRERRzy4DpAO8qgcFX2FRUGVKXUkY0kZsOz19x0TDpsuIrI4a2ctowTlzn1BuzbtoyC8sTLybLCd4IxlrVpwAMUCUbystFKDtZu+QP7cVmIfMHjIN7bryyFdqdOf93A251S3NdFU2fMw80anIJhup4zLZ9CGgu43JYSWIGqKFtXzQ2NGETUJWclnOKM="
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "ServiceInformation": {
+              "ServiceTypeIdentifier": "http://uri.etsi.org/19602/SvcType/WRPRC/Revocation",
+              "ServiceName": [
+                {
+                  "lang": "en",
+                  "value": "Raidiam WRPRC Revocation Service"
+                }
+              ],
+              "ServiceDigitalIdentity": {
+                "X509Certificates": [
+                  {
+                    "val": "MIIDQzCCAiugAwIBAgIFXpo73NswDQYJKoZIhvcNAQELBQAwYzELMAkGA1UEBhMCR0IxHTAbBgNVBAoMFFJhaWRpYW0gU2VydmljZXMgTHRkMTUwMwYDVQQDDCxFVURJIFNhbmRib3ggUmVnaXN0cmF0aW9uIENlcnRpZmljYXRlIFNpZ25lcjAeFw0yNjA5MTgxNjAwNDBaFw0yNzEwMTgxNjAwNDBaMGMxCzAJBgNVBAYTAkdCMR0wGwYDVQQKDBRSYWlkaWFtIFNlcnZpY2VzIEx0ZDE1MDMGA1UEAwwsRVVESSBTYW5kYm94IFJlZ2lzdHJhdGlvbiBDZXJ0aWZpY2F0ZSBTaWduZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDaN+7O9dDWMEtuICRcBYzKhAIp74Sa9XcOFaAYkvhiFPAokT3rpjDiDPBKfR7qK8oIPQwv3zz1Z9MwxYvLRiks9NIGvDlLxIXYCbd6JYVK9BZxRvm3fFZTdpLlT6GEmgwolyhJFVTg2WfgrAmVB9gUU9VC1v7dLLKgmApniSJlYHbQTW0y46oF9JRSKxc6KXR3qMsa063l5LGa0ouRs5j3Dec3vaJHAI6CzLiJ5ZEkZCuY4KZrgda7nqmTzB2QRmobdgEMzOAMbiTxJyDM/NhOHEQWkArrL+8b84drQThLIsEpVFyFGcji7sixC7av5AYZKb+FdmqoBEeDmVLgjqjJAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAGYHa14y8YJYZIHQAmcYuAoUr9GXqmIFHyNXkBCcZovq4y3iGWn8t3Ru2waETu/71E5RuSoH+ZiFRG9sGn3nIJXTeTojWB9iYNYz67G8sRmBzO2Af18uVLrytxb45J+F36ILlwBtIWSeEVCak/aRZfVEUIa9mRERRzy4DpAO8qgcFX2FRUGVKXUkY0kZsOz19x0TDpsuIrI4a2ctowTlzn1BuzbtoyC8sTLybLCd4IxlrVpwAMUCUbystFKDtZu+QP7cVmIfMHjIN7bryyFdqdOf93A251S3NdFU2fMw80anIJhup4zLZ9CGgu43JYSWIGqKFtXzQ2NGETUJWclnOKM="
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
