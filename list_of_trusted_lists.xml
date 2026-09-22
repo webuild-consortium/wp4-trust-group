@@ -171,6 +171,32 @@
         <ServiceDigitalIdentities>
           <ServiceDigitalIdentity>
             <DigitalId>
+              <X509Certificate>MIIDQzCCAiugAwIBAgIFXpo73NswDQYJKoZIhvcNAQELBQAwYzELMAkGA1UEBhMCR0IxHTAbBgNVBAoMFFJhaWRpYW0gU2VydmljZXMgTHRkMTUwMwYDVQQDDCxFVURJIFNhbmRib3ggUmVnaXN0cmF0aW9uIENlcnRpZmljYXRlIFNpZ25lcjAeFw0yNjA5MTgxNjAwNDBaFw0yNzEwMTgxNjAwNDBaMGMxCzAJBgNVBAYTAkdCMR0wGwYDVQQKDBRSYWlkaWFtIFNlcnZpY2VzIEx0ZDE1MDMGA1UEAwwsRVVESSBTYW5kYm94IFJlZ2lzdHJhdGlvbiBDZXJ0aWZpY2F0ZSBTaWduZXIwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDaN+7O9dDWMEtuICRcBYzKhAIp74Sa9XcOFaAYkvhiFPAokT3rpjDiDPBKfR7qK8oIPQwv3zz1Z9MwxYvLRiks9NIGvDlLxIXYCbd6JYVK9BZxRvm3fFZTdpLlT6GEmgwolyhJFVTg2WfgrAmVB9gUU9VC1v7dLLKgmApniSJlYHbQTW0y46oF9JRSKxc6KXR3qMsa063l5LGa0ouRs5j3Dec3vaJHAI6CzLiJ5ZEkZCuY4KZrgda7nqmTzB2QRmobdgEMzOAMbiTxJyDM/NhOHEQWkArrL+8b84drQThLIsEpVFyFGcji7sixC7av5AYZKb+FdmqoBEeDmVLgjqjJAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAGYHa14y8YJYZIHQAmcYuAoUr9GXqmIFHyNXkBCcZovq4y3iGWn8t3Ru2waETu/71E5RuSoH+ZiFRG9sGn3nIJXTeTojWB9iYNYz67G8sRmBzO2Af18uVLrytxb45J+F36ILlwBtIWSeEVCak/aRZfVEUIa9mRERRzy4DpAO8qgcFX2FRUGVKXUkY0kZsOz19x0TDpsuIrI4a2ctowTlzn1BuzbtoyC8sTLybLCd4IxlrVpwAMUCUbystFKDtZu+QP7cVmIfMHjIN7bryyFdqdOf93A251S3NdFU2fMw80anIJhup4zLZ9CGgu43JYSWIGqKFtXzQ2NGETUJWclnOKM=</X509Certificate>
+            </DigitalId>
+          </ServiceDigitalIdentity>
+        </ServiceDigitalIdentities>
+        <TSLLocation>https://webuild-consortium.github.io/wp4-trust-group/lotes/wrprc-providers-lote.json</TSLLocation>
+        <AdditionalInformation>
+          <OtherInformation>
+            <TSLType>http://uri.etsi.org/19602/LoTEType/EUWRPRCProvidersList</TSLType>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeOperatorName>
+              <Name xml:lang="en">Raidiam Services Ltd</Name>
+            </SchemeOperatorName>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeTerritory>EU</SchemeTerritory>
+          </OtherInformation>
+          <OtherInformation>
+            <tslx:MimeType>application/json</tslx:MimeType>
+          </OtherInformation>
+        </AdditionalInformation>
+      </OtherTSLPointer>
+      <OtherTSLPointer>
+        <ServiceDigitalIdentities>
+          <ServiceDigitalIdentity>
+            <DigitalId>
               <X509Certificate>MIIDNzCCAtygAwIBAgIQFaNOwKwgTq/0hz86UmX4xTAKBggqhkjOPQQDAjCBqDELMAkGA1UEBhMCTkwxCTAHBgNVBAgTADEJMAcGA1UEBxMAMQkwBwYDVQQJEwAxCTAHBgNVBBETADFBMD8GA1UEChM4V0VCVUlMRCAtIFdQIDQgLSBHcm91cCA1IC0gVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxKjAoBgNVBAMTIWh0dHBzOi8vd3d3LndlYnVpbGRjb25zb3J0aXVtLmV1LzAeFw0yNjAzMTcxMjEwMzlaFw0yNjA0MTYxMTEwMzlaMIGoMQswCQYDVQQGEwJOTDEJMAcGA1UECBMAMQkwBwYDVQQHEwAxCTAHBgNVBAkTADEJMAcGA1UEERMAMUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEqMCgGA1UEAxMhaHR0cHM6Ly93d3cud2VidWlsZGNvbnNvcnRpdW0uZXUvMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE+8YxSGeEgjDMWUh2OJtyiX4A94kStp9zxr3oiaL+0iKjjIO15H45m2cYjQPT8fpnfGvYRju0bcUyYnxkus5Wv6OB5TCB4jAOBgNVHQ8BAf8EBAMCB4AwEgYDVR0lBAswCQYHKIGMXQUBBjAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQY8HnM41E+ZkE/12gArJUJp4D2PTAfBgNVHSMEGDAWgBQY8HnM41E+ZkE/12gArJUJp4D2PTBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMTljZmJiMy1mYTM5LTczZDgtYjRiYy0xOGNjNTQ1YjMyMGEwCgYIKoZIzj0EAwIDSQAwRgIhAKvKc5O8TIUmb70twuzFr+GG3zolvRK0D9rZhhhDePPQAiEAlcYRMaJLmcX2p1p2y6qe93L47tF8XiV0v8BJQ+RBmd4=</X509Certificate>
             </DigitalId>
           </ServiceDigitalIdentity>
@@ -350,15 +376,15 @@
         </AdditionalInformation>
       </OtherTSLPointer>
     </PointersToOtherTSL>
-    <ListIssueDateTime>2026-09-18T11:16:13Z</ListIssueDateTime>
+    <ListIssueDateTime>2026-09-22T09:07:28Z</ListIssueDateTime>
     <NextUpdate>
-      <dateTime>2027-03-18T11:16:13Z</dateTime>
+      <dateTime>2027-03-22T09:07:28Z</dateTime>
     </NextUpdate>
     <DistributionPoints>
       <URI>https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml</URI>
     </DistributionPoints>
   </SchemeInformation>
-<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Id="SignXMLSignatureD52B5160"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256"/><ds:Reference URI="#lotl-1" Id="SignXMLReferenceB12636D1"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>thBOrZrzvAFk8arwi+fLTMHnpXRuvq8AF16YeAl3z9I=</ds:DigestValue></ds:Reference><ds:Reference URI="#SignXMLSignatureD52B5160-SignedPropertiesC320F511" Type="http://uri.etsi.org/01903#SignedProperties"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>g/iGCpClm9xLoCsBwZQASIM9QM0HfzT0sBr7q8YQ8fI=</ds:DigestValue></ds:Reference><ds:Reference URI="#SignXMLCertificate79E098BB"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>EuBs/dUbl1/XmusjKarSPXbpjW7hyFe5bODcyZl4Xx4=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>2rIrCskt4QmlT1ZajCqmLqHOyqc4w4zG59q24JM+ewTRsqMIbQTlokXT135zlNE8ZF5HqK2SskCIJkLBky0qLg==</ds:SignatureValue><ds:KeyInfo Id="SignXMLCertificate79E098BB"><ds:X509Data><ds:X509Certificate>MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAw
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Id="SignXMLSignature4006FDD3"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256"/><ds:Reference URI="#lotl-1" Id="SignXMLReference6BD225F4"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>AowWLEA5biI7RSbuiw/9oH5S9zB06GBqnk5BKX84yAY=</ds:DigestValue></ds:Reference><ds:Reference URI="#SignXMLSignature4006FDD3-SignedProperties2CD78D6E" Type="http://uri.etsi.org/01903#SignedProperties"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>vMUPKVbrPDgb8XmwXFXdQ0jVT1s1ayIfu4RftOVnfDo=</ds:DigestValue></ds:Reference><ds:Reference URI="#SignXMLCertificate28B7ADCE"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>C13G4BelSSh8HESlh1onbW+qYrNvZ6BxHfrpH60wxwo=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>P6CPUebx4Ir4ibScenn2/VVndE7kpBX9LF2toD9RjvPcOY55YkYGuDirZ2CVqRv3Rn845ua9qNNsI0pPIwlQ+A==</ds:SignatureValue><ds:KeyInfo Id="SignXMLCertificate28B7ADCE"><ds:X509Data><ds:X509Certificate>MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAw
 MQswCQYDVQQGEwJFVTEhMB8GA1UECgwYV1A0IFRydXN0IFJlZ2lzdHJ5IEdyb3Vw
 MB4XDTI2MDMyMDEzMjgyNVoXDTI5MDMxOTEzMjgyNVowMDELMAkGA1UEBhMCRVUx
 ITAfBgNVBAoMGFdQNCBUcnVzdCBSZWdpc3RyeSBHcm91cDBZMBMGByqGSM49AgEG
@@ -368,4 +394,4 @@ wDARBgNVHSUECjAIBgYEAJE3AwAwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUh78b
 CQwjCQICwxtn6FHEQAktn7YwCgYIKoZIzj0EAwIDRwAwRAIgfbkN22wQzj8kfoAg
 vYk1u86n/jHDB1FEXJA7aH4VuRECIHulljT498YiqnCgRU7UlRXSF/MpC02r1V1D
 jAue5lYF
-</ds:X509Certificate></ds:X509Data></ds:KeyInfo><ds:Object><xades:QualifyingProperties Target="#SignXMLSignatureD52B5160"><xades:SignedProperties Id="SignXMLSignatureD52B5160-SignedPropertiesC320F511"><xades:SignedSignatureProperties><xades:SigningTime>2026-09-18T11:16:13Z</xades:SigningTime><xades:SigningCertificateV2><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>M5dT2K7ZuZ/rwTzBXIfh6JLjkaDf+xvTrIINcyGeOOE=</ds:DigestValue></xades:CertDigest></xades:Cert></xades:SigningCertificateV2></xades:SignedSignatureProperties><xades:SignedDataObjectProperties><xades:DataObjectFormat ObjectReference="#SignXMLReferenceB12636D1"><xades:Description>ETSI TS 119 612 trusted list</xades:Description><xades:MimeType>application/vnd.etsi.tsl+xml</xades:MimeType></xades:DataObjectFormat></xades:SignedDataObjectProperties></xades:SignedProperties></xades:QualifyingProperties></ds:Object></ds:Signature></TrustServiceStatusList>
+</ds:X509Certificate></ds:X509Data></ds:KeyInfo><ds:Object><xades:QualifyingProperties Target="#SignXMLSignature4006FDD3"><xades:SignedProperties Id="SignXMLSignature4006FDD3-SignedProperties2CD78D6E"><xades:SignedSignatureProperties><xades:SigningTime>2026-09-22T09:07:28Z</xades:SigningTime><xades:SigningCertificateV2><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>M5dT2K7ZuZ/rwTzBXIfh6JLjkaDf+xvTrIINcyGeOOE=</ds:DigestValue></xades:CertDigest></xades:Cert></xades:SigningCertificateV2></xades:SignedSignatureProperties><xades:SignedDataObjectProperties><xades:DataObjectFormat ObjectReference="#SignXMLReference6BD225F4"><xades:Description>ETSI TS 119 612 trusted list</xades:Description><xades:MimeType>application/vnd.etsi.tsl+xml</xades:MimeType></xades:DataObjectFormat></xades:SignedDataObjectProperties></xades:SignedProperties></xades:QualifyingProperties></ds:Object></ds:Signature></TrustServiceStatusList>
