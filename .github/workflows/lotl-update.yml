@@ -122,10 +122,11 @@ jobs:
       - name: Prepare gh-pages content
         run: |
           rm -rf .gh-pages-dist
-          mkdir -p .gh-pages-dist/assets
+          mkdir -p .gh-pages-dist/assets .gh-pages-dist/lotl
           cp lotl/pages/index.html .gh-pages-dist/index.html
           cp lotl/list_of_trusted_lists.json .gh-pages-dist/list_of_trusted_lists.json
           cp lotl/list_of_trusted_lists.xml .gh-pages-dist/list_of_trusted_lists.xml
+          cp lotl/wrprc-providers-lote.json .gh-pages-dist/lotl/wrprc-providers-lote.json
           cp -r lotl/pages/assets/. .gh-pages-dist/assets/
 
       - name: Publish to gh-pages
