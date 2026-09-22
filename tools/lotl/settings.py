@@ -34,19 +34,31 @@ VALID_TL_TYPES = frozenset(
 )
 
 # Mapping from tl_type to ETSI identifier for the *referenced* trusted list (LoTE type or TSL type).
-# Aligns with task2-trust-framework/trust-infrastructure-schema.md §3:
-# - PuB-EAA (EC) and national non-qualified EAA → TS 119 602 Annex H / EUPubEAAProvidersList
-# - QEAA (MS QTSP) → national TS 119 612 trusted list (TSLType EUgeneric), not Annex H
+# Aligns with ARF + ETSI TS 119 612 / TS 119 602:
+# - PuB-EAA (EC) → TS 119 602 Annex H / EUPubEAAProvidersList
+# - QEAA (MS QTSP) and non-qualified EAA (MS TLP) → national TS 119 612 TSL
+#   (TSLType EUgeneric); disambiguated by ServiceTypeIdentifier
+#   Svctype/EAA/Q vs Svctype/EAA (not by a second 602 LoTE type — Annex H is
+#   Pub-EAA only).
 TL_TYPE_TO_REFERENCE_URI = {
     "wrpac-provider": "http://uri.etsi.org/19602/LoTEType/EUWRPACProvidersList",
     "wrprc-provider": "http://uri.etsi.org/19602/LoTEType/EUWRPRCProvidersList",
     "pub-eaa-provider": "http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList",
     "pid-provider": "http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList",
     "qeaa-provider": "http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric",
-    "eaa-provider": "http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList",
+    "eaa-provider": "http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric",
     "wallet-provider": "http://uri.etsi.org/19602/LoTEType/EUWalletProvidersList",
     "ebwoid-provider": "http://uri.etsi.org/19602/LoTEType/EURegistrarsAndRegistersList",
 }
+
+# National TS 119 612 XML Trusted Lists (not TS 119 602 LoTE / Annex H).
+TS_119_612_TL_TYPES = frozenset({"qeaa-provider", "eaa-provider"})
+
+# ETSI TS 119 612 clause 5.5.1.1 — how EAA vs QEAA vs Pub-EAA are distinguished
+# on a national TSL (same TSLType EUgeneric).
+SVC_TYPE_EAA = "http://uri.etsi.org/TrstSvc/Svctype/EAA"
+SVC_TYPE_EAA_Q = "http://uri.etsi.org/TrstSvc/Svctype/EAA/Q"
+SVC_TYPE_EAA_PUB = "http://uri.etsi.org/TrstSvc/Svctype/EAA/Pub-EAA"
 
 # Backward-compatible alias (values are not always LoTEType URIs)
 TL_TYPE_TO_LOTE_URI = TL_TYPE_TO_REFERENCE_URI
@@ -105,6 +117,12 @@ POINTER_MIME_TYPES = frozenset([MIME_TSL_XML, MIME_LOTE_XML, MIME_LOTE_JSON])
 # Output filenames
 LOTL_JSON_FILENAME = "list_of_trusted_lists.json"
 LOTL_XML_FILENAME = "list_of_trusted_lists.xml"
+
+# Published LoTL (GitHub Pages) — used by the scheduled expiry check
+PUBLISHED_LOTL_JSON_URL = os.environ.get(
+    "LOTL_PUBLISHED_JSON_URL",
+    "https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json",
+)
 
 
 def get_schema_path() -> Path:

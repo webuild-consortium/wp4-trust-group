@@ -9,15 +9,15 @@ Per the EUDIW trust model in [Trust Infrastructure Schema](../task2-trust-framew
 | TL type (folder) | Trusted List (Task 2) | Compiler | Expected list format | `referencedListTypeUri` in LoTL JSON (`tools/lotl/settings.py`) |
 |------------------|----------------------|----------|----------------------|------------------------------------------------------------------|
 | `pub-eaa-provider` | EU-level **PuB-EAA** Providers TL | European Commission | TS 119 602 Annex H (LoTE) / profile §7.3 | `http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList` |
-| `eaa-provider` | National **non-qualified EAA** Provider TL | Member State TLP | TS 119 602 Annex H (LoTE) / profile §7.3 | `http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList` |
-| `qeaa-provider` | National **QTSP** TL for **QEAA** Providers | Member State TLP | **TS 119 612** national trusted list (XML TSL; Article 22 eIDAS) | `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric` |
+| `eaa-provider` | National **non-qualified EAA** Provider TL | Member State TLP | **TS 119 612** national trusted list (XML TSL; `Svctype/EAA`) | `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric` |
+| `qeaa-provider` | National **QTSP** TL for **QEAA** Providers | Member State TLP | **TS 119 612** national trusted list (XML TSL; Article 22 eIDAS; `Svctype/EAA/Q`) | `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric` |
 | `pid-provider` | EU PID Providers List | EC | Profile §7.1 | `…/LoTEType/EUPIDProvidersList` |
 | `wallet-provider` | EU Wallet Providers List | EC | Profile §7.2 | `…/LoTEType/EUWalletProvidersList` |
 | `wrpac-provider` | EU WRPAC Providers List | EC | Profile | `…/LoTEType/EUWRPACProvidersList` |
 | `wrprc-provider` | EU WRPRC Providers List | EC | Profile | `…/LoTEType/EUWRPRCProvidersList` |
 | `ebwoid-provider` | Registrars / registers (EBWOID) | Per Task 3 / ARF | Profile | `…/LoTEType/EURegistrarsAndRegistersList` |
 
-For **PuB-EAA** and **non-qualified EAA**, **`referencedListTypeUri` is the same LoTE type** because both follow **Annex H / `EUPubEAAProvidersList`**; they differ by **who publishes** (EC vs MS) and by notification rules (see Task 2). **QEAA** pointers denote **Member State national trusted lists**; consumers validate them per **ETSI TS 119 615** and TS 119 612 rules, not the Annex H LoTE profile. CI **must** validate each `tl_url` against the applicable format (LoTE JSON/XML vs TS 119 612 XML).
+For **PuB-EAA**, **`referencedListTypeUri` is Annex H / `EUPubEAAProvidersList`**. For **non-qualified EAA** and **QEAA**, the pointer URI is the same national **TS 119 612** `TSLType/EUgeneric`; consumers disambiguate by **ServiceTypeIdentifier** (`Svctype/EAA` vs `Svctype/EAA/Q`), not by reusing the Pub-EAA LoTE type. CI **must** validate each `tl_url` against the applicable format (LoTE JSON/XML vs TS 119 612 XML).
 
 ## Process Overview
 
@@ -206,7 +206,7 @@ Signature validation with `trust_anchor` is implemented today. Per-type ETSI sch
 | `wallet-provider` | TS 119 602 Annex E | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
 | `pub-eaa-provider` | TS 119 602 Annex H | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
 | `qeaa-provider` | TS 119 612 (national QTSP TL) | https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd | [ ] Planned |
-| `eaa-provider` | TS 119 602 Annex H | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
+| `eaa-provider` | TS 119 612 (national EAA TSL) | https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd | [ ] Planned |
 | `wrpac-provider` | TS 119 602 Annex F | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
 | `wrprc-provider` | TS 119 602 Annex G | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
 | `ebwoid-provider` | TS 119 602 Annex I | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
@@ -252,8 +252,10 @@ tools/lotl/
 python -m tools.lotl --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
 # With inline key/cert:
 python -m tools.lotl --signing-key key.pem --signing-cert cert.pem --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
-# Validate-only (for CI): no signing required
+# Validate-only (for CI): no signing required; fails if any trust_anchor is expired
 python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/
+# Expiry check of entries plus a published LoTL (signing x5c and pointer certs)
+python -m tools.lotl --check-expiry --tl-entries-dir lotl/tl_entries/ --lotl-json https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json
 ```
 
 - **LoTL is signed**: XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON).
@@ -309,7 +311,7 @@ python -m tools.lotl --signing-key lotl/certs/lotl_signing_key.pem --signing-cer
 2. On success: collect entries, generate LoTL, sign LoTL
 3. On failure: produce exits non-zero
 
-For CI (PR validation without producing): `python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/` (no signing required).
+For CI (PR validation without producing): `python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/` (no signing required). Validation includes certificate expiry: an expired or not-yet-valid `trust_anchor` fails the PR. The produce path also rejects an expired LoTL signing certificate.
 
 ### 5.1 Running Tests
 
@@ -347,11 +349,22 @@ env/bin/pytest tools/lotl/tests/test_producer.py -v
 **Steps**:
 1. For each new or modified `lotl/tl_entries/{tl_type}/*.json`:
    - Parse the file; validate against the TL entry JSON schema (required fields: `tl_url`, `trust_anchor`)
+   - Reject the entry if `trust_anchor` cannot be parsed or is expired / not yet valid
    - Fetch the TL from `tl_url` (or `tl_url_json`/`tl_url_xml`)
    - Validate the TL signature using the provided `trust_anchor` (X.509 certificate)
    - Validate the TL against the ETSI schema for that TL type (per [Task 3 implementation profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md))
 2. If all validations pass: PR is mergeable
 3. If any validation fails: CI fails; PR cannot be merged
+
+#### 6.1a Scheduled LoTL certificate expiry
+
+**Location**: `.github/workflows/lotl-cert-expiry.yml`
+
+**Trigger**: Daily at 06:00 UTC, and `workflow_dispatch`.
+
+**Steps**: `python -m tools.lotl --check-expiry --tl-entries-dir lotl/tl_entries/ --lotl-json https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json`
+
+The job fails if any `trust_anchor` in the repository, the published LoTL signing certificate (`x5c`), or any LoTL pointer certificate is expired or not yet valid. This catches certificates that expire after merge.
 
 #### 6.2 LoTL Update on Merge
 
@@ -366,6 +379,7 @@ env/bin/pytest tools/lotl/tests/test_producer.py -v
 1. **Load TL Entries**:
    - Scan `lotl/tl_entries/{tl_type}/*.json` for all valid entries
    - Parse each file to obtain TL URL(s) and metadata
+   - Fail the PR or publish job if any `trust_anchor` or the LoTL signing certificate is expired
 
 2. **Generate and Sign LoTL**:
    - Execute LoTL producer with `--tl-entries-dir` and `--output-dir`

@@ -83,7 +83,14 @@ def validate_tl_signature_xml(
     try:
         from tools.lotl.xades_signer import verify_xml
 
-        verify_xml(tl_content, cert_pem=trust_anchor_pem.encode() if isinstance(trust_anchor_pem, str) else trust_anchor_pem)
+        verify_xml(
+            tl_content,
+            cert_pem=trust_anchor_pem.encode()
+            if isinstance(trust_anchor_pem, str)
+            else trust_anchor_pem,
+            # Participant lists are XAdES-B (>= 2 refs), not the LoTL 3-ref profile.
+            expect_references=None,
+        )
         return True, ""
     except Exception as e:
         return False, str(e)

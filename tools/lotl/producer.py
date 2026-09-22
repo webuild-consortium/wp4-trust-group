@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from typing import Optional
 
+from tools.lotl.cert_expiry import certificate_pem_errors
 from tools.lotl.collector import collect_entries
 from tools.lotl.lote_validate import validate_lote_json
 from tools.lotl.jades_signer import sign_json
@@ -140,6 +141,14 @@ def produce(
     # 5. Sign
     if not signing_key or not signing_cert:
         logger.error("Signing key and certificate required for produce mode")
+        return 1
+
+    signing_cert_errors = certificate_pem_errors(
+        signing_cert, "LoTL signing certificate"
+    )
+    if signing_cert_errors:
+        for err in signing_cert_errors:
+            logger.error(err)
         return 1
 
     try:

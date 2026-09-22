@@ -47,6 +47,24 @@ def test_validate_tl_signature_xml_valid(signing_key_and_cert) -> None:
     assert not err
 
 
+def test_validate_tl_signature_xml_accepts_xades_b_two_references(
+    signing_key_and_cert,
+) -> None:
+    """Published lists may omit the LoTL KeyInfo ds:Reference."""
+    from lxml import etree
+
+    from tools.lotl.tests.test_signing import _drop_references_except_document, _resign
+
+    key_path, cert_path = signing_key_and_cert
+    signed = sign_xml(generate_lotl_xml([], sequence_number=1), key_path, cert_path)
+    root = etree.fromstring(signed)
+    _drop_references_except_document(root, keep_signed_properties=True)
+    two_ref = _resign(root, key_path)
+    valid, err = validate_tl_signature_xml(two_ref, cert_path.read_text())
+    assert valid, err
+    assert not err
+
+
 def test_validate_tl_entry_no_fetch(sample_tl_entry: TLEntry) -> None:
     """validate_tl_entry with fetch_and_validate=False passes."""
     valid, errors = validate_tl_entry(sample_tl_entry, fetch_and_validate=False)

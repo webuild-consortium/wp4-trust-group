@@ -183,6 +183,11 @@ http://uri.etsi.org/TrstSvc/Svctype/Certstatus/CRL/QC
 
 # Qualified time-stamping
 http://uri.etsi.org/TrstSvc/Svctype/TSA/QTST
+
+# Electronic attestation of attributes (non-qualified / qualified / public-body)
+http://uri.etsi.org/TrstSvc/Svctype/EAA
+http://uri.etsi.org/TrstSvc/Svctype/EAA/Q
+http://uri.etsi.org/TrstSvc/Svctype/EAA/Pub-EAA
 ```
 
 **Important profile separation**:
@@ -732,9 +737,9 @@ python -m jsonschema lote.json lote-schema.json
 - Next update maximum: 6 months
 - Signature: Compact JAdES Baseline B
 
-### 7.3 Pub-EAA Providers List and national non-qualified EAA Provider lists (TS 119 602, Annex H)
+### 7.3 Pub-EAA Providers List (TS 119 602, Annex H)
 
-**Scope**: Annex H defines the LoTE profile for **Pub-EAA Providers** (EC-compiled list) and is also used for **national non-qualified EAA Provider Trusted Lists** compiled and published by Member State TLPs (per ARF v3.0.0 and the trust infrastructure schema).
+**Scope**: Annex H defines the LoTE profile for **Pub-EAA Providers** (EC-compiled list). It does **not** define a LoTE type for national non-qualified EAA or QEAA providers. Those providers appear on **TS 119 612** national Trusted Lists (see §7.3.1).
 
 #### Required URIs
 - **LoTE Type**: `http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList`
@@ -755,7 +760,19 @@ python -m jsonschema lote.json lote-schema.json
 - Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
 - Service history uses X509SKI (not X509Certificate)
 
-**QEAA (qualified EAA) — national lists**: **Annex H / `EUPubEAAProvidersList` does not replace** Member State **TS 119 612** trusted lists for **QEAA Providers** as QTSPs. Per [Trust Infrastructure Schema](../task2-trust-framework/trust-infrastructure-schema.md) §3, QEAA trust anchors are published on **national QTSP Trusted Lists** (Article 22 eIDAS), typically with **TSLType** `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric`. The WP4 LoTL automation maps folder `qeaa-provider` to that TSL type URI in `tools/lotl/settings.py`.
+### 7.3.1 National EAA and QEAA Provider lists (TS 119 612)
+
+**QEAA** and **non-qualified EAA** providers are trust services on Member State **TS 119 612** Trusted Lists (`TrustServiceStatusList`), not TS 119 602 Annex H LoTEs. Both use **TSLType** `http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric`. They are distinguished by **ServiceTypeIdentifier** (TS 119 612 clause 5.5.1.1):
+
+| Provider class | LoTL folder | Distinguishing service type |
+|----------------|-------------|-----------------------------|
+| Non-qualified EAA | `eaa-provider` | `http://uri.etsi.org/TrstSvc/Svctype/EAA` |
+| QEAA (QTSP) | `qeaa-provider` | `http://uri.etsi.org/TrstSvc/Svctype/EAA/Q` |
+| Pub-EAA as a 612 service (when listed on a national TSL) | not the EC Annex H LoTE | `http://uri.etsi.org/TrstSvc/Svctype/EAA/Pub-EAA` |
+
+**QEAA** trust anchors are published on **national QTSP Trusted Lists** (Article 22 eIDAS). **Non-qualified EAA** trust anchors, when published as a Trusted List pointed from the LoTL, use the same 612 TSL model. ARF TS11 still allows a **Rulebook** to use the TS 119 602 LoTE data model or OpenID Federation instead of a national TSL; that optional mechanism is **not** `EUPubEAAProvidersList` (Annex H is Pub-EAA only). The WP4 LoTL automation maps both `eaa-provider` and `qeaa-provider` to `TSLType/EUgeneric` in `tools/lotl/settings.py`.
+
+Format: XML `TrustServiceStatusList` with enveloped XAdES Baseline B (enveloped-signature then exclusive C14N). JSON LoTE is not the 612 profile.
 
 ### 7.4 Issuer constraint extensions (ServiceInformationExtensions)
 
@@ -1137,5 +1154,5 @@ Use appropriate JAdES validation library (see section 12).
 
 **Document Version**: 1.1  
 **Last Updated**: 2025-02-02  
-**ARF alignment**: v3.0.0 (ETSI TS 119 602 title "Lists of trusted entities; Data model" V1.1.1 (2025-11); Annex H for Pub-EAA and national non-qualified EAA Provider lists; TS 119 612 / CIR 2025/2164)
+**ARF alignment**: v3.0.0 (ETSI TS 119 602 title "Lists of trusted entities; Data model" V1.1.1 (2025-11); Annex H for Pub-EAA Providers only; national non-qualified EAA and QEAA on TS 119 612 / CIR 2025/2164, distinguished by `Svctype/EAA` vs `Svctype/EAA/Q`)
 

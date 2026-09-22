@@ -37,6 +37,31 @@ def test_generate_with_entries(sample_tl_entry: TLEntry) -> None:
     assert ptrs[1]["LoTEQualifiers"][0]["MimeType"] == "application/xml"
 
 
+def test_612_eaa_pointer_is_xml_mime(
+    signing_key_and_cert: tuple[Path, Path],
+) -> None:
+    """National EAA/QEAA pointers are TS 119 612 XML, not Annex H JSON."""
+    from tools.lotl.settings import MIME_TSL_XML
+
+    _key_path, cert_path = signing_key_and_cert
+    entry = TLEntry(
+        tl_type="eaa-provider",
+        participant_id="it-eaa",
+        tl_url="https://example.com/eaa.json",
+        tl_url_xml="https://example.com/eaa.xml",
+        trust_anchor=cert_path.read_text(),
+        metadata={"operator_name": "IT TLP", "country": "IT"},
+    )
+    out = generate_lotl_json([entry], sequence_number=1)
+    ptrs = out["LoTE"]["ListAndSchemeInformation"]["PointersToOtherLoTE"]
+    assert len(ptrs) == 1
+    assert ptrs[0]["LoTELocation"] == "https://example.com/eaa.xml"
+    q = ptrs[0]["LoTEQualifiers"][0]
+    assert q["MimeType"] == MIME_TSL_XML
+    assert q["LoTEType"].endswith("/EUgeneric")
+    assert "LoTEType/EUPubEAA" not in q["LoTEType"]
+
+
 def test_x509_in_pointer(
     sample_tl_entry: TLEntry,
     signing_key_and_cert: tuple[Path, Path],

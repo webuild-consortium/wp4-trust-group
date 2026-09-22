@@ -15,6 +15,53 @@ import pytest
 from tools.lotl.tl_entry import TLEntry
 
 
+def make_self_signed_cert_pem(
+    *,
+    not_before_days: int,
+    not_after_days: int,
+) -> bytes:
+    """Return a self-signed ECDSA P-256 certificate PEM with the given validity window."""
+    import datetime
+
+    from cryptography import x509
+    from cryptography.hazmat.primitives import hashes, serialization
+    from cryptography.hazmat.primitives.asymmetric import ec
+    from cryptography.x509.oid import NameOID
+
+    key = ec.generate_private_key(ec.SECP256R1())
+    now = datetime.datetime.now(datetime.timezone.utc)
+    subject = issuer = x509.Name(
+        [
+            x509.NameAttribute(NameOID.COUNTRY_NAME, "EU"),
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME, "WP4 Test"),
+            x509.NameAttribute(NameOID.COMMON_NAME, "LoTL Test Cert"),
+        ]
+    )
+    cert = (
+        x509.CertificateBuilder()
+        .subject_name(subject)
+        .issuer_name(issuer)
+        .public_key(key.public_key())
+        .serial_number(1)
+        .not_valid_before(now + datetime.timedelta(days=not_before_days))
+        .not_valid_after(now + datetime.timedelta(days=not_after_days))
+        .sign(key, hashes.SHA256())
+    )
+    return cert.public_bytes(serialization.Encoding.PEM)
+
+
+@pytest.fixture
+def valid_cert_pem() -> str:
+    """Currently valid self-signed certificate PEM."""
+    return make_self_signed_cert_pem(not_before_days=-1, not_after_days=30).decode()
+
+
+@pytest.fixture
+def expired_cert_pem() -> str:
+    """Already-expired self-signed certificate PEM."""
+    return make_self_signed_cert_pem(not_before_days=-60, not_after_days=-1).decode()
+
+
 @pytest.fixture
 def signing_key_and_cert(tmp_path: Path) -> tuple[Path, Path]:
     """Generate a temporary EC P-256 key and self-signed certificate (LoTL default key type)."""
