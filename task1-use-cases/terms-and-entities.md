@@ -2,7 +2,7 @@
 
 This document is the single source of truth for **terms**, **acronyms**, and **entity definitions** used across WP4 Trust Group deliverables. Other documents in the repository reference this document to avoid duplicating definitions.
 
-**Scope**: EUDI Wallet ecosystem trust infrastructure, onboarding, and trust evaluation, aligned with the [EUDI Wallet Architecture and Reference Framework (ARF) v3.0.0](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/).
+**Scope**: EUDI Wallet ecosystem trust infrastructure, onboarding, and trust evaluation, aligned with the [EUDI Wallet Architecture and Reference Framework (ARF) v3.0.0](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/). European Business Wallet (EBW) terms used in WP4 trust evaluation are included; the ARF does not define legal-person Wallet Units (see [EBW trust framework](../task2-trust-framework/european-business-wallet-trust-framework.md)).
 
 ---
 
@@ -16,12 +16,17 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 | **CIR** | Commission Implementing Regulation | EU |
 | **CWT** | CBOR Web Token | RFC 8392 |
 | **EAA** | Electronic Attestation of Attributes | ARF |
+| **EBW** | European Business Wallet — wallet solution for a legal person or economic operator | COM(2025) 838; 2025/0358(COD) |
+| **EBWOID** | European Business Wallet Owner Identification Data (legal name + EUID or national register code) | WE BUILD D4.1; COM(2025) 838 owner identification data |
 | **EC** | European Commission | ARF |
 | **EAA Provider** | non-qualified Electronic Attestation of Attributes Provider | ARF |
+| **EDD** | European Digital Directory — Commission directory of EBW-enabled entities (not a WP4 trust source yet) | COM(2025) 838 Art. 10 |
 | **EUDI** | European Digital Identity | ARF |
 | **EUDIW** | European Digital Identity Wallet | Regulation (EU) 2024/1183 |
+| **EUID** | European Unique Identifier (company law / BRIS; AML where assigned) | Directive (EU) 2017/1132 |
 | **JWT** | JSON Web Token | RFC 7519 |
 | **KA** | Key Attestation — attests to security properties of cryptographic keys in a WSCD or keystore; used during PID and device-bound attestation issuance | ARF Topic 9, TS3 |
+| **LPID** | Legal Person Identification Data — EWC/LSP predecessor of EBWOID; schema id may remain `LPID` | EWC RFC 005, rb001 |
 | **LoTE** | List of Trusted Entities — consumption artifact for trust anchors (ETSI TS 119 602) | ARF, ETSI TS 119 602 |
 | **LoTL** | List of Trusted Lists | ARF, ETSI TS 119 612 |
 | **MS** | Member State | ARF |
@@ -31,6 +36,7 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 | **PID** | Person Identification Data | ARF |
 | **PuB-EAA Provider** | Public Sector Body Electronic Attestation of Attributes Provider | ARF |
 | **QEAA Provider** | Qualified Electronic Attestation of Attributes Provider (a QTSP under eIDAS) | ARF |
+| **QERDS** | Qualified Electronic Registered Delivery Service — EBW secure communication channel (not a WP4 trust source yet) | eIDAS Art. 43; COM(2025) 838 |
 | **QTSP** | Qualified Trust Service Provider (under eIDAS) | eIDAS Regulation |
 | **RP** | Relying Party | ARF |
 | **RPI** | Relying Party Intermediary | ARF Topic 52 |
@@ -55,7 +61,9 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 - **wallet solution**: A combination of software, hardware, services, settings, and configurations, including wallet instances, one or more wallet secure cryptographic applications and one or more wallet secure cryptographic devices.
 - **wallet instance**: The application installed and configured on a wallet user's device or environment, which is part of a wallet unit, and that the wallet user uses to interact with the wallet unit.
 - **wallet unit**: A unique configuration of a wallet solution that includes wallet instances, wallet secure cryptographic applications and wallet secure cryptographic devices provided by a wallet provider to an individual wallet user.
-- **wallet provider**: A natural or legal person who provides wallet solutions.
+- **wallet provider**: A natural or legal person who provides wallet solutions. In WP4 this includes providers of EUDI Wallet solutions for natural persons and providers of European Business Wallet solutions for legal persons; both are listed in `EUWalletProvidersList`.
+- **European Business Wallet (EBW)**: Wallet solution for a legal person or economic operator, complementary to the EUDI Wallet. WP4 evaluates EBW trust on the EUDI Trusted List / Registry stack until EBW implementing acts exist. See [EBW trust framework](../task2-trust-framework/european-business-wallet-trust-framework.md).
+- **EBWOID**: European Business Wallet Owner Identification Data — the organisation’s core identity attestation (legal name and EUID or national register code), issued as a QEAA or PuB-EAA. Predecessor term: LPID.
 
 ### 2.2 Trust Infrastructure Terms
 
@@ -91,8 +99,10 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 - **PuB-EAA Provider**: Public Sector Body Electronic Attestation of Attributes Provider.
 - **EAA Provider**: non-qualified Electronic Attestation of Attributes Provider.
 - **Relying Party (RP)**: Service that requests attributes from Wallet Units to provide services to users.
-- **Wallet Provider (WP)**: Natural or legal person who provides wallet solutions.
-- **Holder**: User using the Wallet Unit.
+- **Wallet Provider (WP)**: Natural or legal person who provides wallet solutions (EUDI Wallet and/or European Business Wallet in the WP4 pilot).
+- **European Business Wallet (EBW) Provider**: Wallet Provider whose listed solution is an EBW. Not a separate ETSI LoTE type in TS 119 602 v1.1.1.
+- **EBWOID Provider**: Attestation Provider (QEAA or PuB-EAA) that issues European Business Wallet Owner Identification Data. Distinct from the LoTL folder `ebwoid-provider`, which maps to `EURegistrarsAndRegistersList` (registrars/registers).
+- **Holder**: User using the Wallet Unit (natural person for EUDI Wallet; authorised representative acting for the owner of an EBW Unit).
 - **Intermediary**: Special class of Relying Party that acts on behalf of other Relying Parties.
 
 ---
@@ -178,7 +188,12 @@ The following entities are involved in trust evaluation, trust registry, and tru
 ### 3.14 Wallet Provider
 
 - **Role**: Make certified Wallet Solutions available to Users.
-- **Trust Evaluation Involvement**: Wallet Solutions must be certified by CABs; trust anchors notified to Commission and published in Wallet Provider LoTE; can be suspended or cancelled by Commission; supervised by Supervisory Bodies.
+- **Trust Evaluation Involvement**: Wallet Solutions must be certified by CABs; trust anchors notified to Commission and published in Wallet Provider LoTE; can be suspended or cancelled by Commission; supervised by Supervisory Bodies. In the WP4 pilot, the same LoTE (`EUWalletProvidersList`) lists both EUDI Wallet solutions and European Business Wallet solutions; the onboarding record states which type the solution is. Production listing of EBW providers under COM(2025) 838 is not implemented.
+
+### 3.14a EBWOID Provider
+
+- **Role**: Issue European Business Wallet Owner Identification Data (legal name + EUID or national register code) as a QEAA or PuB-EAA from authentic sources (typically business registers).
+- **Trust Evaluation Involvement**: Same as QEAA Provider (§3.11) or PuB-EAA Provider (§3.12). Evaluators MUST use those Trusted Lists, not `lotl/tl_entries/ebwoid-provider/` (that folder is the registrars/registers list). Predecessor term: LPID (EWC RFC 005). See [EBW trust framework](../task2-trust-framework/european-business-wallet-trust-framework.md) and [UC-TE-07](subtask1-2-trust-registry/european-business-wallet-trust-evaluation.md).
 
 ### 3.15 Relying Party (RP)
 

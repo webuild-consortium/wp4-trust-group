@@ -15,7 +15,9 @@ Per the EUDIW trust model in [Trust Infrastructure Schema](../task2-trust-framew
 | `wallet-provider` | EU Wallet Providers List | EC | Profile §7.2 | `…/LoTEType/EUWalletProvidersList` |
 | `wrpac-provider` | EU WRPAC Providers List | EC | Profile | `…/LoTEType/EUWRPACProvidersList` |
 | `wrprc-provider` | EU WRPRC Providers List | EC | Profile | `…/LoTEType/EUWRPRCProvidersList` |
-| `ebwoid-provider` | Registrars / registers (EBWOID) | Per Task 3 / ARF | Profile | `…/LoTEType/EURegistrarsAndRegistersList` |
+| `ebwoid-provider` | Registrars / registers (`EURegistrarsAndRegistersList`) | Per Task 3 / ARF | Profile | `…/LoTEType/EURegistrarsAndRegistersList` |
+
+The folder name **`ebwoid-provider` is a WE BUILD pipeline label**. It maps to ETSI **`EURegistrarsAndRegistersList`** (TS 119 602 Annex I) for **registrar/register discovery**. It is **not** a list of EBWOID issuers and there is no ETSI type `EBWOIDProvidersList`. EBWOID issuers are QEAA or PuB-EAA providers (`qeaa-provider` / `pub-eaa-provider`). EBW Wallet Providers share **`wallet-provider` / `EUWalletProvidersList`** with EUDI Wallet Providers. See [EBW trust framework](../task2-trust-framework/european-business-wallet-trust-framework.md).
 
 For **PuB-EAA**, **`referencedListTypeUri` is Annex H / `EUPubEAAProvidersList`**. For **non-qualified EAA** and **QEAA**, the pointer URI is the same national **TS 119 612** `TSLType/EUgeneric`; consumers disambiguate by **ServiceTypeIdentifier** (`Svctype/EAA` vs `Svctype/EAA/Q`), not by reusing the Pub-EAA LoTE type. CI **must** validate each `tl_url` against the applicable format (LoTE JSON/XML vs TS 119 612 XML).
 
