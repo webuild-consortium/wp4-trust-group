@@ -64,14 +64,14 @@ The following table defines the complete set of extensions applicable to the cer
 | `subjectKeyIdentifier` | OPTIONAL. If present, the `keyIdentifier` field SHOULD be derived from the subject public key using the methods defined in [RFC 5280 Section 4.2.1.2](https://datatracker.ietf.org/doc/html/rfc5280#section-4.2.1.2). |
 | `keyUsage` | REQUIRED. It MUST contain one (and only one) of the key-usage settings *Type A*, *Type B*, *Type C*, or *Type F*.<br>For additional details, see Clause 4.4.1 [ETSI TS 119 412-6](../references/etsi/ETSI_TS_119_412-6_V1.1.1.md), Clause 4.3.2 [ETSI EN 319 412-2](../references/etsi/ETSI_EN_319_412-2_V2.4.1.md), and Clause 4.3.1 [ETSI EN 319 412-3](../references/etsi/ETSI_EN_319_412-3_V1.3.1.md). |
 | `certificatePolicies` | REQUIRED. It MUST include a `PolicyInformation` structure with `policyIdentifier` set to the OID of a certificate policy including at least (as per [EUDI Wallet ARF](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/) requirement `EW-DM-38-001`):<br>• The requirements for *NCP*, defined in [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf), for KAs describing a keystore.<br>• The requirements for *NCP+*, defined in [ETSI EN 319 411-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941101/01.04.01_60/en_31941101v010401p.pdf), for KAs describing a WSCA/WSCD. |
-| `subjectAltName` | REQUIRED. It MUST include at least one URI `GeneralName` whose value is exactly the URI of the Wallet Solution associated with the certificate. The URI MUST match the URI recorded for that Wallet Solution in the Trusted List of Wallet Providers. A missing or mismatching Wallet Solution URI is invalid. |
+| `subjectAltName` | REQUIRED. A URI in this extension, when present, is contact information for the Wallet Provider. |
 | `cRLDistributionPoints` | CONDITIONAL. **REQUIRED IF:** the certificate does not include any access location of an OCSP responder or the validity assured extension as defined in [ETSI EN 319 412-1](https://www.etsi.org/deliver/etsi_en/319400_319499/31941201/01.06.01_60/en_31941201v010601c.pdf). |
 | `authorityInfoAccess` | REQUIRED. It MUST include an `AccessDescription` structure with `accessMethod` set to `1.3.6.1.5.5.7.48.2` (`id-ad-caIssuers`) and `accessLocation` specifying at least one access location of a valid CA certificate of the issuing CA.<br><br>If OCSP is supported by the issuing CA, the extension MUST include an `AccessDescription` structure with `accessMethod` set to `1.3.6.1.5.5.7.48.1` (`id-ad-ocsp`) and `accessLocation` specifying at least one OCSP responder authoritative to provide certificate status information for the certificate, as described in [RFC 6960](https://datatracker.ietf.org/doc/html/rfc6960). |
 | `qcStatements` | REQUIRED. It MUST contain a `QCStatement` structure with `statementId` set to `0.4.0.1862.1.6` (`id-etsi-qcs-QcType`).<br>The corresponding `statementInfo` MUST contain a `QcType` structure including exactly one object identifier, namely `0.4.0.194126.1.2` (`id-etsi-qct-wal`), as defined in Clause 5.2 of [ETSI TS 119 412-6](../references/etsi/ETSI_TS_119_412-6_V1.1.1.md). |
 
-Each Wallet Solution MUST have its own cryptographic material and its related sign/seal certificate. The Wallet Provider MUST generate or register a distinct ECDSA P-256 key pair for each Wallet Solution and obtain a distinct sign/seal certificate for each of them. The key pair and certificate MUST NOT be reused for another Wallet Solution.
+Each Wallet Solution MUST have its own sign/seal key pair and certificate for its WIA and KA. The Wallet Provider MUST generate or register a distinct ECDSA P-256 key pair for each Wallet Solution and obtain a distinct sign/seal certificate for each of them. The key pair and certificate MUST NOT be reused for another Wallet Solution. On the Wallet Providers LoTE, that certificate is the `ServiceDigitalIdentity` of the `http://uri.etsi.org/19602/SvcType/WalletSolution/Issuance` service for the solution named by `ServiceName` ([ETSI TS 119 602](../references/etsi/ts_119602v010101p.md) Annex E, Table E.3). The Wallet Solution identifier on that list is `ServiceName` together with `ServiceUniqueIdentifier`. [Technical Specification 3](https://github.com/eu-digital-identity-wallet/eudi-doc-standards-and-technical-specifications/blob/main/docs/technical-specifications/ts3-wallet-unit-attestation.md) conveys the solution name in the WIA `wallet_name` claim.
 
-The private key corresponding to a Wallet Solution's sign/seal certificate MUST sign that solution's WIA, KA, and every Token Status List used for the WIA (`client_status`) or KA (`key_storage_status`) revocation status. These signatures MUST use `ES256`. A separate WIA, KA, or Token Status List signing key or certificate MUST NOT be used for that Wallet Solution.
+The private key corresponding to a Wallet Solution's sign/seal certificate MUST sign that solution's WIA and KA. These signatures MUST use `ES256`. A Token Status List for the WIA (`client_status`) or the KA (`key_storage_status`) MAY be signed with that same private key, or with a distinct key and certificate. When a distinct revocation certificate is used, it is the trust anchor for WIA and KA Attestation Status Lists in [ARF Topic 31](https://eu-digital-identity-wallet.github.io/eudi-doc-architecture-and-reference-framework/3.0.0/annexes/annex-2/annex-2.02-high-level-requirements-by-topic/) requirement `WPNot_02`, and the `ServiceDigitalIdentity` of the `http://uri.etsi.org/19602/SvcType/WalletSolution/Revocation` service.
 
 ### (Q)EAA Provider Sign/Seal Certificate
 
@@ -126,7 +126,7 @@ The CSR MUST:
 3. Contain a subject that conforms to the applicable [ETSI EN 319 412-2](../references/etsi/ETSI_EN_319_412-2_V2.4.1.md) or [ETSI EN 319 412-3](../references/etsi/ETSI_EN_319_412-3_V1.3.1.md) base profile and matches the provider onboarding data. For a legal-person provider, the subject MUST comply with ETSI EN 319 412-3 clause 4.2.1 and include `countryName`, `organizationName`, `organizationIdentifier`, and `commonName`. Where a natural-person provider profile applies, the subject MUST comply with ETSI EN 319 412-2 clause 4.2.4.
 4. Contain a PKCS#9 `extensionRequest` attribute requesting the profile-compliant `keyUsage` choice (ETSI EN 319 412-3 clause 4.3.1 for legal entities or ETSI EN 319 412-2 clause 4.3.2 for natural persons) and the `subjectAltName` values required by the requested certificate profile and provider onboarding data.
 
-For a Wallet Provider CSR, the `subjectAltName` MUST include at least one URI `GeneralName` whose value is exactly the Wallet Solution URI supplied in [UC-03](../task1-use-cases/subtask1-1-onboarding/wallet-provider-onboarding.md) and recorded for that Wallet Solution in the Trusted List of Wallet Providers. A missing or mismatching Wallet Solution URI is invalid. The Wallet Provider key pair and certificate MUST NOT be registered or reused for another Wallet Solution.
+For a Wallet Provider CSR, the key pair and certificate MUST NOT be registered or reused for another Wallet Solution. A URI in `subjectAltName`, when present, is contact information for the Wallet Provider.
 
 The CA controls the issuer name, serial number, validity period, `authorityKeyIdentifier`, `subjectKeyIdentifier`, `authorityInfoAccess`, `cRLDistributionPoints`, certificate policy, and `qcStatements` of the issued certificate. The CA MUST apply the complete profile for the requested certificate type, including its profile-specific `QcType`.
 
@@ -139,14 +139,14 @@ Before issuing any PID, Wallet, EAA, QEAA, or PuB-EAA Provider sign/seal certifi
 3. Verify that the requested public key is ECDSA on P-256 and that the CSR signature uses `ecdsa-with-SHA256`. The CA MUST reject RSA keys and non-P-256 curves.
 4. Identify the requested certificate profile and verify that the subject conforms to its applicable ETSI EN 319 412 base profile and matches the submitted provider data.
 5. Verify that the `extensionRequest` contains the profile-compliant `keyUsage` choice and the `subjectAltName` values required by the requested certificate profile. Unsupported `keyUsage` requests MUST be rejected.
-6. For a Wallet Provider CSR, compare the URI SAN exactly with the Wallet Solution URI supplied in [UC-03](../task1-use-cases/subtask1-1-onboarding/wallet-provider-onboarding.md) and recorded in the Trusted List of Wallet Providers. Reject a missing or mismatching URI and reject a key pair or certificate registered or reused for another Wallet Solution.
+6. For a Wallet Provider CSR, reject a key pair or certificate registered or reused for another Wallet Solution.
 7. For other provider profiles, verify each profile-specific identifier and requested SAN value against the provider's onboarding data.
 
 If any check fails, the CA MUST reject the CSR before certificate issuance. If all checks succeed, the CA MUST issue a fresh certificate that contains all mandatory extensions in the requested certificate profile, including its profile-specific `QcType` where applicable.
 
 ## OpenSSL Commands
 
-The following non-normative code examples illustrate the Wallet Provider process for generating a Wallet Solution sign/seal key and CSR, verifying the CSR, and issuing its certificate. They demonstrate common P-256 mechanics; replace the provider subject and Wallet Solution URI with values from the onboarding request, and replace the CA values with those of the issuing CA. The common CSR profile above applies to all five sign/seal certificate types, while these commands specifically illustrate the Wallet Provider process.
+The following non-normative code examples illustrate the Wallet Provider process for generating a Wallet Solution sign/seal key and CSR, verifying the CSR, and issuing its certificate. They demonstrate common P-256 mechanics; replace the provider subject and contact URI with values from the onboarding request, and replace the CA values with those of the issuing CA. The common CSR profile above applies to all five sign/seal certificate types, while these commands specifically illustrate the Wallet Provider process.
 
 ### Generate Key Pair
 
@@ -164,7 +164,7 @@ openssl req -new -sha256 \
   -out wallet_solution.csr \
   -subj "/C=DE/O=Example of Wallet Provider/CN=Wallet Provider Example/organizationIdentifier=LEIDE-5493001KJTIIGC8Y1R12" \
   -addext "keyUsage=critical,nonRepudiation" \
-  -addext "subjectAltName=URI:https://wallet.example.test/solution"
+  -addext "subjectAltName=URI:https://wp.example.test/support"
 ```
 
 ### Inspect and Verify CSR
@@ -201,7 +201,7 @@ openssl x509 -req -sha256 \
 
 ### Extensions Configuration (wallet_provider_ext.cnf)
 
-The CA's `wallet_provider_ext.cnf` configuration MUST apply the complete certificate profile selected for the CSR. In particular, it MUST supply the profile-compliant `keyUsage`, the required `subjectAltName`, `certificatePolicies`, `authorityInfoAccess`, conditional `cRLDistributionPoints`, and the profile-specific `qcStatements`. For a Wallet Provider certificate, this includes the exact Wallet Solution URI and `id-etsi-qct-wal` (`0.4.0.194126.1.2`).
+The CA's `wallet_provider_ext.cnf` configuration MUST apply the complete certificate profile selected for the CSR. In particular, it MUST supply the profile-compliant `keyUsage`, `certificatePolicies`, `authorityInfoAccess`, conditional `cRLDistributionPoints`, and the profile-specific `qcStatements`. For a Wallet Provider certificate, this includes `id-etsi-qct-wal` (`0.4.0.194126.1.2`). A URI in `subjectAltName`, when present, is contact information.
 
 The following non-normative configuration illustrates these profile-relevant entries for the example certificate.
 
@@ -210,15 +210,15 @@ The following non-normative configuration illustrates these profile-relevant ent
 authorityKeyIdentifier = keyid,issuer
 subjectKeyIdentifier = hash
 keyUsage = critical, nonRepudiation
-subjectAltName = @wallet_solution_san
+subjectAltName = @wallet_provider_san
 certificatePolicies = @policy_section
 authorityInfoAccess = caIssuers;URI:https://ca.example.test/caIssuers/issuing-ca.cer,OCSP;URI:https://ocsp.example.test
 crlDistributionPoints = URI:https://crl.example.test/issuing-ca.crl
 # id-etsi-qcs-QcType containing id-etsi-qct-wal.
 1.3.6.1.5.5.7.1.3 = ASN1:SEQUENCE:qc_statements
 
-[wallet_solution_san]
-URI.1 = https://wallet.example.test/solution
+[wallet_provider_san]
+URI.1 = https://wp.example.test/support
 email.1 = support@wp.example.test
 
 [policy_section]
@@ -253,7 +253,7 @@ statementInfo = SEQUENCE:qc_type
 
 **Attestation Providers (EAA, QEAA, PuB-EAA):** These certificates are used to sign attestations. They MUST be formatted as described in [(Q)EAA Provider Sign/Seal Certificate](#qeaa-provider-signseal-certificate) and [PuB-EAA Provider Sign/Seal Certificate](#pub-eaa-provider-signseal-certificate).
 
-When OCSP or a CRL is used for attestation revocation, the private key corresponding to the applicable provider sign/seal certificate MUST sign the OCSP responder certificate or CRL, respectively, as required by Clause 6.2 of [ETSI TS 119 412-6](../references/etsi/ETSI_TS_119_412-6_V1.1.1.md).
+For an EAA, and for a QEAA or PuB-EAA through Clauses 7.3 and 8.4, when OCSP or a CRL is used for revocation of the attestation, the private key corresponding to that provider's sign/seal certificate MUST sign the OCSP responder certificate or the CRL, as required by Clause 6.2 of [ETSI TS 119 412-6](../references/etsi/ETSI_TS_119_412-6_V1.1.1.md).
 
 ### UC-03: Wallet Provider Onboarding
 
@@ -261,9 +261,9 @@ When OCSP or a CRL is used for attestation revocation, the private key correspon
 
 | Entity | Sign/seal certificate (TS 119 412-6) |
 |--------|--------------------------------------|
-| Wallet Provider | Clause 5 — one Wallet Solution sign/seal certificate per Wallet Solution, with URI SAN binding; `QcType` `id-etsi-qct-wal` |
+| Wallet Provider | Clause 5 — one Wallet Solution sign/seal certificate per Wallet Solution; `QcType` `id-etsi-qct-wal` |
 
-**Wallet Provider:** Each Wallet Solution receives its own sign/seal key pair and certificate. The certificate's URI SAN is the Wallet Solution URI. The corresponding private key signs the Wallet Solution's WIA, KA, and related Token Status Lists using `ES256`. The certificate MUST be formatted as described in [Wallet Provider Sign/Seal Certificate](#wallet-provider-signseal-certificate).
+**Wallet Provider:** Each Wallet Solution receives its own sign/seal key pair and certificate for its WIA and KA. The corresponding private key signs that solution's WIA and KA using `ES256`. A Token Status List for that solution may be signed with the same key or with a separate revocation key and certificate. The certificate MUST be formatted as described in [Wallet Provider Sign/Seal Certificate](#wallet-provider-signseal-certificate).
 
 ### Relying Party Onboarding
 
@@ -373,7 +373,7 @@ Certificate:
                 Policy: 0.4.0.194112.1.3
                     CPS: https://rpca.example.test/cps
             X509v3 Subject Alternative Name: 
-                URI: https://wallet.example.test/solution
+                URI: https://wp.example.test/support
                 email: support@wp.example.test
             X509v3 CRL Distribution Points: 
                 Full Name:
@@ -387,7 +387,7 @@ Certificate:
     Signature Value: BASE64(ECDSA_SIGN(issuerPrivateKey, DER(tbsCertificate)))
 ```
 
-*Used to sign the WIA, KA, and related Token Status List for the example Wallet Solution.*
+*Used to sign the WIA and KA for the example Wallet Solution. A Token Status List for that solution may be signed with this certificate or with a separate revocation certificate.*
 
 ### EAA Provider Sign/Seal Certificate Example
 
