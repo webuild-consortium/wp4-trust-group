@@ -105,6 +105,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 
 - **[Consolidated Terms and Entity Definitions](task1-use-cases/terms-and-entities.md)** — Single source for acronyms, key terminology, entity types, WEBUILD-specific entities (Trust Infrastructure Responsible Group), MVP/MVP+ definitions, and policy terms.
 - **[Entities Involved](task2-trust-framework/entities-involved.md)** — Description of entities participating in trust evaluation, the trust registry, and trust infrastructure (aligned with the EUDIW ARF).
+- **[European Business Wallet trust framework](task2-trust-framework/european-business-wallet-trust-framework.md)** — EBW vs EUDI Wallet: owner identification data (EBWOID), LoTE mapping, trust evaluation, and WP4 task split.
 
 ### How do participants join the ecosystem? — Onboarding and registration
 
@@ -113,7 +114,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 - **[Base Onboarding Framework](task1-use-cases/subtask1-1-onboarding/onboarding-base.md)** — Common framework: MVP/MVP+ definitions, Member State requirements, RACI matrix; references use-case-specific documents.
 - **[Relying Party Onboarding (UC-01)](task1-use-cases/subtask1-1-onboarding/relying_party_onboarding.md)** — RP registration use case (National Register — not TL/LoTE-listed), policy acceptance, certificate validation, access control setup.
 - **[PID / EAA Provider Onboarding](task1-use-cases/subtask1-1-onboarding/pid_eaa_provider_onboarding.md)** — PID/Attestation Provider registration, attestation type declaration, access/registration certificate issuance, trust anchor publication, notification to Commission.
-- **[Wallet Provider Onboarding](task1-use-cases/subtask1-1-onboarding/wallet-provider-onboarding.md)** — Wallet Provider registration, wallet instance attestation, security compliance, trust establishment.
+- **[Wallet Provider Onboarding](task1-use-cases/subtask1-1-onboarding/wallet-provider-onboarding.md)** — Wallet Provider registration, wallet instance attestation, security compliance, trust establishment (EUDI Wallet or European Business Wallet).
 - **[WRPAC/WRPRC Authority Onboarding (UC-04)](task1-use-cases/subtask1-1-onboarding/wrpac-wrprc-authority-onboarding.md)** — Access CA and Registration Certificate Provider onboarding.
 - **[Onboarding API](task4-trust-infrastructure-api/onboarding-api/README.md)** — API for participant registration, certificate management, policy management, compliance and audits.
 
@@ -121,6 +122,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 
 - **[Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md)** — Schema and processes for registration/onboarding, notification, and Trusted List publication; responsibilities matrix (Registrar vs. EC vs. MS TLP).
 - **[Trusted List Registration Trust Evaluation Matrix](task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md)** — Requirements matrix for trusted lists, participant registration, and trust evaluation derived from EUDI Wallet ARF Annex 2.
+- **[European Business Wallet trust framework](task2-trust-framework/european-business-wallet-trust-framework.md)** — How EBW Providers, EBWOID issuers, and EBW Units map onto the same schema (shared `EUWalletProvidersList`; `ebwoid-provider` = registrars list).
 
 ### How do participants verify each other’s trustworthiness? — Trust evaluation use cases
 
@@ -131,6 +133,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 - **[Relying Party Intermediary (UC-RPI-01)](task1-use-cases/subtask1-2-trust-registry/relying-party-intermediary-use-case.md)** — Intermediary presents on behalf of another RP; Wallet authenticates the intermediary WRPAC (`Reg_34a`) and displays only the intermediated RP (`RPI_07`).
 - **[Relying Party evaluates presented credentials](task1-use-cases/subtask1-2-trust-registry/relying-party-evaluates-credentials.md)** — RP validates PID and attestation signatures using Trusted Lists.
 - **[Trusted List discovery and consumption](task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md)** — How to obtain and use LoTL and Trusted Lists for validation.
+- **[European Business Wallet trust evaluation (UC-TE-07)](task1-use-cases/subtask1-2-trust-registry/european-business-wallet-trust-evaluation.md)** — Overlay of UC-TE-02–06 when the wallet is an EBW and the core identity is EBWOID.
 
 ### How does the wallet discover and verify trust? — Wallet (holder) perspective
 
@@ -189,6 +192,10 @@ Reading paths group documents by the questions or problems they address. Each pa
   - [Official Document](https://eur-lex.europa.eu/eli/reg/2014/910/oj)
 - **Regulation (EU) 2024/1183** - Amending Regulation (EU) No 910/2014
   - [Official Document](https://eur-lex.europa.eu/eli/reg/2024/1183/oj)
+- **Proposal COM(2025) 838** - European Business Wallets (procedure 2025/0358(COD)); WP4 pilots EBW on the EUDI trust infrastructure until the Regulation and implementing acts exist
+  - [EUR-Lex](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0838)
+  - [Council general approach ST 7659/26](https://data.consilium.europa.eu/doc/document/ST-7659-2026-INIT/en/pdf) (9 June 2026)
+  - WP4 interpretation: [EBW trust framework](task2-trust-framework/european-business-wallet-trust-framework.md)
 - **CIR (EU) 2025/848** - Commission Implementing Regulation on the registration of wallet-relying parties
   - [Official Document](https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX:32025R0848)
 - **CIR (EU) 2026/1730** - Amending CIR 2025/848 (standards, intermediary–RP association, certificate profiles, automated WRPRC issuance)

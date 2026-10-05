@@ -2,6 +2,8 @@
 
 This document describes the policy discovery process performed by an EUDI Wallet Instance (holder) when interacting with **Relying Parties (RPs)** and **Attestation Providers** (PID Providers, QEAA Providers, PuB-EAA Providers, non-qualified EAA Providers). The discovery mechanism enables the wallet to verify the trustworthiness and entitlements of counterparties before disclosing user attributes.
 
+The same discovery stack applies to a **European Business Wallet Unit** (WRPAC/WRPRC/Registry/LoTL). EBW-specific overlay, including confidential attributes: [UC-TE-07](../task1-use-cases/subtask1-2-trust-registry/european-business-wallet-trust-evaluation.md), [EBW trust framework](european-business-wallet-trust-framework.md).
+
 **ARF v3.0.0:** Wallet Units verify the **WRPRC included in the presentation request** (**RPRC_17**, **RPRC_19**, **RPRC_21**). **RPRC_16**, **RPRC_18**, and **RPRC_19a** are empty: there is no user-opt-in Registrar lookup as a substitute for a missing WRPRC. Registry APIs (**Reg_03**, **Reg_06**) remain for publication and transparency. For intermediaries, the WRPAC is bound to the intermediated RP (**Reg_34a**); the Wallet SHALL NOT display the intermediary’s trade names (**RPI_07**).
 
 ## Abbreviations

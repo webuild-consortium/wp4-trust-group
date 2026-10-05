@@ -10,6 +10,8 @@ This document follows the WEBUILD ecosystem structure; see [MVP and MVP+ Definit
 
 Wherever feasible, this specification aligns with processes defined in Regulation (EU) 2024/1183 and the [Architecture and Reference Framework](https://eudi.dev/3.0.0/architecture-and-reference-framework-main/), interpreting them for the testing purposes specific to WEBUILD.
 
+European Business Wallet providers use this same use case. Trust-framework interpretation (shared `EUWalletProvidersList`, EBWOID vs the `ebwoid-provider` folder): [European Business Wallet in the WP4 Trust Framework](../../task2-trust-framework/european-business-wallet-trust-framework.md). Evaluation overlay: [UC-TE-07](../subtask1-2-trust-registry/european-business-wallet-trust-evaluation.md).
+
 For the common framework (terminology, MVP/MVP+, success criteria, preconditions), see [Base Onboarding Framework](onboarding-base.md). This document defines only **Wallet Provider–specific** content; it does not duplicate the base.
 
 ## Terminology and Acronyms
@@ -50,7 +52,7 @@ See [Terminology and Acronyms](onboarding-base.md#terminology-and-acronyms) in t
   Providers and certified solutions of
     - EUDI Wallets for natural persons [CIR 2025/849](https://data.europa.eu/eli/reg_impl/2025/849/oj)
     - European Business
-      Wallets [Proposal for a Regulation (EU) 2025/0358 (COD) ](https://digital-strategy.ec.europa.eu/en/library/proposal-regulation-establishment-european-business-wallets)
+      Wallets [COM(2025) 838](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0838) ([proposal landing page](https://digital-strategy.ec.europa.eu/en/library/proposal-regulation-establishment-european-business-wallets); Council general approach [ST 7659/26](https://data.consilium.europa.eu/doc/document/ST-7659-2026-INIT/en/pdf)). WP4 interpretation: [EBW trust framework](../../task2-trust-framework/european-business-wallet-trust-framework.md).
 - **Success Criteria**:
     - [MVP] Pilot implementations successfully demonstrate wallet providers' onboarding; all wallet providers within WEBUILD are included on a publicly accessible trusted list maintained by the WP4 Trust Infrastructure group.
     - [MVP+] See [Success Criteria](onboarding-base.md#success-criteria). Wallet Provider–specific: onboarding via notification (not registration with Registrar); trust anchors published in Trusted Lists (see [Trust Infrastructure Schema - Responsibilities Matrix](../../task2-trust-framework/trust-infrastructure-schema.md#responsibilities-matrix)).
