@@ -54,6 +54,7 @@ venv.bak/
 # IDE
 .idea/
 .vscode/
+/.opencode/
 *.swp
 *.swo
 *~
@@ -95,3 +96,6 @@ celerybeat.pid
 /site
 
 lotl/certs/
+
+# tests 
+/tests/specification/
