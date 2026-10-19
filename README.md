@@ -131,6 +131,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 - **[Relying Party Intermediary (UC-RPI-01)](task1-use-cases/subtask1-2-trust-registry/relying-party-intermediary-use-case.md)** — Intermediary presents on behalf of another RP; Wallet authenticates the intermediary WRPAC (`Reg_34a`) and displays only the intermediated RP (`RPI_07`).
 - **[Relying Party evaluates presented credentials](task1-use-cases/subtask1-2-trust-registry/relying-party-evaluates-credentials.md)** — RP validates PID and attestation signatures using Trusted Lists.
 - **[Trusted List discovery and consumption](task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md)** — How to obtain and use LoTL and Trusted Lists for validation.
+- **[Relying Party Verification Guide](task2-trust-framework/relying-party-verification-guide.md)** — 5-minute guide for verifier developers: when to accept or reject a presented PID or attestation, using the WEBUILD LoTL; production differences.
 
 ### How does the wallet discover and verify trust? — Wallet (holder) perspective
 
