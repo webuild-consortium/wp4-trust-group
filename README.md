@@ -122,7 +122,7 @@ Reading paths group documents by the questions or problems they address. Each pa
 
 - **[Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md)** — Schema and processes for registration/onboarding, notification, and Trusted List publication; responsibilities matrix (Registrar vs. EC vs. MS TLP).
 - **[Trusted List Registration Trust Evaluation Matrix](task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md)** — Requirements matrix for trusted lists, participant registration, and trust evaluation derived from EUDI Wallet ARF Annex 2.
-- **[European Business Wallet trust framework](task2-trust-framework/european-business-wallet-trust-framework.md)** — How EBW Providers, EBWOID issuers, and EBW Units map onto the same schema (shared `EUWalletProvidersList`; `ebwoid-provider` = registrars list).
+- **[European Business Wallet trust framework](task2-trust-framework/european-business-wallet-trust-framework.md)** — How EBW Providers, EBWOID issuers, and EBW Units map onto the schema (shared `EUWalletProvidersList`; pilot EBWOID issuer list; `ebwoid-provider` = registrars list).
 
 ### How do participants verify each other’s trustworthiness? — Trust evaluation use cases
 

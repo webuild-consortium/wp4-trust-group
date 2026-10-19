@@ -101,7 +101,7 @@ This document is the single source of truth for **terms**, **acronyms**, and **e
 - **Relying Party (RP)**: Service that requests attributes from Wallet Units to provide services to users.
 - **Wallet Provider (WP)**: Natural or legal person who provides wallet solutions (EUDI Wallet and/or European Business Wallet in the WP4 pilot).
 - **European Business Wallet (EBW) Provider**: Wallet Provider whose listed solution is an EBW. Not a separate ETSI LoTE type in TS 119 602 v1.1.1.
-- **EBWOID Provider**: Attestation Provider (QEAA or PuB-EAA) that issues European Business Wallet Owner Identification Data. Distinct from the LoTL folder `ebwoid-provider`, which maps to `EURegistrarsAndRegistersList` (registrars/registers).
+- **EBWOID Provider**: Attestation Provider (QEAA or PuB-EAA) that issues European Business Wallet Owner Identification Data. In the WE BUILD pilot the trust anchor is the dedicated EBWOID Providers LoTE ([profile](subtask1-1-onboarding/EBWOID-provider-profile.md)). Distinct from the LoTL folder `ebwoid-provider`, which maps to `EURegistrarsAndRegistersList` (registrars/registers).
 - **Holder**: User using the Wallet Unit (natural person for EUDI Wallet; authorised representative acting for the owner of an EBW Unit).
 - **Intermediary**: Special class of Relying Party that acts on behalf of other Relying Parties.
 
@@ -193,7 +193,7 @@ The following entities are involved in trust evaluation, trust registry, and tru
 ### 3.14a EBWOID Provider
 
 - **Role**: Issue European Business Wallet Owner Identification Data (legal name + EUID or national register code) as a QEAA or PuB-EAA from authentic sources (typically business registers).
-- **Trust Evaluation Involvement**: Same as QEAA Provider (§3.11) or PuB-EAA Provider (§3.12). Evaluators MUST use those Trusted Lists, not `lotl/tl_entries/ebwoid-provider/` (that folder is the registrars/registers list). Predecessor term: LPID (EWC RFC 005). See [EBW trust framework](../task2-trust-framework/european-business-wallet-trust-framework.md) and [UC-TE-07](subtask1-2-trust-registry/european-business-wallet-trust-evaluation.md).
+- **Trust Evaluation Involvement**: Legal issuance form is the same as QEAA Provider (§3.11) or PuB-EAA Provider (§3.12). In the WE BUILD pilot, evaluators use the dedicated EBWOID Providers LoTE (`EUEBWOIDProvidersList`, a WE BUILD extension; [profile](subtask1-1-onboarding/EBWOID-provider-profile.md)) as the issuer trust anchor. Evaluators MUST NOT use `lotl/tl_entries/ebwoid-provider/` (that folder is the registrars/registers list) or the PID Provider LoTE. Predecessor term: LPID (EWC RFC 005). See [EBW trust framework](../task2-trust-framework/european-business-wallet-trust-framework.md) and [UC-TE-07](subtask1-2-trust-registry/european-business-wallet-trust-evaluation.md).
 
 ### 3.15 Relying Party (RP)
 
