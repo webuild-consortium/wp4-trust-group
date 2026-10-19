@@ -828,9 +828,17 @@ For the EUDI Wallet ecosystem, the following extensions are used when configurin
 
 #### Key Requirements
 - Entries identify authoritative registrars and registers used for relying party registration and entitlement discovery.
-- `ebwoid-provider` in the WP4 LoTL pipeline maps to this profile and LoTE type URI.
+- `ebwoid-provider` in the WP4 LoTL pipeline maps to this profile and LoTE type URI. It does **not** list EBWOID issuers. Those use [§7.8](#78-ebwoid-providers-list-we-build-extension).
 - Next update maximum: 6 months.
 - Signature: Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML).
+
+### 7.8 EBWOID Providers List (WE BUILD extension)
+
+TS 119 602 v1.1.1 has no Annex for providers of European Business Wallet Owner Identification Data. The pilot profile, including the extension URI `http://uri.etsi.org/19602/LoTEType/EUEBWOIDProvidersList`, is the [EBWOID provider profile](../task1-use-cases/subtask1-1-onboarding/EBWOID-provider-profile.md).
+
+- Planned pipeline folder: `ebwoid-issuer`.
+- Do not publish EBWOID issuers under §7.7 or under folder `ebwoid-provider`.
+- The attestation remains a QEAA or PuB-EAA. This section is the pilot trust-anchor profile, not a replacement of the legal issuance form.
 
 ## 8. Digital Signature Implementation
 
@@ -1085,14 +1093,21 @@ Use appropriate JAdES validation library (see section 12).
 - [ ] Next update is within 6 months
 - [ ] Signature is Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
 
-#### Registrars and Registers List (EBWOID)
+#### Registrars and Registers List (pipeline folder `ebwoid-provider`)
 - [ ] LoTE type URI is `http://uri.etsi.org/19602/LoTEType/EURegistrarsAndRegistersList`
 - [ ] Status determination approach URI is correct
 - [ ] Scheme type/community/rules URI is correct
 - [ ] Service type URI is `http://uri.etsi.org/19602/SvcType/Register`
-- [ ] Entries identify authoritative registrars/registers used for relying-party registration and entitlement discovery
+- [ ] Entries identify authoritative registrars/registers used for relying-party registration and entitlement discovery — **not** EBWOID issuers ([EBW trust framework](../task2-trust-framework/european-business-wallet-trust-framework.md#lotl--lote-mapping-do-not-confuse-the-names))
 - [ ] Next update is within 6 months
 - [ ] Signature is Compact JAdES Baseline B (JSON) or XAdES Baseline B (XML)
+
+#### EBWOID Providers List (WE BUILD extension; pipeline folder `ebwoid-issuer`)
+- [ ] Profile applied: [EBWOID provider profile](../task1-use-cases/subtask1-1-onboarding/EBWOID-provider-profile.md)
+- [ ] LoTE type URI is `http://uri.etsi.org/19602/LoTEType/EUEBWOIDProvidersList` (not registered in TS 119 602 v1.1.1)
+- [ ] Entries are EBWOID issuers, not registrars, and not PID providers
+- [ ] The list is not published in folder `ebwoid-provider`
+- [ ] Signature is Compact JAdES Baseline B
 
 ## Implementation Checklist
 
@@ -1111,6 +1126,7 @@ Use appropriate JAdES validation library (see section 12).
 - [x] WRPRC Providers profile
 - [ ] Pub-EAA Providers profile
 - [x] Registrars and Registers profile
+- [ ] EBWOID Providers profile (WE BUILD extension; [EBWOID provider profile](../task1-use-cases/subtask1-1-onboarding/EBWOID-provider-profile.md))
 
 ### Signature Implementation
 - [ ] XAdES signature generation (XML)

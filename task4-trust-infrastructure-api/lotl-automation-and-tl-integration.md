@@ -15,7 +15,12 @@ Per the EUDIW trust model in [Trust Infrastructure Schema](../task2-trust-framew
 | `wallet-provider` | EU Wallet Providers List | EC | Profile §7.2 | `…/LoTEType/EUWalletProvidersList` |
 | `wrpac-provider` | EU WRPAC Providers List | EC | Profile | `…/LoTEType/EUWRPACProvidersList` |
 | `wrprc-provider` | EU WRPRC Providers List | EC | Profile | `…/LoTEType/EUWRPRCProvidersList` |
-| `ebwoid-provider` | Registrars / registers (EBWOID) | Per Task 3 / ARF | Profile | `…/LoTEType/EURegistrarsAndRegistersList` |
+| `ebwoid-issuer` | Pilot **EBWOID** Providers List | WP4 / PID-EBWOID WG | [EBWOID provider profile](../task1-use-cases/subtask1-1-onboarding/EBWOID-provider-profile.md) | `…/LoTEType/EUEBWOIDProvidersList` (WE BUILD extension; not in TS 119 602 v1.1.1) |
+| `ebwoid-provider` | Registrars / registers (`EURegistrarsAndRegistersList`) | Per Task 3 / ARF | Profile | `…/LoTEType/EURegistrarsAndRegistersList` |
+
+The folder name **`ebwoid-provider` is a WE BUILD pipeline label**. It maps to ETSI **`EURegistrarsAndRegistersList`** (TS 119 602 Annex I) for **registrar/register discovery**. It is **not** a list of EBWOID issuers.
+
+**`ebwoid-issuer`** is the planned folder for the pilot EBWOID Providers LoTE ([profile](../task1-use-cases/subtask1-1-onboarding/EBWOID-provider-profile.md)). The type URI is a WE BUILD extension. The folder is **not** created in this change, and `tools/lotl/settings.py` does not yet list it in `VALID_TL_TYPES`. Eight providers are already listed on the operational pilot list. EBWOID remains a QEAA or PuB-EAA; the legal issuance path is still `qeaa-provider` / `pub-eaa-provider`. EBW Wallet Providers share **`wallet-provider` / `EUWalletProvidersList`** with EUDI Wallet Providers. See [EBW trust framework](../task2-trust-framework/european-business-wallet-trust-framework.md).
 
 For **PuB-EAA**, **`referencedListTypeUri` is Annex H / `EUPubEAAProvidersList`**. For **non-qualified EAA** and **QEAA**, the pointer URI is the same national **TS 119 612** `TSLType/EUgeneric`; consumers disambiguate by **ServiceTypeIdentifier** (`Svctype/EAA` vs `Svctype/EAA/Q`), not by reusing the Pub-EAA LoTE type. CI **must** validate each `tl_url` against the applicable format (LoTE JSON/XML vs TS 119 612 XML).
 
@@ -86,6 +91,8 @@ lotl/
 │   │   └── {participant_id}.json
 │   ├── wallet-provider/
 │   │   └── {participant_id}.json
+│   ├── ebwoid-issuer/          # planned; not in VALID_TL_TYPES yet
+│   │   └── {participant_id}.json
 │   └── ebwoid-provider/
 │       └── {participant_id}.json
 ├── list_of_trusted_lists.xml
@@ -134,6 +141,7 @@ The `metadata` field in the base entry format is generic (`operator_name`, `coun
 | `pub-eaa-provider` | `operator_name`, `country` | — | EC-compiled; `country` = MS notifying |
 | `qeaa-provider` | `operator_name`, `country` | — | MS TLP; `country` = MS territory |
 | `eaa-provider` | `operator_name`, `country` | — | MS TLP; `country` = MS territory |
+| `ebwoid-issuer` | `operator_name`, `country` | — | Pilot EBWOID Providers list (planned folder) |
 | `ebwoid-provider` | `operator_name`, `country` | `registry_uri` | Registrars/Registers list |
 
 **Example TL entry for `qeaa-provider` (Member State QTSP TL):**
@@ -209,6 +217,7 @@ Signature validation with `trust_anchor` is implemented today. Per-type ETSI sch
 | `eaa-provider` | TS 119 612 (national EAA TSL) | https://forge.etsi.org/rep/esi/x19_612_trusted_lists/-/raw/v2.4.1/19612_xsd.xsd | [ ] Planned |
 | `wrpac-provider` | TS 119 602 Annex F | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
 | `wrprc-provider` | TS 119 602 Annex G | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
+| `ebwoid-issuer` | TS 119 602 structure; LoTE type is a WE BUILD extension | [EBWOID provider profile](../task1-use-cases/subtask1-1-onboarding/EBWOID-provider-profile.md) | [ ] Planned |
 | `ebwoid-provider` | TS 119 602 Annex I | https://forge.etsi.org/rep/esi/x19_60201_lists_of_trusted_entities | [ ] Planned |
 
 ### 4. LoTL Producer and Signer
