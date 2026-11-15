@@ -263,14 +263,14 @@ def test_format_published_report_groups_and_hints() -> None:
         },
     )
     passed = PublicationCheck(
-        label="wrpac-provider/raidiam",
+        label="wrpac-provider/idunion",
         url="https://example.com/lote.json",
         errors=[],
         observed={"format": "json", "LoTEType": "EUWRPACProvidersList"},
     )
     text = format_published_report([], [fail, passed], github=False)
     assert "FAIL  wrprc-provider/idunion" in text
-    assert "PASS  wrpac-provider/raidiam" in text
+    assert "PASS  wrpac-provider/idunion" in text
     assert "Observed" in text
     assert "transforms" in text
     assert "enveloped-signature then exclusive C14N" in text
