@@ -4,7 +4,11 @@ from __future__ import annotations
 
 import base64
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from unittest.mock import patch
+
+import pytest
 
 from tools.lotl.jades_signer import sign_json
 from tools.lotl.list_profile import (
@@ -49,8 +53,8 @@ def _xml(
     svc: str = PID_SVC,
     status: str | None = None,
     hip: str | None = None,
-    issue: str = "2026-01-01T00:00:00Z",
-    nxt: str = "2026-07-01T00:00:00Z",
+    issue: str | None = None,
+    nxt: str | None = None,
     entity: bool = True,
     signed: bool = True,
     root: str = "TrustedEntitiesList",
@@ -59,6 +63,11 @@ def _xml(
     ref_uri: str = "",
     c14n: str = C14N,
 ) -> bytes:
+    now = datetime.now(timezone.utc)
+    if issue is None:
+        issue = (now - timedelta(days=1)).isoformat()
+    if nxt is None:
+        nxt = (now + timedelta(days=30)).isoformat()
     tfs = transforms if transforms is not None else [ENV, C14N]
     tf_xml = extra_transform_xml + "".join(
         f'<ds:Transform Algorithm="{alg}"/>' for alg in tfs
@@ -398,10 +407,15 @@ def _lote_json(
     svc: str = PID_SVC,
     status: str | None = None,
     hip: int | None = None,
-    issue: str = "2026-01-01T00:00:00Z",
-    nxt: str = "2026-07-01T00:00:00Z",
+    issue: str | None = None,
+    nxt: str | None = None,
     entities: bool = True,
 ) -> dict:
+    now = datetime.now(timezone.utc)
+    if issue is None:
+        issue = (now - timedelta(days=1)).isoformat()
+    if nxt is None:
+        nxt = (now + timedelta(days=30)).isoformat()
     svc_info: dict = {"ServiceTypeIdentifier": svc}
     if status:
         svc_info["ServiceStatus"] = status
@@ -426,6 +440,28 @@ def _lote_json(
     else:
         lote["TrustedEntitiesList"] = []
     return {"LoTE": lote}
+
+
+@pytest.mark.parametrize("format", ["json", "xml"])
+@pytest.mark.parametrize(
+    ("next_update", "expired"),
+    [
+        ("2026-05-01T11:59:59Z", True),
+        ("2026-05-01T12:00:00Z", True),
+        ("2026-05-01T14:00:01+02:00", False),
+    ],
+)
+def test_published_lote_next_update_freshness(format, next_update, expired) -> None:
+    now = datetime(2026, 5, 1, 12, 0, tzinfo=timezone.utc)
+    issue = "2026-04-01T00:00:00Z"
+    with patch("tools.lotl.list_profile.datetime", wraps=datetime) as clock:
+        clock.now.return_value = now
+        if format == "xml":
+            errors = validate_xml_list(_xml(issue=issue, nxt=next_update), tl_type="pid-provider")
+        else:
+            doc = _lote_json(issue=issue, nxt=next_update)
+            errors = validate_json_list(json.dumps(doc), tl_type="pid-provider")
+    assert any("NextUpdate has expired" in error for error in errors) is expired
 
 
 def test_json_pid_with_jades_passes(signing_key_and_cert: tuple[Path, Path]) -> None:

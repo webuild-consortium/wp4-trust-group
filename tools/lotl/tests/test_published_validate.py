@@ -3,8 +3,11 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest.mock import patch
+
+import pytest
 
 from tools.lotl.jades_signer import sign_json
 from tools.lotl.list_profile import ENVELOPED_SIGNATURE_URI, EXCLUSIVE_C14N_URI
@@ -24,6 +27,10 @@ from tools.lotl.tl_entry import TLEntry
 ENV = ENVELOPED_SIGNATURE_URI
 C14N = EXCLUSIVE_C14N_URI
 
+NOW = datetime.now(timezone.utc)
+ISSUE = (NOW - timedelta(days=1)).isoformat()
+NEXT_UPDATE = (NOW + timedelta(days=30)).isoformat()
+
 PID_XML = f"""<?xml version="1.0" encoding="UTF-8"?>
 <TrustedEntitiesList xmlns="http://uri.etsi.org/019602/v1#" Id="root-1">
   <ListAndSchemeInformation>
@@ -32,8 +39,8 @@ PID_XML = f"""<?xml version="1.0" encoding="UTF-8"?>
     <SchemeTypeCommunityRules>
       <URI>http://uri.etsi.org/19602/PIDProviders/schemerules/EU</URI>
     </SchemeTypeCommunityRules>
-    <ListIssueDateTime>2026-01-01T00:00:00Z</ListIssueDateTime>
-    <NextUpdate><dateTime>2026-07-01T00:00:00Z</dateTime></NextUpdate>
+    <ListIssueDateTime>{ISSUE}</ListIssueDateTime>
+    <NextUpdate><dateTime>{NEXT_UPDATE}</dateTime></NextUpdate>
   </ListAndSchemeInformation>
   <TrustedEntitiesList>
     <TrustedEntity>
@@ -318,9 +325,10 @@ def test_run_published_validation_github_annotations(
     assert "::group::" in text
 
 
+@pytest.mark.parametrize("expired", [False, True])
 @patch("tools.lotl.published_validate.fetch_published")
 def test_json_crypto_verify_path(
-    mock_fetch, sample_tl_entry: TLEntry, signing_key_and_cert: tuple[Path, Path]
+    mock_fetch, sample_tl_entry: TLEntry, signing_key_and_cert: tuple[Path, Path], expired: bool
 ) -> None:
     key_path, cert_path = signing_key_and_cert
     payload = {
@@ -336,8 +344,8 @@ def test_json_crypto_verify_path(
                         "uriValue": "http://uri.etsi.org/19602/PIDProviders/schemerules/EU",
                     }
                 ],
-                "ListIssueDateTime": "2026-01-01T00:00:00Z",
-                "NextUpdate": "2026-07-01T00:00:00Z",
+                "ListIssueDateTime": ISSUE,
+                "NextUpdate": (NOW - timedelta(hours=1)).isoformat() if expired else NEXT_UPDATE,
             },
             "TrustedEntitiesList": [
                 {
@@ -365,7 +373,11 @@ def test_json_crypto_verify_path(
     sample_tl_entry.tl_url_xml = None
     sample_tl_entry.tl_url_json = "https://example.com/tl.json"
     errors = validate_entry_publications(sample_tl_entry, verify_crypto=True)
-    assert errors == []
+    if expired:
+        assert any("NextUpdate has expired" in error for error in errors)
+        assert not any("signature verification failed" in error for error in errors)
+    else:
+        assert errors == []
 
 
 @patch("tools.lotl.published_validate.fetch_published")

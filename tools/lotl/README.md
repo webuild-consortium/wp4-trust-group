@@ -91,7 +91,7 @@ python -m tools.lotl --check-expiry \
 # Fetch every published TL/LoTE pointed to by lotl/tl_entries and enforce
 # the WP4/ETSI profile (enveloped-signature then exclusive C14N; compact
 # JAdES Baseline B; list type URIs). Fails CI if a participant uses
-# XPath Filter 2.0 or any other off-profile algorithm/list type.
+# XPath Filter 2.0, an expired LoTE NextUpdate, or another profile violation.
 python -m tools.lotl --validate-published --tl-entries-dir lotl/tl_entries/
 
 # Verbose logging

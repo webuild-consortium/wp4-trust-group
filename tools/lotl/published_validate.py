@@ -87,6 +87,10 @@ _FIX_HINTS: tuple[tuple[str, str], ...] = (
         "JSON must be signed JAdES Baseline B: protected header needs alg, x5c, and iat.",
     ),
     (
+        "NextUpdate has expired",
+        "Publish a freshly signed list with a future NextUpdate.",
+    ),
+    (
         "NextUpdate must be at most 6 months",
         "NextUpdate must be at most 6 months after ListIssueDateTime.",
     ),
@@ -171,6 +175,8 @@ def finding_title(message: str) -> str:
         return "Signature does not verify"
     if "jades" in lowered:
         return "JAdES signature profile"
+    if "nextupdate has expired" in lowered:
+        return "Expired NextUpdate"
     if "nextupdate" in lowered:
         return "NextUpdate interval"
     if "statusdeterminationapproach" in lowered:
