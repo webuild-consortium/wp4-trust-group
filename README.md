@@ -14,10 +14,12 @@ The **List of Trusted Lists (LoTL)** for the WP4 Trust Infrastructure is publish
 
 **[https://webuild-consortium.github.io/wp4-trust-group/](https://webuild-consortium.github.io/wp4-trust-group/)**
 
-| Format | URL |
-|--------|-----|
-| JSON | [list_of_trusted_lists.json](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json) |
-| XML | [list_of_trusted_lists.xml](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml) |
+| File | Standard and document type | Parser to use |
+|------|----------------------------|---------------|
+| [list_of_trusted_lists.json](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json) | ETSI TS 119 602 LoTL (`LoTEType` `.../EUListOfTrustedLists`) | TS 119 602 LoTE parser |
+| [list_of_trusted_lists.xml](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml) | ETSI TS 119 612 `TrustServiceStatusList` (`TSLType` `.../TSLType/EUlistofthelists`) | TS 119 612 TSL parser |
+
+These are different standards and document types, not two serializations of the same list. The TS 119 612 XML LoTL's pointers include both TS 119 612 TSLs and TS 119 602 `TrustedEntitiesList` documents; parse each referenced document according to its own type. A TS 119 602 parser cannot consume the XML LoTL and may return an empty list.
 
 During the **WE BUILD MVP (pilot) phase**, the WP4 Trust Infrastructure group acts as **Ecosystem Authority** and **Trusted List Provider** for all participating entities. The LoTL is the trust anchor in the ETSI TS 119 612 model: it references the Trusted Lists for PID Providers, Wallet Providers, and other entity types, enabling Wallet Units and Relying Parties to validate certificates and trust anchors. In the production phase (MVP+), the European Commission and Member State TLPs take over these roles. Registration, notification, and publication responsibilities are described in the [Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md). 
 
