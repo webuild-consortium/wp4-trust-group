@@ -57,7 +57,7 @@
       "SchemeTerritory": "EU",
       "PointersToOtherLoTE": [
         {
-          "LoTELocation": "https://webuild-consortium.github.io/wp4-trust-group/lotl/wrpac-providers-lote.json",
+          "LoTELocation": "https://raw.githubusercontent.com/webuild-consortium/wp4-trust-group/main/lotl/wrpac-providers-lote.json",
           "ServiceDigitalIdentities": [
             {
               "X509Certificates": [
@@ -85,7 +85,7 @@
       "ListIssueDateTime": "2026-05-06T00:00:00Z",
       "NextUpdate": "2026-11-06T00:00:00Z",
       "DistributionPoints": [
-        "https://webuild-consortium.github.io/wp4-trust-group/lotl/wrpac-providers-lote.json"
+        "https://raw.githubusercontent.com/webuild-consortium/wp4-trust-group/main/lotl/wrpac-providers-lote.json"
       ]
     },
     "TrustedEntitiesList": [
