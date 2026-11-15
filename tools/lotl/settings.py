@@ -116,6 +116,7 @@ POINTER_MIME_TYPES = frozenset([MIME_TSL_XML, MIME_LOTE_XML, MIME_LOTE_JSON])
 
 # Output filenames
 LOTL_JSON_FILENAME = "list_of_trusted_lists.json"
+LOTL_JWS_FILENAME = "list_of_trusted_lists.jws"
 LOTL_XML_FILENAME = "list_of_trusted_lists.xml"
 
 # Published LoTL (GitHub Pages) — used by the scheduled expiry check

@@ -834,32 +834,20 @@ For the EUDI Wallet ecosystem, the following extensions are used when configurin
 
 ## 8. Digital Signature Implementation
 
-### 8.1 JAdES Signature (JSON - TS 119 602)
+### 8.1 JAdES Signature (compact JWS - TS 119 602)
 
 #### Requirements
-- **Format**: Compact JAdES Baseline B
+- **Format**: Attached compact JAdES Baseline B JWS, published as `list_of_trusted_lists.jws`
 - **Standard**: ETSI TS 119 182-1
 
 #### Implementation Steps
 1. Create JWS header with algorithm
-2. Build payload (LoTE JSON without signature)
+2. Build the schema-conformant LoTE JSON payload without a top-level signature member
 3. Create JWS signature
 4. Attach certificate chain in `x5c` header
 5. Validate against JAdES Baseline B profile
 
-#### Signature Structure
-```json
-{
-  "protected": {
-    "alg": "ES256",
-    "x5u": "https://example.org/cert.pem"
-  },
-  "signature": "...",
-  "header": {
-    "x5c": ["MIIF..."]
-  }
-}
-```
+The `.jws` file contains the compact serialization `BASE64URL(protected).BASE64URL(payload).BASE64URL(signature)`. The attached payload is the TS 119 602 JSON binding (`{"LoTE": ...}`); consumers verify the JWS before parsing that payload as a LoTE. The existing `.json` endpoint remains available in its legacy compatibility-wrapper format and is not itself valid against the ETSI JSON schema.
 
 ### 8.2 XAdES Signature (XML - TS 119 612/602)
 

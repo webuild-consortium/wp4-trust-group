@@ -1,5 +1,6 @@
 """Tests for producer."""
 
+import base64
 import json
 from pathlib import Path
 
@@ -7,7 +8,13 @@ import pytest
 from unittest.mock import patch
 
 from tools.lotl.producer import get_next_sequence_number, produce
-from tools.lotl.settings import LOTL_JSON_FILENAME, LOTL_TSL_TYPE_URI, LOTL_XML_FILENAME, NS_TSL
+from tools.lotl.settings import (
+    LOTL_JSON_FILENAME,
+    LOTL_JWS_FILENAME,
+    LOTL_TSL_TYPE_URI,
+    LOTL_XML_FILENAME,
+    NS_TSL,
+)
 
 
 def test_produce_validate_only(tl_entries_dir: Path, tmp_path: Path) -> None:
@@ -64,12 +71,24 @@ def test_produce_success(
     )
     assert code == 0
     json_path = tmp_path / LOTL_JSON_FILENAME
+    jws_path = tmp_path / LOTL_JWS_FILENAME
     xml_path = tmp_path / LOTL_XML_FILENAME
     assert json_path.exists()
+    assert jws_path.exists()
     assert xml_path.exists()
     data = json.loads(json_path.read_text())
     assert "signature" in data
     assert "LoTE" in data
+    compact_parts = jws_path.read_text(encoding="ascii").split(".")
+    assert len(compact_parts) == 3
+    payload_b64 = compact_parts[1]
+    payload_b64 += "=" * ((4 - len(payload_b64) % 4) % 4)
+    jws_payload = json.loads(base64.urlsafe_b64decode(payload_b64))
+    assert jws_payload == {"LoTE": data["LoTE"]}
+    assert data["signature"] == {
+        "protected": compact_parts[0],
+        "signature": compact_parts[2],
+    }
     xml_text = xml_path.read_bytes()
     assert LOTL_TSL_TYPE_URI.encode() in xml_text
     assert b"PointersToOtherTSL" in xml_text

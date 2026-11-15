@@ -38,21 +38,13 @@ def _cert_to_b64(cert_pem: Union[bytes, str]) -> str:
     return base64.b64encode(der).decode("ascii")
 
 
-def sign_json(
+def sign_json_and_compact(
     payload: dict[str, Any],
     key_pem: Union[bytes, str, Path],
     cert_pem: Union[bytes, str, Path],
     algorithm: str | None = None,
-) -> dict[str, Any]:
-    """Sign JSON payload with JAdES Compact Baseline B.
-
-    Adds a ``signature`` key to the payload with the JWS JSON Serialization
-    structure (RFC 7515 §7.2.2):
-
-        payload["signature"] = {
-            "protected": "<BASE64URL(UTF8(JWS Protected Header))>",  # str
-            "signature": "<BASE64URL(JWS Signature)>",               # str
-        }
+) -> tuple[dict[str, Any], str]:
+    """Create the legacy signed JSON wrapper and attached compact JWS.
 
     The protected header contains ``alg`` (algorithm), ``x5c`` (signing
     certificate chain, DER base64), and ``iat`` (Unix integer timestamp,
@@ -66,7 +58,7 @@ def sign_json(
             (EC P-256 defaults to ES256; RSA defaults to RS256).
 
     Returns:
-        Payload dict with ``signature`` key added.
+        The compatibility JSON wrapper and its three-part compact JWS token.
     """
     key_data = _load_pem(key_pem)
     cert_data = _load_pem(cert_pem)
@@ -93,15 +85,25 @@ def sign_json(
     compact = jws_token.serialize(compact=True)
     parts = compact.split(".")
 
-    # RFC 7515 §7.2.2: "protected" = BASE64URL(UTF8(JWS Protected Header)) — the string, not the dict.
-    # Signature covers ASCII(parts[0] || "." || parts[1]); storing the raw dict and re-encoding
-    # during verify would change key order and break §5.2 step 8 validation.
     payload["signature"] = {
         "protected": parts[0],
         "signature": parts[2],
     }
 
-    return payload
+    return payload, compact
+
+
+def sign_json(
+    payload: dict[str, Any],
+    key_pem: Union[bytes, str, Path],
+    cert_pem: Union[bytes, str, Path],
+    algorithm: str | None = None,
+) -> dict[str, Any]:
+    """Sign JSON payload in the existing compatibility-wrapper format."""
+    signed_payload, _compact = sign_json_and_compact(
+        payload, key_pem, cert_pem, algorithm
+    )
+    return signed_payload
 
 
 def verify_json(payload: dict[str, Any]) -> dict[str, Any]:

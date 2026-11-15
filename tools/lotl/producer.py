@@ -7,10 +7,16 @@ from typing import Optional
 from tools.lotl.cert_expiry import certificate_pem_errors
 from tools.lotl.collector import collect_entries
 from tools.lotl.lote_validate import validate_lote_json
-from tools.lotl.jades_signer import sign_json
+from tools.lotl.jades_signer import sign_json_and_compact
 from tools.lotl.json_generator import generate_lotl_json
 from tools.lotl.log import get_logger
-from tools.lotl.settings import LOTL_JSON_FILENAME, LOTL_XML_FILENAME, NS_TSL, NS_TSL_LEGACY
+from tools.lotl.settings import (
+    LOTL_JSON_FILENAME,
+    LOTL_JWS_FILENAME,
+    LOTL_XML_FILENAME,
+    NS_TSL,
+    NS_TSL_LEGACY,
+)
 from tools.lotl.validator import validate_tl_entries_dir
 from tools.lotl.xades_signer import sign_xml
 from tools.lotl.xml_generator import generate_lotl_xml
@@ -152,7 +158,9 @@ def produce(
         return 1
 
     try:
-        signed_json = sign_json(lotl_json, signing_key, signing_cert)
+        signed_json, compact_jws = sign_json_and_compact(
+            lotl_json, signing_key, signing_cert
+        )
         signed_xml_bytes = sign_xml(lotl_xml, signing_key, signing_cert)
     except Exception as e:  # pragma: no cover
         logger.exception("Signing failed: %s", e)
@@ -161,13 +169,22 @@ def produce(
     # 6. Write output
     output_dir.mkdir(parents=True, exist_ok=True)
     json_path = output_dir / LOTL_JSON_FILENAME
+    jws_path = output_dir / LOTL_JWS_FILENAME
     xml_path = output_dir / LOTL_XML_FILENAME
 
     with open(json_path, "w", encoding="utf-8") as f:
         json.dump(signed_json, f, indent=2)
 
+    jws_path.write_text(compact_jws, encoding="ascii")
+
     with open(xml_path, "wb") as f:
         f.write(signed_xml_bytes)
 
-    logger.info("LoTL produced: %s, %s (sequence %d)", json_path, xml_path, sequence)
+    logger.info(
+        "LoTL produced: %s, %s, %s (sequence %d)",
+        json_path,
+        jws_path,
+        xml_path,
+        sequence,
+    )
     return 0
