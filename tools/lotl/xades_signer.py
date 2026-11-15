@@ -6,6 +6,7 @@ by ETSI TS 119 612 V2.4.1 Annex B.1.0.
 """
 
 import datetime
+from dataclasses import replace
 from pathlib import Path
 from typing import Union
 
@@ -71,6 +72,13 @@ class LoTLXAdESSigner(XAdESSigner):
         signing_time.text = datetime.datetime.now(datetime.timezone.utc).strftime(
             "%Y-%m-%dT%H:%M:%SZ"
         )
+
+    def add_signing_certificate(self, signed_signature_properties, sig_root, signing_settings):
+        # KeyInfo retains the chain; SigningCertificateV2 identifies the signer.
+        if not signing_settings.cert_chain:
+            raise ValueError("A signing certificate is required")
+        signer_settings = replace(signing_settings, cert_chain=signing_settings.cert_chain[:1])
+        super().add_signing_certificate(signed_signature_properties, sig_root, signer_settings)
 
 
 def _parse(xml_content: bytes) -> etree._Element:

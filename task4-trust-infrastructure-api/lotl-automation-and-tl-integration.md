@@ -396,7 +396,8 @@ The job fails if any `trust_anchor` in the repository, the published LoTL signin
    - Copy the LoTL (XML, compatibility JSON, and compact JWS) to the `gh-pages` branch
    - [OPTIONAL] Set proper MIME types: `application/vnd.etsi.tsl+xml` (XML) or `application/json`/`application/vnd.etsi.lote+json` (JSON)
      - Note: The Task 3 implementation profile specifies MIME types for TL distribution; GitHub Pages does not support custom MIME type configuration. This is a platform limitation.
-   - Update the GitHub Pages landing page: copy **`lotl/pages/index.html`** to the **`gh-pages` branch root**, and sync the entire **`lotl/pages/assets/`** tree to **`assets/`** on `gh-pages` (vendored WE BUILD `custom.css`, Fracktif/slick fonts, Bootstrap bundle, logos, favicon). The site does not load CSS or images from webuildconsortium.eu. Consortium portal links (Newsletter, Partner Portal, Privacy, etc.) remain absolute URLs.
+   - Build the GitHub Pages landing page from **`lotl/pages/index.html`**, displaying the verified LoTL signer public key, certificate SHA-256 fingerprint and expiry. Publish the public certificate and public key as `lotl-signing-cert.pem` and `lotl-signing-public-key.pem`; never publish the private key. Consumers must authenticate the fingerprint independently before trusting the certificate.
+   - Sync the entire **`lotl/pages/assets/`** tree to **`assets/`** on `gh-pages` (vendored WE BUILD `custom.css`, Fracktif/slick fonts, Bootstrap bundle, logos, favicon). The site does not load CSS or images from webuildconsortium.eu. Consortium portal links (Newsletter, Partner Portal, Privacy, etc.) remain absolute URLs.
 
 **LoTL publication URL** (GitHub Pages, `gh-pages` branch):
 

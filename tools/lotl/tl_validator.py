@@ -58,10 +58,12 @@ def validate_tl_signature_json(
     try:
         from tools.lotl.jades_signer import verify_json
 
+        if not isinstance(trust_anchor_pem, (str, bytes)) or not trust_anchor_pem:
+            raise ValueError("A trust anchor certificate is required")
         if isinstance(tl_content, bytes):
             tl_content = tl_content.decode("utf-8")
         payload = json.loads(tl_content)
-        verify_json(payload)
+        verify_json(payload, trust_anchor_pem=trust_anchor_pem)
         return True, ""
     except Exception as e:
         return False, str(e)
@@ -81,13 +83,28 @@ def validate_tl_signature_xml(
         Tuple of (is_valid, error_message).
     """
     try:
-        from tools.lotl.xades_signer import verify_xml
+        from cryptography.hazmat.primitives import serialization
+
+        from tools.lotl.cert_chain import decode_certificate_chain, validate_certificate_chain
+        from tools.lotl.xades_signer import DS, _parse, verify_xml
+
+        if not isinstance(trust_anchor_pem, (str, bytes)) or not trust_anchor_pem:
+            raise ValueError("A trust anchor certificate is required")
+        root = _parse(tl_content)
+        signatures = root.findall(f"{{{DS}}}Signature")
+        if len(signatures) != 1:
+            raise ValueError(f"Expected exactly one signature, found {len(signatures)}")
+        cert_nodes = signatures[0].findall(
+            f"{{{DS}}}KeyInfo/{{{DS}}}X509Data/{{{DS}}}X509Certificate"
+        )
+        chain = decode_certificate_chain(
+            ["".join((node.text or "").split()) for node in cert_nodes]
+        )
+        validate_certificate_chain(chain, trust_anchor_pem)
 
         verify_xml(
             tl_content,
-            cert_pem=trust_anchor_pem.encode()
-            if isinstance(trust_anchor_pem, str)
-            else trust_anchor_pem,
+            cert_pem=chain[0].public_bytes(serialization.Encoding.PEM),
             # Participant lists are XAdES-B (>= 2 refs), not the LoTL 3-ref profile.
             expect_references=None,
         )

@@ -106,11 +106,15 @@ def sign_json(
     return signed_payload
 
 
-def verify_json(payload: dict[str, Any]) -> dict[str, Any]:
+def verify_json(
+    payload: dict[str, Any], trust_anchor_pem: str | bytes | None = None
+) -> dict[str, Any]:
     """Verify JAdES signature on JSON payload.
 
     Args:
         payload: Signed payload with 'signature' key.
+        trust_anchor_pem: Optional trusted certificate. If omitted, only the
+            signature is verified and the embedded certificate is not trusted.
 
     Returns:
         Verified payload (without signature).
@@ -165,5 +169,11 @@ def verify_json(payload: dict[str, Any]) -> dict[str, Any]:
     jws_token = jws.JWS()
     jws_token.deserialize(compact)
     jws_token.verify(key)
+
+    if trust_anchor_pem is not None:
+        from tools.lotl.cert_chain import decode_certificate_chain, validate_certificate_chain
+
+        encoded_chain = x5c if isinstance(x5c, list) else [x5c]
+        validate_certificate_chain(decode_certificate_chain(encoded_chain), trust_anchor_pem)
 
     return payload_copy

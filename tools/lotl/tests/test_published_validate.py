@@ -137,7 +137,7 @@ def test_validate_entry_xpath_filter2_is_reported(
 
 @patch("tools.lotl.published_validate.fetch_published")
 @patch("tools.lotl.published_validate.validate_tl_signature_xml")
-def test_xades_signed_properties_ref_is_not_crypto_failure(
+def test_xades_reference_verification_failure_is_reported(
     mock_crypto, mock_fetch, sample_tl_entry: TLEntry
 ) -> None:
     mock_fetch.return_value = (PID_XML, "application/xml", None)
@@ -146,7 +146,7 @@ def test_xades_signed_properties_ref_is_not_crypto_failure(
     sample_tl_entry.tl_url_json = None
     sample_tl_entry.tl_url_xml = "https://example.com/tl.xml"
     errors = validate_entry_publications(sample_tl_entry, verify_crypto=True)
-    assert not any("signature verification failed" in e for e in errors)
+    assert any("signature verification failed" in e for e in errors)
 
 
 @patch("tools.lotl.published_validate.fetch_published")

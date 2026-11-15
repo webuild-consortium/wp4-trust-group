@@ -123,7 +123,10 @@ jobs:
         run: |
           rm -rf .gh-pages-dist
           mkdir -p .gh-pages-dist/assets
-          cp lotl/pages/index.html .gh-pages-dist/index.html
+          python -m tools.lotl.build_pages \
+            --template lotl/pages/index.html \
+            --signed-json lotl/list_of_trusted_lists.json \
+            --output-dir .gh-pages-dist
           cp lotl/list_of_trusted_lists.json .gh-pages-dist/list_of_trusted_lists.json
           cp lotl/list_of_trusted_lists.jws .gh-pages-dist/list_of_trusted_lists.jws
           cp lotl/list_of_trusted_lists.xml .gh-pages-dist/list_of_trusted_lists.xml

@@ -849,6 +849,17 @@ For the EUDI Wallet ecosystem, the following extensions are used when configurin
 
 The `.jws` file contains the compact serialization `BASE64URL(protected).BASE64URL(payload).BASE64URL(signature)`. The attached payload is the TS 119 602 JSON binding (`{"LoTE": ...}`); consumers verify the JWS before parsing that payload as a LoTE. The existing `.json` endpoint remains available in its legacy compatibility-wrapper format and is not itself valid against the ETSI JSON schema.
 
+For the legacy JSON wrapper and XML lists, the LoTL publication validator
+verifies the list signature and builds a certificate path to the certificate in
+the corresponding LoTL pointer. The embedded chain starts with the signer;
+intermediates may follow, and the trusted certificate need not be embedded.
+A directly trusted signing certificate is also accepted. This check does not
+perform revocation checking or apply service-specific authorization policies.
+It validates list signatures, not WIA signatures or their LoTE authorization.
+The current XAdES dependency may reject signatures that include additional
+certificate digests in `SigningCertificate` or `SigningCertificateV2`, even
+when the certificate path is valid.
+
 ### 8.2 XAdES Signature (XML - TS 119 612/602)
 
 #### Requirements

@@ -136,6 +136,19 @@
         </p>
       </div>
     </section>
+
+    <section class="pb-5" aria-labelledby="signing-key-heading">
+      <div class="container">
+        <h2 id="signing-key-heading" class="h4 lotl-serif text-secondary mb-3">LoTL signing public key</h2>
+        <p class="lotl-muted">This public key belongs to the certificate used to sign the LoTL, not to the participant lists referenced by it.</p>
+        <pre class="p-3 bg-light rounded" style="overflow-x: auto;"><code><!-- LOTL_SIGNING_PUBLIC_KEY --></code></pre>
+        <p class="small">Signing certificate SHA-256 fingerprint: <code style="overflow-wrap: anywhere;"><!-- LOTL_SIGNING_CERT_SHA256 --></code><br>
+          Certificate expires: <time><!-- LOTL_SIGNING_CERT_EXPIRY --></time></p>
+        <p><a class="btn btn-outline-primary btn-sm" href="lotl-signing-cert.pem">Download signing certificate (PEM)</a>
+          <a class="btn btn-outline-primary btn-sm" href="lotl-signing-public-key.pem">Download public key (PEM)</a></p>
+        <p class="small lotl-muted">Obtain and verify the certificate fingerprint through an independent trusted channel before using it as a trust anchor. Publication on this page alone does not establish trust.</p>
+      </div>
+    </section>
   </main>
 
   <footer id="footer" class="mt-5">

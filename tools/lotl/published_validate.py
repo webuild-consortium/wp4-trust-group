@@ -244,11 +244,6 @@ def _try_crypto_verify(
         valid, err = validate_tl_signature_xml(body, trust_anchor)
         if valid:
             return []
-        # signxml's default expect_references=1 rejects a valid extra
-        # SignedProperties ds:Reference. Participant verify uses the actual
-        # count (>= 2); keep this guard if an older path still surfaces it.
-        if err and "Expected to find 1 references" in err:
-            return []
         return [f"XML signature verification failed: {err}"]
     return []
 

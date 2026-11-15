@@ -100,6 +100,12 @@ python -m tools.lotl --log-level DEBUG ...
 
 Key and certificate can be provided via `--signing-key` / `--signing-cert` or via environment variables `LOTL_SIGNING_KEY` and `LOTL_SIGNING_CERT`.
 
+The GitHub Pages build verifies the signed JSON against `LOTL_SIGNING_CERT`,
+then renders the corresponding public key, certificate fingerprint, and expiry
+on the landing page. It also publishes `lotl-signing-cert.pem` and
+`lotl-signing-public-key.pem`; the private key is never included. Independently
+authenticate the fingerprint before trusting a downloaded certificate.
+
 ## Running Tests
 
 ```bash
