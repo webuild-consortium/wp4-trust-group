@@ -42,6 +42,7 @@ Covers:
 | **weBuild Credential Catalog** | Pilot TS11 instance of the catalogue of attestation schemes | [credential-catalog-service.md](../task4-trust-infrastructure-api/credential-catalog-service.md) |
 | **Trusted Lists** | Which issuers are authorised for which attestation types | [trusted-list-extensions-credential-issuers.md](../task3-x509-pki-etsi/trusted-list-extensions-credential-issuers.md) |
 | **Registration certificates** | Attestation types an issuer intends to issue (when available) | [trusted-list-extensions-credential-issuers.md](../task3-x509-pki-etsi/trusted-list-extensions-credential-issuers.md#registration-certificate-as-source-of-truth-when-available) |
+| **EBWOID / LPID** | EBW owner identification data — **not yet** a catalogue scheme | [EBW trust framework](european-business-wallet-trust-framework.md), [credential-catalogue.md](credential-catalogue.md#european-business-wallet-gap) |
 
 ## Quick Reference
 

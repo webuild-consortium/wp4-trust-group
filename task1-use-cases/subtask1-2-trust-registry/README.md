@@ -20,10 +20,11 @@ These use cases are aligned with the [EUDI Wallet Architecture and Reference Fra
 | **UC-RPI-01** | [Relying Party Intermediary](relying-party-intermediary-use-case.md) | Intermediary presents on behalf of another RP; Wallet authenticates the intermediary WRPAC (`Reg_34a`) and displays only the intermediated RP (`RPI_07`) |
 | **UC-TE-05** | [Relying Party evaluates presented credentials](relying-party-evaluates-credentials.md) | RP validates PID and attestation signatures using Trusted Lists |
 | **UC-TE-06** | [Trusted List discovery and consumption](trusted-list-discovery-consumption.md) | Obtaining and using LoTL and Trusted Lists for validation |
+| **UC-TE-07** | [European Business Wallet trust evaluation](european-business-wallet-trust-evaluation.md) | Overlay: EBW Unit / EBWOID issuer / EBW-as-RP using the same EUDI trust sources; framework: [Task 2 EBW](../../task2-trust-framework/european-business-wallet-trust-framework.md) |
 
 ## Relationship to Other Tasks
 
-- **Task 2** – [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) (Section 8: Trust Evaluation), [Entities Involved](../../task2-trust-framework/entities-involved.md), [Requirements matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md), [RP Intermediary OpenID4VP report](../../task2-trust-framework/rp-intermediary-openid4vp-technical-report.md)
+- **Task 2** – [Trust Infrastructure Schema](../../task2-trust-framework/trust-infrastructure-schema.md) (Section 8: Trust Evaluation), [Entities Involved](../../task2-trust-framework/entities-involved.md), [Requirements matrix](../../task2-trust-framework/trusted-list-registration-trust-evaluation-matrix.md), [RP Intermediary OpenID4VP report](../../task2-trust-framework/rp-intermediary-openid4vp-technical-report.md), [European Business Wallet trust framework](../../task2-trust-framework/european-business-wallet-trust-framework.md)
 - **Task 3** – [ETSI Trusted Lists Implementation Profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md) for TL format and validation
 - **Task 4** – Trust infrastructure APIs for registry and TL access; [Credential Catalog Service](../../task4-trust-infrastructure-api/credential-catalog-service.md) for attestation-type discovery
 - **Task 5** – Certificate and policy evaluation (e.g. ETSI policy evaluation)
