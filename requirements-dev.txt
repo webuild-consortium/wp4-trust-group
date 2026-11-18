@@ -1,6 +1,8 @@
 flake8
 pytest
 bandit
+# After install, force-upgrade filelock>=4.2.1 (Python >=3.11): safety pins filelock<4.0,
+# which is vulnerable (CVE-2026-112908/910/938). Do not pin filelock here — conflicts with safety.
 safety
 pytest-cov
 jsonschema>=4.20
