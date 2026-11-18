@@ -41,136 +41,6 @@
         <ServiceDigitalIdentities>
           <ServiceDigitalIdentity>
             <DigitalId>
-              <X509Certificate>MIIDBTCCAqygAwIBAgIQXNhGXiWDDb5VT/1T8qoPCzAKBggqhkjOPQQDAjCBjzELMAkGA1UEBhMCREUxDzANBgNVBAgTBkhlc3NlbjEPMA0GA1UEBxMGTGFuZ2VuMRcwFQYDVQQJEw5SaGVpbnN0cmFzc2UgNTEOMAwGA1UEERMFNjMyMjUxFDASBgNVBAoTC0lEdW5pb24gU0NFMR8wHQYDVQQDExZodHRwczovL3d3dy5pZHVuaW9uLmV1MB4XDTI2MDkxNDE0MTExOFoXDTI5MDMxOTIzNTk1OVowgY8xCzAJBgNVBAYTAkRFMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MRQwEgYDVQQKEwtJRHVuaW9uIFNDRTEfMB0GA1UEAxMWaHR0cHM6Ly93d3cuaWR1bmlvbi5ldTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABD3W+51YUMeoLo88SalHGnNj2o94Rj/vM/Sk8umWK1T2T0IVgCSZdvKYNE8tHiYExr0ylf8HfcSsIM2WeYHwt42jgecwgeQwDgYDVR0PAQH/BAQDAgGGMBEGA1UdJQQKMAgGBgQAkTcDADAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSxVP1xh2THpojoBO9LmMaYtSZ2njAfBgNVHSMEGDAWgBSxVP1xh2THpojoBO9LmMaYtSZ2njBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMWEwYTA0MS05ZGIwLTdmMzgtOGE5Zi05ZmUxNzE4ODE0ZTAwCgYIKoZIzj0EAwIDRwAwRAIgem5RdsfHvA4gTPBoP3XzOuFy2Ee08ZdKV0tcqcsUHf8CIHdjt0nIlAB/RXLjK14u0vFjvkRGdjBexFJJgY1lZvUN</X509Certificate>
-            </DigitalId>
-          </ServiceDigitalIdentity>
-        </ServiceDigitalIdentities>
-        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/TwJYLuh0/etsi/tl.xml</TSLLocation>
-        <AdditionalInformation>
-          <OtherInformation>
-            <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeOperatorName>
-              <Name xml:lang="en">IDunion SCE</Name>
-            </SchemeOperatorName>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeTerritory>DE</SchemeTerritory>
-          </OtherInformation>
-          <OtherInformation>
-            <tslx:MimeType>application/vnd.etsi.tsl+xml</tslx:MimeType>
-          </OtherInformation>
-        </AdditionalInformation>
-      </OtherTSLPointer>
-      <OtherTSLPointer>
-        <ServiceDigitalIdentities>
-          <ServiceDigitalIdentity>
-            <DigitalId>
-              <X509Certificate>MIICizCCAjKgAwIBAgIUYX8uoJlLFS1DPdxy5gDd9rLy9Y4wCgYIKoZIzj0EAwIwgYkxCzAJBgNVBAYTAklUMTIwMAYDVQQKDClDcmVkaW1pIEVBQSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTFGMEQGA1UEAww9Q3JlZGltaSBFQUEgVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUgVHJ1c3RlZCBMaXN0IFNpZ25lcjAeFw0yNjA4MDUxMDI5MTJaFw0yNzA4MDUxMDI5MTJaMIGJMQswCQYDVQQGEwJJVDEyMDAGA1UECgwpQ3JlZGltaSBFQUEgVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxRjBEBgNVBAMMPUNyZWRpbWkgRUFBIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlIFRydXN0ZWQgTGlzdCBTaWduZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARi5q1Y2ee8P99l30yjeEzdI84VguVPpitLMLUvOu8BOHGMDcI8Mu5IOAAZAxYhQJoO8TNTx1MKLiu0nq9Rb9ado3YwdDAfBgNVHSMEGDAWgBRpPWIS6vZ48udHqBOMkFp3tra/2jAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB/wQEAwIHgDAdBgNVHQ4EFgQUaT1iEur2ePLnR6gTjJBad7a2v9owFAYDVR0lAQH/BAowCAYGBACRNwMAMAoGCCqGSM49BAMCA0cAMEQCIB7Fkfu9TJbDbafBWNTdJ4cjHyB7Z2jWNi4JIOOuA8vVAiAS8jQRvLxcodHfY/R45t9mRa8qLsd1D4VoakzCpjZypQ==</X509Certificate>
-            </DigitalId>
-          </ServiceDigitalIdentity>
-        </ServiceDigitalIdentities>
-        <TSLLocation>https://lote.credimi.io/lists/it_credimi_eaa_trust_registry_infrastructur/latest/trusted-list.xml</TSLLocation>
-        <AdditionalInformation>
-          <OtherInformation>
-            <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeOperatorName>
-              <Name xml:lang="en">Credimi EAA Trust Registry Infrastructure</Name>
-            </SchemeOperatorName>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeTerritory>IT</SchemeTerritory>
-          </OtherInformation>
-          <OtherInformation>
-            <tslx:MimeType>application/vnd.etsi.tsl+xml</tslx:MimeType>
-          </OtherInformation>
-        </AdditionalInformation>
-      </OtherTSLPointer>
-      <OtherTSLPointer>
-        <ServiceDigitalIdentities>
-          <ServiceDigitalIdentity>
-            <DigitalId>
-              <X509Certificate>MIIBoDCCAUagAwIBAgIUeQPc75dyOVwCJVf0X5gtsJ8tkbMwCgYIKoZIzj0EAwIwJjELMAkGA1UEBhMCU0UxFzAVBgNVBAoMDk5YRCBGb3VuZGF0aW9uMB4XDTI2MDkyMTA5NDgzOVoXDTI5MDkyMDA5NTMzOVowJjELMAkGA1UEBhMCU0UxFzAVBgNVBAoMDk5YRCBGb3VuZGF0aW9uMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEQVTqk6oGWN4G15IcOeW27Pp4Akfu54kGaoT1JNNAJbnB7v3zZu1o/9/gHoyrN6Yyu9ww0dAUxsWPQFcq2/+U56NSMFAwDgYDVR0PAQH/BAQDAgbAMBEGA1UdJQQKMAgGBgQAkTcDADAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQVww37whbwN3DMilF8pSAtQRgIsTAKBggqhkjOPQQDAgNIADBFAiBR4C7Tiv94JRayfJ19gggyj68PjdfOfHuCe0Y6B9GgJgIhAKIw81dJK5lGBZXM2d3FSfKAmYH1TpK3TEAjxeZenO4S</X509Certificate>
-            </DigitalId>
-          </ServiceDigitalIdentity>
-        </ServiceDigitalIdentities>
-        <TSLLocation>https://trustlist.nxd.foundation/trust-lists/NXD-TL-EAA.xml</TSLLocation>
-        <AdditionalInformation>
-          <OtherInformation>
-            <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeOperatorName>
-              <Name xml:lang="en">NXD Foundation</Name>
-            </SchemeOperatorName>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeTerritory>SE</SchemeTerritory>
-          </OtherInformation>
-          <OtherInformation>
-            <tslx:MimeType>application/vnd.etsi.tsl+xml</tslx:MimeType>
-          </OtherInformation>
-        </AdditionalInformation>
-      </OtherTSLPointer>
-      <OtherTSLPointer>
-        <ServiceDigitalIdentities>
-          <ServiceDigitalIdentity>
-            <DigitalId>
-              <X509Certificate>MIIDfjCCAySgAwIBAgIQXA/3aVjCNd5CaCKjpAzjNTAKBggqhkjOPQQDAjCByzELMAkGA1UEBhMCTkwxDzANBgNVBAgTBkhlc3NlbjEPMA0GA1UEBxMGTGFuZ2VuMRcwFQYDVQQJEw5SaGVpbnN0cmFzc2UgNTEOMAwGA1UEERMFNjMyMjUxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMS4wLAYDVQQDEyVodHRwczovL3dlYnVpbGQtY29uc29ydGl1bS5naXRodWIuaW8vMB4XDTI2MDkxNDE0MDExMFoXDTI5MDMxOTIzNTk1OVowgcsxCzAJBgNVBAYTAk5MMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEuMCwGA1UEAxMlaHR0cHM6Ly93ZWJ1aWxkLWNvbnNvcnRpdW0uZ2l0aHViLmlvLzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDFgsAhlmdPm6oe8X7y5q8wPZKPibGKlc0ghl8tPYe57HI3CSHJTGNogUEFSQyw6sndLK29LRwRblwECKA4bFAijgecwgeQwDgYDVR0PAQH/BAQDAgGGMBEGA1UdJQQKMAgGBgQAkTcDADAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRROyqc7GUaZjlGAUp3VsodLYGLCTAfBgNVHSMEGDAWgBRROyqc7GUaZjlGAUp3VsodLYGLCTBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMWEwYTAzOC00YzA5LTdlN2YtOTdhOS1iNTU4YzFiYTVmMjIwCgYIKoZIzj0EAwIDSAAwRQIgdrFXRrG+DmCUaSHlQXPWv17TCEfCPYv/i/NvnNGYrbgCIQDoO7ZcVi3PunGIFRp86kN1Gi1ohWBxRnHyAXJl3RpYdw==</X509Certificate>
-            </DigitalId>
-          </ServiceDigitalIdentity>
-        </ServiceDigitalIdentities>
-        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/8djrdSZa/etsi/tl.xml</TSLLocation>
-        <AdditionalInformation>
-          <OtherInformation>
-            <TSLType>http://uri.etsi.org/19602/LoTEType/EUWalletProvidersList</TSLType>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeOperatorName>
-              <Name xml:lang="en">IDunion SCE</Name>
-            </SchemeOperatorName>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeTerritory>DE</SchemeTerritory>
-          </OtherInformation>
-          <OtherInformation>
-            <tslx:MimeType>application/xml</tslx:MimeType>
-          </OtherInformation>
-        </AdditionalInformation>
-      </OtherTSLPointer>
-      <OtherTSLPointer>
-        <ServiceDigitalIdentities>
-          <ServiceDigitalIdentity>
-            <DigitalId>
-              <X509Certificate>MIIDfzCCAySgAwIBAgIQGqlCGVNRMw3qe/kvJYgFijAKBggqhkjOPQQDAjCByzELMAkGA1UEBhMCTkwxDzANBgNVBAgTBkhlc3NlbjEPMA0GA1UEBxMGTGFuZ2VuMRcwFQYDVQQJEw5SaGVpbnN0cmFzc2UgNTEOMAwGA1UEERMFNjMyMjUxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMS4wLAYDVQQDEyVodHRwczovL3dlYnVpbGQtY29uc29ydGl1bS5naXRodWIuaW8vMB4XDTI2MDkxNDE0MTQ0OVoXDTI5MDMxOTIzNTk1OVowgcsxCzAJBgNVBAYTAk5MMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEuMCwGA1UEAxMlaHR0cHM6Ly93ZWJ1aWxkLWNvbnNvcnRpdW0uZ2l0aHViLmlvLzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABAWekpx1GFTQ0PfDDPumcKcHA0uqIaNl8zSPl/z03uCSJ4/wI39sqE7RpmcS4rxMi0QY0E2FdvQftnNNBNvGvOOjgecwgeQwDgYDVR0PAQH/BAQDAgGGMBEGA1UdJQQKMAgGBgQAkTcDADAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSpQv83wqV6CRVRhP59hknSEGLzKzAfBgNVHSMEGDAWgBSpQv83wqV6CRVRhP59hknSEGLzKzBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMWEwYTA0NC1lNjM3LTc1OTItYjhmMC0yN2IxZWRiNDlkZmEwCgYIKoZIzj0EAwIDSQAwRgIhAMq/aqrG20Qqs/ad54y4nsvboQgUTZ6NNTUfsQq6VW++AiEAzgPICLBpFwGljRPC55JjE0ICBR+z/1wWOV+xweGL2MY=</X509Certificate>
-            </DigitalId>
-          </ServiceDigitalIdentity>
-        </ServiceDigitalIdentities>
-        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/by5Cbf5O/etsi/tl.xml</TSLLocation>
-        <AdditionalInformation>
-          <OtherInformation>
-            <TSLType>http://uri.etsi.org/19602/LoTEType/EURegistrarsAndRegistersList</TSLType>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeOperatorName>
-              <Name xml:lang="en">IDunion SCE</Name>
-            </SchemeOperatorName>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeTerritory>DE</SchemeTerritory>
-          </OtherInformation>
-          <OtherInformation>
-            <tslx:MimeType>application/xml</tslx:MimeType>
-          </OtherInformation>
-        </AdditionalInformation>
-      </OtherTSLPointer>
-      <OtherTSLPointer>
-        <ServiceDigitalIdentities>
-          <ServiceDigitalIdentity>
-            <DigitalId>
               <X509Certificate>MIIDfjCCAySgAwIBAgIQRAL20BMQkFskig+t5XJgmDAKBggqhkjOPQQDAjCByzELMAkGA1UEBhMCTkwxDzANBgNVBAgTBkhlc3NlbjEPMA0GA1UEBxMGTGFuZ2VuMRcwFQYDVQQJEw5SaGVpbnN0cmFzc2UgNTEOMAwGA1UEERMFNjMyMjUxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMS4wLAYDVQQDEyVodHRwczovL3dlYnVpbGQtY29uc29ydGl1bS5naXRodWIuaW8vMB4XDTI2MDkxNDE0MDczNVoXDTI5MDMxOTIzNTk1OVowgcsxCzAJBgNVBAYTAk5MMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEuMCwGA1UEAxMlaHR0cHM6Ly93ZWJ1aWxkLWNvbnNvcnRpdW0uZ2l0aHViLmlvLzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABMdSOu3aq4Q7RYMAYTMxf2rkuqR2HMNXBmMaKagXqwWPB3a0EicH0KFACmqT1mvfGInOb62B+MPT83nGkMN2yoSjgecwgeQwDgYDVR0PAQH/BAQDAgGGMBEGA1UdJQQKMAgGBgQAkTcDADAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRp9jiDJg2JDnzX4ZKv3waZ6LYAVjAfBgNVHSMEGDAWgBRp9jiDJg2JDnzX4ZKv3waZ6LYAVjBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMWEwYTAzZS00NWFkLTdjMjQtOTM5OS05M2Y0Y2E3MzEyNjkwCgYIKoZIzj0EAwIDSAAwRQIhAKlIRTuWT+K1SU2hA0w5PCDDhgsbyWrAt6J1gvcOcxsHAiAwrUu7Q8mZxYlhUZ72F4vfj6wRMI5qxY7TFJiWS50z0w==</X509Certificate>
             </DigitalId>
           </ServiceDigitalIdentity>
@@ -197,14 +67,14 @@
         <ServiceDigitalIdentities>
           <ServiceDigitalIdentity>
             <DigitalId>
-              <X509Certificate>MIIDfTCCAySgAwIBAgIQVgCTdE3sftlTyh0Lt+P3AjAKBggqhkjOPQQDAjCByzELMAkGA1UEBhMCTkwxDzANBgNVBAgTBkhlc3NlbjEPMA0GA1UEBxMGTGFuZ2VuMRcwFQYDVQQJEw5SaGVpbnN0cmFzc2UgNTEOMAwGA1UEERMFNjMyMjUxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMS4wLAYDVQQDEyVodHRwczovL3dlYnVpbGQtY29uc29ydGl1bS5naXRodWIuaW8vMB4XDTI2MDkxNDE0MDI1MloXDTI5MDMxOTIzNTk1OVowgcsxCzAJBgNVBAYTAk5MMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEuMCwGA1UEAxMlaHR0cHM6Ly93ZWJ1aWxkLWNvbnNvcnRpdW0uZ2l0aHViLmlvLzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABBOLRTYj12pAoL8yi5fQ/yc9uW84IeUG5OrhzcaeOMHIcNhl9f7aBPKQ/1VO/KXAbEWK5JsOKUfAaqBo04SoGU2jgecwgeQwDgYDVR0PAQH/BAQDAgGGMBEGA1UdJQQKMAgGBgQAkTcDADAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTcnpxJdKyjlksbTtVcNvXOvIISQzAfBgNVHSMEGDAWgBTcnpxJdKyjlksbTtVcNvXOvIISQzBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMWEwYTAzOS1mNDg1LTdiMTEtODRkYy1hZjZkZDRlN2ExM2QwCgYIKoZIzj0EAwIDRwAwRAIgFMCVLZyaGX6/jPYD6N0uI+CCDPi4ELf9xxf8yIXF6FYCIAqslmWb6fXF8HVFA83vpiGIBPou9wCvfiSEf1rUXXU8</X509Certificate>
+              <X509Certificate>MIIDfzCCAySgAwIBAgIQf2sr79rHnySanU/T1oK3QTAKBggqhkjOPQQDAjCByzELMAkGA1UEBhMCTkwxDzANBgNVBAgTBkhlc3NlbjEPMA0GA1UEBxMGTGFuZ2VuMRcwFQYDVQQJEw5SaGVpbnN0cmFzc2UgNTEOMAwGA1UEERMFNjMyMjUxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMS4wLAYDVQQDEyVodHRwczovL3dlYnVpbGQtY29uc29ydGl1bS5naXRodWIuaW8vMB4XDTI2MDkxNDE0MDQyNVoXDTI5MDMxOTIzNTk1OVowgcsxCzAJBgNVBAYTAk5MMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEuMCwGA1UEAxMlaHR0cHM6Ly93ZWJ1aWxkLWNvbnNvcnRpdW0uZ2l0aHViLmlvLzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOfaFau75EaVUmsFMLe9ljCR9KvLwSNZXD6ifzBZ1N4XasXh4Kqve97a60KE5Xh2zLo62W9LSZ3ODcrCE4j1MbSjgecwgeQwDgYDVR0PAQH/BAQDAgGGMBEGA1UdJQQKMAgGBgQAkTcDADAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR7PYFhoNgtEaiRWYC5fbEh/Mv29DAfBgNVHSMEGDAWgBR7PYFhoNgtEaiRWYC5fbEh/Mv29DBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMWEwYTAzYi02MjIyLTdiNDItYjMwNy1mZWRjOWU3NWZhMTcwCgYIKoZIzj0EAwIDSQAwRgIhAJUfrhEtg5WbElBh7Y3FOQ+cKmO3/5fyXbwJ8jmrpXruAiEAzoTSiSpFF/5Suaxzb9owvlThBENcjqmg2pPbZ/cEWKw=</X509Certificate>
             </DigitalId>
           </ServiceDigitalIdentity>
         </ServiceDigitalIdentities>
-        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/xPnOSuTc/etsi/tl.xml</TSLLocation>
+        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/4wdwrdSO/etsi/tl.xml</TSLLocation>
         <AdditionalInformation>
           <OtherInformation>
-            <TSLType>http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList</TSLType>
+            <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
           </OtherInformation>
           <OtherInformation>
             <SchemeOperatorName>
@@ -215,7 +85,7 @@
             <SchemeTerritory>DE</SchemeTerritory>
           </OtherInformation>
           <OtherInformation>
-            <tslx:MimeType>application/xml</tslx:MimeType>
+            <tslx:MimeType>application/vnd.etsi.tsl+xml</tslx:MimeType>
           </OtherInformation>
         </AdditionalInformation>
       </OtherTSLPointer>
@@ -223,14 +93,66 @@
         <ServiceDigitalIdentities>
           <ServiceDigitalIdentity>
             <DigitalId>
-              <X509Certificate>MIIDfjCCAyWgAwIBAgIRAIQ4dUuVCG/wO5cEIOlOd3gwCgYIKoZIzj0EAwIwgcsxCzAJBgNVBAYTAk5MMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEuMCwGA1UEAxMlaHR0cHM6Ly93ZWJ1aWxkLWNvbnNvcnRpdW0uZ2l0aHViLmlvLzAeFw0yNjA5MTQxNDA4NTZaFw0yOTAzMTkyMzU5NTlaMIHLMQswCQYDVQQGEwJOTDEPMA0GA1UECBMGSGVzc2VuMQ8wDQYDVQQHEwZMYW5nZW4xFzAVBgNVBAkTDlJoZWluc3RyYXNzZSA1MQ4wDAYDVQQREwU2MzIyNTFBMD8GA1UEChM4V0VCVUlMRCAtIFdQIDQgLSBHcm91cCA1IC0gVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxLjAsBgNVBAMTJWh0dHBzOi8vd2VidWlsZC1jb25zb3J0aXVtLmdpdGh1Yi5pby8wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQIb5pXB94ZwUR9s3gdkDSJkLarrbe56MbE2aAEewnxDFltLgeOa3VZ/Xfjp/VN0BFieZr4uAQ1sGy3ofK75fV+o4HnMIHkMA4GA1UdDwEB/wQEAwIBhjARBgNVHSUECjAIBgYEAJE3AwAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUmDlDkavCSPT3OmyavvoikDMn1kAwHwYDVR0jBBgwFoAUmDlDkavCSPT3OmyavvoikDMn1kAwbgYDVR0RBGcwZYEPaW5mb0BpZHVuaW9uLmV1hlJodHRwczovL2FwaS53YWxsZXQuaWR1bmlvbi5pbmZvL2FwaS92MS9pc3N1ZXIvMDFhMGEwM2YtODM3NC03ZjIxLWJmOWQtMGJiZDU2ZjJiMDVjMAoGCCqGSM49BAMCA0cAMEQCIAMCG1j0Bkl97ycIdZeMEWOFex4WDslr4VB3me2z/guWAiAtNFy6httj9UGgFaEbpBAlRvbi+UBVhqYCKQ5/BVfbLw==</X509Certificate>
+              <X509Certificate>MIIBoDCCAUagAwIBAgIUeQPc75dyOVwCJVf0X5gtsJ8tkbMwCgYIKoZIzj0EAwIwJjELMAkGA1UEBhMCU0UxFzAVBgNVBAoMDk5YRCBGb3VuZGF0aW9uMB4XDTI2MDkyMTA5NDgzOVoXDTI5MDkyMDA5NTMzOVowJjELMAkGA1UEBhMCU0UxFzAVBgNVBAoMDk5YRCBGb3VuZGF0aW9uMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEQVTqk6oGWN4G15IcOeW27Pp4Akfu54kGaoT1JNNAJbnB7v3zZu1o/9/gHoyrN6Yyu9ww0dAUxsWPQFcq2/+U56NSMFAwDgYDVR0PAQH/BAQDAgbAMBEGA1UdJQQKMAgGBgQAkTcDADAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQVww37whbwN3DMilF8pSAtQRgIsTAKBggqhkjOPQQDAgNIADBFAiBR4C7Tiv94JRayfJ19gggyj68PjdfOfHuCe0Y6B9GgJgIhAKIw81dJK5lGBZXM2d3FSfKAmYH1TpK3TEAjxeZenO4S</X509Certificate>
             </DigitalId>
           </ServiceDigitalIdentity>
         </ServiceDigitalIdentities>
-        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/OsVKoh6j/etsi/tl.xml</TSLLocation>
+        <TSLLocation>https://trustlist.nxd.foundation/trust-lists/NXD-TL-QEAA.xml</TSLLocation>
         <AdditionalInformation>
           <OtherInformation>
-            <TSLType>http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList</TSLType>
+            <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeOperatorName>
+              <Name xml:lang="en">NXD Foundation</Name>
+            </SchemeOperatorName>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeTerritory>SE</SchemeTerritory>
+          </OtherInformation>
+          <OtherInformation>
+            <tslx:MimeType>application/vnd.etsi.tsl+xml</tslx:MimeType>
+          </OtherInformation>
+        </AdditionalInformation>
+      </OtherTSLPointer>
+      <OtherTSLPointer>
+        <ServiceDigitalIdentities>
+          <ServiceDigitalIdentity>
+            <DigitalId>
+              <X509Certificate>MIICkDCCAjagAwIBAgIUKY5Ypn2tibtBnbyWpyXX2liR7QAwCgYIKoZIzj0EAwIwgYsxCzAJBgNVBAYTAklUMTMwMQYDVQQKDCpDcmVkaW1pIFFFQUEgVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxRzBFBgNVBAMMPkNyZWRpbWkgUUVBQSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZSBUcnVzdGVkIExpc3QgU2lnbmVyMB4XDTI2MDgwNTEwMzEzN1oXDTI3MDgwNTEwMzEzN1owgYsxCzAJBgNVBAYTAklUMTMwMQYDVQQKDCpDcmVkaW1pIFFFQUEgVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxRzBFBgNVBAMMPkNyZWRpbWkgUUVBQSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZSBUcnVzdGVkIExpc3QgU2lnbmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE3sT7htkTq+Tzq1LFc95vXcaxUQhiSKE0c6oL1qZI5La8duPZWPpuOX+KuG1k1PezXxEA9IBQu3iA4WG/9HIxj6N2MHQwHwYDVR0jBBgwFoAU7/o+v+zFVJcjEDEHQALfv/q+1MMwDAYDVR0TAQH/BAIwADAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0OBBYEFO/6Pr/sxVSXIxAxB0AC37/6vtTDMBQGA1UdJQEB/wQKMAgGBgQAkTcDADAKBggqhkjOPQQDAgNIADBFAiAfipQO7pkbiyALAnCElxK5aKFHxGspUik9O5Sve8ceJgIhAPQ6d5+2fXDdUw120AKDy+YGQb8PNYwn8HmGC3838NoN</X509Certificate>
+            </DigitalId>
+          </ServiceDigitalIdentity>
+        </ServiceDigitalIdentities>
+        <TSLLocation>https://lote.credimi.io/lists/it_credimi_qeaa_trust_registry_infrastructu/latest/trusted-list.xml</TSLLocation>
+        <AdditionalInformation>
+          <OtherInformation>
+            <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeOperatorName>
+              <Name xml:lang="en">Credimi QEAA Trust Registry Infrastructure</Name>
+            </SchemeOperatorName>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeTerritory>IT</SchemeTerritory>
+          </OtherInformation>
+          <OtherInformation>
+            <tslx:MimeType>application/vnd.etsi.tsl+xml</tslx:MimeType>
+          </OtherInformation>
+        </AdditionalInformation>
+      </OtherTSLPointer>
+      <OtherTSLPointer>
+        <ServiceDigitalIdentities>
+          <ServiceDigitalIdentity>
+            <DigitalId>
+              <X509Certificate>MIIDfzCCAySgAwIBAgIQGqlCGVNRMw3qe/kvJYgFijAKBggqhkjOPQQDAjCByzELMAkGA1UEBhMCTkwxDzANBgNVBAgTBkhlc3NlbjEPMA0GA1UEBxMGTGFuZ2VuMRcwFQYDVQQJEw5SaGVpbnN0cmFzc2UgNTEOMAwGA1UEERMFNjMyMjUxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMS4wLAYDVQQDEyVodHRwczovL3dlYnVpbGQtY29uc29ydGl1bS5naXRodWIuaW8vMB4XDTI2MDkxNDE0MTQ0OVoXDTI5MDMxOTIzNTk1OVowgcsxCzAJBgNVBAYTAk5MMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEuMCwGA1UEAxMlaHR0cHM6Ly93ZWJ1aWxkLWNvbnNvcnRpdW0uZ2l0aHViLmlvLzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABAWekpx1GFTQ0PfDDPumcKcHA0uqIaNl8zSPl/z03uCSJ4/wI39sqE7RpmcS4rxMi0QY0E2FdvQftnNNBNvGvOOjgecwgeQwDgYDVR0PAQH/BAQDAgGGMBEGA1UdJQQKMAgGBgQAkTcDADAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSpQv83wqV6CRVRhP59hknSEGLzKzAfBgNVHSMEGDAWgBSpQv83wqV6CRVRhP59hknSEGLzKzBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMWEwYTA0NC1lNjM3LTc1OTItYjhmMC0yN2IxZWRiNDlkZmEwCgYIKoZIzj0EAwIDSQAwRgIhAMq/aqrG20Qqs/ad54y4nsvboQgUTZ6NNTUfsQq6VW++AiEAzgPICLBpFwGljRPC55JjE0ICBR+z/1wWOV+xweGL2MY=</X509Certificate>
+            </DigitalId>
+          </ServiceDigitalIdentity>
+        </ServiceDigitalIdentities>
+        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/by5Cbf5O/etsi/tl.xml</TSLLocation>
+        <AdditionalInformation>
+          <OtherInformation>
+            <TSLType>http://uri.etsi.org/19602/LoTEType/EURegistrarsAndRegistersList</TSLType>
           </OtherInformation>
           <OtherInformation>
             <SchemeOperatorName>
@@ -275,25 +197,25 @@
         <ServiceDigitalIdentities>
           <ServiceDigitalIdentity>
             <DigitalId>
-              <X509Certificate>MIIFujCCA6KgAwIBAgIUUaTwXC17upDsPSF7y2a15o3IzuMwDQYJKoZIhvcNAQENBQAwdTELMAkGA1UEBhMCR0IxDTALBgNVBAoTBEVVREkxMzAxBgNVBAsTKkVVIERpZ2l0YWwgSWRlbnRpdHkgV2FsbGV0IFRydXN0IEZyYW1ld29yazEiMCAGA1UEAxMZRVVESSBTYW5kYm94IFJvb3QgQ0EgLSBHMTAeFw0yNjAzMzAxMzM4MDBaFw00MTAzMjYxMzM4MDBaMHUxCzAJBgNVBAYTAkdCMQ0wCwYDVQQKEwRFVURJMTMwMQYDVQQLEypFVSBEaWdpdGFsIElkZW50aXR5IFdhbGxldCBUcnVzdCBGcmFtZXdvcmsxIjAgBgNVBAMTGUVVREkgU2FuZGJveCBSb290IENBIC0gRzEwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDd/j1a7EK31Zhr5ulG46QJOkXXmfhaLsvMJRcOV5bKR9m7MeBotIvdSCV0MkbDWaXtTQxQZxhGqMgeYa6CCNBrTD64Nri2ypnxGdMsrOZe0N+D4I3U/3G4AGaZ9RY5khzSTWaY1kc3u5FoCKnGfPO7DAjOvhomI3xo1v0aLPBoG6C/euIu3HOcA8LTvpdCj8Kd/8+Qv3cspKTk3dVB7b3QTn44vXQTna+F8wuUyt4XcS/hz+AJr/QYZlwKNQZa22tpVWK651quMyFPNyfNSN89bd39uA2Dc8HjtgxupxGHdlspbbLsK9YLerNI7gus6rWYUzj95ZdTvYQEUSFNB4uTgo3YiG6fO5i7sWglmsjmfFX8ylBHsnD7Mu0jcYNM34j/zpVPK69XZTb14sJzDFllzX3thvKGIhO2rS7/3p6Dmkrx5tAs/WbJeAhBhX4WU1sAn8k1lZKbO1RcY8ZisLLnDPJaloy4B3c5tp/YGH0ZYGPsok/sIeDAfwACkwNP/D3dtMGMMSMDpuL05eCVwEPBMrSP0jCwsUFZjdumN28M47H/PAoVPYj90vVPLGVR2/gUJEGtgD/jnl3uMDomwg1j0+QwTJ2fYFW0c1RuXnTSYUL7kT8qBYmXI2ipcTUUtyq8VCFphmtW9rHFbuLDkWC6uGEzNlZ03D2fePhDWhrnawIDAQABo0IwQDAOBgNVHQ8BAf8EBAMCAQYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUnQIZYJE9Ibg5jGQiDMJZ/FFWfrIwDQYJKoZIhvcNAQENBQADggIBAFoDml/joIZZmJfChgul6/gAIYEE/3dc6yIbUF4x+F6rFd3qsCY+uqBapqJZPAlPKV9SNzcqJuDZKQyH2MVPwGGacy71ywF4f0D7Gn+45+B+AhPdTX8lLXagtQeAgTv298Q637pZFlZCsv0W7RfWTVAhe6ZS0q0sEE+TRRHPwYmuAvTV3ZutX9pdcxtGwHd1LJi71O3LbJLHebI1lbJBNs6KLpTSmq3qN+P1s8a4MTtiUfbY+zjULnUHwqUjkY1hw69aewGTRwQvrizUOzz8/u3YZRN2f5OKtLSfozae5SM97nRRdm4fLcNKEsftkn+rifFXr/Aze7Kacn5Q5vp+aR4TSx5tBRf7Uo/sn/vsIRDXxftPQst763uokeki6HjGkT1fT2SVs7p2VzhgcjDnCsoe6G+FNgwXsTaBnqALbLEwo+ellN6dKj3FNVThJIJtMG8v96XK2TSPBBtwy0LG7IhXcj6AU/w/9BAJRvjfDCceKojJaNVbOyDc3UMZ8xwnCSNGkIPNuYLAFtRQkcwOVmiFnPtZs+hGLy/yhWDwBO1nfupzKMlG62F4LxThJ28RJ6LrMwWGpyJ2SVs1mbo/UR2xXLM7beIWJHlgOoLAhtKBZOeDcOVPMmh/xiiiwpXGwr7ArHsZ07jBhltCZZlMwkuEIjBsvNxOY3DaA7VjZUlB</X509Certificate>
+              <X509Certificate>MIIDfjCCAySgAwIBAgIQXA/3aVjCNd5CaCKjpAzjNTAKBggqhkjOPQQDAjCByzELMAkGA1UEBhMCTkwxDzANBgNVBAgTBkhlc3NlbjEPMA0GA1UEBxMGTGFuZ2VuMRcwFQYDVQQJEw5SaGVpbnN0cmFzc2UgNTEOMAwGA1UEERMFNjMyMjUxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMS4wLAYDVQQDEyVodHRwczovL3dlYnVpbGQtY29uc29ydGl1bS5naXRodWIuaW8vMB4XDTI2MDkxNDE0MDExMFoXDTI5MDMxOTIzNTk1OVowgcsxCzAJBgNVBAYTAk5MMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEuMCwGA1UEAxMlaHR0cHM6Ly93ZWJ1aWxkLWNvbnNvcnRpdW0uZ2l0aHViLmlvLzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDFgsAhlmdPm6oe8X7y5q8wPZKPibGKlc0ghl8tPYe57HI3CSHJTGNogUEFSQyw6sndLK29LRwRblwECKA4bFAijgecwgeQwDgYDVR0PAQH/BAQDAgGGMBEGA1UdJQQKMAgGBgQAkTcDADAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBRROyqc7GUaZjlGAUp3VsodLYGLCTAfBgNVHSMEGDAWgBRROyqc7GUaZjlGAUp3VsodLYGLCTBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMWEwYTAzOC00YzA5LTdlN2YtOTdhOS1iNTU4YzFiYTVmMjIwCgYIKoZIzj0EAwIDSAAwRQIgdrFXRrG+DmCUaSHlQXPWv17TCEfCPYv/i/NvnNGYrbgCIQDoO7ZcVi3PunGIFRp86kN1Gi1ohWBxRnHyAXJl3RpYdw==</X509Certificate>
             </DigitalId>
           </ServiceDigitalIdentity>
         </ServiceDigitalIdentities>
-        <TSLLocation>https://raw.githubusercontent.com/webuild-consortium/wp4-trust-group/main/lotl/wrpac-providers-lote.json</TSLLocation>
+        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/8djrdSZa/etsi/tl.xml</TSLLocation>
         <AdditionalInformation>
           <OtherInformation>
-            <TSLType>http://uri.etsi.org/19602/LoTEType/EUWRPACProvidersList</TSLType>
+            <TSLType>http://uri.etsi.org/19602/LoTEType/EUWalletProvidersList</TSLType>
           </OtherInformation>
           <OtherInformation>
             <SchemeOperatorName>
-              <Name xml:lang="en">Raidiam Services Ltd</Name>
+              <Name xml:lang="en">IDunion SCE</Name>
             </SchemeOperatorName>
           </OtherInformation>
           <OtherInformation>
-            <SchemeTerritory>EU</SchemeTerritory>
+            <SchemeTerritory>DE</SchemeTerritory>
           </OtherInformation>
           <OtherInformation>
-            <tslx:MimeType>application/json</tslx:MimeType>
+            <tslx:MimeType>application/xml</tslx:MimeType>
           </OtherInformation>
         </AdditionalInformation>
       </OtherTSLPointer>
@@ -301,11 +223,37 @@
         <ServiceDigitalIdentities>
           <ServiceDigitalIdentity>
             <DigitalId>
-              <X509Certificate>MIIDfzCCAySgAwIBAgIQf2sr79rHnySanU/T1oK3QTAKBggqhkjOPQQDAjCByzELMAkGA1UEBhMCTkwxDzANBgNVBAgTBkhlc3NlbjEPMA0GA1UEBxMGTGFuZ2VuMRcwFQYDVQQJEw5SaGVpbnN0cmFzc2UgNTEOMAwGA1UEERMFNjMyMjUxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMS4wLAYDVQQDEyVodHRwczovL3dlYnVpbGQtY29uc29ydGl1bS5naXRodWIuaW8vMB4XDTI2MDkxNDE0MDQyNVoXDTI5MDMxOTIzNTk1OVowgcsxCzAJBgNVBAYTAk5MMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEuMCwGA1UEAxMlaHR0cHM6Ly93ZWJ1aWxkLWNvbnNvcnRpdW0uZ2l0aHViLmlvLzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABOfaFau75EaVUmsFMLe9ljCR9KvLwSNZXD6ifzBZ1N4XasXh4Kqve97a60KE5Xh2zLo62W9LSZ3ODcrCE4j1MbSjgecwgeQwDgYDVR0PAQH/BAQDAgGGMBEGA1UdJQQKMAgGBgQAkTcDADAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR7PYFhoNgtEaiRWYC5fbEh/Mv29DAfBgNVHSMEGDAWgBR7PYFhoNgtEaiRWYC5fbEh/Mv29DBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMWEwYTAzYi02MjIyLTdiNDItYjMwNy1mZWRjOWU3NWZhMTcwCgYIKoZIzj0EAwIDSQAwRgIhAJUfrhEtg5WbElBh7Y3FOQ+cKmO3/5fyXbwJ8jmrpXruAiEAzoTSiSpFF/5Suaxzb9owvlThBENcjqmg2pPbZ/cEWKw=</X509Certificate>
+              <X509Certificate>MIIDfjCCAyWgAwIBAgIRAIQ4dUuVCG/wO5cEIOlOd3gwCgYIKoZIzj0EAwIwgcsxCzAJBgNVBAYTAk5MMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEuMCwGA1UEAxMlaHR0cHM6Ly93ZWJ1aWxkLWNvbnNvcnRpdW0uZ2l0aHViLmlvLzAeFw0yNjA5MTQxNDA4NTZaFw0yOTAzMTkyMzU5NTlaMIHLMQswCQYDVQQGEwJOTDEPMA0GA1UECBMGSGVzc2VuMQ8wDQYDVQQHEwZMYW5nZW4xFzAVBgNVBAkTDlJoZWluc3RyYXNzZSA1MQ4wDAYDVQQREwU2MzIyNTFBMD8GA1UEChM4V0VCVUlMRCAtIFdQIDQgLSBHcm91cCA1IC0gVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxLjAsBgNVBAMTJWh0dHBzOi8vd2VidWlsZC1jb25zb3J0aXVtLmdpdGh1Yi5pby8wWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQIb5pXB94ZwUR9s3gdkDSJkLarrbe56MbE2aAEewnxDFltLgeOa3VZ/Xfjp/VN0BFieZr4uAQ1sGy3ofK75fV+o4HnMIHkMA4GA1UdDwEB/wQEAwIBhjARBgNVHSUECjAIBgYEAJE3AwAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUmDlDkavCSPT3OmyavvoikDMn1kAwHwYDVR0jBBgwFoAUmDlDkavCSPT3OmyavvoikDMn1kAwbgYDVR0RBGcwZYEPaW5mb0BpZHVuaW9uLmV1hlJodHRwczovL2FwaS53YWxsZXQuaWR1bmlvbi5pbmZvL2FwaS92MS9pc3N1ZXIvMDFhMGEwM2YtODM3NC03ZjIxLWJmOWQtMGJiZDU2ZjJiMDVjMAoGCCqGSM49BAMCA0cAMEQCIAMCG1j0Bkl97ycIdZeMEWOFex4WDslr4VB3me2z/guWAiAtNFy6httj9UGgFaEbpBAlRvbi+UBVhqYCKQ5/BVfbLw==</X509Certificate>
             </DigitalId>
           </ServiceDigitalIdentity>
         </ServiceDigitalIdentities>
-        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/4wdwrdSO/etsi/tl.xml</TSLLocation>
+        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/OsVKoh6j/etsi/tl.xml</TSLLocation>
+        <AdditionalInformation>
+          <OtherInformation>
+            <TSLType>http://uri.etsi.org/19602/LoTEType/EUPubEAAProvidersList</TSLType>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeOperatorName>
+              <Name xml:lang="en">IDunion SCE</Name>
+            </SchemeOperatorName>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeTerritory>DE</SchemeTerritory>
+          </OtherInformation>
+          <OtherInformation>
+            <tslx:MimeType>application/xml</tslx:MimeType>
+          </OtherInformation>
+        </AdditionalInformation>
+      </OtherTSLPointer>
+      <OtherTSLPointer>
+        <ServiceDigitalIdentities>
+          <ServiceDigitalIdentity>
+            <DigitalId>
+              <X509Certificate>MIIDBTCCAqygAwIBAgIQXNhGXiWDDb5VT/1T8qoPCzAKBggqhkjOPQQDAjCBjzELMAkGA1UEBhMCREUxDzANBgNVBAgTBkhlc3NlbjEPMA0GA1UEBxMGTGFuZ2VuMRcwFQYDVQQJEw5SaGVpbnN0cmFzc2UgNTEOMAwGA1UEERMFNjMyMjUxFDASBgNVBAoTC0lEdW5pb24gU0NFMR8wHQYDVQQDExZodHRwczovL3d3dy5pZHVuaW9uLmV1MB4XDTI2MDkxNDE0MTExOFoXDTI5MDMxOTIzNTk1OVowgY8xCzAJBgNVBAYTAkRFMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MRQwEgYDVQQKEwtJRHVuaW9uIFNDRTEfMB0GA1UEAxMWaHR0cHM6Ly93d3cuaWR1bmlvbi5ldTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABD3W+51YUMeoLo88SalHGnNj2o94Rj/vM/Sk8umWK1T2T0IVgCSZdvKYNE8tHiYExr0ylf8HfcSsIM2WeYHwt42jgecwgeQwDgYDVR0PAQH/BAQDAgGGMBEGA1UdJQQKMAgGBgQAkTcDADAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBSxVP1xh2THpojoBO9LmMaYtSZ2njAfBgNVHSMEGDAWgBSxVP1xh2THpojoBO9LmMaYtSZ2njBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMWEwYTA0MS05ZGIwLTdmMzgtOGE5Zi05ZmUxNzE4ODE0ZTAwCgYIKoZIzj0EAwIDRwAwRAIgem5RdsfHvA4gTPBoP3XzOuFy2Ee08ZdKV0tcqcsUHf8CIHdjt0nIlAB/RXLjK14u0vFjvkRGdjBexFJJgY1lZvUN</X509Certificate>
+            </DigitalId>
+          </ServiceDigitalIdentity>
+        </ServiceDigitalIdentities>
+        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/TwJYLuh0/etsi/tl.xml</TSLLocation>
         <AdditionalInformation>
           <OtherInformation>
             <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
@@ -327,37 +275,11 @@
         <ServiceDigitalIdentities>
           <ServiceDigitalIdentity>
             <DigitalId>
-              <X509Certificate>MIICkDCCAjagAwIBAgIUKY5Ypn2tibtBnbyWpyXX2liR7QAwCgYIKoZIzj0EAwIwgYsxCzAJBgNVBAYTAklUMTMwMQYDVQQKDCpDcmVkaW1pIFFFQUEgVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxRzBFBgNVBAMMPkNyZWRpbWkgUUVBQSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZSBUcnVzdGVkIExpc3QgU2lnbmVyMB4XDTI2MDgwNTEwMzEzN1oXDTI3MDgwNTEwMzEzN1owgYsxCzAJBgNVBAYTAklUMTMwMQYDVQQKDCpDcmVkaW1pIFFFQUEgVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxRzBFBgNVBAMMPkNyZWRpbWkgUUVBQSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZSBUcnVzdGVkIExpc3QgU2lnbmVyMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE3sT7htkTq+Tzq1LFc95vXcaxUQhiSKE0c6oL1qZI5La8duPZWPpuOX+KuG1k1PezXxEA9IBQu3iA4WG/9HIxj6N2MHQwHwYDVR0jBBgwFoAU7/o+v+zFVJcjEDEHQALfv/q+1MMwDAYDVR0TAQH/BAIwADAOBgNVHQ8BAf8EBAMCB4AwHQYDVR0OBBYEFO/6Pr/sxVSXIxAxB0AC37/6vtTDMBQGA1UdJQEB/wQKMAgGBgQAkTcDADAKBggqhkjOPQQDAgNIADBFAiAfipQO7pkbiyALAnCElxK5aKFHxGspUik9O5Sve8ceJgIhAPQ6d5+2fXDdUw120AKDy+YGQb8PNYwn8HmGC3838NoN</X509Certificate>
-            </DigitalId>
-          </ServiceDigitalIdentity>
-        </ServiceDigitalIdentities>
-        <TSLLocation>https://lote.credimi.io/lists/it_credimi_qeaa_trust_registry_infrastructu/latest/trusted-list.xml</TSLLocation>
-        <AdditionalInformation>
-          <OtherInformation>
-            <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeOperatorName>
-              <Name xml:lang="en">Credimi QEAA Trust Registry Infrastructure</Name>
-            </SchemeOperatorName>
-          </OtherInformation>
-          <OtherInformation>
-            <SchemeTerritory>IT</SchemeTerritory>
-          </OtherInformation>
-          <OtherInformation>
-            <tslx:MimeType>application/vnd.etsi.tsl+xml</tslx:MimeType>
-          </OtherInformation>
-        </AdditionalInformation>
-      </OtherTSLPointer>
-      <OtherTSLPointer>
-        <ServiceDigitalIdentities>
-          <ServiceDigitalIdentity>
-            <DigitalId>
               <X509Certificate>MIIBoDCCAUagAwIBAgIUeQPc75dyOVwCJVf0X5gtsJ8tkbMwCgYIKoZIzj0EAwIwJjELMAkGA1UEBhMCU0UxFzAVBgNVBAoMDk5YRCBGb3VuZGF0aW9uMB4XDTI2MDkyMTA5NDgzOVoXDTI5MDkyMDA5NTMzOVowJjELMAkGA1UEBhMCU0UxFzAVBgNVBAoMDk5YRCBGb3VuZGF0aW9uMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEQVTqk6oGWN4G15IcOeW27Pp4Akfu54kGaoT1JNNAJbnB7v3zZu1o/9/gHoyrN6Yyu9ww0dAUxsWPQFcq2/+U56NSMFAwDgYDVR0PAQH/BAQDAgbAMBEGA1UdJQQKMAgGBgQAkTcDADAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQVww37whbwN3DMilF8pSAtQRgIsTAKBggqhkjOPQQDAgNIADBFAiBR4C7Tiv94JRayfJ19gggyj68PjdfOfHuCe0Y6B9GgJgIhAKIw81dJK5lGBZXM2d3FSfKAmYH1TpK3TEAjxeZenO4S</X509Certificate>
             </DigitalId>
           </ServiceDigitalIdentity>
         </ServiceDigitalIdentities>
-        <TSLLocation>https://trustlist.nxd.foundation/trust-lists/NXD-TL-QEAA.xml</TSLLocation>
+        <TSLLocation>https://trustlist.nxd.foundation/trust-lists/NXD-TL-EAA.xml</TSLLocation>
         <AdditionalInformation>
           <OtherInformation>
             <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
@@ -375,16 +297,68 @@
           </OtherInformation>
         </AdditionalInformation>
       </OtherTSLPointer>
+      <OtherTSLPointer>
+        <ServiceDigitalIdentities>
+          <ServiceDigitalIdentity>
+            <DigitalId>
+              <X509Certificate>MIICizCCAjKgAwIBAgIUYX8uoJlLFS1DPdxy5gDd9rLy9Y4wCgYIKoZIzj0EAwIwgYkxCzAJBgNVBAYTAklUMTIwMAYDVQQKDClDcmVkaW1pIEVBQSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTFGMEQGA1UEAww9Q3JlZGltaSBFQUEgVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUgVHJ1c3RlZCBMaXN0IFNpZ25lcjAeFw0yNjA4MDUxMDI5MTJaFw0yNzA4MDUxMDI5MTJaMIGJMQswCQYDVQQGEwJJVDEyMDAGA1UECgwpQ3JlZGltaSBFQUEgVHJ1c3QgUmVnaXN0cnkgSW5mcmFzdHJ1Y3R1cmUxRjBEBgNVBAMMPUNyZWRpbWkgRUFBIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlIFRydXN0ZWQgTGlzdCBTaWduZXIwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAARi5q1Y2ee8P99l30yjeEzdI84VguVPpitLMLUvOu8BOHGMDcI8Mu5IOAAZAxYhQJoO8TNTx1MKLiu0nq9Rb9ado3YwdDAfBgNVHSMEGDAWgBRpPWIS6vZ48udHqBOMkFp3tra/2jAMBgNVHRMBAf8EAjAAMA4GA1UdDwEB/wQEAwIHgDAdBgNVHQ4EFgQUaT1iEur2ePLnR6gTjJBad7a2v9owFAYDVR0lAQH/BAowCAYGBACRNwMAMAoGCCqGSM49BAMCA0cAMEQCIB7Fkfu9TJbDbafBWNTdJ4cjHyB7Z2jWNi4JIOOuA8vVAiAS8jQRvLxcodHfY/R45t9mRa8qLsd1D4VoakzCpjZypQ==</X509Certificate>
+            </DigitalId>
+          </ServiceDigitalIdentity>
+        </ServiceDigitalIdentities>
+        <TSLLocation>https://lote.credimi.io/lists/it_credimi_eaa_trust_registry_infrastructur/latest/trusted-list.xml</TSLLocation>
+        <AdditionalInformation>
+          <OtherInformation>
+            <TSLType>http://uri.etsi.org/TrstSvc/TrustedList/TSLType/EUgeneric</TSLType>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeOperatorName>
+              <Name xml:lang="en">Credimi EAA Trust Registry Infrastructure</Name>
+            </SchemeOperatorName>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeTerritory>IT</SchemeTerritory>
+          </OtherInformation>
+          <OtherInformation>
+            <tslx:MimeType>application/vnd.etsi.tsl+xml</tslx:MimeType>
+          </OtherInformation>
+        </AdditionalInformation>
+      </OtherTSLPointer>
+      <OtherTSLPointer>
+        <ServiceDigitalIdentities>
+          <ServiceDigitalIdentity>
+            <DigitalId>
+              <X509Certificate>MIIDfTCCAySgAwIBAgIQVgCTdE3sftlTyh0Lt+P3AjAKBggqhkjOPQQDAjCByzELMAkGA1UEBhMCTkwxDzANBgNVBAgTBkhlc3NlbjEPMA0GA1UEBxMGTGFuZ2VuMRcwFQYDVQQJEw5SaGVpbnN0cmFzc2UgNTEOMAwGA1UEERMFNjMyMjUxQTA/BgNVBAoTOFdFQlVJTEQgLSBXUCA0IC0gR3JvdXAgNSAtIFRydXN0IFJlZ2lzdHJ5IEluZnJhc3RydWN0dXJlMS4wLAYDVQQDEyVodHRwczovL3dlYnVpbGQtY29uc29ydGl1bS5naXRodWIuaW8vMB4XDTI2MDkxNDE0MDI1MloXDTI5MDMxOTIzNTk1OVowgcsxCzAJBgNVBAYTAk5MMQ8wDQYDVQQIEwZIZXNzZW4xDzANBgNVBAcTBkxhbmdlbjEXMBUGA1UECRMOUmhlaW5zdHJhc3NlIDUxDjAMBgNVBBETBTYzMjI1MUEwPwYDVQQKEzhXRUJVSUxEIC0gV1AgNCAtIEdyb3VwIDUgLSBUcnVzdCBSZWdpc3RyeSBJbmZyYXN0cnVjdHVyZTEuMCwGA1UEAxMlaHR0cHM6Ly93ZWJ1aWxkLWNvbnNvcnRpdW0uZ2l0aHViLmlvLzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABBOLRTYj12pAoL8yi5fQ/yc9uW84IeUG5OrhzcaeOMHIcNhl9f7aBPKQ/1VO/KXAbEWK5JsOKUfAaqBo04SoGU2jgecwgeQwDgYDVR0PAQH/BAQDAgGGMBEGA1UdJQQKMAgGBgQAkTcDADAPBgNVHRMBAf8EBTADAQH/MB0GA1UdDgQWBBTcnpxJdKyjlksbTtVcNvXOvIISQzAfBgNVHSMEGDAWgBTcnpxJdKyjlksbTtVcNvXOvIISQzBuBgNVHREEZzBlgQ9pbmZvQGlkdW5pb24uZXWGUmh0dHBzOi8vYXBpLndhbGxldC5pZHVuaW9uLmluZm8vYXBpL3YxL2lzc3Vlci8wMWEwYTAzOS1mNDg1LTdiMTEtODRkYy1hZjZkZDRlN2ExM2QwCgYIKoZIzj0EAwIDRwAwRAIgFMCVLZyaGX6/jPYD6N0uI+CCDPi4ELf9xxf8yIXF6FYCIAqslmWb6fXF8HVFA83vpiGIBPou9wCvfiSEf1rUXXU8</X509Certificate>
+            </DigitalId>
+          </ServiceDigitalIdentity>
+        </ServiceDigitalIdentities>
+        <TSLLocation>https://tl-api.dev.idunion.info/api/v1/xPnOSuTc/etsi/tl.xml</TSLLocation>
+        <AdditionalInformation>
+          <OtherInformation>
+            <TSLType>http://uri.etsi.org/19602/LoTEType/EUPIDProvidersList</TSLType>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeOperatorName>
+              <Name xml:lang="en">IDunion SCE</Name>
+            </SchemeOperatorName>
+          </OtherInformation>
+          <OtherInformation>
+            <SchemeTerritory>DE</SchemeTerritory>
+          </OtherInformation>
+          <OtherInformation>
+            <tslx:MimeType>application/xml</tslx:MimeType>
+          </OtherInformation>
+        </AdditionalInformation>
+      </OtherTSLPointer>
     </PointersToOtherTSL>
-    <ListIssueDateTime>2026-09-22T15:05:20Z</ListIssueDateTime>
+    <ListIssueDateTime>2026-11-18T09:24:19Z</ListIssueDateTime>
     <NextUpdate>
-      <dateTime>2027-03-22T15:05:20Z</dateTime>
+      <dateTime>2027-05-18T09:24:19Z</dateTime>
     </NextUpdate>
     <DistributionPoints>
       <URI>https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml</URI>
     </DistributionPoints>
   </SchemeInformation>
-<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Id="SignXMLSignature66010DC7"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256"/><ds:Reference URI="#lotl-1" Id="SignXMLReference27BDE805"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>dQQ6lmYPM/l9d+BKZJzBDUn3Pi8ZZ2wE+HZcIHFZIG8=</ds:DigestValue></ds:Reference><ds:Reference URI="#SignXMLSignature66010DC7-SignedProperties71E6264F" Type="http://uri.etsi.org/01903#SignedProperties"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>4gDrsWEzr/gjWlbH9apLuAFjnSNMqURAxdjHw40Jk94=</ds:DigestValue></ds:Reference><ds:Reference URI="#SignXMLCertificateB340144D"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>zLpJe8i7Rf+30xIIZIbDt1uTKGj+aFC9KJGXgXi4FPA=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>dnIBhL6FrB8SLerxTxLQYe8w7Riumu/SPpypc291FxXKB54+IrFYwet8rhbi1bawWRHoml19uAOsT8DN99l2UQ==</ds:SignatureValue><ds:KeyInfo Id="SignXMLCertificateB340144D"><ds:X509Data><ds:X509Certificate>MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAw
+<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Id="SignXMLSignature29478F57"><ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256"/><ds:Reference URI="#lotl-1" Id="SignXMLReferenceF9188DED"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>Aa7q++RbUqb8FHO7g8r7ZDdetFYcW5Wm8XkGaGAAHGw=</ds:DigestValue></ds:Reference><ds:Reference URI="#SignXMLSignature29478F57-SignedPropertiesE171C8C1" Type="http://uri.etsi.org/01903#SignedProperties"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>H+QZGvAWm3cla0JPux8/UyUMOL+0nm3Vu/nSgacDwOk=</ds:DigestValue></ds:Reference><ds:Reference URI="#SignXMLCertificate2027083F"><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>MEuajiEUTMqloUR1DlaYRlj9ANeFR0AW4+jiMe0pJhM=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>vYmcq4LMZflc0UTN7g0cxva3XKeIGz6KbfdWYb2MGhPDRh5sroepaCbWR2jXAJnImpDY0GYajWl+lFsPplAhOQ==</ds:SignatureValue><ds:KeyInfo Id="SignXMLCertificate2027083F"><ds:X509Data><ds:X509Certificate>MIIBsjCCAVmgAwIBAgITPvPF+X8GhViy0ozkLPO7+1YNITAKBggqhkjOPQQDAjAw
 MQswCQYDVQQGEwJFVTEhMB8GA1UECgwYV1A0IFRydXN0IFJlZ2lzdHJ5IEdyb3Vw
 MB4XDTI2MDMyMDEzMjgyNVoXDTI5MDMxOTEzMjgyNVowMDELMAkGA1UEBhMCRVUx
 ITAfBgNVBAoMGFdQNCBUcnVzdCBSZWdpc3RyeSBHcm91cDBZMBMGByqGSM49AgEG
@@ -394,4 +368,4 @@ wDARBgNVHSUECjAIBgYEAJE3AwAwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUh78b
 CQwjCQICwxtn6FHEQAktn7YwCgYIKoZIzj0EAwIDRwAwRAIgfbkN22wQzj8kfoAg
 vYk1u86n/jHDB1FEXJA7aH4VuRECIHulljT498YiqnCgRU7UlRXSF/MpC02r1V1D
 jAue5lYF
-</ds:X509Certificate></ds:X509Data></ds:KeyInfo><ds:Object><xades:QualifyingProperties Target="#SignXMLSignature66010DC7"><xades:SignedProperties Id="SignXMLSignature66010DC7-SignedProperties71E6264F"><xades:SignedSignatureProperties><xades:SigningTime>2026-09-22T15:05:20Z</xades:SigningTime><xades:SigningCertificateV2><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>M5dT2K7ZuZ/rwTzBXIfh6JLjkaDf+xvTrIINcyGeOOE=</ds:DigestValue></xades:CertDigest></xades:Cert></xades:SigningCertificateV2></xades:SignedSignatureProperties><xades:SignedDataObjectProperties><xades:DataObjectFormat ObjectReference="#SignXMLReference27BDE805"><xades:Description>ETSI TS 119 612 trusted list</xades:Description><xades:MimeType>application/vnd.etsi.tsl+xml</xades:MimeType></xades:DataObjectFormat></xades:SignedDataObjectProperties></xades:SignedProperties></xades:QualifyingProperties></ds:Object></ds:Signature></TrustServiceStatusList>
+</ds:X509Certificate></ds:X509Data></ds:KeyInfo><ds:Object><xades:QualifyingProperties Target="#SignXMLSignature29478F57"><xades:SignedProperties Id="SignXMLSignature29478F57-SignedPropertiesE171C8C1"><xades:SignedSignatureProperties><xades:SigningTime>2026-11-18T09:24:19Z</xades:SigningTime><xades:SigningCertificateV2><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><ds:DigestValue>M5dT2K7ZuZ/rwTzBXIfh6JLjkaDf+xvTrIINcyGeOOE=</ds:DigestValue></xades:CertDigest></xades:Cert></xades:SigningCertificateV2></xades:SignedSignatureProperties><xades:SignedDataObjectProperties><xades:DataObjectFormat ObjectReference="#SignXMLReferenceF9188DED"><xades:Description>ETSI TS 119 612 trusted list</xades:Description><xades:MimeType>application/vnd.etsi.tsl+xml</xades:MimeType></xades:DataObjectFormat></xades:SignedDataObjectProperties></xades:SignedProperties></xades:QualifyingProperties></ds:Object></ds:Signature></TrustServiceStatusList>

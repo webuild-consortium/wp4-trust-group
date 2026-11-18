@@ -89,7 +89,7 @@
         <h1 id="lotl-heading" class="display-6 lotl-serif fw-bold text-secondary mb-3">List of Trusted Lists (LoTL)</h1>
         <p class="lead lotl-muted mb-0" style="max-width: 42rem;">
           Machine-readable List of Trusted Lists for the WE BUILD pilot, following ETSI TS&nbsp;119&nbsp;612 / TS&nbsp;119&nbsp;602.
-          Use the endpoints below to fetch the signed LoTL in JSON or XML for trust validation in Wallet Units and Relying Parties.
+          Use the endpoints below to fetch the signed LoTL in compact JWS, compatibility JSON, or XML for trust validation in Wallet Units and Relying Parties.
         </p>
       </div>
     </section>
@@ -98,17 +98,27 @@
       <div class="container">
         <h2 id="endpoints-heading" class="h4 lotl-serif text-secondary mb-4">Published endpoints</h2>
         <div class="row g-4">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <article class="lotl-endpoint-card p-4 h-100">
-              <h3 class="h6 fw-bold text-secondary mb-2">LoTL (JSON)</h3>
-              <p class="small lotl-muted mb-3">JAdES-signed JSON (TS 119 602-1 LoTE root, <code>1960201</code> shape).</p>
+              <h3 class="h6 fw-bold text-secondary mb-2">LoTL (JWS)</h3>
+              <p class="small lotl-muted mb-3">Compact JAdES Baseline B JWS with the TS 119 602 LoTE JSON as its attached payload.</p>
+              <p class="mb-2">
+                <a class="btn btn-secondary btn-sm" href="https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.jws">Download compact JWS</a>
+              </p>
+              <code class="d-block p-2 bg-light rounded">https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.jws</code>
+            </article>
+          </div>
+          <div class="col-md-4">
+            <article class="lotl-endpoint-card p-4 h-100">
+              <h3 class="h6 fw-bold text-secondary mb-2">LoTL (JSON compatibility)</h3>
+              <p class="small lotl-muted mb-3">Legacy signed JSON wrapper retained for existing consumers; not valid as-is against the ETSI JSON schema.</p>
               <p class="mb-2">
                 <a class="btn btn-secondary btn-sm" href="https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json">Download JSON</a>
               </p>
               <code class="d-block p-2 bg-light rounded">https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json</code>
             </article>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <article class="lotl-endpoint-card p-4 h-100">
               <h3 class="h6 fw-bold text-secondary mb-2">LoTL (XML)</h3>
               <p class="small lotl-muted mb-3">XAdES-signed XML (TS 119 612 ListOfTrustedLists).</p>
@@ -124,6 +134,22 @@
           <a href="https://github.com/webuild-consortium/wp4-trust-group/blob/main/task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md">LoTL automation and TL integration</a>
           in the <a href="https://github.com/webuild-consortium/wp4-trust-group">wp4-trust-group</a> repository.
         </p>
+      </div>
+    </section>
+
+    <section class="pb-5" aria-labelledby="signing-key-heading">
+      <div class="container">
+        <h2 id="signing-key-heading" class="h4 lotl-serif text-secondary mb-3">LoTL signing public key</h2>
+        <p class="lotl-muted">This public key belongs to the certificate used to sign the LoTL, not to the participant lists referenced by it.</p>
+        <pre class="p-3 bg-light rounded" style="overflow-x: auto;"><code>-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEmgj17eZ4Uj75SFAAbdyWkqRtJMvZ
+gi6EZn/gLiRs+OMSBsvyErLBBSUI3pNdSKkPxIyNx5nc+cHnapmAAr1CHQ==
+-----END PUBLIC KEY-----</code></pre>
+        <p class="small">Signing certificate SHA-256 fingerprint: <code style="overflow-wrap: anywhere;">339753D8AED9B99FEBC13CC15C87E1E892E391A0DFFB1BD3AC820D73219E38E1</code><br>
+          Certificate expires: <time>2029-03-19 13:28:25 UTC</time></p>
+        <p><a class="btn btn-outline-primary btn-sm" href="lotl-signing-cert.pem">Download signing certificate (PEM)</a>
+          <a class="btn btn-outline-primary btn-sm" href="lotl-signing-public-key.pem">Download public key (PEM)</a></p>
+        <p class="small lotl-muted">Obtain and verify the certificate fingerprint through an independent trusted channel before using it as a trust anchor. Publication on this page alone does not establish trust.</p>
       </div>
     </section>
   </main>
