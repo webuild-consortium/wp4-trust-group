@@ -12,6 +12,7 @@ This task defines the conceptual trust framework for the WP4 Trust Infrastructur
 - **`trusted-list-registration-trust-evaluation-matrix.md`** – Requirements matrix for trusted lists, participant registration and trust evaluation derived from EUDI Wallet ARF Annex 2
 - **`trust-infrastructure-schema.md`** – Structural schema of the trust infrastructure, including registries, entities and relationships
 - **`eudi-wallet-trust-and-entitlement-discovery.md`** – Policy discovery and trust verification from wallet (holder) perspective: WRPRC/WRPAC discovery, Trusted List validation, Registry lookup, entitlement and attribute validation (ARF RPRC_21, RPA_*)
+- **`relying-party-verification-guide.md`** – Short guide for Relying Party verifier developers: accept/reject rules for presented PIDs and attestations against the WEBUILD LoTL and Trusted Lists (UC-TE-05, UC-TE-06), testing tools, and production differences
 - **`rp-intermediary-openid4vp-technical-report.md`** – Non-normative technical report on Relying Party intermediaries in remote OpenID4VP flows: `verifier_info`, WRPAC/WRPRC exposure, intermediary detection, and examples (ARF Topic 52, ETSI TS 119 472-2). Use case: [UC-RPI-01](../task1-use-cases/subtask1-2-trust-registry/relying-party-intermediary-use-case.md).
 - **`eaa-provider-identity-verification-chaining-LoTL.md`** – EAA provider identity verification via LoTL/TL chaining and X.509 path validation
 
