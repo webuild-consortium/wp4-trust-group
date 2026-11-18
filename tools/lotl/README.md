@@ -1,6 +1,6 @@
 # LoTL Producer and Validator
 
-List of Trusted Lists (LoTL) producer and validator for the WP4 Trust Infrastructure. Generates and signs LoTL in XML (XAdES Baseline B) and JSON (JAdES Compact Baseline B) formats per ETSI TS 119 612 and TS 119 602.
+List of Trusted Lists (LoTL) producer and validator for the WP4 Trust Infrastructure. Generates an XML LoTL (XAdES Baseline B), a legacy JSON compatibility wrapper, and a compact JAdES Baseline B JWS with the TS 119 602 LoTE JSON as its attached payload.
 
 **JSON (LoTE) note:** the unsigned JSON from `json_generator.py` follows the ETSI TS 119 602-1 `1960201` JSON schema root shape (see [Task 3 implementation profile](../../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md)). Before signing, `produce` validates it with `lote_validate.py` using the vendored official ETSI full schema (`tools/lotl/schemas/1960201_json_schema.json`) plus semantic checks. `LOTE_JSON_SCHEMA` can override the schema path; the local subset schema remains a fallback.
 
@@ -10,7 +10,7 @@ List of Trusted Lists (LoTL) producer and validator for the WP4 Trust Infrastruc
 # 1) Create an ETSI-compliant signing certificate
 python -m tools.lotl.create_signing_cert
 
-# 2) Produce and sign LoTL JSON + XML
+# 2) Produce and sign LoTL compatibility JSON, compact JWS, and XML
 python -m tools.lotl \
   --tl-entries-dir lotl/tl_entries/ \
   --output-dir lotl/ \
@@ -91,7 +91,7 @@ python -m tools.lotl --check-expiry \
 # Fetch every published TL/LoTE pointed to by lotl/tl_entries and enforce
 # the WP4/ETSI profile (enveloped-signature then exclusive C14N; compact
 # JAdES Baseline B; list type URIs). Fails CI if a participant uses
-# XPath Filter 2.0 or any other off-profile algorithm/list type.
+# XPath Filter 2.0, an expired LoTE NextUpdate, or another profile violation.
 python -m tools.lotl --validate-published --tl-entries-dir lotl/tl_entries/
 
 # Verbose logging
@@ -99,6 +99,12 @@ python -m tools.lotl --log-level DEBUG ...
 ```
 
 Key and certificate can be provided via `--signing-key` / `--signing-cert` or via environment variables `LOTL_SIGNING_KEY` and `LOTL_SIGNING_CERT`.
+
+The GitHub Pages build verifies the signed JSON against `LOTL_SIGNING_CERT`,
+then renders the corresponding public key, certificate fingerprint, and expiry
+on the landing page. It also publishes `lotl-signing-cert.pem` and
+`lotl-signing-public-key.pem`; the private key is never included. Independently
+authenticate the fingerprint before trusting a downloaded certificate.
 
 ## Running Tests
 

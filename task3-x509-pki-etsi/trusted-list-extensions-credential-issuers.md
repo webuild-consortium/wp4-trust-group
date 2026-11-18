@@ -88,7 +88,7 @@ The following provisions from existing specifications inform conflict resolution
 When a Wallet Unit or Relying Party receives a credential, it:
 
 1. Reads the **attestation type identifier / namespace** from the credential.
-2. Identifies the **issuer** from the credential's signing certificate and locates the corresponding **Trusted List entry** (by matching the signing certificate against trust anchors in the TL; the certificate does *not* contain a pointer to the TL — see [Trusted List discovery and consumption](../task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md) and ETSI TS 119 615 clause 4.3).
+2. Identifies the **issuer** from the credential's signing certificate and locates the corresponding **Trusted List entry** (by matching the signing identity or validating a certification path to an applicable TL trust anchor; the certificate does *not* contain a pointer to the TL — see [Trusted List discovery and consumption](../task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md) and ETSI TS 119 615 clause 4.3).
 3. From the Trusted List entry (or the referenced registration certificate / Registrar API), obtains the list of **attestation types the issuer is authorised to issue**.
 4. **Accepts** the credential as being of that attestation type **only if**:
    - The issuer is present in the applicable Trusted List, and

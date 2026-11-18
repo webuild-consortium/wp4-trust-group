@@ -87,6 +87,10 @@ _FIX_HINTS: tuple[tuple[str, str], ...] = (
         "JSON must be signed JAdES Baseline B: protected header needs alg, x5c, and iat.",
     ),
     (
+        "NextUpdate has expired",
+        "Publish a freshly signed list with a future NextUpdate.",
+    ),
+    (
         "NextUpdate must be at most 6 months",
         "NextUpdate must be at most 6 months after ListIssueDateTime.",
     ),
@@ -171,6 +175,8 @@ def finding_title(message: str) -> str:
         return "Signature does not verify"
     if "jades" in lowered:
         return "JAdES signature profile"
+    if "nextupdate has expired" in lowered:
+        return "Expired NextUpdate"
     if "nextupdate" in lowered:
         return "NextUpdate interval"
     if "statusdeterminationapproach" in lowered:
@@ -243,11 +249,6 @@ def _try_crypto_verify(
     if is_xml:
         valid, err = validate_tl_signature_xml(body, trust_anchor)
         if valid:
-            return []
-        # signxml's default expect_references=1 rejects a valid extra
-        # SignedProperties ds:Reference. Participant verify uses the actual
-        # count (>= 2); keep this guard if an older path still surfaces it.
-        if err and "Expected to find 1 references" in err:
             return []
         return [f"XML signature verification failed: {err}"]
     return []

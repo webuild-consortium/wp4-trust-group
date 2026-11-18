@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
 from urllib.error import URLError
+from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
 from cryptography import x509
@@ -153,10 +154,10 @@ def _b64url_json(protected: str) -> dict[str, Any]:
 
 def load_lotl_json(source: str, timeout: int = _DEFAULT_FETCH_TIMEOUT) -> dict[str, Any]:
     """Load a LoTL JSON document from a filesystem path or http(s) URL."""
-    if source.startswith("http://") or source.startswith("https://"):
+    if urlsplit(source).scheme in {"http", "https"}:
         req = Request(source, headers={"User-Agent": "WP4-LoTL-ExpiryCheck/1.0"})
         try:
-            with urlopen(req, timeout=timeout) as resp:
+            with urlopen(req, timeout=timeout) as resp:  # nosec B310
                 payload = json.loads(resp.read().decode("utf-8"))
         except (URLError, TimeoutError, json.JSONDecodeError, OSError) as exc:
             raise ValueError(f"Failed to load LoTL JSON from {source}: {exc}") from exc

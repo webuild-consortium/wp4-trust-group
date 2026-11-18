@@ -89,10 +89,11 @@ lotl/
 │   └── ebwoid-provider/
 │       └── {participant_id}.json
 ├── list_of_trusted_lists.xml
-└── list_of_trusted_lists.json
+├── list_of_trusted_lists.json
+└── list_of_trusted_lists.jws
 ```
 
-- **`lotl/`** — Root directory for LoTL input data and output. LoTL producer writes `list_of_trusted_lists.{xml,json}` here.
+- **`lotl/`** — Root directory for LoTL input data and output. LoTL producer writes `list_of_trusted_lists.{xml,json,jws}` here.
 - **`lotl/tl_entries/`** — One subfolder per TL type (see [TL Types and Published TLs](#tl-types-and-published-tls)). Each subfolder holds TL entry files for that TL type.
 - **`lotl/tl_entries/{tl_type}/`** — Contains one JSON file per participant TLP. File name: `{participant_id}.json` (e.g. `acme.json`, `example-corp.json`).
 
@@ -241,8 +242,8 @@ tools/lotl/
 **Requirements**:
 - Standalone Python program with CLI
 - Scan `tl_entries/`; generate LoTL referencing participant TLs by URL
-- Output LoTL in both XML and JSON formats per the [Task 3 implementation profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md). JSON (signed with JAdES) uses the TS 119 602-1 `1960201` document shape: root `LoTE`, `ListAndSchemeInformation` with `PointersToOtherLoTE` and URI-only `DistributionPoints` (see Task 3 profile §9-10).
-- Sign using XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON) per [Task 3](../task3-x509-pki-etsi/)
+- Output LoTL in XML, legacy JSON, and compact JWS formats per the [Task 3 implementation profile](../task3-x509-pki-etsi/etsi_trusted_lists_implementation_profile.md). The compact JWS carries the TS 119 602-1 `1960201` JSON binding (`{"LoTE": ...}`) as its attached payload.
+- Sign using XAdES Baseline B (XML) and compact JAdES Baseline B JWS (JSON payload) per [Task 3](../task3-x509-pki-etsi/). Preserve the existing `.json` compatibility endpoint.
 - **Sequence number**: Increment on each publication
 - **Error handling**: On signing failure, exit non-zero; on TLP URL unreachable, log and optionally skip or fail
 
@@ -258,7 +259,7 @@ python -m tools.lotl --validate-only --tl-entries-dir lotl/tl_entries/
 python -m tools.lotl --check-expiry --tl-entries-dir lotl/tl_entries/ --lotl-json https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json
 ```
 
-- **LoTL is signed**: XAdES Baseline B (XML) and JAdES Compact Baseline B (JSON).
+- **LoTL is signed**: XAdES Baseline B (XML) and compact JAdES Baseline B (JWS payload).
 - **Validation is part of produce**: produce validates tl_entries first; on failure, produce fails.
 - **Key/cert**: use `--signing-key` / `--signing-cert` if provided, else `os.environ.get("LOTL_SIGNING_KEY")` and or `os.environ.get("LOTL_SIGNING_CERT")`.
 - **Logging**: Eloquent INFO and DEBUG logging to stderr. Use `--log-level DEBUG` or `LOTL_LOG_LEVEL=DEBUG` for verbose output.
@@ -383,7 +384,7 @@ The job fails if any `trust_anchor` in the repository, the published LoTL signin
 
 2. **Generate and Sign LoTL**:
    - Execute LoTL producer with `--tl-entries-dir` and `--output-dir`
-   - Output: `lotl/list_of_trusted_lists.{xml,json}` (signed)
+   - Output: `lotl/list_of_trusted_lists.{xml,json,jws}` (signed)
 
 3. **Commit and Push** (if changes):
    - Compare generated LoTL with current `lotl/`; commit only if diff exists
@@ -392,16 +393,18 @@ The job fails if any `trust_anchor` in the repository, the published LoTL signin
    - Create git tag for version tracking (e.g. `lotl-v{sequence}`)
 
 4. **Publish to GitHub Pages**:
-   - Copy the LoTL (XML and JSON) to the `gh-pages` branch
+   - Copy the LoTL (XML, compatibility JSON, and compact JWS) to the `gh-pages` branch
    - [OPTIONAL] Set proper MIME types: `application/vnd.etsi.tsl+xml` (XML) or `application/json`/`application/vnd.etsi.lote+json` (JSON)
      - Note: The Task 3 implementation profile specifies MIME types for TL distribution; GitHub Pages does not support custom MIME type configuration. This is a platform limitation.
-   - Update the GitHub Pages landing page: copy **`lotl/pages/index.html`** to the **`gh-pages` branch root**, and sync the entire **`lotl/pages/assets/`** tree to **`assets/`** on `gh-pages` (vendored WE BUILD `custom.css`, Fracktif/slick fonts, Bootstrap bundle, logos, favicon). The site does not load CSS or images from webuildconsortium.eu. Consortium portal links (Newsletter, Partner Portal, Privacy, etc.) remain absolute URLs.
+   - Build the GitHub Pages landing page from **`lotl/pages/index.html`**, displaying the verified LoTL signer public key, certificate SHA-256 fingerprint and expiry. Publish the public certificate and public key as `lotl-signing-cert.pem` and `lotl-signing-public-key.pem`; never publish the private key. Consumers must authenticate the fingerprint independently before trusting the certificate.
+   - Sync the entire **`lotl/pages/assets/`** tree to **`assets/`** on `gh-pages` (vendored WE BUILD `custom.css`, Fracktif/slick fonts, Bootstrap bundle, logos, favicon). The site does not load CSS or images from webuildconsortium.eu. Consortium portal links (Newsletter, Partner Portal, Privacy, etc.) remain absolute URLs.
 
 **LoTL publication URL** (GitHub Pages, `gh-pages` branch):
 
 | Format | Absolute URL |
 |--------|--------------|
-| JSON | `https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json` |
+| Compatibility JSON | `https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json` |
+| Compact JAdES JWS | `https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.jws` |
 | XML | `https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml` |
 
 The `gh-pages` branch is an empty branch used solely for LoTL publication. Enable GitHub Pages in the repository settings (Source: `gh-pages` branch) to serve these URLs.
@@ -441,7 +444,7 @@ SIGNING_CERT_PATH = 'certs/lotl_signing.pem'
 - [ ] Each TL entry contains `tl_url` and `trust_anchor` (X.509 PEM) for TL signature validation
 - [ ] TL entry validator: fetches TL, validates signature with trust anchor, validates against ETSI schema
 - [ ] PR validation: CI runs tl-entry validator on changed files; PR mergeable only when all pass
-- [ ] LoTL producer generates signed LoTL in both XML (XAdES) and JSON (JAdES) formats
+- [ ] LoTL producer generates signed LoTL in XML (XAdES), compatibility JSON, and compact JAdES JWS formats
 - [ ] LoTL references participant TLs by URL (from tl_entries)
 - [ ] LoTL producer includes unit and integration tests using pytest (minimum 90% code coverage)
 - [ ] On merge: CI updates LoTL, signs it, publishes to GitHub Pages

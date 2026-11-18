@@ -7,5 +7,6 @@ jsonschema>=4.20
 signxml>=4.4,<5
 lxml
 jwcrypto>=1.5.6
-cryptography
+cryptography>=50.0.2
+pyOpenSSL>=26.4.0
 setuptools>=83.0.0

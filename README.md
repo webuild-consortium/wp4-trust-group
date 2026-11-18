@@ -14,17 +14,20 @@ The **List of Trusted Lists (LoTL)** for the WP4 Trust Infrastructure is publish
 
 **[https://webuild-consortium.github.io/wp4-trust-group/](https://webuild-consortium.github.io/wp4-trust-group/)**
 
-| Format | URL |
-|--------|-----|
-| JSON | [list_of_trusted_lists.json](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json) |
-| XML | [list_of_trusted_lists.xml](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml) |
+| File | Standard and document type | Parser to use |
+|------|----------------------------|---------------|
+| [list_of_trusted_lists.json](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.json) | Legacy compatibility JSON wrapper around the TS 119 602 LoTL; the top-level `signature` member is outside the ETSI JSON schema | Existing compatibility consumer |
+| [list_of_trusted_lists.jws](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.jws) | Compact JAdES Baseline B JWS; its attached payload is the TS 119 602 LoTL (`LoTEType` `.../EUListOfTrustedLists`) | Verify as compact JAdES, then parse the payload with a TS 119 602 LoTE parser |
+| [list_of_trusted_lists.xml](https://webuild-consortium.github.io/wp4-trust-group/list_of_trusted_lists.xml) | ETSI TS 119 612 `TrustServiceStatusList` (`TSLType` `.../TSLType/EUlistofthelists`) | TS 119 612 TSL parser |
+
+The `.json` endpoint is retained unchanged for existing consumers. For a schema-conformant TS 119 602 LoTL, use the `.jws` endpoint: it is a three-part compact JWS whose payload is the LoTE JSON. The `.xml` file follows a different standard and document type, not a second serialization of the TS 119 602 list. Its pointers include both TS 119 612 TSLs and TS 119 602 `TrustedEntitiesList` documents; parse each referenced document according to its own type.
 
 During the **WE BUILD MVP (pilot) phase**, the WP4 Trust Infrastructure group acts as **Ecosystem Authority** and **Trusted List Provider** for all participating entities. The LoTL is the trust anchor in the ETSI TS 119 612 model: it references the Trusted Lists for PID Providers, Wallet Providers, and other entity types, enabling Wallet Units and Relying Parties to validate certificates and trust anchors. In the production phase (MVP+), the European Commission and Member State TLPs take over these roles. Registration, notification, and publication responsibilities are described in the [Trust Infrastructure Schema](task2-trust-framework/trust-infrastructure-schema.md). 
 
 **Documentation (by reference)** — automation, contribution, and local tooling:
 
 - **[LoTL automation and TL integration](task4-trust-infrastructure-api/lotl-automation-and-tl-integration.md)** — End-to-end specification: participant Trusted List Providers add `lotl/tl_entries/{tl_type}/{participant_id}.json` via pull request; CI fetches each referenced TL, validates its signature with the supplied trust anchor, and checks ETSI schema; on merge, the signed LoTL is regenerated and published to GitHub Pages. Also covers directory layout, GitHub Actions workflows, published URLs, and acceptance criteria.
-- **[LoTL producer and validator (`tools/lotl`)](tools/lotl/README.md)** — Running the Python producer locally: validating `tl_entries`, generating and signing `list_of_trusted_lists.{json,xml}`, LoTL signing certificate creation, CLI options, and tests.
+- **[LoTL producer and validator (`tools/lotl`)](tools/lotl/README.md)** — Running the Python producer locally: validating `tl_entries`, generating and signing `list_of_trusted_lists.{json,jws,xml}`, LoTL signing certificate creation, CLI options, and tests.
 - **[EUDI Trusted Lists Inspector](task7-testing-validation/README.md#eudi-trusted-lists-inspector)** — Open-source audit/debug tool for LoTL, LoTE, and Trusted Lists ([trust-inspector.credimi.io](https://trust-inspector.credimi.io/)).
 
 To **consume** the published LoTL and participant Trusted Lists in verification flows, see [Trusted List discovery and consumption](task1-use-cases/subtask1-2-trust-registry/trusted-list-discovery-consumption.md).

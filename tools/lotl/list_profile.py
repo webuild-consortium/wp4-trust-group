@@ -238,6 +238,12 @@ def _check_next_update(issue: str, nxt: str, tl_type: str) -> list[str]:
         errors.append(f"NextUpdate is not a valid UTC date-time: {nxt!r}")
     if (
         tl_type in NEXT_UPDATE_MAX_MONTHS_TL_TYPES
+        and next_dt is not None
+        and next_dt <= datetime.now(timezone.utc)
+    ):
+        errors.append(f"NextUpdate has expired: {nxt!r}")
+    if (
+        tl_type in NEXT_UPDATE_MAX_MONTHS_TL_TYPES
         and issue_dt is not None
         and next_dt is not None
         and next_dt > _add_months(issue_dt, 6)

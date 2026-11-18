@@ -6,14 +6,16 @@ import json
 from pathlib import Path
 
 import pytest
+
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives.asymmetric.utils import decode_dss_signature
+from jwcrypto import jwk, jws
 from lxml import etree
 
 from signxml.exceptions import InvalidSignature
 
-from tools.lotl.jades_signer import sign_json, verify_json
+from tools.lotl.jades_signer import sign_json, sign_json_and_compact, verify_json
 from tools.lotl.tests.mocks.tl_factory import make_mock_lotl_json
 from tools.lotl.xades_signer import EXC_C14N, _parse, sign_xml, verify_xml
 
@@ -44,6 +46,26 @@ def test_jades_sign_and_verify(signing_key_and_cert: tuple[Path, Path]) -> None:
     verified = verify_json(signed)
     assert "signature" not in verified
     assert verified["LoTE"]["ListAndSchemeInformation"]["LoTESequenceNumber"] == 1
+
+
+def test_jades_compact_contains_and_verifies_lote_payload(
+    signing_key_and_cert: tuple[Path, Path],
+) -> None:
+    key_path, cert_path = signing_key_and_cert
+    payload = make_mock_lotl_json(sequence=1)
+    signed_json, compact = sign_json_and_compact(payload, key_path, cert_path)
+
+    parts = compact.split(".")
+    assert len(parts) == 3
+
+    token = jws.JWS()
+    token.deserialize(compact)
+    token.verify(jwk.JWK.from_pem(cert_path.read_bytes()))
+    assert json.loads(token.payload) == payload
+    assert signed_json["signature"] == {
+        "protected": parts[0],
+        "signature": parts[2],
+    }
 
 
 def test_xades_sign_and_verify(signing_key_and_cert: tuple[Path, Path]) -> None:
