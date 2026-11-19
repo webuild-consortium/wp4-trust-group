@@ -1,0 +1,42 @@
+name: LoTL check
+
+on:
+  schedule:
+    - cron: "0 */4 * * *" # every 4th hour at :00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  LOL_VERSION: lol-v0.1.0
+  LOL_SHA256: 3fd15d75332390497b7f0f53b86964acc5cd620499255c220d50d133ba8cb515
+  LOTL_BASE_URL: https://webuild-consortium.github.io/wp4-trust-group
+  # Pinned so a tampered published cert fails the check; update on signing cert rotation.
+  LOTL_SIGNING_CERT_SHA256: 339753D8AED9B99FEBC13CC15C87E1E892E391A0DFFB1BD3AC820D73219E38E1
+
+jobs:
+  lotl-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download lol
+        run: |
+          curl -fsSL -o lol "https://github.com/SUNET/vc/releases/download/${LOL_VERSION}/lol-linux-amd64"
+          echo "${LOL_SHA256}  lol" | sha256sum -c -
+          chmod +x lol
+
+      - name: Download and pin trust anchor
+        run: |
+          curl -fsSL -o trust-anchors.pem "${LOTL_BASE_URL}/lotl-signing-cert.pem"
+          actual=$(openssl x509 -in trust-anchors.pem -noout -fingerprint -sha256 | cut -d= -f2 | tr -d ':')
+          if [ "${actual^^}" != "${LOTL_SIGNING_CERT_SHA256}" ]; then
+            echo "Signing certificate fingerprint mismatch: ${actual}"
+            exit 1
+          fi
+
+      - name: Check LoTL integrity
+        run: |
+          ./lol \
+            -lotl "${LOTL_BASE_URL}/list_of_trusted_lists.json" \
+            -anchors trust-anchors.pem \
+            -json
