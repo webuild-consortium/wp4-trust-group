@@ -18,6 +18,8 @@ env:
 jobs:
   lotl-check:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     steps:
       - name: Download lol
         run: |
@@ -36,7 +38,37 @@ jobs:
 
       - name: Check LoTL integrity
         run: |
+          status=0
           ./lol \
             -lotl "${LOTL_BASE_URL}/list_of_trusted_lists.json" \
             -anchors trust-anchors.pem \
-            -json
+            -json > lol-report.json || status=$?
+          cat lol-report.json
+          exit "${status}"
+
+      - name: Open or update issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="LoTL check failed"
+          {
+            echo "The scheduled LoTL check failed: ${RUN_URL}"
+            if [ -s lol-report.json ]; then
+              echo
+              echo '```json'
+              head -c 60000 lol-report.json
+              echo
+              echo '```'
+            fi
+          } > issue-body.md
+
+          existing=$(gh issue list --state open --search "\"${title}\" in:title" --json number,title \
+            --jq "map(select(.title == \"${title}\"))[0].number // empty")
+          if [ -n "${existing}" ]; then
+            gh issue comment "${existing}" --body-file issue-body.md
+          else
+            gh issue create --title "${title}" --body-file issue-body.md
+          fi
