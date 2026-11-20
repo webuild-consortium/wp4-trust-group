@@ -46,7 +46,7 @@ jobs:
           cat lol-report.json
           exit "${status}"
 
-      - name: Open or update issue on failure
+      - name: Open issue on failure
         if: failure()
         env:
           GH_TOKEN: ${{ github.token }}
@@ -68,7 +68,7 @@ jobs:
           existing=$(gh issue list --state open --search "\"${title}\" in:title" --json number,title \
             --jq "map(select(.title == \"${title}\"))[0].number // empty")
           if [ -n "${existing}" ]; then
-            gh issue comment "${existing}" --body-file issue-body.md
+            echo "Issue #${existing} is still open; not creating another."
           else
             gh issue create --title "${title}" --body-file issue-body.md
           fi
