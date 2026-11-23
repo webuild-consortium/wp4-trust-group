@@ -115,6 +115,19 @@ jobs:
         run: |
           python -m tools.lotl --check-expiry --tl-entries-dir lotl/tl_entries/
 
+      # The producer derives the next sequence number from the LoTL already in
+      # the output directory. Generated lists are only published to gh-pages,
+      # so bring the published ones back first; otherwise every run starts at 1.
+      - name: Restore published LoTL for sequence numbering
+        run: |
+          if git fetch --depth 1 origin gh-pages; then
+            for f in list_of_trusted_lists.json list_of_trusted_lists.xml; do
+              git show "FETCH_HEAD:$f" > "lotl/$f" 2>/dev/null || rm -f "lotl/$f"
+            done
+          else
+            echo "No gh-pages branch yet; starting at sequence 1."
+          fi
+
       - name: Produce signed LoTL artifacts
         run: |
           python -m tools.lotl --tl-entries-dir lotl/tl_entries/ --output-dir lotl/
